@@ -1,0 +1,194 @@
+[
+ {
+  "nom": "Cornaux",
+  "bfs": 6451,
+  "no_cantonal": 6,
+  "coefficient": 0.74,
+  "coefficient_pct": 74,
+  "coefficient_cantonal": 1.24
+ },
+ {
+  "nom": "Cressier",
+  "bfs": 6452,
+  "no_cantonal": 7,
+  "coefficient": 0.77,
+  "coefficient_pct": 77,
+  "coefficient_cantonal": 1.24
+ },
+ {
+  "nom": "Le Landeron",
+  "bfs": 6455,
+  "no_cantonal": 9,
+  "coefficient": 0.66,
+  "coefficient_pct": 66,
+  "coefficient_cantonal": 1.24
+ },
+ {
+  "nom": "Lignières",
+  "bfs": 6456,
+  "no_cantonal": 10,
+  "coefficient": 0.67,
+  "coefficient_pct": 67,
+  "coefficient_cantonal": 1.24
+ },
+ {
+  "nom": "Boudry",
+  "bfs": 6404,
+  "no_cantonal": 11,
+  "coefficient": 0.68,
+  "coefficient_pct": 68,
+  "coefficient_cantonal": 1.24
+ },
+ {
+  "nom": "Cortaillod",
+  "bfs": 6408,
+  "no_cantonal": 12,
+  "coefficient": 0.66,
+  "coefficient_pct": 66,
+  "coefficient_cantonal": 1.24
+ },
+ {
+  "nom": "La Côte-aux-Fées",
+  "bfs": 6504,
+  "no_cantonal": 33,
+  "coefficient": 0.75,
+  "coefficient_pct": 75,
+  "coefficient_cantonal": 1.24
+ },
+ {
+  "nom": "Les Verrières",
+  "bfs": 6511,
+  "no_cantonal": 35,
+  "coefficient": 0.79,
+  "coefficient_pct": 79,
+  "coefficient_cantonal": 1.24
+ },
+ {
+  "nom": "Le Cerneux-Péquignot",
+  "bfs": 6434,
+  "no_cantonal": 55,
+  "coefficient": 0.72,
+  "coefficient_pct": 72,
+  "coefficient_cantonal": 1.24
+ },
+ {
+  "nom": "La Brévine",
+  "bfs": 6432,
+  "no_cantonal": 56,
+  "coefficient": 0.75,
+  "coefficient_pct": 75,
+  "coefficient_cantonal": 1.24
+ },
+ {
+  "nom": "La Chaux-du-Milieu",
+  "bfs": 6435,
+  "no_cantonal": 57,
+  "coefficient": 0.75,
+  "coefficient_pct": 75,
+  "coefficient_cantonal": 1.24
+ },
+ {
+  "nom": "Les Ponts-de-Martel",
+  "bfs": 6437,
+  "no_cantonal": 58,
+  "coefficient": 0.75,
+  "coefficient_pct": 75,
+  "coefficient_cantonal": 1.24
+ },
+ {
+  "nom": "Brot-Plamboz",
+  "bfs": 6433,
+  "no_cantonal": 59,
+  "coefficient": 0.75,
+  "coefficient_pct": 75,
+  "coefficient_cantonal": 1.24
+ },
+ {
+  "nom": "La Chaux-de-Fonds",
+  "bfs": 6421,
+  "no_cantonal": 60,
+  "coefficient": 0.75,
+  "coefficient_pct": 75,
+  "coefficient_cantonal": 1.24
+ },
+ {
+  "nom": "Les Planchettes",
+  "bfs": 6422,
+  "no_cantonal": 61,
+  "coefficient": 0.77,
+  "coefficient_pct": 77,
+  "coefficient_cantonal": 1.24
+ },
+ {
+  "nom": "La Sagne",
+  "bfs": 6423,
+  "no_cantonal": 62,
+  "coefficient": 0.75,
+  "coefficient_pct": 75,
+  "coefficient_cantonal": 1.24
+ },
+ {
+  "nom": "Val-de-Travers",
+  "bfs": 6512,
+  "no_cantonal": 72,
+  "coefficient": 0.76,
+  "coefficient_pct": 76,
+  "coefficient_cantonal": 1.24
+ },
+ {
+  "nom": "Milvignes",
+  "bfs": 6416,
+  "no_cantonal": 73,
+  "coefficient": 0.63,
+  "coefficient_pct": 63,
+  "coefficient_cantonal": 1.24
+ },
+ {
+  "nom": "Val-de-Ruz",
+  "bfs": 6487,
+  "no_cantonal": 74,
+  "coefficient": 0.66,
+  "coefficient_pct": 66,
+  "coefficient_cantonal": 1.24
+ },
+ {
+  "nom": "Rochefort",
+  "bfs": 6413,
+  "no_cantonal": 75,
+  "coefficient": 0.67,
+  "coefficient_pct": 67,
+  "coefficient_cantonal": 1.24
+ },
+ {
+  "nom": "La Grande Béroche",
+  "bfs": 6417,
+  "no_cantonal": 76,
+  "coefficient": 0.63,
+  "coefficient_pct": 63,
+  "coefficient_cantonal": 1.24
+ },
+ {
+  "nom": "Neuchâtel",
+  "bfs": 6458,
+  "no_cantonal": 77,
+  "coefficient": 0.65,
+  "coefficient_pct": 65,
+  "coefficient_cantonal": 1.24
+ },
+ {
+  "nom": "Le Locle",
+  "bfs": 6436,
+  "no_cantonal": 78,
+  "coefficient": 0.69,
+  "coefficient_pct": 69,
+  "coefficient_cantonal": 1.24
+ },
+ {
+  "nom": "Laténa",
+  "bfs": 6513,
+  "no_cantonal": 79,
+  "coefficient": 0.68,
+  "coefficient_pct": 68,
+  "coefficient_cantonal": 1.24
+ }
+]

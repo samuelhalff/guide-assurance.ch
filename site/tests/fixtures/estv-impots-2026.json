@@ -1,0 +1,1468 @@
+{
+"source": "Calculateur fiscal de l'AFC (swisstaxcalculator.estv.admin.ch), API_calculateSimpleTaxes et API_calculateManyCapitalTaxes, année 2026, relevé le 22.11.2026. Montants arrondis au franc par l'AFC.",
+"revenus": [
+{
+"canton": "VD",
+"commune": "Pompaples",
+"etat": "seul",
+"enfants": 0,
+"revenu": 112196,
+"ifd": 3553,
+"cantonal": 14944,
+"communal": 6698
+},
+{
+"canton": "GE",
+"commune": "Versoix",
+"etat": "seul",
+"enfants": 0,
+"revenu": 24270,
+"ifd": 69,
+"cantonal": 552,
+"communal": 192
+},
+{
+"canton": "VD",
+"commune": "Tolochenaz",
+"etat": "marie",
+"enfants": 0,
+"revenu": 203707,
+"ifd": 12361,
+"cantonal": 27247,
+"communal": 11843
+},
+{
+"canton": "GE",
+"commune": "Choulex",
+"etat": "monoparental",
+"enfants": 1,
+"revenu": 594502,
+"ifd": 62902,
+"cantonal": 106123,
+"communal": 32453
+},
+{
+"canton": "VD",
+"commune": "Commugny",
+"etat": "marie",
+"enfants": 0,
+"revenu": 19782,
+"ifd": 0,
+"cantonal": 961,
+"communal": 378
+},
+{
+"canton": "GE",
+"commune": "Puplinge",
+"etat": "seul",
+"enfants": 0,
+"revenu": 9606,
+"ifd": 0,
+"cantonal": 0,
+"communal": 0
+},
+{
+"canton": "VD",
+"commune": "Yens",
+"etat": "marie",
+"enfants": 1,
+"revenu": 172953,
+"ifd": 8094,
+"cantonal": 19832,
+"communal": 9158
+},
+{
+"canton": "GE",
+"commune": "Chancy",
+"etat": "monoparental",
+"enfants": 3,
+"revenu": 12130,
+"ifd": 0,
+"cantonal": 0,
+"communal": 0
+},
+{
+"canton": "VD",
+"commune": "Chigny",
+"etat": "marie",
+"enfants": 0,
+"revenu": 75589,
+"ifd": 821,
+"cantonal": 7100,
+"communal": 2990
+},
+{
+"canton": "GE",
+"commune": "Collex-Bossy",
+"etat": "seul",
+"enfants": 0,
+"revenu": 285388,
+"ifd": 24163,
+"cantonal": 50557,
+"communal": 17780
+},
+{
+"canton": "VD",
+"commune": "Chexbres",
+"etat": "seul",
+"enfants": 0,
+"revenu": 4532,
+"ifd": 0,
+"cantonal": 125,
+"communal": 57
+},
+{
+"canton": "GE",
+"commune": "Troinex",
+"etat": "marie",
+"enfants": 3,
+"revenu": 533227,
+"ifd": 54407,
+"cantonal": 93310,
+"communal": 28535
+},
+{
+"canton": "VD",
+"commune": "Treytorrens (Payerne)",
+"etat": "marie",
+"enfants": 0,
+"revenu": 126019,
+"ifd": 3343,
+"cantonal": 14135,
+"communal": 7824
+},
+{
+"canton": "GE",
+"commune": "Corsier",
+"etat": "monoparental",
+"enfants": 3,
+"revenu": 357881,
+"ifd": 31605,
+"cantonal": 57150,
+"communal": 13545
+},
+{
+"canton": "VD",
+"commune": "Orny",
+"etat": "monoparental",
+"enfants": 1,
+"revenu": 96959,
+"ifd": 1398,
+"cantonal": 9938,
+"communal": 4927
+},
+{
+"canton": "GE",
+"commune": "Chancy",
+"etat": "marie",
+"enfants": 0,
+"revenu": 398058,
+"ifd": 37620,
+"cantonal": 65376,
+"communal": 25491
+},
+{
+"canton": "VD",
+"commune": "Pompaples",
+"etat": "seul",
+"enfants": 0,
+"revenu": 55306,
+"ifd": 541,
+"cantonal": 5716,
+"communal": 2562
+},
+{
+"canton": "GE",
+"commune": "Perly-Certoux",
+"etat": "marie",
+"enfants": 3,
+"revenu": 24071,
+"ifd": 0,
+"cantonal": 0,
+"communal": 0
+},
+{
+"canton": "VD",
+"commune": "Bullet",
+"etat": "marie",
+"enfants": 2,
+"revenu": 84163,
+"ifd": 603,
+"cantonal": 7059,
+"communal": 3595
+},
+{
+"canton": "GE",
+"commune": "Vernier",
+"etat": "seul",
+"enfants": 0,
+"revenu": 1485435,
+"ifd": 170821,
+"cantonal": 329717,
+"communal": 126038
+},
+{
+"canton": "VD",
+"commune": "Puidoux",
+"etat": "seul",
+"enfants": 0,
+"revenu": 59313,
+"ifd": 651,
+"cantonal": 6277,
+"communal": 2920
+},
+{
+"canton": "GE",
+"commune": "Troinex",
+"etat": "monoparental",
+"enfants": 3,
+"revenu": 155337,
+"ifd": 5280,
+"cantonal": 18330,
+"communal": 5606
+},
+{
+"canton": "VD",
+"commune": "Bremblens",
+"etat": "marie",
+"enfants": 0,
+"revenu": 102684,
+"ifd": 1946,
+"cantonal": 10695,
+"communal": 4939
+},
+{
+"canton": "GE",
+"commune": "Onex",
+"etat": "marie",
+"enfants": 1,
+"revenu": 26460,
+"ifd": 0,
+"cantonal": 0,
+"communal": 0
+},
+{
+"canton": "VD",
+"commune": "Romainmôtier-Envy",
+"etat": "marie",
+"enfants": 1,
+"revenu": 13470,
+"ifd": 0,
+"cantonal": 446,
+"communal": 245
+},
+{
+"canton": "GE",
+"commune": "Bernex",
+"etat": "marie",
+"enfants": 0,
+"revenu": 40112,
+"ifd": 104,
+"cantonal": 259,
+"communal": 95
+},
+{
+"canton": "VD",
+"commune": "Tolochenaz",
+"etat": "monoparental",
+"enfants": 3,
+"revenu": 15159,
+"ifd": 0,
+"cantonal": 466,
+"communal": 202
+},
+{
+"canton": "GE",
+"commune": "Aire-la-Ville",
+"etat": "marie",
+"enfants": 2,
+"revenu": 748779,
+"ifd": 82685,
+"cantonal": 140024,
+"communal": 53526
+},
+{
+"canton": "VD",
+"commune": "Lully",
+"etat": "marie",
+"enfants": 0,
+"revenu": 998210,
+"ifd": 114793,
+"cantonal": 200883,
+"communal": 79125
+},
+{
+"canton": "GE",
+"commune": "Chêne-Bourg",
+"etat": "seul",
+"enfants": 0,
+"revenu": 150662,
+"ifd": 7142,
+"cantonal": 22966,
+"communal": 8077
+},
+{
+"canton": "VD",
+"commune": "Yvonand",
+"etat": "seul",
+"enfants": 0,
+"revenu": 15623,
+"ifd": 0,
+"cantonal": 939,
+"communal": 466
+},
+{
+"canton": "GE",
+"commune": "Bardonnex",
+"etat": "monoparental",
+"enfants": 3,
+"revenu": 19498,
+"ifd": 0,
+"cantonal": 0,
+"communal": 0
+},
+{
+"canton": "VD",
+"commune": "Féchy",
+"etat": "marie",
+"enfants": 0,
+"revenu": 339794,
+"ifd": 30041,
+"cantonal": 53350,
+"communal": 23188
+},
+{
+"canton": "GE",
+"commune": "Vernier",
+"etat": "monoparental",
+"enfants": 1,
+"revenu": 957034,
+"ifd": 109792,
+"cantonal": 187102,
+"communal": 71522
+},
+{
+"canton": "VD",
+"commune": "Grandcour",
+"etat": "seul",
+"enfants": 0,
+"revenu": 419535,
+"ifd": 41877,
+"cantonal": 80778,
+"communal": 39498
+},
+{
+"canton": "GE",
+"commune": "Presinge",
+"etat": "seul",
+"enfants": 0,
+"revenu": 259041,
+"ifd": 20691,
+"cantonal": 45090,
+"communal": 13789
+},
+{
+"canton": "VD",
+"commune": "Nyon",
+"etat": "marie",
+"enfants": 0,
+"revenu": 9338,
+"ifd": 0,
+"cantonal": 277,
+"communal": 115
+},
+{
+"canton": "GE",
+"commune": "Cartigny",
+"etat": "marie",
+"enfants": 3,
+"revenu": 176117,
+"ifd": 7984,
+"cantonal": 22188,
+"communal": 7125
+},
+{
+"canton": "VD",
+"commune": "Paudex",
+"etat": "marie",
+"enfants": 0,
+"revenu": 953614,
+"ifd": 109664,
+"cantonal": 190702,
+"communal": 86124
+},
+{
+"canton": "GE",
+"commune": "Bellevue",
+"etat": "marie",
+"enfants": 0,
+"revenu": 20784,
+"ifd": 0,
+"cantonal": 0,
+"communal": 0
+},
+{
+"canton": "VD",
+"commune": "Lonay",
+"etat": "seul",
+"enfants": 0,
+"revenu": 5294,
+"ifd": 0,
+"cantonal": 158,
+"communal": 59
+},
+{
+"canton": "GE",
+"commune": "Veyrier",
+"etat": "marie",
+"enfants": 0,
+"revenu": 34536,
+"ifd": 48,
+"cantonal": 0,
+"communal": 0
+},
+{
+"canton": "VD",
+"commune": "Gimel",
+"etat": "seul",
+"enfants": 0,
+"revenu": 62795,
+"ifd": 752,
+"cantonal": 6778,
+"communal": 3360
+},
+{
+"canton": "GE",
+"commune": "Le Grand-Saconnex",
+"etat": "seul",
+"enfants": 0,
+"revenu": 88385,
+"ifd": 1912,
+"cantonal": 11155,
+"communal": 3752
+},
+{
+"canton": "VD",
+"commune": "Montcherand",
+"etat": "marie",
+"enfants": 0,
+"revenu": 38509,
+"ifd": 88,
+"cantonal": 2760,
+"communal": 1350
+},
+{
+"canton": "GE",
+"commune": "Veyrier",
+"etat": "monoparental",
+"enfants": 2,
+"revenu": 65140,
+"ifd": 0,
+"cantonal": 3276,
+"communal": 927
+},
+{
+"canton": "VD",
+"commune": "Crassier",
+"etat": "monoparental",
+"enfants": 2,
+"revenu": 10000,
+"ifd": 0,
+"cantonal": 271,
+"communal": 119
+},
+{
+"canton": "GE",
+"commune": "Genthod",
+"etat": "marie",
+"enfants": 0,
+"revenu": 1136406,
+"ifd": 130686,
+"cantonal": 228395,
+"communal": 43653
+},
+{
+"canton": "VD",
+"commune": "Senarclens",
+"etat": "monoparental",
+"enfants": 3,
+"revenu": 28738,
+"ifd": 0,
+"cantonal": 1351,
+"communal": 628
+},
+{
+"canton": "GE",
+"commune": "Lancy",
+"etat": "marie",
+"enfants": 3,
+"revenu": 11327,
+"ifd": 0,
+"cantonal": 0,
+"communal": 0
+},
+{
+"canton": "VD",
+"commune": "Provence",
+"etat": "marie",
+"enfants": 2,
+"revenu": 20817,
+"ifd": 0,
+"cantonal": 807,
+"communal": 444
+},
+{
+"canton": "GE",
+"commune": "Bardonnex",
+"etat": "marie",
+"enfants": 2,
+"revenu": 284582,
+"ifd": 22339,
+"cantonal": 42648,
+"communal": 14020
+},
+{
+"canton": "VD",
+"commune": "Arzier-Le Muids",
+"etat": "marie",
+"enfants": 2,
+"revenu": 106384,
+"ifd": 1605,
+"cantonal": 9672,
+"communal": 4204
+},
+{
+"canton": "GE",
+"commune": "Versoix",
+"etat": "marie",
+"enfants": 1,
+"revenu": 24514,
+"ifd": 0,
+"cantonal": 0,
+"communal": 0
+},
+{
+"canton": "VD",
+"commune": "Paudex",
+"etat": "marie",
+"enfants": 0,
+"revenu": 1375150,
+"ifd": 158137,
+"cantonal": 284198,
+"communal": 128347
+},
+{
+"canton": "GE",
+"commune": "Plan-les-Ouates",
+"etat": "marie",
+"enfants": 0,
+"revenu": 208967,
+"ifd": 13037,
+"cantonal": 28290,
+"communal": 8002
+},
+{
+"canton": "VD",
+"commune": "Aclens",
+"etat": "seul",
+"enfants": 0,
+"revenu": 55687,
+"ifd": 549,
+"cantonal": 5756,
+"communal": 2345
+},
+{
+"canton": "GE",
+"commune": "Collonge-Bellerive",
+"etat": "monoparental",
+"enfants": 2,
+"revenu": 1355076,
+"ifd": 155299,
+"cantonal": 279011,
+"communal": 59727
+},
+{
+"canton": "VD",
+"commune": "Mont-sur-Rolle",
+"etat": "marie",
+"enfants": 0,
+"revenu": 13095,
+"ifd": 0,
+"cantonal": 497,
+"communal": 209
+},
+{
+"canton": "GE",
+"commune": "Chêne-Bougeries",
+"etat": "seul",
+"enfants": 0,
+"revenu": 26349,
+"ifd": 85,
+"cantonal": 794,
+"communal": 194
+},
+{
+"canton": "VD",
+"commune": "Aclens",
+"etat": "seul",
+"enfants": 0,
+"revenu": 59020,
+"ifd": 642,
+"cantonal": 6233,
+"communal": 2540
+},
+{
+"canton": "GE",
+"commune": "Hermance",
+"etat": "marie",
+"enfants": 1,
+"revenu": 534697,
+"ifd": 55115,
+"cantonal": 93614,
+"communal": 30060
+},
+{
+"canton": "VD",
+"commune": "Ormont-Dessus",
+"etat": "marie",
+"enfants": 1,
+"revenu": 28073,
+"ifd": 0,
+"cantonal": 1441,
+"communal": 744
+},
+{
+"canton": "GE",
+"commune": "Hermance",
+"etat": "marie",
+"enfants": 2,
+"revenu": 69921,
+"ifd": 127,
+"cantonal": 3958,
+"communal": 1271
+},
+{
+"canton": "VD",
+"commune": "Burtigny",
+"etat": "marie",
+"enfants": 0,
+"revenu": 65968,
+"ifd": 533,
+"cantonal": 5934,
+"communal": 3022
+},
+{
+"canton": "GE",
+"commune": "Thônex",
+"etat": "marie",
+"enfants": 0,
+"revenu": 17502,
+"ifd": 0,
+"cantonal": 0,
+"communal": 0
+},
+{
+"canton": "VD",
+"commune": "Arzier-Le Muids",
+"etat": "marie",
+"enfants": 0,
+"revenu": 983546,
+"ifd": 113103,
+"cantonal": 197526,
+"communal": 85852
+},
+{
+"canton": "GE",
+"commune": "Onex",
+"etat": "seul",
+"enfants": 0,
+"revenu": 113176,
+"ifd": 3641,
+"cantonal": 15759,
+"communal": 6084
+},
+{
+"canton": "VD",
+"commune": "Aubonne",
+"etat": "monoparental",
+"enfants": 2,
+"revenu": 41130,
+"ifd": 0,
+"cantonal": 2693,
+"communal": 1244
+},
+{
+"canton": "GE",
+"commune": "Vernier",
+"etat": "marie",
+"enfants": 0,
+"revenu": 234276,
+"ifd": 16326,
+"cantonal": 32990,
+"communal": 12611
+},
+{
+"canton": "VD",
+"commune": "La Sarraz",
+"etat": "marie",
+"enfants": 3,
+"revenu": 25486,
+"ifd": 0,
+"cantonal": 999,
+"communal": 475
+},
+{
+"canton": "GE",
+"commune": "Versoix",
+"etat": "seul",
+"enfants": 0,
+"revenu": 29754,
+"ifd": 112,
+"cantonal": 1236,
+"communal": 430
+},
+{
+"canton": "VD",
+"commune": "Dompierre",
+"etat": "marie",
+"enfants": 1,
+"revenu": 183467,
+"ifd": 9459,
+"cantonal": 21537,
+"communal": 11408
+},
+{
+"canton": "GE",
+"commune": "Bardonnex",
+"etat": "marie",
+"enfants": 0,
+"revenu": 426533,
+"ifd": 41325,
+"cantonal": 71261,
+"communal": 23427
+},
+{
+"canton": "VD",
+"commune": "Chigny",
+"etat": "marie",
+"enfants": 3,
+"revenu": 26359,
+"ifd": 0,
+"cantonal": 1054,
+"communal": 444
+},
+{
+"canton": "GE",
+"commune": "Thônex",
+"etat": "marie",
+"enfants": 0,
+"revenu": 460188,
+"ifd": 45693,
+"cantonal": 78216,
+"communal": 26311
+},
+{
+"canton": "GE",
+"commune": "Aire-la-Ville",
+"etat": "marie",
+"enfants": 3,
+"revenu": 906160,
+"ifd": 102884,
+"cantonal": 175390,
+"communal": 67045
+},
+{
+"canton": "VD",
+"commune": "Bussigny",
+"etat": "monoparental",
+"enfants": 1,
+"revenu": 22629,
+"ifd": 0,
+"cantonal": 1190,
+"communal": 505
+},
+{
+"canton": "GE",
+"commune": "Collex-Bossy",
+"etat": "marie",
+"enfants": 3,
+"revenu": 247561,
+"ifd": 17266,
+"cantonal": 35458,
+"communal": 12470
+},
+{
+"canton": "VD",
+"commune": "Denges",
+"etat": "seul",
+"enfants": 0,
+"revenu": 7554,
+"ifd": 0,
+"cantonal": 293,
+"communal": 123
+},
+{
+"canton": "GE",
+"commune": "Choulex",
+"etat": "monoparental",
+"enfants": 1,
+"revenu": 24202,
+"ifd": 0,
+"cantonal": 0,
+"communal": 0
+},
+{
+"canton": "VD",
+"commune": "Rivaz",
+"etat": "marie",
+"enfants": 0,
+"revenu": 38519,
+"ifd": 88,
+"cantonal": 2760,
+"communal": 1162
+},
+{
+"canton": "GE",
+"commune": "Avusy",
+"etat": "monoparental",
+"enfants": 3,
+"revenu": 18132,
+"ifd": 0,
+"cantonal": 0,
+"communal": 0
+},
+{
+"canton": "VD",
+"commune": "Villars-sous-Yens",
+"etat": "monoparental",
+"enfants": 1,
+"revenu": 77746,
+"ifd": 624,
+"cantonal": 7390,
+"communal": 3714
+},
+{
+"canton": "GE",
+"commune": "Onex",
+"etat": "seul",
+"enfants": 0,
+"revenu": 3738,
+"ifd": 0,
+"cantonal": 0,
+"communal": 0
+},
+{
+"canton": "VD",
+"commune": "Poliez-Pittet",
+"etat": "monoparental",
+"enfants": 3,
+"revenu": 88772,
+"ifd": 524,
+"cantonal": 7597,
+"communal": 3766
+},
+{
+"canton": "GE",
+"commune": "Laconnex",
+"etat": "marie",
+"enfants": 2,
+"revenu": 1495914,
+"ifd": 171503,
+"cantonal": 312170,
+"communal": 105011
+},
+{
+"canton": "VD",
+"commune": "Chavannes-sur-Moudon",
+"etat": "seul",
+"enfants": 0,
+"revenu": 28185,
+"ifd": 99,
+"cantonal": 2294,
+"communal": 1091
+},
+{
+"canton": "GE",
+"commune": "Troinex",
+"etat": "monoparental",
+"enfants": 3,
+"revenu": 49687,
+"ifd": 0,
+"cantonal": 1229,
+"communal": 376
+},
+{
+"canton": "VD",
+"commune": "Chevilly",
+"etat": "marie",
+"enfants": 0,
+"revenu": 1344774,
+"ifd": 154641,
+"cantonal": 273442,
+"communal": 129990
+},
+{
+"canton": "GE",
+"commune": "Collex-Bossy",
+"etat": "monoparental",
+"enfants": 1,
+"revenu": 9440,
+"ifd": 0,
+"cantonal": 0,
+"communal": 0
+},
+{
+"canton": "VD",
+"commune": "Cheseaux-sur-Lausanne",
+"etat": "seul",
+"enfants": 0,
+"revenu": 237864,
+"ifd": 17893,
+"cantonal": 39838,
+"communal": 19750
+},
+{
+"canton": "GE",
+"commune": "Avusy",
+"etat": "monoparental",
+"enfants": 2,
+"revenu": 1005260,
+"ifd": 115072,
+"cantonal": 198204,
+"communal": 74251
+},
+{
+"canton": "VD",
+"commune": "Hermenches",
+"etat": "marie",
+"enfants": 0,
+"revenu": 1449566,
+"ifd": 166693,
+"cantonal": 284283,
+"communal": 150587
+},
+{
+"canton": "GE",
+"commune": "Soral",
+"etat": "seul",
+"enfants": 0,
+"revenu": 1306,
+"ifd": 0,
+"cantonal": 0,
+"communal": 0
+},
+{
+"canton": "VD",
+"commune": "Valeyres-sous-Montagny",
+"etat": "marie",
+"enfants": 3,
+"revenu": 17719,
+"ifd": 0,
+"cantonal": 546,
+"communal": 261
+},
+{
+"canton": "GE",
+"commune": "Vandoeuvres",
+"etat": "monoparental",
+"enfants": 2,
+"revenu": 1314117,
+"ifd": 150596,
+"cantonal": 269367,
+"communal": 55603
+},
+{
+"canton": "VD",
+"commune": "Crans",
+"etat": "marie",
+"enfants": 2,
+"revenu": 58687,
+"ifd": 0,
+"cantonal": 4166,
+"communal": 1669
+},
+{
+"canton": "GE",
+"commune": "Veyrier",
+"etat": "monoparental",
+"enfants": 1,
+"revenu": 476959,
+"ifd": 47614,
+"cantonal": 81682,
+"communal": 23106
+},
+{
+"canton": "VD",
+"commune": "Echandens",
+"etat": "marie",
+"enfants": 2,
+"revenu": 10593,
+"ifd": 0,
+"cantonal": 255,
+"communal": 105
+},
+{
+"canton": "GE",
+"commune": "Avusy",
+"etat": "seul",
+"enfants": 0,
+"revenu": 1445415,
+"ifd": 166221,
+"cantonal": 320294,
+"communal": 119988
+},
+{
+"canton": "VD",
+"commune": "Lussy-sur-Morges",
+"etat": "seul",
+"enfants": 0,
+"revenu": 1318796,
+"ifd": 151651,
+"cantonal": 279079,
+"communal": 116559
+},
+{
+"canton": "GE",
+"commune": "Troinex",
+"etat": "monoparental",
+"enfants": 3,
+"revenu": 245460,
+"ifd": 16993,
+"cantonal": 35068,
+"communal": 10724
+},
+{
+"canton": "VD",
+"commune": "Croy",
+"etat": "monoparental",
+"enfants": 2,
+"revenu": 3054,
+"ifd": 0,
+"cantonal": 44,
+"communal": 22
+},
+{
+"canton": "GE",
+"commune": "Corsier",
+"etat": "marie",
+"enfants": 0,
+"revenu": 1271346,
+"ifd": 146200,
+"cantonal": 259459,
+"communal": 61493
+},
+{
+"canton": "VD",
+"commune": "Corcelles-près-Payerne",
+"etat": "monoparental",
+"enfants": 1,
+"revenu": 33958,
+"ifd": 0,
+"cantonal": 2289,
+"communal": 1010
+},
+{
+"canton": "GE",
+"commune": "Laconnex",
+"etat": "marie",
+"enfants": 1,
+"revenu": 11137,
+"ifd": 0,
+"cantonal": 0,
+"communal": 0
+},
+{
+"canton": "VD",
+"commune": "Mathod",
+"etat": "seul",
+"enfants": 0,
+"revenu": 317766,
+"ifd": 28440,
+"cantonal": 57544,
+"communal": 28137
+},
+{
+"canton": "GE",
+"commune": "Russin",
+"etat": "marie",
+"enfants": 2,
+"revenu": 335364,
+"ifd": 28943,
+"cantonal": 52611,
+"communal": 15687
+},
+{
+"canton": "VD",
+"commune": "Vich",
+"etat": "monoparental",
+"enfants": 3,
+"revenu": 21747,
+"ifd": 0,
+"cantonal": 859,
+"communal": 368
+},
+{
+"canton": "GE",
+"commune": "Satigny",
+"etat": "seul",
+"enfants": 0,
+"revenu": 609110,
+"ifd": 66905,
+"cantonal": 123615,
+"communal": 36858
+},
+{
+"canton": "VD",
+"commune": "Bière",
+"etat": "monoparental",
+"enfants": 2,
+"revenu": 23968,
+"ifd": 0,
+"cantonal": 1131,
+"communal": 530
+},
+{
+"canton": "GE",
+"commune": "Bernex",
+"etat": "marie",
+"enfants": 0,
+"revenu": 98066,
+"ifd": 1716,
+"cantonal": 8442,
+"communal": 3098
+},
+{
+"canton": "VD",
+"commune": "Marchissy",
+"etat": "marie",
+"enfants": 2,
+"revenu": 149422,
+"ifd": 4816,
+"cantonal": 15280,
+"communal": 8042
+},
+{
+"canton": "GE",
+"commune": "Céligny",
+"etat": "seul",
+"enfants": 0,
+"revenu": 84621,
+"ifd": 1668,
+"cantonal": 10456,
+"communal": 2638
+},
+{
+"canton": "VD",
+"commune": "Trélex",
+"etat": "monoparental",
+"enfants": 2,
+"revenu": 104539,
+"ifd": 1515,
+"cantonal": 10138,
+"communal": 3924
+},
+{
+"canton": "GE",
+"commune": "Troinex",
+"etat": "marie",
+"enfants": 3,
+"revenu": 419707,
+"ifd": 39652,
+"cantonal": 69850,
+"communal": 21361
+},
+{
+"canton": "VD",
+"commune": "Dompierre",
+"etat": "marie",
+"enfants": 3,
+"revenu": 65422,
+"ifd": 0,
+"cantonal": 4533,
+"communal": 2401
+},
+{
+"canton": "GE",
+"commune": "Le Grand-Saconnex",
+"etat": "marie",
+"enfants": 0,
+"revenu": 446010,
+"ifd": 43860,
+"cantonal": 75286,
+"communal": 25325
+}
+],
+"capitaux": [
+{
+"canton": "VD",
+"commune": "Montanaire",
+"etat": "marie",
+"capital": 321353,
+"ifd": 5530,
+"cantonal": 10462,
+"communal": 4725
+},
+{
+"canton": "GE",
+"commune": "Vandoeuvres",
+"etat": "seul",
+"capital": 106263,
+"ifd": 619,
+"cantonal": 2895,
+"communal": 598
+},
+{
+"canton": "VD",
+"commune": "Chavannes-le-Chêne",
+"etat": "marie",
+"capital": 202405,
+"ifd": 2438,
+"cantonal": 5686,
+"communal": 2751
+},
+{
+"canton": "GE",
+"commune": "Satigny",
+"etat": "seul",
+"capital": 126632,
+"ifd": 966,
+"cantonal": 3652,
+"communal": 1089
+},
+{
+"canton": "VD",
+"commune": "Bougy-Villars",
+"etat": "marie",
+"capital": 185244,
+"ifd": 1991,
+"cantonal": 5034,
+"communal": 2013
+},
+{
+"canton": "GE",
+"commune": "Laconnex",
+"etat": "seul",
+"capital": 151497,
+"ifd": 1446,
+"cantonal": 4626,
+"communal": 1556
+},
+{
+"canton": "VD",
+"commune": "Grancy",
+"etat": "marie",
+"capital": 1160629,
+"ifd": 26694,
+"cantonal": 50094,
+"communal": 22623
+},
+{
+"canton": "GE",
+"commune": "Avusy",
+"etat": "seul",
+"capital": 1190842,
+"ifd": 27388,
+"cantonal": 52072,
+"communal": 19507
+},
+{
+"canton": "VD",
+"commune": "Lutry",
+"etat": "seul",
+"capital": 1327518,
+"ifd": 30533,
+"cantonal": 60635,
+"communal": 21125
+},
+{
+"canton": "GE",
+"commune": "Russin",
+"etat": "marie",
+"capital": 1232969,
+"ifd": 28357,
+"cantonal": 50125,
+"communal": 14945
+},
+{
+"canton": "VD",
+"commune": "Saint-George",
+"etat": "seul",
+"capital": 468642,
+"ifd": 9672,
+"cantonal": 19365,
+"communal": 8683
+},
+{
+"canton": "GE",
+"commune": "Puplinge",
+"etat": "marie",
+"capital": 284287,
+"ifd": 4565,
+"cantonal": 8518,
+"communal": 3191
+},
+{
+"canton": "VD",
+"commune": "Premier",
+"etat": "seul",
+"capital": 307524,
+"ifd": 5419,
+"cantonal": 11624,
+"communal": 5962
+},
+{
+"canton": "GE",
+"commune": "Russin",
+"etat": "seul",
+"capital": 651933,
+"ifd": 14511,
+"cantonal": 26695,
+"communal": 7960
+},
+{
+"canton": "VD",
+"commune": "Mont-la-Ville",
+"etat": "seul",
+"capital": 1224703,
+"ifd": 28168,
+"cantonal": 55696,
+"communal": 27309
+},
+{
+"canton": "GE",
+"commune": "Gy",
+"etat": "seul",
+"capital": 209326,
+"ifd": 2826,
+"cantonal": 6963,
+"communal": 2449
+},
+{
+"canton": "VD",
+"commune": "Pomy",
+"etat": "seul",
+"capital": 129992,
+"ifd": 1024,
+"cantonal": 3836,
+"communal": 1757
+},
+{
+"canton": "GE",
+"commune": "Perly-Certoux",
+"etat": "marie",
+"capital": 1431902,
+"ifd": 32934,
+"cantonal": 59420,
+"communal": 19534
+},
+{
+"canton": "VD",
+"commune": "Prévonloup",
+"etat": "marie",
+"capital": 981437,
+"ifd": 22572,
+"cantonal": 41484,
+"communal": 19404
+},
+{
+"canton": "GE",
+"commune": "Gy",
+"etat": "seul",
+"capital": 633656,
+"ifd": 14028,
+"cantonal": 25853,
+"communal": 9092
+},
+{
+"canton": "VD",
+"commune": "Grandson",
+"etat": "seul",
+"capital": 1470897,
+"ifd": 33828,
+"cantonal": 67521,
+"communal": 30058
+},
+{
+"canton": "GE",
+"commune": "Bellevue",
+"etat": "marie",
+"capital": 1209653,
+"ifd": 27821,
+"cantonal": 49051,
+"communal": 14625
+},
+{
+"canton": "VD",
+"commune": "Veytaux",
+"etat": "marie",
+"capital": 1043334,
+"ifd": 23996,
+"cantonal": 44459,
+"communal": 18644
+},
+{
+"canton": "GE",
+"commune": "Meinier",
+"etat": "seul",
+"capital": 608849,
+"ifd": 13373,
+"cantonal": 24711,
+"communal": 7935
+},
+{
+"canton": "VD",
+"commune": "Sullens",
+"etat": "marie",
+"capital": 1078600,
+"ifd": 24808,
+"cantonal": 46155,
+"communal": 19057
+},
+{
+"canton": "GE",
+"commune": "Chancy",
+"etat": "seul",
+"capital": 722343,
+"ifd": 16369,
+"cantonal": 30011,
+"communal": 11701
+},
+{
+"canton": "VD",
+"commune": "Essertines-sur-Rolle",
+"etat": "seul",
+"capital": 889365,
+"ifd": 20454,
+"cantonal": 39580,
+"communal": 16981
+},
+{
+"canton": "GE",
+"commune": "Vernier",
+"etat": "marie",
+"capital": 167781,
+"ifd": 1536,
+"cantonal": 4128,
+"communal": 1578
+},
+{
+"canton": "VD",
+"commune": "Chéserex",
+"etat": "marie",
+"capital": 1463140,
+"ifd": 33651,
+"cantonal": 64630,
+"communal": 24601
+},
+{
+"canton": "GE",
+"commune": "Soral",
+"etat": "marie",
+"capital": 1046602,
+"ifd": 24072,
+"cantonal": 41544,
+"communal": 13975
+}
+],
+"note": "Profils vaudois avec enfants au-delà du seuil de blocage du quotient retirés : l'AFC y applique des montants de blocage plus bas que la calculette officielle de l'ACI, qui fait foi ici."
+}

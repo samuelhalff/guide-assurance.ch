@@ -1,0 +1,86 @@
+URL: https://assets-us-01.kc-usercontent.com/8d43a6b2-248d-00aa-7cd0-55e59c68fb86/fd7b49f7-274c-4de7-a75e-c8ccedcb4178/CAnb_Grille%20de%20taux%20client%2008-26_Fr.pdf
+Page de départ: https://www.ca-nextbank.ch/fr/tarifs
+Relevé: 2026-11-22T20:43:29+00:00
+Méthode: pdf (http)
+Extrait retenu: Liberty 3A Bancaire 0.65%
+Validité: Valable à partir du 1 er août 2026
+Lignes 1-78 sur 78 (texte normalisé)
+------------------------------------------------------------------------
+Taux d'intérêt des comptes
+(Valable à partir du 1 er août 2026)
+Épargne et placements
+Comptes Devise Paliers Taux d'intérêt Limites de rémunération Retraits / Pénalités
+De CHF 1.– à CHF 100'000.– 0.20% Retrait < à CHF 20'000.–/mois : Pas de pénalité
+Retrait > à CHF 20'000.–/mois
+CHF Illimitées
+∞ Préavis > à 3 mois : Pas de pénalité
+À partir de CHF 100'001.– 0.00% ∞ Préavis < à 3 mois : Pénalité de 2% 1
+CA Libre Epargne
+De EUR 1.– à EUR 200'000.– 0.50% Retrait < à EUR 20'000.–/mois : Pas de pénalité
+Retrait > à EUR 20'000.–/mois
+EUR EUR 1'000'000.–
+∞ Préavis > à 3 mois : Pas de pénalité
+À partir de EUR 200'001.– 0.00% ∞ Préavis < à 3 mois : Pénalité de 2% 1
+De CHF 1.– à CHF 50'000.– 0.40% Retrait avant les 6 premiers mois
+Pénalités : 2% 2
+De CHF 50'001.– à CHF 100'000.– 0.20% Retrait après les 6 premiers mois
+CA Energy CHF Illimitées Retrait < à CHF 50'000.–/an : Pas de pénalité
+De CHF 100'001.– à CHF 200'000.– 0.05% Retrait > à CHF 50'000.–/an
+∞ Préavis > à 3 mois : Pas de pénalité
+À partir de CHF 200'001.– 0.00% ∞ Préavis < à 3 mois : Pénalité de 2% 3
+De CHF 0.– à CHF 200'000.– 0.75% 4 Retraits/Pénalités:
+∞ Jusqu'au 31.07.2027: Pénalités 2% 2
+CA Boost CHF CHF 200'000.–
+∞ Après le 31.07.2027: conditions
+À partir de CHF 200'001.– 0.00% du CA Libre Epargne
+Épargne et placements
+Comptes Devise Paliers Taux d'intérêt Limites de rémunération Retraits / Pénalités
+De CHF 1.– à CHF 30'000.– 0.65%
+CHF Illimitées Aucune pénalité 5
+À partir de CHF 30'001.– 0.25%
+CA Junior
+De EUR 1.– à EUR 30'000.– 0.65%
+EUR Illimitées Aucune pénalité 5
+À partir de EUR 30'001.– 0.25%
+CHF
+Voir les taux sur
+Dépôt à terme EUR Dès CHF/EUR/USD 50'000.– Illimitées Voir conditions en agence
+www.ca-nextbank.ch
+USD
+Comptes épargne plus commercialisés
+Comptes Devise Paliers Taux d'intérêt Limites de rémunération Retraits / Pénalités
+CA MyHome CHF Dès CHF 1.– 0.01% Illimitées Pénalité : 0.75% 6,7
+CA Unlimited CHF Dès CHF 1.– 0.00% – Aucune
+De 0 à 9'999.– 0.10% Retrait < à CHF 100'000.–/an :
+Pas de pénalité
+Dès CHF 10'000.– 0.15%
+CA Evolution CHF CHF 100'000.– Retrait > à CHF 100'000.–/an
+Dès CHF 50'000.– 0.20% ∞ Préavis > à 6 mois : Pas de pénalité
+∞ Préavis < à 6 mois : Pénalité de 0.5% 7
+Dès CHF 100'000.– 0.00%
+Prévoyance Banque au quotidien
+Comptes Taux d'intérêt Comptes Devises Taux d'intérêt Plafonds
+Liberty 3A Bancaire 0.65% CHF 0.00% –
+Liberty Libre Passage Compte privé EUR 0.00% –
+0.30%
+USD 0.00% –
+Découvert autorisé – Compte individuel CHF/EUR 8% 8 CHF 1'000.–
+Crédit privé Découvert autorisé – Compte joint CHF/EUR 8% 8 CHF 2'000.–
+Taux d'intérêt Découvert non autorisé CHF/EUR 11.5% 9 –
+Propriétaire Garantie de loyer CHF 0.01% –
+d'une résidence 4.49%
+principale
+Garantie carte de crédit CHF 0.00% –
+Non propriétaire
+d'une résidence 7.75%
+principale
+Tous les taux indiqués sont révisables au gré de la banque.
+1. La pénalité est due sur le montant excédant la limite. Elle est réduite proportionnellement en cas de préavis inférieur à 3 mois.
+2. La pénalité est due sur le montant retiré. Elle est perçue automatiquement sur tout retrait.
+3. La pénalité est due sur le montant excédant la limite. Elle est réduite proportionnellement, en cas de préavis inférieur à 3 mois.
+4. Taux du CA Libre Epargne valable à compter du 01.08.2026 + boost de 0.55%, jusqu'à CHF 200'000.–.
+5. Crédit Agricole next bank se réserve le droit d'exiger un justificatif de retrait.
+6. Exceptions : 3 ans d'épargne consécutive ou prêt hypothécaire avec Crédit Agricole next bank ou compte à terme.
+7. La pénalité est due sur le montant retiré.
+8. Prélèvement trimestriel.
+9. Taux d'intérêt débiteur. Liste des comptes concernés : Compte privé, CA Libre Epargne, CA Energy, CA Junior, CA Evolution, CA MyHome, CA Unlimited.

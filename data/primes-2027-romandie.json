@@ -1,0 +1,30 @@
+{
+  "source": {
+    "publisher": "OFSP",
+    "urls": [
+      "https://www.bag.admin.ch/dam/fr/sd-web/J6IJ1GWn3TP9/kantonale%20monatliche%20mittlere%20Pr%C3%A4mie%20pro%20Altersklasse_PG2027.pdf",
+      "https://www.priminfo.admin.ch/downloads/medienmitteilung_2027_FR.pdf",
+      "https://www.bag.admin.ch/fr/newnsb/BfuGvedj0OOX",
+      "https://www.bag.admin.ch/fr/assurance-maladie-comparaison-des-primes",
+      "https://www.priminfo.admin.ch/downloads/wegweiser_GE-2027.pdf",
+      "https://www.priminfo.admin.ch/downloads/wegweiser_VD-2027.pdf",
+      "https://www.priminfo.admin.ch/downloads/wegweiser_NE-2027.pdf",
+      "https://www.priminfo.admin.ch/downloads/wegweiser_JU-2027.pdf",
+      "https://www.priminfo.admin.ch/downloads/wegweiser_FR-2027.pdf",
+      "https://www.priminfo.admin.ch/downloads/wegweiser_VS-2027.pdf"
+    ],
+    "published": "2026-09-29",
+    "retrieved": "2026-11-22"
+  },
+  "national": {"adult_2027": 487.6, "adult_2026": 464.8, "change_pct": 4.9, "young_2027": 338.8, "child_2027": 128.1},
+  "cantons": {
+    "GE": {"adult_2027": 610.6, "adult_2026": 585.4, "change_pct": 4.3, "young_2027": 453.0, "child_2027": 157.7, "median_std_f300": 771.0, "min_std_f300": 711.2, "max_std_f300": 915.7},
+    "VD": {"adult_2027": 543.5, "adult_2026": 526.6, "change_pct": 3.2, "young_2027": 382.1, "child_2027": 146.3, "median_std_f300": 693.5, "min_std_f300": 614.4, "max_std_f300": 780.8},
+    "NE": {"adult_2027": 558.8, "adult_2026": 530.8, "change_pct": 5.3, "young_2027": 377.6, "child_2027": 140.8, "median_std_f300": 730.2, "min_std_f300": 675.6, "max_std_f300": 835.0},
+    "JU": {"adult_2027": 551.0, "adult_2026": 520.5, "change_pct": 5.9, "young_2027": 346.1, "child_2027": 134.8, "median_std_f300": 703.5, "min_std_f300": 655.8, "max_std_f300": 810.6},
+    "FR": {"adult_2027": 465.5, "adult_2026": 442.6, "change_pct": 5.2, "young_2027": 318.1, "child_2027": 120.1, "median_std_f300": 610.6, "min_std_f300": 551.0, "max_std_f300": 699.7},
+    "VS": {"adult_2027": 460.9, "adult_2026": 436.1, "change_pct": 5.7, "young_2027": 310.1, "child_2027": 116.5, "median_std_f300": 584.6, "min_std_f300": 494.5, "max_std_f300": 652.9}
+  },
+  "method": "Average premiums (adult 26+, young adult 19-25, child 0-18; 2026, 2027 and % change) were copied unchanged from the OFSP table 'Primes moyennes cantonales mensuelles pour 2026/2027 de l'assurance oblig. des soins incl. franchises à option et modèles' (September 2026, linked from bag.admin.ch/fr/assurance-maladie-comparaison-des-primes). Its CH row (487.6 / 464.8 / +4.9 %; young 338.8; child 128.1) matches the DFI/OFSP press release of 29.09.2026. No figure was recomputed; the OFSP rounds to 0.1 CHF / 0.1 %. median/min/max_std_f300 were computed by us from the OFSP 'Aperçu des primes 2027' canton PDFs on priminfo.admin.ch (release-2026-10-22). Rows used: table 'Primes – Assurance de base' (standard model, free choice of provider, no alternative model), age class 'Adultes', column 'Mit Unfall / avec risque accidents', franchise 300. Every insurer in every premium region counts as one observation (GE 21, NE 21, JU 21, VD 42 = 2 regions, FR 46 = 2 regions, VS 50 = 2 regions). The statistics are unweighted and not weighted by insured persons. Text was extracted by its position on the page, and for every table the number of rows was checked against the number of insurer names. Insurers are not named or ranked.",
+  "notes": "1) The full open-data premium file (Prämien_CH.csv / .xlsx, opendata.swiss dataset 'health-insurance-premiums', hosted on opendata.bagnet.ch, metadata modified 2026-09-29) returned HTTP 500 with an empty body on every try on 2026-11-22. The min/median/max therefore come from the OFSP printed premium overview, which rounds premiums to 0.10 CHF. A median can fall exactly on a printed value. Re-run from the CSV once the host works again for exact centimes. 2) The average premium includes optional franchises and alternative models, so it is lower than the standard F300 premium. That gap is expected (see OFSP fact sheet 'Prime moyenne', 29.09.2026). 3) The 2026 averages are the figures OFSP restated in September 2026. The OFSP notes that the real 2026 increase was 4.3 % instead of the 4.4 % announced in 2025. 4) The 2027 averages are OFSP projections based on the insured persons expected; the OFSP says they may still change slightly. 5) Premium regions in 2027: GE, NE, JU have one region (0); VD, FR, VS have two regions (1, 2)."
+}

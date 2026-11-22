@@ -1,0 +1,308 @@
+[
+ {
+  "nom": "Alle",
+  "bfs": 6771,
+  "coefficient": 2.25,
+  "no_cantonal": 301
+ },
+ {
+  "nom": "Basse-Allaine",
+  "bfs": 6807,
+  "coefficient": 2.35,
+  "no_cantonal": 316
+ },
+ {
+  "nom": "Basse-Vendline",
+  "bfs": 6812,
+  "coefficient": 2.1,
+  "no_cantonal": 305
+ },
+ {
+  "nom": "Boncourt",
+  "bfs": 6774,
+  "coefficient": 1.55,
+  "no_cantonal": 304
+ },
+ {
+  "nom": "Bourrignon",
+  "bfs": 6703,
+  "coefficient": 2.25,
+  "no_cantonal": 103
+ },
+ {
+  "nom": "Boécourt",
+  "bfs": 6702,
+  "coefficient": 2.0,
+  "no_cantonal": 102
+ },
+ {
+  "nom": "Bure",
+  "bfs": 6778,
+  "coefficient": 2.25,
+  "no_cantonal": 308
+ },
+ {
+  "nom": "Châtillon (JU)",
+  "bfs": 6704,
+  "coefficient": 2.0,
+  "no_cantonal": 104
+ },
+ {
+  "nom": "Clos du Doubs",
+  "bfs": 6808,
+  "coefficient": 2.15,
+  "no_cantonal": 334
+ },
+ {
+  "nom": "Coeuve",
+  "bfs": 6781,
+  "coefficient": 2.35,
+  "no_cantonal": 311
+ },
+ {
+  "nom": "Cornol",
+  "bfs": 6782,
+  "coefficient": 2.05,
+  "no_cantonal": 312
+ },
+ {
+  "nom": "Courchapoix",
+  "bfs": 6706,
+  "coefficient": 2.15,
+  "no_cantonal": 106
+ },
+ {
+  "nom": "Courchavon",
+  "bfs": 6783,
+  "coefficient": 1.9,
+  "no_cantonal": 313
+ },
+ {
+  "nom": "Courgenay",
+  "bfs": 6784,
+  "coefficient": 2.05,
+  "no_cantonal": 314
+ },
+ {
+  "nom": "Courrendlin",
+  "bfs": 6708,
+  "coefficient": 2.25,
+  "no_cantonal": 108
+ },
+ {
+  "nom": "Courroux",
+  "bfs": 6709,
+  "coefficient": 2.15,
+  "no_cantonal": 109
+ },
+ {
+  "nom": "Courtedoux",
+  "bfs": 6785,
+  "coefficient": 2.2,
+  "no_cantonal": 315
+ },
+ {
+  "nom": "Courtételle",
+  "bfs": 6710,
+  "coefficient": 1.65,
+  "no_cantonal": 110
+ },
+ {
+  "nom": "Damphreux-Lugnez",
+  "bfs": 6811,
+  "coefficient": 2.15,
+  "no_cantonal": 317
+ },
+ {
+  "nom": "Delémont",
+  "bfs": 6711,
+  "coefficient": 1.9,
+  "no_cantonal": 111
+ },
+ {
+  "nom": "Develier",
+  "bfs": 6712,
+  "coefficient": 1.95,
+  "no_cantonal": 112
+ },
+ {
+  "nom": "Ederswiler",
+  "bfs": 6713,
+  "coefficient": 2.2,
+  "no_cantonal": 113
+ },
+ {
+  "nom": "Fahy",
+  "bfs": 6789,
+  "coefficient": 2.3,
+  "no_cantonal": 319
+ },
+ {
+  "nom": "Fontenais",
+  "bfs": 6790,
+  "coefficient": 2.35,
+  "no_cantonal": 320
+ },
+ {
+  "nom": "Grandfontaine",
+  "bfs": 6792,
+  "coefficient": 2.25,
+  "no_cantonal": 322
+ },
+ {
+  "nom": "Haute-Ajoie",
+  "bfs": 6809,
+  "coefficient": 2.15,
+  "no_cantonal": 310
+ },
+ {
+  "nom": "Haute-Sorne",
+  "bfs": 6729,
+  "coefficient": 2.1,
+  "no_cantonal": 101
+ },
+ {
+  "nom": "La Baroche",
+  "bfs": 6810,
+  "coefficient": 2.15,
+  "no_cantonal": 324
+ },
+ {
+  "nom": "Lajoux (JU)",
+  "bfs": 6750,
+  "coefficient": 2.2,
+  "no_cantonal": 210
+ },
+ {
+  "nom": "Le Bémont (JU)",
+  "bfs": 6741,
+  "coefficient": 1.95,
+  "no_cantonal": 201
+ },
+ {
+  "nom": "Le Noirmont",
+  "bfs": 6754,
+  "coefficient": 1.7,
+  "no_cantonal": 215
+ },
+ {
+  "nom": "Les Bois",
+  "bfs": 6742,
+  "coefficient": 2.05,
+  "no_cantonal": 202
+ },
+ {
+  "nom": "Les Breuleux",
+  "bfs": 6743,
+  "coefficient": 1.3,
+  "no_cantonal": 203
+ },
+ {
+  "nom": "Les Enfers",
+  "bfs": 6745,
+  "coefficient": 2.05,
+  "no_cantonal": 205
+ },
+ {
+  "nom": "Les Genevez (JU)",
+  "bfs": 6748,
+  "coefficient": 2.05,
+  "no_cantonal": 208
+ },
+ {
+  "nom": "Mervelier",
+  "bfs": 6715,
+  "coefficient": 2.25,
+  "no_cantonal": 116
+ },
+ {
+  "nom": "Mettembert",
+  "bfs": 6716,
+  "coefficient": 2.2,
+  "no_cantonal": 117
+ },
+ {
+  "nom": "Montfaucon",
+  "bfs": 6751,
+  "coefficient": 2.2,
+  "no_cantonal": 211
+ },
+ {
+  "nom": "Moutier",
+  "bfs": 6831,
+  "coefficient": 2.3,
+  "no_cantonal": 401
+ },
+ {
+  "nom": "Movelier",
+  "bfs": 6718,
+  "coefficient": 2.25,
+  "no_cantonal": 119
+ },
+ {
+  "nom": "Muriaux",
+  "bfs": 6753,
+  "coefficient": 1.6,
+  "no_cantonal": 213
+ },
+ {
+  "nom": "Pleigne",
+  "bfs": 6719,
+  "coefficient": 2.1,
+  "no_cantonal": 120
+ },
+ {
+  "nom": "Porrentruy",
+  "bfs": 6800,
+  "coefficient": 2.05,
+  "no_cantonal": 330
+ },
+ {
+  "nom": "Rossemaison",
+  "bfs": 6721,
+  "coefficient": 2.0,
+  "no_cantonal": 122
+ },
+ {
+  "nom": "Saignelégier",
+  "bfs": 6757,
+  "coefficient": 2.3,
+  "no_cantonal": 218
+ },
+ {
+  "nom": "Saint-Brais",
+  "bfs": 6758,
+  "coefficient": 2.25,
+  "no_cantonal": 219
+ },
+ {
+  "nom": "Saulcy",
+  "bfs": 6722,
+  "coefficient": 2.2,
+  "no_cantonal": 123
+ },
+ {
+  "nom": "Soubey",
+  "bfs": 6759,
+  "coefficient": 2.25,
+  "no_cantonal": 221
+ },
+ {
+  "nom": "Soyhières",
+  "bfs": 6724,
+  "coefficient": 2.15,
+  "no_cantonal": 125
+ },
+ {
+  "nom": "Val Terbi",
+  "bfs": 6730,
+  "coefficient": 2.2,
+  "no_cantonal": 128
+ },
+ {
+  "nom": "Vendlincourt",
+  "bfs": 6806,
+  "coefficient": 2.3,
+  "no_cantonal": 336
+ }
+]

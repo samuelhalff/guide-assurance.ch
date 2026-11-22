@@ -1,0 +1,1267 @@
+{
+ "source": "https://swisstaxcalculator.estv.admin.ch/delegate/ost-integration/v1/lg-proxy/operation/c3b67379_ESTV/API_exportManyTaxScales",
+ "annee": 2026,
+ "lu_le": "2026-11-22",
+ "donnees": [
+  {
+   "Location": {
+    "TaxLocationID": 300000000,
+    "CantonID": 4,
+    "BfsID": 351,
+    "BfsName": "Bern",
+    "ZipCode": "3000",
+    "City": "Bern",
+    "Canton": "BE"
+   },
+   "Target": "KANTON",
+   "TaxType": "EINKOMMENSSTEUER",
+   "TableType": "ZUERICH",
+   "Splitting": 0,
+   "Group": "LEDIG_ALLEINE,LEDIG_KONKUBINAT,LEDIG_OHNE_KINDER",
+   "Table": [
+    {
+     "Amount": 3300,
+     "Percent": 1.95,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 3300,
+     "Percent": 2.9,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 9800,
+     "Percent": 3.6,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 16100,
+     "Percent": 4.15,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 26900,
+     "Percent": 4.45,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 26900,
+     "Percent": 5,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 26900,
+     "Percent": 5.6,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 26900,
+     "Percent": 5.75,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 26900,
+     "Percent": 5.9,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 26900,
+     "Percent": 6.05,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 37700,
+     "Percent": 6.15,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 86900,
+     "Percent": 6.3,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 152100,
+     "Percent": 6.4,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 999999999.0,
+     "Percent": 6.5,
+     "Taxes": 0,
+     "Formula": ""
+    }
+   ]
+  },
+  {
+   "Location": {
+    "TaxLocationID": 300000000,
+    "CantonID": 4,
+    "BfsID": 351,
+    "BfsName": "Bern",
+    "ZipCode": "3000",
+    "City": "Bern",
+    "Canton": "BE"
+   },
+   "Target": "KANTON",
+   "TaxType": "EINKOMMENSSTEUER",
+   "TableType": "ZUERICH",
+   "Splitting": 0,
+   "Group": "LEDIG_ALLEINE,LEDIG_KONKUBINAT,VERHEIRATET,LEDIG_MIT_KINDER",
+   "Table": [
+    {
+     "Amount": 3300,
+     "Percent": 1.55,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 3300,
+     "Percent": 1.65,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 9800,
+     "Percent": 2.85,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 16100,
+     "Percent": 3.65,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 26900,
+     "Percent": 3.8,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 26900,
+     "Percent": 4.3,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 26900,
+     "Percent": 4.85,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 26900,
+     "Percent": 5.2,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 41700,
+     "Percent": 5.7,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 54300,
+     "Percent": 5.85,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 54300,
+     "Percent": 5.95,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 54300,
+     "Percent": 6.2,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 141300,
+     "Percent": 6.4,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 999999999.0,
+     "Percent": 6.5,
+     "Taxes": 0,
+     "Formula": ""
+    }
+   ]
+  },
+  {
+   "Location": {
+    "TaxLocationID": 300000000,
+    "CantonID": 4,
+    "BfsID": 351,
+    "BfsName": "Bern",
+    "ZipCode": "3000",
+    "City": "Bern",
+    "Canton": "BE"
+   },
+   "Target": "KANTON",
+   "TaxType": "VORSORGESTEUER",
+   "TableType": "ZUERICH",
+   "Splitting": 0,
+   "Group": "LEDIG_ALLEINE,LEDIG_KONKUBINAT,LEDIG_OHNE_KINDER",
+   "Table": [
+    {
+     "Amount": 0,
+     "Percent": 0,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 5300,
+     "Percent": 0.65,
+     "Taxes": 34.45,
+     "Formula": ""
+    },
+    {
+     "Amount": 27700,
+     "Percent": 0.85,
+     "Taxes": 180.05,
+     "Formula": ""
+    },
+    {
+     "Amount": 55400,
+     "Percent": 1.1,
+     "Taxes": 415.5,
+     "Formula": ""
+    },
+    {
+     "Amount": 110800,
+     "Percent": 1.15,
+     "Taxes": 1024.9,
+     "Formula": ""
+    },
+    {
+     "Amount": 166200,
+     "Percent": 1.3,
+     "Taxes": 1662,
+     "Formula": ""
+    },
+    {
+     "Amount": 277000,
+     "Percent": 1.6,
+     "Taxes": 3102.4,
+     "Formula": ""
+    },
+    {
+     "Amount": 443200,
+     "Percent": 1.85,
+     "Taxes": 5761.6,
+     "Formula": ""
+    },
+    {
+     "Amount": 720100,
+     "Percent": 1.9,
+     "Taxes": 10884.25,
+     "Formula": ""
+    },
+    {
+     "Amount": 1274000,
+     "Percent": 2,
+     "Taxes": 21408.35,
+     "Formula": ""
+    }
+   ]
+  },
+  {
+   "Location": {
+    "TaxLocationID": 300000000,
+    "CantonID": 4,
+    "BfsID": 351,
+    "BfsName": "Bern",
+    "ZipCode": "3000",
+    "City": "Bern",
+    "Canton": "BE"
+   },
+   "Target": "KANTON",
+   "TaxType": "VORSORGESTEUER",
+   "TableType": "ZUERICH",
+   "Splitting": 0,
+   "Group": "LEDIG_ALLEINE,LEDIG_KONKUBINAT,VERHEIRATET,LEDIG_MIT_KINDER",
+   "Table": [
+    {
+     "Amount": 0,
+     "Percent": 0,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 5300,
+     "Percent": 0.65,
+     "Taxes": 34.45,
+     "Formula": ""
+    },
+    {
+     "Amount": 55400,
+     "Percent": 0.9,
+     "Taxes": 360.1,
+     "Formula": ""
+    },
+    {
+     "Amount": 110800,
+     "Percent": 1.15,
+     "Taxes": 858.7,
+     "Formula": ""
+    },
+    {
+     "Amount": 221600,
+     "Percent": 1.3,
+     "Taxes": 2132.9,
+     "Formula": ""
+    },
+    {
+     "Amount": 332400,
+     "Percent": 1.5,
+     "Taxes": 3573.3,
+     "Formula": ""
+    },
+    {
+     "Amount": 553900,
+     "Percent": 1.8,
+     "Taxes": 6895.8,
+     "Formula": ""
+    },
+    {
+     "Amount": 886200,
+     "Percent": 1.9,
+     "Taxes": 12877.2,
+     "Formula": ""
+    },
+    {
+     "Amount": 1440100,
+     "Percent": 2,
+     "Taxes": 23401.3,
+     "Formula": ""
+    }
+   ]
+  },
+  {
+   "Location": {
+    "TaxLocationID": 170000000,
+    "CantonID": 7,
+    "BfsID": 2196,
+    "BfsName": "Fribourg",
+    "ZipCode": "1700",
+    "City": "Fribourg",
+    "Canton": "FR"
+   },
+   "Target": "KANTON",
+   "TaxType": "EINKOMMENSSTEUER",
+   "TableType": "FREIBURG",
+   "Splitting": 2,
+   "Group": "LEDIG_ALLEINE,LEDIG_KONKUBINAT,LEDIG_OHNE_KINDER",
+   "Table": [
+    {
+     "Amount": 0,
+     "Percent": 0,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 5199,
+     "Percent": 0,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 5200,
+     "Percent": 1,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 17500,
+     "Percent": 4.1745,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 31400,
+     "Percent": 6.2139,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 48300,
+     "Percent": 8.0352,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 63800,
+     "Percent": 9.1042,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 77600,
+     "Percent": 9.9846,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 102100,
+     "Percent": 10.8662,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 128700,
+     "Percent": 11.7172,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 156000,
+     "Percent": 12.5355,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 181000,
+     "Percent": 13.1097,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 207100,
+     "Percent": 13.5,
+     "Taxes": 0,
+     "Formula": ""
+    }
+   ]
+  },
+  {
+   "Location": {
+    "TaxLocationID": 170000000,
+    "CantonID": 7,
+    "BfsID": 2196,
+    "BfsName": "Fribourg",
+    "ZipCode": "1700",
+    "City": "Fribourg",
+    "Canton": "FR"
+   },
+   "Target": "KANTON",
+   "TaxType": "EINKOMMENSSTEUER",
+   "TableType": "FREIBURG",
+   "Splitting": 0,
+   "Group": "LEDIG_ALLEINE,LEDIG_KONKUBINAT,VERHEIRATET,LEDIG_MIT_KINDER",
+   "Table": [
+    {
+     "Amount": 0,
+     "Percent": 0,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 5199,
+     "Percent": 0,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 5200,
+     "Percent": 1,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 10500,
+     "Percent": 1,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 35000,
+     "Percent": 4.1745,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 62800,
+     "Percent": 6.2139,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 96600,
+     "Percent": 8.0352,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 127600,
+     "Percent": 9.1042,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 155200,
+     "Percent": 9.9846,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 204200,
+     "Percent": 10.8662,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 257400,
+     "Percent": 11.7172,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 312000,
+     "Percent": 12.5355,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 362000,
+     "Percent": 13.1097,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 414200,
+     "Percent": 13.5,
+     "Taxes": 0,
+     "Formula": ""
+    }
+   ]
+  },
+  {
+   "Location": {
+    "TaxLocationID": 170000000,
+    "CantonID": 7,
+    "BfsID": 2196,
+    "BfsName": "Fribourg",
+    "ZipCode": "1700",
+    "City": "Fribourg",
+    "Canton": "FR"
+   },
+   "Target": "KANTON",
+   "TaxType": "VORSORGESTEUER",
+   "TableType": "BUND",
+   "Splitting": 0,
+   "Group": "ALLE",
+   "Table": [
+    {
+     "Amount": 0,
+     "Percent": 0,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 10001,
+     "Percent": 1,
+     "Taxes": 100,
+     "Formula": ""
+    },
+    {
+     "Amount": 50000,
+     "Percent": 2,
+     "Taxes": 500,
+     "Formula": ""
+    },
+    {
+     "Amount": 100000,
+     "Percent": 3,
+     "Taxes": 1500,
+     "Formula": ""
+    },
+    {
+     "Amount": 150000,
+     "Percent": 4,
+     "Taxes": 3000,
+     "Formula": ""
+    },
+    {
+     "Amount": 200000,
+     "Percent": 5,
+     "Taxes": 5000,
+     "Formula": ""
+    }
+   ]
+  },
+  {
+   "Location": {
+    "TaxLocationID": 280000000,
+    "CantonID": 11,
+    "BfsID": 6711,
+    "BfsName": "Delémont",
+    "ZipCode": "2800",
+    "City": "Delémont",
+    "Canton": "JU"
+   },
+   "Target": "KANTON",
+   "TaxType": "EINKOMMENSSTEUER",
+   "TableType": "ZUERICH",
+   "Splitting": 0,
+   "Group": "LEDIG_ALLEINE,LEDIG_KONKUBINAT,LEDIG_OHNE_KINDER",
+   "Table": [
+    {
+     "Amount": 6900,
+     "Percent": 0,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 7800,
+     "Percent": 1.66702,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 14000,
+     "Percent": 3.14902,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 21800,
+     "Percent": 4.02902,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 42200,
+     "Percent": 4.90902,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 112500,
+     "Percent": 5.558,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 9999999999.0,
+     "Percent": 5.78902,
+     "Taxes": 0,
+     "Formula": ""
+    }
+   ]
+  },
+  {
+   "Location": {
+    "TaxLocationID": 280000000,
+    "CantonID": 11,
+    "BfsID": 6711,
+    "BfsName": "Delémont",
+    "ZipCode": "2800",
+    "City": "Delémont",
+    "Canton": "JU"
+   },
+   "Target": "KANTON",
+   "TaxType": "EINKOMMENSSTEUER",
+   "TableType": "ZUERICH",
+   "Splitting": 0,
+   "Group": "LEDIG_ALLEINE,VERHEIRATET,LEDIG_MIT_KINDER",
+   "Table": [
+    {
+     "Amount": 12600,
+     "Percent": 0,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 6200,
+     "Percent": 0.88,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 9300,
+     "Percent": 2.26902,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 20300,
+     "Percent": 3.242,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 42200,
+     "Percent": 4.122,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 112500,
+     "Percent": 4.77102,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 234500,
+     "Percent": 5.69702,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 9999999999.0,
+     "Percent": 5.78902,
+     "Taxes": 0,
+     "Formula": ""
+    }
+   ]
+  },
+  {
+   "Location": {
+    "TaxLocationID": 280000000,
+    "CantonID": 11,
+    "BfsID": 6711,
+    "BfsName": "Delémont",
+    "ZipCode": "2800",
+    "City": "Delémont",
+    "Canton": "JU"
+   },
+   "Target": "KANTON",
+   "TaxType": "EINKOMMENSSTEUER",
+   "TableType": "ZUERICH",
+   "Splitting": 0,
+   "Group": "LEDIG_KONKUBINAT,LEDIG_MIT_KINDER",
+   "Table": [
+    {
+     "Amount": 6900,
+     "Percent": 0,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 7800,
+     "Percent": 1.66702,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 14000,
+     "Percent": 3.14902,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 21800,
+     "Percent": 4.02902,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 42200,
+     "Percent": 4.90902,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 112500,
+     "Percent": 5.558,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 9999999999.0,
+     "Percent": 5.78902,
+     "Taxes": 0,
+     "Formula": ""
+    }
+   ]
+  },
+  {
+   "Location": {
+    "TaxLocationID": 280000000,
+    "CantonID": 11,
+    "BfsID": 6711,
+    "BfsName": "Delémont",
+    "ZipCode": "2800",
+    "City": "Delémont",
+    "Canton": "JU"
+   },
+   "Target": "KANTON",
+   "TaxType": "VORSORGESTEUER",
+   "TableType": "ZUERICH",
+   "Splitting": 0,
+   "Group": "LEDIG_ALLEINE,LEDIG_KONKUBINAT,LEDIG_OHNE_KINDER",
+   "Table": [
+    {
+     "Amount": 56700,
+     "Percent": 1.1,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 56700,
+     "Percent": 1.3,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 9999999999.0,
+     "Percent": 1.7,
+     "Taxes": 0,
+     "Formula": ""
+    }
+   ]
+  },
+  {
+   "Location": {
+    "TaxLocationID": 280000000,
+    "CantonID": 11,
+    "BfsID": 6711,
+    "BfsName": "Delémont",
+    "ZipCode": "2800",
+    "City": "Delémont",
+    "Canton": "JU"
+   },
+   "Target": "KANTON",
+   "TaxType": "VORSORGESTEUER",
+   "TableType": "ZUERICH",
+   "Splitting": 0,
+   "Group": "LEDIG_ALLEINE,VERHEIRATET,LEDIG_MIT_KINDER",
+   "Table": [
+    {
+     "Amount": 56700,
+     "Percent": 0.9,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 56700,
+     "Percent": 1.1,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 9999999999.0,
+     "Percent": 1.3,
+     "Taxes": 0,
+     "Formula": ""
+    }
+   ]
+  },
+  {
+   "Location": {
+    "TaxLocationID": 280000000,
+    "CantonID": 11,
+    "BfsID": 6711,
+    "BfsName": "Delémont",
+    "ZipCode": "2800",
+    "City": "Delémont",
+    "Canton": "JU"
+   },
+   "Target": "KANTON",
+   "TaxType": "VORSORGESTEUER",
+   "TableType": "ZUERICH",
+   "Splitting": 0,
+   "Group": "LEDIG_KONKUBINAT,LEDIG_MIT_KINDER",
+   "Table": [
+    {
+     "Amount": 56700,
+     "Percent": 1.1,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 56700,
+     "Percent": 1.3,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 9999999999.0,
+     "Percent": 1.7,
+     "Taxes": 0,
+     "Formula": ""
+    }
+   ]
+  },
+  {
+   "Location": {
+    "TaxLocationID": 200000000,
+    "CantonID": 13,
+    "BfsID": 6458,
+    "BfsName": "Neuchâtel",
+    "ZipCode": "2000",
+    "City": "Neuchâtel",
+    "Canton": "NE"
+   },
+   "Target": "KANTON",
+   "TaxType": "EINKOMMENSSTEUER",
+   "TableType": "BUND",
+   "Splitting": 1.9230769230769231,
+   "Group": "ALLE",
+   "Table": [
+    {
+     "Amount": 0,
+     "Percent": 0,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 7700,
+     "Percent": 1.98,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 10300,
+     "Percent": 3.96,
+     "Taxes": 51,
+     "Formula": ""
+    },
+    {
+     "Amount": 15500,
+     "Percent": 7.92,
+     "Taxes": 257,
+     "Formula": ""
+    },
+    {
+     "Amount": 20600,
+     "Percent": 11.484,
+     "Taxes": 661,
+     "Formula": ""
+    },
+    {
+     "Amount": 30900,
+     "Percent": 11.781,
+     "Taxes": 1844,
+     "Formula": ""
+    },
+    {
+     "Amount": 41200,
+     "Percent": 12.177,
+     "Taxes": 3058,
+     "Formula": ""
+    },
+    {
+     "Amount": 51500,
+     "Percent": 12.672,
+     "Taxes": 4312,
+     "Formula": ""
+    },
+    {
+     "Amount": 61800,
+     "Percent": 13.167,
+     "Taxes": 5617,
+     "Formula": ""
+    },
+    {
+     "Amount": 72100,
+     "Percent": 13.662,
+     "Taxes": 6973,
+     "Formula": ""
+    },
+    {
+     "Amount": 82400,
+     "Percent": 14.058,
+     "Taxes": 8380,
+     "Formula": ""
+    },
+    {
+     "Amount": 92700,
+     "Percent": 14.355,
+     "Taxes": 9828,
+     "Formula": ""
+    },
+    {
+     "Amount": 103000,
+     "Percent": 14.652,
+     "Taxes": 11307,
+     "Formula": ""
+    },
+    {
+     "Amount": 113300,
+     "Percent": 14.949,
+     "Taxes": 12816,
+     "Formula": ""
+    },
+    {
+     "Amount": 123600,
+     "Percent": 15.246,
+     "Taxes": 14356,
+     "Formula": ""
+    },
+    {
+     "Amount": 133900,
+     "Percent": 15.345,
+     "Taxes": 15926,
+     "Formula": ""
+    },
+    {
+     "Amount": 144200,
+     "Percent": 15.444,
+     "Taxes": 17507,
+     "Formula": ""
+    },
+    {
+     "Amount": 154500,
+     "Percent": 15.543,
+     "Taxes": 19097,
+     "Formula": ""
+    },
+    {
+     "Amount": 164800,
+     "Percent": 15.741,
+     "Taxes": 20698,
+     "Formula": ""
+    },
+    {
+     "Amount": 175100,
+     "Percent": 15.939,
+     "Taxes": 22320,
+     "Formula": ""
+    },
+    {
+     "Amount": 185400,
+     "Percent": 16.038,
+     "Taxes": 23961,
+     "Formula": ""
+    },
+    {
+     "Amount": 195700,
+     "Percent": 16.038,
+     "Taxes": 25613,
+     "Formula": ""
+    },
+    {
+     "Amount": 206000,
+     "Percent": 13.365,
+     "Taxes": 27265,
+     "Formula": ""
+    },
+    {
+     "Amount": 309000,
+     "Percent": 13.6125,
+     "Taxes": 41031,
+     "Formula": ""
+    },
+    {
+     "Amount": 412000,
+     "Percent": 13.86,
+     "Taxes": 55052,
+     "Formula": ""
+    }
+   ]
+  },
+  {
+   "Location": {
+    "TaxLocationID": 195000000,
+    "CantonID": 24,
+    "BfsID": 6266,
+    "BfsName": "Sion",
+    "ZipCode": "1950",
+    "City": "Sion",
+    "Canton": "VS"
+   },
+   "Target": "KANTON",
+   "TaxType": "EINKOMMENSSTEUER",
+   "TableType": "FREIBURG",
+   "Splitting": 0,
+   "Group": "ALLE",
+   "Table": [
+    {
+     "Amount": 0,
+     "Percent": 2,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 5000,
+     "Percent": 2,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 10000,
+     "Percent": 2.8,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 20000,
+     "Percent": 4.6,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 30000,
+     "Percent": 6,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 40000,
+     "Percent": 7.4,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 50000,
+     "Percent": 8.7,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 60000,
+     "Percent": 10.2,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 70000,
+     "Percent": 11.5,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 80000,
+     "Percent": 13,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 90000,
+     "Percent": 13.3,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 100000,
+     "Percent": 13.5,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 200000,
+     "Percent": 14,
+     "Taxes": 0,
+     "Formula": ""
+    }
+   ]
+  },
+  {
+   "Location": {
+    "TaxLocationID": 195000000,
+    "CantonID": 24,
+    "BfsID": 6266,
+    "BfsName": "Sion",
+    "ZipCode": "1950",
+    "City": "Sion",
+    "Canton": "VS"
+   },
+   "Target": "GEMEINDE",
+   "TaxType": "EINKOMMENSSTEUER",
+   "TableType": "FREIBURG",
+   "Splitting": 0,
+   "Group": "ALLE",
+   "Table": [
+    {
+     "Amount": 0,
+     "Percent": 2,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 5000,
+     "Percent": 2,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 10000,
+     "Percent": 2.7,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 15000,
+     "Percent": 3.6,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 20000,
+     "Percent": 4.4,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 30000,
+     "Percent": 5.8,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 40000,
+     "Percent": 6.8,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 50000,
+     "Percent": 7.5,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 60000,
+     "Percent": 8,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 80000,
+     "Percent": 8.8,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 90000,
+     "Percent": 9,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 180000,
+     "Percent": 9.9,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 200000,
+     "Percent": 10,
+     "Taxes": 0,
+     "Formula": ""
+    }
+   ]
+  }
+ ]
+}

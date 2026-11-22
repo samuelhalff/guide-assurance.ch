@@ -1,0 +1,82 @@
+[
+ {
+  "canton": "BE",
+  "region": 2,
+  "commune": "Saint-Imier",
+  "ofs": 443,
+  "location_id": "23453968933896",
+  "localite": "2345 Le Cerneux-Veusil (Commune Saint-Imier)"
+ },
+ {
+  "canton": "FR",
+  "region": 1,
+  "commune": "Fribourg",
+  "ofs": 2196,
+  "location_id": "17003941474438",
+  "localite": "1700 Fribourg/Freiburg (Commune Fribourg)"
+ },
+ {
+  "canton": "FR",
+  "region": 2,
+  "commune": "Bulle",
+  "ofs": 2125,
+  "location_id": "16302601905218",
+  "localite": "1630 Bulle (Commune Bulle)"
+ },
+ {
+  "canton": "GE",
+  "region": 0,
+  "commune": "Genève",
+  "ofs": 6621,
+  "location_id": "12013066035420",
+  "localite": "1201 Genève"
+ },
+ {
+  "canton": "JU",
+  "region": 0,
+  "commune": "Delémont",
+  "ofs": 6711,
+  "location_id": "28003484864209",
+  "localite": "2800 Delémont (Commune Delémont)"
+ },
+ {
+  "canton": "NE",
+  "region": 0,
+  "commune": "Neuchâtel",
+  "ofs": 6458,
+  "location_id": "20004043944337",
+  "localite": "2000 Neuchâtel (Commune Neuchâtel)"
+ },
+ {
+  "canton": "VD",
+  "region": 1,
+  "commune": "Lausanne",
+  "ofs": 5586,
+  "location_id": "10003735325874",
+  "localite": "1000 Lausanne 25 (Commune Lausanne)"
+ },
+ {
+  "canton": "VD",
+  "region": 2,
+  "commune": "Yverdon-les-Bains",
+  "ofs": 5938,
+  "location_id": "14001745127804",
+  "localite": "1400 Yverdon-les-Bains"
+ },
+ {
+  "canton": "VS",
+  "region": 1,
+  "commune": "Sion",
+  "ofs": 6266,
+  "location_id": "19502849258765",
+  "localite": "1950 Sion (Commune Sion)"
+ },
+ {
+  "canton": "VS",
+  "region": 2,
+  "commune": "Brig-Glis",
+  "ofs": 6002,
+  "location_id": "3900349440024",
+  "localite": "3900 Brig (Commune Brig-Glis)"
+ }
+]

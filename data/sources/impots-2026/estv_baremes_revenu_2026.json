@@ -1,0 +1,733 @@
+{
+ "source": "https://swisstaxcalculator.estv.admin.ch/delegate/ost-integration/v1/lg-proxy/operation/c3b67379_ESTV/API_exportManyTaxScales",
+ "annee": 2026,
+ "lu_le": "2026-11-22",
+ "donnees": [
+  {
+   "Location": {
+    "TaxLocationID": 120000000,
+    "CantonID": 8,
+    "BfsID": 6621,
+    "BfsName": "Genève",
+    "ZipCode": "1200",
+    "City": "Genève",
+    "Canton": "GE"
+   },
+   "Target": "KANTON",
+   "TaxType": "EINKOMMENSSTEUER",
+   "TableType": "BUND",
+   "Splitting": 2,
+   "Group": "ALLE",
+   "Table": [
+    {
+     "Amount": 0,
+     "Percent": 0,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 18700,
+     "Percent": 7.3,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 22530,
+     "Percent": 8.2,
+     "Taxes": 279.6,
+     "Formula": ""
+    },
+    {
+     "Amount": 24784,
+     "Percent": 9.1,
+     "Taxes": 464.4,
+     "Formula": ""
+    },
+    {
+     "Amount": 27036,
+     "Percent": 10,
+     "Taxes": 669.35,
+     "Formula": ""
+    },
+    {
+     "Amount": 29290,
+     "Percent": 10.9,
+     "Taxes": 894.75,
+     "Formula": ""
+    },
+    {
+     "Amount": 34922,
+     "Percent": 11.3,
+     "Taxes": 1508.65,
+     "Formula": ""
+    },
+    {
+     "Amount": 39428,
+     "Percent": 12.3,
+     "Taxes": 2017.8,
+     "Formula": ""
+    },
+    {
+     "Amount": 43935,
+     "Percent": 12.8,
+     "Taxes": 2572.2,
+     "Formula": ""
+    },
+    {
+     "Amount": 48441,
+     "Percent": 13.2,
+     "Taxes": 3148.95,
+     "Formula": ""
+    },
+    {
+     "Amount": 77730,
+     "Percent": 14.2,
+     "Taxes": 7015.1,
+     "Formula": ""
+    },
+    {
+     "Amount": 127297,
+     "Percent": 15,
+     "Taxes": 14053.6,
+     "Formula": ""
+    },
+    {
+     "Amount": 171231,
+     "Percent": 15.6,
+     "Taxes": 20643.7,
+     "Formula": ""
+    },
+    {
+     "Amount": 193762,
+     "Percent": 15.8,
+     "Taxes": 24158.55,
+     "Formula": ""
+    },
+    {
+     "Amount": 277125,
+     "Percent": 16,
+     "Taxes": 37329.9,
+     "Formula": ""
+    },
+    {
+     "Amount": 295150,
+     "Percent": 16.8,
+     "Taxes": 40213.9,
+     "Formula": ""
+    },
+    {
+     "Amount": 415688,
+     "Percent": 17.6,
+     "Taxes": 60464.3,
+     "Formula": ""
+    },
+    {
+     "Amount": 651131,
+     "Percent": 18,
+     "Taxes": 101902.25,
+     "Formula": ""
+    }
+   ]
+  },
+  {
+   "Location": {
+    "TaxLocationID": 120000000,
+    "CantonID": 8,
+    "BfsID": 6621,
+    "BfsName": "Genève",
+    "ZipCode": "1200",
+    "City": "Genève",
+    "Canton": "GE"
+   },
+   "Target": "BUND",
+   "TaxType": "EINKOMMENSSTEUER",
+   "TableType": "BUND",
+   "Splitting": 0,
+   "Group": "LEDIG_ALLEINE,LEDIG_KONKUBINAT,LEDIG_OHNE_KINDER",
+   "Table": [
+    {
+     "Amount": 0,
+     "Percent": 0,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 15200,
+     "Percent": 0.77,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 33200,
+     "Percent": 0.88,
+     "Taxes": 138.6,
+     "Formula": ""
+    },
+    {
+     "Amount": 43500,
+     "Percent": 2.64,
+     "Taxes": 229.2,
+     "Formula": ""
+    },
+    {
+     "Amount": 58000,
+     "Percent": 2.9699999999999998,
+     "Taxes": 612,
+     "Formula": ""
+    },
+    {
+     "Amount": 76200,
+     "Percent": 5.9399999999999995,
+     "Taxes": 1152.5,
+     "Formula": ""
+    },
+    {
+     "Amount": 82100,
+     "Percent": 6.6,
+     "Taxes": 1502.95,
+     "Formula": ""
+    },
+    {
+     "Amount": 108900,
+     "Percent": 8.8,
+     "Taxes": 3271.75,
+     "Formula": ""
+    },
+    {
+     "Amount": 141500,
+     "Percent": 11,
+     "Taxes": 6140.55,
+     "Formula": ""
+    },
+    {
+     "Amount": 185100,
+     "Percent": 13.2,
+     "Taxes": 10936.55,
+     "Formula": ""
+    },
+    {
+     "Amount": 793900,
+     "Percent": 13.2,
+     "Taxes": 91298.15,
+     "Formula": ""
+    },
+    {
+     "Amount": 794000,
+     "Percent": 11.5,
+     "Taxes": 91310,
+     "Formula": ""
+    }
+   ]
+  },
+  {
+   "Location": {
+    "TaxLocationID": 120000000,
+    "CantonID": 8,
+    "BfsID": 6621,
+    "BfsName": "Genève",
+    "ZipCode": "1200",
+    "City": "Genève",
+    "Canton": "GE"
+   },
+   "Target": "BUND",
+   "TaxType": "EINKOMMENSSTEUER",
+   "TableType": "BUND",
+   "Splitting": 0,
+   "Group": "LEDIG_ALLEINE,LEDIG_KONKUBINAT,VERHEIRATET,LEDIG_MIT_KINDER",
+   "Table": [
+    {
+     "Amount": 0,
+     "Percent": 0,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 29700,
+     "Percent": 1,
+     "Taxes": 0,
+     "Formula": ""
+    },
+    {
+     "Amount": 53400,
+     "Percent": 2,
+     "Taxes": 237,
+     "Formula": ""
+    },
+    {
+     "Amount": 61300,
+     "Percent": 3,
+     "Taxes": 395,
+     "Formula": ""
+    },
+    {
+     "Amount": 79100,
+     "Percent": 4,
+     "Taxes": 929,
+     "Formula": ""
+    },
+    {
+     "Amount": 94900,
+     "Percent": 5,
+     "Taxes": 1561,
+     "Formula": ""
+    },
+    {
+     "Amount": 108700,
+     "Percent": 6,
+     "Taxes": 2251,
+     "Formula": ""
+    },
+    {
+     "Amount": 120600,
+     "Percent": 7,
+     "Taxes": 2965,
+     "Formula": ""
+    },
+    {
+     "Amount": 130500,
+     "Percent": 8,
+     "Taxes": 3658,
+     "Formula": ""
+    },
+    {
+     "Amount": 138400,
+     "Percent": 9,
+     "Taxes": 4290,
+     "Formula": ""
+    },
+    {
+     "Amount": 144300,
+     "Percent": 10,
+     "Taxes": 4821,
+     "Formula": ""
+    },
+    {
+     "Amount": 148300,
+     "Percent": 11,
+     "Taxes": 5221,
+     "Formula": ""
+    },
+    {
+     "Amount": 150400,
+     "Percent": 12,
+     "Taxes": 5452,
+     "Formula": ""
+    },
+    {
+     "Amount": 152400,
+     "Percent": 13,
+     "Taxes": 5692,
+     "Formula": ""
+    },
+    {
+     "Amount": 941300,
+     "Percent": 13,
+     "Taxes": 108249,
+     "Formula": ""
+    },
+    {
+     "Amount": 941400,
+     "Percent": 11.5,
+     "Taxes": 108261,
+     "Formula": ""
+    }
+   ]
+  },
+  {
+   "Location": {
+    "TaxLocationID": 100000000,
+    "CantonID": 23,
+    "BfsID": 5586,
+    "BfsName": "Lausanne",
+    "ZipCode": "1000",
+    "City": "Lausanne",
+    "Canton": "VD"
+   },
+   "Target": "KANTON",
+   "TaxType": "EINKOMMENSSTEUER",
+   "TableType": "BUND",
+   "Splitting": 1.8,
+   "Group": "VERHEIRATET",
+   "Table": [
+    {
+     "Amount": 100,
+     "Percent": 1,
+     "Taxes": 1,
+     "Formula": ""
+    },
+    {
+     "Amount": 1600,
+     "Percent": 2,
+     "Taxes": 16,
+     "Formula": ""
+    },
+    {
+     "Amount": 3400,
+     "Percent": 3,
+     "Taxes": 52,
+     "Formula": ""
+    },
+    {
+     "Amount": 5100,
+     "Percent": 4,
+     "Taxes": 103,
+     "Formula": ""
+    },
+    {
+     "Amount": 8300,
+     "Percent": 5,
+     "Taxes": 231,
+     "Formula": ""
+    },
+    {
+     "Amount": 11900,
+     "Percent": 6,
+     "Taxes": 411,
+     "Formula": ""
+    },
+    {
+     "Amount": 15100,
+     "Percent": 7,
+     "Taxes": 603,
+     "Formula": ""
+    },
+    {
+     "Amount": 23600,
+     "Percent": 8,
+     "Taxes": 1198,
+     "Formula": ""
+    },
+    {
+     "Amount": 40500,
+     "Percent": 9,
+     "Taxes": 2550,
+     "Formula": ""
+    },
+    {
+     "Amount": 57200,
+     "Percent": 10,
+     "Taxes": 4053,
+     "Formula": ""
+    },
+    {
+     "Amount": 74400,
+     "Percent": 11,
+     "Taxes": 5773,
+     "Formula": ""
+    },
+    {
+     "Amount": 91200,
+     "Percent": 12,
+     "Taxes": 7621,
+     "Formula": ""
+    },
+    {
+     "Amount": 108100,
+     "Percent": 12.5,
+     "Taxes": 9649,
+     "Formula": ""
+    },
+    {
+     "Amount": 135000,
+     "Percent": 13,
+     "Taxes": 13011.5,
+     "Formula": ""
+    },
+    {
+     "Amount": 162000,
+     "Percent": 13.5,
+     "Taxes": 16521.5,
+     "Formula": ""
+    },
+    {
+     "Amount": 192500,
+     "Percent": 14,
+     "Taxes": 20639,
+     "Formula": ""
+    },
+    {
+     "Amount": 223000,
+     "Percent": 14.5,
+     "Taxes": 24909,
+     "Formula": ""
+    },
+    {
+     "Amount": 256000,
+     "Percent": 15,
+     "Taxes": 29694,
+     "Formula": ""
+    },
+    {
+     "Amount": 291700,
+     "Percent": 15.5,
+     "Taxes": 35049,
+     "Formula": ""
+    }
+   ]
+  },
+  {
+   "Location": {
+    "TaxLocationID": 100000000,
+    "CantonID": 23,
+    "BfsID": 5586,
+    "BfsName": "Lausanne",
+    "ZipCode": "1000",
+    "City": "Lausanne",
+    "Canton": "VD"
+   },
+   "Target": "KANTON",
+   "TaxType": "EINKOMMENSSTEUER",
+   "TableType": "BUND",
+   "Splitting": 1.3,
+   "Group": "LEDIG_ALLEINE,LEDIG_MIT_KINDER",
+   "Table": [
+    {
+     "Amount": 100,
+     "Percent": 1,
+     "Taxes": 1,
+     "Formula": ""
+    },
+    {
+     "Amount": 1600,
+     "Percent": 2,
+     "Taxes": 16,
+     "Formula": ""
+    },
+    {
+     "Amount": 3400,
+     "Percent": 3,
+     "Taxes": 52,
+     "Formula": ""
+    },
+    {
+     "Amount": 5100,
+     "Percent": 4,
+     "Taxes": 103,
+     "Formula": ""
+    },
+    {
+     "Amount": 8300,
+     "Percent": 5,
+     "Taxes": 231,
+     "Formula": ""
+    },
+    {
+     "Amount": 11900,
+     "Percent": 6,
+     "Taxes": 411,
+     "Formula": ""
+    },
+    {
+     "Amount": 15100,
+     "Percent": 7,
+     "Taxes": 603,
+     "Formula": ""
+    },
+    {
+     "Amount": 23600,
+     "Percent": 8,
+     "Taxes": 1198,
+     "Formula": ""
+    },
+    {
+     "Amount": 40500,
+     "Percent": 9,
+     "Taxes": 2550,
+     "Formula": ""
+    },
+    {
+     "Amount": 57200,
+     "Percent": 10,
+     "Taxes": 4053,
+     "Formula": ""
+    },
+    {
+     "Amount": 74400,
+     "Percent": 11,
+     "Taxes": 5773,
+     "Formula": ""
+    },
+    {
+     "Amount": 91200,
+     "Percent": 12,
+     "Taxes": 7621,
+     "Formula": ""
+    },
+    {
+     "Amount": 108100,
+     "Percent": 12.5,
+     "Taxes": 9649,
+     "Formula": ""
+    },
+    {
+     "Amount": 135000,
+     "Percent": 13,
+     "Taxes": 13011.5,
+     "Formula": ""
+    },
+    {
+     "Amount": 162000,
+     "Percent": 13.5,
+     "Taxes": 16521.5,
+     "Formula": ""
+    },
+    {
+     "Amount": 192500,
+     "Percent": 14,
+     "Taxes": 20639,
+     "Formula": ""
+    },
+    {
+     "Amount": 223000,
+     "Percent": 14.5,
+     "Taxes": 24909,
+     "Formula": ""
+    },
+    {
+     "Amount": 256000,
+     "Percent": 15,
+     "Taxes": 29694,
+     "Formula": ""
+    },
+    {
+     "Amount": 291700,
+     "Percent": 15.5,
+     "Taxes": 35049,
+     "Formula": ""
+    }
+   ]
+  },
+  {
+   "Location": {
+    "TaxLocationID": 100000000,
+    "CantonID": 23,
+    "BfsID": 5586,
+    "BfsName": "Lausanne",
+    "ZipCode": "1000",
+    "City": "Lausanne",
+    "Canton": "VD"
+   },
+   "Target": "KANTON",
+   "TaxType": "EINKOMMENSSTEUER",
+   "TableType": "BUND",
+   "Splitting": 1,
+   "Group": "LEDIG_KONKUBINAT,LEDIG_MIT_KINDER",
+   "Table": [
+    {
+     "Amount": 100,
+     "Percent": 1,
+     "Taxes": 1,
+     "Formula": ""
+    },
+    {
+     "Amount": 1600,
+     "Percent": 2,
+     "Taxes": 16,
+     "Formula": ""
+    },
+    {
+     "Amount": 3400,
+     "Percent": 3,
+     "Taxes": 52,
+     "Formula": ""
+    },
+    {
+     "Amount": 5100,
+     "Percent": 4,
+     "Taxes": 103,
+     "Formula": ""
+    },
+    {
+     "Amount": 8300,
+     "Percent": 5,
+     "Taxes": 231,
+     "Formula": ""
+    },
+    {
+     "Amount": 11900,
+     "Percent": 6,
+     "Taxes": 411,
+     "Formula": ""
+    },
+    {
+     "Amount": 15100,
+     "Percent": 7,
+     "Taxes": 603,
+     "Formula": ""
+    },
+    {
+     "Amount": 23600,
+     "Percent": 8,
+     "Taxes": 1198,
+     "Formula": ""
+    },
+    {
+     "Amount": 40500,
+     "Percent": 9,
+     "Taxes": 2550,
+     "Formula": ""
+    },
+    {
+     "Amount": 57200,
+     "Percent": 10,
+     "Taxes": 4053,
+     "Formula": ""
+    },
+    {
+     "Amount": 74400,
+     "Percent": 11,
+     "Taxes": 5773,
+     "Formula": ""
+    },
+    {
+     "Amount": 91200,
+     "Percent": 12,
+     "Taxes": 7621,
+     "Formula": ""
+    },
+    {
+     "Amount": 108100,
+     "Percent": 12.5,
+     "Taxes": 9649,
+     "Formula": ""
+    },
+    {
+     "Amount": 135000,
+     "Percent": 13,
+     "Taxes": 13011.5,
+     "Formula": ""
+    },
+    {
+     "Amount": 162000,
+     "Percent": 13.5,
+     "Taxes": 16521.5,
+     "Formula": ""
+    },
+    {
+     "Amount": 192500,
+     "Percent": 14,
+     "Taxes": 20639,
+     "Formula": ""
+    },
+    {
+     "Amount": 223000,
+     "Percent": 14.5,
+     "Taxes": 24909,
+     "Formula": ""
+    },
+    {
+     "Amount": 256000,
+     "Percent": 15,
+     "Taxes": 29694,
+     "Formula": ""
+    },
+    {
+     "Amount": 291700,
+     "Percent": 15.5,
+     "Taxes": 35049,
+     "Formula": ""
+    }
+   ]
+  }
+ ]
+}

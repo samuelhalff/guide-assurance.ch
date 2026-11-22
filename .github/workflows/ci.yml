@@ -1,0 +1,29 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+        working-directory: shared/demande
+      - run: npm ci
+        working-directory: site
+      - run: npx tsc --noEmit
+        working-directory: site
+      - run: npm run lint --if-present
+        working-directory: site
+      - run: npm test
+        working-directory: site
+      - run: npm run build
+        working-directory: site
+      - name: Aucune mention interdite dans le site généré
+        run: "! grep -rli \"leman\"\"is\" site/out"

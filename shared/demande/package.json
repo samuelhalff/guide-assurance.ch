@@ -1,0 +1,14 @@
+{
+  "name": "@ga/demande",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Schéma partagé de la demande Guide Assurance (site + leads). zod seulement.",
+  "type": "module",
+  "scripts": {
+    "gen:consent": "node scripts/gen-consent.mjs",
+    "check:consent": "node scripts/gen-consent.mjs --check"
+  },
+  "dependencies": {
+    "zod": "4.6.7"
+  }
+}

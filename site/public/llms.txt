@@ -1,0 +1,97 @@
+# Guide Assurance
+
+> Guide Assurance (guide-assurance.ch) explique les assurances en Suisse romande à partir des données officielles (OFSP, Fedlex, Urssaf). Il compare les primes LAMal 2027 publiées par l'OFSP selon les critères du visiteur, sans recommander d'assureur ; aucun assureur ne paie pour figurer sur le site ni pour l'ordre des résultats. Pour les branches sans prix publics, le visiteur peut demander à être rappelé par un conseiller d'un courtier partenaire, gratuitement. Chaque page indique sa date de mise à jour et ses sources. Les outils calculent dans le navigateur : aucune donnée saisie n'est envoyée.
+
+Site en français (Suisse), version anglaise sous /en/ (English section below).
+
+## Outils
+
+- [Comparer les primes LAMal 2027](https://guide-assurance.ch/assurance-maladie/comparateur/) : primes 2027 approuvées par l'OFSP pour un NPA, une année de naissance et une franchise en Suisse romande, triées de la plus basse à la plus haute ; calcul dans le navigateur.
+- [Taux des comptes 3a](https://guide-assurance.ch/3e-pilier/taux-3a/) : taux d'intérêt des comptes 3a de 17 banques suisses, relevés le 22.11.2026 sur leurs propres pages, triés du plus élevé au plus bas ; aucune banque ne paie.
+- [Économie d'impôt 3a en Suisse romande](https://guide-assurance.ch/3e-pilier/economie-impot/) : impôt fédéral, cantonal et communal économisé par un versement 3a à Genève, dans les cantons de Vaud, du Valais, de Fribourg, de Neuchâtel et dans le Jura bernois (toutes les communes), et impôt sur un retrait en capital, barèmes 2026 vérifiés sur les calculettes officielles, calcul dans le navigateur.
+- [Simulateur frontalier : LAMal ou assurance maladie française ?](https://guide-assurance.ch/simulateur-frontalier/) : compare la cotisation Urssaf et les primes LAMal 2027 des 13 assureurs pour un foyer qui vit en France et travaille à Genève ou dans le canton de Vaud.
+- [Lettre de résiliation d'assurance maladie](https://guide-assurance.ch/lettre-resiliation/) : calcule la date limite de réception (art. 7 LAMal, art. 35a LCA) et rédige la lettre de résiliation de l'assurance de base ou d'une complémentaire.
+
+## Assurances
+
+Chaque page donne la règle en une phrase, ce qui fait varier la prime et, pour les branches sans prix publics, la possibilité d'être rappelé par un conseiller d'un courtier partenaire.
+
+- [Assurance maladie LAMal 2027 en Suisse romande : primes, franchises, délais](https://guide-assurance.ch/assurance-maladie/) : La loi fixe les prestations de base, identiques d’une caisse à l’autre ; la prime 2027 change selon votre commune, votre âge, la franchise et le modèle.
+- [Primes LAMal 2027 en Suisse romande, canton par canton](https://guide-assurance.ch/assurance-maladie/primes/) : En 2027, la prime moyenne d’un adulte va de 460,90 CHF par mois en Valais à 610,60 CHF à Genève (OFSP). Votre prime dépend de votre commune, de votre âge et de la franchise.
+- [Assurance complémentaire santé (LCA) : ce qu’il faut vérifier avant de changer](https://guide-assurance.ch/complementaire-sante/) : Une complémentaire est facultative et l’assureur peut refuser ou poser des réserves. Elle se résilie pour la fin de la 3e année, puis de chaque année, avec 3 mois de préavis.
+- [Assurance accident en Suisse romande : LAA, LAMal et complémentaires](https://guide-assurance.ch/assurance-accident/) : Salarié en Suisse, vous êtes assuré par la LAA de votre employeur ; sans LAA, votre assurance maladie de base couvre les accidents, avec franchise et quote-part.
+- [Assurance ménage et RC privée en Suisse romande : l’essentiel avant une offre](https://guide-assurance.ch/assurance-menage-rc/) : Vaud, Fribourg et le Jura imposent d’assurer le mobilier contre l’incendie ; la RC privée reste facultative, mais le bailleur la demande souvent.
+- [Assurance bâtiment en Suisse romande : ce qui change selon le canton](https://guide-assurance.ch/assurance-batiment/) : À Vaud, Fribourg, Neuchâtel et au Jura, l’établissement cantonal assure obligatoirement le bâtiment contre l’incendie et les éléments naturels ; à Genève et en Valais, le propriétaire choisit un assureur privé.
+- [Assurance auto en Suisse romande : RC obligatoire et cascos](https://guide-assurance.ch/assurance-auto/) : Seule la RC véhicule à moteur est obligatoire, avec au moins 5 millions CHF par événement ; la casco partielle ou complète, qui protège votre véhicule, est facultative.
+- [Assurance protection juridique en Suisse romande : ce qui est couvert](https://guide-assurance.ch/protection-juridique/) : La protection juridique est facultative ; elle paie les frais d’avocat, de procédure ou d’expertise d’un litige, dans les domaines prévus par le contrat.
+- [Assurance voyage en Suisse romande : soins, rapatriement, annulation](https://guide-assurance.ch/assurance-voyage/) : À l’étranger, la LAMal rembourse les urgences jusqu’au double du tarif suisse ; une assurance voyage couvre le surplus, le rapatriement et, selon le contrat, l’annulation.
+- [Assurance chien et chat en Suisse romande : frais vétérinaires et RC](https://guide-assurance.ch/assurance-animaux/) : Aucune assurance maladie animale n’est obligatoire ; Genève, Vaud, le Valais, Fribourg et Berne imposent en revanche une RC au détenteur de chien.
+- [Assurance cyber privée en Suisse romande : ce qu’elle couvre](https://guide-assurance.ch/cyber-prive/) : Une assurance cyber privée couvre, selon le contrat, la fraude aux achats en ligne, l’usurpation d’identité, le cyberharcèlement et la restauration des données.
+- [Frontaliers en Suisse romande : LAMal ou assurance maladie française ?](https://guide-assurance.ch/frontaliers/) : Vous avez 3 mois dès le début de votre activité en Suisse pour choisir entre la LAMal et l’assurance française. Ce choix est en principe irrévocable et vaut pour votre foyer.
+- [Arriver en Suisse romande : vos assurances des trois premiers mois](https://guide-assurance.ch/nouveaux-arrivants/) : Vous avez 3 mois après votre prise de domicile pour conclure l’assurance maladie de base, qui vous couvre alors depuis votre arrivée.
+- [Assurances PME en Suisse romande : obligatoires et facultatives](https://guide-assurance.ch/entreprises/) : Deux assurances sont obligatoires pour un employeur : la LPP pour les salaires annuels au-delà de 23 040 CHF en 2027, et la LAA pour tous les travailleurs.
+- [LPP pour PME en Suisse romande : chiffres 2027 et choix de la fondation](https://guide-assurance.ch/entreprises/lpp/) : En 2027, la LPP s’applique au-delà de 23 040 CHF de salaire annuel chez un même employeur ; la déduction de coordination est de 26 880 CHF.
+- [LAA pour les entreprises : Suva ou assureur privé et complémentaire](https://guide-assurance.ch/entreprises/laa/) : Tout employeur doit assurer ses travailleurs contre les accidents : à la Suva pour les secteurs listés à l’art. 66 LAA, sinon auprès d’un assureur de son choix.
+- [Perte de gain maladie (IJM) pour employeurs : salaire dû et assurance](https://guide-assurance.ch/entreprises/perte-de-gain-maladie/) : L’IJM n’est pas obligatoire au niveau fédéral, sauf CCT. Sans elle, l’employeur paie le salaire d’un employé malade : 3 semaines la 1re année, puis plus longtemps.
+- [RC professionnelle et RC entreprise : différences et obligations](https://guide-assurance.ch/entreprises/rc-professionnelle/) : La RC entreprise couvre les dommages corporels et matériels causés à des tiers ; la RC professionnelle couvre les dommages purement économiques, par exemple après un conseil erroné.
+- [Assurance choses pour entreprises : stock, machines et interruption](https://guide-assurance.ch/entreprises/assurance-choses/) : Aucune loi fédérale n’impose l’assurance choses ; Vaud, Fribourg et le Jura obligent en revanche les entreprises à assurer leur mobilier contre l’incendie.
+- [Cyber-assurance PME : couvertures, plafonds et exigences de sécurité](https://guide-assurance.ch/entreprises/cyber/) : La cyber-assurance est facultative ; elle prend en charge une partie des frais et des pertes après une cyberattaque, si les mesures de sécurité déclarées sont en place.
+
+## Pages
+
+- [Accueil](https://guide-assurance.ch/) : primes moyennes 2027 de l'assurance de base par canton romand, échéances de résiliation, guides.
+- [Méthodologie](https://guide-assurance.ch/methodologie/) : sources, mise à jour et corrections.
+
+## English
+
+English version under /en/: the same guides and tools, translated from French. The French version prevails for legal pages. The site compares FOPH-published 2027 LAMal premiums by the visitor's own criteria and recommends no insurer; no insurer pays to appear or for the order of results. For lines without public prices, visitors can ask to be called back by an adviser at a partner broker.
+
+### Tools
+
+- [Compare 2027 LAMal premiums](https://guide-assurance.ch/en/health-insurance/compare/): 2027 FOPH-approved premiums for a postcode, year of birth and deductible in French-speaking Switzerland, sorted from lowest to highest; calculated in the browser.
+- [Pillar 3a interest rates](https://guide-assurance.ch/en/pillar-3a/interest-rates/): pillar 3a account rates at 17 Swiss banks, read on 22.11.2026 on the banks' own pages, sorted from highest to lowest; no paid listings.
+- [Pillar 3a tax savings in French-speaking Switzerland](https://guide-assurance.ch/en/pillar-3a/tax-savings/): federal, cantonal and municipal tax saved by a 3a payment in Geneva, Vaud, Valais, Fribourg, Neuchâtel and the Bernese Jura (every municipality), plus tax on a capital withdrawal; 2026 scales checked against the official calculators; runs in the browser.
+- [Cross-border calculator: LAMal or French health insurance?](https://guide-assurance.ch/en/cross-border-calculator/): compares the Urssaf contribution with the 2027 LAMal premiums of the 13 insurers for a household living in France and working in Geneva or Vaud.
+- [Health insurance cancellation letter](https://guide-assurance.ch/en/cancellation-letter/): calculates the date by which the insurer must receive the letter (art. 7 LAMal, art. 35a LCA) and drafts the letter in French for basic or supplementary insurance.
+
+### Pages
+
+- [Home](https://guide-assurance.ch/en/): 2027 average basic health insurance premiums by canton in French-speaking Switzerland, cancellation deadlines, guides.
+- [All guides](https://guide-assurance.ch/en/guides/): index of the English guides.
+
+### Personal insurance
+
+- [Accident insurance in Switzerland: LAA, LAMal and top-up cover](https://guide-assurance.ch/en/accident-insurance/): Employees in Switzerland are insured by their employer’s LAA; without LAA, your basic health insurance covers accidents, with deductible and co-payment.
+- [Building insurance in French-speaking Switzerland: canton by canton](https://guide-assurance.ch/en/building-insurance/): In Vaud, Fribourg, Neuchâtel and Jura, the cantonal institution compulsorily insures buildings against fire and natural hazards; in Geneva and Valais, owners pick a private insurer.
+- [Car insurance in Switzerland: compulsory liability and casco cover](https://guide-assurance.ch/en/car-insurance/): Only motor vehicle liability is compulsory, with at least CHF 5 million per event; partial or comprehensive casco, which protects your own vehicle, is optional.
+- [Swiss health insurance (LAMal) 2027: premiums, deductibles, deadlines](https://guide-assurance.ch/en/health-insurance/): The law sets basic benefits, which are identical from one insurer to the next; the 2027 premium depends on where you live, your age, the deductible and the model.
+- [2027 LAMal premiums in French-speaking Switzerland, canton by canton](https://guide-assurance.ch/en/health-insurance/premiums/): In 2027 the average adult premium ranges from CHF 460.90 a month in Valais to CHF 610.60 in Geneva (FOPH). Your own premium depends on where you live, your age and the deductible.
+- [Household and liability insurance in French-speaking Switzerland](https://guide-assurance.ch/en/household-and-liability-insurance/): Vaud, Fribourg and Jura require contents to be insured against fire; personal liability cover is optional, though landlords often ask for it.
+- [Legal protection insurance in Switzerland: what is covered](https://guide-assurance.ch/en/legal-protection-insurance/): Legal protection insurance is optional; it pays lawyer, court or expert costs in a dispute, within the areas set out in the contract.
+- [Personal cyber insurance in Switzerland: what it covers](https://guide-assurance.ch/en/personal-cyber-insurance/): Depending on the contract, personal cyber insurance covers online shopping fraud, identity theft, cyberbullying and data restoration.
+- [Dog and cat insurance in Switzerland: vet costs and liability](https://guide-assurance.ch/en/pet-insurance/): No pet health insurance is compulsory; Geneva, Vaud, Valais, Fribourg and Bern do, however, require dog owners to have liability cover.
+- [Supplementary health insurance (LCA): what to check before you switch](https://guide-assurance.ch/en/supplementary-health-insurance/): Supplementary cover is optional and the insurer can refuse you or add reservations. You can cancel it for the end of year 3, then each year, with 3 months' notice.
+- [Travel and cancellation insurance: what LAMal leaves uncovered](https://guide-assurance.ch/en/travel-insurance/): Abroad, LAMal reimburses emergency care at up to twice the Swiss tariff; travel insurance covers the rest, repatriation and, depending on the contract, cancellation.
+- [Pillar 3: 2027 limits, 3a, 3b and death cover](https://guide-assurance.ch/en/pillar-3a/): In 2027 you can pay CHF 7,373 into a pillar 3a with a pension fund, or 20% of income up to CHF 36,864 without. The guide also covers buy-backs, the choice between 3a and 3b, and death cover.
+
+### Situations
+
+- [Cross-border workers: Swiss LAMal or French health insurance?](https://guide-assurance.ch/en/cross-border-workers/): You have 3 months from starting work in Switzerland to choose between LAMal and French insurance. The choice is in principle irrevocable and covers your household.
+- [Moving to Switzerland: your insurance in the first three months](https://guide-assurance.ch/en/moving-to-switzerland/): You have 3 months after taking up residence to take out basic health insurance, which then covers you from the day you arrived.
+
+### Business
+
+- [Business insurance in Switzerland: what is compulsory, what is optional](https://guide-assurance.ch/en/business/): Two insurances are compulsory for an employer: LPP pensions for annual salaries above CHF 23,040 in 2027, and LAA accident cover for all workers.
+- [LPP for SMEs in Switzerland: 2027 figures and choosing a foundation](https://guide-assurance.ch/en/business/occupational-pensions/): In 2027, an employee is insured under the LPP once annual salary from one employer exceeds CHF 23,040; the coordination deduction is CHF 26,880.
+- [LAA accident insurance for businesses: Suva, private insurer, top-up](https://guide-assurance.ch/en/business/accident-insurance/): Every employer must insure its workers against accidents: with Suva for the sectors listed in art. 66 LAA, otherwise with an insurer of its choice.
+- [Daily sickness benefits (IJM) for employers: sick pay and insurance](https://guide-assurance.ch/en/business/sickness-benefit-insurance/): IJM is not compulsory at federal level unless a CCT requires it. Without it, the employer pays a sick employee: 3 weeks in year 1, then longer.
+- [Professional and business liability insurance: differences and duties](https://guide-assurance.ch/en/business/professional-liability/): Business liability covers bodily injury and property damage to third parties; professional liability covers pure financial loss, for example after wrong advice.
+- [Cyber insurance for SMEs: cover, limits and security requirements](https://guide-assurance.ch/en/business/cyber-insurance/): Cyber insurance is optional; it pays part of the costs and losses after a cyberattack, provided the security measures declared to the insurer are in place.
+- [Business property insurance: stock, machinery and interruption](https://guide-assurance.ch/en/business/property-insurance/): No federal law requires property insurance; Vaud, Fribourg and Jura, however, require businesses to insure their contents against fire.
+
+### About the site
+
+- [Our ties with insurers and brokers](https://guide-assurance.ch/en/independence/): Guide Assurance sells no place in its lists, sorts offers by a criterion shown on screen and recommends no contract.
+- [Legal notice](https://guide-assurance.ch/en/legal-notice/): Who publishes guide-assurance.ch, its UID, contact details and the scope of the information on the site.
+- [Methodology: where our figures come from](https://guide-assurance.ch/en/methodology/): The figures come from FOPH premiums, Fedlex texts and the Urssaf formula. The page explains how we date and check them, and what the tools leave out.
+- [Privacy policy](https://guide-assurance.ch/en/privacy/): The tools calculate in your browser. The site used no cookies or analytics at launch and deletes server logs after 30 days; the page also sets out your rights under the Swiss nFADP.

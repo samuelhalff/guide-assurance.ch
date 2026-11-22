@@ -1,0 +1,283 @@
+/* Pages outils : portage de mockups/v2/simulateur-frontalier.html et lettre-resiliation.html.
+   Mobile d'abord (390 px), min-width pour élargir. Les choix reprennent le composant commun (.option, site.css). */
+@layer components {
+  .page-outil h1, .page-outil h2, .page-outil h3 { line-height: 1.12; letter-spacing: -.02em; margin: 0; }
+  .page-outil h1 { font-size: 31px; font-weight: 800; }
+  .page-outil h2 { font-size: 25px; font-weight: 800; }
+  .page-outil .intro { margin: var(--s3) 0 0; color: var(--encre-2); max-width: 60ch; }
+  .prive { display: flex; gap: 10px; align-items: flex-start; margin: var(--s4) 0 0; font-family: var(--narrow); font-size: 16px; color: var(--encre); }
+  .prive svg { flex: 0 0 20px; width: 20px; height: 20px; margin-top: 2px; }
+  .partage { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2); margin: var(--s2) 0 0 -10px; }
+  .partage .commande { font-family: var(--narrow); font-size: 16px; color: var(--lac-encre); }
+  .partage-ok { font: 15px var(--narrow); color: var(--encre-2); }
+
+  .outil { display: grid; gap: var(--s5); margin: var(--s5) 0 var(--s7); }
+  .form { background: var(--papier); border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s5) var(--s4); }
+  .form fieldset { border: 0; margin: 0 0 var(--s5); padding: 0; min-width: 0; }
+  .form fieldset.dernier { margin-bottom: 0; }
+  .form legend { font: 700 19px var(--sans); margin: 0 0 var(--s3); padding: 0; display: flex; gap: 10px; align-items: baseline; }
+  .form legend .n { font: 700 15px var(--narrow); color: var(--sentier-texte); white-space: nowrap; }
+  .choix-liste { display: grid; gap: 0; }
+  .choix-liste .option { grid-template-columns: 22px 1fr; }
+  .choix-liste .option:first-of-type { margin-top: 0; }
+  .sous-q { font: 600 16px var(--narrow); margin: var(--s3) 0 2px; }
+  .deux { display: grid; grid-template-columns: 7em 1fr; gap: var(--s3); }
+  .ligne { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3); }
+  .case { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; font-size: 16px; margin: var(--s2) 0 var(--s3); cursor: pointer; }
+  .case input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--sentier); }
+  .case small { display: block; font: 14px var(--narrow); color: var(--encre-2); }
+  .note-outil { font: 15px var(--narrow); color: var(--encre-2); margin: 0; }
+  details.aide-revenus { font: 15px var(--narrow); color: var(--encre-2); margin: 0 0 var(--s2); }
+  details.aide-revenus summary { cursor: pointer; color: var(--lac-encre); min-height: 32px; }
+  details.aide-revenus p { margin: var(--s2) 0; }
+
+  /* Délai : encadré d'alerte */
+  .delai { padding: var(--s3) var(--s4); margin: 0 0 var(--s5); font-size: 17px; }
+  .delai.urgent { background: var(--alerte-forte); }
+  .delai .base { display: block; font: 15px var(--narrow); color: var(--encre-2); margin-top: 4px; }
+  .delai .manque { display: block; margin-bottom: 6px; color: var(--sentier-fonce); font-weight: 600; }
+
+  .page-outil .apercu > h2 { font-size: 21px; margin-bottom: var(--s3); }
+  .recap { background: var(--papier); border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s4); margin-bottom: var(--s5); }
+  .page-outil .recap h2 { font-size: 19px; margin-bottom: var(--s3); }
+  .recap dl { display: grid; grid-template-columns: auto 1fr; gap: 4px var(--s4); margin: 0; font-size: 16px; }
+  .recap dt { font: 600 15px var(--narrow); color: var(--encre-2); }
+  .recap dd { margin: 0; }
+  .a-verifier {
+    margin: var(--s3) 0 0; padding: var(--s3) var(--s3) var(--s3) 2em; list-style: disc;
+    background: var(--attention-teinte); border-left: 3px solid var(--attention); border-radius: 0 var(--r) var(--r) 0; font-size: 15px;
+  }
+  .a-verifier li { margin-bottom: 4px; }
+
+  /* La lettre : un document à imprimer, blanc dans les deux thèmes */
+  .lettre {
+    background: var(--doc-fond); color: var(--doc-encre); border: 1px solid var(--doc-filet); border-radius: var(--r);
+    padding: var(--s5) var(--s4); font-size: 15px; line-height: 1.5; color-scheme: light;
+  }
+  .lettre p { margin: 0 0 var(--s3); }
+  .lettre .exp { margin: 0 0 var(--s5); }
+  .lettre .dest { margin: 0 0 var(--s5) auto; width: max-content; max-width: 62%; }
+  .lettre .lieu { margin: 0 0 var(--s4); }
+  .lettre .objet { font-weight: 700; margin: 0 0 var(--s4); }
+  .lettre .sign { margin-top: var(--s6); }
+  .vide { color: var(--doc-vide); background: var(--doc-vide-fond); padding: 0 3px; border-radius: 2px; }
+  .actions { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s4); }
+  .copie-ok { font: 15px var(--narrow); color: var(--encre-2); align-self: center; }
+
+  .apres { margin-top: var(--s5); border-top: 1px solid var(--filet); padding-top: var(--s4); }
+  .page-outil .apres h3 { font-size: 19px; margin-bottom: var(--s3); }
+  .apres ol { margin: 0; padding-left: 1.3em; font-size: 17px; list-style: decimal; }
+  .apres li { margin-bottom: 6px; }
+  .apres b { font-weight: 700; }
+
+  .conseil { background: var(--papier); border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s5) var(--s4); margin: var(--s5) 0 0; }
+  .conseil p { margin: 0 0 var(--s3); font-size: 17px; }
+  .conseil a { font-weight: 700; }
+
+  /* Simulateur */
+  .duel { display: grid; gap: var(--s3); margin-bottom: var(--s4); }
+  .duel-option { background: var(--papier); border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s4); }
+  .page-outil .duel-option h3 { font: 700 15px var(--narrow); color: var(--encre-2); margin: 0 0 4px; letter-spacing: 0; }
+  .prix { font: 800 30px/1.1 var(--sans); letter-spacing: -.02em; }
+  .prix small { font: 600 16px var(--narrow); color: var(--encre-2); letter-spacing: 0; }
+  .duel-option p { margin: 6px 0 0; font: 15px var(--narrow); color: var(--encre-2); }
+  .verdict {
+    border-left: 3px solid var(--lac-encre); background: var(--info-teinte); border-radius: 0 var(--r) var(--r) 0;
+    padding: var(--s3) var(--s4); font-size: 17px; margin: 0 0 var(--s4);
+  }
+  .provisoire {
+    background: var(--attention-teinte); border-left: 3px solid var(--attention); border-radius: 0 var(--r) var(--r) 0;
+    padding: var(--s3) var(--s4); font: 15px var(--narrow); margin: 0 0 var(--s4);
+  }
+  .note-outil.provisoire { color: var(--encre); margin-top: var(--s2); }
+  .qui { background: var(--papier); border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s3) var(--s4); margin: 0 0 var(--s4); font-size: 16px; }
+  .page-outil .qui h3 { font: 700 16px var(--sans); margin: 0 0 6px; letter-spacing: 0; }
+  .qui p { margin: 0 0 4px; }
+  .qui p + p { margin-top: 8px; }
+  .qui ul { margin: 0; padding-left: 1.2em; list-style: disc; }
+  .qui li { margin-bottom: 3px; }
+  table.assureurs { width: 100%; border-collapse: collapse; background: var(--papier); font-size: 16px; }
+  table.assureurs caption { text-align: left; font: 15px var(--narrow); color: var(--encre-2); padding: 0 0 var(--s2); }
+  table.assureurs th, table.assureurs td { padding: 9px 10px; border-bottom: 1px solid var(--filet); text-align: right; }
+  table.assureurs th:first-child, table.assureurs td:first-child { text-align: left; }
+  table.assureurs thead th { font: 600 14px var(--narrow); color: var(--encre-2); border-bottom: 1.5px solid var(--encre); }
+  .barre { display: block; height: 6px; background: var(--lac); margin-top: 4px; }
+  .source-outil { font: 14px var(--narrow); color: var(--encre-2); margin: var(--s2) 0 0; }
+  .nuances { margin-top: var(--s5); }
+  .page-outil .nuances > h2 { font-size: 21px; margin-bottom: var(--s3); }
+  .nuances dl { margin: 0; display: grid; gap: var(--s3); }
+  .nuances dt { font-weight: 700; }
+  .nuances dd { margin: 2px 0 0; font-size: 17px; }
+
+
+  /* Comparateur de primes : mobile = cartes, ordinateur = tableau. Lisible à 390 px. */
+  .outil-comparateur .form .champ { margin-bottom: var(--s2); }
+  .outil-comparateur .form .note-outil { margin-bottom: var(--s4); }
+  .champ-court { max-width: 11em; }
+  .champ-court .saisie { font-variant-numeric: tabular-nums; letter-spacing: .04em; }
+  .lieu-trouve { font: 600 16px var(--narrow); margin: 0 0 var(--s4); color: var(--encre); }
+  .lieu-trouve::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #2E7D4F; margin-right: 8px; vertical-align: 2px; }
+  .choix-lieu { margin-bottom: var(--s4); }
+  .pastilles { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s2); margin: var(--s1) 0 var(--s2); }
+  .pastilles-2 { grid-template-columns: 1fr 1fr; }
+  .pastille { position: relative; cursor: pointer; }
+  .pastille input { position: absolute; opacity: 0; pointer-events: none; }
+  .pastille span {
+    display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 6px 8px; text-align: center;
+    border: 1px solid var(--filet); border-radius: var(--r); background: var(--papier); font: 600 16px var(--narrow);
+    font-variant-numeric: tabular-nums; transition: border-color .15s, background-color .15s;
+  }
+  .pastille:hover span { border-color: var(--encre-2); }
+  .pastille input:checked + span { border-color: var(--sentier); background: var(--sentier-teinte); box-shadow: inset 0 0 0 1px var(--sentier); }
+  .pastille input:focus-visible + span { outline: 3px solid var(--lac-encre); outline-offset: 2px; }
+  .attente { font: 17px var(--narrow); color: var(--encre-2); margin: 0; padding: var(--s5) var(--s4); border: 1px dashed var(--filet); border-radius: var(--r); }
+  .resume-liste { font-size: 17px; margin: 0 0 4px; }
+  .resume-liste b { font-weight: 600; }
+  .fourchette { font: 600 16px var(--narrow); margin: 0 0 var(--s4); }
+  .reglages { display: grid; gap: var(--s3); align-items: end; }
+  .reglages .champ { margin: 0; }
+  .bascule { display: grid; grid-template-columns: auto auto; gap: 4px; }
+  .bascule .pastille span { min-height: 48px; padding: 6px 10px; font-size: 15px; }
+  details.caisse-actuelle { margin: var(--s3) 0 var(--s4); }
+  details.caisse-actuelle summary { cursor: pointer; font: 600 16px var(--narrow); color: var(--lac-encre); min-height: 44px; display: flex; align-items: center; }
+  details.caisse-actuelle .note-outil { margin: 0 0 var(--s2); }
+
+  .cartes-primes { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s2); }
+  .carte-prime {
+    display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 2px var(--s2); align-items: start;
+    background: var(--papier); border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s3);
+  }
+  .cartes-primes > li:first-child .carte-prime { border-color: var(--lac-trait); }
+  .cartes-primes > li.est-actuelle .carte-prime, table.primes-liste tr.est-actuelle td { box-shadow: inset 3px 0 0 var(--sentier); }
+  .carte-prime .rang { font: 600 14px var(--narrow); color: var(--encre-2); padding-top: 2px; font-variant-numeric: tabular-nums; }
+  .carte-prime .offre-qui b { display: block; font-weight: 700; font-size: 17px; }
+  .carte-prime .produit, table.primes-liste .produit { display: block; font: 15px var(--narrow); overflow-wrap: anywhere; }
+  .carte-prime .type, table.primes-liste .type { display: block; margin-top: 2px; font: 14px var(--narrow); color: var(--encre-2); }
+  .carte-prime .combien { text-align: right; }
+  .carte-prime .montant { display: block; font: 800 22px/1.1 var(--sans); letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+  .carte-prime .unite { display: block; font: 13px var(--narrow); color: var(--encre-2); }
+  .carte-prime .autre { display: block; font: 14px var(--narrow); color: var(--encre-2); margin-top: 2px; white-space: nowrap; }
+  .carte-prime .ecarts { grid-column: 2 / -1; list-style: none; margin: var(--s2) 0 0; padding: var(--s2) 0 0; border-top: 1px solid var(--filet); font: 14px var(--narrow); color: var(--encre-2); display: grid; gap: 1px; }
+  .carte-prime .ecarts b { color: var(--encre); font-weight: 700; font-variant-numeric: tabular-nums; }
+  .carte-prime .ecarts .vs-actuelle { color: var(--encre); }
+  .rappel-liste { margin: var(--s3) 0 var(--s2); padding: var(--s3) var(--s4); background: var(--info-teinte); border-radius: var(--r); font-size: 16px; }
+  .rappel-liste a, .rappel-collant a { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; }
+  .rappel-liste svg { vertical-align: -2px; }
+  .rappel-bureau { display: none; }
+  .barre-collante {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2);
+    padding: var(--s2) calc(var(--s4) + 72px) calc(var(--s2) + env(safe-area-inset-bottom)) var(--s4);
+    background: var(--background); border-top: 1px solid var(--filet); box-shadow: 0 -4px 16px rgb(0 0 0 / .08);
+  }
+  .barre-collante .commande { border: 1px solid var(--filet); font-family: var(--narrow); font-size: 15px; }
+  .plus-basse { margin: 0 0 var(--s4); padding: var(--s3) var(--s4); border: 1px solid var(--lac-trait); border-radius: var(--r); background: var(--papier); font-size: 16px; }
+  .lien-profil { border: 0; background: none; padding: 0; font: 600 14px var(--narrow); color: var(--lac-encre); text-decoration: underline; cursor: pointer; }
+  .titre-resultat { font-size: 23px !important; margin: 0 0 var(--s2) !important; }
+  .reglages { grid-template-columns: 1fr; }
+  .reglages .bascule { justify-self: start; }
+  .caisse-case { margin-top: var(--s3); }
+  .caisse-actuelle { margin-bottom: var(--s3); }
+  .caisse-actuelle > p { grid-column: 1 / -1; margin: 0; }
+  details.detail-offre { grid-column: 2 / -1; font: 14px var(--narrow); margin-top: var(--s1); }
+  details.detail-offre summary { cursor: pointer; color: var(--lac-encre); min-height: 32px; display: flex; align-items: center; }
+  details.detail-offre ul { margin: 0 0 var(--s1); padding-left: 1.1em; list-style: disc; color: var(--encre-2); }
+  .rappel-offre { grid-column: 2 / -1; font: 14px var(--narrow); color: var(--lac-encre); justify-self: start; }
+  .outil-comparateur fieldset.personne { border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s3) var(--s3) 0; margin: 0 0 var(--s3); }
+  .outil-comparateur fieldset.personne legend { font: 700 16px var(--sans); padding: 0 6px; margin: 0 0 var(--s1) -6px; display: flex; gap: var(--s3); align-items: baseline; }
+  .retirer { border: 0; background: none; padding: 0; font: 14px var(--narrow); color: var(--lac-encre); text-decoration: underline; cursor: pointer; }
+  .outil-comparateur .personne .note-outil.classe { margin: 0 0 var(--s1); }
+  .outil-comparateur .personne .case { margin-bottom: var(--s3); }
+  .ajouter-personne {
+    width: 100%; min-height: 48px; border: 1.5px dashed var(--filet); border-radius: var(--r); background: none; cursor: pointer;
+    font: 600 16px var(--narrow); color: var(--lac-encre); margin: 0 0 var(--s3);
+  }
+  .ajouter-personne:hover { border-color: var(--encre-2); }
+  .franchise-aide { margin-bottom: var(--s3) !important; }
+  .voir-primes { width: 100%; justify-content: center; }
+  .avec-coche { position: relative; }
+  .avec-coche .saisie { padding-right: 38px; }
+  .coche-ok { position: absolute; right: 12px; top: 50%; width: 18px; height: 18px; margin-top: -9px; color: #2E7D4F; }
+  :root.dark .coche-ok { color: #6FCF97; }
+  table.primes-liste { display: none; }
+  table.primes-liste td { vertical-align: top; font-variant-numeric: tabular-nums; }
+  table.primes-liste td:first-child { position: relative; padding-left: 34px; min-width: 15em; }
+  table.primes-liste { width: 100%; }
+  table.primes-liste th, table.primes-liste td { padding-left: 6px; padding-right: 6px; }
+  table.primes-liste .rang { position: absolute; left: 8px; top: 10px; font: 600 14px var(--narrow); color: var(--encre-2); }
+  table.primes-liste b { display: block; font-weight: 700; }
+  table.primes-liste td.mois { font-weight: 700; }
+  table.primes-liste thead th { white-space: nowrap; vertical-align: bottom; }
+  table.primes-liste thead small { display: block; font: 12px var(--narrow); white-space: normal; max-width: 9em; margin-left: auto; }
+  table.primes-liste tbody tr:first-child td { background: var(--info-teinte); }
+  .commande.plus { margin: var(--s2) 0 0; padding: 0; color: var(--lac-encre); font-family: var(--narrow); font-size: 16px; text-decoration: underline; text-underline-offset: 3px; }
+  .integrite { margin-top: var(--s4); padding: var(--s3) var(--s4); border: 1px solid var(--filet); border-radius: var(--r); font: 14px var(--narrow); color: var(--encre-2); }
+  .integrite p { margin: 0 0 6px; }
+  .integrite p:last-child { margin: 0; }
+  .integrite b { color: var(--encre); font-weight: 600; }
+  details.franchises { margin-top: var(--s5); border-top: 1px solid var(--filet); padding-top: var(--s3); }
+  details.franchises summary { cursor: pointer; font: 700 17px var(--sans); min-height: 44px; display: flex; align-items: center; }
+  details.franchises > p { font: 15px var(--narrow); color: var(--encre-2); margin: var(--s2) 0 var(--s3); }
+  details.franchises tr[aria-current] td { font-weight: 700; background: var(--sentier-teinte); }
+  .apres-comparateur p { margin: 0 0 var(--s2); font-size: 16px; }
+  .apres-comparateur a { font-weight: 600; }
+  .page-outil .reperes-statiques h3 { font-weight: 700; }
+  .reperes-statiques th { white-space: nowrap; }
+  .profils-reperes { margin-bottom: var(--s3); }
+  /* Tableau statique (sans JavaScript) : offres par canton */
+  .reperes-statiques { margin: var(--s6) 0 0; }
+  .reperes-statiques h2 { margin-bottom: var(--s3); }
+  .reperes-statiques > p { max-width: 68ch; margin: 0 0 var(--s4); }
+  .reperes-statiques h3 { font-size: 19px; margin: var(--s5) 0 var(--s2); }
+  .reperes-grille { display: grid; gap: var(--s4); }
+  @media (min-width: 720px) {
+    .pastilles { grid-template-columns: repeat(6, 1fr); }
+    .pastilles-2 { grid-template-columns: repeat(2, minmax(0, 14em)); }
+    .reperes-grille { grid-template-columns: 1fr 1fr; gap: var(--s5) var(--s6); }
+  }
+  @media (min-width: 1000px) {
+    .outil-comparateur { grid-template-columns: minmax(300px, .62fr) minmax(0, 1.38fr); }
+    .outil-comparateur .form { position: sticky; top: calc(57px + var(--s4)); padding: var(--s5); }
+    .outil-comparateur .pastilles { grid-template-columns: repeat(3, 1fr); }
+    .outil-comparateur .apercu { position: static; }
+    .cartes-primes { display: none; }
+    table.primes-liste { display: table; }
+    .rappel-bureau { display: block; }
+    .barre-collante { display: none; }
+    .reglages { grid-template-columns: 1fr 1fr auto; }
+    .reglages .bascule { grid-column: auto; }
+  }
+
+  /* FAQ en bas de page */
+  .faq { padding-block: var(--s7); border-top: 1px solid var(--filet); }
+  .faq section { max-width: 68ch; margin-bottom: var(--s6); }
+  .faq h2 { margin-bottom: var(--s3); }
+  .faq p { margin: 0 0 var(--s3); }
+  .faq .src { font: 15px var(--narrow); color: var(--encre-2); }
+  .maj { font: 15px var(--narrow); color: var(--encre-2); margin: 0 0 var(--s6); }
+
+  @media (min-width: 720px) {
+    .page-outil .wrap { padding: 0 var(--s5); }
+    .page-outil h1 { font-size: 42px; }
+    .page-outil h2 { font-size: 30px; }
+    .form { padding: var(--s6); }
+    .lettre { padding: var(--s7) var(--s6); font-size: 16px; }
+    .duel { grid-template-columns: 1fr 1fr; }
+    .prix { font-size: 25px; }
+    .prix small { display: block; margin-top: 2px; }
+  }
+  @media (min-width: 1000px) {
+    .outil { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: var(--s6); align-items: start; }
+    .outil-simulateur { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); }
+    .apercu { position: sticky; top: calc(57px + var(--s4)); }
+  }
+}
+
+@media print {
+  @page { size: A4; margin: 20mm 22mm; }
+  html, body { background: var(--doc-fond) !important; }
+  .page-lettre .tete, .page-lettre .marge, .page-lettre .fil, .page-lettre h1, .page-lettre .intro, .page-lettre .prive,
+  .page-lettre .partage, .page-lettre .form, .page-lettre .apercu > :not(.lettre), .page-lettre .faq { display: none !important; }
+  .page-lettre .outil { display: block; margin: 0; }
+  .page-lettre .lettre { border: 0; box-shadow: none; padding: 0; font-size: 11pt; }
+  .page-lettre .lettre .vide { background: none; color: var(--doc-encre); }
+}

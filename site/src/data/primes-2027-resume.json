@@ -1,0 +1,489 @@
+{
+ "source": "OFSP, primes LAMal 2027 approuvées (priminfo.admin.ch), relevées le 22.11.2026",
+ "profil": "adulte (26 ans et plus), franchise 300 CHF, avec accident",
+ "cantons": [
+  {
+   "profils": [
+    {
+     "franchise": 300,
+     "accident": true,
+     "premiere": 61170,
+     "moyenne": 69540,
+     "nombre": 106
+    },
+    {
+     "franchise": 300,
+     "accident": false,
+     "premiere": 56890,
+     "moyenne": 64916,
+     "nombre": 106
+    },
+    {
+     "franchise": 2500,
+     "accident": true,
+     "premiere": 48340,
+     "moyenne": 56797,
+     "nombre": 106
+    },
+    {
+     "franchise": 2500,
+     "accident": false,
+     "premiere": 44960,
+     "moyenne": 53023,
+     "nombre": 106
+    }
+   ],
+   "canton": "GE",
+   "region": 0,
+   "commune": "Genève",
+   "nombre": 106,
+   "moyenne": 69540,
+   "offres": [
+    {
+     "assureur": "Assura",
+     "produit": "QualiMed",
+     "type": "FLEX",
+     "mensuel": 61170
+    },
+    {
+     "assureur": "Swica",
+     "produit": "Favorit Santé",
+     "type": "PRAXIS",
+     "mensuel": 62900
+    },
+    {
+     "assureur": "Sanitas",
+     "produit": "TelMed Basic",
+     "type": "TEL_DIG",
+     "mensuel": 62910
+    },
+    {
+     "assureur": "Assura",
+     "produit": "PharMed",
+     "type": "PRAXIS",
+     "mensuel": 62950
+    },
+    {
+     "assureur": "KPT",
+     "produit": "KPTwin.plus - Médecin de famille dans centre HMO",
+     "type": "PRAXIS",
+     "mensuel": 62970
+    }
+   ]
+  },
+  {
+   "profils": [
+    {
+     "franchise": 300,
+     "accident": true,
+     "premiere": 58430,
+     "moyenne": 65215,
+     "nombre": 106
+    },
+    {
+     "franchise": 300,
+     "accident": false,
+     "premiere": 54630,
+     "moyenne": 60868,
+     "nombre": 106
+    },
+    {
+     "franchise": 2500,
+     "accident": true,
+     "premiere": 45600,
+     "moyenne": 52558,
+     "nombre": 106
+    },
+    {
+     "franchise": 2500,
+     "accident": false,
+     "premiere": 42700,
+     "moyenne": 49055,
+     "nombre": 106
+    }
+   ],
+   "canton": "VD",
+   "region": 1,
+   "commune": "Lausanne",
+   "nombre": 106,
+   "moyenne": 65215,
+   "offres": [
+    {
+     "assureur": "Atupri",
+     "produit": "HMO",
+     "type": "PRAXIS",
+     "mensuel": 58430
+    },
+    {
+     "assureur": "Assura",
+     "produit": "MediTel",
+     "type": "TEL_DIG",
+     "mensuel": 58740
+    },
+    {
+     "assureur": "Sanitas",
+     "produit": "TelMed Basic",
+     "type": "TEL_DIG",
+     "mensuel": 58810
+    },
+    {
+     "assureur": "Vivao Sympany",
+     "produit": "flexhelp24",
+     "type": "FLEX",
+     "mensuel": 59090
+    },
+    {
+     "assureur": "Assura",
+     "produit": "PharMed",
+     "type": "PRAXIS",
+     "mensuel": 59790
+    }
+   ]
+  },
+  {
+   "profils": [
+    {
+     "franchise": 300,
+     "accident": true,
+     "premiere": 50760,
+     "moyenne": 55781,
+     "nombre": 112
+    },
+    {
+     "franchise": 300,
+     "accident": false,
+     "premiere": 47550,
+     "moyenne": 52074,
+     "nombre": 112
+    },
+    {
+     "franchise": 2500,
+     "accident": true,
+     "premiere": 37930,
+     "moyenne": 43038,
+     "nombre": 112
+    },
+    {
+     "franchise": 2500,
+     "accident": false,
+     "premiere": 35605,
+     "moyenne": 40180,
+     "nombre": 112
+    }
+   ],
+   "canton": "VS",
+   "region": 1,
+   "commune": "Sion",
+   "nombre": 112,
+   "moyenne": 55781,
+   "offres": [
+    {
+     "assureur": "Atupri",
+     "produit": "HMO",
+     "type": "PRAXIS",
+     "mensuel": 50760
+    },
+    {
+     "assureur": "Concordia",
+     "produit": "HMO",
+     "type": "PRAXIS",
+     "mensuel": 51040
+    },
+    {
+     "assureur": "Sanitas",
+     "produit": "TelMed Basic",
+     "type": "TEL_DIG",
+     "mensuel": 51075
+    },
+    {
+     "assureur": "Concordia",
+     "produit": "smartDoc",
+     "type": "TEL_DIG",
+     "mensuel": 51330
+    },
+    {
+     "assureur": "Atupri",
+     "produit": "CareMed",
+     "type": "PRAXIS",
+     "mensuel": 51560
+    }
+   ]
+  },
+  {
+   "profils": [
+    {
+     "franchise": 300,
+     "accident": true,
+     "premiere": 47950,
+     "moyenne": 53452,
+     "nombre": 116
+    },
+    {
+     "franchise": 300,
+     "accident": false,
+     "premiere": 44600,
+     "moyenne": 49918,
+     "nombre": 116
+    },
+    {
+     "franchise": 2500,
+     "accident": true,
+     "premiere": 35380,
+     "moyenne": 40825,
+     "nombre": 116
+    },
+    {
+     "franchise": 2500,
+     "accident": false,
+     "premiere": 32900,
+     "moyenne": 38127,
+     "nombre": 116
+    }
+   ],
+   "canton": "FR",
+   "region": 2,
+   "commune": "Bulle",
+   "nombre": 116,
+   "moyenne": 53452,
+   "offres": [
+    {
+     "assureur": "Aquilana",
+     "produit": "SMARTMED",
+     "type": "TEL_DIG",
+     "mensuel": 47950
+    },
+    {
+     "assureur": "KPT",
+     "produit": "KPTwin.smart - Médecin de famille avec app",
+     "type": "TEL_DIG",
+     "mensuel": 48210
+    },
+    {
+     "assureur": "Atupri",
+     "produit": "HMO",
+     "type": "PRAXIS",
+     "mensuel": 48510
+    },
+    {
+     "assureur": "Concordia",
+     "produit": "HMO",
+     "type": "PRAXIS",
+     "mensuel": 48530
+    },
+    {
+     "assureur": "Concordia",
+     "produit": "smartDoc",
+     "type": "TEL_DIG",
+     "mensuel": 48810
+    }
+   ]
+  },
+  {
+   "profils": [
+    {
+     "franchise": 300,
+     "accident": true,
+     "premiere": 58340,
+     "moyenne": 66632,
+     "nombre": 107
+    },
+    {
+     "franchise": 300,
+     "accident": false,
+     "premiere": 55275,
+     "moyenne": 62222,
+     "nombre": 107
+    },
+    {
+     "franchise": 2500,
+     "accident": true,
+     "premiere": 46540,
+     "moyenne": 53953,
+     "nombre": 107
+    },
+    {
+     "franchise": 2500,
+     "accident": false,
+     "premiere": 43330,
+     "moyenne": 50384,
+     "nombre": 107
+    }
+   ],
+   "canton": "NE",
+   "region": 0,
+   "commune": "Neuchâtel",
+   "nombre": 107,
+   "moyenne": 66632,
+   "offres": [
+    {
+     "assureur": "Agrisano",
+     "produit": "AGRIsmart",
+     "type": "TEL_DIG",
+     "mensuel": 58340
+    },
+    {
+     "assureur": "Sanitas",
+     "produit": "TelMed Basic",
+     "type": "TEL_DIG",
+     "mensuel": 59370
+    },
+    {
+     "assureur": "Agrisano",
+     "produit": "AGRIcontact",
+     "type": "TEL_DIG",
+     "mensuel": 59400
+    },
+    {
+     "assureur": "Agrisano",
+     "produit": "AGRIeco",
+     "type": "PRAXIS",
+     "mensuel": 59760
+    },
+    {
+     "assureur": "Avenir",
+     "produit": "SanaTel (Télémédecine)",
+     "type": "TEL_DIG",
+     "mensuel": 59890
+    }
+   ]
+  },
+  {
+   "profils": [
+    {
+     "franchise": 300,
+     "accident": true,
+     "premiere": 58430,
+     "moyenne": 65273,
+     "nombre": 105
+    },
+    {
+     "franchise": 300,
+     "accident": false,
+     "premiere": 54400,
+     "moyenne": 60946,
+     "nombre": 105
+    },
+    {
+     "franchise": 2500,
+     "accident": true,
+     "premiere": 45600,
+     "moyenne": 52582,
+     "nombre": 105
+    },
+    {
+     "franchise": 2500,
+     "accident": false,
+     "premiere": 42455,
+     "moyenne": 49098,
+     "nombre": 105
+    }
+   ],
+   "canton": "JU",
+   "region": 0,
+   "commune": "Delémont",
+   "nombre": 105,
+   "moyenne": 65273,
+   "offres": [
+    {
+     "assureur": "Sanitas",
+     "produit": "TelMed Basic",
+     "type": "TEL_DIG",
+     "mensuel": 58430
+    },
+    {
+     "assureur": "Assura",
+     "produit": "MediTel",
+     "type": "TEL_DIG",
+     "mensuel": 59000
+    },
+    {
+     "assureur": "Atupri",
+     "produit": "SmartCare",
+     "type": "TEL_DIG",
+     "mensuel": 59020
+    },
+    {
+     "assureur": "Sanitas",
+     "produit": "Médecin de famille 1",
+     "type": "PRAXIS",
+     "mensuel": 59110
+    },
+    {
+     "assureur": "EGK",
+     "produit": "EGK-TelCare",
+     "type": "TEL_DIG",
+     "mensuel": 59200
+    }
+   ]
+  },
+  {
+   "profils": [
+    {
+     "franchise": 300,
+     "accident": true,
+     "premiere": 51920,
+     "moyenne": 58170,
+     "nombre": 129
+    },
+    {
+     "franchise": 300,
+     "accident": false,
+     "premiere": 48290,
+     "moyenne": 54370,
+     "nombre": 129
+    },
+    {
+     "franchise": 2500,
+     "accident": true,
+     "premiere": 39610,
+     "moyenne": 45497,
+     "nombre": 129
+    },
+    {
+     "franchise": 2500,
+     "accident": false,
+     "premiere": 37030,
+     "moyenne": 42526,
+     "nombre": 129
+    }
+   ],
+   "canton": "BE",
+   "region": 2,
+   "commune": "Saint-Imier",
+   "nombre": 129,
+   "moyenne": 58170,
+   "offres": [
+    {
+     "assureur": "ÖKK",
+     "produit": "ÖKK CASAMED HMO",
+     "type": "PRAXIS",
+     "mensuel": 51920
+    },
+    {
+     "assureur": "Agrisano",
+     "produit": "AGRIsmart",
+     "type": "TEL_DIG",
+     "mensuel": 52000
+    },
+    {
+     "assureur": "Visana",
+     "produit": "Plan de santé VIVA",
+     "type": "PRAXIS",
+     "mensuel": 52450
+    },
+    {
+     "assureur": "Assura",
+     "produit": "MediTel",
+     "type": "TEL_DIG",
+     "mensuel": 52860
+    },
+    {
+     "assureur": "KPT",
+     "produit": "KPTwin.plus - Médecin de famille dans centre HMO",
+     "type": "PRAXIS",
+     "mensuel": 53000
+    }
+   ]
+  }
+ ]
+}

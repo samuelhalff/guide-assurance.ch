@@ -1,0 +1,716 @@
+[
+ {
+  "nom": "Belmont-Broye",
+  "bfs": 2053,
+  "coefficient": 78.0,
+  "district": "Broye"
+ },
+ {
+  "nom": "Châtillon (FR)",
+  "bfs": 2008,
+  "coefficient": 65.0,
+  "district": "Broye"
+ },
+ {
+  "nom": "Cheyres-Châbles",
+  "bfs": 2055,
+  "coefficient": 70.0,
+  "district": "Broye"
+ },
+ {
+  "nom": "Cugy (FR)",
+  "bfs": 2011,
+  "coefficient": 85.0,
+  "district": "Broye"
+ },
+ {
+  "nom": "Delley-Portalban",
+  "bfs": 2051,
+  "coefficient": 49.9,
+  "district": "Broye"
+ },
+ {
+  "nom": "Estavayer",
+  "bfs": 2054,
+  "coefficient": 84.0,
+  "district": "Broye"
+ },
+ {
+  "nom": "Fétigny-Ménières",
+  "bfs": 2056,
+  "coefficient": 86.0,
+  "district": "Broye"
+ },
+ {
+  "nom": "Gletterens",
+  "bfs": 2022,
+  "coefficient": 68.9,
+  "district": "Broye"
+ },
+ {
+  "nom": "Les Montets",
+  "bfs": 2050,
+  "coefficient": 77.4,
+  "district": "Broye"
+ },
+ {
+  "nom": "Lully (FR)",
+  "bfs": 2025,
+  "coefficient": 85.0,
+  "district": "Broye"
+ },
+ {
+  "nom": "Montagny (FR)",
+  "bfs": 2029,
+  "coefficient": 83.6,
+  "district": "Broye"
+ },
+ {
+  "nom": "Nuvilly",
+  "bfs": 2035,
+  "coefficient": 87.9,
+  "district": "Broye"
+ },
+ {
+  "nom": "Prévondavaux",
+  "bfs": 2038,
+  "coefficient": 90.3,
+  "district": "Broye"
+ },
+ {
+  "nom": "Sévaz",
+  "bfs": 2043,
+  "coefficient": 50.0,
+  "district": "Broye"
+ },
+ {
+  "nom": "Saint-Aubin (FR)",
+  "bfs": 2041,
+  "coefficient": 80.0,
+  "district": "Broye"
+ },
+ {
+  "nom": "Surpierre",
+  "bfs": 2044,
+  "coefficient": 88.7,
+  "district": "Broye"
+ },
+ {
+  "nom": "Vallon",
+  "bfs": 2045,
+  "coefficient": 83.0,
+  "district": "Broye"
+ },
+ {
+  "nom": "Billens-Hennens",
+  "bfs": 2063,
+  "coefficient": 95.0,
+  "district": "Glâne"
+ },
+ {
+  "nom": "Châtonnaye",
+  "bfs": 2068,
+  "coefficient": 85.0,
+  "district": "Glâne"
+ },
+ {
+  "nom": "Grangettes",
+  "bfs": 2079,
+  "coefficient": 85.0,
+  "district": "Glâne"
+ },
+ {
+  "nom": "Le Châtelard",
+  "bfs": 2067,
+  "coefficient": 90.0,
+  "district": "Glâne"
+ },
+ {
+  "nom": "Mézières (FR)",
+  "bfs": 2087,
+  "coefficient": 93.0,
+  "district": "Glâne"
+ },
+ {
+  "nom": "Massonnens",
+  "bfs": 2086,
+  "coefficient": 91.2,
+  "district": "Glâne"
+ },
+ {
+  "nom": "Romont (FR)",
+  "bfs": 2096,
+  "coefficient": 90.0,
+  "district": "Glâne"
+ },
+ {
+  "nom": "Rue",
+  "bfs": 2097,
+  "coefficient": 77.0,
+  "district": "Glâne"
+ },
+ {
+  "nom": "Siviriez",
+  "bfs": 2099,
+  "coefficient": 88.0,
+  "district": "Glâne"
+ },
+ {
+  "nom": "Torny",
+  "bfs": 2115,
+  "coefficient": 85.0,
+  "district": "Glâne"
+ },
+ {
+  "nom": "Ursy",
+  "bfs": 2102,
+  "coefficient": 89.0,
+  "district": "Glâne"
+ },
+ {
+  "nom": "Villaz",
+  "bfs": 2117,
+  "coefficient": 88.0,
+  "district": "Glâne"
+ },
+ {
+  "nom": "Villorsonnens",
+  "bfs": 2114,
+  "coefficient": 80.0,
+  "district": "Glâne"
+ },
+ {
+  "nom": "Vuisternens-devant-Romont",
+  "bfs": 2113,
+  "coefficient": 92.0,
+  "district": "Glâne"
+ },
+ {
+  "nom": "Bas-Intyamon",
+  "bfs": 2162,
+  "coefficient": 83.2,
+  "district": "Gruyère"
+ },
+ {
+  "nom": "Botterens",
+  "bfs": 2123,
+  "coefficient": 85.0,
+  "district": "Gruyère"
+ },
+ {
+  "nom": "Broc",
+  "bfs": 2124,
+  "coefficient": 92.0,
+  "district": "Gruyère"
+ },
+ {
+  "nom": "Bulle",
+  "bfs": 2125,
+  "coefficient": 74.3,
+  "district": "Gruyère"
+ },
+ {
+  "nom": "Châtel-sur-Montsalvens",
+  "bfs": 2128,
+  "coefficient": 79.5,
+  "district": "Gruyère"
+ },
+ {
+  "nom": "Corbières",
+  "bfs": 2129,
+  "coefficient": 73.5,
+  "district": "Gruyère"
+ },
+ {
+  "nom": "Crésuz",
+  "bfs": 2130,
+  "coefficient": 67.0,
+  "district": "Gruyère"
+ },
+ {
+  "nom": "Echarlens",
+  "bfs": 2131,
+  "coefficient": 70.0,
+  "district": "Gruyère"
+ },
+ {
+  "nom": "Grandvillard",
+  "bfs": 2134,
+  "coefficient": 80.0,
+  "district": "Gruyère"
+ },
+ {
+  "nom": "Gruyères",
+  "bfs": 2135,
+  "coefficient": 80.0,
+  "district": "Gruyère"
+ },
+ {
+  "nom": "Haut-Intyamon",
+  "bfs": 2121,
+  "coefficient": 97.0,
+  "district": "Gruyère"
+ },
+ {
+  "nom": "Hauteville",
+  "bfs": 2137,
+  "coefficient": 77.7,
+  "district": "Gruyère"
+ },
+ {
+  "nom": "Jaun",
+  "bfs": 2138,
+  "coefficient": 100.0,
+  "district": "Gruyère"
+ },
+ {
+  "nom": "La Roche",
+  "bfs": 2149,
+  "coefficient": 87.0,
+  "district": "Gruyère"
+ },
+ {
+  "nom": "Le Pâquier (FR)",
+  "bfs": 2145,
+  "coefficient": 80.0,
+  "district": "Gruyère"
+ },
+ {
+  "nom": "Marsens",
+  "bfs": 2140,
+  "coefficient": 75.0,
+  "district": "Gruyère"
+ },
+ {
+  "nom": "Morlon",
+  "bfs": 2143,
+  "coefficient": 84.3,
+  "district": "Gruyère"
+ },
+ {
+  "nom": "Pont-en-Ogoz",
+  "bfs": 2122,
+  "coefficient": 75.0,
+  "district": "Gruyère"
+ },
+ {
+  "nom": "Pont-la-Ville",
+  "bfs": 2147,
+  "coefficient": 75.0,
+  "district": "Gruyère"
+ },
+ {
+  "nom": "Riaz",
+  "bfs": 2148,
+  "coefficient": 73.0,
+  "district": "Gruyère"
+ },
+ {
+  "nom": "Sâles",
+  "bfs": 2152,
+  "coefficient": 86.0,
+  "district": "Gruyère"
+ },
+ {
+  "nom": "Sorens",
+  "bfs": 2153,
+  "coefficient": 73.0,
+  "district": "Gruyère"
+ },
+ {
+  "nom": "Val-de-Charmey",
+  "bfs": 2163,
+  "coefficient": 89.8,
+  "district": "Gruyère"
+ },
+ {
+  "nom": "Vaulruz",
+  "bfs": 2155,
+  "coefficient": 79.0,
+  "district": "Gruyère"
+ },
+ {
+  "nom": "Vuadens",
+  "bfs": 2160,
+  "coefficient": 82.8,
+  "district": "Gruyère"
+ },
+ {
+  "nom": "Autigny",
+  "bfs": 2173,
+  "coefficient": 90.0,
+  "district": "Sarine"
+ },
+ {
+  "nom": "Avry",
+  "bfs": 2174,
+  "coefficient": 69.1,
+  "district": "Sarine"
+ },
+ {
+  "nom": "Belfaux",
+  "bfs": 2175,
+  "coefficient": 84.0,
+  "district": "Sarine"
+ },
+ {
+  "nom": "Bois-d'Amont",
+  "bfs": 2238,
+  "coefficient": 85.0,
+  "district": "Sarine"
+ },
+ {
+  "nom": "Chénens",
+  "bfs": 2177,
+  "coefficient": 91.7,
+  "district": "Sarine"
+ },
+ {
+  "nom": "Corminboeuf",
+  "bfs": 2183,
+  "coefficient": 75.0,
+  "district": "Sarine"
+ },
+ {
+  "nom": "Cottens (FR)",
+  "bfs": 2186,
+  "coefficient": 80.0,
+  "district": "Sarine"
+ },
+ {
+  "nom": "Ferpicloz",
+  "bfs": 2194,
+  "coefficient": 55.0,
+  "district": "Sarine"
+ },
+ {
+  "nom": "Fribourg",
+  "bfs": 2196,
+  "coefficient": 80.0,
+  "district": "Sarine"
+ },
+ {
+  "nom": "Gibloux",
+  "bfs": 2236,
+  "coefficient": 82.0,
+  "district": "Sarine"
+ },
+ {
+  "nom": "Givisiez",
+  "bfs": 2197,
+  "coefficient": 70.0,
+  "district": "Sarine"
+ },
+ {
+  "nom": "Granges-Paccot",
+  "bfs": 2198,
+  "coefficient": 67.8,
+  "district": "Sarine"
+ },
+ {
+  "nom": "Grolley-Ponthaux",
+  "bfs": 2239,
+  "coefficient": 80.0,
+  "district": "Sarine"
+ },
+ {
+  "nom": "Hauterive (FR)",
+  "bfs": 2233,
+  "coefficient": 74.0,
+  "district": "Sarine"
+ },
+ {
+  "nom": "La Brillaz",
+  "bfs": 2234,
+  "coefficient": 85.0,
+  "district": "Sarine"
+ },
+ {
+  "nom": "La Sonnaz",
+  "bfs": 2235,
+  "coefficient": 76.0,
+  "district": "Sarine"
+ },
+ {
+  "nom": "Le Mouret",
+  "bfs": 2220,
+  "coefficient": 84.5,
+  "district": "Sarine"
+ },
+ {
+  "nom": "Marly",
+  "bfs": 2206,
+  "coefficient": 89.0,
+  "district": "Sarine"
+ },
+ {
+  "nom": "Matran",
+  "bfs": 2208,
+  "coefficient": 65.0,
+  "district": "Sarine"
+ },
+ {
+  "nom": "Neyruz (FR)",
+  "bfs": 2211,
+  "coefficient": 81.0,
+  "district": "Sarine"
+ },
+ {
+  "nom": "Pierrafortscha",
+  "bfs": 2216,
+  "coefficient": 80.0,
+  "district": "Sarine"
+ },
+ {
+  "nom": "Prez",
+  "bfs": 2237,
+  "coefficient": 80.0,
+  "district": "Sarine"
+ },
+ {
+  "nom": "Treyvaux",
+  "bfs": 2226,
+  "coefficient": 80.0,
+  "district": "Sarine"
+ },
+ {
+  "nom": "Villars-sur-Glâne",
+  "bfs": 2228,
+  "coefficient": 63.9,
+  "district": "Sarine"
+ },
+ {
+  "nom": "Villarsel-sur-Marly",
+  "bfs": 2230,
+  "coefficient": 90.0,
+  "district": "Sarine"
+ },
+ {
+  "nom": "Courgevaux",
+  "bfs": 2250,
+  "coefficient": 76.0,
+  "district": "Lac"
+ },
+ {
+  "nom": "Courtepin",
+  "bfs": 2254,
+  "coefficient": 80.0,
+  "district": "Lac"
+ },
+ {
+  "nom": "Cressier (FR)",
+  "bfs": 2257,
+  "coefficient": 68.0,
+  "district": "Lac"
+ },
+ {
+  "nom": "Fräschels",
+  "bfs": 2258,
+  "coefficient": 75.0,
+  "district": "Lac"
+ },
+ {
+  "nom": "Greng",
+  "bfs": 2261,
+  "coefficient": 32.0,
+  "district": "Lac"
+ },
+ {
+  "nom": "Gurmels",
+  "bfs": 2262,
+  "coefficient": 80.0,
+  "district": "Lac"
+ },
+ {
+  "nom": "Kerzers",
+  "bfs": 2265,
+  "coefficient": 79.0,
+  "district": "Lac"
+ },
+ {
+  "nom": "Kleinbösingen",
+  "bfs": 2266,
+  "coefficient": 75.0,
+  "district": "Lac"
+ },
+ {
+  "nom": "Meyriez",
+  "bfs": 2271,
+  "coefficient": 58.0,
+  "district": "Lac"
+ },
+ {
+  "nom": "Misery-Courtion",
+  "bfs": 2272,
+  "coefficient": 88.0,
+  "district": "Lac"
+ },
+ {
+  "nom": "Mont-Vully",
+  "bfs": 2284,
+  "coefficient": 58.0,
+  "district": "Lac"
+ },
+ {
+  "nom": "Muntelier",
+  "bfs": 2274,
+  "coefficient": 55.0,
+  "district": "Lac"
+ },
+ {
+  "nom": "Murten",
+  "bfs": 2275,
+  "coefficient": 62.0,
+  "district": "Lac"
+ },
+ {
+  "nom": "Ried bei Kerzers",
+  "bfs": 2276,
+  "coefficient": 72.5,
+  "district": "Lac"
+ },
+ {
+  "nom": "Bösingen",
+  "bfs": 2295,
+  "coefficient": 76.0,
+  "district": "Singine"
+ },
+ {
+  "nom": "Brünisried",
+  "bfs": 2292,
+  "coefficient": 84.0,
+  "district": "Singine"
+ },
+ {
+  "nom": "Düdingen",
+  "bfs": 2293,
+  "coefficient": 82.0,
+  "district": "Singine"
+ },
+ {
+  "nom": "Giffers",
+  "bfs": 2294,
+  "coefficient": 85.9,
+  "district": "Singine"
+ },
+ {
+  "nom": "Heitenried",
+  "bfs": 2296,
+  "coefficient": 81.0,
+  "district": "Singine"
+ },
+ {
+  "nom": "Plaffeien",
+  "bfs": 2299,
+  "coefficient": 92.0,
+  "district": "Singine"
+ },
+ {
+  "nom": "Plasselb",
+  "bfs": 2300,
+  "coefficient": 95.0,
+  "district": "Singine"
+ },
+ {
+  "nom": "Rechthalten",
+  "bfs": 2301,
+  "coefficient": 86.0,
+  "district": "Singine"
+ },
+ {
+  "nom": "Schmitten (FR)",
+  "bfs": 2305,
+  "coefficient": 77.0,
+  "district": "Singine"
+ },
+ {
+  "nom": "St. Silvester",
+  "bfs": 2303,
+  "coefficient": 95.0,
+  "district": "Singine"
+ },
+ {
+  "nom": "St. Ursen",
+  "bfs": 2304,
+  "coefficient": 75.0,
+  "district": "Singine"
+ },
+ {
+  "nom": "Tafers",
+  "bfs": 2306,
+  "coefficient": 75.0,
+  "district": "Singine"
+ },
+ {
+  "nom": "Tentlingen",
+  "bfs": 2307,
+  "coefficient": 86.0,
+  "district": "Singine"
+ },
+ {
+  "nom": "Ueberstorf",
+  "bfs": 2308,
+  "coefficient": 87.0,
+  "district": "Singine"
+ },
+ {
+  "nom": "Wünnewil-Flamatt",
+  "bfs": 2309,
+  "coefficient": 82.0,
+  "district": "Singine"
+ },
+ {
+  "nom": "Attalens",
+  "bfs": 2321,
+  "coefficient": 78.5,
+  "district": "Veveyse"
+ },
+ {
+  "nom": "Bossonnens",
+  "bfs": 2323,
+  "coefficient": 90.0,
+  "district": "Veveyse"
+ },
+ {
+  "nom": "Châtel-Saint-Denis",
+  "bfs": 2325,
+  "coefficient": 83.6,
+  "district": "Veveyse"
+ },
+ {
+  "nom": "Granges (Veveyse)",
+  "bfs": 2328,
+  "coefficient": 84.0,
+  "district": "Veveyse"
+ },
+ {
+  "nom": "La Verrerie",
+  "bfs": 2338,
+  "coefficient": 86.0,
+  "district": "Veveyse"
+ },
+ {
+  "nom": "Le Flon",
+  "bfs": 2337,
+  "coefficient": 93.8,
+  "district": "Veveyse"
+ },
+ {
+  "nom": "Remaufens",
+  "bfs": 2333,
+  "coefficient": 88.0,
+  "district": "Veveyse"
+ },
+ {
+  "nom": "Saint-Martin (FR)",
+  "bfs": 2335,
+  "coefficient": 87.0,
+  "district": "Veveyse"
+ },
+ {
+  "nom": "Semsales",
+  "bfs": 2336,
+  "coefficient": 83.0,
+  "district": "Veveyse"
+ }
+]

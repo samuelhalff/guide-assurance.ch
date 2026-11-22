@@ -1,0 +1,856 @@
+[
+ {
+  "nom": "Agarn",
+  "bfs": 6101,
+  "nr_vs": 75,
+  "coefficient": 1.3,
+  "indexation": 153
+ },
+ {
+  "nom": "Albinen",
+  "bfs": 6102,
+  "nr_vs": 76,
+  "coefficient": 1.3,
+  "indexation": 145
+ },
+ {
+  "nom": "Anniviers",
+  "bfs": 6252,
+  "nr_vs": 111,
+  "coefficient": 1.25,
+  "indexation": 146
+ },
+ {
+  "nom": "Arbaz",
+  "bfs": 6261,
+  "nr_vs": 121,
+  "coefficient": 1.25,
+  "indexation": 146
+ },
+ {
+  "nom": "Ardon",
+  "bfs": 6021,
+  "nr_vs": 127,
+  "coefficient": 1.3,
+  "indexation": 166
+ },
+ {
+  "nom": "Ausserberg",
+  "bfs": 6191,
+  "nr_vs": 63,
+  "coefficient": 1.3,
+  "indexation": 138
+ },
+ {
+  "nom": "Ayent",
+  "bfs": 6082,
+  "nr_vs": 113,
+  "coefficient": 1.3,
+  "indexation": 158
+ },
+ {
+  "nom": "Baltschieder",
+  "bfs": 6281,
+  "nr_vs": 43,
+  "coefficient": 1.2,
+  "indexation": 166
+ },
+ {
+  "nom": "Bellwald",
+  "bfs": 6052,
+  "nr_vs": 2,
+  "coefficient": 1.3,
+  "indexation": 160
+ },
+ {
+  "nom": "Bettmeralp",
+  "bfs": 6205,
+  "nr_vs": 22,
+  "coefficient": 1.2,
+  "indexation": 136
+ },
+ {
+  "nom": "Binn",
+  "bfs": 6054,
+  "nr_vs": 4,
+  "coefficient": 1.2,
+  "indexation": 156
+ },
+ {
+  "nom": "Bister",
+  "bfs": 6172,
+  "nr_vs": 23,
+  "coefficient": 1.0,
+  "indexation": 176
+ },
+ {
+  "nom": "Bitsch",
+  "bfs": 6173,
+  "nr_vs": 24,
+  "coefficient": 1.0,
+  "indexation": 176
+ },
+ {
+  "nom": "Blatten",
+  "bfs": 6192,
+  "nr_vs": 64,
+  "coefficient": 1.4,
+  "indexation": 136
+ },
+ {
+  "nom": "Bourg-St-Pierre",
+  "bfs": 6032,
+  "nr_vs": 144,
+  "coefficient": 1.0,
+  "indexation": 176
+ },
+ {
+  "nom": "Bovernier",
+  "bfs": 6131,
+  "nr_vs": 132,
+  "coefficient": 1.2,
+  "indexation": 156
+ },
+ {
+  "nom": "Brig-Glis",
+  "bfs": 6002,
+  "nr_vs": 33,
+  "coefficient": 1.0,
+  "indexation": 176
+ },
+ {
+  "nom": "Bürchen",
+  "bfs": 6193,
+  "nr_vs": 65,
+  "coefficient": 1.3,
+  "indexation": 146
+ },
+ {
+  "nom": "Chalais",
+  "bfs": 6232,
+  "nr_vs": 92,
+  "coefficient": 1.3,
+  "indexation": 146
+ },
+ {
+  "nom": "Chamoson",
+  "bfs": 6022,
+  "nr_vs": 128,
+  "coefficient": 1.25,
+  "indexation": 143
+ },
+ {
+  "nom": "Champéry",
+  "bfs": 6151,
+  "nr_vs": 159,
+  "coefficient": 1.35,
+  "indexation": 141
+ },
+ {
+  "nom": "Chippis",
+  "bfs": 6235,
+  "nr_vs": 95,
+  "coefficient": 1.2,
+  "indexation": 146
+ },
+ {
+  "nom": "Collombey-Muraz",
+  "bfs": 6152,
+  "nr_vs": 160,
+  "coefficient": 1.25,
+  "indexation": 171
+ },
+ {
+  "nom": "Collonges",
+  "bfs": 6211,
+  "nr_vs": 149,
+  "coefficient": 1.1,
+  "indexation": 165
+ },
+ {
+  "nom": "Conthey",
+  "bfs": 6023,
+  "nr_vs": 129,
+  "coefficient": 1.2,
+  "indexation": 163
+ },
+ {
+  "nom": "Crans-Montana",
+  "bfs": 6253,
+  "nr_vs": 104,
+  "coefficient": 1.15,
+  "indexation": 176
+ },
+ {
+  "nom": "Dorénaz",
+  "bfs": 6212,
+  "nr_vs": 150,
+  "coefficient": 1.2,
+  "indexation": 161
+ },
+ {
+  "nom": "Eggerberg",
+  "bfs": 6004,
+  "nr_vs": 35,
+  "coefficient": 1.3,
+  "indexation": 133
+ },
+ {
+  "nom": "Eischoll",
+  "bfs": 6194,
+  "nr_vs": 66,
+  "coefficient": 1.3,
+  "indexation": 146
+ },
+ {
+  "nom": "Eisten",
+  "bfs": 6282,
+  "nr_vs": 44,
+  "coefficient": 1.0,
+  "indexation": 176
+ },
+ {
+  "nom": "Embd",
+  "bfs": 6283,
+  "nr_vs": 45,
+  "coefficient": 1.3,
+  "indexation": 158
+ },
+ {
+  "nom": "Ergisch",
+  "bfs": 6104,
+  "nr_vs": 78,
+  "coefficient": 1.0,
+  "indexation": 176
+ },
+ {
+  "nom": "Ernen",
+  "bfs": 6056,
+  "nr_vs": 6,
+  "coefficient": 1.1,
+  "indexation": 176
+ },
+ {
+  "nom": "Evionnaz",
+  "bfs": 6213,
+  "nr_vs": 151,
+  "coefficient": 1.3,
+  "indexation": 176
+ },
+ {
+  "nom": "Evolène",
+  "bfs": 6083,
+  "nr_vs": 114,
+  "coefficient": 1.25,
+  "indexation": 140
+ },
+ {
+  "nom": "Ferden",
+  "bfs": 6195,
+  "nr_vs": 67,
+  "coefficient": 1.4,
+  "indexation": 151
+ },
+ {
+  "nom": "Fiesch",
+  "bfs": 6057,
+  "nr_vs": 7,
+  "coefficient": 1.15,
+  "indexation": 160
+ },
+ {
+  "nom": "Fieschertal",
+  "bfs": 6058,
+  "nr_vs": 8,
+  "coefficient": 1.1,
+  "indexation": 176
+ },
+ {
+  "nom": "Finhaut",
+  "bfs": 6214,
+  "nr_vs": 152,
+  "coefficient": 1.0,
+  "indexation": 176
+ },
+ {
+  "nom": "Fully",
+  "bfs": 6133,
+  "nr_vs": 134,
+  "coefficient": 1.2,
+  "indexation": 165
+ },
+ {
+  "nom": "Gampel-Bratsch",
+  "bfs": 6118,
+  "nr_vs": 81,
+  "coefficient": 1.3,
+  "indexation": 151
+ },
+ {
+  "nom": "Goms",
+  "bfs": 6077,
+  "nr_vs": 13,
+  "coefficient": 1.1,
+  "indexation": 173
+ },
+ {
+  "nom": "Grengiols",
+  "bfs": 6177,
+  "nr_vs": 28,
+  "coefficient": 1.0,
+  "indexation": 146
+ },
+ {
+  "nom": "Grimisuat",
+  "bfs": 6263,
+  "nr_vs": 122,
+  "coefficient": 1.25,
+  "indexation": 163
+ },
+ {
+  "nom": "Grächen",
+  "bfs": 6285,
+  "nr_vs": 47,
+  "coefficient": 1.4,
+  "indexation": 135
+ },
+ {
+  "nom": "Grône",
+  "bfs": 6238,
+  "nr_vs": 98,
+  "coefficient": 1.25,
+  "indexation": 143
+ },
+ {
+  "nom": "Guttet-Feschel",
+  "bfs": 6117,
+  "nr_vs": 82,
+  "coefficient": 1.3,
+  "indexation": 148
+ },
+ {
+  "nom": "Hérémence",
+  "bfs": 6084,
+  "nr_vs": 115,
+  "coefficient": 1.0,
+  "indexation": 176
+ },
+ {
+  "nom": "Icogne",
+  "bfs": 6239,
+  "nr_vs": 99,
+  "coefficient": 1.2,
+  "indexation": 176
+ },
+ {
+  "nom": "Inden",
+  "bfs": 6109,
+  "nr_vs": 83,
+  "coefficient": 1.1,
+  "indexation": 136
+ },
+ {
+  "nom": "Isérables",
+  "bfs": 6134,
+  "nr_vs": 135,
+  "coefficient": 1.35,
+  "indexation": 138
+ },
+ {
+  "nom": "Kippel",
+  "bfs": 6197,
+  "nr_vs": 69,
+  "coefficient": 1.4,
+  "indexation": 136
+ },
+ {
+  "nom": "Lalden",
+  "bfs": 6286,
+  "nr_vs": 48,
+  "coefficient": 1.2,
+  "indexation": 158
+ },
+ {
+  "nom": "Lax",
+  "bfs": 6061,
+  "nr_vs": 11,
+  "coefficient": 1.4,
+  "indexation": 163
+ },
+ {
+  "nom": "Lens",
+  "bfs": 6240,
+  "nr_vs": 100,
+  "coefficient": 1.05,
+  "indexation": 176
+ },
+ {
+  "nom": "Leuk",
+  "bfs": 6110,
+  "nr_vs": 84,
+  "coefficient": 1.3,
+  "indexation": 156
+ },
+ {
+  "nom": "Leukerbad",
+  "bfs": 6111,
+  "nr_vs": 85,
+  "coefficient": 1.45,
+  "indexation": 151
+ },
+ {
+  "nom": "Leytron",
+  "bfs": 6135,
+  "nr_vs": 136,
+  "coefficient": 1.2,
+  "indexation": 146
+ },
+ {
+  "nom": "Liddes",
+  "bfs": 6033,
+  "nr_vs": 145,
+  "coefficient": 1.25,
+  "indexation": 143
+ },
+ {
+  "nom": "Martigny",
+  "bfs": 6136,
+  "nr_vs": 138,
+  "coefficient": 1.1,
+  "indexation": 166
+ },
+ {
+  "nom": "Martigny-Combe",
+  "bfs": 6137,
+  "nr_vs": 137,
+  "coefficient": 1.1,
+  "indexation": 163
+ },
+ {
+  "nom": "Massongex",
+  "bfs": 6215,
+  "nr_vs": 153,
+  "coefficient": 1.2,
+  "indexation": 168
+ },
+ {
+  "nom": "Mont-Noble",
+  "bfs": 6090,
+  "nr_vs": 117,
+  "coefficient": 1.35,
+  "indexation": 148
+ },
+ {
+  "nom": "Monthey",
+  "bfs": 6153,
+  "nr_vs": 161,
+  "coefficient": 1.2,
+  "indexation": 170
+ },
+ {
+  "nom": "Mörel-Filet",
+  "bfs": 6203,
+  "nr_vs": 30,
+  "coefficient": 1.15,
+  "indexation": 140
+ },
+ {
+  "nom": "Naters",
+  "bfs": 6007,
+  "nr_vs": 38,
+  "coefficient": 1.1,
+  "indexation": 176
+ },
+ {
+  "nom": "Nendaz",
+  "bfs": 6024,
+  "nr_vs": 130,
+  "coefficient": 1.3,
+  "indexation": 156
+ },
+ {
+  "nom": "Niedergesteln",
+  "bfs": 6198,
+  "nr_vs": 70,
+  "coefficient": 1.2,
+  "indexation": 156
+ },
+ {
+  "nom": "Noble-Contrée",
+  "bfs": 6254,
+  "nr_vs": 110,
+  "coefficient": 1.1,
+  "indexation": 166
+ },
+ {
+  "nom": "Oberems",
+  "bfs": 6112,
+  "nr_vs": 86,
+  "coefficient": 1.0,
+  "indexation": 176
+ },
+ {
+  "nom": "Obergoms",
+  "bfs": 6076,
+  "nr_vs": 15,
+  "coefficient": 1.1,
+  "indexation": 176
+ },
+ {
+  "nom": "Orsières",
+  "bfs": 6034,
+  "nr_vs": 146,
+  "coefficient": 1.2,
+  "indexation": 150
+ },
+ {
+  "nom": "Port-Valais",
+  "bfs": 6154,
+  "nr_vs": 162,
+  "coefficient": 1.1,
+  "indexation": 170
+ },
+ {
+  "nom": "Randa",
+  "bfs": 6287,
+  "nr_vs": 49,
+  "coefficient": 1.1,
+  "indexation": 176
+ },
+ {
+  "nom": "Raron",
+  "bfs": 6199,
+  "nr_vs": 71,
+  "coefficient": 1.2,
+  "indexation": 165
+ },
+ {
+  "nom": "Riddes",
+  "bfs": 6139,
+  "nr_vs": 139,
+  "coefficient": 1.25,
+  "indexation": 153
+ },
+ {
+  "nom": "Ried-Brig",
+  "bfs": 6008,
+  "nr_vs": 39,
+  "coefficient": 1.1,
+  "indexation": 170
+ },
+ {
+  "nom": "Riederalp",
+  "bfs": 6181,
+  "nr_vs": 31,
+  "coefficient": 1.2,
+  "indexation": 138
+ },
+ {
+  "nom": "Saas-Almagell",
+  "bfs": 6288,
+  "nr_vs": 50,
+  "coefficient": 1.2,
+  "indexation": 150
+ },
+ {
+  "nom": "Saas-Balen",
+  "bfs": 6289,
+  "nr_vs": 51,
+  "coefficient": 1.1,
+  "indexation": 153
+ },
+ {
+  "nom": "Saas-Fee",
+  "bfs": 6290,
+  "nr_vs": 52,
+  "coefficient": 1.2,
+  "indexation": 145
+ },
+ {
+  "nom": "Saas-Grund",
+  "bfs": 6291,
+  "nr_vs": 53,
+  "coefficient": 1.3,
+  "indexation": 133
+ },
+ {
+  "nom": "Saillon",
+  "bfs": 6140,
+  "nr_vs": 140,
+  "coefficient": 1.2,
+  "indexation": 146
+ },
+ {
+  "nom": "Salgesch",
+  "bfs": 6113,
+  "nr_vs": 87,
+  "coefficient": 1.2,
+  "indexation": 136
+ },
+ {
+  "nom": "Salvan",
+  "bfs": 6218,
+  "nr_vs": 156,
+  "coefficient": 1.15,
+  "indexation": 173
+ },
+ {
+  "nom": "Savièse",
+  "bfs": 6265,
+  "nr_vs": 124,
+  "coefficient": 1.15,
+  "indexation": 156
+ },
+ {
+  "nom": "Saxon",
+  "bfs": 6141,
+  "nr_vs": 141,
+  "coefficient": 1.2,
+  "indexation": 166
+ },
+ {
+  "nom": "Sembrancher",
+  "bfs": 6035,
+  "nr_vs": 147,
+  "coefficient": 1.2,
+  "indexation": 155
+ },
+ {
+  "nom": "Sierre",
+  "bfs": 6248,
+  "nr_vs": 108,
+  "coefficient": 1.2,
+  "indexation": 161
+ },
+ {
+  "nom": "Simplon",
+  "bfs": 6009,
+  "nr_vs": 40,
+  "coefficient": 1.0,
+  "indexation": 176
+ },
+ {
+  "nom": "Sion",
+  "bfs": 6266,
+  "nr_vs": 125,
+  "coefficient": 1.1,
+  "indexation": 176
+ },
+ {
+  "nom": "St-Gingolph",
+  "bfs": 6155,
+  "nr_vs": 163,
+  "coefficient": 1.35,
+  "indexation": 133
+ },
+ {
+  "nom": "St-Léonard",
+  "bfs": 6246,
+  "nr_vs": 106,
+  "coefficient": 1.2,
+  "indexation": 158
+ },
+ {
+  "nom": "St-Martin",
+  "bfs": 6087,
+  "nr_vs": 118,
+  "coefficient": 1.35,
+  "indexation": 150
+ },
+ {
+  "nom": "St-Maurice",
+  "bfs": 6217,
+  "nr_vs": 155,
+  "coefficient": 1.25,
+  "indexation": 163
+ },
+ {
+  "nom": "St. Niklaus",
+  "bfs": 6292,
+  "nr_vs": 54,
+  "coefficient": 1.2,
+  "indexation": 160
+ },
+ {
+  "nom": "Stalden",
+  "bfs": 6293,
+  "nr_vs": 55,
+  "coefficient": 1.1,
+  "indexation": 171
+ },
+ {
+  "nom": "Staldenried",
+  "bfs": 6294,
+  "nr_vs": 56,
+  "coefficient": 1.1,
+  "indexation": 176
+ },
+ {
+  "nom": "Steg-Hohtenn",
+  "bfs": 6204,
+  "nr_vs": 72,
+  "coefficient": 1.2,
+  "indexation": 156
+ },
+ {
+  "nom": "Termen",
+  "bfs": 6010,
+  "nr_vs": 41,
+  "coefficient": 1.2,
+  "indexation": 176
+ },
+ {
+  "nom": "Trient",
+  "bfs": 6142,
+  "nr_vs": 142,
+  "coefficient": 1.0,
+  "indexation": 176
+ },
+ {
+  "nom": "Troistorrents",
+  "bfs": 6156,
+  "nr_vs": 164,
+  "coefficient": 1.2,
+  "indexation": 166
+ },
+ {
+  "nom": "Turtmann - Unterems",
+  "bfs": 6119,
+  "nr_vs": 88,
+  "coefficient": 1.2,
+  "indexation": 166
+ },
+ {
+  "nom": "Täsch",
+  "bfs": 6295,
+  "nr_vs": 57,
+  "coefficient": 1.1,
+  "indexation": 155
+ },
+ {
+  "nom": "Törbel",
+  "bfs": 6296,
+  "nr_vs": 58,
+  "coefficient": 1.4,
+  "indexation": 176
+ },
+ {
+  "nom": "Unterbäch",
+  "bfs": 6201,
+  "nr_vs": 73,
+  "coefficient": 1.2,
+  "indexation": 138
+ },
+ {
+  "nom": "Val d'Illiez",
+  "bfs": 6157,
+  "nr_vs": 165,
+  "coefficient": 1.3,
+  "indexation": 151
+ },
+ {
+  "nom": "Val de Bagnes",
+  "bfs": 6037,
+  "nr_vs": 143,
+  "coefficient": 1.0,
+  "indexation": 176
+ },
+ {
+  "nom": "Varen",
+  "bfs": 6116,
+  "nr_vs": 90,
+  "coefficient": 1.2,
+  "indexation": 156
+ },
+ {
+  "nom": "Vernayaz",
+  "bfs": 6219,
+  "nr_vs": 157,
+  "coefficient": 1.2,
+  "indexation": 166
+ },
+ {
+  "nom": "Vex",
+  "bfs": 6089,
+  "nr_vs": 120,
+  "coefficient": 1.3,
+  "indexation": 166
+ },
+ {
+  "nom": "Veysonnaz",
+  "bfs": 6267,
+  "nr_vs": 126,
+  "coefficient": 1.2,
+  "indexation": 110
+ },
+ {
+  "nom": "Vionnaz",
+  "bfs": 6158,
+  "nr_vs": 166,
+  "coefficient": 1.1,
+  "indexation": 153
+ },
+ {
+  "nom": "Visp",
+  "bfs": 6297,
+  "nr_vs": 59,
+  "coefficient": 1.1,
+  "indexation": 176
+ },
+ {
+  "nom": "Visperterminen",
+  "bfs": 6298,
+  "nr_vs": 60,
+  "coefficient": 1.3,
+  "indexation": 150
+ },
+ {
+  "nom": "Vouvry",
+  "bfs": 6159,
+  "nr_vs": 167,
+  "coefficient": 1.25,
+  "indexation": 158
+ },
+ {
+  "nom": "Vérossaz",
+  "bfs": 6220,
+  "nr_vs": 158,
+  "coefficient": 1.3,
+  "indexation": 153
+ },
+ {
+  "nom": "Vétroz",
+  "bfs": 6025,
+  "nr_vs": 131,
+  "coefficient": 1.15,
+  "indexation": 163
+ },
+ {
+  "nom": "Wiler",
+  "bfs": 6202,
+  "nr_vs": 74,
+  "coefficient": 1.4,
+  "indexation": 146
+ },
+ {
+  "nom": "Zeneggen",
+  "bfs": 6299,
+  "nr_vs": 61,
+  "coefficient": 1.3,
+  "indexation": 151
+ },
+ {
+  "nom": "Zermatt",
+  "bfs": 6300,
+  "nr_vs": 62,
+  "coefficient": 1.0,
+  "indexation": 176
+ },
+ {
+  "nom": "Zwischbergen",
+  "bfs": 6011,
+  "nr_vs": 42,
+  "coefficient": 1.0,
+  "indexation": 176
+ }
+]

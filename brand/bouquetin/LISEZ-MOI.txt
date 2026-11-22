@@ -1,0 +1,25 @@
+BOUQUETIN — ILLUSTRATION ET LOGOS
+
+1) bouquetin-illustration-site.webp
+   Illustration de référence sur fond clair, pour le site web. Qualité visuelle maximale.
+
+2) bouquetin-facettes.svg
+   Version vectorielle géométrique en couleurs, fond transparent.
+   Les triangles et formes sont de vrais tracés SVG, pas une image raster intégrée.
+
+3) bouquetin-bicolore.svg
+   Logo vectoriel bicolore, fond transparent, adapté aux cartes de visite.
+
+4) bouquetin-monochrome.svg
+   Logo vectoriel une couleur, fond transparent, pour tampons/impressions et petits formats.
+
+5) bouquetin-tete.svg
+   Symbole de tête et cornes, pour icône, favicon ou support étroit.
+
+6) bouquetin-illustration-vectorielle.svg
+   Variante complètement vectorielle du paysage et du bouquetin, de style plus graphique et simplifié que la version WebP.
+
+COULEURS : ocre #D9953C ; anthracite #3B3739 ; fond clair #F9F6F2.
+Les fichiers SVG sont éditables dans Adobe Illustrator, Inkscape ou Figma.
+
+Note : les SVG constituent une réinterprétation vectorielle de l'illustration initiale, non un fichier Blender 3D ni une reproduction pixel-par-pixel. Les logos doivent être testés à la taille d'impression et affinés avant un dépôt de marque.

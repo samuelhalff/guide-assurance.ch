@@ -1,0 +1,143 @@
+/* Formulaire de demande (/demande/, /en/request/), appel en fin de guide, barre collante, page de remerciement.
+   Mobile d'abord (390 px). Jetons de globals.css, rayon 8 px (--r), commandes ≥ 48 px. */
+@layer components {
+  /* ===== Mise en page du formulaire ===== */
+  .page-demande { min-height: 100dvh; display: flex; flex-direction: column; font-size: 18px; }
+  .page-demande > main { flex: 1 0 auto; }
+  .tete-demande .wrap { justify-content: space-between; flex-wrap: nowrap; min-height: 58px; }
+  .demande { max-width: 600px; padding-top: var(--s5); padding-bottom: var(--s8); }
+  .demande-form section { display: grid; gap: var(--s5); }
+  .demande-form fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+  .demande-form legend { padding: 0; margin: 0 0 var(--s3); }
+  .demande h1, .demande h2 { margin: 0; letter-spacing: -.02em; line-height: 1.15; text-wrap: balance; }
+  .demande h1 { font-size: 27px; font-weight: 800; }
+  .demande h2 { font-size: 21px; font-weight: 800; }
+  .demande h2.petit { font-size: 18px; font-weight: 700; letter-spacing: -.01em; }
+  .demande h1:focus { outline: none; }
+  .demande h1:focus-visible { outline: 3px solid var(--lac-encre); outline-offset: 4px; }
+  .demande .aide { font: 15px var(--narrow); color: var(--encre-2); margin: 0 0 var(--s3); }
+  .demande .champ .aide { margin: 0; }
+  .demande .champ { margin: 0; }
+  .legende-champ { font: 600 16px var(--narrow); }
+  .facultatif { font-weight: 400; color: var(--encre-2); }
+  .saisie-courte { max-width: 9em; letter-spacing: .04em; }
+  .saisie[aria-invalid="true"] { border-color: var(--sentier); }
+  .erreur-champ { font: 600 15px var(--narrow); color: var(--sentier-fonce); margin: var(--s2) 0 0; }
+
+  /* Progression : « 1 sur 3 » + trois segments */
+  .progression { display: grid; gap: var(--s2); margin: 0 0 var(--s5); }
+  .progression p { margin: 0; font: 15px var(--narrow); color: var(--encre-2); }
+  .progression p span { font-weight: 700; color: var(--encre); }
+  .progression ol { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 0; padding: 0; list-style: none; }
+  .progression li { height: 4px; border-radius: 2px; background: var(--filet); transition: background-color .25s ease-out; }
+  .progression li[data-fait] { background: var(--sentier); }
+
+  /* Puces : cases ou radios cachées, étiquette 48 px, coche dessinée */
+  .puces { display: flex; flex-wrap: wrap; gap: var(--s2); }
+  .puce {
+    position: relative; display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 10px 16px;
+    border: 1px solid var(--filet); border-radius: var(--r); background: var(--papier); color: var(--encre);
+    font-size: 17px; line-height: 1.25; cursor: pointer; transition: border-color .15s, background-color .15s;
+  }
+  .puce input { position: absolute; opacity: 0; pointer-events: none; }
+  .puce .coche { width: 18px; height: 18px; flex: 0 0 18px; color: var(--sentier); display: none; }
+  .puce:hover { border-color: var(--encre-2); }
+  .puce:has(input:checked) { border-color: var(--sentier); background: var(--sentier-teinte); font-weight: 600; }
+  .puce:has(input:checked) .coche { display: block; }
+  .puce:has(input:focus-visible) { outline: 3px solid var(--lac-encre); outline-offset: 2px; }
+  .groupe-invalide .puce { border-color: var(--sentier); }
+  .puces-ligne { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .puces-ligne .puce { justify-content: center; font-weight: 600; font-size: 18px; }
+  .puces-ligne .puce .coche { display: none !important; }
+
+  /* Bascule « J'habite en Suisse » */
+  .bascule-ligne {
+    display: flex; align-items: center; justify-content: space-between; gap: var(--s4);
+    min-height: 56px; padding: 8px 8px 8px 16px; border: 1px solid var(--filet); border-radius: var(--r); background: var(--papier);
+    font-size: 17px; font-weight: 600;
+  }
+  .bascule {
+    display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 8px; border: 0; border-radius: var(--r);
+    background: none; color: var(--encre); font: 600 16px var(--narrow); cursor: pointer;
+  }
+  .bascule-piste {
+    position: relative; width: 48px; height: 28px; border-radius: 14px; background: var(--input); transition: background-color .18s ease-out;
+  }
+  .bascule-piste::after {
+    content: ""; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: var(--papier);
+    box-shadow: 0 1px 3px rgb(0 0 0 / .25); transition: transform .18s cubic-bezier(.16, 1, .3, 1);
+  }
+  .bascule[aria-checked="true"] .bascule-piste { background: var(--sentier); }
+  .bascule[aria-checked="true"] .bascule-piste::after { transform: translateX(20px); }
+  .bascule-texte { min-width: 2.2em; text-align: left; }
+
+  .hors-suisse p { margin: 0; }
+  .hors-suisse ul { margin: 0; padding-left: 1.2em; list-style: disc; display: grid; gap: var(--s2); }
+
+  /* Consentement */
+  .consent { display: grid; gap: var(--s3); padding: var(--s4); border: 1px solid var(--filet); border-radius: var(--r); background: var(--papier); }
+  .consent p { margin: 0; font: 15px/1.5 var(--narrow); color: var(--encre-2); }
+  .consent p strong { color: var(--encre); font-weight: 700; }
+  .consent .erreur-champ { margin: 0; font: 600 15px var(--narrow); color: var(--sentier-fonce); }
+  .case-demande { display: grid; grid-template-columns: 24px 1fr; gap: 12px; align-items: start; font-size: 16px; line-height: 1.4; cursor: pointer; padding: 6px 0; }
+  .case-demande input { width: 22px; height: 22px; margin: 1px 0 0; accent-color: var(--sentier); }
+  .case-demande:has(input[aria-invalid="true"]) input { outline: 2px solid var(--sentier); outline-offset: 2px; }
+
+  /* Actions : Retour à gauche, action principale qui prend la place */
+  .actions-demande { display: flex; gap: var(--s3); margin-top: var(--s2); }
+  .actions-demande .bouton { justify-content: center; min-height: 56px; }
+  .actions-demande .bouton:not(.second) { flex: 1 1 auto; }
+  .actions-demande .bouton.second { flex: 0 0 auto; }
+  .bouton:disabled { opacity: .7; cursor: progress; }
+  .rassurance { margin: 0; font: 15px var(--narrow); color: var(--encre-2); text-align: center; text-wrap: balance; }
+  .echec { margin: 0; padding: var(--s3) var(--s4); border: 1px solid var(--sentier); border-radius: var(--r); background: var(--sentier-teinte); font-size: 16px; font-weight: 600; }
+  .turnstile:empty { display: none; }
+
+  /* Pot de miel : hors écran, sans display:none (certains robots l'ignorent) */
+  .pot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  /* ===== Appel en fin de guide et sous le simulateur ===== */
+  .cta-demande { display: grid; gap: var(--s2); justify-items: start; max-width: 68ch; margin: 0 0 var(--s7); }
+  .apercu .cta-demande { margin: 0 0 var(--s4); }
+  .cta-demande .bouton { line-height: 1.2; }
+  .cta-demande p { margin: 0; font: 15px var(--narrow); color: var(--encre-2); }
+
+  /* Barre collante : mobile seulement, après la moitié de la page */
+  .barre-demande { display: none; }
+  @media (max-width: 820px) {
+    .barre-demande {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; display: flex; align-items: center; gap: var(--s2);
+      padding: var(--s3) var(--s3) calc(var(--s3) + env(safe-area-inset-bottom)) var(--s4);
+      background: var(--papier); border-top: 1px solid var(--filet); box-shadow: 0 -4px 16px rgb(0 0 0 / .08);
+      transform: translateY(110%); transition: transform .28s cubic-bezier(.16, 1, .3, 1);
+    }
+    .barre-demande[data-visible] { transform: none; }
+    /* Le bandeau cookies passe d'abord : la barre attend qu'il soit fermé. */
+    body:has(.consentement) .barre-demande { display: none; }
+    .barre-demande .bouton { flex: 1 1 auto; justify-content: center; text-align: center; line-height: 1.2; font-size: 16px; padding: 14px 12px; }
+  }
+
+  /* ===== Page de remerciement ===== */
+  .envoyee { max-width: 68ch; padding-top: var(--s7); padding-bottom: var(--s8); }
+  .envoyee h1 { font-size: 31px; font-weight: 800; letter-spacing: -.02em; line-height: 1.12; margin: 0; }
+  .envoyee h2 { font-size: 21px; font-weight: 800; margin: var(--s6) 0 var(--s3); }
+  .envoyee ol { margin: 0 0 var(--s5); padding-left: 1.3em; list-style: decimal; }
+  .envoyee li { margin-bottom: 6px; }
+  .envoyee p { margin: 0 0 var(--s3); }
+
+  @media (min-width: 720px) {
+    .demande h1 { font-size: 34px; }
+    .demande { padding-top: var(--s7); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .puce, .progression li, .bascule-piste, .bascule-piste::after, .barre-demande { transition: none; }
+  }
+}
+
+/* « Être rappelé » : lien sous l'appel des guides, formulaire court (/demande/rappel/, /en/request/call-back/). */
+@layer components {
+  .cta-demande .cta-rappel { margin-top: var(--s1); color: var(--encre); }
+  .cta-rappel a { font-weight: 700; }
+  .chapo-rappel { margin: calc(-1 * var(--s2)) 0 0; font-size: 18px; line-height: 1.45; color: var(--encre-2); }
+  .vers-complet { margin: 0; font: 15px var(--narrow); color: var(--encre-2); text-align: center; }
+}

@@ -1,0 +1,336 @@
+/* Accueil : portage de mockups/v2/index.html (cascade finale de la maquette, aplatie).
+   Thème sombre : la carte devient une carte de nuit par les seuls jetons. */
+@layer components {
+  /* ===== Feuille : carte + cartouche ===== */
+  .feuille { position: relative; min-height: 760px; border-bottom: 1px solid var(--filet); overflow: hidden; }
+  .carte { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .carte .c-fond { fill: var(--carte); }
+  .carte .c-grille { stroke: var(--carte-grille); }
+  .carte .c-courbes { stroke: var(--courbe); }
+  .carte .c-hachure { stroke: var(--hachure); }
+  .carte .c-foret { fill: var(--foret); stroke: var(--foret-trait); }
+  .carte .c-riviere { stroke: var(--riviere); }
+  .carte .c-lac { fill: var(--lac); stroke: var(--riviere); }
+  .carte .c-frontiere { stroke: var(--frontiere); }
+  .carte .c-encre { fill: var(--encre); }
+  .carte .c-localite { fill: var(--carte-coord); }
+  .carte .c-ombre { fill: var(--ombre); }
+  .carte .c-ombre-portee { flood-color: var(--ombre); }
+  .carte .c-depart { fill: var(--papier); stroke: var(--encre); }
+  .carte .c-depart-point { fill: var(--sentier-carte); }
+  .carte .lbl { font-family: var(--narrow); fill: var(--encre-2); font-size: 15px; }
+  .carte .lbl-ville { font-family: var(--narrow); fill: var(--encre); font-size: 16px; font-weight: 600; }
+  .carte .lbl-eau { font-family: var(--narrow); fill: var(--lac-encre); font-size: 22px; letter-spacing: .3em; font-style: italic; }
+  .carte .lbl-relief { font-family: var(--narrow); fill: var(--relief-encre); font-size: 17px; letter-spacing: .4em; font-style: italic; }
+  .carte .lbl-coord { font-family: var(--narrow); fill: var(--carte-coord); font-size: 12px; }
+  .sentier {
+    fill: none; stroke: var(--sentier-carte); stroke-width: 3.4; stroke-dasharray: 10 7; stroke-linecap: round;
+    transition: opacity .5s cubic-bezier(.16, 1, .3, 1);
+  }
+  /* Masque SVG : c'est la luminance blanche qui révèle le tracé, pas une couleur d'interface */
+  .trace { fill: none; stroke: white; stroke-width: 12; stroke-linecap: round; }
+  .feuille[data-actif] .itin { opacity: .28; }
+  .feuille[data-actif="sante"] .itin[data-itin="sante"],
+  .feuille[data-actif="frontaliers"] .itin[data-itin="frontaliers"],
+  .feuille[data-actif="arrivee"] .itin[data-itin="arrivee"],
+  .feuille[data-actif="prevoyance"] .itin[data-itin="prevoyance"] { opacity: 1; }
+  .feuille[data-actif="sante"] .itin[data-itin="sante"] .trace,
+  .feuille[data-actif="frontaliers"] .itin[data-itin="frontaliers"] .trace,
+  .feuille[data-actif="arrivee"] .itin[data-itin="arrivee"] .trace,
+  .feuille[data-actif="prevoyance"] .itin[data-itin="prevoyance"] .trace { animation: tracer 1.4s cubic-bezier(.16, 1, .3, 1) both; }
+  @keyframes tracer { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+
+  .carte .dest-mini circle { fill: var(--papier); stroke: var(--encre); stroke-width: 2; }
+  .carte .dest-mini text {
+    font: 700 19px var(--narrow); fill: var(--encre);
+    paint-order: stroke; stroke: var(--carte); stroke-width: 5px; stroke-linejoin: round;
+  }
+  .feuille[data-actif] .dest-mini { opacity: .35; }
+  .feuille[data-actif="sante"] .dest-mini[data-dest="sante"],
+  .feuille[data-actif="frontaliers"] .dest-mini[data-dest="frontaliers"],
+  .feuille[data-actif="arrivee"] .dest-mini[data-dest="arrivee"],
+  .feuille[data-actif="prevoyance"] .dest-mini[data-dest="prevoyance"] { opacity: 1; }
+  .feuille[data-actif="sante"] .dest-mini[data-dest="sante"] circle,
+  .feuille[data-actif="frontaliers"] .dest-mini[data-dest="frontaliers"] circle,
+  .feuille[data-actif="arrivee"] .dest-mini[data-dest="arrivee"] circle,
+  .feuille[data-actif="prevoyance"] .dest-mini[data-dest="prevoyance"] circle { fill: var(--sentier-carte); stroke: var(--sentier-fonce); }
+  .feuille[data-actif="sante"] .dest-mini[data-dest="sante"] text,
+  .feuille[data-actif="frontaliers"] .dest-mini[data-dest="frontaliers"] text,
+  .feuille[data-actif="arrivee"] .dest-mini[data-dest="arrivee"] text,
+  .feuille[data-actif="prevoyance"] .dest-mini[data-dest="prevoyance"] text { fill: var(--sentier-fonce); }
+
+  .cartouche {
+    position: relative; z-index: 2;
+    margin: var(--s6) 0 var(--s7) max(var(--s5), calc((100vw - 1280px) / 2 + var(--s5)));
+    width: min(530px, calc(100% - 2 * var(--s5)));
+    background: var(--papier); border: 1.5px solid var(--encre); padding: var(--s6) var(--s6) var(--s5);
+  }
+  .cartouche h1 {
+    font-weight: 800; font-size: clamp(34px, 3.4vw, 46px); line-height: 1.02; letter-spacing: -.03em;
+    margin: 0; text-wrap: balance;
+  }
+  .cartouche .intro { margin: var(--s4) 0 0; color: var(--encre-2); font-size: 18px; max-width: 38ch; }
+  /* Formulaire du comparateur dans le cartouche : lieu + année côte à côte, bouton pleine largeur */
+  .comparer { margin: var(--s5) 0 0; }
+  .comparer-champs { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: var(--s3); align-items: end; }
+  .comparer .champ { margin: 0; }
+  .comparer .champ label { font-size: 15px; }
+  .comparer .saisie[aria-invalid] { border-color: var(--sentier); }
+  .comparer-err { font: 600 15px var(--narrow); color: var(--sentier-fonce); margin: var(--s2) 0 0; }
+  .cartouche .bouton { width: 100%; justify-content: center; margin-top: var(--s3); padding: 16px 22px; }
+  .comparer-defaut { font: 14px/1.4 var(--narrow); color: var(--encre-2); margin: var(--s2) 0 0; }
+  .garantie {
+    display: flex; align-items: flex-start; gap: 10px; margin: var(--s4) 0 0; padding-top: var(--s3);
+    border-top: 1px solid var(--filet); font: 500 15px/1.45 var(--narrow); color: var(--encre);
+  }
+  .garantie svg { flex: 0 0 auto; margin: 2px 1px 0; color: var(--encre-2); }
+  .saison { margin: var(--s3) 0 0; font: 15px/1.45 var(--narrow); color: var(--encre-2); }
+  .saison strong { color: var(--sentier-fonce); }
+  .pied-cartouche {
+    display: flex; justify-content: space-between; align-items: flex-end; gap: var(--s4);
+    margin-top: var(--s5); padding-top: var(--s3); border-top: 1px solid var(--filet);
+    font-family: var(--narrow); font-size: 14px; color: var(--encre-2);
+  }
+  .mini-leg { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+  .mini-leg .sym { display: inline-block; width: 24px; height: 0; margin-left: 6px; }
+  .mini-leg .sym:first-child { margin-left: 0; }
+  .sym-sentier { border-top: 3.4px dashed var(--sentier-carte); }
+  .sym-front { border-top: 2px dashed var(--frontiere); }
+  .echelle { display: flex; flex-direction: column; gap: 3px; align-items: flex-end; }
+  .echelle span {
+    display: block; width: 96px; height: 6px; border: 1px solid var(--encre);
+    background: linear-gradient(90deg, var(--encre) 0 25%, var(--papier) 25% 50%, var(--encre) 50% 75%, var(--papier) 75%);
+  }
+
+  .mini-carte { display: none; }
+
+  /* ===== Tête : bouquetin sur son rocher (jour / nuit) ===== */
+  /* Fond = couleur du bord gauche de l'image, ligne par ligne (échantillonnée), étiré à la hauteur de l'image :
+     le fondu gauche ne laisse aucune couture. L'image tient dans l'écran visible ; la base du rocher se fond
+     dans la brume (couleur du bas), comme la mer de nuages de l'illustration. */
+  .paysage {
+    --h: min(100%, max(620px, calc(100svh - 56px)));
+    position: absolute; inset: 0; overflow: hidden;
+    background: linear-gradient(to bottom, #d1c2bc 0%, #d5c6bd 10%, #daccc3 20%, #e1d3ca 30%, #e4d5cc 40%, #e6d7cf 50%, #e8dad0 60%, #ecddd5 70%, #e3d4cb 80%, #e1d1c8 90%, #e1d1c8 100%) 0 0 / 100% var(--h) no-repeat, #e1d1c8;
+  }
+  .paysage img {
+    position: absolute; top: 0; right: min(0px, calc((100vw - 1440px) * .4)); height: var(--h); width: auto; max-width: none;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 24%), linear-gradient(to top, transparent 0, #000 16%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(to right, transparent 0, #000 24%), linear-gradient(to top, transparent 0, #000 16%);
+    mask-composite: intersect;
+  }
+  .paysage-nuit { display: none; }
+  html.dark .paysage { background: linear-gradient(to bottom, #8d8eb2 0%, #8f91b0 10%, #9397b8 20%, #979dbd 30%, #999dc0 40%, #9a9dc3 50%, #9ba3c3 60%, #9da5c9 70%, #999dbf 80%, #979abb 90%, #979abb 100%) 0 0 / 100% var(--h) no-repeat, #979abb; }
+  html.dark .paysage-jour { display: none; }
+  html.dark .paysage-nuit { display: block; }
+
+  /* ===== Sections sous la feuille ===== */
+  .accueil section { padding: var(--s9) 0; }
+  .accueil .titre {
+    font-weight: 800; font-size: clamp(30px, 3.2vw, 42px); line-height: 1.06; letter-spacing: -.025em;
+    margin: 0; text-wrap: balance; max-width: 20ch;
+  }
+  .accueil .texte { max-width: 62ch; margin: var(--s4) 0 0; }
+
+  /* Situations : liste légère juste sous la tête */
+  .accueil .situations { padding: var(--s6) 0 var(--s5); border-bottom: 1px solid var(--filet); }
+  .situations-titre { font: 700 19px var(--narrow); margin: 0; }
+  .situations-liste { list-style: none; margin: var(--s2) 0 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); column-gap: var(--s7); }
+  .situations-liste a {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--s3); align-items: center;
+    padding: 12px 0; border-bottom: 1px solid var(--filet); color: var(--encre); text-decoration: none; min-height: 56px;
+  }
+  .situations-liste li:last-child a { border-bottom: 0; }
+  .situations-liste .libelle { font-weight: 700; font-size: 17px; line-height: 1.3; }
+  .situations-liste .detail { grid-row: 2; font: 15px var(--narrow); color: var(--encre-2); margin-top: 2px; }
+  .situations-liste svg { grid-row: 1 / span 2; grid-column: 2; color: var(--sentier-texte); transition: transform .15s; }
+  .situations-liste a:hover .libelle { text-decoration: underline; text-decoration-color: var(--sentier-texte); text-underline-offset: 3px; }
+  .situations-liste a:hover svg { transform: translateX(3px); }
+  .situations-liste a:focus-visible { outline: 3px solid var(--lac-encre); outline-offset: 2px; }
+  @media (min-width: 900px) {
+    .situations-liste { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .situations-liste li:nth-last-child(2) a { border-bottom: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { .situations-liste svg { transition: none; } }
+
+  /* Résiliation */
+  .passage .grille { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s8); align-items: start; }
+  .echeances { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s4); margin-top: var(--s6); }
+  .echeance { padding: var(--s4); }
+  .echeance .date { font-weight: 800; font-size: 30px; letter-spacing: -.02em; color: var(--sentier-texte); }
+  .echeance .date .an { font-size: 18px; }
+  .echeance .quoi { font-family: var(--narrow); font-size: 16px; color: var(--encre-2); }
+  .extrait { padding: var(--s6); margin: 0; }
+  .extrait .source { font-family: var(--narrow); font-size: 14px; color: var(--encre-2); margin: 0 0 var(--s3); }
+  .extrait p.clause { margin: 0; font-size: 17px; line-height: 1.65; }
+  .extrait mark { background: transparent; color: inherit; border-bottom: 3.4px dashed var(--sentier); padding-bottom: 1px; }
+  .note {
+    display: grid; grid-template-columns: 28px 1fr; gap: var(--s3); margin-top: var(--s5); padding-top: var(--s4);
+    border-top: 1px solid var(--filet); font-size: 16px;
+  }
+  .note b { display: block; }
+  .note .i-fond { fill: var(--papier); stroke: var(--lac-encre); }
+  .note .i-trait { stroke: var(--lac-encre); }
+  .note .i-point { fill: var(--lac-encre); }
+
+  /* Outils : bande sombre ; en thème sombre, surface un peu plus claire que le fond, bordée */
+  .accueil .outils { background: var(--bande); color: var(--bande-texte); box-shadow: inset 0 1px var(--bande-bord), inset 0 -1px var(--bande-bord); }
+  .outils .titre { color: var(--bande-titre); }
+  .outils .texte { color: var(--bande-texte-2); }
+  .outils-liste { list-style: none; margin: var(--s6) 0 0; padding: 0; display: grid; gap: var(--s3); }
+  .outil-ligne {
+    display: grid; grid-template-columns: 1fr; gap: var(--s3); padding: var(--s5) var(--s4);
+    border: 1px solid var(--bande-filet); border-radius: var(--r); background: var(--bande-surface);
+    color: var(--bande-texte); text-decoration: none; transition: border-color .15s, transform .15s, background-color .15s;
+  }
+  a.outil-ligne:hover { border-color: var(--sentier); background: var(--bande-survol); color: var(--bande-texte); transform: translateY(-2px); }
+  a.outil-ligne:focus-visible { outline: 3px solid var(--bande-focus); outline-offset: 3px; }
+  .outil-chiffre {
+    font: 800 clamp(30px, 8.5vw, 38px)/1 var(--sans); letter-spacing: -.03em; color: var(--bande-titre);
+    white-space: nowrap; font-variant-numeric: tabular-nums lining-nums;
+  }
+  .outil-chiffre small {
+    display: block; font: 600 14px var(--narrow); letter-spacing: 0; color: var(--bande-texte-3);
+    margin-top: 6px; white-space: normal; max-width: 30ch;
+  }
+  .outil-texte { font-size: 16px; color: var(--bande-texte-2); line-height: 1.5; }
+  .outil-texte b { display: block; color: var(--bande-titre); font-size: 19px; margin-bottom: 4px; line-height: 1.25; }
+  .outil-cta { display: inline-flex; align-items: center; gap: 8px; font: 700 16px var(--sans); color: var(--bande-lien); align-self: end; }
+  .outil-cta svg { transition: transform .15s; display: block; }
+  a.outil-ligne:hover .outil-cta svg { transform: translateX(3px); }
+  .bientot-ligne { font-size: 15px; color: var(--bande-texte-3); padding: var(--s3) var(--s4) 0; line-height: 1.5; }
+  .bientot-ligne b { color: var(--bande-texte-2); font-weight: 600; }
+  @media (min-width: 900px) {
+    .outil-ligne { grid-template-columns: 340px 1fr auto; align-items: center; gap: var(--s6); padding: var(--s5) var(--s6); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .outil-ligne, .outil-cta svg { transition: none; }
+    a.outil-ligne:hover { transform: none; }
+  }
+
+  /* Primes */
+  .primes .grille { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--s8); align-items: start; margin-top: var(--s7); }
+  .graphe { margin: 0; }
+  .g-liste { list-style: none; margin: 0; padding: 0; }
+  .g-row { display: grid; grid-template-columns: 5.5em minmax(0, 1fr) auto; align-items: center; gap: var(--s3); min-height: 48px; border-bottom: 1px solid var(--filet); }
+  .g-nom { font: 600 17px var(--narrow); }
+  .g-piste { position: relative; height: 20px; }
+  .g-piste::before { content: ""; position: absolute; left: var(--ch); top: -14px; bottom: -14px; border-left: 1.6px dashed var(--sentier); }
+  .g-piste i { position: absolute; top: 50%; transform: translate(-50%, -50%); border-radius: 50%; }
+  .g-piste .g-seg { transform: translateY(-50%); height: 2px; border-radius: 0; background: var(--encre); }
+  .g-26 { width: 11px; height: 11px; background: var(--papier); border: 2px solid var(--encre); }
+  .g-27 { width: 14px; height: 14px; background: var(--encre); }
+  .g-val { font: 700 16px var(--sans); text-align: right; white-space: nowrap; }
+  .g-val em { font: 600 15px var(--narrow); font-style: normal; color: var(--sentier-fonce); margin-left: 4px; }
+  .g-leg { font: 15px var(--narrow); color: var(--encre-2); margin: var(--s3) 0 0; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .g-k { display: inline-block; width: 11px; height: 11px; border-radius: 50%; border: 2px solid var(--encre); }
+  .g-k27 { background: var(--encre); margin-left: 8px; }
+  .g-kch { display: inline-block; width: 0; height: 14px; border-left: 1.6px dashed var(--sentier); margin-left: 8px; }
+  .primes-lien { margin: var(--s5) 0 0; }
+  .note-donnees { font: 15px/1.5 var(--narrow); color: var(--encre-2); max-width: 80ch; margin: var(--s5) 0 0; }
+
+  .accueil table { border-collapse: collapse; width: 100%; font-size: 16px; }
+  .accueil caption { text-align: left; font-family: var(--narrow); font-size: 15px; color: var(--encre-2); padding-bottom: var(--s3); }
+  .accueil th, .accueil td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--filet); }
+  .accueil th { font-family: var(--narrow); font-weight: 700; font-size: 15px; color: var(--encre-2); border-bottom: 1.5px solid var(--encre); }
+  .accueil td.num, .accueil th.num { text-align: right; }
+  .accueil tbody th { border-bottom: 1px solid var(--filet); color: var(--encre); font-weight: 600; font-size: 16px; }
+  .primes td .fourchette { display: block; font: 14px var(--narrow); color: var(--encre-2); margin-top: 2px; }
+
+  /* Guides */
+  .accueil .itineraires { padding-top: 0; }
+  .itineraires table { margin-top: var(--s6); }
+  .itineraires table td:first-child a { font-weight: 700; font-size: 18px; color: var(--encre); text-decoration: none; }
+  .itineraires table td:first-child a:hover { color: var(--lac-encre); text-decoration: underline; }
+  .itineraires .pour { font-family: var(--narrow); color: var(--encre-2); }
+  .itineraires tbody tr:hover { background: var(--papier); }
+  .itineraires tbody tr:hover a { text-decoration: underline; }
+
+  @media (max-width: 1080px) {
+    .feuille { display: flex; flex-direction: column; }
+    .cartouche { order: 1; }
+    .paysage { position: relative; order: 0; width: 100%; aspect-ratio: 1448 / 1086; }
+    /* Image pleine largeur : seule la base du rocher peut être rognée, jamais les cornes. */
+    .paysage img { position: static; vertical-align: top; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0%; -webkit-mask-image: none; mask-image: none; }
+    .paysage { background-size: 100% 100%; }
+    .carte { order: 2; }
+    .passage .grille, .primes .grille { grid-template-columns: minmax(0, 1fr); gap: var(--s6); }
+  }
+  @media (max-width: 820px) {
+    .feuille { min-height: 0; }
+    .carte { display: none; }
+    .cartouche {
+      order: 1; display: flex; flex-direction: column; margin: 0; width: auto;
+      border: 0; border-bottom: 1px solid var(--filet); padding: var(--s5) var(--s4);
+    }
+    .cartouche h1 { font-size: 29px; }
+    .cartouche .intro { font-size: 17px; }
+    .pied-cartouche { display: none; }
+    .accueil section { padding: var(--s8) 0; }
+    .echeances { grid-template-columns: minmax(0, 1fr); }
+
+    /* Mini-carte mobile : dessinée pour 390 px, même logique de sélection que la grande carte */
+    .mini-carte .mm-ombre-bq { fill: var(--ombre); opacity: .2; }
+    .mini-carte { display: block; width: 100%; height: auto; background: var(--carte); border-bottom: 1px solid var(--filet); }
+    .mm-grille path { stroke: var(--filet); stroke-width: 1; fill: none; opacity: .45; }
+    .mm-lac { fill: var(--lac); stroke: var(--lac-trait); stroke-width: .8; }
+    .mm-eau { font: italic 600 11px var(--narrow); letter-spacing: .32em; fill: var(--lac-encre); }
+    .mm-traces path {
+      fill: none; stroke: var(--sentier-carte); stroke-width: 2.2; stroke-dasharray: 6 4; stroke-linecap: round; opacity: .85;
+    }
+    .mm-dest circle { fill: var(--papier); stroke: var(--encre); stroke-width: 2; }
+    .mm-dest text {
+      font: 700 14px var(--narrow); fill: var(--encre);
+      paint-order: stroke; stroke: var(--carte); stroke-width: 5px; stroke-linejoin: round;
+    }
+    .mm-depart circle:first-child { fill: var(--papier); stroke: var(--encre); stroke-width: 2; }
+    .mm-depart circle:nth-child(2) { fill: var(--sentier-carte); }
+    .feuille[data-actif] .mm-dest { opacity: .4; }
+    .feuille[data-actif="sante"] .mm-dest[data-dest="sante"],
+  .feuille[data-actif="frontaliers"] .mm-dest[data-dest="frontaliers"],
+  .feuille[data-actif="arrivee"] .mm-dest[data-dest="arrivee"],
+  .feuille[data-actif="prevoyance"] .mm-dest[data-dest="prevoyance"] { opacity: 1; }
+    .feuille[data-actif="sante"] .mm-dest[data-dest="sante"] circle,
+  .feuille[data-actif="frontaliers"] .mm-dest[data-dest="frontaliers"] circle,
+  .feuille[data-actif="arrivee"] .mm-dest[data-dest="arrivee"] circle,
+  .feuille[data-actif="prevoyance"] .mm-dest[data-dest="prevoyance"] circle { fill: var(--sentier-carte); stroke: var(--sentier-fonce); }
+    .feuille[data-actif="sante"] .mm-dest[data-dest="sante"] text,
+  .feuille[data-actif="frontaliers"] .mm-dest[data-dest="frontaliers"] text,
+  .feuille[data-actif="arrivee"] .mm-dest[data-dest="arrivee"] text,
+  .feuille[data-actif="prevoyance"] .mm-dest[data-dest="prevoyance"] text { fill: var(--sentier-fonce); }
+    .feuille[data-actif] .mm-traces path { opacity: .25; }
+    .feuille[data-actif="sante"] .mm-traces path[data-itin="sante"],
+  .feuille[data-actif="frontaliers"] .mm-traces path[data-itin="frontaliers"],
+  .feuille[data-actif="arrivee"] .mm-traces path[data-itin="arrivee"],
+  .feuille[data-actif="prevoyance"] .mm-traces path[data-itin="prevoyance"] { opacity: 1; stroke-width: 2.6; }
+  }
+  @media (max-width: 600px) {
+    /* Primes : la moyenne et la hausse sont déjà dans le graphique */
+    .primes table th:nth-child(2), .primes table td:nth-child(2),
+    .primes table th:nth-child(3), .primes table td:nth-child(3) { display: none; }
+    /* Guides : une ligne par guide, titre puis « pour qui · durée » */
+    .itineraires table thead { display: none; }
+    .itineraires table, .itineraires tbody, .itineraires tr { display: block; width: 100%; }
+    .itineraires tr { padding: 14px 0; border-bottom: 1px solid var(--filet); }
+    .itineraires td { display: inline; border: 0; padding: 0; }
+    .itineraires td:first-child { display: block; font-size: 17px; line-height: 1.35; margin-bottom: 4px; }
+    .itineraires td.pour, .itineraires td.num { font: 500 14px var(--narrow); color: var(--encre-2); }
+    .itineraires td.pour::after { content: " · "; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .trace { animation: none !important; }
+    .sentier { transition: none; }
+  }
+}
+
+/* Accueil : « Pas envie de tout lire ? Un conseiller vous rappelle » sous le bouton des situations. */
+@layer components {
+  .rappel-accueil {
+    display: flex; align-items: flex-start; gap: 10px; margin: var(--s3) 0 0;
+    font: 500 17px/1.4 var(--narrow); color: var(--encre-2);
+  }
+  .rappel-accueil svg { flex: 0 0 auto; margin-top: 2px; color: var(--sentier-texte); }
+  .rappel-accueil a { font-weight: 700; color: var(--encre); text-decoration: underline; text-decoration-color: var(--sentier-texte); text-underline-offset: 3px; text-decoration-thickness: 2px; }
+  .rappel-accueil a:hover { color: var(--sentier-texte); }
+}

@@ -1,0 +1,262 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "./styles/site.css";
+@import "./styles/accueil.css";
+@import "./styles/outils.css";
+@import "./styles/outils-3a.css";
+@import "./styles/guide.css";
+@import "./styles/demande.css";
+@import "./styles/assistant.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-carte: var(--carte);
+  --color-papier: var(--papier);
+  --color-encre: var(--encre);
+  --color-encre-2: var(--encre-2);
+  --color-filet: var(--filet);
+  --color-sentier: var(--sentier);
+  --color-sentier-fonce: var(--sentier-fonce);
+  --color-sentier-lien: var(--sentier-lien);
+  --color-sentier-teinte: var(--sentier-teinte);
+  --color-lac: var(--lac);
+  --color-lac-encre: var(--lac-encre);
+  --color-foret: var(--foret);
+  --color-ocre: var(--ocre);
+  --color-bande: var(--bande);
+  --color-bande-surface: var(--bande-surface);
+  --color-bande-filet: var(--bande-filet);
+  --color-foret-trait: var(--foret-trait);
+  --color-bande-texte: var(--bande-texte);
+  --color-bande-titre: var(--bande-titre);
+  --color-bande-texte-2: var(--bande-texte-2);
+  --color-bande-texte-3: var(--bande-texte-3);
+  --color-bande-doux: var(--bande-doux);
+  --color-bande-survol: var(--bande-survol);
+  --color-bande-lien: var(--bande-lien);
+  --color-bande-focus: var(--bande-focus);
+  --color-sentier-carte: var(--sentier-carte);
+  --color-pastille: var(--pastille);
+  --font-narrow: var(--font-archivo-narrow);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-archivo);
+
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* Guide Assurance : palette de la carte suisse (docs/decisions.md §8 octies).
+   Thème clair = carte de jour ; thème sombre = carte de nuit. Aucune couleur codée en dur dans les composants. */
+:root {
+  --radius: 0.5rem;
+  /* Marque */
+  --carte: #F3F6F1;
+  --papier: #FFFFFF;
+  --encre: #1A1C19;
+  --encre-2: #4A4E47;
+  --filet: #C9CEC4;
+  --sentier: #C8202A;
+  --sentier-fonce: #A3161F;
+  --sentier-texte: #C8202A;
+  --bouton-survol: #A3161F;
+  --sur-sentier: #FFFFFF;
+  --alerte-forte: #F9E1E1;
+  --info-teinte: #E8F1F8;
+  --attention: #C98A00;
+  --attention-teinte: #FFF6E0;
+  --champ: #FFFFFF;
+  --lac-trait: #8DB9D8;
+  --bande-bord: #1A1C19;
+  /* Document à imprimer (aperçu de la lettre) : blanc dans les deux thèmes */
+  --doc-fond: #FFFFFF;
+  --doc-encre: #111111;
+  --doc-filet: #C9CEC4;
+  --doc-vide: #8C9286;
+  --doc-vide-fond: #F1F2EF;
+  --sentier-lien: #B01C25;
+  --sentier-teinte: #FBF1EF;
+  --lac: #B5D6EC;
+  --lac-encre: #1C5C88;
+  --foret: #D6E7CA;
+  --foret-trait: #B7D2A6;
+  --ocre: #D9953C;
+  --bande: #1A1C19;
+  --bande-surface: #22251F;
+  --bande-filet: #3A3D38;
+  /* Bande sombre (outils, pied de page) : textes et états */
+  --bande-texte: #F3F6F1;
+  --bande-titre: #FFFFFF;
+  --bande-texte-2: #C9CEC4;
+  --bande-texte-3: #A9AFA3;
+  --bande-doux: #D9DDD5;
+  --bande-survol: #262A23;
+  --bande-lien: #FF8A8F;
+  --bande-focus: #8FC3EA;
+  /* Carte (fond de l'accueil) : relief, eaux, frontière */
+  --sentier-carte: #C8202A;
+  --courbe: #C49A70;
+  --hachure: #C9B89C;
+  --relief-encre: #8A6440;
+  --carte-grille: #E4E8E0;
+  --mm-grille: #DCE1D7;
+  --carte-coord: #6F7469;
+  --riviere: #7DB3DA;
+  --frontiere: #8A4C8E;
+  --ombre: #1A1C19;
+  /* Contrôles */
+  --pastille: #9AA094;
+  --selection: #F4C9CB;
+  /* shadcn */
+  --background: var(--carte);
+  --foreground: var(--encre);
+  --card: var(--papier);
+  --card-foreground: var(--encre);
+  --popover: var(--papier);
+  --popover-foreground: var(--encre);
+  --primary: var(--sentier);
+  --primary-foreground: #FFFFFF;
+  --secondary: var(--papier);
+  --secondary-foreground: var(--encre);
+  --muted: #E7ECE3;
+  --muted-foreground: var(--encre-2);
+  --accent: var(--sentier-teinte);
+  --accent-foreground: var(--encre);
+  --destructive: var(--sentier);
+  --border: var(--filet);
+  --input: #8C9286;
+  --ring: var(--lac-encre);
+  --chart-1: var(--sentier);
+  --chart-2: var(--lac-encre);
+  --chart-3: var(--ocre);
+  --chart-4: #5E7F4E;
+  --chart-5: var(--encre-2);
+  --sidebar: var(--papier);
+  --sidebar-foreground: var(--encre);
+  --sidebar-primary: var(--sentier);
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: var(--sentier-teinte);
+  --sidebar-accent-foreground: var(--encre);
+  --sidebar-border: var(--filet);
+  --sidebar-ring: var(--lac-encre);
+}
+
+.dark {
+  --carte: #121412;
+  --papier: #1B1E1A;
+  --encre: #E9ECE5;
+  --encre-2: #A9AFA3;
+  --filet: #343832;
+  --sentier: #C8202A;
+  --sentier-fonce: #E5484F;
+  --sentier-texte: #F06E73; /* 5,8:1 sur --papier sombre, 5,2:1 sur la teinte d’alerte (passe d’écriture 22.11.2026) */
+  --bouton-survol: #A3161F;
+  --alerte-forte: #3A1C1E;
+  --info-teinte: #16283A;
+  --attention: #E0A452;
+  --attention-teinte: #2A2416;
+  --champ: #141613;
+  --lac-trait: #3D739A;
+  --bande-bord: #343832;
+  --sentier-lien: #FF7A80;
+  --sentier-teinte: #2A1A1A;
+  --lac: #23465C;
+  --lac-encre: #8FC3EA;
+  --foret: #263322;
+  --foret-trait: #34452E;
+  --ocre: #E0A452;
+  --bande: #1B1E1A;
+  --bande-surface: #232722;
+  --bande-filet: #3A3F38;
+  --bande-texte: #E9ECE5;
+  --bande-titre: #FFFFFF;
+  --bande-texte-2: #C3C9BD;
+  --bande-texte-3: #A0A69A;
+  --bande-doux: #CDD2C8;
+  --bande-survol: #2A2F28;
+  --bande-lien: #FF8A8F;
+  --bande-focus: #8FC3EA;
+  /* Carte de nuit : sol sombre, relief et quadrillage atténués, sentiers plus vifs */
+  --sentier-carte: #F2444D;
+  --courbe: #6F5B42;
+  --hachure: #3A3428;
+  --relief-encre: #B8956E;
+  --carte-grille: #1C201C;
+  --mm-grille: #232823;
+  --carte-coord: #858B80;
+  --riviere: #3D739A;
+  --frontiere: #B98ABD;
+  --ombre: #000000;
+  --pastille: #6E7569;
+  --selection: #5A2326;
+  --muted: #232722;
+  --input: #5E645A;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+    scrollbar-color: var(--courbe) var(--carte);
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    font-size: 18px;
+    line-height: 1.55;
+    font-variant-numeric: tabular-nums;
+  }
+  @media (max-width: 820px) {
+    body { font-size: 17px; }
+  }
+  ::selection { background: var(--selection); color: var(--encre); }
+  a {
+    color: var(--lac-encre);
+    text-decoration-line: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+  a:hover { color: var(--encre); text-decoration-thickness: 2px; }
+  :focus-visible { outline: 3px solid var(--lac-encre); outline-offset: 3px; border-radius: 2px; }
+}
