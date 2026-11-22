@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { CONSENTEMENT_REQUIS, MESURE_ACTIVE, demarrerPostHog, ecrireChoix, lireChoix } from "@/lib/analytics";
+import { CONSENTEMENT_REQUIS, MESURE_ACTIVE, apresChargement, demarrerPostHog, ecrireChoix, lireChoix } from "@/lib/analytics";
 
 const TXT = {
   fr: {
@@ -28,7 +28,8 @@ export function Mesure({ locale = "fr" }: { locale?: "fr" | "en" }) {
   useEffect(() => {
     if (!MESURE_ACTIVE) return;
     const c = lireChoix();
-    void demarrerPostHog(c === "oui");
+    /* PostHog (environ 220 Ko) se charge après l'affichage ; les événements antérieurs attendent dans la file. */
+    apresChargement(() => void demarrerPostHog(lireChoix() === "oui"));
     if (CONSENTEMENT_REQUIS && c === null) setVisible(true);
     const rouvrir = () => setVisible(true);
     window.addEventListener("mesure:rouvrir", rouvrir);

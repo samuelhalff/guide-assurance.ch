@@ -8,7 +8,9 @@ import { calculerSaison } from "@/components/site/saison";
 import { pageMetadata } from "@/lib/metadata";
 import { jsonLdAccueil } from "@/lib/jsonld-accueil";
 import { ORG_ID, WEBSITE_ID } from "@/lib/jsonld";
-import { MAJ_ISO, abs } from "@/lib/site";
+import { abs } from "@/lib/site";
+import { DATE_PAGE } from "@/lib/donnees";
+import { COMPTES_3A, RELEVE_LE, TAUX_MAX, TAUX_MIN, dateCh, tauxEn } from "@/lib/taux3a";
 import { OUTILS_EN } from "@/lib/nav";
 
 /* English home: the French home (src/app/(fr)/page.tsx) in English, same figures, links to the English pages. */
@@ -33,7 +35,7 @@ const LD = {
       about: { "@id": ORG_ID },
       publisher: { "@id": ORG_ID },
       mainEntity: { "@id": abs(`${OUTILS_EN.comparateur}#outil`) },
-      dateModified: MAJ_ISO,
+      dateModified: DATE_PAGE.accueil,
     },
     {
       "@type": "WebApplication",
@@ -102,8 +104,8 @@ const OUTILS_LISTE: OutilLigne[] = [
 const OUTILS_3A: OutilLigne[] = [
   {
     href: "/en/pillar-3a/interest-rates/",
-    chiffre: "0.05 to 0.65%",
-    legende: "pillar 3a account rates at 17 banks, read on 22.11.2026",
+    chiffre: `${TAUX_MIN.toFixed(2)} to ${tauxEn(TAUX_MAX)}`,
+    legende: `pillar 3a account rates at ${COMPTES_3A.length} banks, read on ${dateCh(RELEVE_LE)}`,
     titre: "Pillar 3a interest rates",
     texte: "We read each bank's rate on its own page, with its conditions. The list runs from the highest rate to the lowest, and no bank pays to be listed.",
     cta: "See the rates",

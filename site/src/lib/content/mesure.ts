@@ -28,7 +28,7 @@ Non. Le site n’utilise aucun cookie et aucun outil de mesure d’audience. Si 
 
 Nous comptons les pages lues et l’usage des outils pour savoir quels guides servent et les améliorer. Ce que vous saisissez dans les outils (nom, adresse, revenu, dates) n’est jamais envoyé.
 ${ph ? `
-- Par défaut, un outil de mesure sans cookie (données hébergées dans l’Union européenne) compte les pages vues et quelques actions${N}: situation choisie sur l’accueil, simulateur utilisé, lettre imprimée ou copiée, outil partagé. Rien n’est stocké sur votre appareil, votre adresse IP n’est pas conservée et aucune session n’est enregistrée.` : ""}${ga ? `
+- Par défaut, un outil de mesure sans cookie (données hébergées dans l’Union européenne) compte les pages vues et quelques actions${N}: situation choisie sur l’accueil, simulateur utilisé, lettre imprimée ou copiée, outil partagé, lien « Être rappelé » affiché à l’écran ou ouvert. Rien n’est stocké sur votre appareil, votre adresse IP n’est pas conservée et aucune session n’est enregistrée.` : ""}${ga ? `
 - Un second outil de mesure d’audience dépose des cookies (jusqu’à 2 ans). En Suisse, ils sont actifs tant que vous ne les refusez pas. Depuis l’Union européenne ou le Royaume-Uni, ils ne sont déposés qu’après votre accord. Les signaux publicitaires restent désactivés sans votre accord. Son fournisseur peut traiter ces données aux États-Unis, dans le cadre du Swiss-U.S. Data Privacy Framework.${ph ? " Si vous acceptez, le premier outil peut aussi reconnaître votre appareil d’une visite à l’autre." : ""}
 - Votre choix est enregistré dans votre navigateur. Il se modifie à tout moment avec le lien « Cookies » en bas de page.` : ""}
 `,
@@ -55,7 +55,7 @@ No. The site uses no cookies and no audience measurement tool. If this changes, 
 
 We count page views and tool use to learn which guides help and to improve them. What you type into the tools (name, address, income, dates) is never sent.
 ${ph ? `
-- By default, a cookie-free measurement tool (data hosted in the European Union) counts page views and a few actions: situation chosen on the home page, calculator used, letter printed or copied, tool shared. Nothing is stored on your device, your IP address is not kept and no session is recorded.` : ""}${ga ? `
+- By default, a cookie-free measurement tool (data hosted in the European Union) counts page views and a few actions: situation chosen on the home page, calculator used, letter printed or copied, tool shared, "Call me back" link shown on screen or opened. Nothing is stored on your device, your IP address is not kept and no session is recorded.` : ""}${ga ? `
 - A second analytics tool sets cookies (up to 2 years). In Switzerland they are active unless you decline them. From the European Union or the United Kingdom, they are only set after you accept. Advertising signals stay off without your consent. Its provider may process this data in the United States under the Swiss-U.S. Data Privacy Framework.${ph ? " If you accept, the first tool can also recognise your device from one visit to the next." : ""}
 - Your choice is stored in your browser and can be changed at any time with the "Cookies" link at the bottom of the page.` : ""}
 `,

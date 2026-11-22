@@ -6,7 +6,8 @@ import { JsonLd } from "@/components/site/json-ld";
 import { PartagerOutil } from "@/components/site/partager-outil";
 import { LettreResiliation } from "@/components/outils/lettre-resiliation";
 import { pageMetadata } from "@/lib/metadata";
-import { ORG_ID, WEBSITE_ID, breadcrumbLd, graph, type Miette } from "@/lib/jsonld";
+import { ORG_ID, WEBSITE_ID, breadcrumbLd, faqLd, graph, type Miette } from "@/lib/jsonld";
+import { FaqSections, faqOutilLd, type FaqOutil } from "@/components/site/faq-sections";
 import { MAJ_ISO, abs } from "@/lib/site";
 import { OUTILS, OUTILS_EN } from "@/lib/nav";
 
@@ -23,6 +24,31 @@ const MIETTES: Miette[] = [
   { name: "Home", href: "/en/" },
   { name: "Health", href: "/en/health-insurance/" },
   { name: "Cancellation letter" },
+];
+
+/* Questions affichées sous l'outil, reprises telles quelles dans le JSON-LD (FAQPage). */
+const FAQ: FaqOutil[] = [
+  {
+    q: "When is the deadline to cancel basic health insurance for 2027?",
+    a: ["Your insurer must receive your letter by 30 November 2026 at the latest for you to change insurer on 1 January 2027. This one-month period applies after the new premiums are announced (art. 7 para. 2 LAMal).", "With the CHF 300 deductible and free choice of doctor, a change on 30 June is also possible, with a letter received by 31 March (art. 7 para. 1 LAMal). With another deductible or a family doctor, HMO or Telmed model, a change is possible only at the end of the year (art. 94 and 100 OAMal, Health Insurance Ordinance)."],
+  },
+  {
+    q: "When can you cancel supplementary insurance?",
+    a: ["Supplementary insurance can be cancelled for the end of the third year of the contract, then for the end of each year, with three months’ notice (art. 35a LCA, Insurance Contract Act). For a contract that follows the calendar year, the letter must therefore arrive by 30 September.", "Your general terms and conditions can allow earlier cancellation, for example after a premium increase. They cannot be less favourable than the law."],
+  },
+  {
+    q: "Do you have to send the letter by registered mail?",
+    a: ["No, the law does not require it. Registered mail does, however, let you prove the date of receipt, which is the only date that counts. For supplementary insurance, the law requires writing or another means that leaves a written record (art. 35a LCA)."],
+  },
+  {
+    q: "What happens if I do not have a new insurer yet?",
+    a: ["For basic health insurance, you stay insured with the old insurer until the new one confirms your membership to it, with no gap in cover (art. 7 para. 5 LAMal). Supplementary insurance offers no such protection, so it is safer to wait until another insurer has accepted you before you cancel it."],
+  },
+  {
+    q: "Can you change insurer with unpaid premiums?",
+    a: ["No. As long as premiums, cost sharing, interest and debt collection costs are not paid in full, the insured person cannot change basic health insurer (art. 64a para. 6 LAMal). Arrears that concern only your children do not stop you."],
+    src: <>Texts: <a href="https://www.fedlex.admin.ch/eli/cc/1995/1328_1328_1328/fr#art_7">art. 7 LAMal</a>, <a href="https://www.fedlex.admin.ch/eli/cc/1995/1328_1328_1328/fr#art_64a">art. 64a LAMal</a>, <a href="https://www.fedlex.admin.ch/eli/cc/1995/3867_3867_3867/fr#art_94">art. 94</a> and <a href="https://www.fedlex.admin.ch/eli/cc/1995/3867_3867_3867/fr#art_100">100 OAMal</a>, <a href="https://www.fedlex.admin.ch/eli/cc/24/719_735_717/fr#art_35a">art. 35a LCA</a>.</>,
+  },
 ];
 
 const LD = graph(
@@ -58,6 +84,7 @@ const LD = graph(
     provider: { "@id": ORG_ID },
   },
   breadcrumbLd(MIETTES, `${URL_}#breadcrumb`),
+  { ...faqLd(faqOutilLd(FAQ)), "@id": `${URL_}#faq` },
 );
 
 export default function Page() {
@@ -90,31 +117,7 @@ export default function Page() {
 
         <div className="wrap faq">
           <p className="maj">Updated on 22 November 2026. Sources: Fedlex (LAMal, OAMal, LCA).</p>
-          <section>
-            <h2>When is the deadline to cancel basic health insurance for 2027?</h2>
-            <p>Your insurer must receive your letter by 30 November 2026 at the latest for you to change insurer on 1 January 2027. This one-month period applies after the new premiums are announced (art. 7 para. 2 LAMal).</p>
-            <p>With the CHF 300 deductible and free choice of doctor, a change on 30 June is also possible, with a letter received by 31 March (art. 7 para. 1 LAMal). With another deductible or a family doctor, HMO or Telmed model, a change is possible only at the end of the year (art. 94 and 100 OAMal, Health Insurance Ordinance).</p>
-          </section>
-          <section>
-            <h2>When can you cancel supplementary insurance?</h2>
-            <p>Supplementary insurance can be cancelled for the end of the third year of the contract, then for the end of each year, with three months’ notice (art. 35a LCA, Insurance Contract Act). For a contract that follows the calendar year, the letter must therefore arrive by 30 September.</p>
-            <p>Your general terms and conditions can allow earlier cancellation, for example after a premium increase. They cannot be less favourable than the law.</p>
-          </section>
-          <section>
-            <h2>Do you have to send the letter by registered mail?</h2>
-            <p>No, the law does not require it. Registered mail does, however, let you prove the date of receipt, which is the only date that counts. For supplementary insurance, the law requires writing or another means that leaves a written record (art. 35a LCA).</p>
-          </section>
-          <section>
-            <h2>What happens if I do not have a new insurer yet?</h2>
-            <p>For basic health insurance, you stay insured with the old insurer until the new one confirms your membership to it, with no gap in cover (art. 7 para. 5 LAMal). Supplementary insurance offers no such protection, so it is safer to wait until another insurer has accepted you before you cancel it.</p>
-          </section>
-          <section>
-            <h2>Can you change insurer with unpaid premiums?</h2>
-            <p>No. As long as premiums, cost sharing, interest and debt collection costs are not paid in full, the insured person cannot change basic health insurer (art. 64a para. 6 LAMal). Arrears that concern only your children do not stop you.</p>
-            <p className="src">
-              Texts: <a href="https://www.fedlex.admin.ch/eli/cc/1995/1328_1328_1328/fr#art_7">art. 7 LAMal</a>, <a href="https://www.fedlex.admin.ch/eli/cc/1995/1328_1328_1328/fr#art_64a">art. 64a LAMal</a>, <a href="https://www.fedlex.admin.ch/eli/cc/1995/3867_3867_3867/fr#art_94">art. 94</a> and <a href="https://www.fedlex.admin.ch/eli/cc/1995/3867_3867_3867/fr#art_100">100 OAMal</a>, <a href="https://www.fedlex.admin.ch/eli/cc/24/719_735_717/fr#art_35a">art. 35a LCA</a>.
-            </p>
-          </section>
+          <FaqSections faq={FAQ} />
         </div>
       </main>
       <SiteFooter locale="en" altPath={OUTILS.lettre} note="This tool gives general information; your contract prevails." />

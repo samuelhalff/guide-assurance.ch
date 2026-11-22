@@ -5,7 +5,8 @@ import type { Locale } from "@/lib/i18n";
 import { suivre } from "@/lib/analytics";
 import { outils } from "@/lib/nav";
 import { RAPPEL, ecrirePreremplissage, lienDemande } from "@/lib/demande";
-import { IconeTelephone } from "@/components/demande/lien-rappel";
+import { IconeTelephone, useRappelVu } from "@/components/demande/lien-rappel";
+import { dateCh } from "@/lib/taux3a";
 
 /* Comparateur de primes LAMal 2027. Les données du canton sont chargées à la demande (public/data/primes-2027) ;
    le calcul se fait dans le navigateur, rien de ce qui est saisi n'est envoyé ni mis dans l'adresse.
@@ -22,7 +23,6 @@ const nfEn = (x: number, d = 0) => new Intl.NumberFormat("en-GB", { minimumFract
 const PAR_PAGE = 20;
 type Tri = "prix" | "prixDesc" | "assureur";
 const RAPPEL_APRES = 5;
-const DONNEES_DU = { fr: "22.11.2026", en: "22.11.2026" };
 
 const CANTON_FR: Record<P.Canton, string> = { GE: "Genève", VD: "Vaud", VS: "Valais", FR: "Fribourg", NE: "Neuchâtel", JU: "Jura", BE: "Jura bernois" };
 const CANTON_EN: Record<P.Canton, string> = { GE: "Geneva", VD: "Vaud", VS: "Valais", FR: "Fribourg", NE: "Neuchâtel", JU: "Jura", BE: "Bernese Jura" };
@@ -124,8 +124,8 @@ const TXT = {
     redistribution: (x: string) =>
       `La prime est le montant approuvé par l’OFSP. La redistribution est la part des taxes environnementales que l’assureur déduit de chaque facture (${x} par mois et par personne en 2027). Le total correspond à ce que vous payez.`,
     reseau: "Certains modèles à réseau ne sont proposés que dans une partie de la région. L’assureur vous dira si votre commune en fait partie.",
-    source: `Primes 2027 approuvées par l’OFSP (Priminfo), données du ${DONNEES_DU.fr}. La prime de votre police fait foi.`,
-    integrite: `Mis à jour le ${DONNEES_DU.fr}. Aucun assureur ne paie pour figurer ici ni pour l’ordre des résultats.`,
+    source: (d: string) => `Primes 2027 approuvées par l’OFSP (Priminfo), données du ${d}. La prime de votre police fait foi.`,
+    integrite: (d: string) => `Mis à jour le ${d}. Aucun assureur ne paie pour figurer ici ni pour l’ordre des résultats.`,
     franchisesTitre: "Le même profil avec les autres franchises",
     franchisesTexte: (qp: string) =>
       `Une franchise plus haute fait baisser la prime, et une plus grande part des frais reste à votre charge. La dernière colonne additionne la prime annuelle de la 1re offre, la franchise entière et la quote-part maximale (10${NB}% des frais, au plus ${qp} par an).`,
@@ -134,8 +134,10 @@ const TXT = {
     thMax: "Au plus à votre charge",
     delai: "Pour changer de caisse au 1er janvier 2027, votre résiliation doit lui parvenir au plus tard le 30 novembre 2026.",
     lettre: "Préparer ma lettre de résiliation",
-    accompagne: "Être accompagné pour changer",
-    accompagneSuite: " par un conseiller d’un courtier partenaire, qui reprend le profil saisi ici.",
+    accompagne: "Être rappelé pour changer d’assureur",
+    accompagneSuite: ", par un conseiller d’un courtier partenaire. Votre nom et votre numéro suffisent.",
+    complet: "Le formulaire complet",
+    completSuite: " reprend le profil saisi ici, si vous préférez tout décrire.",
   },
   en: {
     lieu: "Postcode or town",
@@ -231,8 +233,8 @@ const TXT = {
     redistribution: (x: string) =>
       `The premium is the amount approved by the FOPH (OFSP). The redistribution is the share of environmental levies that the insurer deducts from each bill (${x} a month per person in 2027). The total is what you pay.`,
     reseau: "Some network models are offered only in part of the region. The insurer can tell you whether your municipality is included.",
-    source: `2027 premiums approved by the FOPH (OFSP, Priminfo), data of ${DONNEES_DU.en}. The premium on your policy is what counts.`,
-    integrite: `Updated on ${DONNEES_DU.en}. No insurer pays to be listed here or for the order of the results.`,
+    source: (d: string) => `2027 premiums approved by the FOPH (OFSP, Priminfo), data of ${d}. The premium on your policy is what counts.`,
+    integrite: (d: string) => `Updated on ${d}. No insurer pays to be listed here or for the order of the results.`,
     franchisesTitre: "The same profile with the other deductibles",
     franchisesTexte: (qp: string) =>
       `A higher deductible lowers the premium, and more of your costs stay with you. The last column adds up the yearly premium of the 1st offer, the full deductible and the maximum co-payment (10% of costs, at most ${qp} a year).`,
@@ -241,8 +243,10 @@ const TXT = {
     thMax: "At most out of pocket",
     delai: "To change insurer on 1 January 2027, your cancellation must reach your current insurer by 30 November 2026 at the latest.",
     lettre: "Prepare my cancellation letter",
-    accompagne: "Get support to change",
-    accompagneSuite: " from an adviser of a partner broker, who picks up the profile you entered here.",
+    accompagne: "Get a call back to switch insurer",
+    accompagneSuite: ", from an adviser of a partner broker. Your name and number are enough.",
+    complet: "The full form",
+    completSuite: " picks up the profile you entered here, if you would rather describe everything.",
   },
 };
 
@@ -264,7 +268,8 @@ type Lieu = { npa: string; canton: P.Canton; region: number; communes: string };
 type PersonneUI = { id: number; naissance: string; franchise: number | null; accident: boolean };
 const MAX_PERSONNES = 6;
 
-export function ComparateurPrimes({ locale = "fr" }: { locale?: Locale }) {
+/* donneesDu : date du relevé des primes (ISO), lue au build dans les données (lib/date-primes.ts). */
+export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Locale; donneesDu: string }) {
   const isEn = locale === "en";
   const t = TXT[locale];
   const nf = isEn ? nfEn : nfFr;
@@ -308,6 +313,8 @@ export function ComparateurPrimes({ locale = "fr" }: { locale?: Locale }) {
   const [barre, setBarre] = useState(false);
   const listeRef = useRef<HTMLDivElement>(null);
   const apresRef = useRef<HTMLDivElement>(null);
+  const rappelListe = useRef<HTMLParagraphElement>(null);
+  const rappelApres = useRef<HTMLParagraphElement>(null);
   const resultatRef = useRef<HTMLElement>(null);
 
   /* Lieu : NPA en tête de saisie ; si la saisie reprend une suggestion exacte, sa région est retenue. */
@@ -387,6 +394,10 @@ export function ComparateurPrimes({ locale = "fr" }: { locale?: Locale }) {
     if (apresRef.current) obs.observe(apresRef.current);
     return () => obs.disconnect();
   }, [aListe]);
+
+  /* rappel_vu : appel sous la 5e offre et appel de fin de liste (un seul événement « comparateur » par page). */
+  useRappelVu(rappelListe, "comparateur", Boolean(aListe) && (r?.offres.length ?? 0) >= RAPPEL_APRES);
+  useRappelVu(rappelApres, "comparateur", Boolean(aListe));
 
   function profilVersFormulaires() {
     const p1 = lues[0];
@@ -656,7 +667,7 @@ export function ComparateurPrimes({ locale = "fr" }: { locale?: Locale }) {
                           </details>
                           <a className="rappel-offre" href={RAPPEL[locale]} onClick={versRappel}>{t.rappelOffre}</a>
                         </div>
-                        {i === RAPPEL_APRES - 1 ? <p className="rappel-liste">{t.rappelQ} {lienRappel()}</p> : null}
+                        {i === RAPPEL_APRES - 1 ? <p className="rappel-liste" ref={rappelListe}>{t.rappelQ} {lienRappel()}</p> : null}
                       </li>
                     );
                   })}
@@ -711,10 +722,10 @@ export function ComparateurPrimes({ locale = "fr" }: { locale?: Locale }) {
             )}
 
             <div className="integrite">
-              <p>{t.source}</p>
+              <p>{t.source(dateCh(donneesDu))}</p>
               <p>{t.redistribution(chf(r.redistribution / Math.max(1, pers.length), 2))}</p>
               <p>{t.reseau}</p>
-              <p><b>{t.integrite}</b></p>
+              <p><b>{t.integrite(dateCh(donneesDu))}</b></p>
               <p>
                 <button type="button" className="lien-profil" onClick={copierLien}>{t.lienProfil}</button>
                 {copie ? <span className="copie-ok"> {t.lienCopie}</span> : null}
@@ -749,9 +760,14 @@ export function ComparateurPrimes({ locale = "fr" }: { locale?: Locale }) {
 
             <div className="apres apres-comparateur" ref={apresRef}>
               <p className="delai-fait">{t.delai} <a href={outils(locale).lettre}>{t.lettre}</a></p>
-              <p>
-                <a href={lienDemande(locale, "sante")} onClick={profilVersFormulaires}>{t.accompagne}</a>
+              {/* Formulaire court d'abord (un écran, prérempli), le formulaire en trois écrans ensuite. */}
+              <p ref={rappelApres}>
+                <a href={RAPPEL[locale]} onClick={versRappel}>{t.accompagne}</a>
                 {t.accompagneSuite}
+              </p>
+              <p>
+                <a href={lienDemande(locale, "sante")} onClick={profilVersFormulaires}>{t.complet}</a>
+                {t.completSuite}
               </p>
             </div>
 

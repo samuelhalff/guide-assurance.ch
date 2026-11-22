@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useRappelVu } from "@/components/demande/lien-rappel";
 import type { Porte } from "@shared/demande/portes";
 import { RAPPEL, TEXTE_CTA, TEXTE_RAPPEL, ecrirePreremplissage, lienDemande, lirePreremplissage } from "@/lib/demande";
 import { suivre } from "@/lib/analytics";
@@ -12,6 +13,8 @@ const CLE_MASQUEE = "ga-barre-demande-masquee";
 export function BarreDemande({ locale = "fr", porte, rappelSujet }: { locale?: "fr" | "en"; porte?: Porte; rappelSujet?: string }) {
   const [visible, setVisible] = useState(false);
   const [masquee, setMasquee] = useState(true);
+  const lienRappel = useRef<HTMLAnchorElement>(null);
+  useRappelVu(lienRappel, "produit", visible && !masquee && !porte);
 
   useEffect(() => {
     let m = false;
@@ -53,6 +56,7 @@ export function BarreDemande({ locale = "fr", porte, rappelSujet }: { locale?: "
         </a>
       ) : (
         <a
+          ref={lienRappel}
           className="bouton"
           href={RAPPEL[locale]}
           onClick={() => {

@@ -7,8 +7,10 @@ import { PartagerOutil } from "@/components/site/partager-outil";
 import { ComparateurPrimes } from "@/components/outils/comparateur-primes";
 import { TableauReperes } from "@/components/outils/reperes-primes";
 import { pageMetadata } from "@/lib/metadata";
-import { ORG_ID, WEBSITE_ID, breadcrumbLd, faqLd, graph, type Miette } from "@/lib/jsonld";
-import { MAJ_ISO, abs } from "@/lib/site";
+import { ORG_ID, WEBSITE_ID, breadcrumbLd, datasetPrimesLd, faqLd, graph, type Miette } from "@/lib/jsonld";
+import { abs } from "@/lib/site";
+import { DATE_PAGE, DATE_PRIMES } from "@/lib/donnees";
+import { dateLongue } from "@/lib/i18n";
 import { OUTILS, OUTILS_EN } from "@/lib/nav";
 
 /* English version of /assurance-maladie/comparateur/: same tool, English interface. */
@@ -37,7 +39,7 @@ const FAQ = [
   },
   {
     q: "Where do the premiums come from?",
-    a: "They come from the 2027 premiums approved by the Federal Office of Public Health (FOPH, OFSP in French), published on priminfo.admin.ch and retrieved on 22 November 2026, and from the FOPH 2027 premium regions file. Amounts are monthly, in Swiss francs, before the redistribution of environmental levies.",
+    a: `They come from the 2027 premiums approved by the Federal Office of Public Health (FOPH, OFSP in French), published on priminfo.admin.ch and retrieved on ${dateLongue(DATE_PRIMES, "en")}, and from the FOPH 2027 premium regions file. Amounts are monthly, in Swiss francs, before the redistribution of environmental levies.`,
   },
 ];
 
@@ -60,9 +62,10 @@ const LD = graph(
     isPartOf: { "@id": WEBSITE_ID },
     publisher: { "@id": ORG_ID },
     datePublished: "2026-11-22",
-    dateModified: MAJ_ISO,
+    dateModified: DATE_PAGE.comparateur,
     breadcrumb: { "@id": `${URL_}#breadcrumb` },
     mainEntity: { "@id": `${URL_}#outil` },
+    mentions: { "@id": `${URL_}#donnees` },
     citation: [
       "https://www.priminfo.admin.ch/fr/praemien",
       "https://www.priminfo.admin.ch/downloads/praemienregionen-2027.xlsx",
@@ -82,6 +85,7 @@ const LD = graph(
   },
   breadcrumbLd(MIETTES, `${URL_}#breadcrumb`),
   { ...faqLd(FAQ), "@id": `${URL_}#faq` },
+  datasetPrimesLd("en", `${URL_}#donnees`, DATE_PRIMES),
 );
 
 export default function Page() {
@@ -104,7 +108,7 @@ export default function Page() {
             The calculation runs in your browser. We receive neither your postcode nor your age.
           </p>
           <PartagerOutil path={PATH} title="Compare 2027 LAMal premiums" text="The 2027 LAMal premiums for your postcode, age and deductible, sorted from lowest to highest." locale="en" />
-          <ComparateurPrimes locale="en" />
+          <ComparateurPrimes locale="en" donneesDu={DATE_PRIMES} />
           <TableauReperes locale="en" />
         </div>
 
@@ -115,7 +119,7 @@ export default function Page() {
               <p>{f.a}</p>
             </section>
           ))}
-          <p className="maj">Updated on 22 November 2026. Data: FOPH (OFSP), 2027 premiums and 2027 premium regions.</p>
+          <p className="maj">Updated on {dateLongue(DATE_PAGE.comparateur, "en")}. Data: FOPH (OFSP), 2027 premiums and 2027 premium regions.</p>
         </div>
       </main>
       <SiteFooter note="Premiums for information only. The premium on your policy is what counts." locale="en" altPath={OUTILS.comparateur} />

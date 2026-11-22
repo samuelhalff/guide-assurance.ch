@@ -7,8 +7,10 @@ import { PartagerOutil } from "@/components/site/partager-outil";
 import { ComparateurPrimes } from "@/components/outils/comparateur-primes";
 import { TableauReperes } from "@/components/outils/reperes-primes";
 import { pageMetadata } from "@/lib/metadata";
-import { ORG_ID, WEBSITE_ID, breadcrumbLd, faqLd, graph, type Miette } from "@/lib/jsonld";
-import { MAJ_ISO, abs } from "@/lib/site";
+import { ORG_ID, WEBSITE_ID, breadcrumbLd, datasetPrimesLd, faqLd, graph, type Miette } from "@/lib/jsonld";
+import { abs } from "@/lib/site";
+import { DATE_PAGE, DATE_PRIMES } from "@/lib/donnees";
+import { dateLongue } from "@/lib/i18n";
 import { OUTILS, OUTILS_EN } from "@/lib/nav";
 
 const PATH = OUTILS.comparateur;
@@ -37,7 +39,7 @@ const FAQ = [
   },
   {
     q: `D’où viennent les primes affichées${N}?`,
-    a: "Elles proviennent des primes 2027 approuvées par l’Office fédéral de la santé publique (OFSP), publiées sur priminfo.admin.ch et relevées le 22 novembre 2026, ainsi que du fichier des régions de primes 2027 de l’OFSP. Les montants sont mensuels, en francs, avant la redistribution des taxes environnementales.",
+    a: `Elles proviennent des primes 2027 approuvées par l’Office fédéral de la santé publique (OFSP), publiées sur priminfo.admin.ch et relevées le ${dateLongue(DATE_PRIMES, "fr")}, ainsi que du fichier des régions de primes 2027 de l’OFSP. Les montants sont mensuels, en francs, avant la redistribution des taxes environnementales.`,
   },
 ];
 
@@ -60,9 +62,10 @@ const LD = graph(
     isPartOf: { "@id": WEBSITE_ID },
     publisher: { "@id": ORG_ID },
     datePublished: "2026-11-22",
-    dateModified: MAJ_ISO,
+    dateModified: DATE_PAGE.comparateur,
     breadcrumb: { "@id": `${URL_}#breadcrumb` },
     mainEntity: { "@id": `${URL_}#outil` },
+    mentions: { "@id": `${URL_}#donnees` },
     citation: [
       "https://www.priminfo.admin.ch/fr/praemien",
       "https://www.priminfo.admin.ch/downloads/praemienregionen-2027.xlsx",
@@ -82,6 +85,7 @@ const LD = graph(
   },
   breadcrumbLd(MIETTES, `${URL_}#breadcrumb`),
   { ...faqLd(FAQ), "@id": `${URL_}#faq` },
+  datasetPrimesLd("fr", `${URL_}#donnees`, DATE_PRIMES),
 );
 
 export default function Page() {
@@ -104,7 +108,7 @@ export default function Page() {
             Le calcul se fait dans votre navigateur. Nous ne recevons ni votre NPA ni votre âge.
           </p>
           <PartagerOutil path={PATH} title="Comparer les primes LAMal 2027" text="Les primes LAMal 2027 pour votre NPA, votre âge et votre franchise, triées de la plus basse à la plus haute." />
-          <ComparateurPrimes />
+          <ComparateurPrimes donneesDu={DATE_PRIMES} />
           <TableauReperes locale="fr" />
         </div>
 
@@ -115,7 +119,7 @@ export default function Page() {
               <p>{f.a}</p>
             </section>
           ))}
-          <p className="maj">Mis à jour le 22 novembre 2026. Données : OFSP, primes 2027 et régions de primes 2027.</p>
+          <p className="maj">Mis à jour le {dateLongue(DATE_PAGE.comparateur, "fr")}. Données : OFSP, primes 2027 et régions de primes 2027.</p>
         </div>
       </main>
       <SiteFooter note="Primes données à titre d’information. La prime de votre police fait foi." altPath={OUTILS_EN.comparateur} />

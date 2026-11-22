@@ -1,10 +1,10 @@
 import type { Porte } from "@shared/demande/portes";
 import { TEXTE_CTA, TEXTE_RAPPEL, lienDemande } from "@/lib/demande";
-import { LienRappel } from "@/components/demande/lien-rappel";
+import { LienRappel, type EmplacementRappel } from "@/components/demande/lien-rappel";
 
 /* Appel au formulaire de demande : bouton plein + ligne de réassurance + lien vers le formulaire court « Être rappelé ». `onClick` sert au simulateur
    (préremplissage en sessionStorage juste avant de partir). */
-export function CtaDemande({ locale = "fr", porte, onClick }: { locale?: "fr" | "en"; porte: Porte; onClick?: () => void }) {
+export function CtaDemande({ locale = "fr", porte, onClick, emplacement = "guide" }: { locale?: "fr" | "en"; porte: Porte; onClick?: () => void; emplacement?: EmplacementRappel }) {
   const t = TEXTE_CTA[locale];
   return (
     <div className="cta-demande">
@@ -17,7 +17,7 @@ export function CtaDemande({ locale = "fr", porte, onClick }: { locale?: "fr" | 
       <p>{t.rassurance}</p>
       <p className="cta-rappel">
         {TEXTE_RAPPEL[locale].guideQ}{" "}
-        <LienRappel locale={locale} emplacement="guide">{TEXTE_RAPPEL[locale].guideLien}</LienRappel>
+        <LienRappel locale={locale} emplacement={emplacement} sujet={emplacement === "frontalier" ? "frontaliers" : undefined}>{TEXTE_RAPPEL[locale].guideLien}</LienRappel>
         {TEXTE_RAPPEL[locale].guideSuite}
       </p>
     </div>

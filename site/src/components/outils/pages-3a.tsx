@@ -9,7 +9,9 @@ import * as I from "@/lib/engines/impot3a";
 import { COMPTES_3A, RELEVE_LE, TAUX_MAX, TAUX_MIN, dateCh, tauxEn, tauxFr } from "@/lib/taux3a";
 import { pageMetadata } from "@/lib/metadata";
 import { ORG_ID, WEBSITE_ID, breadcrumbLd, faqLd, graph, type Miette } from "@/lib/jsonld";
-import { MAJ_ISO, abs } from "@/lib/site";
+import { abs } from "@/lib/site";
+import { DATE_IMPOTS, DATE_PAGE } from "@/lib/donnees";
+import { dateLongue } from "@/lib/i18n";
 import { OUTILS, OUTILS_EN } from "@/lib/nav";
 import type { Locale } from "@/lib/i18n";
 
@@ -158,7 +160,7 @@ export function PageTaux3a({ locale }: { locale: Locale }) {
       isPartOf: { "@id": WEBSITE_ID },
       publisher: { "@id": ORG_ID },
       datePublished: "2026-11-22",
-      dateModified: MAJ_ISO,
+      dateModified: DATE_PAGE.taux3a,
       breadcrumb: { "@id": `${url}#breadcrumb` },
       mainEntity: { "@id": `${url}#taux` },
       citation: COMPTES_3A.map((c) => c.url),
@@ -288,7 +290,7 @@ const IMPOT = {
         a: "Le calculateur reprend les barèmes 2026 de l’Administration fédérale des contributions pour l’impôt fédéral direct, et pour chaque canton les lois, barèmes et listes de coefficients communaux publiés par son administration fiscale. Les résultats ont été vérifiés le 22.11.2026 sur les calculettes officielles de Genève, de Vaud, du Valais, de Fribourg et de Neuchâtel, à quelques centimes près, et pour le Jura bernois sur le calculateur de l’AFC, vers lequel le canton de Berne renvoie. Le canton du Jura sera ajouté quand sa calculette officielle aura pu être consultée.",
       },
     ] as Faq[],
-    maj: "Mis à jour le 22 novembre 2026, avec les barèmes 2026 de l’AFC et des administrations fiscales de Genève, Vaud, du Valais, de Fribourg, de Neuchâtel et de Berne, et les plafonds 3a de l’OFAS.",
+    maj: `Mis à jour le ${dateLongue(DATE_IMPOTS, "fr")}, avec les barèmes 2026 de l’AFC et des administrations fiscales de Genève, Vaud, du Valais, de Fribourg, de Neuchâtel et de Berne, et les plafonds 3a de l’OFAS.`,
     footer: "Cette estimation est donnée à titre d’information. Seule la taxation de l’administration fiscale fait foi.",
   },
   en: {
@@ -351,7 +353,7 @@ const IMPOT = {
         a: "The calculator uses the Federal Tax Administration’s 2026 scales for direct federal tax and, for each canton, the laws, scales and lists of municipal multipliers published by its tax administration. The results were checked on 22.11.2026 against the official calculators of Geneva, Vaud, Valais, Fribourg and Neuchâtel, to within a few centimes, and for the Bernese Jura against the Federal Tax Administration’s calculator, which the canton of Bern links to. The canton of Jura will be added once its official calculator can be consulted.",
       },
     ] as Faq[],
-    maj: "Updated on 22 November 2026, with 2026 tax scales from the Federal Tax Administration and the tax administrations of Geneva, Vaud, Valais, Fribourg, Neuchâtel and Bern, and 3a caps from the FSIO.",
+    maj: `Updated on ${dateLongue(DATE_IMPOTS, "en")}, with 2026 tax scales from the Federal Tax Administration and the tax administrations of Geneva, Vaud, Valais, Fribourg, Neuchâtel and Bern, and 3a caps from the FSIO.`,
     footer: "This estimate is for information only. The tax administration’s assessment alone is authoritative.",
   },
 };
@@ -376,7 +378,7 @@ export function PageImpot3a({ locale }: { locale: Locale }) {
       isPartOf: { "@id": WEBSITE_ID },
       publisher: { "@id": ORG_ID },
       datePublished: "2026-11-22",
-      dateModified: MAJ_ISO,
+      dateModified: DATE_PAGE.impot3a,
       breadcrumb: { "@id": `${url}#breadcrumb` },
       mainEntity: { "@id": `${url}#outil` },
       citation: [

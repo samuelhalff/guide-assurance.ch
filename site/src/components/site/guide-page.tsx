@@ -2,7 +2,8 @@ import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
 import { Breadcrumbs } from "@/components/site/breadcrumbs";
 import { JsonLd } from "@/components/site/json-ld";
-import { ORG_ID, WEBSITE_ID, breadcrumbLd, faqLd, graph, type Miette } from "@/lib/jsonld";
+import { ORG_ID, WEBSITE_ID, breadcrumbLd, datasetPrimesLd, faqLd, graph, type Miette } from "@/lib/jsonld";
+import { DATE_PRIMES } from "@/lib/date-primes";
 import { abs } from "@/lib/site";
 import type { Rubrique } from "@/lib/nav";
 import { DICT, dateLongue, type Locale } from "@/lib/i18n";
@@ -80,6 +81,7 @@ export function GuidePage({
   const t = DICT[locale];
   const tl = TEXTE_LANDING[locale];
   const url = abs(path);
+  const estPagePrimes = path === "/assurance-maladie/primes/" || path === "/en/health-insurance/premiums/";
   const appli = landing && landing.action !== "rappel" ? { id: abs(`${outils(locale)[landing.action]}#outil`), url: abs(outils(locale)[landing.action]), name: APPLI[landing.action][locale] } : null;
   const ldLanding = landing
     ? [
@@ -130,10 +132,13 @@ export function GuidePage({
       ...(sources.some((s) => s.href) ? { citation: sources.filter((s) => s.href).map((s) => s.href) } : {}),
       ...(landing ? { about: { "@id": `${url}#service` } } : {}),
       ...(appli ? { mentions: { "@id": appli.id } } : {}),
+      ...(estPagePrimes ? { mainEntity: { "@id": `${url}#donnees` } } : {}),
     },
     breadcrumbLd(miettes, `${url}#breadcrumb`),
     ...(faq.length ? [{ ...faqLd(faq), "@id": `${url}#faq` }] : []),
     ...ldLanding,
+    /* Page « Primes 2027 » : jeu de données des primes OFSP. */
+    ...(estPagePrimes ? [datasetPrimesLd(locale, `${url}#donnees`, DATE_PRIMES)] : []),
   );
 
   return (

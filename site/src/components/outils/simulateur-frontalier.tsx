@@ -243,6 +243,7 @@ export function SimulateurFrontalier({ locale = "fr" }: { locale?: Locale }) {
         <CtaDemande
           locale={locale}
           porte="frontaliers"
+          emplacement="frontalier"
           onClick={() => {
             const annee = num(n1);
             const conjoint = cj === "aucun" ? 0 : 1;

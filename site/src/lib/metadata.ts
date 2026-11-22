@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { INDEXABLE, SITE_NAME, abs } from "@/lib/site";
 import { autreLangue } from "@/lib/content/pages";
+import { imagePartage } from "@/lib/og";
 
 /* Métadonnées d'une page : titre exact, description, canonique, hreflang et Open Graph.
    Page française : fr-CH, en si la page existe en anglais, x-default sur la française.
@@ -27,7 +28,8 @@ export function pageMetadata({
   if (fr) languages["fr-CH"] = abs(fr);
   if (en) languages.en = abs(en);
   if (fr) languages["x-default"] = abs(fr);
-  const image = locale === "en" ? "/og/guide-assurance-en.png" : "/og/guide-assurance.png";
+  /* Image propre à la page (lib/og.ts), générée au build. */
+  const image = imagePartage(path, locale);
   return {
     title: { absolute: title },
     description,
@@ -40,7 +42,7 @@ export function pageMetadata({
       title,
       description,
       url: abs(path),
-      images: [{ url: abs(image), width: 1200, height: 630, alt: "Guide Assurance" }],
+      images: [{ url: abs(image), width: 1200, height: 630, alt: title }],
     },
     twitter: { card: "summary_large_image" },
   };

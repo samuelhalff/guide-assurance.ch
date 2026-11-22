@@ -16,7 +16,9 @@ export const CLE = "ga-consentement";
 
 const EEE_RU = ["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IS","IE","IT","LV","LI","LT","LU","MT","NL","NO","PL","PT","RO","SK","SI","ES","SE","GB"];
 
-/* Script en ligne du <head>, avant gtm.js : états par défaut, choix enregistré, puis chargement de GTM. */
+/* Script en ligne du <head> : états de consentement par défaut et choix enregistré, posés tout de suite, avant
+   gtm.js. Seule l'injection de gtm.js attend la fin du chargement de la page puis un moment libre (requestIdleCallback,
+   3 s au plus) ; les événements poussés entre-temps restent dans dataLayer et GTM les lit à son arrivée. */
 export function amorceGTM(): string {
   if (!GTM_ID) return "";
   const refuse = { ad_storage: "denied", analytics_storage: "denied", ad_user_data: "denied", ad_personalization: "denied" };
@@ -28,7 +30,7 @@ gtag('consent','default',${JSON.stringify(accorde)});
 gtag('set','ads_data_redaction',true);
 try{var c=localStorage.getItem(${JSON.stringify(CLE)});if(c==='oui')gtag('consent','update',${JSON.stringify(accorde)});else if(c==='non')gtag('consent','update',${JSON.stringify(refuse)});}catch(e){}
 gtag('js',new Date());
-(function(w,d,s,l,i){w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer',${JSON.stringify(GTM_ID)});`;
+(function(w,d,l,i){var go=function(){w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var j=d.createElement('script');j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i;d.head.appendChild(j);};var later=function(){(w.requestIdleCallback||function(f){setTimeout(f,1)})(go,{timeout:3000});};if(d.readyState==='complete')later();else w.addEventListener('load',later,{once:true});})(window,document,'dataLayer',${JSON.stringify(GTM_ID)});`;
 }
 
 export type Evenement =
@@ -48,8 +50,10 @@ export type Evenement =
   | "demande_ouverte"
   | "demande_etape"
   | "demande_envoyee"
-  /* Clic sur un appel « Être rappelé » ({ emplacement: tete | accueil | guide | comparateur | produit | outil3a }), avant le formulaire court. */
+  /* Clic sur un appel « Être rappelé » ({ emplacement: tete | accueil | guide | comparateur | produit | outil3a | lettre | frontalier }), avant le formulaire court. */
   | "rappel_ouvert"
+  /* Appel « Être rappelé » vu à l'écran ({ emplacement }), une fois par emplacement et par page, sans aucune valeur saisie. */
+  | "rappel_vu"
   /* Assistant (PostHog seulement, jamais de contenu de la conversation ni de dataLayer). */
   | "assistant_ouvert"
   | "assistant_message"
@@ -107,12 +111,38 @@ export function ecrireChoix(c: "oui" | "non") {
   (window as unknown as W).gtag?.("consent", "update", { ad_storage: v, analytics_storage: v, ad_user_data: v, ad_personalization: v });
 }
 
+/* Après l'affichage : fin du chargement de la page, puis un moment libre (3 s au plus). Les événements attendent dans `file`. */
+export function apresChargement(f: () => void) {
+  if (typeof window === "undefined") return;
+  const w = window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number };
+  const plusTard = () => (w.requestIdleCallback ? w.requestIdleCallback(f, { timeout: 3000 }) : setTimeout(f, 1));
+  if (document.readyState === "complete") plusTard();
+  else window.addEventListener("load", plusTard, { once: true });
+}
+
+let persistanceVoulue: boolean | null = null;
+let chargement: Promise<void> | null = null;
+
 export async function demarrerPostHog(persistant: boolean) {
   if (!POSTHOG_TOKEN || typeof window === "undefined") return;
+  persistanceVoulue = persistant;
   if (ph) {
     ph.set_config({ persistence: persistant ? "localStorage+cookie" : "memory" });
     return;
   }
+  /* Un seul chargement même si le visiteur choisit pendant qu'il est en cours ; le dernier choix l'emporte. */
+  if (!chargement) chargement = initPostHog(persistant);
+  await chargement;
+  const p = ph as PH | null;
+  if (p && persistanceVoulue !== persistanceInit) {
+    persistanceInit = persistanceVoulue;
+    p.set_config({ persistence: persistanceVoulue ? "localStorage+cookie" : "memory" });
+  }
+}
+
+let persistanceInit: boolean | null = null;
+async function initPostHog(persistant: boolean) {
+  persistanceInit = persistant;
   const { default: posthog } = await import("posthog-js");
   posthog.init(POSTHOG_TOKEN, {
     api_host: POSTHOG_HOST,

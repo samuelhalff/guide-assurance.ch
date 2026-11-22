@@ -4,7 +4,7 @@ import { Dialog as DialogPrimitive } from "@base-ui/react/dialog";
 import { LogoSilhouette } from "@/components/site/logo";
 import { Turnstile } from "@/components/demande/turnstile";
 import { suivre } from "@/lib/analytics";
-import { ecrirePreremplissage, lienDemande } from "@/lib/demande";
+import { RAPPEL, ecrirePreremplissage, lienDemande } from "@/lib/demande";
 import {
   TEXTE_ASSISTANT,
   ErreurAssistant,
@@ -164,10 +164,12 @@ export function Assistant({ locale = "fr" }: { locale?: "fr" | "en" }) {
     champ.current?.focus();
   };
 
-  const versDemande = (o: Offre) => {
-    ecrirePreremplissage({ porte: o.porte, besoin: o.besoin, npa: o.npa, birthYear: o.birthYear, householdSize: o.householdSize });
-    suivre("assistant_vers_demande", { porte: o.porte }, true);
-    window.location.href = lienDemande(locale, o.porte);
+  /* Formulaire court d'abord (un écran : nom, téléphone, sujet = porte de l'offre, NPA), formulaire complet ensuite. */
+  const versDemande = (o: Offre, formulaire: "rappel" | "complet") => {
+    if (formulaire === "rappel") ecrirePreremplissage({ besoin: [o.porte], npa: o.npa });
+    else ecrirePreremplissage({ porte: o.porte, besoin: o.besoin, npa: o.npa, birthYear: o.birthYear, householdSize: o.householdSize });
+    suivre("assistant_vers_demande", { porte: o.porte, formulaire }, true);
+    window.location.href = formulaire === "rappel" ? RAPPEL[locale] : lienDemande(locale, o.porte);
   };
 
   return (
@@ -242,12 +244,16 @@ export function Assistant({ locale = "fr" }: { locale?: "fr" | "en" }) {
                         ))}
                       </ul>
                       <p className="assistant-rappel-texte">{t.rappelTexte}</p>
-                      <button type="button" className="bouton" onClick={() => versDemande(m.offre!)}>
+                      <button type="button" className="bouton" onClick={() => versDemande(m.offre!, "rappel")}>
                         {t.rappelBouton}
                         <svg viewBox="0 0 20 20" aria-hidden="true">
                           <path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       </button>
+                      <p className="assistant-rappel-texte">
+                        <a href={lienDemande(locale, m.offre.porte)} onClick={(e) => { e.preventDefault(); versDemande(m.offre!, "complet"); }}>{t.rappelComplet}</a>
+                        {t.rappelCompletSuite}
+                      </p>
                     </div>
                   )}
                 </Fragment>

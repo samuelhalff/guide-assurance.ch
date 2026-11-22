@@ -6,7 +6,8 @@ import { JsonLd } from "@/components/site/json-ld";
 import { PartagerOutil } from "@/components/site/partager-outil";
 import { SimulateurFrontalier } from "@/components/outils/simulateur-frontalier";
 import { pageMetadata } from "@/lib/metadata";
-import { ORG_ID, WEBSITE_ID, breadcrumbLd, graph, type Miette } from "@/lib/jsonld";
+import { ORG_ID, WEBSITE_ID, breadcrumbLd, faqLd, graph, type Miette } from "@/lib/jsonld";
+import { FaqSections, faqOutilLd, type FaqOutil } from "@/components/site/faq-sections";
 import { MAJ_ISO, abs } from "@/lib/site";
 import { OUTILS } from "@/lib/nav";
 
@@ -22,6 +23,30 @@ const MIETTES: Miette[] = [
   { name: "Accueil", href: "/" },
   { name: "Frontaliers", href: "/frontaliers/" },
   { name: "LAMal ou assurance française" },
+];
+
+/* Questions affichées sous l'outil, reprises telles quelles dans le JSON-LD (FAQPage). */
+const FAQ: FaqOutil[] = [
+  {
+    q: "Combien de temps ai-je pour choisir entre LAMal et assurance française ?",
+    a: ["Vous disposez de trois mois à compter du début de votre travail en Suisse (ou de votre installation en France). Le formulaire « Choix du système », une fois tamponné par votre CPAM, est à envoyer vous-même au service de l’assurance maladie de Genève ou à l’OVAM (Vaud), car la CPAM ne le transmet pas."],
+    src: <>Sources : OFSP, assurance maladie des frontaliers ; CLEISS, droit d’option ; État de Genève.</>,
+  },
+  {
+    q: "Que se passe-t-il si je ne choisis pas ?",
+    a: ["Vous êtes affilié d’office à la LAMal. Un choix tacite n’est pas valable. En cas de retard sans excuse valable, un supplément de prime peut s’appliquer."],
+    src: <>Source : OFSP.</>,
+  },
+  {
+    q: "Comment l’Urssaf calcule-t-elle la cotisation ?",
+    a: ["L’Urssaf prélève 8 % de vos revenus de l’avant-dernière année, après un abattement de 25 % du plafond annuel de la sécurité sociale (12 225 € en 2027). Par exemple, pour 60 000 € de revenus 2025, (60 000 − 12 225) × 8 % = 3 822 € en 2027. Chaque frontalier du foyer paie sa propre cotisation ; les personnes à charge sont rattachées sans cotisation."],
+    src: <>Source : Urssaf, « Travail en Suisse : déclarer vos revenus ». Le taux de 2027 reste à confirmer par la loi de financement de la sécurité sociale.</>,
+  },
+  {
+    q: "Puis-je changer d’option plus tard ?",
+    a: ["En principe non. Un nouveau contrat sans interruption, un changement de canton, un mariage ou une naissance ne rouvrent pas le choix."],
+    src: <>Sources : OVAM (Vaud), CLEISS.</>,
+  },
 ];
 
 const LD = graph(
@@ -57,6 +82,7 @@ const LD = graph(
     provider: { "@id": ORG_ID },
   },
   breadcrumbLd(MIETTES, `${URL_}#breadcrumb`),
+  { ...faqLd(faqOutilLd(FAQ)), "@id": `${URL_}#faq` },
 );
 
 export default function Page() {
@@ -83,30 +109,7 @@ export default function Page() {
         </div>
 
         <div className="wrap faq">
-          <section>
-            <h2>Combien de temps ai-je pour choisir entre LAMal et assurance française ?</h2>
-            <p>
-              Vous disposez de trois mois à compter du début de votre travail en Suisse (ou de votre installation en France). Le formulaire « Choix du système », une fois tamponné par votre CPAM, est à envoyer vous-même au service de l’assurance maladie de Genève ou à l’OVAM (Vaud), car la CPAM ne le transmet pas.
-            </p>
-            <p className="src">Sources : OFSP, assurance maladie des frontaliers ; CLEISS, droit d’option ; État de Genève.</p>
-          </section>
-          <section>
-            <h2>Que se passe-t-il si je ne choisis pas ?</h2>
-            <p>Vous êtes affilié d’office à la LAMal. Un choix tacite n’est pas valable. En cas de retard sans excuse valable, un supplément de prime peut s’appliquer.</p>
-            <p className="src">Source : OFSP.</p>
-          </section>
-          <section>
-            <h2>Comment l’Urssaf calcule-t-elle la cotisation ?</h2>
-            <p>
-              L’Urssaf prélève 8 % de vos revenus de l’avant-dernière année, après un abattement de 25 % du plafond annuel de la sécurité sociale (12 225 € en 2027). Par exemple, pour 60 000 € de revenus 2025, (60 000 − 12 225) × 8 % = 3 822 € en 2027. Chaque frontalier du foyer paie sa propre cotisation ; les personnes à charge sont rattachées sans cotisation.
-            </p>
-            <p className="src">Source : Urssaf, « Travail en Suisse : déclarer vos revenus ». Le taux de 2027 reste à confirmer par la loi de financement de la sécurité sociale.</p>
-          </section>
-          <section>
-            <h2>Puis-je changer d’option plus tard ?</h2>
-            <p>En principe non. Un nouveau contrat sans interruption, un changement de canton, un mariage ou une naissance ne rouvrent pas le choix.</p>
-            <p className="src">Sources : OVAM (Vaud), CLEISS.</p>
-          </section>
+          <FaqSections faq={FAQ} />
           <p className="maj">Mis à jour le 22 novembre 2026. Données : OFSP 2027, Urssaf 2026 et 2027.</p>
         </div>
       </main>

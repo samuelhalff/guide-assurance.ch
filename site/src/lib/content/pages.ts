@@ -22,6 +22,7 @@ export type PageContenu = {
   faq: { q: string; a: string }[];
   landing?: Landing; // page produit en landing (bloc de tête), voir lib/landing.ts
   html: string;
+  markdown: string; // texte source (après remplacements), pour llms-full.txt
   mots: number;
 };
 
@@ -67,6 +68,7 @@ export function toutesLesPages(locale: Locale = "fr"): PageContenu[] {
         faq: (data.faq ?? []) as PageContenu["faq"],
         landing: lireLanding(data.landing),
         html: marked.parse(content) as string,
+        markdown: content.trim(),
         mots: content.split(/\s+/).filter(Boolean).length,
       };
     })

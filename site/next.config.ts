@@ -7,7 +7,8 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   images: { unoptimized: true },
   /* Le formulaire de demande importe ../shared/demande (libellés, consentements, NPA) : hors du dossier du site. */
-  experimental: { externalDir: true },
+  /* globalNotFound : page 404 unique (src/app/global-not-found.tsx), le site ayant deux mises en page racines. */
+  experimental: { externalDir: true, globalNotFound: true },
 };
 
 export default nextConfig;

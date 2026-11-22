@@ -270,6 +270,15 @@
     .outil-simulateur { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); }
     .apercu { position: sticky; top: calc(57px + var(--s4)); }
   }
+
+  /* Page 404 (app/global-not-found.tsx) : liste des guides et appel au rappel, bloc anglais à la fin. */
+  .page-404 main .wrap { padding-top: var(--s6); padding-bottom: var(--s7); max-width: 760px; }
+  .page-404 .liste-guides { margin-top: var(--s5); }
+  .page-404 .rappel-liste { margin-top: var(--s5); }
+  .page-404 .retour-accueil { margin: var(--s4) 0 0; font-weight: 700; }
+  .page-404 .en-404 { margin-top: var(--s6); padding-top: var(--s4); border-top: 1px solid var(--filet); }
+  .page-404 .en-404 h2 { font-size: 21px; }
+  .page-404 .en-404 p { margin: var(--s2) 0 0; color: var(--encre-2); font-size: 16px; }
 }
 
 @media print {

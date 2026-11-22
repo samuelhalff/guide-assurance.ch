@@ -6,7 +6,8 @@ import { JsonLd } from "@/components/site/json-ld";
 import { PartagerOutil } from "@/components/site/partager-outil";
 import { SimulateurFrontalier } from "@/components/outils/simulateur-frontalier";
 import { pageMetadata } from "@/lib/metadata";
-import { ORG_ID, WEBSITE_ID, breadcrumbLd, graph, type Miette } from "@/lib/jsonld";
+import { ORG_ID, WEBSITE_ID, breadcrumbLd, faqLd, graph, type Miette } from "@/lib/jsonld";
+import { FaqSections, faqOutilLd, type FaqOutil } from "@/components/site/faq-sections";
 import { MAJ_ISO, abs } from "@/lib/site";
 import { OUTILS, OUTILS_EN } from "@/lib/nav";
 
@@ -23,6 +24,30 @@ const MIETTES: Miette[] = [
   { name: "Home", href: "/en/" },
   { name: "Cross-border workers", href: "/en/cross-border-workers/" },
   { name: "LAMal or French insurance" },
+];
+
+/* Questions affichées sous l'outil, reprises telles quelles dans le JSON-LD (FAQPage). */
+const FAQ: FaqOutil[] = [
+  {
+    q: "How long do I have to choose between LAMal and French insurance?",
+    a: ["You have three months from the start of your work in Switzerland (or from your move to France). Once your CPAM (French local health insurance fund) has stamped the “Choix du système” (choice of system) form, you send it yourself to the Geneva health insurance service or to the OVAM (Vaud), because the CPAM does not forward it."],
+    src: <>Sources: FOPH, health insurance for cross-border workers; CLEISS, right of option; State of Geneva.</>,
+  },
+  {
+    q: "What happens if I do not choose?",
+    a: ["You are automatically enrolled in LAMal. A tacit choice is not valid. If you are late without a valid excuse, a premium surcharge can apply."],
+    src: <>Source: FOPH.</>,
+  },
+  {
+    q: "How does Urssaf calculate the contribution?",
+    a: ["Urssaf charges 8% of your income from the year before last, after an allowance of 25% of the annual social security ceiling (€12,225 in 2027). For example, for €60,000 of 2025 income, (60,000 − 12,225) × 8% = €3,822 in 2027. Each cross-border worker in the household pays their own contribution; dependants are attached with no contribution."],
+    src: <>Source: Urssaf, “Travail en Suisse : déclarer vos revenus” (Working in Switzerland: declaring your income). The 2027 rate is still to be confirmed by the French social security financing act.</>,
+  },
+  {
+    q: "Can I change option later?",
+    a: ["In principle, no. A new contract with no break, a change of canton, a marriage or a birth does not reopen the choice."],
+    src: <>Sources: OVAM (Vaud), CLEISS.</>,
+  },
 ];
 
 const LD = graph(
@@ -58,6 +83,7 @@ const LD = graph(
     provider: { "@id": ORG_ID },
   },
   breadcrumbLd(MIETTES, `${URL_}#breadcrumb`),
+  { ...faqLd(faqOutilLd(FAQ)), "@id": `${URL_}#faq` },
 );
 
 export default function Page() {
@@ -89,30 +115,7 @@ export default function Page() {
         </div>
 
         <div className="wrap faq">
-          <section>
-            <h2>How long do I have to choose between LAMal and French insurance?</h2>
-            <p>
-              You have three months from the start of your work in Switzerland (or from your move to France). Once your CPAM (French local health insurance fund) has stamped the “Choix du système” (choice of system) form, you send it yourself to the Geneva health insurance service or to the OVAM (Vaud), because the CPAM does not forward it.
-            </p>
-            <p className="src">Sources: FOPH, health insurance for cross-border workers; CLEISS, right of option; State of Geneva.</p>
-          </section>
-          <section>
-            <h2>What happens if I do not choose?</h2>
-            <p>You are automatically enrolled in LAMal. A tacit choice is not valid. If you are late without a valid excuse, a premium surcharge can apply.</p>
-            <p className="src">Source: FOPH.</p>
-          </section>
-          <section>
-            <h2>How does Urssaf calculate the contribution?</h2>
-            <p>
-              Urssaf charges 8% of your income from the year before last, after an allowance of 25% of the annual social security ceiling (€12,225 in 2027). For example, for €60,000 of 2025 income, (60,000 − 12,225) × 8% = €3,822 in 2027. Each cross-border worker in the household pays their own contribution; dependants are attached with no contribution.
-            </p>
-            <p className="src">Source: Urssaf, “Travail en Suisse : déclarer vos revenus” (Working in Switzerland: declaring your income). The 2027 rate is still to be confirmed by the French social security financing act.</p>
-          </section>
-          <section>
-            <h2>Can I change option later?</h2>
-            <p>In principle, no. A new contract with no break, a change of canton, a marriage or a birth does not reopen the choice.</p>
-            <p className="src">Sources: OVAM (Vaud), CLEISS.</p>
-          </section>
+          <FaqSections faq={FAQ} />
           <p className="maj">Updated on 22 November 2026. Data: FOPH 2027, Urssaf 2026 and 2027.</p>
         </div>
       </main>

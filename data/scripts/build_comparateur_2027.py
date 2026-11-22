@@ -28,7 +28,15 @@ RESUME = ROOT / "site" / "src" / "data" / "primes-2027-resume.json"
 CANTONS = ["GE", "VD", "VS", "FR", "NE", "JU", "BE"]
 CLASSES = ["enfant", "jeune", "adulte"]
 TYPES = ["BASE", "FLEX", "PRAXIS", "TEL_DIG", "PHARM"]
-SOURCE = "OFSP, primes LAMal 2027 approuvées (priminfo.admin.ch), relevées le 22.11.2026"
+# Date du relevé : fichier priminfo le plus récent (le relevé les réécrit). Le site lit cette date dans `source`
+# (site/src/lib/date-primes.ts) pour le « Mis à jour le », le JSON-LD, le sitemap et llms.txt.
+def _date_releve() -> str:
+    from datetime import datetime
+    ts = [f.stat().st_mtime for f in PI.rglob("*") if f.is_file() and f.name != "plan.json"]
+    return datetime.fromtimestamp(max(ts)).strftime("%d.%m.%Y") if ts else "22.11.2026"
+
+
+SOURCE = f"OFSP, primes LAMal 2027 approuvées (priminfo.admin.ch), relevées le {_date_releve()}"
 
 ROW = re.compile(r"<tr>\s*<th[^>]*>(.*?)</th>\s*<th[^>]*>(.*?)</th>(.*?)</tr>", re.S)
 TD = re.compile(r'<td class="monthlyCell">([^<]*)</td>')

@@ -1,8 +1,32 @@
 "use client";
+import { useEffect, useRef, type RefObject } from "react";
 import { suivre } from "@/lib/analytics";
 import { RAPPEL, ecrirePreremplissage, lirePreremplissage } from "@/lib/demande";
 
-export type EmplacementRappel = "tete" | "accueil" | "guide" | "comparateur" | "produit" | "outil3a";
+export type EmplacementRappel = "tete" | "accueil" | "guide" | "comparateur" | "produit" | "outil3a" | "lettre" | "frontalier";
+
+/* Vue d'un appel « Être rappelé » : rappel_vu {emplacement}, une fois par emplacement et par page, quand la moitié
+   de l'appel est à l'écran. Rien d'autre ne part (aucune valeur saisie). La tête est exclue : toujours visible,
+   sa vue doublerait les pages vues. */
+const vus = new Set<EmplacementRappel>();
+export function useRappelVu(ref: RefObject<Element | null>, emplacement: EmplacementRappel, actif = true) {
+  useEffect(() => {
+    const el = ref.current;
+    if (!actif || !el || emplacement === "tete" || vus.has(emplacement) || typeof IntersectionObserver === "undefined") return;
+    const io = new IntersectionObserver(
+      (entrees) => {
+        if (!entrees.some((e) => e.isIntersecting)) return;
+        io.disconnect();
+        if (vus.has(emplacement)) return;
+        vus.add(emplacement);
+        suivre("rappel_vu", { emplacement });
+      },
+      { threshold: 0.5 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [ref, emplacement, actif]);
+}
 
 /* Lien vers le formulaire court « Être rappelé ». Le clic part vers PostHog (rappel_ouvert, emplacement seul). */
 export function LienRappel({
@@ -20,12 +44,14 @@ export function LienRappel({
   className?: string;
   children: React.ReactNode;
 } & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href" | "onClick">) {
+  const ref = useRef<HTMLAnchorElement>(null);
+  useRappelVu(ref, emplacement);
   const ouvrir = () => {
     if (sujet) ecrirePreremplissage({ ...lirePreremplissage(), besoin: [sujet] });
     suivre("rappel_ouvert", { emplacement }, true);
   };
   return (
-    <a {...rest} className={className} href={RAPPEL[locale]} onClick={ouvrir}>
+    <a {...rest} ref={ref} className={className} href={RAPPEL[locale]} onClick={ouvrir}>
       {children}
     </a>
   );

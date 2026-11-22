@@ -8,7 +8,9 @@ import { calculerSaison } from "@/components/site/saison";
 import { pageMetadata } from "@/lib/metadata";
 import { jsonLdAccueil } from "@/lib/jsonld-accueil";
 import { ORG_ID, WEBSITE_ID } from "@/lib/jsonld";
-import { MAJ_ISO, abs } from "@/lib/site";
+import { abs } from "@/lib/site";
+import { DATE_PAGE } from "@/lib/donnees";
+import { COMPTES_3A, RELEVE_LE, TAUX_MAX, TAUX_MIN, dateCh, tauxFr } from "@/lib/taux3a";
 import { OUTILS } from "@/lib/nav";
 
 const TITRE = "Comparer les primes maladie 2027 en Suisse romande";
@@ -35,7 +37,7 @@ const LD = {
       about: { "@id": ORG_ID },
       publisher: { "@id": ORG_ID },
       mainEntity: { "@id": abs(`${OUTILS.comparateur}#outil`) },
-      dateModified: MAJ_ISO,
+      dateModified: DATE_PAGE.accueil,
     },
     {
       "@type": "WebApplication",
@@ -104,8 +106,8 @@ const OUTILS_LISTE: OutilLigne[] = [
 const OUTILS_3A: OutilLigne[] = [
   {
     href: "/3e-pilier/taux-3a/",
-    chiffre: "0,05 à 0,65 %",
-    legende: "taux des comptes 3a de 17 banques, relevés le 22.11.2026",
+    chiffre: `${TAUX_MIN.toFixed(2).replace(".", ",")} à ${tauxFr(TAUX_MAX)}`,
+    legende: `taux des comptes 3a de ${COMPTES_3A.length} banques, relevés le ${dateCh(RELEVE_LE)}`,
     titre: "Taux des comptes 3a",
     texte: "Nous relevons le taux de chaque banque sur sa propre page, avec ses conditions. La liste va du taux le plus élevé au plus bas, et aucune banque ne paie pour y figurer.",
     cta: "Voir les taux",

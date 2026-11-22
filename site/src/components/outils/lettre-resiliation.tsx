@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import * as D from "@/lib/engines/delais";
 import { outils } from "@/lib/nav";
 import type { Locale } from "@/lib/i18n";
+import { IconeTelephone, LienRappel } from "@/components/demande/lien-rappel";
 
 /* Lettre de résiliation : interface de mockups/v2/lettre-resiliation.html, délais par src/lib/engines/delais.ts.
    La lettre est rédigée dans le navigateur ; rien n'est envoyé ni gardé. */
@@ -74,6 +75,8 @@ export function LettreResiliation({ aujourdhuiIso, locale = "fr" }: { aujourdhui
     debut: "", echeance: "", preavis: "3", produits: "",
   });
   const [copie, setCopie] = useState("");
+  /* Lettre copiée ou imprimée : l'appel « Être rappelé » apparaît sous les boutons. */
+  const [faite, setFaite] = useState(false);
   const lettre = useRef<HTMLElement>(null);
   const set = (k: keyof Champs) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setV((o) => ({ ...o, [k]: e.target.value }));
@@ -161,6 +164,7 @@ export function LettreResiliation({ aujourdhuiIso, locale = "fr" }: { aujourdhui
 
   async function copier() {
     suivre("lettre_copiee");
+    setFaite(true);
     const txt = (lettre.current?.innerText || "").replace(/\n{3,}/g, "\n\n");
     try {
       await navigator.clipboard.writeText(txt);
@@ -347,10 +351,25 @@ export function LettreResiliation({ aujourdhuiIso, locale = "fr" }: { aujourdhui
           <p className="sign">{ou(t.nom, "Prénom Nom")}<br /><Vide>Signature</Vide></p>
         </article>
         <div className="actions">
-          <button type="button" className="bouton" onClick={() => { suivre("lettre_imprimee"); window.print(); }}>{isEn ? "Print or save as PDF" : "Imprimer ou enregistrer en PDF"}</button>
+          <button type="button" className="bouton" onClick={() => { suivre("lettre_imprimee"); setFaite(true); window.print(); }}>{isEn ? "Print or save as PDF" : "Imprimer ou enregistrer en PDF"}</button>
           <button type="button" className="bouton second" onClick={copier}>{isEn ? "Copy the text" : "Copier le texte"}</button>
           <span className="copie-ok" role="status">{copie}</span>
         </div>
+        {faite ? (
+          <p className="rappel-liste rappel-lettre">
+            {type === "lamal"
+              ? isEn
+                ? "Supplementary insurance is best cancelled once the new insurer has accepted you, since it can turn an application down. If you would like to talk it through, an adviser can call you back. "
+                : "Une complémentaire se résilie de préférence après l’acceptation par le nouvel assureur, car celui-ci peut refuser une demande. Si vous voulez en parler, un conseiller vous rappelle. "
+              : isEn
+                ? "Looking for new supplementary insurance? An adviser can call you back to talk it through before you send the letter. "
+                : "Vous cherchez une nouvelle complémentaire\u202f? Un conseiller peut vous rappeler pour en parler avant que vous envoyiez la lettre. "}
+            <LienRappel locale={locale} emplacement="lettre" sujet="sante">
+              <IconeTelephone size={16} />
+              {isEn ? "Call me back" : "Être rappelé"}
+            </LienRappel>
+          </p>
+        ) : null}
         <div className="apres">
           <h3>{isEn ? "What is left to do" : "Ce qu’il reste à faire"}</h3>
           {type === "lamal" ? (
