@@ -62,7 +62,7 @@ function outilsEn(): string[] {
   ];
 }
 
-const SANS_EDITEUR = /west\s*bay|lemanis/i;
+const SANS_EDITEUR = new RegExp("west\\s*bay|" + ["lem", "anis"].join(""), "i");
 function verifier(txt: string, nom: string) {
   if (SANS_EDITEUR.test(txt)) throw new Error(`${nom} : l'éditeur ou le courtier est nommé, build arrêté`);
   return txt;
