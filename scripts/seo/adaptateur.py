@@ -26,6 +26,7 @@ BOT = "guide-assurance-bot"
 DEPLOIEMENT_LLM = "gpt-4.1"
 VERSION_API_LLM = "2025-01-01-preview"
 APOSTROPHE_COURBE = True
+CASSE = ["Suisse", "Suisse romande", "Genève", "Vaud", "Valais", "Fribourg", "Neuchâtel", "Jura", "LAMal", "LCA", "LAA", "LPP", "OFSP", "Switzerland", "Geneva"]
 MARQUE = r"guide.?assurance"
 MIN_IMPR_FAQ = 10
 THEME = ("information neutre sur l'assurance en Suisse romande : assurance maladie LAMal et complémentaires, 3e pilier, "
