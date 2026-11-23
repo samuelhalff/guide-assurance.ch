@@ -16,9 +16,16 @@ const NB = " ";
 const T = " ";
 const ANNEE = 2027;
 const MAX_PERSONNES = 6;
-const nfFr = (x: number, d = 0) =>
-  new Intl.NumberFormat("fr-CH", { minimumFractionDigits: d, maximumFractionDigits: d }).format(x).replace(/\s/g, T);
-const nfEn = (x: number, d = 0) => new Intl.NumberFormat("en-GB", { minimumFractionDigits: d, maximumFractionDigits: d }).format(x);
+/* Nombres formatés sans Intl : l'ICU de Node (build) et celle du navigateur diffèrent pour fr-CH (apostrophe ou
+   espace fine), ce qui casse l'hydratation (erreur React 418). FR : espace fine et virgule ; EN : virgule et point. */
+const grouper = (x: number, d: number, mille: string, dec: string) => {
+  const v = Number.isFinite(x) ? x : 0;
+  const [e, f] = Math.abs(v).toFixed(d).split(".");
+  const s = e.replace(/\B(?=(\d{3})+(?!\d))/g, mille) + (f ? dec + f : "");
+  return v < 0 && Number(Math.abs(v).toFixed(d)) !== 0 ? `-${s}` : s;
+};
+const nfFr = (x: number, d = 0) => grouper(x, d, T, ",");
+const nfEn = (x: number, d = 0) => grouper(x, d, ",", ".");
 
 type PersonneUI = { id: number; enfant: boolean; naissance: string; situation: F.Situation; revenu: string; moinsDe8h: boolean };
 type SituationUI = F.Situation;
