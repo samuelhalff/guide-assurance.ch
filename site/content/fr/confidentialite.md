@@ -4,7 +4,7 @@ title: "Politique de confidentialité"
 description: "{{MESURE_DESCRIPTION}}"
 h1: "Politique de confidentialité"
 rubrique: legal
-updated: 2026-11-22
+updated: 2026-11-23
 sources:
   - { label: "Loi fédérale sur la protection des données, nLPD (Fedlex)", url: "https://www.fedlex.admin.ch/eli/cc/2022/491/fr" }
 faq:
@@ -36,7 +36,8 @@ La lettre de résiliation et le simulateur frontalier font leurs calculs dans vo
 
 Si vous remplissez le formulaire pour être rappelé, West Bay SA enregistre ce que vous y saisissez (besoin, NPA, année de naissance, taille du foyer, nom, téléphone et, si vous les donnez, e-mail et créneau de rappel) ainsi que la preuve de votre accord : le texte accepté, sa version, la date et l’adresse IP de l’envoi.
 
-- La demande est transmise seulement à un courtier en assurances partenaire, en Suisse romande, qui vous rappelle et devient responsable du traitement pour la suite. Son nom vous est communiqué sur demande. Elle n’est transmise à aucune autre entreprise.
+- La demande est transmise seulement à un courtier en assurances partenaire, en Suisse romande, qui vous rappelle et devient responsable du traitement pour la suite. Son nom vous est communiqué sur demande. En dehors de l’invitation à laisser un avis décrite au point suivant, elle n’est transmise à aucune autre entreprise.
+- Si vous avez donné votre e-mail, Guide Assurance vous envoie une confirmation de votre demande et transmet votre nom, votre e-mail et la référence de la demande à Trustpilot, qui vous invite ensuite à laisser un avis sur notre service.
 - Les complémentaires santé qui vous intéressent (hospitalisation, soins dentaires) ne sont traitées qu’avec votre accord exprès séparé, et enregistrées chiffrées.
 - Aucun outil de mesure ne reçoit ce que vous saisissez dans le formulaire. Les outils de mesure d’audience ne sont pas chargés sur ses pages.
 - Les demandes sont hébergées en Suisse. Les notifications internes passent par une messagerie professionnelle. Une protection contre les robots vérifie que l’envoi vient d’une personne. La liste des sous-traitants est communiquée sur demande.

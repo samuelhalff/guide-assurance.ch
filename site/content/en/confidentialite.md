@@ -5,7 +5,7 @@ title: "Privacy policy"
 description: "{{MESURE_DESCRIPTION}}"
 h1: "Privacy policy"
 rubrique: legal
-updated: 2026-11-22
+updated: 2026-11-23
 sources:
   - { label: "Federal Act on Data Protection, nFADP (nLPD) (Fedlex)", url: "https://www.fedlex.admin.ch/eli/cc/2022/491/fr" }
 faq:
@@ -56,7 +56,8 @@ The assistant answers your questions from the site’s guides, without personal 
 
 If you fill in the form to be called back, West Bay SA stores what you enter (need, postcode, year of birth, household size, name, phone and, if you give them, e-mail and call-back slot) together with proof of your consent: the accepted text, its version, the date and the IP address of the submission.
 
-- The request is passed only to a partner insurance broker in French-speaking Switzerland, which calls you back and becomes the controller from then on. Its name is given to you on request. It is passed to no other company.
+- The request is passed only to a partner insurance broker in French-speaking Switzerland, which calls you back and becomes the controller from then on. Its name is given to you on request. Apart from the review invitation described in the next point, it is passed to no other company.
+- If you gave your e-mail address, Guide Assurance sends you a confirmation of your request and passes your name, e-mail address and request reference to Trustpilot, which then invites you to review our service.
 - The supplementary health covers you are interested in (hospital, dental) are only processed with your separate express consent, and stored encrypted.
 - No analytics tool receives what you type in the form. Analytics tools are not loaded on its pages.
 - Requests are hosted in Switzerland. Internal notifications go through a business e-mail service. A bot check confirms the request comes from a person. The list of processors is available on request.
