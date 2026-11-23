@@ -236,7 +236,7 @@
   }
   @media (min-width: 1000px) {
     .outil-comparateur { grid-template-columns: minmax(300px, .62fr) minmax(0, 1.38fr); }
-    .outil-comparateur .form { position: sticky; top: calc(57px + var(--s4)); padding: var(--s5); }
+    .outil-comparateur .form { position: sticky; top: calc(var(--tete-h) + var(--s4)); padding: var(--s5); }
     .outil-comparateur .pastilles { grid-template-columns: repeat(3, 1fr); }
     .outil-comparateur .apercu { position: static; }
     .cartes-primes { display: none; }
@@ -268,7 +268,7 @@
   @media (min-width: 1000px) {
     .outil { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: var(--s6); align-items: start; }
     .outil-simulateur { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); }
-    .apercu { position: sticky; top: calc(57px + var(--s4)); }
+    .apercu { position: sticky; top: calc(var(--tete-h) + var(--s4)); }
   }
 
   /* Page 404 (app/global-not-found.tsx) : liste des guides et appel au rappel, bloc anglais à la fin. */

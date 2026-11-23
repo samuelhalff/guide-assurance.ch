@@ -67,7 +67,7 @@
     .cartes-taux { display: none; }
     table.table-taux { display: table; }
     .outil-impot3a { grid-template-columns: minmax(320px, .9fr) minmax(0, 1.1fr); align-items: start; }
-    .outil-impot3a .form { position: sticky; top: calc(57px + var(--s4)); padding: var(--s5); }
+    .outil-impot3a .form { position: sticky; top: calc(var(--tete-h) + var(--s4)); padding: var(--s5); }
   }
 }
 

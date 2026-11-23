@@ -25,7 +25,7 @@
   /* ===== Tête ===== */
   /* Barre du haut toujours visible ; les ancres et les blocs collants se placent dessous. */
   /* Place de la barre de défilement toujours réservée : ouvrir l'assistant (qui bloque le défilement) ne décale plus la page. */
-  html { scroll-padding-top: 72px; scrollbar-gutter: stable; }
+  html { --tete-h: 73px; scroll-padding-top: calc(var(--tete-h) + 8px); scrollbar-gutter: stable; }
   .tete { background: var(--papier); border-bottom: 1px solid var(--filet); position: sticky; top: 0; z-index: 30; }
   .tete .wrap { display: flex; align-items: center; gap: var(--s6); min-height: 68px; flex-wrap: wrap; }
   .marque { display: flex; align-items: center; gap: 6px; color: var(--encre); text-decoration: none; }

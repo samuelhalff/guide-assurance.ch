@@ -130,7 +130,7 @@
   }
   @media (min-width: 1000px) {
     .outil-menage { grid-template-columns: minmax(320px, .9fr) minmax(0, 1.1fr); align-items: start; }
-    .outil-menage .form { position: sticky; top: calc(57px + var(--s4)); padding: var(--s5); }
+    .outil-menage .form { position: sticky; top: calc(var(--tete-h) + var(--s4)); padding: var(--s5); }
     .cartes-pj { display: none; }
     .tables-pj { display: block; }
   }
