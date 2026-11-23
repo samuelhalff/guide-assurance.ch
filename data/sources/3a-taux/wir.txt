@@ -1,10 +1,59 @@
 URL: https://www.wir.ch/fileadmin/downloads/Informationen/zinsen-konditionen-bank-wir-fr.pdf
-Relevé: 2026-11-23T05:30:19+00:00
+Relevé: 2026-11-23T10:09:59+00:00
 Méthode: pdf (http)
-Extrait retenu: Compte Terzo Tenue de compte gratuite 0,30%
-Validité: Conditions valables à compter du 21 octobre 2026
-Lignes 50-289 sur 329 (texte normalisé)
+Extrait retenu: -
+Validité: -
+Lignes 1-120 sur 329 (texte normalisé)
 ------------------------------------------------------------------------
+Intérêts et conditions de la Banque WIR
+Conditions valables à compter du 23 novembre 2026 (sous réserve de modifications)
+Payer et épargner
+Intérêts Intérêts
+Conditions créditeurs débiteurs
+Le système CHW – simple et transparent
+Contribution au réseau 2,00% sur rentrées en CHW
+Prix du paquet CHW pour PME 150 CHF p. a. 1)
+Contenu du paquet
+Compte CHW (tenue et clôture de compte) inclus 0,00% 10,00%***
+Compte CHF (tenue et clôture de compte) inclus 0,00%* 10,00%***
+Livraison des documents de clôture sous forme papier 2.00 CHF/CHW
+Accès au registre des participants inclus
+Compte CHW / Compte CHF privé pour les employés
+(nombre illimité) inclus 0,00% ** 10,00% ***
+CHWcard (illimitée) incluse
+1 CHWcard plus avec un nombre illimité de retraits aux distri-
+buteurs automatiques en Suisse et à l'étranger incluse
+Magazine PME WIRinfo inclus
+Crédit publicitaire de 500 CHW p.a. dans les médias CHW inclus
+10 000 CHW de crédit immédiat lors d'une bonne solvabilité inclus 0,00%
+Crédit de liquidités 3,00%
+E-Banking inclus
+* jusqu'à 50 000 CHF
+** Intérêt créditeur sur le compte CHF privé en CHF jusqu'à 50 000 CHF
+*** intérêts débiteurs sur soldes de comptes CHF / CHW, débit sur compte CHF
+1) Pour les clients qui quittent le système CHW, une taxe de tenue de compte de 150 CHF p.a. (12.50 CHF p.m.) s'applique également ceci jusqu'à la clôture des comptes
+Les frais de gestion du compte CHW / compte CHF privé des employés sont directement débités aux employés lorsque l'entreprise quitte le réseau CHW.
+La paquet bancaire top, idéal pour les paiements privés
+Paquet bancaire top* Contenu du paquet
+• Compte privé top Tenue de compte gratuit 0,00%
+Clôture annuelle sous forme d'e-document gratuit
+• Debit Mastercard Frais de carte gratuit
+24 retraits aux distributeurs en Suisse et à l'étranger gratuit
+À partir du 25 e retrait, prix par retrait 2 CHF
+Achats dans les POS et e-commerce en Suisse et à l'étranger gratuit
+Retraits en devises étrangères Cours interbancaire sans supplément et commission
+Blocage de la carte, Carte de remplacement, Code-PIN gratuit
+• E-Banking & Mobile Banking Paiements en Suisse, EUR dans la zone SEPA gratuit
+Informations complémentaires sur les produits Voir page 5
+*Conditions d'utilisation
+Pour bénéficier du paquet, il suffit de remplir l'une des conditions suivantes: Entrées de fonds régulières d'un montant de 1 500 CHF / Fonds de prévoyance d'un montant
+d'au moins 20 000 CHF auprès de la Banque WIR / Une hypothèque d'au moins 300 000 CHF auprès de la Banque WIR / Possession d'une part sociale de la Banque WIR
+(coopératrice/coopératreur).
+PDF/030050.50/f/1126/DMS770 1 /8
+Intérêts Intérêts
+Conditions créditeurs débiteurs
+Business pro – idéal pour les paiements professionnels
+Business pro Contenu du paquet
 Prix du paquet par mois 9 CHF
 Compte inclus dans le paquet: Compte CHF pro CHF-konto pro
 Devise CHF
@@ -46,7 +95,7 @@ Paiements par E-Banking en devises étrangères 5 CHF
 * Pour employés chez un participant CHW avec paquet PME CHW, sinon 2.50 CHF p.m.
 ** Taux compte CHF privé: jusqu'à 50 000 CHF
 *** Intérêts débiteurs sur soldes de comptes CHF / CHW, débit sur compte courant CHF.
-PDF/030050.49/f/1026/DMS770 2 /8
+PDF/030050.50/f/1126/DMS770 2 /8
 Intérêts Intérêts
 Conditions créditeurs débiteurs
 Aperçu des rentrées locatives et dépenses foncières
@@ -76,172 +125,3 @@ Compte d'épargne fidélité* Tenue de compte gratuite 0,30%** 10,00%
 Clôture annuelle gratuite
 Sans résiliation (par année calendrier) 20 000 CHF gratuit
 Délai de résiliation pour montants supérieurs à 20 000 CHF 180 jours
-Sur retraits sans résiliation, au-delà de la limite sans résiliation 2,00%
-Rémunérations externes (y compris par E-Banking) 2 CHF
-Transferts au sein de la Banque WIR via E- et M-Banking gratuits
-* Le «compte d'épargne fidélité» est disponible comme produit de remplacement pour les titulaires du «compte d'épargne plus» – selon l'offre de la banque
-** jusqu'à 500 000 CHF, au-delà: 0,025%
-**Pour de retraits dépassant le montant autorisé sans préavis de 20 000 CHF par année civile et en cas de clôture de compte en cours d'année, le droit au taux d'intérêt fidélité
-est supprimé et l'intégralité du solde du compte sera rémunérée au taux d'intérêt du compte d'épargne (actuellement 0,05%) pour l'année civile en cours.
-PDF/030050.49/f/1026/DMS770 3 /8
-Intérêts Intérêts
-Conditions créditeurs débiteurs
-Épargne bonus pour des clients domicilés en Suisse
-Compte d'épargne participatif Tenue de compte / taux d'intérêt de base gratuite 0,05%* 10,00%
-Clôture annuelle gratuite
-Bonus pour bon de participation 0,35%**
-Sans résiliation (par trimestre) jusqu'à 20 000 CHF gratuit
-Délai de résiliation pour montants supérieurs à 20 000 CHF 180 jours
-Sur retraits sans résiliation, au-delà de la limite sans résiliation 2,00%
-Rémunérations externes (y compris par E-Banking) 2 CHF
-Transferts au sein de la Banque WIR via E- et M-Banking gratuits
-*jusqu'à 500 000 CHF, au-delà: 0,025%
-** pour au moins 25 bons de participation dans le dépôt (taux de base et taux bonus jusqu'à 100 000 CHF, au dessus de 100 000 CHF, le taux de base s'applique)
-Placement avantageux de fonds de prévoyance libérés à partir de 60 ans
-Compte d'épargne 60+ Tenue de compte gratuite 0,10* 10,00%
-Clôture annuelle gratuite
-Sans résiliation (par mois calendaire) 10 000 CHF gratuit
-Délai de résiliation pour montants supérieurs à 10 000 CHF 180 jours
-Sur retraits sans résiliation, au-delà de la limite sans résiliation 2,00%
-Rémunérations externes (y compris par E-Banking) 2 CHF
-Transferts au sein de la Banque WIR via E- et M-Banking gratuits
-* jusqu'à 500 000 CHF, au-delà: 0,025%
-Continuation uniquement pour comptes existants
-Compte d'épargne caution
-de loyer en CHF Tenue de compte gratuite 0,00% 10,00%
-Clôture annuelle gratuite
-Placement à terme
-Compte de placement à terme CHF Tenue de compte
-durant l'année 3 - 12 mois, pluriannuel 2 - 10 ans gratuite du jour 10,00%
-Attestation annuelle d'intérêts / de capital gratuite
-Placement minimum:
-5 000 (2 - 10 Jans), CHF 100 000 (3 - 12 mois)
-Placement maximal:
-CHF 1 Mio. (2 - 10 ans), CHF 3 Mio. (3 - 12 mois)
-Solde de compte gratuit
-Résiliation anticipée 100 CHF
-(plus des frais de remboursement anticipé d'au moins 2,00 %)
-PDF/030050.49/f/1026/DMS770 4 /8
-Intérêts Intérêts
-Conditions créditeurs débiteurs
-Prévoyance avec pilier 3a*
-Compte Terzo Tenue de compte gratuite 0,30%
-Clôture annuelle gratuite
-Versement de l'encouragement à la propriété du logement
-si le financement ne passe pas par la Banque WIR 300 CHF
-Attestation fiscale annuelle gratuite
-Solde de compte gratuit
-Selon le règlement de la fondation de prévoyance
-Échéance et versement Terzo de la Banque WIR
-VIAC pilier 3a* Ouverture et solde de compte gratuit par App
-Commission à forfait (inclut la gestion de dépôt, coûts de 0,00% - max. 0,40% frais de géstion
-transactions, administration de la prévoyance) (en savoir plus: www.viac.ch/fr/strategies)
-Clôture annuelle gratuite
-Versement de l'encouragement à la propriété du logement
-si le financement ne passe pas par la Banque WIR 300 CHF
-Attestation fiscale annuelle gratuite
-*Plafond de versement avec caisse de pension: au maximum 7 258 CHF; sans caisse de pension: jusqu'à 20% du revenu annuel, toutefois au maximum 36 288 CHF.
-Intérêts Intérêts
-Conditions créditeurs débiteurs
-Dépôt intermédiaire des actifs de retraite du 2 e pilier
-Compte de libre passage CHF Tenue de compte gratuite 0,15%
-Clôture annuelle gratuite
-Versement de l'encouragement à la propriété du logement
-si le financement ne passe pas par la Banque WIR 300 CHF
-Attestation fiscale annuelle gratuite
-Solde de compte gratuit
-Selon le règlement de la fondation de
-Versement de l'avoir libre-passage de la Banque WIR
-VIAC 2 e pilier Ouverture et solde de compte gratuite
-Commission à forfait (inclut la gestion de dépôt, coûts de 0,00% - max. 0,40% frais de géstion
-transactions, administration de la prévoyance) (en savoir plus: www.viac.ch/fr/strategies)
-Versement de l'encouragement à la propriété du logement 300 CHF
-si le financement ne passe pas par la Banque WIR
-S'engager auprès de la banque WIR
-Le bon de participation Courtage interne bourse de la Banque WIR 0,25% de la valeur boursière (au min. 20 CHF)
-Courtage Marché OTC Banque Cantonale Bernoise 0,25% de la valeur boursière (au min. 20 CHF)
-plus frais de tiers
-Droit de négociation: 0,075% de la valeur boursière
-Transfert de dépôt à dépôt 20.00 CHF incl. 8,80% de TVA
-Transfert sur dépôt d'une banque tierce: 100 CHF plus 8,80% de TVA
-Gestion de dépôt gratuite
-PDF/030050.49/f/1026/DMS770 5 / 8
-Intérêts Intérêts
-Conditions créditeurs débiteurs
-Payer sous forme électronique et économiser ainsi
-E-Banking et Mobile Banking Paiements en CHW / CHF en Suisse,
-EUR dans l'espace SEPA gratuits
-Devises étrangères / CHF à l'étranger, EUR hors de
-l'espace SEPA 5 CHF
-Transferts au sein de la Banque WIR via E-Banking
-et Mobile-Banking gratuits
-Rémunérations externes à partir de comptes d'épargne 2 CHF
-(par transfert)
-Clôtures de compte et extraits gratuits
-Téléchargement de fichiers de paiement ISO gratuit
-Création / mutation ordre permanent gratuit
-Opérations manuelles de paiement
-Ordre permanent Demande par courrier de création / mutation par poste 10 CHF
-Ordre permanent Exécution de devises étrangères et CHF à l'étranger 5 CHF
-Exécution de CHF / CHW en Suisse gratuite
-Ordre par courrier A partir de compte CHW/CHF / EUR / USD 10 CHW / CHF
-de rémunération (norme A6) Compte courant CHW / CHF / Compte loyer CHF
-Frais par paiement 1 CHW / CHF
-à partir de comptes d'épargne 2 CHF
-Suppléments
-Paiements à l'étranger Option «Frais bancaires à la charge du donneur d'ordre» 20 CHF
-Relation clients Frais pour clients étranger 480 CHW / CHF p.a. (par année entamée)
-Frais pour clients sans contact 200 CHF p.a. (par année entamée)
-Paiement sans espèce
-CHWcard Frais de carte gratuits
-Paiements en CHW / CHF gratuits
-Debit Mastercard ® CHWcard plus Frais de carte 40 CHF p. a. (une carte incluse dans le paquet CHW)
-Paiements CHW / CHF dans le réseau CHW gratuits
-24 retraits sur distributeurs automatiques p. a.
-en Suisse et à l'étranger gratuits
-À partir du 25 e retrait, prix par retrait 2 CHF (retraits illimités dans le paquet CHW)
-Achat POS et e-Commerce en Suisse gratuit
-Achat POS et e-Commerce étranger 1.50 CHF (gratuit dans le paquet CHW pour PME)
-Retrait d'espèces en magasin (Purchase with Cashback) gratuit
-Blocage de la carte 20 CHF
-NIP de remplacement 10 CHF
-Carte de remplacement 40 CHF
-Activation paiement mobile
-(Apple Pay, Google Pay, Samsung Pay) gratuite
-PDF/030050.49/f/1026/DMS770 6 /8
-Prestations de service
-Conditions
-FX Trading Marge client par accord
-ouverture et tenue de compte selon amnistreasury.com
-Compte de consignation de capital 0,10% du montant versé:
-fondation d'entreprise avec participation au système CHW min. 200 CHF, max. 2000 CHF
-fondation d'entreprise sans participation au système CHW min. 1000 CHF, pas de maximum
-Confirmation de relations commerciales (1 à 3 comptes) 200 CHF plus 8,80% de TVA
-Confirmation de relations commerciales
-(pour chaque compte supplémentaire) 50 CHF plus 8,80% de TVA
-Envois Direct Mail Service plus frais de port 0.22 CHW
-Ordre de virement (au moins 2 unités), par unité 1 CHF
-Livraison des documents de clôture sous forme papier 2 CHW / CHF (sauf des comptes d'épargne
-et de retraite)
-Autres clôtures de compte / extraits définis par périodes
-par l'intermédiaire du conseiller clientèle 4 CHF
-poste sont débités
-Tâches (Recherches d'adresses, div. clarifications) 140 CHF plus 8,80% de TVA de l'heure
-Investissement minimal dans les recherches 20 CHF plus 8,80% de TVA
-Résiliation de la relation client
-(débit sur le solde restant du dernier compte soldé
-– sauf pour les comptes de prévoyance) 15 CHF
-Frais de rappel
-Relevé de compte pour dépassement de compte dans
-la monnaie respective du compte gratuit
-Rappel pour défaut de communication d'informations Min. 50 CHF / CHW
-Max. 250 CHF / CHW
-1 er et 2 e rappel pour dépassement de compte dans
-la monnaie respective du compte 50 CHW / CHF / EUR / USD
-3 e rappel pour les dépassements de compte dans
-la devise du compte respectif 100 CHW / CHF / EUR / USD
-1 er et 2 e rappel lors d'intérêts et/ou d'amortissements 50 CHF
-3 e rappel lors d'intérêts et/ou d'amortissements 100 CHF
-Frais de traitement pour les hypothèques et les crédits
-Emission Maisons individuelles / appartements en propriété 250 CHF
-Immeubles d'habitation, biens d'habitation / commerciaux ½‰ du montant du crédit, au min. 500 CHF

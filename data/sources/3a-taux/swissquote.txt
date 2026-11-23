@@ -1,5 +1,5 @@
 URL: https://www.swissquote.com/fr-ch/private/invest/products/3a-easy
-Relevé: 2026-11-23T05:30:19+00:00
+Relevé: 2026-11-23T10:10:01+00:00
 Méthode: http
 Extrait retenu: Stratégie d'épargne 3a Frais d'administration Aucuns frais Montant minimum de dépôt CHF 100 Taux d'intérêt 0.10 %
 Validité: -

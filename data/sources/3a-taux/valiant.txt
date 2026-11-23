@@ -1,5 +1,5 @@
 URL: https://www.valiant.ch/fr/clients-prives/prevoyance-produits-de-prevoyance-compte-de-prevoyance-privor-3a
-Relevé: 2026-11-23T05:30:18+00:00
+Relevé: 2026-11-23T10:09:56+00:00
 Méthode: http
 Extrait retenu: Taux d'intérêt de 0,200%
 Validité: Dernier ajustement des taux: le 22 septembre 2026

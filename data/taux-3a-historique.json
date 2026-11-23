@@ -111,7 +111,7 @@
   },
   {
    "date": "2026-11-23",
-   "source": "relevé automatique, aucun changement (infra/refresh/taux3a.py)",
+   "source": "relevé automatique (infra/refresh/taux3a.py)",
    "comptes": [
     {
      "id": "bas",
@@ -213,7 +213,8 @@
      "id": "wir",
      "banque": "Banque WIR",
      "taux": 0.3,
-     "taux_valable_des": "2026-10-21"
+     "taux_valable_des": "2026-10-21",
+     "lu_le": "2026-11-22"
     }
    ]
   }

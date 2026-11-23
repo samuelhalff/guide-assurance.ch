@@ -1,5 +1,5 @@
 URL: https://www.bcv.ch/fr/home/informations-financieres/taux-et-tarifs/taux-et-tarifs-clientele-privee.html
-Relevé: 2026-11-23T05:30:12+00:00
+Relevé: 2026-11-23T10:09:44+00:00
 Méthode: http
 Extrait retenu: Comptes de prévoyance Rémunération actuelle Epargne 3 0,05% Epargne 3 Jeunes 0,50%
 Validité: -
