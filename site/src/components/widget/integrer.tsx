@@ -2,6 +2,7 @@
 import { useState } from "react";
 import type { Locale } from "@/lib/i18n";
 import { suivre } from "@/lib/analytics";
+import { Choix } from "@/components/outils/choix";
 
 /* Code d'intégration d'un widget : aperçu (iframe), code à copier, choix de la région pour la prime.
    Aucune mesure ici : la copie du code n'est pas comptée. */
@@ -46,11 +47,7 @@ export function CodeWidget({
       {choix ? (
         <div className="champ">
           <label htmlFor={`choix-${id}`}>{libelleChoix}</label>
-          <select className="saisie" id={`choix-${id}`} value={sel} onChange={(e) => { setSel(e.target.value); setEtat(""); }}>
-            {choix.map((c) => (
-              <option key={c.valeur} value={c.valeur}>{c.libelle}</option>
-            ))}
-          </select>
+          <Choix id={`choix-${id}`} value={sel} onChange={(v) => { setSel(v); setEtat(""); }} options={choix.map((c) => ({ value: c.valeur, label: c.libelle }))} />
         </div>
       ) : null}
       <iframe className="widget-apercu" src={apercu} title={titre} width="100%" height={h} loading="lazy" />

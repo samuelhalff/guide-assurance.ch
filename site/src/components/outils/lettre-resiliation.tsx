@@ -7,6 +7,7 @@ import type { Locale } from "@/lib/i18n";
 import { IconeTelephone, LienRappel } from "@/components/demande/lien-rappel";
 import { BoutonAgenda } from "@/components/outils/ajouter-agenda";
 import { evenementLettre } from "@/lib/ics";
+import { Choix } from "@/components/outils/choix";
 
 /* Lettre de résiliation : interface de mockups/v2/lettre-resiliation.html, délais par src/lib/engines/delais.ts.
    La lettre est rédigée dans le navigateur ; rien n'est envoyé ni gardé. */
@@ -238,11 +239,11 @@ export function LettreResiliation({ aujourdhuiIso, locale = "fr" }: { aujourdhui
           </div>
           <div className="champ" style={{ marginTop: "var(--s3)" }}>
             <label htmlFor="preavis">{isEn ? "Notice period" : "Délai de préavis"}</label>
-            <select className="saisie" id="preavis" name="preavis" value={v.preavis} onChange={set("preavis")}>
-              <option value="3">{isEn ? "3 months (legal rule)" : "3 mois (règle légale)"}</option>
-              <option value="2">{isEn ? "2 months (under my contract)" : "2 mois (selon mon contrat)"}</option>
-              <option value="1">{isEn ? "1 month (under my contract)" : "1 mois (selon mon contrat)"}</option>
-            </select>
+            <Choix id="preavis" name="preavis" value={v.preavis} onChange={(x) => setV((cur) => ({ ...cur, preavis: x }))} options={[
+              { value: "3", label: isEn ? "3 months (legal rule)" : "3 mois (règle légale)" },
+              { value: "2", label: isEn ? "2 months (under my contract)" : "2 mois (selon mon contrat)" },
+              { value: "1", label: isEn ? "1 month (under my contract)" : "1 mois (selon mon contrat)" },
+            ]} />
           </div>
           <div className="champ">
             <label htmlFor="produits">{isEn ? "Supplementary insurance to cancel" : "Complémentaires à résilier"}</label>

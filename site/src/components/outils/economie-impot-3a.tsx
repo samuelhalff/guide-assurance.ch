@@ -4,6 +4,7 @@ import * as I from "@/lib/engines/impot3a";
 import { suivre } from "@/lib/analytics";
 import { IconeTelephone, LienRappel } from "@/components/demande/lien-rappel";
 import type { Locale } from "@/lib/i18n";
+import { Choix } from "@/components/outils/choix";
 
 /* Calculateur « Économie d'impôt 3a » : tout se calcule ici, rien n'est envoyé. Le profil peut être partagé
    après le # (jamais transmis au serveur), lu une fois puis retiré de l'adresse. */
@@ -251,20 +252,12 @@ export function EconomieImpot3a({ locale = "fr" }: { locale?: Locale }) {
         <div className="ligne">
           <div className="champ">
             <label htmlFor="i3-etat">{t.situation}</label>
-            <select className="saisie" id="i3-etat" value={etat} onChange={(e) => changerEtat(e.target.value as I.EtatCivil)}>
-              {(["seul", "marie", "monoparental"] as const).map((e) => (
-                <option key={e} value={e}>{t.etats[e]}</option>
-              ))}
-            </select>
+            <Choix id="i3-etat" value={etat} onChange={changerEtat} options={(["seul", "marie", "monoparental"] as const).map((e) => ({ value: e as I.EtatCivil, label: t.etats[e] }))} />
           </div>
           {etat !== "seul" ? (
             <div className="champ">
               <label htmlFor="i3-enfants">{t.enfants}</label>
-              <select className="saisie" id="i3-enfants" value={k} onChange={(e) => setEnfants(+e.target.value)}>
-                {Array.from({ length: maxK + 1 }, (_, i) => i).filter((i) => etat !== "monoparental" || i > 0).map((i) => (
-                  <option key={i} value={i}>{i}</option>
-                ))}
-              </select>
+              <Choix id="i3-enfants" value={k} onChange={setEnfants} options={Array.from({ length: maxK + 1 }, (_, i) => i).filter((i) => etat !== "monoparental" || i > 0).map((i) => ({ value: i, label: String(i) }))} />
             </div>
           ) : null}
         </div>

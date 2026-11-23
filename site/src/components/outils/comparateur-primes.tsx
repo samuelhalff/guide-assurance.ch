@@ -8,6 +8,7 @@ import { RAPPEL, ecrirePreremplissage, lienDemande } from "@/lib/demande";
 import { IconeTelephone, useRappelVu } from "@/components/demande/lien-rappel";
 import { dateCh } from "@/lib/taux3a";
 import { OffreComparateur, type OffreComparateurHandle } from "@/components/outils/offre-comparateur";
+import { Choix } from "@/components/outils/choix";
 
 /* Comparateur de primes LAMal 2027. Les données du canton sont chargées à la demande (public/data/primes-2027) ;
    le calcul se fait dans le navigateur, rien de ce qui est saisi n'est envoyé ni mis dans l'adresse.
@@ -542,9 +543,7 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
               </div>
               <div className="champ">
                 <label htmlFor={`cp-f-${p.id}`}>{t.franchiseCourt}</label>
-                <select className="saisie" id={`cp-f-${p.id}`} value={p.fr} disabled={!p.ok} onChange={(e) => maj(p.id, { franchise: +e.target.value })}>
-                  {p.choix.map((f) => <option key={f} value={f}>{nf(f)}</option>)}
-                </select>
+                <Choix id={`cp-f-${p.id}`} value={p.fr} disabled={!p.ok} onChange={(v) => maj(p.id, { franchise: v })} options={p.choix.map((f) => ({ value: f, label: nf(f) }))} />
                 {k === 0 ? <small className="aide-champ">{t.franchiseAide}</small> : null}
               </div>
             </div>
@@ -602,17 +601,11 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
             <div className="reglages" ref={reglagesRef}>
               <div className="champ">
                 <label htmlFor="cp-tri">{t.trier}</label>
-                <select className="saisie" id="cp-tri" value={tri} onChange={(e) => setTri(e.target.value as Tri)}>
-                  {(["prix", "prixDesc", "assureur"] as Tri[]).map((x) => <option key={x} value={x}>{t.tris[x]}</option>)}
-                </select>
+                <Choix id="cp-tri" value={tri} onChange={setTri} options={(["prix", "prixDesc", "assureur"] as Tri[]).map((x) => ({ value: x, label: t.tris[x] }))} />
               </div>
               <div className="champ">
                 <label htmlFor="cp-modele">{t.modele}</label>
-                <select className="saisie" id="cp-modele" value={filtre} onChange={(e) => setFiltre(e.target.value as P.Filtre)}>
-                  {(["tous", ...typesPresents] as P.Filtre[]).map((f) => (
-                    <option key={f} value={f}>{t.filtres[f]}</option>
-                  ))}
-                </select>
+                <Choix id="cp-modele" value={filtre} onChange={setFiltre} options={(["tous", ...typesPresents] as P.Filtre[]).map((f) => ({ value: f, label: t.filtres[f] }))} />
               </div>
               <div className="bascule" role="radiogroup" aria-label={t.affichage}>
                 <label className="pastille">
@@ -633,17 +626,11 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
               <div className="ligne caisse-actuelle">
                 <div className="champ">
                   <label htmlFor="cp-act-a">{t.assureur}</label>
-                  <select className="saisie" id="cp-act-a" value={actA} onChange={(e) => { setActA(e.target.value); setActP(""); }}>
-                    <option value="">{t.choisir}</option>
-                    {assureursListe.map((a) => <option key={a} value={a}>{a}</option>)}
-                  </select>
+                  <Choix id="cp-act-a" value={actA} onChange={(v) => { setActA(v); setActP(""); }} options={[{ value: "", label: t.choisir }, ...assureursListe.map((a) => ({ value: a, label: a }))]} />
                 </div>
                 <div className="champ">
                   <label htmlFor="cp-act-p">{t.produit}</label>
-                  <select className="saisie" id="cp-act-p" value={actP} onChange={(e) => setActP(e.target.value)} disabled={!actA}>
-                    <option value="">{t.choisir}</option>
-                    {produitsActA.map((x) => <option key={x} value={x}>{x}</option>)}
-                  </select>
+                  <Choix id="cp-act-p" value={actP} onChange={setActP} disabled={!actA} options={[{ value: "", label: t.choisir }, ...produitsActA.map((x) => ({ value: x, label: x }))]} />
                 </div>
                 {actuelle ? <p className="note-outil">{t.actuelle}{isEn ? ":" : `${T}:`} {chf(actuelle.mensuel, 2)} {t.mois}, {chf(actuelle.annuel)} {t.an}.</p> : null}
               </div>

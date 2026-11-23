@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { BoutonAgenda } from "@/components/outils/ajouter-agenda";
 import { NOM_CONTRAT, evenementContrat, evenementFixe, prochain, type Contrat, type TypeContrat, type TypeFixe } from "@/lib/ics";
 import type { Locale } from "@/lib/i18n";
+import { Choix } from "@/components/outils/choix";
 
 /* Page « Rappels d'échéance » : échéances légales cochées, puis contrats saisis par le visiteur.
    Tout reste dans le navigateur : aucune valeur n'est envoyée, gardée ou mesurée. */
@@ -55,6 +56,7 @@ export function RappelsEcheances({ aujourdhuiIso, locale = "fr" }: { aujourdhuiI
   const [suivant, setSuivant] = useState(2);
   const maj = (id: number, k: keyof Ligne) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
     setLignes((ls) => ls.map((x) => (x.id === id ? { ...x, [k]: e.target.value } : x)));
+  const majVal = (id: number, k: keyof Ligne, val: string) => setLignes((ls) => ls.map((x) => (x.id === id ? { ...x, [k]: val } : x)));
   const valides = lignes.filter((x) => /^\d{4}-\d{2}-\d{2}$/.test(x.echeance));
   const contrats: Contrat[] = valides.map((x) => ({ type: x.type, nom: x.nom, echeance: new Date(`${x.echeance}T00:00`), preavis: +x.preavis }));
   const apercu = contrats.map((c, i) => evenementContrat(c, i, today, l));
@@ -112,11 +114,7 @@ export function RappelsEcheances({ aujourdhuiIso, locale = "fr" }: { aujourdhuiI
             <div className="deux">
               <div className="champ">
                 <label htmlFor={`type-${x.id}`}>{en ? "Type of insurance" : "Type d’assurance"}</label>
-                <select className="saisie" id={`type-${x.id}`} value={x.type} onChange={maj(x.id, "type")}>
-                  {TYPES.map((t) => (
-                    <option key={t} value={t}>{NOM_CONTRAT[t][l]}</option>
-                  ))}
-                </select>
+                <Choix id={`type-${x.id}`} value={x.type} onChange={(val) => majVal(x.id, "type", val)} options={TYPES.map((t) => ({ value: t, label: NOM_CONTRAT[t][l] }))} />
               </div>
               <div className="champ">
                 <label htmlFor={`nom-${x.id}`}>{en ? "Name in your calendar (optional)" : "Nom dans votre agenda (facultatif)"}</label>
@@ -130,12 +128,12 @@ export function RappelsEcheances({ aujourdhuiIso, locale = "fr" }: { aujourdhuiI
               </div>
               <div className="champ">
                 <label htmlFor={`pre-${x.id}`}>{en ? "Notice period" : "Délai de préavis"}</label>
-                <select className="saisie" id={`pre-${x.id}`} value={x.preavis} onChange={maj(x.id, "preavis")}>
-                  <option value="3">{en ? "3 months (legal rule)" : "3 mois (règle légale)"}</option>
-                  <option value="1">{en ? "1 month" : "1 mois"}</option>
-                  <option value="2">{en ? "2 months" : "2 mois"}</option>
-                  <option value="6">{en ? "6 months" : "6 mois"}</option>
-                </select>
+                <Choix id={`pre-${x.id}`} value={x.preavis} onChange={(val) => majVal(x.id, "preavis", val)} options={[
+                  { value: "3", label: en ? "3 months (legal rule)" : "3 mois (règle légale)" },
+                  { value: "1", label: en ? "1 month" : "1 mois" },
+                  { value: "2", label: en ? "2 months" : "2 mois" },
+                  { value: "6", label: en ? "6 months" : "6 mois" },
+                ]} />
               </div>
             </div>
             {apercu[valides.indexOf(x)] ? (
