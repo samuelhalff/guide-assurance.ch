@@ -135,9 +135,9 @@
   .marge .credit a { display: inline-flex; padding: 6px 0; opacity: .85; }
   .marge .credit a:hover { opacity: 1; }
   .marge .credit img { display: block; height: 15px; width: auto; }
-  /* Mobile : la barre collante de demande (≈ 90 px, deux lignes en FR) ne doit pas cacher la fin du pied. */
+  /* Mobile : la barre collante de demande (--barre-h) ne doit pas cacher la fin du pied. */
   @media (max-width: 820px) {
-    body:has(.barre-demande[data-visible]) .marge { padding-bottom: calc(var(--s6) + 104px + env(safe-area-inset-bottom)); }
+    body:has(.barre-demande[data-visible]) .marge { padding-bottom: calc(var(--s6) + var(--barre-h) + env(safe-area-inset-bottom)); }
   }
 
   /* ===== Fil d'Ariane ===== */

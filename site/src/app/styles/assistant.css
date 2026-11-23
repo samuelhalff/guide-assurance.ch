@@ -21,7 +21,8 @@
      visible dès l'arrivée (Sam, 23.11.2026). La barre « Comparer avec un conseiller » garde sa place. */
   @media (max-width: 1099px) { body:has(.consentement) .assistant-bouton { display: none; } }
   @media (max-width: 820px) {
-    body:has(.barre-demande[data-visible]) .assistant-bouton { bottom: calc(84px + env(safe-area-inset-bottom)); }
+    /* Barre de demande visible : le bouton se range dans la barre, à droite du bouton d'action, au lieu de flotter sur le contenu. */
+    body:has(.barre-demande[data-visible]) .assistant-bouton { right: var(--s3); bottom: calc(var(--s3) - 2px + env(safe-area-inset-bottom)); z-index: 51; }
   }
   @media (min-width: 821px) {
     .assistant-bouton { width: auto; height: 52px; padding: 0 20px 0 16px; border-radius: 26px; right: var(--s5); bottom: var(--s5); }

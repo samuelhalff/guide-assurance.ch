@@ -70,12 +70,12 @@ export function effacerPreremplissage() {
 
 export const TEXTE_CTA = {
   fr: {
-    bouton: "Comparer avec un conseiller, gratuit",
+    bouton: "Comparer avec un conseiller",
     rassurance: "C’est gratuit et sans engagement, et un seul conseiller vous appelle.",
     fermer: "Masquer",
   },
   en: {
-    bouton: "Compare with an adviser, free",
+    bouton: "Compare with an adviser",
     rassurance: "It is free and without commitment, and only one adviser calls you.",
     fermer: "Hide",
   },

@@ -29,11 +29,13 @@ export function CtaOffres({ locale, href, libelle, note, className }: { locale: 
   );
 }
 
-export function BarreOffres({ locale, href, libelle, visible }: { locale: Locale; href: string; libelle?: string; visible: boolean }) {
+/* `detail` : seconde ligne, plus petite (ex. la somme assurée), pour que le libellé tienne sur une ligne à côté du bouton de l'assistant. */
+export function BarreOffres({ locale, href, libelle, detail, visible }: { locale: Locale; href: string; libelle?: string; detail?: string; visible: boolean }) {
   return (
     <div className="barre-demande barre-offres" data-visible={visible || undefined} aria-hidden={!visible} inert={!visible}>
       <a className="bouton" href={href}>
-        {libelle ?? TEXTE_OFFRES[locale].bouton}
+        <span>{libelle ?? TEXTE_OFFRES[locale].bouton}</span>
+        {detail ? <small>{detail}</small> : null}
       </a>
     </div>
   );

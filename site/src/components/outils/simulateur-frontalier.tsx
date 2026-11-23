@@ -34,7 +34,6 @@ const SITUATIONS: SituationUI[] = ["sans", "suisse", "france", "autre"];
 
 const TXT = {
   fr: {
-    ctaHaut: "Être accompagné dans mon choix",
     etape: "Où en êtes-vous ?",
     commence: "Je commence en Suisse",
     commenceAide: "ou je reprends après un chômage en France",
@@ -74,15 +73,14 @@ const TXT = {
     france: "Assurance maladie française",
     lamal: "LAMal",
     parAn: "par an",
-    parMois: (x: string) => `soit ${x} par mois`,
-    environ: (x: string) => `environ ${x}`,
+    environ: "≈",
+    enEuros: (an: string, mois: string, cot: string) => `Soit ${an} par an (${mois} par mois), ${cot}.`,
     cotisations: (n: number) => (n > 1 ? `${n} cotisations, une par frontalier` : "votre seule cotisation"),
     des: "dès",
-    mediane: (x: string, n: number) => `Médiane ${x}, pour ${n} prime${n > 1 ? "s" : ""} chez le même assureur`,
-    plusHaute: (x: string) => `prime la plus haute ${x}`,
-    attente: "Indiquez l’année de naissance de chaque personne pour voir le résultat.",
+    mediane: (x: string, max: string, n: number) => `Prime médiane ${x}, la plus haute ${max}${n > 1 ? ", tout le foyer chez le même assureur" : ""}.`,
+    attente: "Indiquez votre année de naissance et vos revenus pour voir le résultat.",
     verdictPlus: (x: string) => `Pour ce foyer, la LAMal coûte au moins ${x} de plus par an que l’assurance française, même avec la prime la plus basse de la liste.`,
-    verdictMixte: (a: string, b: string) => `Avec la prime la plus basse, la LAMal coûte ${a} de moins par an ; avec une prime médiane, elle coûte ${b} de plus.`,
+    verdictMixte: (a: string, b: string) => `Avec la prime la plus basse, la LAMal coûte ${a} de moins par an que l’assurance française ; avec une prime médiane, ${b} de plus.`,
     verdictMoins: (x: string) => `Pour ce foyer, la LAMal coûte ${x} de moins par an, même avec une prime médiane.`,
     dejaChoisi:
       "Comme vous avez déjà choisi, ce comparatif est indicatif. Le choix ne se refait qu’en cas de nouvelle première activité en Suisse, de reprise après un régime étranger, d’installation en France ou de passage à la retraite.",
@@ -101,8 +99,7 @@ const TXT = {
     thAn: "CHF / an",
     source:
       "Sources : OFSP, primes 2027 des assurés résidant en France (Prämien_EU), opendata.swiss, mise à jour du 29.09.2026 ; Urssaf, cotisation maladie des frontaliers (page mise à jour le 24.09.2026). Franchise de 300 CHF, la seule possible pour un résident en France (art. 101a OAMal). Une seule prime par assureur pour toute la France : le département de résidence ne change pas le calcul.",
-    barre: (fr: string, ch: string) => `France ${fr} · LAMal dès ${ch}`,
-    barreBouton: "Être accompagné",
+    barre: (fr: string, ch: string) => `France ≈ ${fr} · LAMal dès ${ch}`,
     voirResultat: "Voir le résultat",
   },
   en: {
@@ -146,15 +143,14 @@ const TXT = {
     france: "French health insurance",
     lamal: "LAMal",
     parAn: "per year",
-    parMois: (x: string) => `that is ${x} a month`,
-    environ: (x: string) => `about ${x}`,
+    environ: "≈",
+    enEuros: (an: string, mois: string, cot: string) => `That is ${an} a year (${mois} a month), ${cot}.`,
     cotisations: (n: number) => (n > 1 ? `${n} contributions, one per cross-border worker` : "your contribution alone"),
     des: "from",
-    mediane: (x: string, n: number) => `Median ${x}, for ${n} premium${n > 1 ? "s" : ""} with the same insurer`,
-    plusHaute: (x: string) => `highest premium ${x}`,
-    attente: "Enter each person’s year of birth to see the result.",
+    mediane: (x: string, max: string, n: number) => `Median premium ${x}, highest ${max}${n > 1 ? ", whole household with the same insurer" : ""}.`,
+    attente: "Enter your year of birth and your income to see the result.",
     verdictPlus: (x: string) => `For this household, LAMal costs at least ${x} more per year than French health insurance, even with the lowest premium on the list.`,
-    verdictMixte: (a: string, b: string) => `With the lowest premium, LAMal costs ${a} less per year; with a median premium, it costs ${b} more.`,
+    verdictMixte: (a: string, b: string) => `With the lowest premium, LAMal costs ${a} less per year than French health insurance; with a median premium, ${b} more.`,
     verdictMoins: (x: string) => `For this household, LAMal costs ${x} less per year, even with a median premium.`,
     dejaChoisi:
       "As you have already chosen, this comparison is only an indication. The choice can be made again only if you start a new first job in Switzerland, return to work after a foreign scheme, move to France or retire.",
@@ -173,8 +169,7 @@ const TXT = {
     thAn: "CHF / year",
     source:
       "Sources: FOPH (OFSP), 2027 premiums for insured persons living in France (Prämien_EU), opendata.swiss, update of 29.09.2026; Urssaf, health contribution for cross-border workers (page updated on 24.09.2026). Deductible of CHF 300, the only one possible for a resident of France (art. 101a OAMal). Each insurer has a single premium for the whole of France, so your département does not change the calculation.",
-    barre: (fr: string, ch: string) => `France ${fr} · LAMal from ${ch}`,
-    barreBouton: "Get help",
+    barre: (fr: string, ch: string) => `France ≈ ${fr} · LAMal from ${ch}`,
     voirResultat: "See the result",
   },
 };
@@ -214,7 +209,7 @@ export function SimulateurFrontalier({ locale = "fr" }: { locale?: Locale }) {
   const qui = (q: string) => (isEn ? QUI_EN(q) : q);
 
   const [etape, setEtape] = useState<"ouvert" | "fait">("ouvert");
-  const [personnes, setPersonnes] = useState<PersonneUI[]>([{ id: 1, enfant: false, naissance: "1990", situation: "suisse", revenu: "60000", moinsDe8h: false }]);
+  const [personnes, setPersonnes] = useState<PersonneUI[]>([{ id: 1, enfant: false, naissance: "", situation: "suisse", revenu: "", moinsDe8h: false }]);
   const [tx, setTx] = useState("0.93");
   const [barre, setBarre] = useState(false);
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -232,7 +227,8 @@ export function SimulateurFrontalier({ locale = "fr" }: { locale?: Locale }) {
     return { ...p, annee, ok, cl: ok ? F.classe(annee, ANNEE) : null };
   });
   const valides = lues.filter((p) => p.ok);
-  const pret = lues[0].ok;
+  /* Résultat seulement quand le visiteur a donné son année et ses revenus : aucun chiffre pour un profil qui n’est pas le sien. */
+  const pret = lues[0].ok && lues[0].revenu.trim() !== "";
 
   const c = useMemo(
     () =>
@@ -290,7 +286,7 @@ export function SimulateurFrontalier({ locale = "fr" }: { locale?: Locale }) {
     <>
       <div className="cta-haut-outil">
         <a className="bouton" href={lienDemande(locale, "frontaliers")} onClick={prerempli}>
-          {t.ctaHaut}
+          {TEXTE_CTA[locale].bouton}
           <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="2" /></svg>
         </a>
         <p>{TEXTE_CTA[locale].rassurance}</p>
@@ -415,14 +411,13 @@ export function SimulateurFrontalier({ locale = "fr" }: { locale?: Locale }) {
               <div className="duel duel-serre">
                 <div className="duel-option">
                   <h3>{t.france}</h3>
-                  <div className="prix">{eur(c.france.eur)} <small>{t.parAn}</small></div>
-                  <p>{t.environ(chf(c.france.chf))}, {t.cotisations(nF)}.</p>
-                  <p>{t.parMois(eur(c.france.mensuelEur))}</p>
+                  <div className="prix"><small className="des">{t.environ}</small> {chf(c.france.chf)} <small>{t.parAn}</small></div>
+                  <p>{t.enEuros(eur(c.france.eur), eur(c.france.mensuelEur), t.cotisations(nF))}</p>
                 </div>
                 <div className="duel-option">
                   <h3>{t.lamal}</h3>
                   <div className="prix"><small className="des">{t.des}</small> {chf(Math.round(c.lamal.min * 12))} <small>{t.parAn}</small></div>
-                  <p>{t.mediane(chf(Math.round(c.lamal.mediane * 12)), c.assuresCH.length)}, {t.plusHaute(chf(Math.round(c.lamal.max * 12)))}.</p>
+                  <p>{t.mediane(chf(Math.round(c.lamal.mediane * 12)), chf(Math.round(c.lamal.max * 12)), c.assuresCH.length)}</p>
                 </div>
               </div>
               {etape === "fait" ? <p className="provisoire">{t.dejaChoisi}</p> : null}
@@ -471,9 +466,9 @@ export function SimulateurFrontalier({ locale = "fr" }: { locale?: Locale }) {
       {c ? (
         <div className="barre-demande barre-frontalier" data-visible={barre || undefined} aria-hidden={!barre} inert={!barre}>
           <button type="button" className="barre-resume" onClick={() => resultatRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })} aria-label={t.voirResultat}>
-            {t.barre(eur(c.france.eur), chf(Math.round(c.lamal.min * 12)))}
+            {t.barre(chf(c.france.chf), chf(Math.round(c.lamal.min * 12)))}
           </button>
-          <a className="bouton" href={lienDemande(locale, "frontaliers")} onClick={prerempli}>{t.barreBouton}</a>
+          <a className="bouton" href={lienDemande(locale, "frontaliers")} onClick={prerempli}>{TEXTE_CTA[locale].bouton}</a>
         </div>
       ) : null}
     </>

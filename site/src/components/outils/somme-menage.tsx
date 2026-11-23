@@ -31,7 +31,7 @@ const TXT = {
     fourchette: (a: string, b: string) => `Les deux méthodes publiées donnent ${a} et ${b} CHF, réserve de 10${N}% comprise. La somme reprend la plus haute, arrondie au millier.`,
     seule: (a: string) => `Pour ce nombre de personnes, la grille Baloise n’a pas de case : seule la formule Zurich s’applique (${a} CHF, réserve de 10${N}% comprise).`,
     cta: (s: string) => `Recevoir des offres pour ${s} CHF`,
-    ctaCourt: (s: string) => `Recevoir des offres · ${s} CHF`,
+    ctaSomme: (s: string) => `pour ${s} CHF`,
     methode: "Méthode",
     montant: "Montant",
     baloise: "Grille Baloise (formulaire 140.1173, 2023)",
@@ -76,7 +76,7 @@ const TXT = {
     fourchette: (a: string, b: string) => `The two published methods give CHF ${a} and CHF ${b}, including a 10% reserve. The sum takes the higher one, rounded up to the next thousand.`,
     seule: (a: string) => `The Baloise grid has no cell for this number of people, so only the Zurich formula applies (CHF ${a}, including a 10% reserve).`,
     cta: (s: string) => `Get quotes for CHF ${s}`,
-    ctaCourt: (s: string) => `Get quotes · CHF ${s}`,
+    ctaSomme: (s: string) => `for CHF ${s}`,
     methode: "Method",
     montant: "Amount",
     baloise: "Baloise grid (form 140.1173, 2023)",
@@ -282,7 +282,7 @@ export function SommeMenage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <BarreOffres locale={locale} href={href} libelle={t.ctaCourt(f(e.somme))} visible={!ctaVisible} />
+      <BarreOffres locale={locale} href={href} detail={t.ctaSomme(f(e.somme))} visible={!ctaVisible} />
     </>
   );
 }
