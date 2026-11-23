@@ -1,4 +1,5 @@
 import { COMPTES_3A, RELEVE_LE, dateCh, tauxEn, tauxFr } from "@/lib/taux3a";
+import { FRAIS_COMPTES, FRAIS_VERIFIE_LE, TITRES_3A, fourchette, partActions, resumeFraisCompte } from "@/lib/frais3a";
 import { IconeTelephone, LienRappel } from "@/components/demande/lien-rappel";
 import type { Locale } from "@/lib/i18n";
 
@@ -11,8 +12,11 @@ const TXT = {
     thBanque: "Banque et compte",
     thTaux: "Taux",
     thConditions: "Conditions",
+    thFrais: "Frais",
     thReleve: "Relevé",
     par: "par an",
+    frais: "Frais",
+    fraisSource: (d: string) => `grille tarifaire, lue le ${d}`,
     releve: (d: string) => `Taux relevé le ${d}`,
     depuis: (d: string) => `en vigueur depuis le ${d}`,
     source: "page de la banque",
@@ -29,15 +33,18 @@ const TXT = {
     thBanque: "Bank and account",
     thTaux: "Rate",
     thConditions: "Conditions",
+    thFrais: "Fees",
     thReleve: "Read on",
     par: "per year",
+    frais: "Fees",
+    fraisSource: (d: string) => `price list, read on ${d}`,
     releve: (d: string) => `Rate read on ${d}`,
     depuis: (d: string) => `in force since ${d}`,
     source: "bank’s page",
     integrite:
       "No bank pays to be listed here or for its place in the list. Rates are variable: the bank can change them at any time, and its website is authoritative.",
     titres:
-      "Pillar 3a securities solutions (investment funds) are not in this list because they pay no interest: their return depends on the markets and the fund’s fees.",
+      "Pillar 3a securities solutions (investment funds) are not in this list because they pay no interest. Their fees and equity share are shown separately, further down.",
     rappelQ: "A question about your pillar 3a?",
     rappel: "Request a call-back",
   },
@@ -47,6 +54,11 @@ export function Taux3a({ locale = "fr" }: { locale?: Locale }) {
   const t = TXT[locale];
   const taux = locale === "fr" ? tauxFr : tauxEn;
   const cond = (c: (typeof COMPTES_3A)[number]) => (locale === "fr" ? c.affiche_fr : c.affiche_en);
+  const en = locale === "en";
+  const frais = (id: string) => {
+    const f = FRAIS_COMPTES[id];
+    return f ? { resume: resumeFraisCompte(f, en), note: en ? f.note_en : f.note_fr, url: f.url, lu: dateCh(f.lu_le) } : null;
+  };
   return (
     <section className="taux-3a" aria-label={t.caption(dateCh(RELEVE_LE))}>
       <p className="note-outil ordre">{t.ordre}</p>
@@ -64,6 +76,12 @@ export function Taux3a({ locale = "fr" }: { locale?: Locale }) {
               <span className="unite">{t.par}</span>
             </div>
             <p className="cond">{cond(c)}</p>
+            {frais(c.id) ? (
+              <p className="frais">
+                <b>{frais(c.id)!.resume}</b> {frais(c.id)!.note}{" "}
+                <a href={frais(c.id)!.url} rel="nofollow noopener" target="_blank">{t.fraisSource(frais(c.id)!.lu)}</a>
+              </p>
+            ) : null}
             <p className="releve">
               {t.releve(dateCh(c.lu_le))}
               {c.taux_valable_des ? `, ${t.depuis(dateCh(c.taux_valable_des))}` : ""}.{" "}
@@ -80,6 +98,7 @@ export function Taux3a({ locale = "fr" }: { locale?: Locale }) {
             <th scope="col">{t.thBanque}</th>
             <th scope="col">{t.thTaux}</th>
             <th scope="col">{t.thConditions}</th>
+            <th scope="col">{t.thFrais}</th>
             <th scope="col">{t.thReleve}</th>
           </tr>
         </thead>
@@ -93,6 +112,14 @@ export function Taux3a({ locale = "fr" }: { locale?: Locale }) {
               </td>
               <td className="taux">{taux(c.taux)}</td>
               <td className="cond">{cond(c)}</td>
+              <td className="frais">
+                {frais(c.id) ? (
+                  <>
+                    <b>{frais(c.id)!.resume}</b> {frais(c.id)!.note}
+                    <a href={frais(c.id)!.url} rel="nofollow noopener" target="_blank">{t.fraisSource(frais(c.id)!.lu)}</a>
+                  </>
+                ) : null}
+              </td>
               <td className="releve">
                 {dateCh(c.lu_le)}
                 {c.taux_valable_des ? <small>{t.depuis(dateCh(c.taux_valable_des))}</small> : null}
@@ -115,6 +142,105 @@ export function Taux3a({ locale = "fr" }: { locale?: Locale }) {
         <p>{t.titres}</p>
         <p><b>{t.integrite}</b></p>
       </div>
+    </section>
+  );
+}
+
+/* Solutions 3a en titres : aucun intérêt, donc ni taux ni rendement. Coût annuel publié, ce qu'il couvre, part en actions,
+   minimum. Tri (critère affiché) : coût publié le plus haut de la fourchette, du plus bas au plus haut ; offres dont une
+   partie des coûts n'est pas publiée ensuite, par nom (lib/engines/frais3a.ts). */
+const TXT_TITRES = {
+  fr: {
+    ordre: "Trié du coût annuel publié le plus bas au plus haut (haut de la fourchette, frais du fournisseur et des fonds compris). Les offres dont une partie des coûts n’est pas publiée suivent, par ordre alphabétique.",
+    caption: (d: string) => `Solutions 3a en titres : coûts annuels publiés et part en actions, relevés le ${d} sur les pages des fournisseurs`,
+    thOffre: "Fournisseur et produit",
+    thCout: "Coût annuel publié",
+    thCouvre: "Ce que couvre ce chiffre",
+    thActions: "Part en actions",
+    thAutres: "À savoir",
+    nonChiffre: "non chiffré",
+    incomplet: "coûts des fonds non publiés",
+    actions: "Actions",
+    nonPublie: "non publiée",
+    minimum: (x: number) => (x === 0 ? "sans minimum" : `minimum ${x}\u00A0CHF`),
+    liquidites: (x: number) => `liquidités rémunérées à ${x.toFixed(2).replace(".", ",")}\u202F%`,
+    source: (d: string) => `grille tarifaire, lue le ${d}`,
+    avertissement:
+      "Ces solutions ne versent pas d’intérêt et n’offrent aucune garantie : la valeur suit les marchés et peut baisser, surtout avec une part en actions élevée. Cette liste ne montre aucun rendement passé. Les frais se lisent en pour cent de l’avoir investi, par an.",
+  },
+  en: {
+    ordre: "Sorted from the lowest published annual cost to the highest (top of the range, provider and fund costs included). Offers where part of the costs is not published follow, in alphabetical order.",
+    caption: (d: string) => `Pillar 3a securities solutions: published annual costs and equity share, read on the providers’ pages on ${d}`,
+    thOffre: "Provider and product",
+    thCout: "Published annual cost",
+    thCouvre: "What this figure covers",
+    thActions: "Equity share",
+    thAutres: "Good to know",
+    nonChiffre: "not stated",
+    incomplet: "fund costs not published",
+    actions: "Equities",
+    nonPublie: "not published",
+    minimum: (x: number) => (x === 0 ? "no minimum" : `minimum CHF ${x}`),
+    liquidites: (x: number) => `cash earns ${x.toFixed(2)}%`,
+    source: (d: string) => `price list, read on ${d}`,
+    avertissement:
+      "These solutions pay no interest and carry no guarantee: their value follows the markets and can fall, especially with a high equity share. This list shows no past returns. Fees are a percentage of the invested balance, per year.",
+  },
+};
+
+export function Titres3a({ locale = "fr" }: { locale?: Locale }) {
+  const t = TXT_TITRES[locale];
+  const en = locale === "en";
+  const details = (x: (typeof TITRES_3A)[number]) =>
+    [x.minimum_chf !== null ? t.minimum(x.minimum_chf) : null, x.taux_liquidites_pct ? t.liquidites(x.taux_liquidites_pct) : null, en ? x.autres_en : x.autres_fr]
+      .filter(Boolean)
+      .join(" · ");
+  const cout = (x: (typeof TITRES_3A)[number]) => fourchette(x, en) ?? t.nonChiffre;
+  return (
+    <section className="taux-3a titres-3a" aria-label={t.caption(dateCh(FRAIS_VERIFIE_LE))}>
+      <p className="note-outil ordre">{t.ordre}</p>
+      <ol className="cartes-taux">
+        {TITRES_3A.map((x, i) => (
+          <li key={x.id} className="carte-taux">
+            <span className="rang">{i + 1}</span>
+            <div className="qui">
+              <b>{x.fournisseur}</b>
+              <span className="produit">{x.produit}</span>
+            </div>
+            <div className="combien">
+              <span className="montant">{cout(x)}</span>
+              <span className="unite">{x.cout_complet ? t.thCout.toLowerCase() : t.incomplet}</span>
+            </div>
+            <p className="cond">{en ? x.cout_en : x.cout_fr}</p>
+            <p className="cond">{t.actions}{en ? ": " : "\u202F: "}{partActions(x, en) ?? t.nonPublie}. {details(x)}</p>
+            <p className="releve"><a href={x.url} rel="nofollow noopener" target="_blank">{t.source(dateCh(x.lu_le))}</a></p>
+          </li>
+        ))}
+      </ol>
+      <table className="assureurs table-taux">
+        <caption>{t.caption(dateCh(FRAIS_VERIFIE_LE))}</caption>
+        <thead>
+          <tr>
+            <th scope="col">{t.thOffre}</th>
+            <th scope="col">{t.thCout}</th>
+            <th scope="col">{t.thCouvre}</th>
+            <th scope="col">{t.thActions}</th>
+            <th scope="col">{t.thAutres}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {TITRES_3A.map((x, i) => (
+            <tr key={x.id}>
+              <td><span className="rang">{i + 1}</span><b>{x.fournisseur}</b><span className="produit">{x.produit}</span></td>
+              <td className="taux">{cout(x)}{x.cout_complet ? null : <small>{t.incomplet}</small>}</td>
+              <td className="cond">{en ? x.cout_en : x.cout_fr}</td>
+              <td className="actions">{partActions(x, en) ?? t.nonPublie}</td>
+              <td className="releve">{details(x)}<a href={x.url} rel="nofollow noopener" target="_blank">{t.source(dateCh(x.lu_le))}</a></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div className="integrite"><p>{t.avertissement}</p></div>
     </section>
   );
 }

@@ -56,6 +56,7 @@ DATA_OUTPUTS = [
 
 NAMES = {
     "taux3a": "taux 3a",
+    "frais3a": "frais 3a",
     "lamal": "primes LAMal",
     "frontalier": "frontaliers",
     "impots": "barèmes d'impôt",

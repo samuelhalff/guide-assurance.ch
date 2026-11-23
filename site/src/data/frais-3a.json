@@ -1,0 +1,488 @@
+{
+ "verifie_le": "2026-11-23",
+ "source_note": "Frais relevés à la main le 23.11.2026 sur les pages et grilles tarifaires des fournisseurs eux-mêmes (jamais sur un comparateur). Les fournisseurs ne publient pas ces chiffres sous une forme lisible par un script de façon fiable : données datées, contrôlées chaque mois par infra/refresh/frais3a.py (empreinte de chaque page source et présence des chiffres témoins). null = chiffre non publié ou non vérifiable sur la page du fournisseur.",
+ "comptes": {
+  "ubs": {
+   "tenue_chf": 0,
+   "transfert_chf": null,
+   "note_fr": "Frais de transfert : renvoi au règlement des frais de la fondation, non publié en ligne.",
+   "note_en": "Transfer fee: the price list refers to the foundation’s fee rules, not published online.",
+   "url": "https://www.ubs.com/content/dam/assets/rc/services/accounts-and-cards/static/fact-sheets/services-prices-fr.pdf",
+   "extrait": "UBS Fisca 3a (prévoyance liée pilier 3a) … Tenue de compte par mois | Gratuite | 3 CHF [libre passage] … Frais de la fondation: voir règlement des frais",
+   "lu_le": "2026-11-23",
+   "temoins": [
+    "Gratuite"
+   ]
+  },
+  "postfinance": {
+   "tenue_chf": 0,
+   "transfert_chf": 0,
+   "note_fr": "Retrait pour le logement : 200 CHF.",
+   "note_en": "Withdrawal for home ownership: CHF 200.",
+   "url": "https://www.postfinance.ch/fr/particuliers/prevoyance/compte-prevoyance-3a.html",
+   "extrait": "Les prestations suivantes sont gratuites: Ouverture de compte | Gestion de compte | Résiliation de compte | Achat et vente de titres",
+   "lu_le": "2026-11-23",
+   "temoins": [
+    "Résiliation de compte"
+   ]
+  },
+  "raiffeisen": {
+   "tenue_chf": 0,
+   "transfert_chf": 0,
+   "note_fr": "Préavis de 31 jours pour un retrait, sinon 2 % sur la part qui dépasse la limite.",
+   "note_en": "31 days’ notice for a withdrawal, otherwise 2% on the amount above the limit.",
+   "url": "https://www.raiffeisen.ch/content/dam/www/rch/pdf/privatkunden/vorsorgen-und-absichern/konditionenuebersicht/vorsorge-konditionenuebersicht-fr.pdf",
+   "extrait": "Prévoyance – Aperçu des conditions, valable à partir du 1er février 2026 … Frais de tenue de compte gratuit … Clôture de compte gratuit … CHF 120.–/par heure",
+   "lu_le": "2026-11-23",
+   "temoins": [
+    "gratuit"
+   ]
+  },
+  "bcge": {
+   "tenue_chf": 0,
+   "transfert_chf": 120,
+   "note_fr": "Frais de clôture de 120 CHF sauf à l’âge de la retraite ; le tarif ne nomme pas le transfert à part. Retrait pour le logement : 50 CHF.",
+   "note_en": "Closure fee of CHF 120 except at retirement age; the price list does not name transfers separately. Withdrawal for home ownership: CHF 50.",
+   "url": "https://bcge.ch/bcge-brochure-tarif-conditions-paiement-fr",
+   "extrait": "Compte Epargne 3 … Forfait de tenue de compte Gratuit … Frais de clôture • Si clôture à l'âge légal de la retraite: gratuits • Autre motif: CHF 120",
+   "lu_le": "2026-11-23",
+   "temoins": [
+    "120"
+   ]
+  },
+  "bcv": {
+   "tenue_chf": null,
+   "transfert_chf": null,
+   "note_fr": "Tenue de compte non chiffrée dans les documents actuels. Un transfert avant le préavis de 6 mois entraîne des frais, dont le montant n’est pas publié.",
+   "note_en": "Account fee not stated in current documents. A transfer before the 6-month notice period incurs a fee, amount not published.",
+   "url": "https://www.bcv.ch/content/dam/bcv/brochure---flyer/04-059-Fondation_prevoyance_epargne3.pdf",
+   "extrait": "dénoncer la convention passée avec la Fondation moyennant un délai de 6 mois. Un transfert avant cette échéance peut être effectué moyennant le prélèvement de frais de résiliation.",
+   "lu_le": "2026-11-23",
+   "temoins": [
+    "6 mois"
+   ]
+  },
+  "bcvs": {
+   "tenue_chf": 0,
+   "transfert_chf": 70,
+   "note_fr": "70 CHF pour tout retrait ou transfert vers une autre fondation.",
+   "note_en": "CHF 70 for any withdrawal or transfer to another foundation.",
+   "url": "https://www.bcvs.ch/fileadmin/user_upload/site/publications/conditions-infos-juridiques/Epargne3/Reglement_de_Fondation_EP3_-_FR_-_2025.pdf",
+   "extrait": "Libération Epargne 3 | Commission forfaitaire | Âge terme | CHF 70.00 | … Transfert à une autre Fondation 3ème pilier | Accession à la propriété",
+   "lu_le": "2026-11-23",
+   "temoins": [
+    "70"
+   ]
+  },
+  "bcf": {
+   "tenue_chf": 0,
+   "transfert_chf": null,
+   "note_fr": "Frais de transfert non publiés.",
+   "note_en": "Transfer fee not published.",
+   "url": "https://www.bcf.ch/fr/prives/prevoyance-et-assurances/comptes-de-prevoyance/compte-epargne3",
+   "extrait": "Ouverture, tenue de compte, clôture annuelle et attestation fiscale gratuites … Relevé de compte supplémentaire CHF 5.-",
+   "lu_le": "2026-11-23",
+   "temoins": [
+    "gratuites"
+   ]
+  },
+  "bcn": {
+   "tenue_chf": 0,
+   "transfert_chf": 50,
+   "note_fr": "50 CHF pour un transfert vers un autre établissement.",
+   "note_en": "CHF 50 for a transfer to another provider.",
+   "url": "https://www.bcn.ch/prives/prevoyance/comptes-de-prevoyance/epargne-3",
+   "extrait": "Frais de tenue de compte Sans frais … Conditions particulières CHF 50.- lors d'un transfert à un autre institut de prévoyance.",
+   "lu_le": "2026-11-23",
+   "temoins": [
+    "50"
+   ]
+  },
+  "bcj": {
+   "tenue_chf": 0,
+   "transfert_chf": null,
+   "note_fr": "Frais de transfert non trouvés : le tarif 2026 n’a pas pu être lu.",
+   "note_en": "Transfer fee not found: the 2026 price list could not be read.",
+   "url": "https://www.bcj.ch/fr/Particuliers/Prevoyance/Epargne-3a/Epargne-3a.html",
+   "extrait": "Frais de gestion | Gratuit | Frais d'écriture | Gratuit | Relevé de compte | Annuel, gratuit",
+   "lu_le": "2026-11-23",
+   "temoins": [
+    "Gratuit"
+   ]
+  },
+  "migros": {
+   "tenue_chf": 0,
+   "transfert_chf": 0,
+   "note_fr": "Clôture gratuite.",
+   "note_en": "Free closure.",
+   "url": "https://www.migrosbank.ch/fr/personnes-privees/prevoyance/pilier-3a/compte-3a.html",
+   "extrait": "Compte de prévoyance 3a rémunéré à 0,20% d'intérêts Frais et conditions: ouverture, clôture, tenue de compte et relevés de compte entièrement gratuits",
+   "lu_le": "2026-11-23",
+   "temoins": [
+    "gratuits"
+   ]
+  },
+  "cler": {
+   "tenue_chf": 0,
+   "transfert_chf": 0,
+   "note_fr": "Clôture gratuite. Retrait pour le logement financé ailleurs : 200 CHF.",
+   "note_en": "Free closure. Withdrawal for a home financed elsewhere: CHF 200.",
+   "url": "https://www.cler.ch/fr/vorsorgen-und-nachlass/vorsorgemoeglichkeiten/compte-de-prevoyance-3",
+   "extrait": "Ouverture de compte | Gratuite | Tenue de compte | Gratuite | … Clôture de compte | Gratuite",
+   "lu_le": "2026-11-23",
+   "temoins": [
+    "Gratuite"
+   ]
+  },
+  "valiant": {
+   "tenue_chf": 0,
+   "transfert_chf": 0,
+   "note_fr": "Clôture gratuite. Préavis de 31 jours, sinon 2 % du montant versé.",
+   "note_en": "Free closure. 31 days’ notice, otherwise 2% of the amount paid out.",
+   "url": "https://www.valiant.ch/en/privatkunden/vorsorgen-transfer3a",
+   "extrait": "Konditionen | Gratis Kontoführung, -eröffnung und -auflösung",
+   "lu_le": "2026-11-23",
+   "temoins": [
+    "Gratis"
+   ]
+  },
+  "bas": {
+   "tenue_chf": 0,
+   "transfert_chf": 0,
+   "note_fr": "Clôture gratuite.",
+   "note_en": "Free closure.",
+   "url": "https://www.abs.ch/gebuehrentarif",
+   "extrait": "ABS 3 … Vorsorgekonto … Zinssatz | 0,200 % … Kontoführungsgebühren | keine … Saldierungsgebühren | keine",
+   "lu_le": "2026-11-23",
+   "temoins": [
+    "keine"
+   ]
+  },
+  "wir": {
+   "tenue_chf": 0,
+   "transfert_chf": 0,
+   "note_fr": "Solde de compte gratuit. Retrait pour le logement financé ailleurs : 300 CHF.",
+   "note_en": "Free account closure. Withdrawal for a home financed elsewhere: CHF 300.",
+   "url": "https://www.wir.ch/fileadmin/user_upload/Dokumente/Informationen/zinsen-konditionen-bank-wir-fr.pdf",
+   "extrait": "Terzo-Compte 3a | Tenue de compte gratuite | 0,30% | Clôture annuelle | gratuite | Versement de l'encouragement à la propriété du logement … 300 CHF | … Solde de compte | gratuit",
+   "lu_le": "2026-11-23",
+   "temoins": [
+    "gratuite"
+   ]
+  },
+  "swissquote": {
+   "tenue_chf": 0,
+   "transfert_chf": null,
+   "note_fr": "Frais de transfert non publiés.",
+   "note_en": "Transfer fee not published.",
+   "url": "https://www.swissquote.com/fr-ch/private/invest/pricing",
+   "extrait": "Stratégie d'épargne 3a Frais d'administration Aucuns frais Montant minimum de dépôt CHF 100 Taux d'intérêt 0.10%",
+   "lu_le": "2026-11-23",
+   "temoins": [
+    "Aucuns frais"
+   ]
+  },
+  "cic": {
+   "tenue_chf": 0,
+   "transfert_chf": null,
+   "note_fr": "Frais de transfert non publiés. Retrait pour le logement : 300 CHF (offert avec une hypothèque CIC).",
+   "note_en": "Transfer fee not published. Withdrawal for home ownership: CHF 300 (waived with a CIC mortgage).",
+   "url": "https://www.cic.ch/dam/jcr:42e7a83c-e6c1-4219-9c54-b857c8f07ae4/tarifs-et-conditions-pour-personnes-privees.pdf",
+   "extrait": "Sont exonérés des frais de relation client : cleverinvest, les mandats de gestion de fortune ainsi que les comptes de prévoyance 3a et les comptes de libre passage.",
+   "lu_le": "2026-11-23",
+   "temoins": [
+    "prévoyance 3a"
+   ]
+  },
+  "ca-next-bank": {
+   "tenue_chf": 0,
+   "transfert_chf": null,
+   "note_fr": "Le compte fait partie d’un paquet bancaire, dont le prix n’est pas compté ici. Frais de transfert non publiés.",
+   "note_en": "The account is part of a banking package, whose price is not counted here. Transfer fee not published.",
+   "url": "https://assets-us-01.kc-usercontent.com/8d43a6b2-248d-00aa-7cd0-55e59c68fb86/7f7742a2-cdaf-415b-9018-38700b81873d/CANB_Fiche%203P_09-26_En.pdf",
+   "extrait": "The 3rd pillar account is part of a banking package. • Interest rate of 0.65% • Opening and maintenance services free of charge",
+   "lu_le": "2026-11-23",
+   "temoins": [
+    "banking package"
+   ]
+  }
+ },
+ "titres": [
+  {
+   "id": "finpension",
+   "fournisseur": "finpension",
+   "produit": "finpension 3a",
+   "nom_complet": "finpension AG",
+   "cout_min_pct": 0.39,
+   "cout_max_pct": 0.41,
+   "cout_complet": true,
+   "cout_fr": "Frais forfaitaires de 0,39 % et coûts des fonds de 0 à 0,02 %, TVA comprise.",
+   "cout_en": "Flat fee of 0.39% plus fund costs of 0–0.02%, VAT included.",
+   "actions_min_pct": 0,
+   "actions_max_pct": 100,
+   "minimum_chf": 0,
+   "taux_liquidites_pct": 0.0,
+   "autres_fr": "Transfert gratuit ; retrait pour le logement 250 CHF.",
+   "autres_en": "Free transfer; withdrawal for home ownership CHF 250.",
+   "url": "https://finpension.ch/fr/frais-de-finpension",
+   "extrait": "Frais finpension 3a Coûts courants des stratégies finpension Frais forfaitaires 0.39 % Coûts du fonds (TER) 0.00 - 0.02 % TVA inclus Total 0.39 - 0.41 % … Transfert vers un autre prestataire Gratuit",
+   "lu_le": "2026-11-23",
+   "temoins": [
+    "0.39"
+   ]
+  },
+  {
+   "id": "viac",
+   "fournisseur": "VIAC",
+   "produit": "VIAC pilier 3a",
+   "nom_complet": "VIAC Solutions AG, avec la Banque WIR (fondation Terzo)",
+   "cout_min_pct": 0.0,
+   "cout_max_pct": 0.43,
+   "cout_complet": true,
+   "cout_fr": "Coûts totaux publiés, frais des produits compris ; les premiers 8 500 CHF sont sans frais.",
+   "cout_en": "Published total costs, product costs included; the first CHF 8,500 are free of charge.",
+   "actions_min_pct": 5,
+   "actions_max_pct": 99,
+   "minimum_chf": 0,
+   "taux_liquidites_pct": 0.3,
+   "autres_fr": "Pas de frais de clôture, sauf retrait pour un logement financé ailleurs.",
+   "autres_en": "No closure fee, except a withdrawal for a home financed elsewhere.",
+   "url": "https://viac.ch/fr/frais/",
+   "extrait": "Investir jusqu'à CHF 8'500 sans frais! Puis 0.00% – 0.43% de coûts totaux, frais de produit inclus … frais de clôture (exception: accession à la propriété privée)",
+   "lu_le": "2026-11-23",
+   "temoins": [
+    "0.43"
+   ]
+  },
+  {
+   "id": "truewealth",
+   "fournisseur": "True Wealth",
+   "produit": "True Wealth pilier 3a",
+   "nom_complet": "True Wealth AG (Pension Foundation 3a Digital)",
+   "cout_min_pct": 0.14,
+   "cout_max_pct": 0.24,
+   "cout_complet": true,
+   "cout_fr": "0 % de frais de gestion, environ 0,14 % de coûts des produits et 0 à 0,1 % sur le change.",
+   "cout_en": "0% management fee, about 0.14% product costs and 0–0.1% on currency exchange.",
+   "actions_min_pct": null,
+   "actions_max_pct": 99,
+   "minimum_chf": 1000,
+   "taux_liquidites_pct": 0.35,
+   "autres_fr": "Frais de transfert non publiés.",
+   "autres_en": "Transfer fee not published.",
+   "url": "https://www.truewealth.ch/en/pricing",
+   "extrait": "Pillar 3a Minimum investment CHF 1'000 Management fee 0.0% FX surcharge 0.0 - 0.1% External Product Costs (TER) About 0.14% Interest on cash 0.35%",
+   "lu_le": "2026-11-23",
+   "temoins": [
+    "0.14"
+   ]
+  },
+  {
+   "id": "yuh",
+   "fournisseur": "Yuh",
+   "produit": "Yuh pilier 3a",
+   "nom_complet": "Yuh (Fondation Simply 3a)",
+   "cout_min_pct": 0.5,
+   "cout_max_pct": 0.5,
+   "cout_complet": true,
+   "cout_fr": "Forfait tout compris de 0,50 % sur l’avoir investi (0,29 à 0,49 % dès 2027 selon le montant).",
+   "cout_en": "All-in fee of 0.50% on invested assets (0.29–0.49% from 2027 depending on the amount).",
+   "actions_min_pct": 20,
+   "actions_max_pct": 98,
+   "minimum_chf": null,
+   "taux_liquidites_pct": null,
+   "autres_fr": "Minimum de versement non publié.",
+   "autres_en": "Minimum payment not published.",
+   "url": "https://www.yuh.com/en/pricing/",
+   "extrait": "Pillar 3a Annual fees … Covers all fees and services, such as custody fees, investment fees (TER), currency exchange fees, administration fees … 0.50% (as of 2027: 0.29% to 0.49%)",
+   "lu_le": "2026-11-23",
+   "temoins": [
+    "0.50%"
+   ]
+  },
+  {
+   "id": "swissquote",
+   "fournisseur": "Swissquote",
+   "produit": "3a Easy",
+   "nom_complet": "Swissquote Bank SA",
+   "cout_min_pct": 0.59,
+   "cout_max_pct": 0.61,
+   "cout_complet": true,
+   "cout_fr": "Frais d’administration de 0,36 à 0,37 % et frais de produits de 0,23 à 0,24 %.",
+   "cout_en": "Administration fee of 0.36–0.37% plus product costs of 0.23–0.24%.",
+   "actions_min_pct": null,
+   "actions_max_pct": null,
+   "minimum_chf": 100,
+   "taux_liquidites_pct": 0.1,
+   "autres_fr": "Frais de transfert non publiés.",
+   "autres_en": "Transfer fee not published.",
+   "url": "https://www.swissquote.com/fr-ch/private/invest/pricing",
+   "extrait": "Stratégie équilibrée 3a Stratégie dynamique 3a Stratégie ambitieuse 3a Frais liés aux produits 0.24 % 0.24 % 0.23 % Frais d'administration 0.36 % 0.36 % 0.37 % Dépôt minimum CHF 100",
+   "lu_le": "2026-11-23",
+   "temoins": [
+    "0.36"
+   ]
+  },
+  {
+   "id": "alpian",
+   "fournisseur": "Alpian",
+   "produit": "Alpian Pillar 3a",
+   "nom_complet": "Alpian SA (groupe Intesa Sanpaolo)",
+   "cout_min_pct": 0.85,
+   "cout_max_pct": 0.95,
+   "cout_complet": true,
+   "cout_fr": "Frais de gestion de 0,60 % et coûts des fonds de 0,25 à 0,35 %, TVA en sus (offre de lancement à 0 % jusqu’au 31.12.2026 pour les 1 000 premiers clients).",
+   "cout_en": "Management fee of 0.60% plus fund costs of 0.25–0.35%, VAT extra (launch offer at 0% until 31.12.2026 for the first 1,000 clients).",
+   "actions_min_pct": null,
+   "actions_max_pct": null,
+   "minimum_chf": 300,
+   "taux_liquidites_pct": null,
+   "autres_fr": "Minimum de 300 CHF.",
+   "autres_en": "Minimum of CHF 300.",
+   "url": "https://www.alpian.com/pricing",
+   "extrait": "Pillar 3a Management fee 0.60%* per year Launch offer for the first 1'000 clients 0% until 31.12.2026 *Only minimal underlying fund costs (ranging between 0.25% and 0.35% TER) and applicable VAT",
+   "lu_le": "2026-11-23",
+   "temoins": [
+    "0.60%"
+   ]
+  },
+  {
+   "id": "frankly",
+   "fournisseur": "frankly",
+   "produit": "frankly 3a",
+   "nom_complet": "Zürcher Kantonalbank",
+   "cout_min_pct": 0.43,
+   "cout_max_pct": 0.43,
+   "cout_complet": false,
+   "cout_fr": "Forfait de 0,43 % sur l’avoir en titres ; les coûts des fonds indiciels s’y ajoutent et ne sont pas chiffrés sur les pages consultées.",
+   "cout_en": "All-in fee of 0.43% on securities; index fund costs come on top and are not stated on the pages read.",
+   "actions_min_pct": null,
+   "actions_max_pct": null,
+   "minimum_chf": null,
+   "taux_liquidites_pct": 0.15,
+   "autres_fr": "Clôture et transfert compris dans le forfait.",
+   "autres_en": "Closure and transfer included in the fee.",
+   "url": "https://www.frankly.ch/en/faq/what-included-all-in-fee.html",
+   "extrait": "What is included in the all-in-fee 0.43%? … The all-in fee is only charged on the securities balances but not on your 3a or vested benfits cash savings.",
+   "lu_le": "2026-11-23",
+   "temoins": [
+    "0.43%"
+   ]
+  },
+  {
+   "id": "selma",
+   "fournisseur": "Selma",
+   "produit": "Selma pilier 3a",
+   "nom_complet": "Selma Finance (fondation de prévoyance VZ, VZ Depotbank)",
+   "cout_min_pct": 0.42,
+   "cout_max_pct": 0.68,
+   "cout_complet": false,
+   "cout_fr": "Frais de 0,68 à 0,42 % selon le montant investi ; les coûts des ETF s’y ajoutent et ne sont pas chiffrés.",
+   "cout_en": "Fee of 0.68% down to 0.42% depending on the amount invested; ETF costs come on top and are not stated.",
+   "actions_min_pct": null,
+   "actions_max_pct": 97,
+   "minimum_chf": 500,
+   "taux_liquidites_pct": null,
+   "autres_fr": "Minimum de 500 CHF.",
+   "autres_en": "Minimum of CHF 500.",
+   "url": "https://www.selma.com/",
+   "extrait": "you pay 0.68% to 0.42% a year depending on the amount invested, with no trading or bank fees. Your investment account and your pillar 3a count together for this. The ETFs' product costs come on top.",
+   "lu_le": "2026-11-23",
+   "temoins": [
+    "0,68 %"
+   ]
+  },
+  {
+   "id": "cic-fonds-3a",
+   "fournisseur": "Banque CIC",
+   "produit": "Fonds de prévoyance 3a",
+   "nom_complet": "Banque CIC (Suisse) SA",
+   "cout_min_pct": 0.5,
+   "cout_max_pct": 0.5,
+   "cout_complet": false,
+   "cout_fr": "Forfait de 0,5 % par an, au moins 50 CHF, TVA en sus ; coûts des fonds non publiés sur la page des frais.",
+   "cout_en": "All-in fee of 0.5% a year, at least CHF 50, VAT extra; fund costs not stated on the fee page.",
+   "actions_min_pct": null,
+   "actions_max_pct": null,
+   "minimum_chf": null,
+   "taux_liquidites_pct": null,
+   "autres_fr": "Retrait pour le logement : 300 CHF.",
+   "autres_en": "Withdrawal for home ownership: CHF 300.",
+   "url": "https://www.cic.ch/en/solutions/retirement/fees-and-conditions-retirement.html",
+   "extrait": "Retirement funds | All-in fee of 0.5% p.a. of portfolio value* | *Minimum CHF 50 p.a., debited annually on 31.12. or when the retirement account is closed.",
+   "lu_le": "2026-11-23",
+   "temoins": [
+    "0.5%"
+   ]
+  },
+  {
+   "id": "migros-mifuturo",
+   "fournisseur": "Banque Migros",
+   "produit": "MiFuturo (prévoyance en ligne)",
+   "nom_complet": "Banque Migros SA",
+   "cout_min_pct": 0.9,
+   "cout_max_pct": 0.9,
+   "cout_complet": false,
+   "cout_fr": "Commission de gestion de 0,90 % prélevée sur la fortune du fonds ; coût total des fonds non publié.",
+   "cout_en": "Management commission of 0.90% taken from the fund’s assets; total fund cost not published.",
+   "actions_min_pct": null,
+   "actions_max_pct": null,
+   "minimum_chf": 10,
+   "taux_liquidites_pct": null,
+   "autres_fr": "Achat, garde et vente gratuits.",
+   "autres_en": "Buying, custody and selling are free.",
+   "url": "https://www.migrosbank.ch/fr/personnes-privees/prevoyance/pilier-3a/prevoyance-en-ligne-mi-futuro.html",
+   "extrait": "Commission de gestion | La commission de gestion de 0,90% est prélevée sur la fortune du fonds, au prorata.",
+   "lu_le": "2026-11-23",
+   "temoins": [
+    "0,90%"
+   ]
+  },
+  {
+   "id": "raiffeisen-3a-digital",
+   "fournisseur": "Raiffeisen",
+   "produit": "Pilier 3a digital / prévoyance 3a en titres",
+   "nom_complet": "Fondation de prévoyance Raiffeisen",
+   "cout_min_pct": null,
+   "cout_max_pct": null,
+   "cout_complet": false,
+   "cout_fr": "Pas de commission de gestion de la fondation ; commission d’émission de 0,75 % jusqu’à 100 000 CHF, puis 0,15 % ; rémunération de la banque de 0,50 à 1,00 % par an comprise dans les fonds.",
+   "cout_en": "No foundation management fee; issue commission of 0.75% up to CHF 100,000, then 0.15%; bank remuneration of 0.50–1.00% a year built into the funds.",
+   "actions_min_pct": 25,
+   "actions_max_pct": 100,
+   "minimum_chf": null,
+   "taux_liquidites_pct": 0.2,
+   "autres_fr": "Retrait gratuit.",
+   "autres_en": "Free withdrawal.",
+   "url": "https://www.raiffeisen.ch/content/dam/www/rch/pdf/privatkunden/vorsorgen-und-absichern/konditionenuebersicht/vorsorge-konditionenuebersicht-fr.pdf",
+   "extrait": "Commission de gestion du prévoyance 3a et du libre passage en titres gratuit … Pour les premiers CHF 100'000.– 0,750% … supérieurs à CHF 100'000.– 0,150%",
+   "lu_le": "2026-11-23",
+   "temoins": [
+    "0,750%"
+   ]
+  },
+  {
+   "id": "postfinance-fonds",
+   "fournisseur": "PostFinance",
+   "produit": "Fonds de prévoyance PF Pension (compte prévoyance 3a)",
+   "nom_complet": "PostFinance SA (Fondation de prévoyance 3a PostFinance, avec UBS Switzerland SA)",
+   "cout_min_pct": null,
+   "cout_max_pct": null,
+   "cout_complet": false,
+   "cout_fr": "Pas de frais de dépôt ni de commission d’achat ou de vente ; seuls les frais courants des fonds, non lisibles sur la page, s’appliquent.",
+   "cout_en": "No custody fee or buying and selling commission; only the funds’ ongoing charges apply, not readable on the page.",
+   "actions_min_pct": null,
+   "actions_max_pct": null,
+   "minimum_chf": null,
+   "taux_liquidites_pct": 0.05,
+   "autres_fr": "Retrait pour le logement : 200 CHF.",
+   "autres_en": "Withdrawal for home ownership: CHF 200.",
+   "url": "https://www.postfinance.ch/fr/particuliers/prevoyance/fonds-prevoyance.html",
+   "extrait": "Ces frais couvrent les coûts de la gestion professionnelle des fonds. Ils ne vous sont pas débités séparément, mais sont déduits automatiquement de la fortune du fonds.",
+   "lu_le": "2026-11-23",
+   "temoins": [
+    "fortune du fonds"
+   ]
+  }
+ ]
+}

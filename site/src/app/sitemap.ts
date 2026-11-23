@@ -21,6 +21,7 @@ const PAGES: { path: string; lastmod: string; lastmodEn?: string }[] = [
   { path: OUTILS.comparateur, lastmod: DATE_PAGE.comparateur },
   { path: OUTILS.taux3a, lastmod: DATE_PAGE.taux3a },
   { path: OUTILS.impot3a, lastmod: DATE_PAGE.impot3a },
+  { path: OUTILS.assurance3a, lastmod: DATE_PAGE.assurance3a },
   { path: OUTILS.sommeMenage, lastmod: DATE_PAGE.sommeMenage },
   { path: OUTILS.garantiesPj, lastmod: DATE_PAGE.garantiesPj },
   { path: HUB_OUTILS.fr, lastmod: DATE_PAGE_OUTILS },

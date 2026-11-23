@@ -4,6 +4,10 @@
 import { DATE_PRIMES } from "@/lib/date-primes";
 import IMPOTS from "@/data/impots-2026.json";
 import { RELEVE_LE } from "@/lib/taux3a";
+import FRAIS3A from "@/data/frais-3a.json";
+import ASSUREURS3A from "@/data/assureurs-3a-3b.json";
+export const DATE_FRAIS_3A: string = FRAIS3A.verifie_le;
+export const DATE_ASSUREURS_3A: string = ASSUREURS3A.lu_le;
 import H3A from "@/data/taux-3a-historique.json";
 
 export const maxIso = (...d: string[]) => d.reduce((a, b) => (b > a ? b : a));
@@ -22,7 +26,8 @@ export const DATE_TEXTE = {
   comparateur: "2026-11-22",
   simulateur: "2026-11-23",
   lettre: "2026-11-22",
-  taux3a: "2026-11-22",
+  taux3a: "2026-11-23", // frais des comptes 3a et solutions 3a en titres
+  assurance3a: "2026-11-23", // page 3a et 3b auprès d'un assureur créée
   impot3a: "2026-11-23", // canton du Jura ajouté
   outils: "2026-11-23", // page « Outils et chiffres » créée ; calculateur ménage et garanties PJ ajoutés
   sommeMenage: "2026-11-23", // calculateur de la somme d'assurance ménage créé
@@ -33,7 +38,8 @@ export const DATE_TEXTE = {
 /* Date de modification d'une page outil : la plus récente entre son texte et ses données. */
 export const DATE_PAGE = {
   comparateur: maxIso(DATE_TEXTE.comparateur, DATE_PRIMES),
-  taux3a: maxIso(DATE_TEXTE.taux3a, DATE_TAUX_3A),
+  taux3a: maxIso(DATE_TEXTE.taux3a, DATE_TAUX_3A, DATE_FRAIS_3A),
+  assurance3a: maxIso(DATE_TEXTE.assurance3a, DATE_ASSUREURS_3A),
   impot3a: maxIso(DATE_TEXTE.impot3a, DATE_IMPOTS),
   simulateur: DATE_TEXTE.simulateur,
   lettre: DATE_TEXTE.lettre,

@@ -70,3 +70,69 @@
     .outil-impot3a .form { position: sticky; top: calc(57px + var(--s4)); padding: var(--s5); }
   }
 }
+
+/* Taux et frais 3a : appels à l'action, sections, frais ; page « 3a et 3b auprès d'un assureur ». */
+@layer components {
+  .cta-haut-3a .cta-demande { margin: var(--s3) 0 var(--s5); }
+  .cta-bas-3a .cta-demande { margin: var(--s6) 0 var(--s5); }
+  .page-outil h2.titre-section-3a { margin: var(--s7) 0 var(--s2); scroll-margin-top: 80px; }
+  .intro-section-3a { max-width: 68ch; margin: 0 0 var(--s4); }
+  .carte-taux .frais { grid-column: 2 / -1; margin: var(--s1) 0 0; font: 15px/1.4 var(--narrow); }
+  .carte-taux .frais a { color: var(--lac-encre); }
+  table.table-taux td.frais { font: 15px/1.4 var(--narrow); min-width: 14em; }
+  table.table-taux td.frais a { display: block; font-size: 13px; color: var(--lac-encre); }
+  .titres-3a table.table-taux td.releve { white-space: normal; }
+  .titres-3a table.table-taux td.actions { white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+  .bloc-3a { margin: var(--s7) 0 0; max-width: 72rem; }
+  .bloc-3a > p { max-width: 68ch; }
+  dl.types-3a { display: grid; gap: var(--s2); margin: var(--s3) 0; }
+  dl.types-3a > div { background: var(--papier); border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s3) var(--s4); }
+  dl.types-3a dt { font-weight: 700; }
+  dl.types-3a dd { margin: 2px 0 0; font: 16px/1.45 var(--narrow); }
+  @media (min-width: 720px) { dl.types-3a { grid-template-columns: 1fr 1fr; } }
+
+  table.table-assureurs-3a { width: 100%; }
+  .table-assureurs-3a th, .table-assureurs-3a td { vertical-align: top; text-align: left; }
+  .table-assureurs-3a th[scope="row"] a { color: var(--lac-encre); font-weight: 700; }
+  ul.puces-types { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px; }
+  ul.puces-types li, .contrat-3a .etiquettes span {
+    font: 600 13px/1.2 var(--narrow); padding: 3px 8px; border-radius: 999px;
+    background: var(--info-teinte); color: var(--encre); border: 1px solid var(--filet);
+  }
+  .table-assureurs-3a .aucun { font: 14px var(--narrow); color: var(--encre-2); }
+
+  .assureurs-3a { display: grid; gap: var(--s2); margin-top: var(--s3); }
+  details.assureur-3a { background: var(--papier); border: 1px solid var(--filet); border-radius: var(--r); padding: 0 var(--s4); scroll-margin-top: 80px; }
+  details.assureur-3a summary { cursor: pointer; min-height: 48px; display: flex; align-items: center; justify-content: space-between; gap: var(--s2); font-size: 17px; }
+  details.assureur-3a summary span { font: 14px var(--narrow); color: var(--encre-2); white-space: nowrap; }
+  details.assureur-3a[open] { padding-bottom: var(--s3); }
+  details.assureur-3a .entite { margin: 0 0 var(--s2); font: 14px var(--narrow); color: var(--encre-2); }
+  .contrat-3a { border-top: 1px solid var(--filet); padding: var(--s3) 0 0; margin-top: var(--s3); }
+  .page-outil .contrat-3a h3 { margin: 0; font-size: 17px; }
+  .contrat-3a .etiquettes { display: flex; flex-wrap: wrap; gap: 4px; margin: var(--s1) 0 var(--s2); }
+  .contrat-3a dl { margin: 0; display: grid; gap: var(--s2); }
+  .contrat-3a dt { font: 600 14px var(--narrow); color: var(--encre-2); }
+  .contrat-3a dd { margin: 0; font: 16px/1.45 var(--narrow); max-width: 68ch; }
+  .contrat-3a .source-outil { margin: var(--s2) 0 0; font-size: 14px; }
+  .contrat-3a .source-outil a { color: var(--lac-encre); }
+
+  table.assureurs.table-compar-3a td, table.assureurs.table-compar-3a thead th,
+  table.assureurs.table-assureurs-3a td, table.assureurs.table-assureurs-3a thead th { text-align: left; }
+  table.table-compar-3a { width: 100%; }
+  .table-compar-3a th, .table-compar-3a td { vertical-align: top; text-align: left; font-size: 16px; line-height: 1.45; }
+  .table-compar-3a th[scope="row"] { font-weight: 700; min-width: 9em; }
+  .table-compar-3a .src-ligne { display: block; font: 400 13px var(--narrow); color: var(--lac-encre); margin-top: 2px; }
+  @media (max-width: 719px) {
+    .table-compar-3a thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    .table-compar-3a, .table-compar-3a tbody, .table-compar-3a tr, .table-compar-3a th, .table-compar-3a td { display: block; }
+    .table-compar-3a tr { background: var(--papier); border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s3); margin-bottom: var(--s2); }
+    .table-compar-3a th, .table-compar-3a td { border: 0; padding: 0; }
+    .table-compar-3a td { margin-top: var(--s2); }
+    .table-compar-3a td::before { display: block; font: 600 13px var(--narrow); color: var(--encre-2); }
+    .table-compar-3a td:nth-of-type(1)::before { content: var(--lib-assurance); }
+    .table-compar-3a td:nth-of-type(2)::before { content: var(--lib-banque); }
+  }
+  .page-assurance-3a { --lib-assurance: "Contrat d’assurance"; --lib-banque: "Compte ou titres en banque"; }
+  .page-assurance-3a:lang(en), html[lang="en"] .page-assurance-3a { --lib-assurance: "Insurance policy"; --lib-banque: "Bank account or securities"; }
+}

@@ -8,6 +8,7 @@ import * as I from "../src/lib/engines/impot3a.ts";
 import * as C from "../src/lib/engines/communes-3a.ts";
 import * as R from "../src/lib/engines/regions-primes.ts";
 import * as P from "../src/lib/engines/primes.ts";
+import * as Fr from "../src/lib/engines/frais3a.ts";
 
 let n = 0;
 const t = (nom: string, fn: () => void) => {
@@ -114,6 +115,43 @@ t("historique des taux 3a : relevés datés, 17 comptes, notes BNS encadrées pa
   const dernier = h.releves.find((r: { date: string }) => r.date === actuel.releve_le);
   assert.ok(dernier, "le relevé de taux-3a.json est dans l'historique");
   for (const c of actuel.comptes) assert.strictEqual(dernier.comptes.find((x: { id: string }) => x.id === c.id)?.taux, c.taux, c.id);
+});
+
+
+/* Frais du 3e pilier : données sourcées, tri neutre (critère affiché), formats */
+t("frais 3a : chaque compte a ses frais, chaque source est datée", () => {
+  const frais = JSON.parse(fs.readFileSync("src/data/frais-3a.json", "utf8"));
+  const taux = JSON.parse(fs.readFileSync("src/data/taux-3a.json", "utf8"));
+  for (const c of taux.comptes) assert.ok(frais.comptes[c.id], `frais du compte ${c.id}`);
+  for (const [id, f] of Object.entries(frais.comptes) as [string, Record<string, unknown>][]) {
+    assert.match(String(f.url), /^https:\/\//, id); assert.match(String(f.lu_le), /^\d{4}-\d{2}-\d{2}$/, id);
+    assert.ok((f.temoins as string[]).length > 0, id);
+  }
+  for (const t of frais.titres) {
+    assert.match(t.url, /^https:\/\//, t.id); assert.ok(t.temoins.length > 0, t.id);
+    assert.ok(!("rendement" in t), "aucun rendement");
+    if (t.cout_complet) assert.ok(t.cout_min_pct !== null && t.cout_max_pct !== null && t.cout_min_pct <= t.cout_max_pct, t.id);
+  }
+});
+t("frais 3a : tri par coût publié le plus haut, offres incomplètes à la fin par nom", () => {
+  const b = { produit: "", nom_complet: "", cout_fr: "", cout_en: "", actions_min_pct: null, actions_max_pct: null, minimum_chf: null, taux_liquidites_pct: null, autres_fr: "", autres_en: "", url: "", lu_le: "" };
+  const l = Fr.trierTitres([
+    { ...b, id: "z", fournisseur: "Zeta", cout_min_pct: null, cout_max_pct: null, cout_complet: false },
+    { ...b, id: "c", fournisseur: "Gamma", cout_min_pct: 0.2, cout_max_pct: 0.5, cout_complet: true },
+    { ...b, id: "a", fournisseur: "Alpha", cout_min_pct: 0.4, cout_max_pct: 0.4, cout_complet: true },
+    { ...b, id: "i", fournisseur: "Beta", cout_min_pct: 0.1, cout_max_pct: 0.1, cout_complet: false },
+    { ...b, id: "d", fournisseur: "Delta", cout_min_pct: 0.1, cout_max_pct: 0.5, cout_complet: true },
+  ]);
+  assert.deepStrictEqual(l.map((x) => x.id), ["a", "d", "c", "i", "z"]);
+});
+t("frais 3a : formats", () => {
+  assert.strictEqual(Fr.fourchette({ cout_min_pct: 0.39, cout_max_pct: 0.41 }), "0,39 à 0,41\u202F%");
+  assert.strictEqual(Fr.fourchette({ cout_min_pct: 0.5, cout_max_pct: 0.5 }, true), "0.50%");
+  assert.strictEqual(Fr.fourchette({ cout_min_pct: null, cout_max_pct: null }), null);
+  assert.strictEqual(Fr.partActions({ actions_min_pct: 5, actions_max_pct: 99 }), "5 à 99\u202F%");
+  assert.strictEqual(Fr.partActions({ actions_min_pct: null, actions_max_pct: 97 }, true), "up to 97%");
+  assert.strictEqual(Fr.resumeFraisCompte({ tenue_chf: 0, transfert_chf: 50, note_fr: "", note_en: "", url: "", lu_le: "" }), "Tenue de compte gratuite, transfert ou clôture 50\u00A0CHF.");
+  assert.strictEqual(Fr.resumeFraisCompte({ tenue_chf: null, transfert_chf: null, note_fr: "", note_en: "", url: "", lu_le: "" }, true), "Account fee not published, transfer fee not published.");
 });
 
 console.log(`donnees : ${n} tests passés`);

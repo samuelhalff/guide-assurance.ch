@@ -7,7 +7,9 @@ import { chiffresClesMarkdown } from "@/lib/chiffres-cles";
 import { ANNEE_BAROMETRE, DATE_BAROMETRE, barometreMarkdown } from "@/lib/barometre";
 import { ROUTES_IDEES, cheminBarometre } from "@/lib/pages-idees";
 import { toutesLesPages, type PageContenu, type Rubrique } from "@/lib/content/pages";
-import { DATE_IMPOTS, DATE_PRIMES, DATE_TAUX_3A } from "@/lib/donnees";
+import { DATE_ASSUREURS_3A, DATE_FRAIS_3A, DATE_IMPOTS, DATE_PRIMES, DATE_TAUX_3A } from "@/lib/donnees";
+import { TITRES_3A } from "@/lib/frais3a";
+import ASS3A from "@/data/assureurs-3a-3b.json";
 import { COMPTES_3A, dateCh } from "@/lib/taux3a";
 import { dateLongue, type Locale } from "@/lib/i18n";
 import IMPOTS from "@/data/impots-2026.json";
@@ -51,7 +53,8 @@ const resumePage = (p: PageContenu) => NEUTRE[p.slug] ?? p.landing?.reponse ?? p
 function outilsFr(): string[] {
   return [
     lienFr("Comparer les primes LAMal 2027", OUTILS.comparateur, `primes 2027 approuvées par l'OFSP pour un NPA, une année de naissance et une franchise en Suisse romande, relevées le ${dateCh(DATE_PRIMES)}, triées de la plus basse à la plus haute${N}; calcul dans le navigateur.`),
-    lienFr("Taux des comptes 3a", OUTILS.taux3a, `taux d'intérêt des comptes 3a de ${NB_BANQUES} banques suisses, relevés le ${dateCh(DATE_TAUX_3A)} sur leurs propres pages, triés du plus élevé au plus bas${N}; aucune banque ne paie.`),
+    lienFr("Taux des comptes 3a", OUTILS.taux3a, `taux d'intérêt des comptes 3a de ${NB_BANQUES} banques suisses, relevés le ${dateCh(DATE_TAUX_3A)} sur leurs propres pages, triés du plus élevé au plus bas, avec les frais de chaque compte${N}; puis frais annuels publiés et part en actions de ${TITRES_3A.length} solutions 3a en titres, lus le ${dateCh(DATE_FRAIS_3A)} sur les grilles tarifaires, triés par coût publié, sans rendement${N}; aucun fournisseur ne paie.`),
+    lienFr("3a et 3b auprès d'un assureur", OUTILS.assurance3a, `${ASS3A.assureurs.length} assureurs vie et leurs contrats 3a et 3b (risque pur, épargne garantie, liés à des fonds, hybrides), primes, libération du paiement des primes et rachat d'après leurs documents publics lus le ${dateCh(DATE_ASSUREURS_3A)}${N}; différences factuelles avec un 3a bancaire (OPP 3, LCA, circulaire FINMA 2024/2). Ordre alphabétique, sans classement.`),
     lienFr("Économie d'impôt 3a en Suisse romande", OUTILS.impot3a, `impôt fédéral, cantonal et communal économisé par un versement 3a pour ${cantonsImpot("fr")} (toutes les communes), et impôt sur un retrait en capital, barèmes ${IMPOTS.annee} vérifiés le ${dateCh(DATE_IMPOTS)} sur les calculettes officielles, calcul dans le navigateur.`),
     lienFr(`Simulateur frontalier${N}: LAMal ou assurance maladie française${N}?`, OUTILS.simulateur, `compare la cotisation Urssaf et les primes LAMal 2027 des ${NB_ASSUREURS_EU} assureurs pour un foyer qui vit en France et travaille à Genève ou dans le canton de Vaud.`),
     lienFr("Lettre de résiliation d'assurance maladie", OUTILS.lettre, "calcule la date limite de réception (art. 7 LAMal, art. 35a LCA) et rédige la lettre de résiliation de l'assurance de base ou d'une complémentaire."),
@@ -67,7 +70,8 @@ function outilsFr(): string[] {
 function outilsEn(): string[] {
   return [
     lienEn("Compare 2027 LAMal premiums", OUTILS_EN.comparateur, `2027 FOPH-approved premiums for a postcode, year of birth and deductible in French-speaking Switzerland, retrieved on ${dateCh(DATE_PRIMES)}, sorted from lowest to highest; calculated in the browser.`),
-    lienEn("Pillar 3a interest rates", OUTILS_EN.taux3a, `pillar 3a account rates at ${NB_BANQUES} Swiss banks, read on ${dateCh(DATE_TAUX_3A)} on the banks' own pages, sorted from highest to lowest; no paid listings.`),
+    lienEn("Pillar 3a interest rates", OUTILS_EN.taux3a, `pillar 3a account rates at ${NB_BANQUES} Swiss banks, read on ${dateCh(DATE_TAUX_3A)} on the banks' own pages, sorted from highest to lowest, with each account's fees; then published annual costs and equity share of ${TITRES_3A.length} pillar 3a securities solutions, read on ${dateCh(DATE_FRAIS_3A)} on their price lists, sorted by published cost, no returns; no paid listings.`),
+    lienEn("Pillar 3a and 3b with an insurer", OUTILS_EN.assurance3a, `${ASS3A.assureurs.length} life insurers and their 3a and 3b policies (pure risk, guaranteed savings, unit-linked, hybrid), premiums, premium waiver and surrender terms from their public documents read on ${dateCh(DATE_ASSUREURS_3A)}; factual differences from a bank 3a (OPP 3, LCA, FINMA circular 2024/2). Alphabetical order, no ranking.`),
     lienEn("Pillar 3a tax savings in French-speaking Switzerland", OUTILS_EN.impot3a, `federal, cantonal and municipal tax saved by a 3a payment in ${cantonsImpot("en")} (every municipality), plus tax on a capital withdrawal; ${IMPOTS.annee} scales checked on ${dateCh(DATE_IMPOTS)} against the official calculators; runs in the browser.`),
     lienEn("Cross-border calculator: LAMal or French health insurance?", OUTILS_EN.simulateur, `compares the Urssaf contribution with the 2027 LAMal premiums of the ${NB_ASSUREURS_EU} insurers for a household living in France and working in Geneva or Vaud.`),
     lienEn("Health insurance cancellation letter", OUTILS_EN.lettre, "calculates the date by which the insurer must receive the letter (art. 7 LAMal, art. 35a LCA) and drafts the letter in French for basic or supplementary insurance."),

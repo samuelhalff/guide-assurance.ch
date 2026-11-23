@@ -18,6 +18,7 @@ DATASETS = {
     "lamal": ("Primes LAMal (mensuel, quotidien du 25.9 au 31.12, publication automatique des corrections)", 32),
     "frontalier": ("Frontaliers : PASS et primes UE (mensuel, quotidien en janvier, alerte seulement)", 32),
     "impots": ("Barèmes d'impôt GE/VD (mensuel, alerte seulement)", 32),
+    "frais3a": ("Frais 3a : pages tarifaires des fournisseurs (mensuel, alerte seulement)", 32),
 }
 STATUTS = {"ok": "aucun changement", "publie": "publié", "ecrit_non_publie": "écrit, non publié",
            "alerte": "alerte envoyée", "echec": "échec de lecture", "invalide": "valeurs invraisemblables"}

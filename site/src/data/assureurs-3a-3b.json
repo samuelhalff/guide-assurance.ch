@@ -1,0 +1,554 @@
+{
+ "lu_le": "2026-11-23",
+ "source_note": "Relevé à la main le 23.11.2026 sur les pages produits, fiches et feuilles d’information des assureurs eux-mêmes. Aucun comparateur. Ordre alphabétique. Ce que la page ne dit pas reste non précisé.",
+ "assureurs": [
+  {
+   "id": "allianz",
+   "nom": "Allianz Suisse",
+   "entite": "Allianz Suisse Société d'Assurances sur la Vie SA",
+   "lu_le": "2026-11-23",
+   "produits": [
+    {
+     "nom": "Smart Invest",
+     "pilier": "3a+3b",
+     "type": "hybride",
+     "primes_fr": "Les primes périodiques sont d’au moins 1 800 CHF par an, avec un versement annuel, semestriel, trimestriel ou mensuel. La prime peut être augmentée ou réduite, et une pause est possible, un an à la fois. En 3a, la prime peut suivre automatiquement le plafond déductible.",
+     "primes_en": "Periodic premiums are at least CHF 1,800 a year, paid annually, half-yearly, quarterly or monthly. The premium can be raised or lowered, and a pause of one year at a time is possible. In pillar 3a, the premium can automatically follow the deductible ceiling.",
+     "rachat_fr": "La page ne dit rien de la valeur de rachat ni des frais. Elle annonce 100 % de l’avoir en cas de vie et 101 % en cas de décès. Lors d’un transfert entre composantes, une déduction pour risque d’intérêt conforme au marché peut s’appliquer. La part en fonds peut perdre de la valeur.",
+     "rachat_en": "The page says nothing about the surrender value or the charges. It states 100% of the account value on survival and 101% on death. When funds are switched between components, a market-based interest-risk deduction may apply. The fund portion can lose value.",
+     "liberation_primes": true,
+     "url": "https://www.allianz.ch/fr/clients-prives/offres/prevoyance-assurance-vie/epargne-placements/smart-invest.html",
+     "extrait": "Smart Invest est une assurance vie avec une composante liée au taux d'intérêt et une composante liée à des fonds."
+    },
+    {
+     "nom": "Flex Saving",
+     "pilier": "3a",
+     "type": "mixte",
+     "primes_fr": "La prime d’assurance contre la perte d’épargne est fixe. Les versements d’épargne sont libres. Aucune prime minimale n’est indiquée.",
+     "primes_en": "The premium for the savings-loss insurance is fixed. Savings payments are freely chosen. No minimum premium is stated.",
+     "rachat_fr": "La rémunération globale est variable et la page n’annonce aucune garantie de capital. Elle ne parle ni du rachat ni des frais. Des avoirs 3a existants peuvent y être intégrés à tout moment.",
+     "rachat_en": "The overall return is variable and the page announces no capital guarantee. It says nothing about surrender or charges. Existing pillar 3a assets can be transferred in at any time.",
+     "liberation_primes": true,
+     "url": "https://www.allianz.ch/fr/clients-prives/offres/prevoyance-assurance-vie/epargne-placements/flex-saving.html",
+     "extrait": "Versement des cotisations d'épargne par Allianz en cas d'incapacité de gain"
+    },
+    {
+     "nom": "Assurance en cas de décès",
+     "pilier": "3a+3b",
+     "type": "risque",
+     "primes_fr": "Les primes sont périodiques, avec un versement annuel, semestriel, trimestriel ou mensuel. La somme d’assurance minimale est de 10 000 CHF si le capital reste constant.",
+     "primes_en": "Premiums are periodic, paid annually, half-yearly, quarterly or monthly. The minimum sum insured is CHF 10,000 if the capital stays constant.",
+     "rachat_fr": "C’est une assurance de risque pur, qui ne verse rien si l’assuré est en vie à l’échéance. La page ne parle pas de valeur de rachat.",
+     "rachat_en": "This is pure risk insurance, which pays nothing if the insured person is alive at maturity. The page says nothing about a surrender value.",
+     "liberation_primes": true,
+     "url": "https://www.allianz.ch/fr/clients-prives/offres/prevoyance-assurance-vie/assurance-risque-pur/assurance-deces.html",
+     "extrait": "Si la personne assurée est encore en vie à l'échéance de la police, aucun versement n'est effectué."
+    },
+    {
+     "nom": "Balance Invest",
+     "pilier": "3b",
+     "type": "hybride",
+     "primes_fr": "La prime est unique, d’au moins 30 000 CHF, à laquelle s’ajoute le timbre fédéral.",
+     "primes_en": "The premium is a single payment of at least CHF 30,000, plus federal stamp duty.",
+     "rachat_fr": "Le capital garanti en cas de vie se choisit entre 60 et 75 %, et un capital garanti en cas de décès s’y ajoute. La partie axée sur le rendement est versée au prix de rachat. La page ne donne pas les frais.",
+     "rachat_en": "The guaranteed capital on survival can be chosen between 60 and 75%, with a guaranteed capital on death in addition. The performance-oriented part is paid out at the surrender price. The page does not give the charges.",
+     "liberation_primes": null,
+     "url": "https://www.allianz.ch/fr/clients-prives/offres/prevoyance-assurance-vie/epargne-placements/balance-invest.html",
+     "extrait": "Balance Invest est une assurance vie de la prévoyance libre (pilier 3b)"
+    }
+   ]
+  },
+  {
+   "id": "axa",
+   "nom": "AXA Suisse",
+   "entite": "AXA Assurances SA",
+   "lu_le": "2026-11-23",
+   "produits": [
+    {
+     "nom": "Plan de prévoyance SmartFlex",
+     "pilier": "3a+3b",
+     "type": "hybride",
+     "primes_fr": "Les primes périodiques commencent à 600 CHF par an. Il est possible de verser plus ou moins que la prime fixée. En 3a, la prime peut être suspendue pendant un an ou réduite. En 3b, la suspension ou la réduction est possible après au moins 5 primes annuelles.",
+     "primes_en": "Periodic premiums start at CHF 600 a year. It is possible to pay more or less than the set premium. In pillar 3a, the premium can be suspended for one year or reduced. In pillar 3b, suspension or reduction is possible after at least 5 annual premiums.",
+     "rachat_fr": "Le capital sécurisé est garanti à 100 % dans la fortune liée. La part en fonds vaut la valeur actuelle des parts. En 3a, le versement n’a lieu que pour un motif légal, sinon l’avoir est viré sur un compte 3a ou à une caisse de pension. En 3b, le rachat est possible à tout moment. Une pause de primes réduit la valeur de rachat. Aucun frais des premières années n’est publié.",
+     "rachat_en": "The secured capital is guaranteed at 100% within the tied assets. The fund portion is worth the current value of the units. In pillar 3a, payment is made only for a legal reason; otherwise the assets are transferred to a 3a account or to a pension fund. In pillar 3b, surrender is possible at any time. A premium pause reduces the surrender value. No charges for the first years are published.",
+     "liberation_primes": true,
+     "url": "https://www.axa.ch/fr/particuliers/offres/prevoyance-patrimoine/3e-pilier-prevoyance-individuelle/plan-prevoyance-smartflex.html",
+     "extrait": "Vous avez également la possibilité de verser plus ou moins que la prime de prévoyance fixée ou même de suspendre le paiement de certaines primes."
+    },
+    {
+     "nom": "Plan de capital SmartFlex",
+     "pilier": "3a+3b",
+     "type": "hybride",
+     "primes_fr": "La prime est unique, d’au moins 15 000 CHF en 3a et 25 000 CHF en 3b. Elle est répartie entre une part sécurisée et une part en actions, et une réallocation est possible.",
+     "primes_en": "The premium is a single payment of at least CHF 15,000 in pillar 3a and CHF 25,000 in pillar 3b. It is split between a secured part and an equity part, and reallocation is possible.",
+     "rachat_fr": "La page ne parle pas de valeur de rachat. Les frais publiés sont d’environ 0,1 à 0,3 % par an pour la gestion des fonds et, en 3b, un droit de timbre de 2,5 % de la prime unique. Le total est indiqué dans l’offre. L’avantage fiscal en 3b suppose une durée minimale de 10 ans.",
+     "rachat_en": "The page says nothing about a surrender value. The published charges are about 0.1 to 0.3% a year for fund management and, in pillar 3b, stamp duty of 2.5% of the single premium. The total is shown in the quotation. The tax advantage in pillar 3b requires a minimum term of 10 years.",
+     "liberation_primes": null,
+     "url": "https://www.axa.ch/fr/particuliers/offres/prevoyance-patrimoine/3e-pilier-prevoyance-individuelle/plan-capital-smartflex.html",
+     "extrait": "Avec le plan de capital SmartFlex, vous bénéficiez des avantages d’une assurance de capital à partir d’une prime unique d’au moins 15 000 francs (pour le pilier 3a)"
+    },
+    {
+     "nom": "Assurance en cas de décès",
+     "pilier": "3a+3b",
+     "type": "risque",
+     "primes_fr": "Le capital-décès est constant ou décroissant. Une variante pour deux personnes existe en 3b seulement. Aucune prime n’est publiée, mais un calculateur est proposé.",
+     "primes_en": "The death benefit is constant or decreasing. A variant for two persons exists in pillar 3b only. No premium is published, but a calculator is offered.",
+     "rachat_fr": "C’est une couverture de risque sans épargne, et la page ne dit rien d’une valeur de rachat. Une mise en gage est possible pour un logement à usage propre.",
+     "rachat_en": "This is risk cover without savings, and the page says nothing about a surrender value. Pledging is possible for an owner-occupied home.",
+     "liberation_primes": true,
+     "url": "https://www.axa.ch/fr/particuliers/offres/prevoyance-patrimoine/couvrir-invalidite-deces/assurance-deces.html",
+     "extrait": "En cas de décès, AXA verse immédiatement le capital-décès aux bénéficiaires après les avoir identifiés, indépendamment de la procédure successorale."
+    }
+   ]
+  },
+  {
+   "id": "generali",
+   "nom": "Generali Suisse",
+   "entite": "Generali Assurances de personnes SA",
+   "lu_le": "2026-11-23",
+   "produits": [
+    {
+     "nom": "Formule de prévoyance Previdenza",
+     "pilier": "3a+3b",
+     "type": "fonds",
+     "primes_fr": "Les primes sont périodiques, avec un versement mensuel, trimestriel, semestriel ou annuel, et la prime est garantie sur toute la durée. Aucune prime minimale n’est indiquée.",
+     "primes_en": "Premiums are periodic, paid monthly, quarterly, half-yearly or annually, and the premium is guaranteed for the whole term. No minimum premium is stated.",
+     "rachat_fr": "Selon la feuille d’information de base, la valeur de rachat est l’avoir en fonds moins les frais d’acquisition non amortis, et elle atteint au moins deux tiers de l’avoir. La résiliation est possible dès la 2e année. La page avertit d’une perte possible en cas de résiliation dans les trois premières années. En 3a, un motif légal est nécessaire. Seul le capital-décès est garanti.",
+     "rachat_en": "According to the basic information sheet, the surrender value is the fund assets less the unamortised acquisition costs, and it is at least two thirds of the assets. Termination is possible from the 2nd year. The page warns of a possible loss if the contract is terminated within the first three years. In pillar 3a, a legal reason is required. Only the death benefit is guaranteed.",
+     "liberation_primes": true,
+     "url": "https://www.generali.ch/fr/particuliers/prevoyance-investissements/epargne-prevoyance/formule-de-prevoyance",
+     "extrait": "vous pouvez perdre de l’argent en cas de résiliation de l’assurance avant l’échéance des trois premières années."
+    },
+    {
+     "nom": "Assurance de prévoyance Flex",
+     "pilier": "3a+3b",
+     "type": "hybride",
+     "primes_fr": "La prime d’épargne se répartit entre un avoir de sécurité et un avoir de rendement, dont 10 à 95 % en fonds. La répartition peut être modifiée en cours de contrat. La durée va de 10 à 45 ans. Aucune prime minimale n’est indiquée.",
+     "primes_en": "The savings premium is split between a security account and a performance account, with 10 to 95% in funds. The split can be changed during the contract. The term runs from 10 to 45 years. No minimum premium is stated.",
+     "rachat_fr": "L’avoir de sécurité est une assurance mixte traditionnelle, avec un capital garanti en cas de vie. La libération des primes est une option. Le rachat suit les conditions du pilier 3a.",
+     "rachat_en": "The security account is a traditional endowment insurance with a guaranteed capital on survival. Premium waiver is an option. Surrender follows the conditions of pillar 3a.",
+     "liberation_primes": true,
+     "url": "https://www.generali.ch/content/dam/generali/pdf/produktdokumente/factsheets/vorsorgeversicherungen/factsheet-fr-assurance-prevoyance-flex.pdf",
+     "extrait": "Elle se compose d’un avoir de sécurité, comparable à un compte générant des intérêts, et d’un avoir de rendement, similaire à un placement de fonds."
+    },
+    {
+     "nom": "Assurance de prévoyance Performa",
+     "pilier": "3a+3b",
+     "type": "fonds",
+     "primes_fr": "Le versement est mensuel, trimestriel, semestriel ou annuel. La page ne parle ni de pause ni de minimum.",
+     "primes_en": "Payment is monthly, quarterly, half-yearly or annual. The page says nothing about a pause or a minimum.",
+     "rachat_fr": "C’est une assurance-vie d’épargne liée à des fonds, sans capital-décès selon le tableau comparatif. La page ne donne ni conditions de rachat ni frais.",
+     "rachat_en": "This is fund-linked savings life insurance, with no death benefit according to the comparison table. The page gives neither surrender conditions nor charges.",
+     "liberation_primes": true,
+     "url": "https://www.generali.ch/fr/particuliers/prevoyance-investissements/epargne-prevoyance/assurances-de-prevoyance",
+     "extrait": "nous continuons à payer votre prime pour vous"
+    }
+   ]
+  },
+  {
+   "id": "groupemutuel",
+   "nom": "Groupe Mutuel Vie",
+   "entite": "Groupe Mutuel Vie GMV SA",
+   "lu_le": "2026-11-23",
+   "produits": [
+    {
+     "nom": "VariaInvest",
+     "pilier": "3a+3b",
+     "type": "hybride",
+     "primes_fr": "Le versement est mensuel, d’au moins 100 CHF. Des versements supplémentaires sont possibles. En 3a seulement, les primes peuvent être suspendues pendant 1, 2 ou 3 ans.",
+     "primes_en": "Payment is monthly, at least CHF 100. Additional payments are possible. In pillar 3a only, premiums can be suspended for 1, 2 or 3 years.",
+     "rachat_fr": "La part d’épargne est garantie et participe aux excédents, tandis que le risque de la part en fonds reste à la charge du preneur. La page ne parle ni de valeur de rachat, ni de frais, ni de transfert.",
+     "rachat_en": "The savings part is guaranteed and shares in surpluses, while the risk on the fund part stays with the policyholder. The page says nothing about a surrender value, charges or transfer.",
+     "liberation_primes": null,
+     "url": "https://www.groupemutuel.ch/fr/clients-prives/nos-produits/vie/Epargne-et-placements/variainvest.html",
+     "extrait": "suspendre le paiement de vos primes durant 1, 2, ou 3 ans en prévoyance liée (3a)"
+    },
+    {
+     "nom": "Global Vie Invest",
+     "pilier": "3a+3b",
+     "type": "fonds",
+     "primes_fr": "La prime est unique, à partir de 10 000 CHF.",
+     "primes_en": "The premium is a single payment, from CHF 10,000.",
+     "rachat_fr": "En cas de décès, le capital garanti est versé, ou la valeur des fonds si elle est supérieure. En cas de vie, le montant dépend des marchés. La page ne parle ni de rachat ni de frais.",
+     "rachat_en": "On death, the guaranteed capital is paid, or the value of the funds if it is higher. On survival, the amount depends on the markets. The page says nothing about surrender or charges.",
+     "liberation_primes": null,
+     "url": "https://www.groupemutuel.ch/fr/clients-prives/nos-produits/vie/Epargne-et-placements/Global-Vie-Invest.html",
+     "extrait": "Global Vie Invest est une assurance épargne à prime unique liée à des fonds de placement."
+    },
+    {
+     "nom": "Assurances en cas de décès (capital constant, décroissant, rente de survivants)",
+     "pilier": "3a+3b",
+     "type": "risque",
+     "primes_fr": "La prime est constante avec un capital constant et plus basse avec un capital décroissant. Un tarif préférentiel est prévu pour les non-fumeurs.",
+     "primes_en": "The premium is constant with a constant capital and lower with a decreasing capital. A preferential rate applies to non-smokers.",
+     "rachat_fr": "La page ne parle pas de valeur de rachat.",
+     "rachat_en": "The page says nothing about a surrender value.",
+     "liberation_primes": true,
+     "url": "https://www.groupemutuel.ch/fr/clients-prives/nos-produits/vie/Assurances-en-cas-de-deces-ou-d-incapacite-de-gain/Assurances-en-cas-de-deces.html",
+     "extrait": "En cas d'incapacité de gain, après le délai d'attente convenu"
+    }
+   ]
+  },
+  {
+   "id": "helvetia",
+   "nom": "Helvetia (groupe Helvetia Baloise)",
+   "entite": "Helvetia Compagnie Suisse d’Assurances sur la Vie SA",
+   "lu_le": "2026-11-23",
+   "produits": [
+    {
+     "nom": "Assurance vie flexible VivaFlex",
+     "pilier": "3a+3b",
+     "type": "hybride",
+     "primes_fr": "Les primes sont périodiques ou uniques. La prime est ajustable, les versements sont facultatifs et une pause est possible en 3a comme en 3b. En 3a, la prime s’adapte automatiquement au plafond légal. Aucune prime minimale n’est indiquée.",
+     "primes_en": "Premiums are periodic or single. The premium is adjustable, payments are optional and a pause is possible in both pillar 3a and pillar 3b. In pillar 3a, the premium adapts automatically to the legal ceiling. No minimum premium is stated.",
+     "rachat_fr": "À l’échéance, la prestation est au minimum le capital garanti en cas de vie fixé dans la police. Selon la feuille d’information de base du 01.07.2026, un rachat anticipé verse l’avoir moins les frais de conclusion non amortis et une déduction pour risque de taux. En 3a, le retrait suit les règles légales, et en 3b il est libre.",
+     "rachat_en": "At maturity, the benefit is at least the guaranteed capital on survival set out in the policy. According to the basic information sheet of 1 July 2026, early surrender pays out the account value less the unamortised acquisition costs and an interest-rate risk deduction. In pillar 3a, withdrawal follows the legal rules, and in pillar 3b it is free.",
+     "liberation_primes": true,
+     "url": "https://www.helvetia.com/ch/web/fr/personnes-privees/prevoyance/assurance-vie.html",
+     "extrait": "La valeur de l’avoir du contrat, au minimum toutefois le capital garanti dans la police en cas de vie."
+    },
+    {
+     "nom": "Assurance décès",
+     "pilier": "3a+3b",
+     "type": "risque",
+     "primes_fr": "C’est une assurance de risque pur, et la page donne des exemples de primes mensuelles. La durée maximale est de 45 ans.",
+     "primes_en": "This is pure risk insurance, and the page gives examples of monthly premiums. The maximum term is 45 years.",
+     "rachat_fr": "Aucun capital n’est constitué. En cas d’invalidité, Helvetia paie les primes si cela a été convenu.",
+     "rachat_en": "No capital is built up. In the event of disability, Helvetia pays the premiums if this has been agreed.",
+     "liberation_primes": true,
+     "url": "https://www.helvetia.com/ch/web/fr/personnes-privees/prevoyance/assurance-deces.html",
+     "extrait": "Vous concluez l’assurance décès en tant qu’assurance risque pur dans le cadre du pilier 3a ou du pilier 3b."
+    },
+    {
+     "nom": "Helvetia Trendmarket",
+     "pilier": "3b",
+     "type": "hybride",
+     "primes_fr": "Il s’agit d’un investissement unique pour une durée fixe, en 3b seulement.",
+     "primes_en": "This is a single investment for a fixed term, in pillar 3b only.",
+     "rachat_fr": "Une banque partenaire garantit la prestation minimale à l’échéance. Helvetia garantit le capital-décès pendant toute la durée. La page ne parle pas de valeur de rachat.",
+     "rachat_en": "A partner bank guarantees the minimum benefit at maturity. Helvetia guarantees the death benefit for the whole term. The page says nothing about a surrender value.",
+     "liberation_primes": null,
+     "url": "https://www.helvetia.com/ch/web/fr/personnes-privees/prevoyance/produits-de-placement.html",
+     "extrait": "Prestation à l’échéance du contrat garantie par une banque partenaire"
+    }
+   ]
+  },
+  {
+   "id": "mobiliere",
+   "nom": "La Mobilière",
+   "entite": "Mobilière Suisse Société d'assurances sur la vie SA",
+   "lu_le": "2026-11-23",
+   "produits": [
+    {
+     "nom": "Assurance épargne évolutive",
+     "pilier": "3a+3b",
+     "type": "hybride",
+     "primes_fr": "Les primes sont mensuelles. En 3a, une suspension temporaire, des primes supplémentaires et un alignement sur le maximum légal sont possibles. En 3b, le montant peut être modifié à tout moment. Un compte de dépôt de primes est possible. Aucune prime minimale n’est indiquée.",
+     "primes_en": "Premiums are monthly. In pillar 3a, temporary suspension, additional premiums and alignment with the legal maximum are possible. In pillar 3b, the amount can be changed at any time. A premium deposit account is possible. No minimum premium is stated.",
+     "rachat_fr": "La page annonce des valeurs de rachat élevées et garanties, avec au moins 100 % du placement garanti dès le départ. La part garantie est protégée pendant au moins dix ans, et la part en fonds suit le marché. La durée minimale est de 15 ans en 3a et de 10 ans en 3b. La libération des primes est en option, avec un délai d’attente de trois mois.",
+     "rachat_en": "The page announces high, guaranteed surrender values, with at least 100% of the investment guaranteed from the outset. The guaranteed part is protected for at least ten years, and the fund part follows the market. The minimum term is 15 years in pillar 3a and 10 years in pillar 3b. Premium waiver is optional, with a waiting period of three months.",
+     "liberation_primes": true,
+     "url": "https://www.mobiliere.ch/particuliers/epargne-et-prevoyance/assurance-epargne-evolutive",
+     "extrait": "vous recevez dès le départ au moins 100% du placement garanti."
+    },
+    {
+     "nom": "Assurance décès",
+     "pilier": "3a+3b",
+     "type": "risque",
+     "primes_fr": "La page ne donne ni montant ni périodicité. Avec deux assurés, le contrat continue à prime réduite après le premier décès.",
+     "primes_en": "The page gives neither an amount nor a payment frequency. With two insured persons, the contract continues at a reduced premium after the first death.",
+     "rachat_fr": "C’est une assurance de risque pur, sans prestation en cas de vie. La page ne parle pas de rachat.",
+     "rachat_en": "This is pure risk insurance, with no benefit on survival. The page says nothing about surrender.",
+     "liberation_primes": true,
+     "url": "https://www.mobiliere.ch/particuliers/epargne-et-prevoyance/assurance-deces",
+     "extrait": "En cas d'incapacité de gain consécutive à une maladie ou un accident, nous prenons en charge le paiement de vos primes."
+    },
+    {
+     "nom": "Assurance épargne liée à des fonds de placement à prime unique",
+     "pilier": "3a+3b",
+     "type": "fonds",
+     "primes_fr": "L’apport est unique, d’au moins 10 000 CHF.",
+     "primes_en": "The contribution is a single payment of at least CHF 10,000.",
+     "rachat_fr": "Le capital-décès est garanti, mais le capital à l’échéance ne l’est pas. Les primes de risque et les frais sont prélevés sur l’avoir en fonds. La page ne parle pas de rachat.",
+     "rachat_en": "The death benefit is guaranteed, but the capital at maturity is not. Risk premiums and charges are deducted from the fund assets. The page says nothing about surrender.",
+     "liberation_primes": null,
+     "url": "https://www.mobiliere.ch/particuliers/epargne-et-prevoyance/assurance-epargne-liee-a-des-fonds-de-placement-a-prime-unique",
+     "extrait": "Les primes de risque décès et les frais sont régulièrement déduits de l'avoir en fonds."
+    }
+   ]
+  },
+  {
+   "id": "liechtensteinlife",
+   "nom": "Liechtenstein Life",
+   "entite": "Liechtenstein Life Assurance AG",
+   "lu_le": "2026-11-23",
+   "produits": [
+    {
+     "nom": "Prosperity 3a",
+     "pilier": "3a",
+     "type": "fonds",
+     "primes_fr": "Les primes périodiques commencent à 1 200 CHF par an, la prime unique à 5 000 CHF et les versements supplémentaires à 50 CHF. Les primes sont modulables, et la pause peut durer jusqu’à 24 mois.",
+     "primes_en": "Periodic premiums start at CHF 1,200 a year, the single premium at CHF 5,000 and additional payments at CHF 50. Premiums can be adjusted, and the pause can last up to 24 months.",
+     "rachat_fr": "Un abattement de résiliation s’applique en cas de rachat anticipé. Le transfert d’un avoir 3a existant est en principe possible. Une garantie de primes de 50, 80 ou 100 % est optionnelle. Les frais apparaissent dans l’offre sous la forme d’une réduction du rendement.",
+     "rachat_en": "A termination deduction applies on early surrender. Transfer of an existing pillar 3a account is in principle possible. A premium guarantee of 50, 80 or 100% is optional. Charges appear in the quotation as a reduction in yield.",
+     "liberation_primes": true,
+     "url": "https://liechtensteinlife.com/fr-CH/markets/ch/prosperity",
+     "extrait": "En cas de rachat anticipé, un abattement de résiliation s'applique."
+    },
+    {
+     "nom": "Prosperity Plus",
+     "pilier": "3b",
+     "type": "fonds",
+     "primes_fr": "La prime est d’au moins 1 200 CHF par an, la prime unique commence à 10 000 CHF et les versements supplémentaires à 500 CHF. La pause peut durer jusqu’à 24 mois.",
+     "primes_en": "The premium is at least CHF 1,200 a year, the single premium starts at CHF 10,000 and additional payments at CHF 500. The pause can last up to 24 months.",
+     "rachat_fr": "Le retrait anticipé est présenté comme possible, avec un plan de versement en option, et aucun frais n’est indiqué. Une garantie de primes de 50, 80 ou 100 % est optionnelle.",
+     "rachat_en": "Early withdrawal is presented as possible, with an optional payout plan, and no charges are stated. A premium guarantee of 50, 80 or 100% is optional.",
+     "liberation_primes": true,
+     "url": "https://liechtensteinlife.com/fr-CH/markets/ch/produits/prosperity-plus",
+     "extrait": "Tu choisis librement le montant des primes (au minimum CHF 1'200 par an)"
+    },
+    {
+     "nom": "Prosperity Duo",
+     "pilier": "3b",
+     "type": "fonds",
+     "primes_fr": "Les primes périodiques commencent à 1 200 CHF par an et les versements supplémentaires à 500 CHF. Il n’y a pas de prime unique. La pause peut durer jusqu’à 24 mois.",
+     "primes_en": "Periodic premiums start at CHF 1,200 a year and additional payments at CHF 500. There is no single premium. The pause can last up to 24 months.",
+     "rachat_fr": "Le retrait anticipé est présenté comme possible, et aucun frais n’est indiqué. La libération des primes joue au décès du souscripteur et, en option, en cas d’incapacité de gain.",
+     "rachat_en": "Early withdrawal is presented as possible, and no charges are stated. Premium waiver applies on the death of the policyholder and, as an option, in the event of incapacity for work.",
+     "liberation_primes": true,
+     "url": "https://liechtensteinlife.com/fr-CH/markets/ch/prosperity",
+     "extrait": "libération du paiement des primes en cas d'incapacité de gain du souscripteur en option"
+    }
+   ]
+  },
+  {
+   "id": "pax",
+   "nom": "Pax",
+   "entite": "Pax, Société suisse d'assurance sur la vie SA",
+   "lu_le": "2026-11-23",
+   "produits": [
+    {
+     "nom": "Pax 3a",
+     "pilier": "3a",
+     "type": "hybride",
+     "primes_fr": "La prime est fixe, à partir de 50 CHF par mois, avec un versement mensuel, trimestriel, semestriel ou annuel. Des versements supplémentaires sont possibles à tout moment. La page ne parle pas de pause.",
+     "primes_en": "The premium is fixed, from CHF 50 a month, paid monthly, quarterly, half-yearly or annually. Additional payments are possible at any time. The page says nothing about a pause.",
+     "rachat_fr": "La page ne parle ni de valeur de rachat ni de transfert 3a. Elle annonce un taux fixe garanti sur la part épargne, sans le chiffrer. Les frais affichés sont de 0,5 % d’administration jusqu’à 50 000 CHF (0,35 % au-delà), un TER de 0,15 % sur les fonds et des frais de gestion de 0,5 % au maximum.",
+     "rachat_en": "The page says nothing about a surrender value or about 3a transfer. It announces a guaranteed fixed rate on the savings part, without giving a figure. The charges shown are 0.5% administration up to CHF 50,000 (0.35% above that), a TER of 0.15% on the funds and management fees of 0.5% at most.",
+     "liberation_primes": true,
+     "url": "https://www.pax.ch/fr/prevoyance-privee/produits/pax-3a",
+     "extrait": "Nous continuons à payer si vous ne pouvez plus cotiser en raison d'une incapacité de gain."
+    },
+    {
+     "nom": "Pax FondsStar (TerzaFondsStar 3a / FondsStar 3b, versions Invest à prime unique)",
+     "pilier": "3a+3b",
+     "type": "fonds",
+     "primes_fr": "Les primes périodiques commencent à 1 200 CHF par an et la prime unique à 10 000 CHF, ou les deux peuvent être combinées. La durée minimale est de 10 ans. Les primes sont adaptables. En cas de difficultés financières, une assurance risque intermédiaire maintient la couverture pendant que l’épargne est suspendue.",
+     "primes_en": "Periodic premiums start at CHF 1,200 a year and the single premium at CHF 10,000, or the two can be combined. The minimum term is 10 years. Premiums are adjustable. In the event of financial difficulty, an interim risk insurance keeps the cover in place while savings are suspended.",
+     "rachat_fr": "La brochure annonce une valeur de rachat dès la première année. Un passage entre 3a et 3b est possible si la situation professionnelle change. La prestation décès minimale est garantie, et la prestation en cas de vie dépend des fonds.",
+     "rachat_en": "The brochure announces a surrender value from the first year. A switch between pillar 3a and pillar 3b is possible if the professional situation changes. The minimum death benefit is guaranteed, and the benefit on survival depends on the funds.",
+     "liberation_primes": true,
+     "url": "https://assets.pax.ch/x/1436189844/prevoyance-privee-brochure-du-produit-pax-placements-en-fonds.pdf",
+     "extrait": "Dès la première année, vous disposez d'une valeur de rachat."
+    },
+    {
+     "nom": "Assurance-vie épargne Pax (épargne classique à intérêts garantis)",
+     "pilier": "3a+3b",
+     "type": "mixte",
+     "primes_fr": "La prime minimale est de 100 CHF par mois, calculée selon les besoins. La page ne parle pas de pause.",
+     "primes_en": "The minimum premium is CHF 100 a month, calculated according to needs. The page says nothing about a pause.",
+     "rachat_fr": "Le capital assuré est versé à hauteur du montant garanti, et les excédents sont crédités et garantis chaque année. La page ne parle ni de valeur de rachat, ni des frais des premières années, ni de transfert.",
+     "rachat_en": "The insured capital is paid up to the guaranteed amount, and surpluses are credited and guaranteed each year. The page says nothing about a surrender value, charges in the first years or transfer.",
+     "liberation_primes": true,
+     "url": "https://www.pax.ch/fr/prevoyance-privee/produits/assurance-vie-epargne-pax",
+     "extrait": "Vous pouvez épargner de manière classique avec des intérêts garantis ou investir votre argent dans des fonds axés sur le rendement."
+    },
+    {
+     "nom": "Assurance décès Pax",
+     "pilier": "3a+3b",
+     "type": "risque",
+     "primes_fr": "La prime dépend de la somme assurée, de l’âge d’entrée et du sexe, et commence à 8,35 CHF par mois. Les excédents réduisent la prime. La souscription en ligne n’est possible qu’en 3b.",
+     "primes_en": "The premium depends on the sum insured, the age at entry and sex, and starts at CHF 8.35 a month. Surpluses reduce the premium. Online application is possible in pillar 3b only.",
+     "rachat_fr": "La page ne parle pas de valeur de rachat. Elle prévoit un versement anticipé du capital-décès si l’espérance de vie certifiée est de 12 mois ou moins.",
+     "rachat_en": "The page says nothing about a surrender value. It provides for early payment of the death benefit if certified life expectancy is 12 months or less.",
+     "liberation_primes": null,
+     "url": "https://www.pax.ch/fr/prevoyance-privee/produits/assurance-deces-pax",
+     "extrait": "Dans le pilier 3b, la personne assurée peut choisir librement les bénéficiaires."
+    }
+   ]
+  },
+  {
+   "id": "retraitespopulaires",
+   "nom": "Retraites Populaires",
+   "entite": "Retraites Populaires, institution de droit public cantonal (Lausanne)",
+   "lu_le": "2026-11-23",
+   "produits": [
+    {
+     "nom": "Modulo",
+     "pilier": "3a+3b",
+     "type": "mixte",
+     "primes_fr": "La prime commence à 100 CHF par mois, en 3a comme en 3b. Les options et les versements sont modifiables en tout temps, et une suspension temporaire est possible. En 3a, des versements flexibles s’ajoutent aux primes contractuelles.",
+     "primes_en": "The premium starts at CHF 100 a month, in both pillar 3a and pillar 3b. Options and payments can be changed at any time, and temporary suspension is possible. In pillar 3a, flexible payments are added to the contractual premiums.",
+     "rachat_fr": "L’épargne est annoncée comme garantie à 100 %. Selon les CGA 3a (éd. 03.2022), le rachat est possible au plus tôt à la fin de la 1re année pour des primes périodiques, et seulement dans les cas prévus par l’OPP 3. Le transfert d’un avoir 3a vers Modulo est possible, sous déduction des frais d’assurance. Selon la brochure, le passage du 3a au 3b se fait sans pénalité. La libération des primes ne couvre que les primes contractuelles.",
+     "rachat_en": "Savings are announced as 100% guaranteed. According to the 3a general conditions (ed. 03.2022), surrender is possible at the earliest at the end of the 1st year for periodic premiums, and only in the cases allowed by the OPP 3. Transfer of a pillar 3a account to Modulo is possible, less the insurance costs. According to the brochure, switching from pillar 3a to pillar 3b is made without penalty. Premium waiver covers only the contractual premiums.",
+     "liberation_primes": true,
+     "url": "https://solution.retraitespopulaires.ch/3eme-pilier",
+     "extrait": "Votre épargne est garantie à 100%."
+    }
+   ]
+  },
+  {
+   "id": "swisslife",
+   "nom": "Swiss Life",
+   "entite": "Swiss Life SA",
+   "lu_le": "2026-11-23",
+   "produits": [
+    {
+     "nom": "Swiss Life Dynamic Elements Duo",
+     "pilier": "3a+3b",
+     "type": "hybride",
+     "primes_fr": "Les primes sont annuelles, semestrielles, trimestrielles ou mensuelles. Une interruption est possible après 3 ans en 3a et après 5 ans en 3b. La prime peut être augmentée, et des versements additionnels sont possibles en 3a. Aucune prime minimale n’est indiquée.",
+     "primes_en": "Premiums are annual, half-yearly, quarterly or monthly. An interruption is possible after 3 years in pillar 3a and after 5 years in pillar 3b. The premium can be increased, and additional payments are possible in pillar 3a. No minimum premium is stated.",
+     "rachat_fr": "Un versement anticipé ou un rachat est possible en 3a (aux conditions légales) et en 3b. La prestation en cas de vie n’est pas garantie et peut être inférieure à la somme des primes. Un changement de pilier est possible. La fiche ne chiffre pas les frais des premières années.",
+     "rachat_en": "Early withdrawal or surrender is possible in pillar 3a (under the legal conditions) and in pillar 3b. The benefit on survival is not guaranteed and may be lower than the sum of the premiums. A change of pillar is possible. The sheet gives no figure for the charges in the first years.",
+     "liberation_primes": true,
+     "url": "https://www.swisslife.ch/content/dam/ch/dokumente/fr/private/produkte_p/factsheet_dynamic_elements_duo_fr.pdf",
+     "extrait": "Assurance vie hybride constituée d’une composante liée à des parts de fonds et d’une composante d’assurance classique sans prestation garantie en cas de vie"
+    },
+    {
+     "nom": "Swiss Life FlexSave Duo",
+     "pilier": "3a+3b",
+     "type": "mixte",
+     "primes_fr": "Les primes sont annuelles, semestrielles, trimestrielles ou mensuelles. Une interruption est possible après 3 ans en 3a et après 5 ans en 3b. Des versements additionnels sont possibles en 3a. La fiche date de 04.2023.",
+     "primes_en": "Premiums are annual, half-yearly, quarterly or monthly. An interruption is possible after 3 years in pillar 3a and after 5 years in pillar 3b. Additional payments are possible in pillar 3a. The sheet dates from April 2023.",
+     "rachat_fr": "Un versement minimum est garanti à l’échéance et augmente avec la participation indicielle. Au départ, la garantie en cas de vie est inférieure à la somme des primes. Un versement anticipé et une mise en gage sont possibles en 3a (dans le cadre légal) et en 3b. Un prêt est possible en 3b.",
+     "rachat_en": "A minimum payment is guaranteed at maturity and increases with the index participation. At the start, the guarantee on survival is lower than the sum of the premiums. Early withdrawal and pledging are possible in pillar 3a (within the legal framework) and in pillar 3b. A loan is possible in pillar 3b.",
+     "liberation_primes": true,
+     "url": "https://www.swisslife.ch/content/dam/ch/dokumente/fr/private/produkte_p/flexsave/factsheet_flexsave_duo_fr.pdf",
+     "extrait": "Les prestations garanties en cas de vie dès le début du contrat sont inférieures à la somme des primes à payer."
+    },
+    {
+     "nom": "Swiss Life Opportunities Duo",
+     "pilier": "3a+3b",
+     "type": "fonds",
+     "primes_fr": "La prime mensuelle se répartit librement entre le 3a et le 3b. Une interruption est possible après 3 ans en 3a et après 5 ans en 3b. La prime peut être augmentée. Aucune prime minimale n’est indiquée.",
+     "primes_en": "The monthly premium can be split freely between pillar 3a and pillar 3b. An interruption is possible after 3 years in pillar 3a and after 5 years in pillar 3b. The premium can be increased. No minimum premium is stated.",
+     "rachat_fr": "Le rachat est possible en 3a (aux conditions légales) et en 3b. La prestation en cas de vie n’est pas garantie. Elle suit la valeur des parts de fonds et peut être inférieure à la somme des primes.",
+     "rachat_en": "Surrender is possible in pillar 3a (under the legal conditions) and in pillar 3b. The benefit on survival is not guaranteed. It follows the value of the fund units and may be lower than the sum of the premiums.",
+     "liberation_primes": true,
+     "url": "https://www.swisslife.ch/content/dam/ch/dokumente/fr/private/produkte_p/factsheet_opportunities_duo_fr.pdf",
+     "extrait": "Si l'évolution de la valeur des parts de fonds est insuffisante sur la durée contractuelle, la prestation d'assurance peut être inférieure à la somme des primes."
+    },
+    {
+     "nom": "Swiss Life Premium Vitality Duo",
+     "pilier": "3a+3b",
+     "type": "fonds",
+     "primes_fr": "Les primes sont mensuelles, d’au moins 100 CHF. Le passage entre 3a et 3b est possible dans les deux sens.",
+     "primes_en": "Premiums are monthly, at least CHF 100. Switching between pillar 3a and pillar 3b is possible in both directions.",
+     "rachat_fr": "La fiche ne donne pas de valeur de rachat. Au décès, l’avoir en fonds est versé, au minimum le capital garanti s’il est assuré. Un prêt sur police est possible en 3b.",
+     "rachat_en": "The sheet gives no surrender value. On death, the fund assets are paid out, at least the guaranteed capital if one is insured. A policy loan is possible in pillar 3b.",
+     "liberation_primes": true,
+     "url": "https://www.swisslife.ch/content/dam/ch/dokumente/fr/private/produkte_p/factsheet_vitality_duo_fr.pdf",
+     "extrait": "Exonération des primes Possible; obligatoire si la protection contre le décès n'est pas assurée"
+    }
+   ]
+  },
+  {
+   "id": "vaudoise",
+   "nom": "Vaudoise",
+   "entite": "Vaudoise Vie, Compagnie d'Assurances SA",
+   "lu_le": "2026-11-23",
+   "produits": [
+    {
+     "nom": "RythmoInvest 3a",
+     "pilier": "3a",
+     "type": "hybride",
+     "primes_fr": "Les primes périodiques sont réparties entre une épargne garantie facultative et des fonds Vaudoise Umbrella Fund. La page « Épargner » annonce des versements mensuels, annuels ou ponctuels. Aucune prime minimale n’est indiquée.",
+     "primes_en": "Periodic premiums are split between an optional guaranteed savings component and Vaudoise Umbrella Fund funds. The «Épargner» page announces monthly, annual or one-off payments. No minimum premium is stated.",
+     "rachat_fr": "Un rachat total ou partiel est possible à tout moment si l’OPP 3 le permet. La valeur de rachat peut fortement fluctuer, et une résiliation anticipée peut entraîner des frais. L’exemple de la feuille d’information de base montre une réduction de rendement de 8,18 % par an après un an, contre 2,09 % à l’échéance.",
+     "rachat_en": "Full or partial surrender is possible at any time if the OPP 3 allows it. The surrender value can fluctuate considerably, and early termination may incur charges. The example in the basic information sheet shows a yield reduction of 8.18% a year after one year, against 2.09% at maturity.",
+     "liberation_primes": true,
+     "url": "https://www.vaudoise.ch/docs/default-source/documents-commerciaux/brochures/ri3a-fib-fr.pdf?sfvrsn=a15fb610_28",
+     "extrait": "Cette assurance épargne se compose obligatoirement d’une couverture épargne en fonds ainsi que d’une couverture en cas de décès et/ou de libération du service des primes"
+    },
+    {
+     "nom": "Assurance décès",
+     "pilier": "3a+3b",
+     "type": "risque",
+     "primes_fr": "Les primes sont annuelles, semestrielles ou trimestrielles. Le paiement à son propre rythme est possible grâce à un compte de dépôt. Une prime progressive est proposée en option.",
+     "primes_en": "Premiums are annual, half-yearly or quarterly. Payment at one’s own pace is possible through a deposit account. A progressive premium is available as an option.",
+     "rachat_fr": "La page ne parle ni de rachat ni de résiliation. Elle parle d’incapacité de travail. Elle ne rattache pas clairement le produit à un pilier, car elle cite à la fois le 3b et le 3a.",
+     "rachat_en": "The page says nothing about surrender or termination. It does mention incapacity for work. It does not clearly tie the product to a pillar, since it cites both pillar 3b and pillar 3a.",
+     "liberation_primes": true,
+     "url": "https://www.vaudoise.ch/fr/particulier/assurances-famille/se-proteger/assurance-deces",
+     "extrait": "Vos primes sont payées lors d'une incapacité de travail, à la suite d'une maladie ou d'un accident."
+    }
+   ]
+  },
+  {
+   "id": "youplus",
+   "nom": "Youplus",
+   "entite": "YOUPLUS Assurance SCHWEIZ AG",
+   "lu_le": "2026-11-23",
+   "produits": [
+    {
+     "nom": "my choice",
+     "pilier": "3a+3b",
+     "type": "nc",
+     "primes_fr": "Le montant est libre, sans minimum indiqué. Une suspension de 2 ans au maximum est possible, deux fois au plus, à condition d’avoir au moins 5 000 CHF d’épargne.",
+     "primes_en": "The amount is free, with no minimum stated. A suspension of up to 2 years is possible, at most twice, provided savings reach at least CHF 5,000.",
+     "rachat_fr": "La page ne parle ni de rachat, ni de frais, ni de garantie. Elle mentionne le transfert 3a et le passage du 3a au 3b (my choice combi). Le placement se fait dans les portefeuilles Zugerberg Finanz Revo 1-6, et la page ne qualifie pas le produit de lié à des fonds.",
+     "rachat_en": "The page says nothing about surrender, charges or guarantee. It mentions 3a transfer and switching from pillar 3a to pillar 3b (my choice combi). Money is invested in the Zugerberg Finanz Revo 1-6 portfolios, and the page does not describe the product as fund-linked.",
+     "liberation_primes": true,
+     "url": "https://www.youplus.ch/my-choice/",
+     "extrait": "Basislösung mit Prämienbefreiung – Wartefrist von 3 Monaten"
+    }
+   ]
+  },
+  {
+   "id": "zurich",
+   "nom": "Zurich",
+   "entite": "Zurich Compagnie d’Assurances sur la Vie SA",
+   "lu_le": "2026-11-23",
+   "produits": [
+    {
+     "nom": "Prévoyance Premium (assurance épargne 3a/3b)",
+     "pilier": "3a+3b",
+     "type": "hybride",
+     "primes_fr": "La prime annuelle est convenue à l’avance. Une pause de 1 à 3 ans est possible après 3 ans en 3a ou 5 ans en 3b, si l’avoir atteint au moins 5 000 CHF. Un versement supplémentaire par an est possible en 3a. À certains moments, la prime peut être augmentée sans nouvel examen de santé.",
+     "primes_en": "The annual premium is agreed in advance. A pause of 1 to 3 years is possible after 3 years in pillar 3a or 5 years in pillar 3b, if the account value reaches at least CHF 5,000. One additional payment a year is possible in pillar 3a. At certain points, the premium can be increased without a new health examination.",
+     "rachat_fr": "95 % des primes d’épargne sont garantis et 5 % sont investis en fonds. Une pause de primes réduit la prestation garantie. Le passage du 3a au 3b se fait sans frais en cas de chômage ou d’arrêt d’activité. La page ne chiffre pas la valeur de rachat.",
+     "rachat_en": "95% of the savings premiums are guaranteed and 5% are invested in funds. A premium pause reduces the guaranteed benefit. Switching from pillar 3a to pillar 3b is free of charge in the event of unemployment or cessation of activity. The page gives no figure for the surrender value.",
+     "liberation_primes": true,
+     "url": "https://www.zurich.ch/fr/clientele-privee/prevoyance-patrimoine/3-pilier-prevoyance-privee/assurance-epargne-3a-3b",
+     "extrait": "Avec la Prévoyance Premium, les deux sont possibles: 95 pour cent des primes d’épargne versées vous sont garantis."
+    },
+    {
+     "nom": "CapitalFund (assurance vie liée à des fonds)",
+     "pilier": "3a+3b",
+     "type": "fonds",
+     "primes_fr": "Les primes sont périodiques ou uniques, la prime unique pouvant servir à placer un avoir 3a existant. Une pause est possible après 3 ans en 3a ou 5 ans en 3b, et dure au maximum 3 ans en 3a. Un versement supplémentaire par an est possible en 3a.",
+     "primes_en": "Premiums are periodic or single, and the single premium can be used to invest an existing pillar 3a account. A pause is possible after 3 years in pillar 3a or 5 years in pillar 3b, and lasts at most 3 years in pillar 3a. One additional payment a year is possible in pillar 3a.",
+     "rachat_fr": "En 3b, la résiliation donne la valeur de rachat, avec perte de la couverture et perte d’argent possible. En 3a, le retrait n’est possible que dans les cas légaux. Avec une prime unique, une garantie de 50 ou 80 % de la somme investie est possible à l’échéance.",
+     "rachat_en": "In pillar 3b, termination gives the surrender value, with loss of cover and a possible loss of money. In pillar 3a, withdrawal is possible only in the legal cases. With a single premium, a guarantee of 50 or 80% of the amount invested is possible at maturity.",
+     "liberation_primes": true,
+     "url": "https://www.zurich.ch/fr/clientele-privee/prevoyance-patrimoine/3-pilier-prevoyance-privee/assurance-vie-liee-fonds-3a-3b",
+     "extrait": "En cas d’interruption du contrat, vous perdez votre couverture du risque et peut-être aussi de l’argent."
+    },
+    {
+     "nom": "Assurance risque-décès (RisqueVie)",
+     "pilier": "3a+3b",
+     "type": "risque",
+     "primes_fr": "La prestation est constante ou décroissante. Les primes sont plus basses pour les non-fumeurs. Dans le calculateur, la prime augmente chaque année selon le risque.",
+     "primes_en": "The benefit is constant or decreasing. Premiums are lower for non-smokers. In the calculator, the premium rises each year according to risk.",
+     "rachat_fr": "C’est une couverture de risque sans épargne. La page ne parle pas de valeur de rachat.",
+     "rachat_en": "This is risk cover without savings. The page says nothing about a surrender value.",
+     "liberation_primes": null,
+     "url": "https://www.zurich.ch/fr/clientele-privee/prevoyance-patrimoine/assurance-vie-risque/assurance-risque-deces",
+     "extrait": "Avec le produit «RisqueVie», vous pouvez aussi opter pour une prestation décroissante afin de garantir un engagement qui diminue dans la durée"
+    }
+   ]
+  }
+ ]
+}
