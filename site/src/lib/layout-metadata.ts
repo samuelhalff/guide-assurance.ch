@@ -15,7 +15,13 @@ export const baseMetadata: Metadata = {
   /* Icônes : fichiers src/app/favicon.ico, icon.svg et apple-icon.png (tuile encre, bouquetin ocre). */
   manifest: "/manifest.webmanifest",
   formatDetection: { telephone: false },
-  ...(BING_VERIFICATION ? { verification: { other: { "msvalidate.01": BING_VERIFICATION } } } : {}),
+  /* Vérification du domaine pour Trustpilot (compte Guide Assurance, 23.11.2026) : identifiant public, sans secret. */
+  verification: {
+    other: {
+      "trustpilot-one-time-domain-verification-id": "8db0af47-c69f-465f-8cc5-f95bf37dbbe2",
+      ...(BING_VERIFICATION ? { "msvalidate.01": BING_VERIFICATION } : {}),
+    },
+  },
 };
 
 export const baseViewport: Viewport = {
