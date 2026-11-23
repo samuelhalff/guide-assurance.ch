@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import type { Locale } from "@/lib/i18n";
+import { suivre } from "@/lib/analytics";
 
 /* Code d'intégration d'un widget : aperçu (iframe), code à copier, choix de la région pour la prime.
    Aucune mesure ici : la copie du code n'est pas comptée. */
@@ -35,6 +36,7 @@ export function CodeWidget({
     try {
       await navigator.clipboard.writeText(code);
       setEtat(en ? "Code copied." : "Code copié.");
+      suivre("code_integration_copie", { widget: id, methode: "bouton" });
     } catch {
       setEtat(en ? "Copying did not work. Select the code by hand." : "La copie n’a pas fonctionné. Sélectionnez le code à la main.");
     }

@@ -1,0 +1,107 @@
+name: CI et déploiement
+
+# Chaque push sur main : contrôles complets, build, puis déploiement de site/out sur le proxy (rsync par une clé
+# restreinte), contrôles en ligne et IndexNow. Pull requests et autres branches : contrôles et build seulement.
+# Les relevés de données (refresh-*.yml) partagent le groupe de concurrence de production : jamais deux
+# déploiements en même temps.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Simulation : rsync --dry-run, pas d'IndexNow"
+        type: boolean
+        default: false
+
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && format('ci-pr-{0}', github.event.pull_request.number) || (github.ref == 'refs/heads/main' && 'guide-assurance-prod' || format('ci-{0}', github.ref)) }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+env:
+  NEXT_TELEMETRY_DISABLED: "1"
+  # Valeurs publiques (elles figurent dans le HTML) : variables du dépôt. Même contenu que l'ancien site/.env.production.
+  NEXT_PUBLIC_GTM_ID: ${{ vars.NEXT_PUBLIC_GTM_ID }}
+  NEXT_PUBLIC_POSTHOG_TOKEN: ${{ vars.NEXT_PUBLIC_POSTHOG_TOKEN }}
+  NEXT_PUBLIC_POSTHOG_HOST: ${{ vars.NEXT_PUBLIC_POSTHOG_HOST }}
+  NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.NEXT_PUBLIC_TURNSTILE_SITE_KEY }}
+  NEXT_PUBLIC_BING_VERIFICATION: ${{ vars.NEXT_PUBLIC_BING_VERIFICATION }}
+  ACTUALITES_APERCU_CLE: ${{ secrets.ACTUALITES_APERCU_CLE }}
+
+jobs:
+  site:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Mentions interdites (dépôt)
+        env:
+          FORBIDDEN_PATTERNS: ${{ secrets.FORBIDDEN_PATTERNS }}
+        run: scripts/check-forbidden.sh
+
+      - name: Secrets (gitleaks, tout l'historique)
+        run: docker run --rm -v "$PWD":/repo:ro zricethezav/gitleaks:v8.21.2 detect --source /repo --no-banner --redact
+
+      - uses: ./.github/actions/setup-site
+
+      - name: Types (tsc)
+        working-directory: site
+        run: npx tsc --noEmit
+
+      - name: Lint
+        working-directory: site
+        run: npm run lint
+
+      - name: Tests
+        working-directory: site
+        run: npm test
+
+      - name: Données ouvertes à jour (data/csv)
+        working-directory: site
+        run: node --no-warnings scripts/donnees-ouvertes.mts ../data/csv && git diff --exit-code -- ../data/csv
+
+      - name: Restaurer le cache de build Next.js
+        uses: actions/cache@v5
+        with:
+          path: site/.next/cache
+          key: next-${{ runner.os }}-${{ hashFiles('site/package-lock.json', 'site/next.config.ts') }}-${{ github.sha }}
+          restore-keys: next-${{ runner.os }}-${{ hashFiles('site/package-lock.json', 'site/next.config.ts') }}-
+
+      - name: Build
+        working-directory: site
+        run: npm run build
+
+      - name: Contrôles SEO du HTML généré (canonical, hreflang, JSON-LD, FAQ, sitemap)
+        working-directory: site
+        run: npm run test:html
+
+      - name: Mentions interdites (site généré)
+        env:
+          FORBIDDEN_PATTERNS: ${{ secrets.FORBIDDEN_PATTERNS }}
+        run: scripts/check-forbidden.sh site/out
+
+      - name: Liens internes
+        run: node scripts/check-links.mjs site/out
+
+      - name: Accès SSH
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: ./.github/actions/ssh-deploy
+        with:
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          known_hosts: ${{ secrets.DEPLOY_SSH_KNOWN_HOSTS }}
+
+      - name: Déploiement, contrôles en ligne, IndexNow
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        env:
+          DEPLOY_SSH_HOST: ${{ secrets.DEPLOY_SSH_HOST }}
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+          DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
+        run: scripts/deploy-site.sh

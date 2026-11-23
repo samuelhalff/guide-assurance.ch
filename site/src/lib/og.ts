@@ -1,8 +1,8 @@
 /* Images de partage (Open Graph) par page, générées au build par src/app/og-pages/[nom]/route.tsx
    (next/og, export statique) : rubrique, titre de la page, date de mise à jour. Une page absente de la liste
    garde l'image générale de sa langue (accueil). */
-import { OUTILS, OUTILS_EN, PAGES_DONNEES, PAGES_DONNEES_EN, SLUG_CANTON_3A } from "@/lib/nav";
-import { DATE_PAGE, DATE_PAGE_DONNEES } from "@/lib/donnees";
+import { HUB_OUTILS, OUTILS, OUTILS_EN, PAGES_DONNEES, PAGES_DONNEES_EN, SLUG_CANTON_3A } from "@/lib/nav";
+import { DATE_PAGE, DATE_PAGE_DONNEES, DATE_PAGE_OUTILS } from "@/lib/donnees";
 import { dateLongue, type Locale } from "@/lib/i18n";
 import { dateIndexGuides, toutesLesPages, type PageContenu } from "@/lib/content/pages";
 import { pagesIdees } from "@/lib/pages-idees";
@@ -38,6 +38,8 @@ function pagesTsx(): Omit<Partage, "cle">[] {
     { path: "/en/", locale: "en", rubrique: "French-speaking Switzerland", titre: "Compare your 2027 health insurance premiums", maj: DATE_PAGE.accueil },
     { path: "/guides/", locale: "fr", rubrique: "Guides", titre: "Tous les guides d’assurance", maj: dateIndexGuides("fr") },
     { path: "/en/guides/", locale: "en", rubrique: "Guides", titre: "All insurance guides", maj: dateIndexGuides("en") },
+    { path: HUB_OUTILS.fr, locale: "fr", rubrique: "Outils et chiffres", titre: "Outils gratuits et chiffres de l’assurance en Suisse romande", maj: DATE_PAGE_OUTILS },
+    { path: HUB_OUTILS.en, locale: "en", rubrique: "Tools and figures", titre: "Free tools and insurance figures for French-speaking Switzerland", maj: DATE_PAGE_OUTILS },
     { path: OUTILS.comparateur, locale: "fr", rubrique: OUTIL_FR, titre: "Comparer les primes de l’assurance maladie 2027", maj: DATE_PAGE.comparateur },
     { path: OUTILS_EN.comparateur, locale: "en", rubrique: OUTIL_EN, titre: "Compare 2027 health insurance premiums", maj: DATE_PAGE.comparateur },
     { path: OUTILS.lettre, locale: "fr", rubrique: OUTIL_FR, titre: "Votre lettre de résiliation d’assurance maladie", maj: DATE_PAGE.lettre },

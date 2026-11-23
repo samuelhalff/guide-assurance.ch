@@ -46,6 +46,7 @@ export default function Guides() {
   const pages = toutesLesPages();
   return (
     <GuidePage
+      rubrique="guides"
       path={PATH}
       titre={TITRE}
       h1="Tous les guides"

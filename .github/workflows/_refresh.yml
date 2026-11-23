@@ -1,0 +1,155 @@
+name: Relevé de données (modèle)
+
+# Appelé par refresh-<jeu>.yml. Restaure l'état (branche refresh-state), lance infra/refresh/<jeu>.py, qui relève,
+# contrôle, et si tout est valide écrit les données, teste, construit, committe sur main et déploie depuis ce runner.
+# Alertes par e-mail (Microsoft Graph). L'état est réenregistré sur refresh-state, le journal gardé en artefact.
+#
+# Planifié : les lignes cron sont en UTC, deux par tâche (heure d'hiver, heure d'été). --utc-hour transmet l'heure
+# prévue par la ligne, et le script ne s'exécute que si elle correspond à l'heure de Zurich --at, même si GitHub
+# lance la tâche en retard.
+
+on:
+  workflow_call:
+    inputs:
+      dataset:
+        type: string
+        required: true
+      at:
+        description: heure de Zurich prévue
+        type: number
+        required: true
+      dry_run:
+        type: boolean
+        default: false
+      args:
+        description: options supplémentaires (--simulate-change, --only …)
+        type: string
+        default: ""
+    secrets:
+      DEPLOY_SSH_KEY:
+      DEPLOY_SSH_KNOWN_HOSTS:
+      DEPLOY_SSH_HOST:
+      INDEXNOW_KEY:
+      ENTRA_TENANT_ID:
+      ENTRA_CLIENT_ID:
+      ENTRA_CLIENT_SECRET:
+      FORBIDDEN_PATTERNS:
+      ACTUALITES_APERCU_CLE:
+      ANTHROPIC_API_KEY:
+      AZURE_OPENAI_ENDPOINT:
+      AZURE_OPENAI_API_KEY:
+      AZURE_OPENAI_DEPLOYMENT:
+
+jobs:
+  # Sans checkout ni concurrence : une ligne cron hors de l'heure de Zurich prévue s'arrête ici, sans occuper le
+  # groupe de production (une exécution en attente dans le groupe serait sinon annulée).
+  plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      go: ${{ steps.plan.outputs.go }}
+      args: ${{ steps.plan.outputs.args }}
+    steps:
+      - name: Planification (heure prévue)
+        id: plan
+        env:
+          SCHEDULE: ${{ github.event.schedule }}
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            h=$(echo "$SCHEDULE" | awk '{print $2}')
+            zh=$(TZ=Europe/Zurich date -d "$(date -u +%F) ${h}:00 UTC" +%-H)
+            echo "args=--scheduled --at ${{ inputs.at }} --utc-hour $h" >> "$GITHUB_OUTPUT"
+            if [ "$zh" = "${{ inputs.at }}" ]; then echo "go=1" >> "$GITHUB_OUTPUT"; else echo "go=0" >> "$GITHUB_OUTPUT"; echo "ligne $h h UTC = $zh h à Zurich : pas l'heure prévue (${{ inputs.at }} h), rien à faire"; fi
+          else
+            echo "args=" >> "$GITHUB_OUTPUT"; echo "go=1" >> "$GITHUB_OUTPUT"
+          fi
+
+
+  run:
+    needs: plan
+    if: needs.plan.outputs.go == '1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    concurrency:
+      group: guide-assurance-prod
+      cancel-in-progress: false
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: write
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
+      NEXT_PUBLIC_GTM_ID: ${{ vars.NEXT_PUBLIC_GTM_ID }}
+      NEXT_PUBLIC_POSTHOG_TOKEN: ${{ vars.NEXT_PUBLIC_POSTHOG_TOKEN }}
+      NEXT_PUBLIC_POSTHOG_HOST: ${{ vars.NEXT_PUBLIC_POSTHOG_HOST }}
+      NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.NEXT_PUBLIC_TURNSTILE_SITE_KEY }}
+      NEXT_PUBLIC_BING_VERIFICATION: ${{ vars.NEXT_PUBLIC_BING_VERIFICATION }}
+      ACTUALITES_APERCU_CLE: ${{ secrets.ACTUALITES_APERCU_CLE }}
+      REFRESH_DATASET: ${{ inputs.dataset }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: ./.github/actions/setup-site
+        with:
+          python: "true"
+
+      - name: Restaurer l'état (branche refresh-state)
+        run: |
+          mkdir -p infra/refresh/state
+          if git fetch -q origin refresh-state; then git archive FETCH_HEAD | tar -x -C infra/refresh/state; fi
+          ls infra/refresh/state
+
+      - name: Accès SSH
+        if: ${{ !inputs.dry_run }}
+        uses: ./.github/actions/ssh-deploy
+        with:
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          known_hosts: ${{ secrets.DEPLOY_SSH_KNOWN_HOSTS }}
+
+      - name: Relevé ${{ inputs.dataset }}
+        id: run
+        env:
+          DEPLOY_SSH_HOST: ${{ secrets.DEPLOY_SSH_HOST }}
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+          ENTRA_TENANT_ID: ${{ secrets.ENTRA_TENANT_ID }}
+          ENTRA_CLIENT_ID: ${{ secrets.ENTRA_CLIENT_ID }}
+          ENTRA_CLIENT_SECRET: ${{ secrets.ENTRA_CLIENT_SECRET }}
+          FORBIDDEN_PATTERNS: ${{ secrets.FORBIDDEN_PATTERNS }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          AZURE_OPENAI_ENDPOINT: ${{ secrets.AZURE_OPENAI_ENDPOINT }}
+          AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_OPENAI_API_KEY }}
+          AZURE_OPENAI_DEPLOYMENT: ${{ secrets.AZURE_OPENAI_DEPLOYMENT }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 infra/refresh/${{ inputs.dataset }}.py ${{ needs.plan.outputs.args }} ${{ inputs.dry_run && '--dry-run' || '' }} ${{ inputs.args }}
+
+      - name: Enregistrer l'état (branche refresh-state)
+        if: ${{ always() && !inputs.dry_run }}
+        run: |
+          set -euo pipefail
+          git switch -q main 2>/dev/null || true
+          W=$(mktemp -d)
+          if git fetch -q origin refresh-state; then git worktree add -q --detach "$W" FETCH_HEAD; else git worktree add -q --detach "$W" && (cd "$W" && git checkout -q --orphan refresh-state && git rm -rqf . || true); fi
+          cp infra/refresh/state/*.json "$W"/ 2>/dev/null || true
+          cd "$W"
+          git add -A
+          if git diff --cached --quiet; then echo "état inchangé"; exit 0; fi
+          git -c user.name=guide-assurance-bot -c user.email=41898282+github-actions[bot]@users.noreply.github.com \
+            commit -qm "État ${{ inputs.dataset }} : passage ${{ github.run_id }}"
+          for i in 1 2 3; do
+            git push -q origin HEAD:refresh-state && exit 0
+            git fetch -q origin refresh-state && git rebase -q FETCH_HEAD || true
+          done
+          exit 1
+
+      - name: Journal
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: journal-${{ inputs.dataset }}-${{ github.run_id }}
+          path: infra/refresh/logs/
+          if-no-files-found: ignore
+          retention-days: 90

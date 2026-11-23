@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as P from "@/lib/engines/primes";
 import type { Locale } from "@/lib/i18n";
-import { suivre } from "@/lib/analytics";
+import { suivre, versGA } from "@/lib/analytics";
 import { outils } from "@/lib/nav";
 import { RAPPEL, ecrirePreremplissage, lienDemande } from "@/lib/demande";
 import { IconeTelephone, useRappelVu } from "@/components/demande/lien-rappel";
@@ -380,6 +380,16 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
   }, [r]);
   const cleProfil = JSON.stringify([lieu?.canton, lieu?.region, pers, filtre]);
   useEffect(() => setNb(PAR_PAGE), [cleProfil]);
+  /* GA4 view_item_list : nombre d'offres affichées seulement, une fois par profil. */
+  const listeVue = useRef("");
+  useEffect(() => {
+    if (!r || !r.total || listeVue.current === cleProfil) return;
+    const t = setTimeout(() => {
+      listeVue.current = cleProfil;
+      versGA("view_item_list", { item_list_name: "comparateur_primes", item_count: r.total });
+    }, 1500);
+    return () => clearTimeout(t);
+  }, [r, cleProfil]);
 
   /* Bouton de rappel en bas d'écran (mobile) : visible tant que la liste occupe l'écran, masqué sur le bloc final. */
   const aListe = Boolean(r && r.total);
@@ -441,7 +451,7 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
     ) : null;
 
   return (
-    <div className="outil outil-comparateur">
+    <div className="ph-sensitive outil outil-comparateur" data-ph-mask>
       <form
         ref={formRef}
         className="form"

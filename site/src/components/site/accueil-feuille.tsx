@@ -119,7 +119,7 @@ function FormComparer({ locale }: { locale: Locale }) {
   }
 
   return (
-    <form className="comparer" action={cible} method="get" onSubmit={envoyer} noValidate aria-label={t.form}>
+    <form className="comparer ph-sensitive" data-ph-mask action={cible} method="get" onSubmit={envoyer} noValidate aria-label={t.form}>
       <div className="comparer-champs">
         <div className="champ">
           <label htmlFor="ac-lieu">{t.lieu}</label>

@@ -177,7 +177,7 @@ export function LettreResiliation({ aujourdhuiIso, locale = "fr" }: { aujourdhui
   }
 
   return (
-    <div className="outil">
+    <div className="ph-sensitive outil" data-ph-mask>
       <form className="form" autoComplete="on" noValidate onSubmit={(e) => e.preventDefault()}>
         <fieldset>
           <legend><span className="n">{isEn ? "1 of 3" : "1 sur 3"}</span>{isEn ? "What do you want to cancel?" : "Que voulez-vous résilier ?"}</legend>

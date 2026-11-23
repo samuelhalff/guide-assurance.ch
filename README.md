@@ -4,11 +4,36 @@ Code du site [guide-assurance.ch](https://guide-assurance.ch) : informations sur
 
 - `site/` : Next.js en export statique. Tous les calculs se font dans le navigateur.
 - `data/` : données publiques et scripts qui les produisent (OFSP, barèmes fiscaux cantonaux, taux publiés par les banques).
-- `shared/demande/` : schéma du formulaire de rappel.
+- `shared/demande/` : schéma du formulaire de rappel (copie publique, voir `shared/demande/LISEZMOI.md`).
+- `infra/refresh/` : relevés automatiques des données (taux 3a, primes LAMal, frontaliers, barèmes d'impôt, point mensuel, actualités).
+- `scripts/` : déploiement (`deploy-site.sh`), mentions interdites (`check-forbidden.sh`), liens internes (`check-links.mjs`), IndexNow (`indexnow-urls.py`).
 
 ```
 cd shared/demande && npm ci && cd ../../site && npm ci && npm test && npm run build
 ```
+
+## Travailler sur le site
+
+Ce dépôt est la seule source du site. On y travaille directement (`~/dev/guide-assurance.ch`), on committe sur `main` (ou une branche avec pull request) et **le push sur `main` déploie** : aucun poste ne sert de serveur.
+
+Avant de pousser : `cd site && npx tsc --noEmit && npm run lint && npm test && npm run build && npm run test:html`, puis `scripts/check-forbidden.sh` (avec `FORBIDDEN_PATTERNS` dans l'environnement si on l'a). Règles du dépôt public : aucun nom de courtier ni de collaborateur, aucun secret ; seule West Bay SA est nommée (pied de page, pages légales, JSON-LD Organization). La CI bloque sinon.
+
+## GitHub Actions
+
+| Workflow | Quand | Ce qu'il fait |
+|---|---|---|
+| `ci-deploy.yml` | chaque push et pull request ; à la main (`dry_run`) | mentions interdites, gitleaks (tout l'historique), tsc, lint, tests, données ouvertes à jour, build, contrôles SEO du HTML, mentions interdites dans `site/out`, liens internes. Sur `main` : rsync de `site/out` vers le proxy, contrôle HTTP 200 des pages clés, IndexNow (adresses nouvelles, retirées ou au `lastmod` changé, par rapport au plan du site en ligne avant la mise à jour) |
+| `refresh-taux3a.yml` | lundi 06:30 (Zurich) | taux 3a des 17 banques : contrôles, publication automatique si valide, historique hebdomadaire |
+| `refresh-lamal.yml` | 06:15 chaque jour du 25.9 au 31.12, sinon le 1er du mois | corrections des primes LAMal de l'année en cours publiées automatiquement ; nouvelle année : alerte |
+| `refresh-frontalier.yml` | 06:45 chaque jour en janvier, sinon le 1er du mois | PASS et primes UE : alerte seulement |
+| `refresh-impots.yml` | le 1er du mois, 07:00 | barèmes d'impôt GE/VD : alerte seulement |
+| `refresh-digest.yml` | le 1er du mois, 08:00 | e-mail « tout va bien » ou « données à vérifier » |
+| `actualites.yml` | à la main (planification préparée, pas active) | brouillon FR + EN rédigé par LLM et vérifié, ouvert en pull request avec aperçu et sources ; e-mail avec le lien. Fusionner = publier |
+| `monthly-quality.yml` | le 2 du mois, 05:23 (Zurich, hiver) | Lighthouse (budgets de `site/lighthouserc.mobile.json`) et liens internes : rapport en artefact, issue et e-mail si régression |
+
+Les lignes cron sont en UTC, deux par tâche (hiver, été) : `_refresh.yml` ne garde que celle qui tombe à l'heure de Zurich prévue, même si GitHub la lance en retard. Déploiements et relevés partagent le groupe de concurrence `guide-assurance-prod` : jamais deux à la fois. Un relevé valide committe les données sur `main` (auteur `guide-assurance-bot`) et déploie depuis le même runner ; l'état des relevés (dernier passage, alertes déjà envoyées) vit sur la branche `refresh-state`, le journal dans l'artefact du passage. Les alertes partent de assurance@houle.ai vers sh@houle.ai (Microsoft Graph) ; un e-mail qui ne part pas fait échouer le passage. Chaque relevé se lance aussi à la main, `dry_run` coché par défaut (`--simulate-change`, `--simulate-parser-failure` dans `args`). Détails : `infra/refresh/LISEZMOI.md`.
+
+Secrets du dépôt (valeurs jamais affichées) : `DEPLOY_SSH_KEY` (clé ed25519 dédiée, limitée par `rrsync` au dossier du site sur le proxy), `DEPLOY_SSH_KNOWN_HOSTS` (empreintes épinglées de l'hôte), `DEPLOY_SSH_HOST`, `INDEXNOW_KEY`, `ENTRA_TENANT_ID`, `ENTRA_CLIENT_ID`, `ENTRA_CLIENT_SECRET` (envoi des alertes), `FORBIDDEN_PATTERNS` (mentions interdites), `ACTUALITES_APERCU_CLE`, `ANTHROPIC_API_KEY` (ou `AZURE_OPENAI_ENDPOINT`, `AZURE_OPENAI_API_KEY`, `AZURE_OPENAI_DEPLOYMENT`) pour les actualités. Variables (valeurs publiques, présentes dans le HTML) : `NEXT_PUBLIC_GTM_ID`, `NEXT_PUBLIC_POSTHOG_TOKEN`, `NEXT_PUBLIC_POSTHOG_HOST`, `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `NEXT_PUBLIC_BING_VERIFICATION`.
 
 ## Données ouvertes
 

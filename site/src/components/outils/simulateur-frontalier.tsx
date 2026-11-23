@@ -122,7 +122,7 @@ export function SimulateurFrontalier({ locale = "fr" }: { locale?: Locale }) {
   const mx = c.lamal.max;
 
   return (
-    <div className="outil outil-simulateur">
+    <div className="ph-sensitive outil outil-simulateur" data-ph-mask>
       <form className="form" onSubmit={(ev) => ev.preventDefault()} noValidate>
         <fieldset>
           <legend><span className="n">1</span>{isEn ? "Where are you now?" : "Où en êtes-vous ?"}</legend>

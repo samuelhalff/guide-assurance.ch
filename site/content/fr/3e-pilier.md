@@ -52,7 +52,7 @@ Le 3a est une épargne liée, sous forme de compte bancaire ou de police d’ass
 
 ## Combien rapporte un compte 3a et combien d’impôt économise-t-on ?
 
-Selon nos relevés du 22.11.2026, les comptes 3a des banques rapportent entre 0,05 % et 0,65 % par an. Le [tableau des taux 3a](/3e-pilier/taux-3a/) les présente du taux le plus élevé au plus bas. L’économie d’impôt dépend de votre revenu, de votre commune et de votre situation de famille ; le [calculateur d’économie d’impôt 3a](/3e-pilier/economie-impot/) en donne une estimation avec les barèmes 2026 pour Genève, Vaud, le Valais, Fribourg, Neuchâtel, le Jura et le Jura bernois.
+Selon nos relevés du 22.11.2026, les comptes 3a des banques rapportent entre 0,05 % et 0,65 % par an. Le [tableau des taux 3a](/3e-pilier/taux-3a/) les présente du taux le plus élevé au plus bas. L’économie d’impôt dépend de votre revenu, de votre commune et de votre situation de famille ; le [calculateur d’économie d’impôt 3a](/3e-pilier/economie-impot/) en donne une estimation avec les barèmes 2026 pour Genève, Vaud, le Valais, Fribourg, Neuchâtel, le Jura et le Jura bernois. L’[historique des taux 3a](/3e-pilier/taux-3a/historique/) montre comment ces taux évoluent d’un relevé à l’autre, et la page [économie d’impôt par commune](/3e-pilier/economie-impot/communes/) compare les communes pour un même versement.
 
 ## Comment couvrir le décès et l’invalidité ?
 

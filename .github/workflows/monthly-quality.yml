@@ -1,0 +1,88 @@
+name: "Qualité mensuelle : Lighthouse et liens"
+
+# Rapport non bloquant : Lighthouse CI (site/lighthouserc.mobile.json, budgets en « error ») sur le site construit
+# et servi localement comme par nginx, et liens internes du site généré. Rapport en artefact ; si un budget
+# Lighthouse n'est pas tenu ou qu'un lien est cassé : issue GitHub et e-mail à sh@houle.ai.
+on:
+  schedule:
+    - cron: "23 3 2 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+env:
+  NEXT_TELEMETRY_DISABLED: "1"
+  NEXT_PUBLIC_GTM_ID: ${{ vars.NEXT_PUBLIC_GTM_ID }}
+  NEXT_PUBLIC_POSTHOG_TOKEN: ${{ vars.NEXT_PUBLIC_POSTHOG_TOKEN }}
+  NEXT_PUBLIC_POSTHOG_HOST: ${{ vars.NEXT_PUBLIC_POSTHOG_HOST }}
+  NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.NEXT_PUBLIC_TURNSTILE_SITE_KEY }}
+  NEXT_PUBLIC_BING_VERIFICATION: ${{ vars.NEXT_PUBLIC_BING_VERIFICATION }}
+  ACTUALITES_APERCU_CLE: ${{ secrets.ACTUALITES_APERCU_CLE }}
+
+jobs:
+  qualite:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v6
+      - uses: ./.github/actions/setup-site
+
+      - name: Build
+        working-directory: site
+        run: npm run build
+
+      - name: Lighthouse (mobile)
+        id: lh
+        continue-on-error: true
+        working-directory: site
+        run: npm run lighthouse 2>&1 | tee ../lighthouse.txt
+
+      - name: Liens internes
+        id: liens
+        continue-on-error: true
+        run: node scripts/check-links.mjs site/out 2>&1 | tee liens.txt
+
+      - name: Rapport
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qualite-${{ github.run_id }}
+          path: |
+            site/.lighthouseci/
+            lighthouse.txt
+            liens.txt
+          if-no-files-found: ignore
+          retention-days: 90
+
+      - name: Issue et e-mail si régression
+        if: steps.lh.outcome == 'failure' || steps.liens.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ENTRA_TENANT_ID: ${{ secrets.ENTRA_TENANT_ID }}
+          ENTRA_CLIENT_ID: ${{ secrets.ENTRA_CLIENT_ID }}
+          ENTRA_CLIENT_SECRET: ${{ secrets.ENTRA_CLIENT_SECRET }}
+        run: |
+          set -euo pipefail
+          RUN="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          {
+            echo "Contrôle mensuel du $(TZ=Europe/Zurich date +%d.%m.%Y)."
+            echo
+            [ "${{ steps.lh.outcome }}" = failure ] && { echo "### Lighthouse : budget non tenu"; echo '```'; grep -E '✘|failure|expected|found' lighthouse.txt | head -40 || true; echo '```'; }
+            [ "${{ steps.liens.outcome }}" = failure ] && { echo "### Liens internes cassés"; echo '```'; head -40 liens.txt; echo '```'; }
+            echo
+            echo "Rapport complet (artefact) : $RUN"
+          } > corps.md
+          URL=$(gh issue create --title "Qualité mensuelle : régression ($(date +%m.%Y))" --body-file corps.md)
+          python3 - "$URL" "$RUN" <<'PY'
+          import html, sys
+          from pathlib import Path
+          sys.path.insert(0, "infra/refresh")
+          from mailer import send_mail
+          url, run = sys.argv[1], sys.argv[2]
+          corps = html.escape(Path("corps.md").read_text(encoding="utf-8"))
+          send_mail("Guide Assurance : qualité mensuelle à vérifier",
+                    f"<p>Le contrôle mensuel (Lighthouse et liens internes) signale une régression.</p>"
+                    f"<p>Issue : <a href='{url}'>{url}</a></p><pre>{corps}</pre>")
+          PY

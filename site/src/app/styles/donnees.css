@@ -64,4 +64,24 @@
   .sources-chiffres { margin: 0 0 var(--s6); }
   .sources-chiffres summary { cursor: pointer; font-weight: 600; min-height: 44px; display: flex; align-items: center; }
   .sources-chiffres ul { margin: var(--s2) 0 0; padding-left: 1.2em; list-style: disc; font-size: 15px; }
+
+  /* « Outils et chiffres » (/outils/) : lignes des outils de l'accueil (outil-ligne), sur le fond de la page
+     au lieu de la bande sombre. */
+  .page-hub .hub-groupe { margin: var(--s7) 0 0; }
+  .page-hub .hub-groupe > p { margin: var(--s3) 0 0; max-width: 62ch; color: var(--encre-2); }
+  .page-hub .hub-liste { margin-top: var(--s5); }
+  .page-hub .hub-liste .outil-ligne { background: var(--carte); border-color: var(--filet); color: var(--encre); }
+  .page-hub .hub-liste a.outil-ligne:hover { background: var(--carte); border-color: var(--sentier); color: var(--encre); }
+  .page-hub .hub-liste a.outil-ligne:focus-visible { outline-color: var(--lac-encre); }
+  .page-hub .hub-liste .outil-chiffre { color: var(--encre); font-size: clamp(26px, 7.5vw, 34px); white-space: normal; }
+  .page-hub .hub-liste .outil-chiffre small { color: var(--encre-2); }
+  .page-hub .hub-liste .outil-texte { color: var(--encre-2); }
+  .page-hub .hub-liste .outil-texte b { color: var(--encre); }
+  .page-hub .hub-liste .outil-cta { color: var(--sentier-texte); }
+  .page-hub .hub-cantons { margin: var(--s2) 0 0; padding: 0 var(--s4); font-size: 15px; color: var(--encre-2); }
+  .page-hub .hub-cantons a { display: inline-block; min-height: 32px; line-height: 32px; }
+  .page-hub .hub-autres { margin: var(--s7) 0 var(--s5); max-width: 68ch; }
+  @media (min-width: 900px) {
+    .page-hub .hub-cantons { padding: 0 var(--s6); }
+  }
 }

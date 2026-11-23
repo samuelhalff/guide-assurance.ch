@@ -19,8 +19,15 @@ export function SiteHeader({ current, locale = "fr", altPath, rappel = true }: {
         <Marque locale={locale} />
         <nav className="nav" aria-label={t.navPrincipale}>
           {nav(locale).map((l) => (
-            <a key={l.id} href={l.href} aria-current={current === l.id ? "page" : undefined}>
-              {l.label}
+            <a key={l.id} href={l.href} aria-current={current === l.id ? "page" : undefined} aria-label={l.court ? l.label : undefined}>
+              {l.court ? (
+                <>
+                  <span className="nav-long" aria-hidden="true">{l.label}</span>
+                  <span className="nav-court" aria-hidden="true">{l.court}</span>
+                </>
+              ) : (
+                l.label
+              )}
             </a>
           ))}
         </nav>

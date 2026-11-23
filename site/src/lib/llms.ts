@@ -2,7 +2,7 @@
    pages Markdown et des fichiers de données : les dates et les nombres suivent chaque relevé automatique.
    Règle (Sam, 22.11.2026) : l'éditeur n'est jamais nommé dans ces fichiers ; le build échoue s'il apparaît. */
 import { abs } from "@/lib/site";
-import { OUTILS, OUTILS_EN, PAGES_DONNEES, PAGES_DONNEES_EN } from "@/lib/nav";
+import { HUB_OUTILS, OUTILS, OUTILS_EN, PAGES_DONNEES, PAGES_DONNEES_EN } from "@/lib/nav";
 import { chiffresClesMarkdown } from "@/lib/chiffres-cles";
 import { ANNEE_BAROMETRE, DATE_BAROMETRE, barometreMarkdown } from "@/lib/barometre";
 import { ROUTES_IDEES, cheminBarometre } from "@/lib/pages-idees";
@@ -131,6 +131,7 @@ export function llmsTxt(): string {
     "",
     lienFr("Accueil", "/", "primes moyennes 2027 de l'assurance de base par canton romand, échéances de résiliation, guides."),
     lienFr("Tous les guides", "/guides/", "index des guides en français."),
+    lienFr("Outils et chiffres", HUB_OUTILS.fr, `tous les outils (comparateur LAMal, lettre de résiliation, simulateur frontalier, rappels d'échéance, taux et économie d'impôt 3a) et toutes les pages de données (chiffres clés 2027, baromètre des primes, primes par région, historique des taux 3a, économie d'impôt par commune), avec le chiffre clé daté de chacun.`),
     lienFr("Méthodologie", "/methodologie/", "sources, mise à jour et corrections."),
     lienFr("Texte intégral des guides", "/llms-full.txt", "tous les guides en français et en anglais, en Markdown, dans un seul fichier."),
     "",
@@ -153,6 +154,7 @@ export function llmsTxt(): string {
     "",
     lienEn("Home", "/en/", "2027 average basic health insurance premiums by canton in French-speaking Switzerland, cancellation deadlines, guides."),
     lienEn("All guides", "/en/guides/", "index of the English guides."),
+    lienEn("Tools and figures", HUB_OUTILS.en, "every tool (LAMal premium comparison, cancellation letter, cross-border calculator, renewal reminders, pillar 3a rates and tax savings) and every data page (2027 key figures, premium barometer, premiums by region, pillar 3a rate history, tax savings by municipality), each with its dated key figure."),
     lienEn("Full text of the guides", "/llms-full.txt", "every guide in French and English, in Markdown, in a single file."),
     "",
     "### Personal insurance",

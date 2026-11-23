@@ -62,6 +62,7 @@ export function dateLongue(iso: string, locale: Locale) {
 export const PAGES_FR_EN: Record<string, string> = {
   "/": "/en/",
   "/guides/": "/en/guides/",
+  "/outils/": "/en/tools/",
   "/simulateur-frontalier/": "/en/cross-border-calculator/",
   "/lettre-resiliation/": "/en/cancellation-letter/",
   "/assurance-maladie/comparateur/": "/en/health-insurance/compare/",

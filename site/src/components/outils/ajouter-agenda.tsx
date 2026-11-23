@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { suivre } from "@/lib/analytics";
+import { suivre, versGA } from "@/lib/analytics";
 import { calendrierIcs, type EvenementIcs } from "@/lib/ics";
 import type { Locale } from "@/lib/i18n";
 
@@ -53,6 +53,7 @@ export function BoutonAgenda({
     if (!ev.length) return;
     telechargerIcs(calendrierIcs(ev, { langue: en ? "EN" : "FR" }), fichier);
     suivre("ics_telecharge", { type });
+    versGA("file_download", { file_extension: "ics", file_name: `${type}.ics` });
     setEtat(
       en
         ? "The calendar file has been downloaded. Open it to add the reminder to your calendar."

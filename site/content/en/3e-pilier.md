@@ -53,7 +53,7 @@ Pillar 3a is tied savings, held in a bank account or an insurance policy. Paymen
 
 ## How much does a 3a account pay, and how much tax do you save?
 
-In our survey of 22.11.2026, bank 3a accounts paid between 0.05% and 0.65% a year. The [pillar 3a interest rate table](/en/pillar-3a/interest-rates/) lists them from the highest rate to the lowest. The tax saving depends on your income, municipality and family situation; the [pillar 3a tax savings calculator](/en/pillar-3a/tax-savings/) estimates it with the 2026 tax scales for Geneva, Vaud, Valais, Fribourg, Neuchâtel, Jura and the Bernese Jura.
+In our survey of 22.11.2026, bank 3a accounts paid between 0.05% and 0.65% a year. The [pillar 3a interest rate table](/en/pillar-3a/interest-rates/) lists them from the highest rate to the lowest. The tax saving depends on your income, municipality and family situation; the [pillar 3a tax savings calculator](/en/pillar-3a/tax-savings/) estimates it with the 2026 tax scales for Geneva, Vaud, Valais, Fribourg, Neuchâtel, Jura and the Bernese Jura. The [3a rate history](/en/pillar-3a/interest-rates/history/) shows how these rates move from one survey to the next, and the [tax saving by municipality](/en/pillar-3a/tax-savings/municipalities/) page compares municipalities for the same payment.
 
 ## Can pillar 3 cover death and disability?
 

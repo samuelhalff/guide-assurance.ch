@@ -1,21 +1,29 @@
 /* Navigation principale et liens du pied de page. Les rubriques sans page publiée gardent l'adresse prévue. */
-export type Rubrique = "sante" | "frontaliers" | "arrivee" | "prevoyance" | "entreprises" | "guides";
+/* « Actualités » : seulement quand au moins un article est publié (compté au build, next.config.ts), dans le menu
+   comme dans le pied de page. */
+const AVEC_ACTUS_FR = (process.env.NEXT_PUBLIC_ACTUALITES_FR ?? "0") !== "0";
+const AVEC_ACTUS_EN = (process.env.NEXT_PUBLIC_ACTUALITES_EN ?? "0") !== "0";
+export type Rubrique = "sante" | "frontaliers" | "arrivee" | "prevoyance" | "entreprises" | "guides" | "outils" | "actualites";
 
-export const NAV: { id: Rubrique; href: string; label: string }[] = [
+/* Page « Outils et chiffres » (hub des outils et des pages de données). */
+export const HUB_OUTILS = { fr: "/outils/", en: "/en/tools/" } as const;
+
+/* `court` : libellé de la tête au-dessus de 820 px quand la place manque (8 entrées, ou moins de 1101 px). */
+export const NAV: { id: Rubrique; href: string; label: string; court?: string }[] = [
   { id: "sante", href: "/assurance-maladie/", label: "Santé" },
   { id: "frontaliers", href: "/frontaliers/", label: "Frontaliers" },
   { id: "arrivee", href: "/nouveaux-arrivants/", label: "Nouveaux arrivants" },
   { id: "prevoyance", href: "/3e-pilier/", label: "Prévoyance" },
   { id: "entreprises", href: "/entreprises/", label: "Entreprises" },
   { id: "guides", href: "/guides/", label: "Guides" },
+  { id: "outils", href: HUB_OUTILS.fr, label: "Outils et chiffres", court: "Outils" },
+  ...(AVEC_ACTUS_FR ? [{ id: "actualites" as const, href: "/actualites/", label: "Actualités" }] : []),
 ];
-
-/* « Actualités » : seulement quand au moins un article est publié (compté au build, next.config.ts). */
-const AVEC_ACTUS_FR = (process.env.NEXT_PUBLIC_ACTUALITES_FR ?? "0") !== "0";
-const AVEC_ACTUS_EN = (process.env.NEXT_PUBLIC_ACTUALITES_EN ?? "0") !== "0";
 
 export const PIED: { href: string; label: string }[] = [
   ...(AVEC_ACTUS_FR ? [{ href: "/actualites/", label: "Actualités" }] : []),
+  { href: "/chiffres-cles-2027/", label: "Chiffres clés 2027" },
+  { href: "/integrer/", label: "Intégrer nos outils" },
   { href: "/methodologie/", label: "Méthodologie" },
   { href: "/independance/", label: "Nos liens avec les assureurs" },
   { href: "/confidentialite/", label: "Confidentialité" },
@@ -38,10 +46,14 @@ export const NAV_EN: typeof NAV = [
   { id: "prevoyance", href: "/en/pillar-3a/", label: "Pensions" },
   { id: "entreprises", href: "/en/business/", label: "Business" },
   { id: "guides", href: "/en/guides/", label: "Guides" },
+  { id: "outils", href: HUB_OUTILS.en, label: "Tools and figures", court: "Tools" },
+  ...(AVEC_ACTUS_EN ? [{ id: "actualites" as const, href: "/en/news/", label: "News" }] : []),
 ];
 
 export const PIED_EN: typeof PIED = [
   ...(AVEC_ACTUS_EN ? [{ href: "/en/news/", label: "News" }] : []),
+  { href: "/en/key-figures-2027/", label: "Key figures 2027" },
+  { href: "/en/embed/", label: "Embed our tools" },
   { href: "/en/methodology/", label: "Methodology" },
   { href: "/en/independence/", label: "Ties with insurers" },
   { href: "/en/privacy/", label: "Privacy" },

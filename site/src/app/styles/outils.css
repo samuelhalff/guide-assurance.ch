@@ -256,7 +256,7 @@
   .maj { font: 15px var(--narrow); color: var(--encre-2); margin: 0 0 var(--s6); }
 
   @media (min-width: 720px) {
-    .page-outil .wrap { padding: 0 var(--s5); }
+    .page-outil .wrap { padding-inline: var(--s5); }
     .page-outil h1 { font-size: 42px; }
     .page-outil h2 { font-size: 30px; }
     .form { padding: var(--s6); }

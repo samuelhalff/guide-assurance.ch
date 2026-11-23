@@ -24,6 +24,7 @@ export const DATE_TEXTE = {
   lettre: "2026-11-22",
   taux3a: "2026-11-22",
   impot3a: "2026-11-23", // canton du Jura ajouté
+  outils: "2026-11-23", // page « Outils et chiffres » créée
   guides: "2026-11-23", // questions fréquentes ajoutées ; la liste suit aussi la date des guides (lib/content/pages.ts)
 } as const;
 
@@ -47,6 +48,8 @@ export const DATE_PAGE_DONNEES = {
   communes3a: maxIso("2026-11-23", DATE_IMPOTS),
   chiffres: maxIso("2026-11-23", DATE_PRIMES, DATE_TAUX_3A, DATE_IMPOTS),
 } as const;
+/* « Outils et chiffres » : reprend les chiffres des outils et des pages de données. */
+export const DATE_PAGE_OUTILS = maxIso(DATE_TEXTE.outils, DATE_PAGE.accueil, DATE_PAGE_DONNEES.chiffres, DATE_PAGE_DONNEES.historique3a);
 /* Licence des agrégats publiés par Guide Assurance (CSV des pages de données, dépôt public) : CC BY 4.0, en
    citant les sources (OFSP, pages des banques, administrations fiscales). */
 export const LICENCE_DONNEES = "https://creativecommons.org/licenses/by/4.0/";

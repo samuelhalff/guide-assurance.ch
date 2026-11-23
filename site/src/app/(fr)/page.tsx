@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
@@ -235,6 +236,9 @@ export default function Accueil() {
                 <b>Quelle franchise choisir{N}?</b> Un outil en préparation indiquera le montant de frais à partir duquel la franchise basse devient rentable.
               </li>
             </ol>
+            <p className="texte reperes">
+              Pour les chiffres de l’année, voyez les <Link href="/chiffres-cles-2027/">chiffres clés 2027</Link>, le <Link href="/assurance-maladie/barometre-primes/">baromètre des primes</Link> canton par canton et les <Link href="/assurance-maladie/primes/regions/">primes par région</Link>. Côté 3e pilier, l’<Link href="/3e-pilier/taux-3a/historique/">historique des taux 3a</Link> suit chaque relevé du lundi et l’<Link href="/3e-pilier/economie-impot/communes/">économie d’impôt par commune</Link> compare toutes les communes romandes. Les <Link href="/rappels-echeances/">rappels d’échéance</Link> ajoutent les dates limites à votre agenda.
+            </p>
           </div>
         </section>
 

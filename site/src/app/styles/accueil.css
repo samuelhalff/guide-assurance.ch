@@ -63,7 +63,7 @@
     position: relative; z-index: 2;
     margin: var(--s6) 0 var(--s7) max(var(--s5), calc((100vw - 1280px) / 2 + var(--s5)));
     width: min(530px, calc(100% - 2 * var(--s5)));
-    background: var(--papier); border: 1.5px solid var(--encre); padding: var(--s6) var(--s6) var(--s5);
+    background: var(--papier); border: 1.5px solid var(--encre); border-radius: var(--r); padding: var(--s6) var(--s6) var(--s5);
   }
   .cartouche h1 {
     font-weight: 800; font-size: clamp(34px, 3.4vw, 46px); line-height: 1.02; letter-spacing: -.03em;
@@ -178,6 +178,10 @@
   .accueil .outils { background: var(--bande); color: var(--bande-texte); box-shadow: inset 0 1px var(--bande-bord), inset 0 -1px var(--bande-bord); }
   .outils .titre { color: var(--bande-titre); }
   .outils .texte { color: var(--bande-texte-2); }
+  /* Liens vers les pages de chiffres, sous la liste des outils (bande sombre) : couleur du texte, soulignés. */
+  .outils .reperes { margin-top: var(--s5); max-width: 72ch; }
+  .outils .reperes a { color: var(--bande-titre); text-decoration: underline; text-underline-offset: 3px; }
+  .outils .reperes a:hover { text-decoration-thickness: 2px; }
   .outils-liste { list-style: none; margin: var(--s6) 0 0; padding: 0; display: grid; gap: var(--s3); }
   .outil-ligne {
     display: grid; grid-template-columns: 1fr; gap: var(--s3); padding: var(--s5) var(--s4);
@@ -267,7 +271,7 @@
     .carte { display: none; }
     .cartouche {
       order: 1; display: flex; flex-direction: column; margin: 0; width: auto;
-      border: 0; border-bottom: 1px solid var(--filet); padding: var(--s5) var(--s4);
+      border: 0; border-radius: 0; border-bottom: 1px solid var(--filet); padding: var(--s5) var(--s4);
     }
     .cartouche h1 { font-size: 29px; }
     .cartouche .intro { font-size: 17px; }

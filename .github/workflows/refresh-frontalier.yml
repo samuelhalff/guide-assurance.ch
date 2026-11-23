@@ -1,0 +1,37 @@
+name: "Relevé : frontaliers (06:45, chaque jour en janvier, sinon le 1er)"
+
+# Ancien crontab de sam (infra/refresh/crontab.txt). Lignes en UTC : hiver puis été ; le modèle ne garde que celle
+# qui tombe à 6 h à Zurich.
+on:
+  schedule:
+    - cron: "45 4 * 1 *"
+    - cron: "45 5 * 1 *"
+    - cron: "45 4 1 2-12 *"
+    - cron: "45 5 1 2-12 *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "--dry-run : relève et compare, n'écrit rien, ne publie rien, n'envoie rien"
+        type: boolean
+        default: true
+      args:
+        description: "options (--simulate-change, --simulate-parser-failure)"
+        type: string
+        default: ""
+
+# Concurrence : dans _refresh.yml (job run, groupe guide-assurance-prod partagé avec le déploiement).
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+jobs:
+  releve:
+    uses: ./.github/workflows/_refresh.yml
+    with:
+      dataset: frontalier
+      at: 6
+      dry_run: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+      args: ${{ inputs.args || '' }}
+    secrets: inherit

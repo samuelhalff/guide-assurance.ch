@@ -1,10 +1,10 @@
-/* Mesure d'audience, même modèle qu'ark-fid.ch (Google Consent Mode v2, valeurs par défaut par région) :
-   - UE/EEE et Royaume-Uni : tout refusé tant que le visiteur n'a pas accepté (opt-in) ;
-   - Suisse : mesure d'audience active d'office, signaux publicitaires refusés jusqu'à acceptation (opt-out) ;
-   - reste du monde : accordé d'office, le visiteur peut refuser.
-   Un choix enregistré l'emporte toujours. GTM (GTM_ID) porte les balises Google ; il se charge d'office et
-   respecte l'état de consentement. PostHog (EU) reste sans cookie tant que le visiteur n'a pas accepté
-   (la région n'est pas connue côté navigateur). Les événements ne portent jamais de donnée saisie. */
+/* Mesure d'audience (Google Consent Mode v2 ; règles dans lib/mesure-regles.ts). Décision de Sam du 23.11.2026, prise en
+   connaissance du risque RGPD pour l'UE : partout, tout est accordé d'office, signaux publicitaires compris ; ignorer le
+   bandeau vaut acceptation, seul « Refuser » change cela. Un choix enregistré l'emporte toujours. GTM (GTM_ID) porte les
+   balises Google ; il se charge d'office et respecte l'état de consentement. PostHog (EU) : persistant et avec
+   enregistrement de session sauf refus ; en mémoire, sans enregistrement, après un refus.
+   Jamais de valeur saisie, jamais de contenu de l'assistant, jamais d'enregistrement sur le formulaire de demande. */
+import { ACCORDE, REFUSE, persistantParDefaut, replayAutorise, scriptAmorce, type Choix } from "@/lib/mesure-regles";
 export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID ?? "";
 export const POSTHOG_TOKEN = process.env.NEXT_PUBLIC_POSTHOG_TOKEN ?? "";
 export const POSTHOG_HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://eu.i.posthog.com";
@@ -14,23 +14,9 @@ export const CONSENTEMENT_REQUIS = Boolean(GTM_ID);
 
 export const CLE = "ga-consentement";
 
-const EEE_RU = ["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IS","IE","IT","LV","LI","LT","LU","MT","NL","NO","PL","PT","RO","SK","SI","ES","SE","GB"];
-
-/* Script en ligne du <head> : états de consentement par défaut et choix enregistré, posés tout de suite, avant
-   gtm.js. Seule l'injection de gtm.js attend la fin du chargement de la page puis un moment libre (requestIdleCallback,
-   3 s au plus) ; les événements poussés entre-temps restent dans dataLayer et GTM les lit à son arrivée. */
+/* Script en ligne du <head> : voir scriptAmorce. */
 export function amorceGTM(): string {
-  if (!GTM_ID) return "";
-  const refuse = { ad_storage: "denied", analytics_storage: "denied", ad_user_data: "denied", ad_personalization: "denied" };
-  const accorde = { ad_storage: "granted", analytics_storage: "granted", ad_user_data: "granted", ad_personalization: "granted" };
-  return `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
-gtag('consent','default',${JSON.stringify({ ...refuse, region: EEE_RU, wait_for_update: 500 })});
-gtag('consent','default',${JSON.stringify({ ...refuse, analytics_storage: "granted", region: ["CH"] })});
-gtag('consent','default',${JSON.stringify(accorde)});
-gtag('set','ads_data_redaction',true);
-try{var c=localStorage.getItem(${JSON.stringify(CLE)});if(c==='oui')gtag('consent','update',${JSON.stringify(accorde)});else if(c==='non')gtag('consent','update',${JSON.stringify(refuse)});}catch(e){}
-gtag('js',new Date());
-(function(w,d,l,i){var go=function(){w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var j=d.createElement('script');j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i;d.head.appendChild(j);};var later=function(){(w.requestIdleCallback||function(f){setTimeout(f,1)})(go,{timeout:3000});};if(d.readyState==='complete')later();else w.addEventListener('load',later,{once:true});})(window,document,'dataLayer',${JSON.stringify(GTM_ID)});`;
+  return scriptAmorce(GTM_ID, CLE);
 }
 
 export type Evenement =
@@ -52,7 +38,7 @@ export type Evenement =
   | "demande_ouverte"
   | "demande_etape"
   | "demande_envoyee"
-  /* Clic sur un appel « Être rappelé » ({ emplacement: tete | accueil | guide | comparateur | produit | outil3a | lettre | frontalier | rappels | barometre | kit_rh | donnees | actualite }), avant le formulaire court. */
+  /* Clic sur un appel « Être rappelé » ({ emplacement: tete | accueil | guide | comparateur | produit | outil3a | lettre | frontalier | rappels | barometre | kit_rh | donnees | actualite | outils }), avant le formulaire court. */
   | "rappel_ouvert"
   /* Appel « Être rappelé » vu à l'écran ({ emplacement }), une fois par emplacement et par page, sans aucune valeur saisie. */
   | "rappel_vu"
@@ -60,13 +46,31 @@ export type Evenement =
   | "assistant_ouvert"
   | "assistant_message"
   | "assistant_vers_demande"
-  /* Nom recommandé par GA4 pour une demande envoyée ({ porte }), sur la page de remerciement seulement : voir mesurerLead. */
-  | "generate_lead";
+  /* Nom recommandé par GA4 pour une demande envoyée ({ porte, utm_* de la session }), sur la page de remerciement seulement : voir mesurerLead. */
+  | "generate_lead"
+  /* GA4 seulement (versGA), noms standard : profondeur de lecture { percent_scrolled: 25 | 50 | 75 | 90 } ;
+     lien sortant { link_domain, link_url, outbound } ; fichier { file_extension, file_name, link_url } ;
+     outil utilisé { content_type: "outil", content_id: <événement de l'outil> } ; résultats du comparateur
+     { item_list_name, item_count } (nombre seulement) ; Core Web Vitals { value, metric_id, metric_value, metric_delta, metric_rating }. */
+  | "scroll"
+  | "click"
+  | "file_download"
+  | "select_content"
+  | "view_item_list"
+  | "LCP"
+  | "INP"
+  | "CLS"
+  /* Question de FAQ ouverte ({ question_index, page }). */
+  | "faq_ouverte"
+  /* Code d'intégration d'un widget copié ({ widget, methode: bouton | manuel }). */
+  | "code_integration_copie";
 
 type Props = Record<string, string | number | boolean>;
 type PH = {
   capture: (e: string, p?: Props, o?: { transport?: "sendBeacon"; send_instantly?: boolean }) => void;
   set_config: (c: Record<string, unknown>) => void;
+  startSessionRecording: (o?: boolean) => void;
+  stopSessionRecording: () => void;
 };
 type W = { dataLayer?: unknown[]; gtag?: (...a: unknown[]) => void };
 
@@ -75,30 +79,63 @@ const file: [Evenement, Props | undefined][] = [];
 /* Faux sur le formulaire de demande (mise en page (demande), sans GTM) : rien ne part vers le dataLayer. */
 let versDataLayer = true;
 
+/* Événements d'outil : chacun part aussi vers GA4 sous le nom standard select_content { content_type, content_id }. */
+const OUTILS: readonly Evenement[] = ["situation_choisie", "simulateur_utilise", "lettre_copiee", "lettre_imprimee", "comparateur_utilise", "impot3a_utilise", "comparateur_accueil", "comparateur_produit", "outil_partage", "ics_telecharge"];
+
 export function suivre(e: Evenement, p?: Props, avantDepart = false) {
   if (!MESURE_ACTIVE || typeof window === "undefined") return;
   /* avantDepart : la page va changer, l'événement part tout de suite par sendBeacon. */
   if (ph) ph.capture(e, p, avantDepart ? { transport: "sendBeacon", send_instantly: true } : undefined);
   else if (POSTHOG_TOKEN) file.push([e, p]);
-  if (versDataLayer && !e.startsWith("assistant_")) {
-    const w = window as unknown as W;
-    w.dataLayer?.push({ event: e, ...(p ?? {}) });
-    /* Commande gtag : la balise Google chargée par GTM la transmet à GA4 sans balise d'événement à configurer dans GTM. */
-    w.gtag?.("event", e, p ?? {});
+  if (!e.startsWith("assistant_")) {
+    versGA(e, p);
+    if (OUTILS.includes(e)) versGA("select_content", { content_type: "outil", content_id: e });
   }
+}
+
+/* GA4 seulement (dataLayer + commande gtag), jamais sur le formulaire de demande. PostHog mesure de son côté
+   défilement, clics, liens sortants et Web Vitals (autocapture, capture_performance). */
+export function versGA(e: Evenement, p?: Props) {
+  if (!GTM_ID || !versDataLayer || typeof window === "undefined") return;
+  const w = window as unknown as W;
+  w.dataLayer?.push({ event: e, ...(p ?? {}) });
+  /* Commande gtag : la balise Google chargée par GTM la transmet à GA4 sans balise d'événement à configurer dans GTM. */
+  w.gtag?.("event", e, p ?? {});
 }
 
 /* Conversion GA4 (rapport 09, G5). demande_envoyee part du formulaire, dont la mise en page n'a ni GTM ni dataLayer :
    GA4 ne la voit jamais. Le formulaire laisse donc la porte (constante du site, jamais une valeur saisie) dans
    sessionStorage juste avant d'ouvrir la page de remerciement, qui a GTM ; cette page la lit, l'efface et envoie
-   generate_lead { porte } au dataLayer seulement (PostHog a déjà demande_envoyee). Une visite directe ou un
-   rechargement de la page de remerciement ne trouve pas de marque et n'envoie rien. */
+   generate_lead { porte, utm_* } au dataLayer seulement (PostHog a déjà demande_envoyee). Les utm_* sont ceux de
+   l'adresse d'arrivée de la session (memoriserUtm). Une visite directe ou un rechargement de la page de remerciement
+   ne trouve pas de marque et n'envoie rien. */
 export const CLE_LEAD = "ga-demande-envoyee";
+export const CLE_UTM = "ga-utm";
 export function marquerLead(porte: string) {
   try {
     sessionStorage.setItem(CLE_LEAD, porte);
   } catch {
     /* stockage refusé : pas de conversion GA4, la demande part quand même */
+  }
+}
+/* Garde les UTM de la première page de la session qui en porte (sessionStorage, effacé à la fermeture de l'onglet). */
+export function memoriserUtm(utm: Record<string, string> | null) {
+  if (!utm) return;
+  try {
+    if (!sessionStorage.getItem(CLE_UTM)) sessionStorage.setItem(CLE_UTM, JSON.stringify(utm));
+  } catch {
+    /* stockage refusé */
+  }
+}
+function lireUtm(): Props {
+  try {
+    const v = JSON.parse(sessionStorage.getItem(CLE_UTM) ?? "null") as unknown;
+    if (!v || typeof v !== "object") return {};
+    const r: Props = {};
+    for (const [k, x] of Object.entries(v as Record<string, unknown>)) if (k.startsWith("utm_") && typeof x === "string") r[k] = x.slice(0, 100);
+    return r;
+  } catch {
+    return {};
   }
 }
 export function mesurerLead(portesValides: readonly string[]) {
@@ -111,18 +148,20 @@ export function mesurerLead(portesValides: readonly string[]) {
     return;
   }
   if (!porte || !portesValides.includes(porte)) return;
+  const p = { porte, ...lireUtm() };
   const w = window as unknown as W;
-  w.dataLayer?.push({ event: "generate_lead", porte });
-  w.gtag?.("event", "generate_lead", { porte });
+  w.dataLayer?.push({ event: "generate_lead", ...p });
+  w.gtag?.("event", "generate_lead", p);
 }
 
-/* Formulaire de demande : PostHog seul, sans cookie (mémoire), et jamais de dataLayer. */
+/* Formulaire de demande : PostHog seul, sans cookie (mémoire), sans autocapture ni enregistrement, et jamais de dataLayer. */
 export function demarrerMesureDemande() {
   versDataLayer = false;
+  modeSite = false;
   void demarrerPostHog(false);
 }
 
-export type Choix = "oui" | "non" | null;
+export type { Choix };
 export function lireChoix(): Choix {
   try {
     const v = localStorage.getItem(CLE);
@@ -132,6 +171,8 @@ export function lireChoix(): Choix {
   }
 }
 
+export const persistantNavigateur = () => persistantParDefaut(lireChoix());
+
 /* Enregistre le choix et met à jour Google Consent Mode sans recharger la page. */
 export function ecrireChoix(c: "oui" | "non") {
   try {
@@ -139,8 +180,7 @@ export function ecrireChoix(c: "oui" | "non") {
   } catch {
     /* navigation privée : le choix vaut pour la page */
   }
-  const v = c === "oui" ? "granted" : "denied";
-  (window as unknown as W).gtag?.("consent", "update", { ad_storage: v, analytics_storage: v, ad_user_data: v, ad_personalization: v });
+  (window as unknown as W).gtag?.("consent", "update", c === "oui" ? ACCORDE : REFUSE);
 }
 
 /* Après l'affichage : fin du chargement de la page, puis un moment libre (3 s au plus). Les événements attendent dans `file`. */
@@ -152,38 +192,81 @@ export function apresChargement(f: () => void) {
   else window.addEventListener("load", plusTard, { once: true });
 }
 
+let modeSite = true;
 let persistanceVoulue: boolean | null = null;
+let persistanceAppliquee: boolean | null = null;
 let chargement: Promise<void> | null = null;
 
+/* persistant : localStorage+cookie et enregistrement de session (hors formulaire de demande) ; sinon mémoire, sans enregistrement. */
 export async function demarrerPostHog(persistant: boolean) {
   if (!POSTHOG_TOKEN || typeof window === "undefined") return;
   persistanceVoulue = persistant;
-  if (ph) {
-    ph.set_config({ persistence: persistant ? "localStorage+cookie" : "memory" });
-    return;
-  }
   /* Un seul chargement même si le visiteur choisit pendant qu'il est en cours ; le dernier choix l'emporte. */
   if (!chargement) chargement = initPostHog(persistant);
   await chargement;
-  const p = ph as PH | null;
-  if (p && persistanceVoulue !== persistanceInit) {
-    persistanceInit = persistanceVoulue;
-    p.set_config({ persistence: persistanceVoulue ? "localStorage+cookie" : "memory" });
-  }
+  if (ph && persistanceVoulue !== persistanceAppliquee) await appliquer(persistanceVoulue);
 }
 
-let persistanceInit: boolean | null = null;
+const replayVoulu = (persistant: boolean) => modeSite && persistant && replayAutorise(window.location.pathname);
+
+async function appliquer(persistant: boolean) {
+  const p = ph as PH;
+  persistanceAppliquee = persistant;
+  p.set_config({ persistence: persistant ? "localStorage+cookie" : "memory" });
+  if (replayVoulu(persistant)) {
+    await import("posthog-js/dist/lazy-recorder");
+    p.startSessionRecording(true);
+  } else p.stopSessionRecording();
+}
+
 async function initPostHog(persistant: boolean) {
-  persistanceInit = persistant;
-  const { default: posthog } = await import("posthog-js");
+  const site = modeSite;
+  const [{ default: posthog }] = await Promise.all([
+    import("posthog-js"),
+    /* Extensions groupées dans le bundle du site (disable_external_dependency_loading : aucun script tiers chargé). */
+    ...(site ? [import("posthog-js/dist/web-vitals"), import("posthog-js/dist/dead-clicks-autocapture")] : []),
+    ...(site && replayVoulu(persistant) ? [import("posthog-js/dist/lazy-recorder")] : []),
+  ]);
+  persistanceAppliquee = persistant;
+  /* Configuration distante fournie d'avance : advanced_disable_flags coupe /flags et la configuration distante, sans
+     laquelle l'enregistrement de session ne démarre jamais. Le site la déclare donc lui-même (aucune requête de plus,
+     aucun script tiers). L'enregistrement reste coupé (disable_session_recording) tant qu'appliquer ne l'a pas lancé. */
+  if (site) {
+    const w = window as unknown as { _POSTHOG_REMOTE_CONFIG?: Record<string, { config: Record<string, unknown> }> };
+    w._POSTHOG_REMOTE_CONFIG = {
+      ...w._POSTHOG_REMOTE_CONFIG,
+      [POSTHOG_TOKEN]: {
+        config: {
+          sessionRecording: { endpoint: "/s/", consoleLogRecordingEnabled: false, recordCanvas: false, networkPayloadCapture: null },
+          heatmaps: true,
+          capturePerformance: { web_vitals: true, network_timing: false },
+          autocapture_opt_out: false,
+          autocaptureExceptions: false,
+          surveys: false,
+          supportedCompression: ["gzip-js"],
+        },
+      },
+    };
+  }
   posthog.init(POSTHOG_TOKEN, {
     api_host: POSTHOG_HOST,
     ui_host: "https://eu.posthog.com",
     persistence: persistant ? "localStorage+cookie" : "memory",
-    autocapture: false,
+    /* Clics et envois de formulaire, jamais de valeur de champ (PostHog ne lit pas les champs) ; le texte des outils
+       (classe ph-sensitive) et l'assistant (ph-no-capture) sont exclus. */
+    autocapture: site ? { dom_event_allowlist: ["click", "submit"], capture_copied_text: false } : false,
+    mask_all_text: false,
+    mask_all_element_attributes: false,
+    rageclick: site,
+    enable_heatmaps: site,
+    capture_dead_clicks: site,
+    capture_performance: site ? { web_vitals: true, network_timing: false } : false,
     capture_pageview: "history_change",
     capture_pageleave: true,
+    /* Démarré à la main (appliquer) seulement pour un visiteur persistant, hors formulaire de demande. Champs masqués,
+       texte des outils masqué (data-ph-mask), assistant bloqué (ph-no-capture : la conversation n'est jamais enregistrée). */
     disable_session_recording: true,
+    session_recording: { maskAllInputs: true, maskTextSelector: "[data-ph-mask]", blockClass: "ph-no-capture", recordCrossOriginIframes: false },
     disable_surveys: true,
     disable_external_dependency_loading: true,
     advanced_disable_flags: true,
@@ -191,5 +274,6 @@ async function initPostHog(persistant: boolean) {
     respect_dnt: true,
   });
   ph = posthog as unknown as PH;
+  if (replayVoulu(persistant)) ph.startSessionRecording(true);
   for (const [e, p] of file.splice(0)) ph.capture(e, p);
 }
