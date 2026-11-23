@@ -298,3 +298,58 @@
 @layer components {
   .outil-comparateur .aide-champ { display: block; margin-top: var(--s1); font-size: 14px; line-height: 1.4; color: var(--encre-douce, var(--encre)); opacity: .8; }
 }
+
+/* Simulateur frontalier, foyer personne par personne (simulateur-frontalier.tsx). Mobile d'abord. */
+@layer components {
+  .cta-haut-outil { display: grid; gap: var(--s1); justify-items: start; margin: var(--s4) 0 0; }
+  .cta-haut-outil .bouton { line-height: 1.2; }
+  .cta-haut-outil p { margin: 0; font: 15px var(--narrow); color: var(--encre-2); }
+  .outil-frontalier .foyer-aide { margin: calc(-1 * var(--s2)) 0 var(--s3); }
+  .outil-frontalier fieldset.personne { border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s3) var(--s3) var(--s1); margin: 0 0 var(--s3); }
+  .outil-frontalier fieldset.personne > legend { font: 700 16px var(--sans); padding: 0 6px; margin: 0 0 var(--s1) -6px; display: flex; gap: var(--s3); align-items: baseline; }
+  .outil-frontalier .personne .note-outil { margin: var(--s1) 0 var(--s2); }
+  .outil-frontalier .personne .provisoire { margin: var(--s1) 0 var(--s2); }
+  .outil-frontalier .personne .sous-q { margin-top: var(--s2); }
+  .outil-frontalier .personne .case { margin-bottom: var(--s2); }
+  .outil-frontalier .pastilles-2, .outil-frontalier .pastilles-4 { grid-template-columns: 1fr 1fr; }
+  .outil-frontalier .pastilles-texte span { flex-direction: column; line-height: 1.15; min-height: 56px; }
+  .outil-frontalier .pastille small { display: block; font: 400 13px var(--narrow); color: var(--encre-2); margin-top: 2px; }
+  .outil-frontalier .ajouts { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2); }
+  .outil-frontalier .ajouts .ajouter-personne { margin: 0; }
+  details.taux-change summary { cursor: pointer; font: 600 16px var(--narrow); color: var(--lac-encre); min-height: 44px; display: flex; align-items: center; }
+  details.taux-change .champ { margin-top: var(--s2); max-width: 16em; }
+  details.taux-change .aide { display: block; font: 14px var(--narrow); color: var(--encre-2); margin-top: 4px; }
+  .page-outil .titre-resultat { font-size: 21px; margin: 0 0 var(--s3); }
+  .duel-serre { grid-template-columns: 1fr 1fr; gap: var(--s2); }
+  .duel-serre .duel-option { padding: var(--s3); }
+  .duel-serre .prix { font-size: 23px; font-variant-numeric: tabular-nums; }
+  .duel-serre .prix small { display: block; font-size: 14px; margin-top: 2px; }
+  .duel-serre .prix small.des { display: inline; margin: 0; }
+  .duel-serre .duel-option p { font-size: 14px; line-height: 1.35; }
+  .outil-frontalier .attente { font: 16px var(--narrow); color: var(--encre-2); }
+  @media (max-width: 820px) {
+    .barre-frontalier .barre-resume {
+      flex: 1 1 auto; min-width: 0; border: 0; background: none; padding: 4px 0; text-align: left; cursor: pointer;
+      font: 600 14px/1.25 var(--narrow); color: var(--encre); font-variant-numeric: tabular-nums;
+    }
+    .barre-frontalier .bouton { flex: 0 0 auto; padding: 14px 16px; }
+  }
+  @media (min-width: 720px) {
+    .outil-frontalier .pastilles-4 { grid-template-columns: repeat(4, 1fr); }
+    .duel-serre .prix { font-size: 27px; }
+  }
+  @media (min-width: 1000px) {
+    .outil-frontalier .pastilles-4 { grid-template-columns: 1fr 1fr; }
+  }
+}
+@layer components {
+  .droit-option { margin: 0 0 var(--s6); max-width: 72ch; background: var(--papier); border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s4); }
+  .page-outil .droit-option h2 { font-size: 23px; margin: 0 0 var(--s3); }
+  .droit-option > p { margin: 0 0 var(--s3); }
+  .droit-option dl { margin: 0 0 var(--s3); display: grid; gap: var(--s3); }
+  .droit-option dt { font-weight: 700; }
+  .droit-option dd { margin: 2px 0 0; font-size: 17px; }
+  .droit-option .source-outil a { color: var(--lac-encre); }
+  .page-outil .wrap > .nuances { max-width: 72ch; margin: 0 0 var(--s7); }
+  @media (min-width: 720px) { .droit-option { padding: var(--s5) var(--s6); } }
+}

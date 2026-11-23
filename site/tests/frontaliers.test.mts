@@ -100,4 +100,36 @@ t('salaires + autres revenus additionnés', () => {
   const c = F.comparer(data, { annee: 2027, tauxEurChf: 1, frontalier: { naissance: 1985, assiette: 80000, autres: 10000 }, conjoint: { statut: 'aucun' }, enfants: [] });
   assert.strictEqual(c.france.eur, Math.round((90000 - 12225) * 0.08));
 });
+
+// Foyer décrit personne par personne (simulateur depuis le 23.11.2026)
+const P = (personnes) => F.comparerFoyer(data, { annee: 2027, tauxEurChf: 0.93, personnes });
+t('personne seule : une cotisation, une prime sans accident', () => {
+  const c = P([{ naissance: 1990, revenu: 60000 }]);
+  assert.strictEqual(c.france.eur, 3822); assert.strictEqual(c.assuresCH.length, 1);
+  assert.strictEqual(c.assuresCH[0].accident, false); assert.strictEqual(c.lamal.min, 209.3);
+  assert.strictEqual(c.france.mensuelEur, 319); assert.strictEqual(c.france.chf, Math.round(3822 * 0.93));
+});
+t('même résultat que l’ancienne saisie (conjoint sans activité, 2 enfants)', () => {
+  const a = P([{ naissance: 1985, revenu: 60000 }, { naissance: 1987, situation: 'sans' }, { naissance: 2015, enfant: true }, { naissance: 2018, enfant: true }]);
+  const b = F.comparer(data, base({ statut: 'sans', naissance: 1987 }, [2015, 2018]));
+  assert.deepStrictEqual(a.lamal, b.lamal); assert.strictEqual(a.france.eur, b.france.eur);
+});
+t('adulte qui travaille en France : enfants côté français', () => {
+  const c = P([{ naissance: 1985, revenu: 60000 }, { naissance: 2016, enfant: true }, { naissance: 1987, situation: 'france' }]);
+  assert.deepStrictEqual(c.horsChoix.map((m) => m.qui), ['Enfant 1', 'Adulte 2']);
+  assert.strictEqual(c.assuresCH.length, 1);
+});
+t('trois adultes : deux frontaliers et un adulte sans activité', () => {
+  const c = P([{ naissance: 1980, revenu: 60000 }, { naissance: 1982, situation: 'suisse', revenu: 40000, moinsDe8h: true }, { naissance: 2004, situation: 'sans' }]);
+  assert.strictEqual(c.france.eur, 3822 + 2222);
+  assert.deepStrictEqual(c.assuresCH.map((m) => [m.qui, m.classe, m.accident]), [['Vous', 'adulte', false], ['Adulte 2', 'adulte', true], ['Adulte 3', 'jeune', true]]);
+});
+t('autre cas : compté nulle part, signalé', () => {
+  const c = P([{ naissance: 1985, revenu: 60000 }, { naissance: 1960, situation: 'autre' }, { naissance: 2016, enfant: true }]);
+  assert.strictEqual(c.horsCalcul.length, 1); assert.strictEqual(c.assuresCH.length, 2); assert.strictEqual(c.horsChoix.length, 0);
+});
+t('revenu négatif ramené à zéro, enfant de 19 ans au tarif jeune', () => {
+  const c = P([{ naissance: 1985, revenu: -5 }, { naissance: 2008, enfant: true }]);
+  assert.strictEqual(c.france.eur, 0); assert.strictEqual(c.assuresCH[1].classe, 'jeune');
+});
 console.log(n + ' tests OK');

@@ -5,6 +5,7 @@ import { Breadcrumbs } from "@/components/site/breadcrumbs";
 import { JsonLd } from "@/components/site/json-ld";
 import { PartagerOutil } from "@/components/site/partager-outil";
 import { SimulateurFrontalier } from "@/components/outils/simulateur-frontalier";
+import { FrontalierOption } from "@/components/outils/frontalier-option";
 import { pageMetadata } from "@/lib/metadata";
 import { ORG_ID, WEBSITE_ID, breadcrumbLd, faqLd, graph, type Miette } from "@/lib/jsonld";
 import { FaqSections, faqOutilLd, type FaqOutil } from "@/components/site/faq-sections";
@@ -41,7 +42,7 @@ const FAQ: FaqOutil[] = [
   },
   {
     q: "Comment l’Urssaf calcule-t-elle la cotisation ?",
-    a: ["L’Urssaf prélève 8 % de vos revenus de l’avant-dernière année, après un abattement de 25 % du plafond annuel de la sécurité sociale (12 225 € en 2027). Par exemple, pour 60 000 € de revenus 2025, (60 000 − 12 225) × 8 % = 3 822 € en 2027. Chaque frontalier du foyer paie sa propre cotisation ; les personnes à charge sont rattachées sans cotisation."],
+    a: ["L’Urssaf prélève 8 % de vos revenus de l’avant-dernière année, après un abattement de 25 % du plafond annuel de la sécurité sociale (12 225 € en 2027). Par exemple, pour 60 000 € de revenus 2025, (60 000 − 12 225) × 8 % = 3 822 € en 2027. Les revenus du patrimoine (loyers nets, intérêts, dividendes, plus-values) comptent aussi. Chaque frontalier du foyer déclare et paie sa propre cotisation ; les personnes à charge sont rattachées sans cotisation."],
     src: <>Source : Urssaf, « Travail en Suisse : déclarer vos revenus ». Le taux de 2027 reste à confirmer par la loi de financement de la sécurité sociale.</>,
   },
   {
@@ -97,7 +98,7 @@ export default function Page() {
           <Breadcrumbs items={MIETTES} />
           <h1>Frontalier : LAMal ou assurance maladie française ?</h1>
           <p className="intro">
-            Si vous vivez en France et travaillez à Genève ou dans le canton de Vaud, le simulateur calcule ce que votre foyer paierait en 2027 avec chaque option, à partir des chiffres officiels de l’Urssaf et de l’OFSP. Le choix est en principe définitif.
+            Si vous vivez en France et travaillez à Genève ou dans le canton de Vaud, décrivez votre foyer personne par personne : le simulateur affiche côte à côte ce qu’il paierait en 2027 avec la LAMal et avec l’assurance maladie française, d’après les chiffres officiels de l’Urssaf et de l’OFSP. Le choix est en principe définitif.
           </p>
           <p className="prive">
             <svg viewBox="0 0 20 20" aria-hidden="true">
@@ -108,6 +109,7 @@ export default function Page() {
           </p>
           <PartagerOutil path={PATH} title="Frontalier : LAMal ou assurance française ?" text="Comparer la LAMal et l’assurance maladie française pour un foyer frontalier, avec les chiffres officiels 2027." />
           <SimulateurFrontalier />
+          <FrontalierOption locale="fr" />
         </div>
 
         <div className="wrap faq">

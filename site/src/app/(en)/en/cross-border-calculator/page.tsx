@@ -5,6 +5,7 @@ import { Breadcrumbs } from "@/components/site/breadcrumbs";
 import { JsonLd } from "@/components/site/json-ld";
 import { PartagerOutil } from "@/components/site/partager-outil";
 import { SimulateurFrontalier } from "@/components/outils/simulateur-frontalier";
+import { FrontalierOption } from "@/components/outils/frontalier-option";
 import { pageMetadata } from "@/lib/metadata";
 import { ORG_ID, WEBSITE_ID, breadcrumbLd, faqLd, graph, type Miette } from "@/lib/jsonld";
 import { FaqSections, faqOutilLd, type FaqOutil } from "@/components/site/faq-sections";
@@ -42,7 +43,7 @@ const FAQ: FaqOutil[] = [
   },
   {
     q: "How does Urssaf calculate the contribution?",
-    a: ["Urssaf charges 8% of your income from the year before last, after an allowance of 25% of the annual social security ceiling (€12,225 in 2027). For example, for €60,000 of 2025 income, (60,000 − 12,225) × 8% = €3,822 in 2027. Each cross-border worker in the household pays their own contribution; dependants are attached with no contribution."],
+    a: ["Urssaf charges 8% of your income from the year before last, after an allowance of 25% of the annual social security ceiling (€12,225 in 2027). For example, for €60,000 of 2025 income, (60,000 − 12,225) × 8% = €3,822 in 2027. Capital income (net rents, interest, dividends, capital gains) counts too. Each cross-border worker in the household declares and pays their own contribution; dependants are attached with no contribution."],
     src: <>Source: Urssaf, “Travail en Suisse : déclarer vos revenus” (Working in Switzerland: declaring your income). The 2027 rate is still to be confirmed by the French social security financing act.</>,
   },
   {
@@ -98,7 +99,7 @@ export default function Page() {
           <Breadcrumbs items={MIETTES} locale="en" />
           <h1>Cross-border worker: LAMal or French health insurance?</h1>
           <p className="intro">
-            If you live in France and work in Geneva or in the canton of Vaud, the calculator works out what your household would pay in 2027 with each option, using the official figures from Urssaf and the FOPH (OFSP, Federal Office of Public Health). In principle, the choice is final.
+            If you live in France and work in Geneva or in the canton of Vaud, describe your household person by person: the calculator shows side by side what it would pay in 2027 under LAMal and under French health insurance, using the official figures from Urssaf and the FOPH (OFSP, Federal Office of Public Health). In principle, the choice is final.
           </p>
           <p className="prive">
             <svg viewBox="0 0 20 20" aria-hidden="true">
@@ -114,6 +115,7 @@ export default function Page() {
             text="Compare Swiss LAMal and French health insurance for a cross-border household, with the official 2027 figures."
           />
           <SimulateurFrontalier locale="en" />
+          <FrontalierOption locale="en" />
         </div>
 
         <div className="wrap faq">

@@ -20,7 +20,7 @@ export const DATE_IMPOTS = IMPOTS.lu_le;
 export const DATE_TEXTE = {
   accueil: "2026-11-23", // questions fréquentes ajoutées
   comparateur: "2026-11-22",
-  simulateur: "2026-11-22",
+  simulateur: "2026-11-23",
   lettre: "2026-11-22",
   taux3a: "2026-11-22",
   impot3a: "2026-11-23", // canton du Jura ajouté

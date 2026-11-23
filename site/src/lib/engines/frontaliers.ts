@@ -1,9 +1,12 @@
 /* Frontaliers France → Suisse : assurance maladie française (cotisation Urssaf) ou LAMal.
-   Fonctions pures, testées par tests/frontaliers.test.mjs. Sources vérifiées le 22.11.2026 :
+   Fonctions pures, testées par tests/frontaliers.test.mts. Sources vérifiées le 22.11.2026, revérifiées le 23.11.2026 :
    - Urssaf, « Travail en Suisse : déclarer vos revenus » (MAJ 24.09.2026) : 8 % × (revenus N−2 − 25 % du PASS), arrondis à l'euro,
      proratisation au nombre de jours, taxation d'office sur 5 PASS, majoration de 10 % en cas de déclaration tardive ;
    - calcul aligné sur le simulateur public Urssaf (betagouv/mon-entreprise, contextes/frontalier-suisse/domaine/cotisation.ts) ;
-   - PASS 2026 : 48 060 € ; PASS 2027 : 48 900 € (annonce BOSS du 16.10.2026, arrêté à paraître) ;
+   - PASS 2026 : 48 060 € (arrêté du 22.12.2025, JO du 23.12.2025) ; PASS 2027 : 48 900 € (annonce BOSS du 16.10.2026, arrêté
+     pas encore au JO le 23.11.2026) ; LFSS 2027 adoptée par le Sénat en 1re lecture le 18.11.2026, sans changement de
+     l'art. L.380-3-1 CSS (taux 8 %, abattement 25 % du PASS), non promulguée le 23.11.2026 ;
+   - déclaration individuelle (par frontalier), revenus du patrimoine compris (Cass. civ. 2e, 25.09.2025, n° 22-24.634) ;
    - OFSP, primes 2027 des résidents UE (Prämien_EU) ; art. 101a et 103, al. 7, OAMal (franchise de 300 CHF seulement). */
 export const PASS: Record<number, number> = { 2018: 39732, 2024: 46368, 2025: 47100, 2026: 48060, 2027: 48900 };
 export const TAUX: Record<number, number> = { 2018: 0.08, 2024: 0.08, 2025: 0.08, 2026: 0.08, 2027: 0.08 };
@@ -65,35 +68,71 @@ export type Foyer = {
   annee: number; tauxEurChf: number; frontalier: Revenu;
   conjoint?: { statut: StatutConjoint } & Partial<Revenu>; enfants?: number[];
 };
-export type Membre = { qui: string; classe: Classe; role: 'frontalier' | 'proche' | 'france'; accident?: boolean; assiette?: number };
+/* hors : adulte dont l'affiliation dépend d'une situation que le simulateur ne calcule pas (à son compte, chômage, retraite). */
+export type Role = 'frontalier' | 'proche' | 'france' | 'hors';
+export type Membre = { qui: string; classe: Classe; role: Role; accident?: boolean; assiette?: number };
+
+/* Foyer décrit personne par personne, comme dans le comparateur de primes.
+   La première personne est le frontalier qui fait le choix ; les autres adultes ont une situation, les enfants seulement
+   une année de naissance. revenu : revenus de l'année N−2 déclarés à l'Urssaf (€), pour les frontaliers seulement. */
+export type Situation = 'suisse' | 'sans' | 'france' | 'autre';
+export type PersonneFoyer = { naissance: number; enfant?: boolean; situation?: Situation; revenu?: number; moinsDe8h?: boolean };
+export type FoyerPersonnes = { annee: number; tauxEurChf: number; personnes: PersonneFoyer[] };
 
 /* Qualification du foyer (art. 32 du règlement CE 883/2004 ; OFSP ; CLEISS) :
    - le frontalier choisit son système ; ses proches SANS activité le suivent ;
-   - conjoint qui travaille en France : il relève du régime français, et les enfants y sont rattachés en priorité ;
-   - conjoint frontalier lui aussi : il a son propre droit d'option ; le simulateur suppose la même option pour les deux. */
-export function foyer(f: Foyer): Membre[] {
-  const cj = f.conjoint || { statut: 'aucun' as const }, m: Membre[] = [];
-  m.push({ qui: 'Vous', classe: classe(f.frontalier.naissance, f.annee), role: 'frontalier', accident: !!f.frontalier.moinsDe8h, assiette: (f.frontalier.assiette || 0) + (f.frontalier.autres || 0) });
-  if (cj.statut === 'sans') m.push({ qui: 'Votre conjoint', classe: classe(cj.naissance!, f.annee), role: 'proche', accident: true });
-  if (cj.statut === 'suisse') m.push({ qui: 'Votre conjoint', classe: classe(cj.naissance!, f.annee), role: 'frontalier', accident: !!cj.moinsDe8h, assiette: (cj.assiette || 0) + (cj.autres || 0) });
-  if (cj.statut === 'france') m.push({ qui: 'Votre conjoint', classe: classe(cj.naissance!, f.annee), role: 'france' });
-  (f.enfants || []).forEach((n, k) => {
-    m.push({ qui: 'Enfant ' + (k + 1), classe: classe(n, f.annee), role: cj.statut === 'france' ? 'france' : 'proche', accident: true });
+   - adulte qui travaille en France : il relève du régime français, et les enfants y sont rattachés en priorité ;
+   - autre adulte frontalier : il a son propre droit d'option ; le simulateur suppose la même option pour tous.
+   Qui : « Vous », « Adulte N », « Enfant N » (numérotation par catégorie, traduite par l'interface). */
+export function membresFoyer(ps: PersonneFoyer[], annee: number): Membre[] {
+  const adultes = ps.filter((p, i) => i === 0 || !p.enfant);
+  const franceAdulte = adultes.some((p, i) => i > 0 && p.situation === 'france');
+  let na = 1, ne = 0;
+  return ps.map((p, i) => {
+    const cl = classe(p.naissance, annee);
+    if (i > 0 && p.enfant) {
+      ne++;
+      return { qui: 'Enfant ' + ne, classe: cl, role: franceAdulte ? 'france' : 'proche', accident: true };
+    }
+    const qui = i === 0 ? 'Vous' : 'Adulte ' + ++na;
+    const st: Situation = i === 0 ? 'suisse' : p.situation ?? 'sans';
+    if (st === 'suisse') return { qui, classe: cl, role: 'frontalier', accident: !!p.moinsDe8h, assiette: Math.max(0, p.revenu || 0) };
+    if (st === 'france') return { qui, classe: cl, role: 'france' };
+    if (st === 'autre') return { qui, classe: cl, role: 'hors' };
+    return { qui, classe: cl, role: 'proche', accident: true };
   });
-  return m;
 }
 
+/* Ancienne saisie (vous, conjoint, enfants), gardée pour les tests : traduite en personnes. */
+export function foyer(f: Foyer): Membre[] {
+  return membresFoyer(versPersonnes(f), f.annee).map((m) => (m.qui === 'Adulte 2' ? { ...m, qui: 'Votre conjoint' } : m));
+}
+function versPersonnes(f: Foyer): PersonneFoyer[] {
+  const cj = f.conjoint || { statut: 'aucun' as const };
+  const ps: PersonneFoyer[] = [{ naissance: f.frontalier.naissance, revenu: (f.frontalier.assiette || 0) + (f.frontalier.autres || 0), moinsDe8h: f.frontalier.moinsDe8h }];
+  if (cj.statut !== 'aucun') ps.push({ naissance: cj.naissance!, situation: cj.statut, revenu: (cj.assiette || 0) + (cj.autres || 0), moinsDe8h: cj.moinsDe8h });
+  (f.enfants || []).forEach((n) => ps.push({ naissance: n, enfant: true }));
+  return ps;
+}
+
+export function comparerFoyer(data: DonneesPrimes, f: FoyerPersonnes) {
+  return comparerMembres(data, membresFoyer(f.personnes, f.annee), f.annee, f.tauxEurChf);
+}
 export function comparer(data: DonneesPrimes, f: Foyer) {
-  const membres = foyer(f);
-  const assuresCH = membres.filter((p) => p.role !== 'france');
+  return comparerMembres(data, foyer(f), f.annee, f.tauxEurChf);
+}
+
+function comparerMembres(data: DonneesPrimes, membres: Membre[], annee: number, tauxEurChf: number) {
+  const assuresCH = membres.filter((p) => p.role === 'frontalier' || p.role === 'proche');
   const horsChoix = membres.filter((p) => p.role === 'france');
-  const cotis = membres.filter((p) => p.role === 'frontalier').map((p) => cotisationFR(p.assiette!, f.annee));
+  const horsCalcul = membres.filter((p) => p.role === 'hors');
+  const cotis = membres.filter((p) => p.role === 'frontalier').map((p) => cotisationFR(p.assiette!, annee));
   const lamal = lamalFoyer(data, assuresCH as Personne[]);
   const frEur = cotis.reduce((s, c) => s + c.cotisation, 0);
-  const frChf = Math.round(frEur * f.tauxEurChf);
+  const frChf = Math.round(frEur * tauxEurChf);
   return {
-    membres, assuresCH, horsChoix,
-    france: { detail: cotis, eur: frEur, chf: frChf },
+    membres, assuresCH, horsChoix, horsCalcul,
+    france: { detail: cotis, eur: frEur, chf: frChf, mensuelEur: Math.round(frEur / 12) },
     lamal,
     ecart: { min: Math.round(lamal.min * 12) - frChf, mediane: Math.round(lamal.mediane * 12) - frChf },
   };
