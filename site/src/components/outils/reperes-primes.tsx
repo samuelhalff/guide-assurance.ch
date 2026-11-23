@@ -1,4 +1,5 @@
 import resume from "@/data/primes-2027-resume.json";
+import { Depliable } from "@/components/controles";
 import type { Locale } from "@/lib/i18n";
 import { PAGES_DONNEES, PAGES_DONNEES_EN } from "@/lib/nav";
 
@@ -99,10 +100,9 @@ export function TableauReperes({ locale = "fr", replie = false }: { locale?: Loc
           : `Pour un adulte de 26 ans et plus, avec une franchise de 300${NB}CHF et la couverture accident, la première prime de la liste va de ${chf(min)} à ${chf(max)} par mois selon le canton (région de prime principale). Pour chaque canton, les tableaux ci-dessous donnent quatre profils (franchise de 300 et de 2500${NB}CHF, avec et sans accident), puis les cinq premières offres pour la franchise de 300${NB}CHF avec accident. Source${T}: OFSP, primes 2027.`}
       </p>
       {replie ? (
-        <details className="reperes-details">
-          <summary>{en ? "Show the reference premiums for all 26 cantons" : "Voir les primes repères des 26 cantons"}</summary>
+        <Depliable className="reperes-details" titre={en ? "Show the reference premiums for all 26 cantons" : "Voir les primes repères des 26 cantons"}>
           {grille}
-        </details>
+        </Depliable>
       ) : grille}
       <p className="source-outil">
         <a href={en ? PAGES_DONNEES_EN.regions : PAGES_DONNEES.regions}>{en ? "Premiums by premium region" : "Primes par région de prime"}</a>

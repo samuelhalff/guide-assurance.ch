@@ -36,8 +36,8 @@
   .outil-impot3a .form .champ.dernier { margin-bottom: 0; }
   .outil-impot3a .form fieldset { margin-bottom: var(--s4); }
   .outil-impot3a .form .note-outil { margin: 0 0 var(--s3); }
-  .outil-impot3a details.aide-revenus { margin: 0 0 var(--s4); }
-  .outil-impot3a details.aide-revenus .champ { margin-top: var(--s2); }
+  .outil-impot3a .aide-revenus { margin: 0 0 var(--s4); }
+  .outil-impot3a .aide-revenus .champ { margin-top: var(--s2); }
   .resultat-3a { display: grid; gap: var(--s3); align-content: start; }
   .resultat-3a .economie { background: var(--papier); border: 1px solid var(--filet); border-left: 4px solid var(--sentier); border-radius: var(--r); padding: var(--s4); }
   .page-outil .resultat-3a .economie h2 { font: 700 16px var(--narrow); color: var(--encre-2); margin: 0; letter-spacing: 0; }
@@ -51,10 +51,10 @@
   .detail-3a thead th { font-size: 13px; white-space: normal; }
   .detail-3a tr.total th, .detail-3a tr.total td { border-top: 1.5px solid var(--encre); border-bottom: 0; }
   .resultat-3a .rappel-liste { margin: 0; }
-  details.retrait-3a { background: var(--papier); border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s3) var(--s4); }
-  details.retrait-3a summary { cursor: pointer; font: 700 17px var(--sans); min-height: 32px; color: var(--lac-encre); }
-  details.retrait-3a .note-outil { margin: var(--s2) 0; }
-  details.retrait-3a .champ { margin: var(--s3) 0 var(--s2); }
+  .retrait-3a { background: var(--papier); border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s3) var(--s4); }
+  .retrait-3a .depliable-titre { cursor: pointer; font: 700 17px var(--sans); min-height: 32px; color: var(--lac-encre); }
+  .retrait-3a .note-outil { margin: var(--s2) 0; }
+  .retrait-3a .champ { margin: var(--s3) 0 var(--s2); }
   .retrait-res { margin: var(--s2) 0; font-size: 17px; }
   .resultat-3a .integrite { margin-top: 0; }
   .exemples-3a { margin: 0 0 var(--s6); }
@@ -103,11 +103,12 @@
   .table-assureurs-3a .aucun { font: 14px var(--narrow); color: var(--encre-2); }
 
   .assureurs-3a { display: grid; gap: var(--s2); margin-top: var(--s3); }
-  details.assureur-3a { background: var(--papier); border: 1px solid var(--filet); border-radius: var(--r); padding: 0 var(--s4); scroll-margin-top: 80px; }
-  details.assureur-3a summary { cursor: pointer; min-height: 48px; display: flex; align-items: center; justify-content: space-between; gap: var(--s2); font-size: 17px; }
-  details.assureur-3a summary span { font: 14px var(--narrow); color: var(--encre-2); white-space: nowrap; }
-  details.assureur-3a[open] { padding-bottom: var(--s3); }
-  details.assureur-3a .entite { margin: 0 0 var(--s2); font: 14px var(--narrow); color: var(--encre-2); }
+  .assureur-3a { background: var(--papier); border: 1px solid var(--filet); border-radius: var(--r); padding: 0 var(--s4); scroll-margin-top: 80px; }
+  .assureur-3a > .depliable-titre { min-height: 48px; font-size: 17px; }
+  .assureur-3a .depliable-libelle { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); }
+  .assureur-3a .assureur-nombre { margin-left: auto; font: 14px var(--narrow); color: var(--encre-2); white-space: nowrap; }
+  .assureur-3a[data-open] { padding-bottom: var(--s3); }
+  .assureur-3a .entite { margin: 0 0 var(--s2); font: 14px var(--narrow); color: var(--encre-2); }
   .contrat-3a { border-top: 1px solid var(--filet); padding: var(--s3) 0 0; margin-top: var(--s3); }
   .page-outil .contrat-3a h3 { margin: 0; font-size: 17px; }
   .contrat-3a .etiquettes { display: flex; flex-wrap: wrap; gap: 4px; margin: var(--s1) 0 var(--s2); }

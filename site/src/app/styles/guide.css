@@ -4,8 +4,8 @@
   .page-guide h1 { font-size: 31px; font-weight: 800; line-height: 1.12; letter-spacing: -.02em; margin: 0; max-width: 24ch; text-wrap: balance; }
   .page-guide .chapo { margin: var(--s3) 0 0; color: var(--encre-2); max-width: 60ch; }
   .guide-meta { margin: var(--s4) 0 0; font: 15px var(--narrow); color: var(--encre-2); }
-  .guide-meta details { margin-top: 4px; }
-  .guide-meta summary { cursor: pointer; color: var(--lac-encre); min-height: 32px; }
+  .guide-meta .depliable { margin-top: 4px; }
+  .guide-meta .depliable-titre { cursor: pointer; color: var(--lac-encre); min-height: 32px; }
   .guide-meta ol { margin: var(--s2) 0 0; padding-left: 1.3em; list-style: decimal; }
   .guide-meta li { margin-bottom: 4px; }
   .guide-meta a { color: var(--lac-encre); }

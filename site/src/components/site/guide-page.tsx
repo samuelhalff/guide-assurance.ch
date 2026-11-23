@@ -1,3 +1,4 @@
+import { Depliable } from "@/components/controles";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
 import { Breadcrumbs } from "@/components/site/breadcrumbs";
@@ -162,14 +163,13 @@ export function GuidePage({
               {sources.length ? ` · ${t.source(sources.length)}` : ""}
             </p>
             {sources.length ? (
-              <details>
-                <summary>{t.voirSources}</summary>
+              <Depliable titre={t.voirSources}>
                 <ol>
                   {sources.map((s) => (
                     <li key={s.label}>{s.href ? <a href={s.href}>{s.label}</a> : s.label}</li>
                   ))}
                 </ol>
-              </details>
+              </Depliable>
             ) : null}
           </div>
 

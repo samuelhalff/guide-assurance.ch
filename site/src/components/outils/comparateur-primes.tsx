@@ -9,6 +9,7 @@ import { IconeTelephone, useRappelVu } from "@/components/demande/lien-rappel";
 import { dateCh } from "@/lib/taux3a";
 import { OffreComparateur, type OffreComparateurHandle } from "@/components/outils/offre-comparateur";
 import { Choix } from "@/components/outils/choix";
+import { Case, ChoixBoutons, Depliable } from "@/components/controles";
 
 /* Comparateur de primes LAMal 2027. Les données du canton sont chargées à la demande (public/data/primes-2027) ;
    le calcul se fait dans le navigateur, rien de ce qui est saisi n'est envoyé ni mis dans l'adresse.
@@ -496,15 +497,14 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
         {ambigu ? (
           <div id="cp-lieu-aide" className="choix-lieu">
             <p className="sous-q">{t.plusieurs}</p>
-            <div className="choix-liste" role="radiogroup">
-              {lieux.map((l, i) => (
-                <label className="option" key={`${l.canton}${l.region}`}>
-                  <input type="radio" name="cp-lieu-choix" checked={i === choixLieu} onChange={() => setChoixLieu(i)} />
-                  <span className="repere" aria-hidden="true" />
-                  <span className="libelle">{l.communes}<small>{t.region(l.canton, l.region)}</small></span>
-                </label>
-              ))}
-            </div>
+            <ChoixBoutons
+              name="cp-lieu-choix"
+              variante="option"
+              className="choix-liste"
+              value={choixLieu}
+              onChange={setChoixLieu}
+              options={lieux.map((l, i) => ({ value: i, key: `${l.canton}${l.region}`, label: l.communes, detail: t.region(l.canton, l.region) }))}
+            />
           </div>
         ) : lieu ? (
           <p className="lieu-trouve" id="cp-lieu-aide" role="status">{lieu.npa} {lieu.communes}{lieu.communes === t.region(lieu.canton, lieu.region) ? "" : ` · ${t.region(lieu.canton, lieu.region)}`}</p>
@@ -548,10 +548,9 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
               </div>
             </div>
             <p className="note-outil classe" id={`cp-cl-${p.id}`} role="status">{p.cl ? t.classe[p.cl] : p.naissance.length === 4 ? t.verifier : NB}</p>
-            <label className="case">
-              <input type="checkbox" checked={p.accident} onChange={(e) => maj(p.id, { accident: e.target.checked })} />
-              <span>{t.accidentCase}<small>{t.accidentInfo}</small></span>
-            </label>
+            <Case checked={p.accident} onChange={(c) => maj(p.id, { accident: c })}>
+              {t.accidentCase}<small>{t.accidentInfo}</small>
+            </Case>
           </fieldset>
         ))}
         {personnes.length < MAX_PERSONNES ? (
@@ -607,21 +606,19 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
                 <label htmlFor="cp-modele">{t.modele}</label>
                 <Choix id="cp-modele" value={filtre} onChange={setFiltre} options={(["tous", ...typesPresents] as P.Filtre[]).map((f) => ({ value: f, label: t.filtres[f] }))} />
               </div>
-              <div className="bascule" role="radiogroup" aria-label={t.affichage}>
-                <label className="pastille">
-                  <input type="radio" name="cp-periode" checked={!parAn} onChange={() => setParAn(false)} />
-                  <span>{t.mois}</span>
-                </label>
-                <label className="pastille">
-                  <input type="radio" name="cp-periode" checked={parAn} onChange={() => setParAn(true)} />
-                  <span>{t.an}</span>
-                </label>
-              </div>
+              <ChoixBoutons
+                name="cp-periode"
+                variante="pastille"
+                className="bascule"
+                label={t.affichage}
+                value={parAn}
+                onChange={setParAn}
+                options={[{ value: false, label: t.mois }, { value: true, label: t.an }]}
+              />
             </div>
-            <label className="case caisse-case">
-              <input type="checkbox" checked={avecCaisse} onChange={(e) => setAvecCaisse(e.target.checked)} />
-              <span>{t.ecartCaisse}<small>{t.caisseAide}</small></span>
-            </label>
+            <Case className="case caisse-case" checked={avecCaisse} onChange={setAvecCaisse}>
+              {t.ecartCaisse}<small>{t.caisseAide}</small>
+            </Case>
             {avecCaisse ? (
               <div className="ligne caisse-actuelle">
                 <div className="champ">
@@ -667,8 +664,7 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
                             <li><b>{signe(o.ecartMoyenne)}</b> {t.parAn} {t.vsMoyenne}</li>
                             {vsAct !== null ? <li className="vs-actuelle"><b>{signe(vsAct)}</b> {t.parAn} {t.vsActuelle}</li> : null}
                           </ul>
-                          <details className="detail-offre">
-                            <summary>{t.details}</summary>
+                          <Depliable className="detail-offre" titre={t.details}>
                             <ul>
                               <li>{chf(o.mensuel, 2)} {t.mois}, {chf(o.annuel)} {t.an}</li>
                               <li>{chf(o.mensuel - redis, 2)} {t.mois} {t.apresRedis}</li>
@@ -680,7 +676,7 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
                                 </li>
                               ))}
                             </ul>
-                          </details>
+                          </Depliable>
                           <a className="rappel-offre" href={RAPPEL[locale]} onClick={versRappel}>{t.rappelOffre}</a>
                         </div>
                         {i === RAPPEL_APRES - 1 ? <p className="rappel-liste" ref={rappelListe}>{t.rappelQ} {lienRappel()}</p> : null}
@@ -749,8 +745,7 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
             </div>
 
             {r.total && seul ? (
-              <details className="franchises">
-                <summary>{t.franchisesTitre}</summary>
+              <Depliable className="franchises" titre={t.franchisesTitre}>
                 <p>{t.franchisesTexte(chf(P.QUOTE_PART_MAX[seul.classe]))}</p>
                 <table className="assureurs">
                   <caption className="visually-hidden">{t.franchisesTitre}</caption>
@@ -771,7 +766,7 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
                     ))}
                   </tbody>
                 </table>
-              </details>
+              </Depliable>
             ) : null}
 
             <div className="apres apres-comparateur" ref={apresRef}>

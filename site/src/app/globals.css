@@ -13,6 +13,7 @@
 @import "./styles/idees.css";
 @import "./styles/actualites.css";
 @import "./styles/confiance.css";
+@import "./styles/controles.css";
 
 @custom-variant dark (&:is(.dark *));
 

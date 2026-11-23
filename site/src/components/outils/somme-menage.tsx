@@ -4,6 +4,7 @@ import * as S from "@/lib/engines/somme-menage";
 import { suivre } from "@/lib/analytics";
 import type { Locale } from "@/lib/i18n";
 import { BarreOffres, CtaOffres } from "@/components/outils/cta-offres";
+import { ChoixBoutons, Depliable } from "@/components/controles";
 import { DEMANDE_PORTE } from "@/lib/demande-porte";
 
 /* Calculateur de la somme d'assurance ménage : trois réponses donnent tout de suite une somme, « Affiner » ajoute les
@@ -144,15 +145,15 @@ export function SommeMenage({ locale }: { locale: Locale }) {
     return () => io.disconnect();
   }, []);
 
-  const Pastilles = <T extends string | number>({ nom, valeurs: vs, val, choisir, label, classe }: { nom: string; valeurs: readonly T[]; val: T; choisir: (x: T) => void; label: (x: T) => React.ReactNode; classe: string }) => (
-    <div className={`pastilles ${classe}`}>
-      {vs.map((x) => (
-        <label className="pastille" key={String(x)}>
-          <input type="radio" name={nom} checked={val === x} onChange={() => { choisir(x); toucher(); }} />
-          <span>{label(x)}</span>
-        </label>
-      ))}
-    </div>
+  const Pastilles = <T extends string | number>({ nom, valeurs: vs, val, choisir, label, detail, classe }: { nom: string; valeurs: readonly T[]; val: T; choisir: (x: T) => void; label: (x: T) => React.ReactNode; detail?: (x: T) => React.ReactNode; classe: string }) => (
+    <ChoixBoutons
+      variante="pastille"
+      className={`pastilles ${classe}`}
+      name={nom}
+      value={val}
+      onChange={(x) => { choisir(x); toucher(); }}
+      options={vs.map((x) => ({ value: x, label: label(x), detail: detail ? detail(x) : undefined }))}
+    />
   );
 
   return (
@@ -176,12 +177,8 @@ export function SommeMenage({ locale }: { locale: Locale }) {
               valeurs: S.STANDARDS,
               val: standard,
               choisir: setStandard,
-              label: (x) => (
-                <>
-                  {t.standards[x][0]}
-                  <small>{t.standards[x][1]}</small>
-                </>
-              ),
+              label: (x) => t.standards[x][0],
+              detail: (x) => t.standards[x][1],
               classe: "pastilles-3",
             })}
           </fieldset>
@@ -219,16 +216,16 @@ export function SommeMenage({ locale }: { locale: Locale }) {
             </tbody>
           </table>
 
-          <details
+          <Depliable
             className="affiner"
-            onToggle={(ev) => {
-              if ((ev.target as HTMLDetailsElement).open && !mesure.current.affiner) {
+            titre={t.affiner}
+            onOpenChange={(o) => {
+              if (o && !mesure.current.affiner) {
                 mesure.current.affiner = true;
                 suivre("somme_menage_affiner");
               }
             }}
           >
-            <summary>{t.affiner}</summary>
             <p className="note-outil">{t.affinerTexte}</p>
             <div className="categories">
               {S.EXTRAS.map((x) => (
@@ -251,7 +248,7 @@ export function SommeMenage({ locale }: { locale: Locale }) {
               </div>
             </div>
             {ajoutes > 0 ? <p className="total-affine">{t.totalExtras(f(ajoutes))}</p> : null}
-          </details>
+          </Depliable>
 
           {v > 0 ? <p className="valeur-a-part">{t.aPart(f(v))}</p> : null}
 

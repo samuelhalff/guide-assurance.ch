@@ -1,4 +1,5 @@
 import { SiteHeader } from "@/components/site/site-header";
+import { Depliable } from "@/components/controles";
 import { SiteFooter } from "@/components/site/site-footer";
 import { Breadcrumbs } from "@/components/site/breadcrumbs";
 import { JsonLd } from "@/components/site/json-ld";
@@ -189,14 +190,13 @@ export function PageChiffresCles({ locale }: { locale: Locale }) {
             </ul>
           </section>
 
-          <details className="sources-chiffres">
-            <summary>{t.sourcesTitre}</summary>
+          <Depliable className="sources-chiffres" titre={t.sourcesTitre}>
             <ul>
               {toutesLesSources(locale).map((s) => (
                 <li key={s.url}><a href={s.url}>{s.label}</a></li>
               ))}
             </ul>
-          </details>
+          </Depliable>
 
           <AppelRappel locale={locale} sujet="sante" question={t.rappelQ} />
         </div>

@@ -27,12 +27,11 @@
   :is(.ligne, .categories) > .champ { grid-row: span 3; grid-template-rows: subgrid; row-gap: 4px; }
   :is(.ligne, .categories) > .champ > label { align-self: end; }
   .case { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; font-size: 16px; margin: var(--s2) 0 var(--s3); cursor: pointer; }
-  .case input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--sentier); }
   .case small { display: block; font: 14px var(--narrow); color: var(--encre-2); }
   .note-outil { font: 15px var(--narrow); color: var(--encre-2); margin: 0; }
-  details.aide-revenus { font: 15px var(--narrow); color: var(--encre-2); margin: 0 0 var(--s2); }
-  details.aide-revenus summary { cursor: pointer; color: var(--lac-encre); min-height: 32px; }
-  details.aide-revenus p { margin: var(--s2) 0; }
+  .aide-revenus { font: 15px var(--narrow); color: var(--encre-2); margin: 0 0 var(--s2); }
+  .aide-revenus .depliable-titre { cursor: pointer; color: var(--lac-encre); min-height: 32px; }
+  .aide-revenus p { margin: var(--s2) 0; }
 
   /* Délai : encadré d'alerte */
   .delai { padding: var(--s3) var(--s4); margin: 0 0 var(--s5); font-size: 17px; }
@@ -124,15 +123,12 @@
   .pastilles { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s2); margin: var(--s1) 0 var(--s2); }
   .pastilles-2 { grid-template-columns: 1fr 1fr; }
   .pastille { position: relative; cursor: pointer; }
-  .pastille input { position: absolute; opacity: 0; pointer-events: none; }
   .pastille span {
     display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 6px 8px; text-align: center;
     border: 1px solid var(--filet); border-radius: var(--r); background: var(--papier); font: 600 16px var(--narrow);
     font-variant-numeric: tabular-nums; transition: border-color .15s, background-color .15s;
   }
   .pastille:hover span { border-color: var(--encre-2); }
-  .pastille input:checked + span { border-color: var(--sentier); background: var(--sentier-teinte); box-shadow: inset 0 0 0 1px var(--sentier); }
-  .pastille input:focus-visible + span { outline: 3px solid var(--lac-encre); outline-offset: 2px; }
   .attente { font: 17px var(--narrow); color: var(--encre-2); margin: 0; padding: var(--s5) var(--s4); border: 1px dashed var(--filet); border-radius: var(--r); }
   .resume-liste { font-size: 17px; margin: 0 0 4px; }
   .resume-liste b { font-weight: 600; }
@@ -141,9 +137,6 @@
   .reglages .champ { margin: 0; }
   .bascule { display: grid; grid-template-columns: auto auto; gap: 4px; }
   .bascule .pastille span { min-height: 48px; padding: 6px 10px; font-size: 15px; }
-  details.caisse-actuelle { margin: var(--s3) 0 var(--s4); }
-  details.caisse-actuelle summary { cursor: pointer; font: 600 16px var(--narrow); color: var(--lac-encre); min-height: 44px; display: flex; align-items: center; }
-  details.caisse-actuelle .note-outil { margin: 0 0 var(--s2); }
 
   .cartes-primes { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s2); }
   .carte-prime {
@@ -181,9 +174,9 @@
   .caisse-case { margin-top: var(--s3); }
   .caisse-actuelle { margin-bottom: var(--s3); }
   .caisse-actuelle > p { grid-column: 1 / -1; margin: 0; }
-  details.detail-offre { grid-column: 2 / -1; font: 14px var(--narrow); margin-top: var(--s1); }
-  details.detail-offre summary { cursor: pointer; color: var(--lac-encre); min-height: 32px; display: flex; align-items: center; }
-  details.detail-offre ul { margin: 0 0 var(--s1); padding-left: 1.1em; list-style: disc; color: var(--encre-2); }
+  .detail-offre { grid-column: 2 / -1; font: 14px var(--narrow); margin-top: var(--s1); }
+  .detail-offre .depliable-titre { cursor: pointer; color: var(--lac-encre); min-height: 32px; }
+  .detail-offre ul { margin: 0 0 var(--s1); padding-left: 1.1em; list-style: disc; color: var(--encre-2); }
   .rappel-offre { grid-column: 2 / -1; font: 14px var(--narrow); color: var(--lac-encre); justify-self: start; }
   .outil-comparateur fieldset.personne { border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s3) var(--s3) 0; margin: 0 0 var(--s3); }
   .outil-comparateur fieldset.personne legend { font: 700 16px var(--sans); padding: 0 6px; margin: 0 0 var(--s1) -6px; display: flex; gap: var(--s3); align-items: baseline; }
@@ -217,10 +210,10 @@
   .integrite p { margin: 0 0 6px; }
   .integrite p:last-child { margin: 0; }
   .integrite b { color: var(--encre); font-weight: 600; }
-  details.franchises { margin-top: var(--s5); border-top: 1px solid var(--filet); padding-top: var(--s3); }
-  details.franchises summary { cursor: pointer; font: 700 17px var(--sans); min-height: 44px; display: flex; align-items: center; }
-  details.franchises > p { font: 15px var(--narrow); color: var(--encre-2); margin: var(--s2) 0 var(--s3); }
-  details.franchises tr[aria-current] td { font-weight: 700; background: var(--sentier-teinte); }
+  .franchises { margin-top: var(--s5); border-top: 1px solid var(--filet); padding-top: var(--s3); }
+  .franchises .depliable-titre { cursor: pointer; font: 700 17px var(--sans); min-height: 44px; }
+  .franchises .depliable-contenu > p { font: 15px var(--narrow); color: var(--encre-2); margin: var(--s2) 0 var(--s3); }
+  .franchises tr[aria-current] td { font-weight: 700; background: var(--sentier-teinte); }
   .apres-comparateur p { margin: 0 0 var(--s2); font-size: 16px; }
   .apres-comparateur a { font-weight: 600; }
   .page-outil .reperes-statiques h3 { font-weight: 700; }
@@ -300,8 +293,8 @@
 }
 @layer components {
   .reperes-details { margin-top: var(--s4); }
-  .reperes-details > summary { cursor: pointer; font-weight: 700; color: var(--bande-titre, var(--encre)); text-decoration: underline; text-underline-offset: 3px; padding: var(--s3) 0; }
-  .reperes-details[open] > summary { margin-bottom: var(--s4); }
+  .reperes-details > .depliable-titre { cursor: pointer; font-weight: 700; color: var(--bande-titre, var(--encre)); text-decoration: underline; text-underline-offset: 3px; padding: var(--s3) 0; }
+  .reperes-details[data-open] > .depliable-titre { margin-bottom: var(--s4); }
 }
 @layer components {
   .outil-comparateur .aide-champ { display: block; margin-top: var(--s1); font: 14px/1.4 var(--narrow); color: var(--encre-2); }
@@ -324,9 +317,9 @@
   .outil-frontalier .pastille small { display: block; font: 400 13px var(--narrow); color: var(--encre-2); margin-top: 2px; }
   .outil-frontalier .ajouts { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2); }
   .outil-frontalier .ajouts .ajouter-personne { margin: 0; }
-  details.taux-change summary { cursor: pointer; font: 600 16px var(--narrow); color: var(--lac-encre); min-height: 44px; display: flex; align-items: center; }
-  details.taux-change .champ { margin-top: var(--s2); max-width: 16em; }
-  details.taux-change .aide { display: block; font: 14px var(--narrow); color: var(--encre-2); margin-top: 4px; }
+  .taux-change .depliable-titre { cursor: pointer; font: 600 16px var(--narrow); color: var(--lac-encre); min-height: 44px; }
+  .taux-change .champ { margin-top: var(--s2); max-width: 16em; }
+  .taux-change .aide { display: block; font: 14px var(--narrow); color: var(--encre-2); margin-top: 4px; }
   .page-outil .titre-resultat { font-size: 21px; margin: 0 0 var(--s3); }
   .duel-serre { grid-template-columns: 1fr 1fr; gap: var(--s2); }
   .duel-serre .duel-option { padding: var(--s3); }

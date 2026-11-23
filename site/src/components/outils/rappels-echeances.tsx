@@ -4,6 +4,7 @@ import { BoutonAgenda } from "@/components/outils/ajouter-agenda";
 import { NOM_CONTRAT, evenementContrat, evenementFixe, prochain, type Contrat, type TypeContrat, type TypeFixe } from "@/lib/ics";
 import type { Locale } from "@/lib/i18n";
 import { Choix } from "@/components/outils/choix";
+import { Case } from "@/components/controles";
 
 /* Page « Rappels d'échéance » : échéances légales cochées, puis contrats saisis par le visiteur.
    Tout reste dans le navigateur : aucune valeur n'est envoyée, gardée ou mesurée. */
@@ -72,16 +73,13 @@ export function RappelsEcheances({ aujourdhuiIso, locale = "fr" }: { aujourdhuiI
         </p>
         <div className="cases-fixes">
           {FIXES.map((f) => (
-            <label key={f.t} className="case">
-              <input type="checkbox" checked={fixes[f.t]} onChange={(e) => setFixes((o) => ({ ...o, [f.t]: e.target.checked }))} />
-              <span>
-                <b>{f.titre}</b>
-                <small>
-                  {en ? "Next one: " : `Prochaine${N}: `}
-                  {fmt(f.date)}. {f.texte}
-                </small>
-              </span>
-            </label>
+            <Case key={f.t} checked={fixes[f.t]} onChange={(c) => setFixes((o) => ({ ...o, [f.t]: c }))}>
+              <b>{f.titre}</b>
+              <small>
+                {en ? "Next one: " : `Prochaine${N}: `}
+                {fmt(f.date)}. {f.texte}
+              </small>
+            </Case>
           ))}
         </div>
         <div className="actions">

@@ -4,6 +4,7 @@ import * as F from "@/lib/engines/frontaliers";
 import primes from "@/data/primes-eu-fr-2027.json";
 import type { Locale } from "@/lib/i18n";
 import { suivre } from "@/lib/analytics";
+import { Case, ChoixBoutons, Depliable } from "@/components/controles";
 import { CtaDemande } from "@/components/demande/cta-demande";
 import { TEXTE_CTA, ecrirePreremplissage, lienDemande } from "@/lib/demande";
 
@@ -193,14 +194,14 @@ function Pastilles<V extends string>({ nom, valeurs, val, choisir, label, classe
   nom: string; valeurs: readonly V[]; val: V; choisir: (x: V) => void; label: (x: V) => React.ReactNode; classe?: string;
 }) {
   return (
-    <div className={`pastilles ${classe}`} role="radiogroup">
-      {valeurs.map((x) => (
-        <label className="pastille" key={x}>
-          <input type="radio" name={nom} checked={val === x} onChange={() => choisir(x)} />
-          <span>{label(x)}</span>
-        </label>
-      ))}
-    </div>
+    <ChoixBoutons
+      name={nom}
+      variante="pastille"
+      className={`pastilles ${classe}`}
+      value={val}
+      onChange={choisir}
+      options={valeurs.map((x) => ({ value: x, label: label(x) }))}
+    />
   );
 }
 
@@ -357,13 +358,12 @@ export function SimulateurFrontalier({ locale = "fr" }: { locale?: Locale }) {
                     {p.cl ? t.classe[p.cl] : p.naissance.length ? t.verifier : frontalier ? t.revenuAide : NB}
                   </p>
                   {k === 0 ? (
-                    <details className="aide-revenus">
-                      <summary>{t.quelMontant}</summary>
+                    <Depliable className="aide-revenus" titre={t.quelMontant}>
                       <p>
                         {t.quelMontantTexte}{" "}
                         <a href="https://mon-entreprise.urssaf.fr/simulateurs/cotisation-maladie-frontalier-suisse" rel="noopener">{t.simulateurUrssaf}</a>.
                       </p>
-                    </details>
+                    </Depliable>
                   ) : null}
                   {k > 0 && !p.enfant ? (
                     <>
@@ -380,10 +380,9 @@ export function SimulateurFrontalier({ locale = "fr" }: { locale?: Locale }) {
                     </>
                   ) : null}
                   {frontalier ? (
-                    <label className="case">
-                      <input type="checkbox" checked={p.moinsDe8h} onChange={(e) => maj(p.id, { moinsDe8h: e.target.checked })} />
-                      <span>{t.moins8h}<small>{t.moins8hAide}</small></span>
-                    </label>
+                    <Case checked={p.moinsDe8h} onChange={(c) => maj(p.id, { moinsDe8h: c })}>
+                      {t.moins8h}<small>{t.moins8hAide}</small>
+                    </Case>
                   ) : null}
                 </fieldset>
               );
@@ -397,14 +396,13 @@ export function SimulateurFrontalier({ locale = "fr" }: { locale?: Locale }) {
           </fieldset>
 
           <fieldset className="dernier">
-            <details className="taux-change">
-              <summary>{t.change}{isEn ? ": " : `${T}: `}{tx.replace(".", isEn ? "." : ",")}</summary>
+            <Depliable className="taux-change" titre={<>{t.change}{isEn ? ": " : `${T}: `}{tx.replace(".", isEn ? "." : ",")}</>}>
               <div className="champ">
                 <label htmlFor="sf-tx">{t.changeLabel}</label>
                 <input className="saisie" id="sf-tx" inputMode="decimal" value={tx} onChange={(e) => setTx(e.target.value.replace(",", ".").replace(/[^\d.]/g, "").slice(0, 5))} />
                 <span className="aide">{t.changeAide}</span>
               </div>
-            </details>
+            </Depliable>
           </fieldset>
         </form>
 

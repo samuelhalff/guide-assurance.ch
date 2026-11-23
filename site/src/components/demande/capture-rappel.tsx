@@ -274,7 +274,7 @@ export const CaptureRappel = forwardRef<
               </legend>
               <div className="puces">
                 {CRENEAUX.map((c) => (
-                  <Puce key={c} type="checkbox" name={id("creneau")} checked={creneau === c} onChange={() => setCreneau((x) => (x === c ? null : c))}>
+                  <Puce key={c} name={id("creneau")} checked={creneau === c} onChange={() => setCreneau((x) => (x === c ? null : c))}>
                     {CRENEAU_LABELS[c][locale]}
                   </Puce>
                 ))}

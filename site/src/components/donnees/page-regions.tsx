@@ -1,4 +1,5 @@
 import { SiteHeader } from "@/components/site/site-header";
+import { Depliable } from "@/components/controles";
 import { SiteFooter } from "@/components/site/site-footer";
 import { Breadcrumbs } from "@/components/site/breadcrumbs";
 import { JsonLd } from "@/components/site/json-ld";
@@ -347,11 +348,10 @@ export function PageRegions({ locale }: { locale: Locale }) {
                   <a href={`${comparateur}${R.hashComparateur(r, R.PROFILS[0])}`}>{t.lienComparateur(r)}</a>{" "}
                   <span>{t.lienComparateurTexte}</span>
                 </p>
-                <details className="communes-region">
-                  <summary>{t.communes(r)}</summary>
+                <Depliable className="communes-region" titre={t.communes(r)}>
                   <p>{r.communes.map((c) => c[0]).join(", ")}.</p>
                   <p className="source-outil">{t.population(r)}</p>
-                </details>
+                </Depliable>
               </section>
             );
           })}

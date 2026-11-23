@@ -27,6 +27,7 @@ import type { Demande } from "@shared/demande/schema";
 import { suivre, marquerLead } from "@/lib/analytics";
 import { DEMANDE_ENVOYEE, TEXTE_CTA, effacerPreremplissage, estPorte, lirePreremplissage } from "@/lib/demande";
 import { Turnstile } from "@/components/demande/turnstile";
+import { Case, ChoixBoutons, Depliable, Interrupteur } from "@/components/controles";
 
 type Locale = "fr" | "en";
 type Ecran = 1 | 2 | 3 | "hors-suisse";
@@ -177,15 +178,11 @@ function enLigne(md: string): React.ReactNode[] {
 }
 const paragraphes = (md: string) => md.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
 
-export function Puce({ type, name, checked, onChange, children }: { type: "checkbox" | "radio"; name: string; checked: boolean; onChange: () => void; children: React.ReactNode }) {
+export function Puce({ name, checked, onChange, children }: { name: string; checked: boolean; onChange: () => void; children: React.ReactNode }) {
   return (
-    <label className="puce">
-      <input type={type} name={name} checked={checked} onChange={onChange} />
-      <svg className="coche" viewBox="0 0 20 20" aria-hidden="true">
-        <path d="M4.5 10.5l3.5 3.5 7.5-8" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-      <span>{children}</span>
-    </label>
+    <Case variante="puce" name={name} checked={checked} onChange={() => onChange()}>
+      {children}
+    </Case>
   );
 }
 
@@ -449,13 +446,14 @@ export function FormulaireDemande({ locale, porte: porteAdresse }: { locale: Loc
                 <legend>
                   <h1 id="titre-ecran" ref={titre} tabIndex={-1}>{t.porteQ}</h1>
                 </legend>
-                <div className="puces">
-                  {PORTES_FORMULAIRE.map((p) => (
-                    <Puce key={p} type="radio" name="porte" checked={porte === p} onChange={() => choisirPorte(p)}>
-                      {PORTES_DEF[p].label[locale]}
-                    </Puce>
-                  ))}
-                </div>
+                <ChoixBoutons
+                  variante="puce"
+                  className="puces"
+                  name="porte"
+                  value={porte}
+                  onChange={choisirPorte}
+                  options={PORTES_FORMULAIRE.map((p) => ({ value: p, label: PORTES_DEF[p].label[locale] }))}
+                />
                 <Erreur id="err-porte" msg={erreurs.porte} />
               </fieldset>
             ) : null}
@@ -469,19 +467,24 @@ export function FormulaireDemande({ locale, porte: porteAdresse }: { locale: Loc
                   )}
                 </legend>
                 <p className="aide" id="aide-besoin">{def.besoinUnique ? t.unSeul : t.plusieurs}</p>
-                <div className={def.besoinUnique ? "puces puces-pile" : "puces"}>
-                  {def.besoin.choix.map((c) =>
-                    def.besoinUnique ? (
-                      <Puce key={c.code} type="radio" name="besoin" checked={besoin[0] === c.code} onChange={() => setBesoin([c.code])}>
+                {def.besoinUnique ? (
+                  <ChoixBoutons
+                    variante="puce"
+                    className="puces puces-pile"
+                    name="besoin"
+                    value={besoin[0] ?? null}
+                    onChange={(v) => setBesoin([v])}
+                    options={def.besoin.choix.map((c) => ({ value: c.code, label: c.label[locale] }))}
+                  />
+                ) : (
+                  <div className="puces">
+                    {def.besoin.choix.map((c) => (
+                      <Puce key={c.code} name="besoin" checked={besoin.includes(c.code)} onChange={() => setBesoin((b) => basculer(b, c.code))}>
                         {c.label[locale]}
                       </Puce>
-                    ) : (
-                      <Puce key={c.code} type="checkbox" name="besoin" checked={besoin.includes(c.code)} onChange={() => setBesoin((b) => basculer(b, c.code))}>
-                        {c.label[locale]}
-                      </Puce>
-                    ),
-                  )}
-                </div>
+                    ))}
+                  </div>
+                )}
                 <Erreur id="err-besoin" msg={erreurs.besoin} />
               </fieldset>
             ) : null}
@@ -493,7 +496,7 @@ export function FormulaireDemande({ locale, porte: porteAdresse }: { locale: Loc
                 </legend>
                 <div className="puces">
                   {SANTE_CHOIX.map((s) => (
-                    <Puce key={s} type="checkbox" name="sante" checked={sante.includes(s)} onChange={() => setSante((x) => basculer(x, s))}>
+                    <Puce key={s} name="sante" checked={sante.includes(s)} onChange={() => setSante((x) => basculer(x, s))}>
                       {SANTE_LABELS[s][locale]}
                     </Puce>
                   ))}
@@ -513,10 +516,7 @@ export function FormulaireDemande({ locale, porte: porteAdresse }: { locale: Loc
             <h1 id="titre-ecran" ref={titre} tabIndex={-1}>{ETAPES[locale][1]}</h1>
             <div className="bascule-ligne">
               <span id="lib-suisse">{RESIDENCE.question[locale]}</span>
-              <button type="button" role="switch" aria-checked={enSuisse} aria-labelledby="lib-suisse" className="bascule" onClick={() => setEnSuisse((v) => !v)}>
-                <span className="bascule-piste" aria-hidden="true" />
-                <span className="bascule-texte" aria-hidden="true">{enSuisse ? t.oui : t.non}</span>
-              </button>
+              <Interrupteur checked={enSuisse} onChange={setEnSuisse} labelledBy="lib-suisse" texteOui={t.oui} texteNon={t.non} />
             </div>
             {enSuisse ? (
               <>
@@ -536,13 +536,14 @@ export function FormulaireDemande({ locale, porte: porteAdresse }: { locale: Loc
                 {profil.personnes ? (
                 <fieldset className={erreurs.personnes ? "groupe-invalide" : undefined} aria-describedby={erreurs.personnes ? "err-personnes" : undefined}>
                   <legend className="legende-champ">{t.personnes}</legend>
-                  <div className="puces puces-ligne">
-                    {PERSONNES.map((n) => (
-                      <Puce key={n} type="radio" name="personnes" checked={personnes === n} onChange={() => setPersonnes(n)}>
-                        {PERSONNES_LABELS[n]}
-                      </Puce>
-                    ))}
-                  </div>
+                  <ChoixBoutons
+                    variante="puce"
+                    className="puces puces-ligne"
+                    name="personnes"
+                    value={personnes}
+                    onChange={setPersonnes}
+                    options={PERSONNES.map((n) => ({ value: n, label: PERSONNES_LABELS[n] }))}
+                  />
                   <Erreur id="err-personnes" msg={erreurs.personnes} />
                 </fieldset>
                 ) : null}
@@ -598,7 +599,7 @@ export function FormulaireDemande({ locale, porte: porteAdresse }: { locale: Loc
               </legend>
               <div className="puces">
                 {CRENEAUX.map((c) => (
-                  <Puce key={c} type="checkbox" name="creneau" checked={creneau === c} onChange={() => setCreneau((x) => (x === c ? null : c))}>
+                  <Puce key={c} name="creneau" checked={creneau === c} onChange={() => setCreneau((x) => (x === c ? null : c))}>
                     {CRENEAU_LABELS[c][locale]}
                   </Puce>
                 ))}
@@ -606,11 +607,10 @@ export function FormulaireDemande({ locale, porte: porteAdresse }: { locale: Loc
             </fieldset>
 
             {champsDetails(porte, 3).length ? (
-              <details className="precis" open={precisOuvert || champsDetails(porte, 3).some((c) => erreurs[`d:${c.code}`])} onToggle={(e) => setPrecisOuvert(e.currentTarget.open)}>
-                <summary>{typo(t.precisTitre, locale)}</summary>
+              <Depliable className="precis" titre={typo(t.precisTitre, locale)} open={precisOuvert || champsDetails(porte, 3).some((c) => erreurs[`d:${c.code}`])} onOpenChange={setPrecisOuvert}>
                 <p className="aide">{t.precisAide}</p>
                 {champsDetails(porte, 3).map((c) => <ChampPorte key={c.code} c={c} locale={locale} valeur={reponses[c.code]} onChange={(v) => repondre(c.code, v)} date={quandDate} onDate={setQuandDate} erreur={erreurs[`d:${c.code}`]} />)}
-              </details>
+              </Depliable>
             ) : null}
 
             <Consentements locale={locale} porte={porte} avecSante={avecSante} accord={accord} setAccord={setAccord} accordSante={accordSante} setAccordSante={setAccordSante} erreurs={erreurs} />
@@ -677,19 +677,24 @@ function ChampPorte({
       <fieldset className={erreur ? "groupe-invalide" : undefined} aria-describedby={erreur ? errId : c.aide ? `aide-${id}` : undefined}>
         <legend className="legende-champ">{libelle}</legend>
         {aide}
-        <div className={choix.length <= 2 || c.code === "pieces" ? "puces puces-grille" : "puces"}>
-          {choix.map((x) => (
-            <Puce
-              key={x.code}
-              type={multiple ? "checkbox" : "radio"}
-              name={id}
-              checked={multiple ? liste.includes(x.code) : valeur === x.code}
-              onChange={() => onChange(multiple ? (liste.includes(x.code) ? liste.filter((y) => y !== x.code) : [...liste, x.code]) : x.code)}
-            >
-              {x.label[locale]}
-            </Puce>
-          ))}
-        </div>
+        {multiple ? (
+          <div className={choix.length <= 2 || c.code === "pieces" ? "puces puces-grille" : "puces"}>
+            {choix.map((x) => (
+              <Puce key={x.code} name={id} checked={liste.includes(x.code)} onChange={() => onChange(liste.includes(x.code) ? liste.filter((y) => y !== x.code) : [...liste, x.code])}>
+                {x.label[locale]}
+              </Puce>
+            ))}
+          </div>
+        ) : (
+          <ChoixBoutons
+            variante="puce"
+            className={choix.length <= 2 || c.code === "pieces" ? "puces puces-grille" : "puces"}
+            name={id}
+            value={typeof valeur === "string" ? valeur : null}
+            onChange={onChange}
+            options={choix.map((x) => ({ value: x.code, label: x.label[locale] }))}
+          />
+        )}
         {c.type === "quand" && valeur === "date" ? (
           <div className="champ champ-date">
             <label htmlFor={`${id}-date`}>{t.dateLabel}</label>
@@ -756,17 +761,15 @@ export function Consentements({
       {info.map((p, i) => (
         <p key={i}>{enLigne(p)}</p>
       ))}
-      <label className="case-demande">
-        <input type="checkbox" checked={accord} onChange={(e) => setAccord(e.target.checked)} aria-invalid={erreurs.consent ? true : undefined} aria-describedby={erreurs.consent ? "err-consent" : undefined} />
-        <span>{enLigne(pc[pc.length - 1])}</span>
-      </label>
+      <Case className="case-demande" caseClassName="size-[22px]" checked={accord} onChange={setAccord} invalid={!!erreurs.consent} describedBy={erreurs.consent ? "err-consent" : undefined}>
+        {enLigne(pc[pc.length - 1])}
+      </Case>
       <Erreur id="err-consent" msg={erreurs.consent} />
       {avecSante ? (
         <>
-          <label className="case-demande">
-            <input type="checkbox" checked={accordSante} onChange={(e) => setAccordSante(e.target.checked)} aria-invalid={erreurs.sante ? true : undefined} aria-describedby={erreurs.sante ? "err-sante" : undefined} />
-            <span>{enLigne(ps[ps.length - 1])}</span>
-          </label>
+          <Case className="case-demande" caseClassName="size-[22px]" checked={accordSante} onChange={setAccordSante} invalid={!!erreurs.sante} describedBy={erreurs.sante ? "err-sante" : undefined}>
+            {enLigne(ps[ps.length - 1])}
+          </Case>
           <Erreur id="err-sante" msg={erreurs.sante} />
         </>
       ) : null}

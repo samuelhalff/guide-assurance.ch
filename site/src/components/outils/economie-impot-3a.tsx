@@ -5,6 +5,7 @@ import { suivre } from "@/lib/analytics";
 import { IconeTelephone, LienRappel } from "@/components/demande/lien-rappel";
 import type { Locale } from "@/lib/i18n";
 import { Choix } from "@/components/outils/choix";
+import { ChoixBoutons, Depliable } from "@/components/controles";
 
 /* Calculateur « Économie d'impôt 3a » : tout se calcule ici, rien n'est envoyé. Le profil peut être partagé
    après le # (jamais transmis au serveur), lu une fois puis retiré de l'adresse. */
@@ -218,14 +219,14 @@ export function EconomieImpot3a({ locale = "fr" }: { locale?: Locale }) {
       <form className="form" onSubmit={(e) => e.preventDefault()}>
         <fieldset>
           <legend>{t.canton}</legend>
-          <div className="pastilles">
-            {I.CANTONS.map((c) => (
-              <label className="pastille" key={c}>
-                <input type="radio" name="i3-canton" value={c} checked={canton === c} onChange={() => changerCanton(c)} />
-                <span>{I.NOM_CANTON[locale][c]}</span>
-              </label>
-            ))}
-          </div>
+          <ChoixBoutons
+            variante="pastille"
+            className="pastilles"
+            name="i3-canton"
+            value={canton}
+            onChange={changerCanton}
+            options={I.CANTONS.map((c) => ({ value: c, label: I.NOM_CANTON[locale][c] }))}
+          />
           <p className="note-outil">{t.bientot}</p>
         </fieldset>
 
@@ -268,27 +269,30 @@ export function EconomieImpot3a({ locale = "fr" }: { locale?: Locale }) {
           <input className="saisie" id="i3-revenu" inputMode="numeric" placeholder="85000" value={revenu} onChange={(e) => setRevenu(e.target.value)} />
           <span className="aide">{t.revenuAide}</span>
         </div>
-        <details className="aide-revenus">
-          <summary>{t.ifd}</summary>
+        <Depliable className="aide-revenus" titre={t.ifd}>
           <div className="champ">
             <label htmlFor="i3-ifd" className="visually-hidden">{t.ifd}</label>
             <input className="saisie" id="i3-ifd" inputMode="numeric" placeholder="87000" value={revenuIfd} onChange={(e) => setRevenuIfd(e.target.value)} />
             <span className="aide">{t.ifdAide}</span>
           </div>
-        </details>
+        </Depliable>
 
         <fieldset>
           <legend>{t.lpp}</legend>
-          <div className="pastilles pastilles-2">
-            <label className="pastille">
-              <input type="radio" name="i3-lpp" checked={lpp} onChange={() => { setLpp(true); setVersement(String(P26.avecLPP * (couple ? 2 : 1))); }} />
-              <span>{t.avecLpp}</span>
-            </label>
-            <label className="pastille">
-              <input type="radio" name="i3-lpp" checked={!lpp} onChange={() => setLpp(false)} />
-              <span>{t.sansLpp}</span>
-            </label>
-          </div>
+          <ChoixBoutons
+            variante="pastille"
+            className="pastilles pastilles-2"
+            name="i3-lpp"
+            value={lpp ? "avec" : "sans"}
+            onChange={(v) => {
+              if (v === "avec") { setLpp(true); setVersement(String(P26.avecLPP * (couple ? 2 : 1))); }
+              else setLpp(false);
+            }}
+            options={[
+              { value: "avec" as string, label: t.avecLpp },
+              { value: "sans" as string, label: t.sansLpp },
+            ]}
+          />
         </fieldset>
 
         <div className="champ dernier">
@@ -349,8 +353,7 @@ export function EconomieImpot3a({ locale = "fr" }: { locale?: Locale }) {
           </>
         )}
 
-        <details className="retrait-3a">
-          <summary>{t.retraitTitre}</summary>
+        <Depliable className="retrait-3a" titre={t.retraitTitre}>
           <p className="note-outil">{t.retraitTexte}</p>
           <div className="champ champ-court">
             <label htmlFor="i3-capital">{t.capital}</label>
@@ -359,7 +362,7 @@ export function EconomieImpot3a({ locale = "fr" }: { locale?: Locale }) {
           {retrait ? <p className="retrait-res"><b>{t.retraitRes(nf.format(retrait.total), pct(retrait.taux))}</b></p> : null}
           <p className="note-outil">{t.retraitNote}</p>
           {canton === "VS" ? <p className="note-outil">{t.retraitVS}</p> : null}
-        </details>
+        </Depliable>
 
         <div className="integrite">
           <p>{t.limites}</p>

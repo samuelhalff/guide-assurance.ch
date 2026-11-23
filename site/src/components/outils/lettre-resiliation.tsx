@@ -8,6 +8,7 @@ import { IconeTelephone, LienRappel } from "@/components/demande/lien-rappel";
 import { BoutonAgenda } from "@/components/outils/ajouter-agenda";
 import { evenementLettre } from "@/lib/ics";
 import { Choix } from "@/components/outils/choix";
+import { ChoixBoutons } from "@/components/controles";
 
 /* Lettre de résiliation : interface de mockups/v2/lettre-resiliation.html, délais par src/lib/engines/delais.ts.
    La lettre est rédigée dans le navigateur ; rien n'est envoyé ni gardé. */
@@ -182,34 +183,32 @@ export function LettreResiliation({ aujourdhuiIso, locale = "fr" }: { aujourdhui
       <form className="form" autoComplete="on" noValidate onSubmit={(e) => e.preventDefault()}>
         <fieldset>
           <legend><span className="n">{isEn ? "1 of 3" : "1 sur 3"}</span>{isEn ? "What do you want to cancel?" : "Que voulez-vous résilier ?"}</legend>
-          <div className="choix-liste">
-            <label className="option">
-              <input type="radio" name="type" value="lamal" checked={type === "lamal"} onChange={() => setType("lamal")} />
-              <span className="repere" aria-hidden="true" />
-              <span className="libelle">{isEn ? "Basic health insurance (LAMal)" : "L’assurance de base (LAMal)"}</span>
-            </label>
-            <label className="option">
-              <input type="radio" name="type" value="lca" checked={type === "lca"} onChange={() => setType("lca")} />
-              <span className="repere" aria-hidden="true" />
-              <span className="libelle">{isEn ? "A supplementary insurance (LCA)" : "Une complémentaire (LCA)"}<small>{isEn ? "Hospital, dental care, complementary medicine…" : "Hospitalisation, soins dentaires, médecines douces…"}</small></span>
-            </label>
-          </div>
+          <ChoixBoutons
+            variante="option"
+            className="choix-liste"
+            name="type"
+            value={type}
+            onChange={setType}
+            options={[
+              { value: "lamal" as const, label: isEn ? "Basic health insurance (LAMal)" : "L’assurance de base (LAMal)" },
+              { value: "lca" as const, label: isEn ? "A supplementary insurance (LCA)" : "Une complémentaire (LCA)", detail: isEn ? "Hospital, dental care, complementary medicine…" : "Hospitalisation, soins dentaires, médecines douces…" },
+            ]}
+          />
         </fieldset>
 
         <fieldset hidden={type !== "lamal"}>
           <legend><span className="n">{isEn ? "2 of 3" : "2 sur 3"}</span>{isEn ? "Which contract do you have?" : "Quel est votre contrat ?"}</legend>
-          <div className="choix-liste">
-            <label className="option">
-              <input type="radio" name="modele" value="standard" checked={modele === "standard"} onChange={() => setModele("standard")} />
-              <span className="repere" aria-hidden="true" />
-              <span className="libelle">{isEn ? "Deductible of CHF 300 and free choice of doctor" : "Franchise de 300 francs et libre choix du médecin"}</span>
-            </label>
-            <label className="option">
-              <input type="radio" name="modele" value="autre" checked={modele === "autre"} onChange={() => setModele("autre")} />
-              <span className="repere" aria-hidden="true" />
-              <span className="libelle">{isEn ? "Another deductible, or a family doctor, HMO or Telmed model" : "Autre franchise, ou modèle médecin de famille, HMO ou Telmed"}<small>{isEn ? "If you are not sure, keep this choice, which covers the most common case." : "Dans le doute, gardez ce choix, qui correspond au cas le plus courant."}</small></span>
-            </label>
-          </div>
+          <ChoixBoutons
+            variante="option"
+            className="choix-liste"
+            name="modele"
+            value={modele}
+            onChange={setModele}
+            options={[
+              { value: "standard" as const, label: isEn ? "Deductible of CHF 300 and free choice of doctor" : "Franchise de 300 francs et libre choix du médecin" },
+              { value: "autre" as const, label: isEn ? "Another deductible, or a family doctor, HMO or Telmed model" : "Autre franchise, ou modèle médecin de famille, HMO ou Telmed", detail: isEn ? "If you are not sure, keep this choice, which covers the most common case." : "Dans le doute, gardez ce choix, qui correspond au cas le plus courant." },
+            ]}
+          />
         </fieldset>
 
         <fieldset hidden={type !== "lca"}>
@@ -224,19 +223,19 @@ export function LettreResiliation({ aujourdhuiIso, locale = "fr" }: { aujourdhui
             <input className="saisie" type="date" id="echeance" name="echeance" placeholder={isEn ? "dd.mm.yyyy" : "jj.mm.aaaa"} value={v.echeance} onChange={set("echeance")} />
             <span className="aide">{isEn ? "It is often 31 December. If you do not know it, leave the field empty." : "C’est souvent le 31 décembre. Si vous ne la connaissez pas, laissez le champ vide."}</span>
           </div>
-          <div className="choix-liste" role="radiogroup" aria-labelledby="t-cg">
-            <p id="t-cg" className="sous-q">{isEn ? "Do your general terms and conditions allow you to cancel every year?" : "Vos conditions générales permettent-elles de résilier chaque année ?"}</p>
-            <label className="option">
-              <input type="radio" name="annuel" value="non" checked={annuel === "non"} onChange={() => setAnnuel("non")} />
-              <span className="repere" aria-hidden="true" />
-              <span className="libelle">{isEn ? "No, or I do not know" : "Non, ou je ne sais pas"}<small>{isEn ? "The legal three-year rule applies." : "On applique la règle légale des trois ans."}</small></span>
-            </label>
-            <label className="option">
-              <input type="radio" name="annuel" value="oui" checked={annuel === "oui"} onChange={() => setAnnuel("oui")} />
-              <span className="repere" aria-hidden="true" />
-              <span className="libelle">{isEn ? "Yes, every year" : "Oui, chaque année"}</span>
-            </label>
-          </div>
+          <p id="t-cg" className="sous-q">{isEn ? "Do your general terms and conditions allow you to cancel every year?" : "Vos conditions générales permettent-elles de résilier chaque année ?"}</p>
+          <ChoixBoutons
+            variante="option"
+            className="choix-liste"
+            name="annuel"
+            labelledBy="t-cg"
+            value={annuel}
+            onChange={setAnnuel}
+            options={[
+              { value: "non" as const, label: isEn ? "No, or I do not know" : "Non, ou je ne sais pas", detail: isEn ? "The legal three-year rule applies." : "On applique la règle légale des trois ans." },
+              { value: "oui" as const, label: isEn ? "Yes, every year" : "Oui, chaque année" },
+            ]}
+          />
           <div className="champ" style={{ marginTop: "var(--s3)" }}>
             <label htmlFor="preavis">{isEn ? "Notice period" : "Délai de préavis"}</label>
             <Choix id="preavis" name="preavis" value={v.preavis} onChange={(x) => setV((cur) => ({ ...cur, preavis: x }))} options={[

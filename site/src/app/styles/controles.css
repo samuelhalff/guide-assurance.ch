@@ -1,0 +1,28 @@
+/* Contrôles shadcn habillés (components/controles.tsx) : états lus sur les attributs base-ui (data-checked, data-open).
+   Les cartes (.option, .pastille, .puce) gardent leur dessin de site.css, outils.css et demande.css. */
+@layer components {
+  .case, .puce, .option, .pastille { position: relative; }
+
+  /* Cartes et puces radio : état coché et focus clavier portés par l'élément shadcn caché. */
+  .option:has([data-slot="radio-group-item"][data-checked]) { border-color: var(--sentier); background: var(--sentier-teinte); }
+  .option:has([data-slot="radio-group-item"][data-checked]) .libelle { font-weight: 600; }
+  .option:has([data-slot="radio-group-item"]:focus-visible) { outline: 3px solid var(--lac-encre); outline-offset: 2px; }
+
+  .pastille:has([data-slot="radio-group-item"][data-checked]) > span { border-color: var(--sentier); background: var(--sentier-teinte); box-shadow: inset 0 0 0 1px var(--sentier); }
+  .pastille:has([data-slot="radio-group-item"]:focus-visible) > span { outline: 3px solid var(--lac-encre); outline-offset: 2px; }
+
+  .puce:has([data-checked]) { border-color: var(--sentier); background: var(--sentier-teinte); font-weight: 600; }
+  .puce:has([data-checked]) .coche { display: block; }
+  .puce:has([data-slot]:focus-visible) { outline: 3px solid var(--lac-encre); outline-offset: 2px; }
+
+  /* Blocs dépliables (Collapsible) : remplacent <details>/<summary>. */
+  .depliable-titre {
+    display: flex; align-items: center; gap: var(--s2); width: 100%; min-height: 44px; padding: 0; border: 0; background: none;
+    font: inherit; color: inherit; text-align: left; cursor: pointer; text-wrap: balance;
+  }
+  .depliable-titre:focus-visible { outline: 3px solid var(--lac-encre); outline-offset: 2px; border-radius: 4px; }
+  .depliable-libelle { flex: 1 1 auto; min-width: 0; }
+  .depliable-chevron { flex: 0 0 18px; width: 18px; height: 18px; transition: transform .18s ease-out; }
+  .depliable-titre[data-panel-open] .depliable-chevron { transform: rotate(180deg); }
+  @media (prefers-reduced-motion: reduce) { .depliable-chevron { transition: none; } }
+}

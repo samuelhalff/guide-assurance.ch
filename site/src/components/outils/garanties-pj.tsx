@@ -2,6 +2,7 @@
 import { useRef, useState } from "react";
 import { suivre } from "@/lib/analytics";
 import type { Locale } from "@/lib/i18n";
+import { ChoixBoutons, Depliable } from "@/components/controles";
 import { CONTRATS, DOMAINES, NOM_COUVERTURE, NOM_DOMAINE, NOM_STATUT, type Domaine, type Statut } from "@/lib/garanties-pj";
 
 /* Tableau des garanties de protection juridique. Ordre alphabétique fixe ; le filtre par domaine met en évidence la
@@ -94,18 +95,18 @@ export function GarantiesPj({ locale }: { locale: Locale }) {
     <div className="garanties-pj" data-domaine={dom ?? undefined}>
       <fieldset className="filtre-domaine">
         <legend>{t.filtre}</legend>
-        <div className="puces-domaine">
-          <label className="pastille">
-            <input type="radio" name="pj-domaine" checked={dom === null} onChange={() => choisir(null)} />
-            <span>{t.tous}</span>
-          </label>
-          {DOMAINES.map((d) => (
-            <label className="pastille" key={d}>
-              <input type="radio" name="pj-domaine" checked={dom === d} onChange={() => choisir(d)} />
-              <span>{NOM_DOMAINE[locale][d]}</span>
-            </label>
-          ))}
-        </div>
+        <ChoixBoutons
+          variante="pastille"
+          className="puces-domaine"
+          name="pj-domaine"
+          label={t.filtre}
+          value={dom ?? "tous"}
+          onChange={(v) => choisir(v === "tous" ? null : (v as Domaine))}
+          options={[
+            { value: "tous" as string, label: t.tous },
+            ...DOMAINES.map((d) => ({ value: d as string, label: NOM_DOMAINE[locale][d] })),
+          ]}
+        />
         <p className="note-outil">{t.filtreAide}</p>
       </fieldset>
 
@@ -145,8 +146,7 @@ export function GarantiesPj({ locale }: { locale: Locale }) {
               <dt>{t.libreChoix}</dt>
               <dd>{c.libreChoix[locale]}</dd>
             </dl>
-            <details>
-              <summary>{t.voirDomaines}</summary>
+            <Depliable titre={t.voirDomaines}>
               <ul className="liste-domaines">
                 {DOMAINES.map((d) => (
                   <li key={d} className={dom === d ? "actif" : undefined}>
@@ -155,15 +155,14 @@ export function GarantiesPj({ locale }: { locale: Locale }) {
                   </li>
                 ))}
               </ul>
-            </details>
-            <details>
-              <summary>{t.voirExclusions}</summary>
+            </Depliable>
+            <Depliable titre={t.voirExclusions}>
               <ul className="exclusions">
                 {c.exclusions[locale].map((x) => (
                   <li key={x}>{x}</li>
                 ))}
               </ul>
-            </details>
+            </Depliable>
             <p className="doc">
               {t.document}{locale === "fr" ? "\u202f" : ""}: <a href={c.doc.url}>{c.doc.titre}</a>, {c.doc.version}
             </p>

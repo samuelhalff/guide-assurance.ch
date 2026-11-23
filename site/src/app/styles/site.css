@@ -20,7 +20,8 @@
   .visually-hidden, .sr {
     position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
   }
-  [hidden] { display: none !important; }
+  /* hidden="until-found" (blocs dépliables) reste trouvable par Ctrl+F : le navigateur le masque lui-même. */
+  [hidden]:not([hidden="until-found"]) { display: none !important; }
 
   /* ===== Tête ===== */
   /* Barre du haut toujours visible ; les ancres et les blocs collants se placent dessous. */
@@ -165,19 +166,10 @@
     background: var(--papier); cursor: pointer; font-size: 17px; line-height: 1.3;
     transition: border-color .15s, background-color .15s;
   }
-  .option input { position: absolute; opacity: 0; pointer-events: none; }
   .option small { display: block; font: 15px var(--narrow); color: var(--encre-2); margin-top: 2px; }
-  .repere {
-    width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--encre-2); box-sizing: border-box;
-    background: var(--papier); transition: border-color .14s, background-color .14s;
-  }
   .option:hover { border-color: var(--encre-2); }
-  .option:has(input:checked) { border-color: var(--sentier); background: var(--sentier-teinte); }
-  .option:has(input:checked) .repere { border: 6px solid var(--sentier); }
-  .option:has(input:checked) .libelle { font-weight: 600; }
-  .option:has(input:focus-visible) { outline: 3px solid var(--lac-encre); outline-offset: 2px; }
   .duree { font: 500 14px var(--narrow); color: var(--encre-2); white-space: nowrap; }
-  @media (prefers-reduced-motion: reduce) { .option, .repere { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .option { transition: none; } }
 
   /* ===== Champs : 48 px, label permanent, police ≥ 16 px ===== */
   .champ { display: grid; gap: 4px; align-content: start; margin-bottom: var(--s3); }
@@ -190,7 +182,6 @@
   textarea.saisie { min-height: 84px; resize: vertical; line-height: 1.4; }
   .saisie:focus { border-color: var(--lac-encre); outline: 2px solid var(--lac-encre); outline-offset: 0; }
   .saisie::placeholder { color: var(--encre-2); opacity: .85; }
-  select.saisie { appearance: auto; }
 
   /* ===== Encadrés ===== */
   .alerte {

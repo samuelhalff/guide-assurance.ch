@@ -1,3 +1,4 @@
+import { Assureurs3aListe } from "@/components/outils/assureurs-3a-liste";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
 import { Breadcrumbs } from "@/components/site/breadcrumbs";
@@ -324,26 +325,30 @@ export function PageAssurance3a({ locale }: { locale: Locale }) {
           <section className="bloc-3a">
             <h2>{t.detailsTitre}</h2>
             <p>{t.detailsTexte}</p>
-            <div className="assureurs-3a">
-              {ASSUREURS_3A.map((a) => (
-                <details key={a.id} id={a.id} className="assureur-3a">
-                  <summary><b>{a.nom}</b> <span>{a.produits.length} {en ? (a.produits.length > 1 ? "policies" : "policy") : `contrat${a.produits.length > 1 ? "s" : ""}`}</span></summary>
-                  <p className="entite">{a.entite}</p>
-                  {a.produits.map((p) => (
-                    <div className="contrat-3a" key={p.nom}>
-                      <h3>{p.nom}</h3>
-                      <p className="etiquettes"><span>{t.pilier(p.pilier)}</span><span data-type={p.type || "nc"}>{t.types[(p.type || "nc") as TypeContrat]}</span></p>
-                      <dl>
-                        <div><dt>{t.primes}</dt><dd>{(en ? p.primes_en : p.primes_fr) || p.primes_fr}</dd></div>
-                        <div><dt>{t.liberation}</dt><dd>{p.liberation_primes === true ? t.oui : p.liberation_primes === false ? t.non : t.nc}</dd></div>
-                        <div><dt>{t.rachat}</dt><dd>{(en ? p.rachat_en : p.rachat_fr) || p.rachat_fr}</dd></div>
-                      </dl>
-                      <p className="source-outil"><a href={p.url} rel="nofollow noopener" target="_blank">{t.source(dch(a.lu_le))}</a></p>
-                    </div>
-                  ))}
-                </details>
-              ))}
-            </div>
+            <Assureurs3aListe
+              blocs={ASSUREURS_3A.map((a) => ({
+                id: a.id,
+                titre: a.nom,
+                nombre: `${a.produits.length} ${en ? (a.produits.length > 1 ? "policies" : "policy") : `contrat${a.produits.length > 1 ? "s" : ""}`}`,
+                contenu: (
+                  <>
+                      <p className="entite">{a.entite}</p>
+                      {a.produits.map((p) => (
+                        <div className="contrat-3a" key={p.nom}>
+                          <h3>{p.nom}</h3>
+                          <p className="etiquettes"><span>{t.pilier(p.pilier)}</span><span data-type={p.type || "nc"}>{t.types[(p.type || "nc") as TypeContrat]}</span></p>
+                          <dl>
+                            <div><dt>{t.primes}</dt><dd>{(en ? p.primes_en : p.primes_fr) || p.primes_fr}</dd></div>
+                            <div><dt>{t.liberation}</dt><dd>{p.liberation_primes === true ? t.oui : p.liberation_primes === false ? t.non : t.nc}</dd></div>
+                            <div><dt>{t.rachat}</dt><dd>{(en ? p.rachat_en : p.rachat_fr) || p.rachat_fr}</dd></div>
+                          </dl>
+                          <p className="source-outil"><a href={p.url} rel="nofollow noopener" target="_blank">{t.source(dch(a.lu_le))}</a></p>
+                        </div>
+                      ))}
+                  </>
+                ),
+              }))}
+            />
           </section>
 
           <section className="bloc-3a">

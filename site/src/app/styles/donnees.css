@@ -24,8 +24,8 @@
   .lien-region { margin: var(--s3) 0; }
   .lien-region a { font-weight: 700; }
   .communes-region { margin: var(--s3) 0 0; font-size: 16px; }
-  .communes-region summary { cursor: pointer; font-weight: 600; min-height: 44px; display: flex; align-items: center; }
-  .communes-region p { margin: var(--s2) 0 0; color: var(--encre-2); }
+  .communes-region .depliable-titre { cursor: pointer; font-weight: 600; min-height: 44px; }
+  .communes-region .depliable-contenu p { margin: var(--s2) 0 0; color: var(--encre-2); }
   .autres-cantons ul { list-style: none; padding: 0; margin: var(--s2) 0 0; display: flex; flex-wrap: wrap; gap: var(--s2); }
   .autres-cantons a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--s3); border: 1px solid var(--filet); border-radius: var(--r); background: var(--papier); }
   .autres-cantons a[aria-current="page"] { border-color: var(--encre); font-weight: 700; }
@@ -62,7 +62,7 @@
   .fait-meta { margin: var(--s2) 0 0; font: 14px var(--narrow); color: var(--encre-2); }
   .fait-meta > span { display: block; margin-top: 2px; }
   .sources-chiffres { margin: 0 0 var(--s6); }
-  .sources-chiffres summary { cursor: pointer; font-weight: 600; min-height: 44px; display: flex; align-items: center; }
+  .sources-chiffres .depliable-titre { cursor: pointer; font-weight: 600; min-height: 44px; }
   .sources-chiffres ul { margin: var(--s2) 0 0; padding-left: 1.2em; list-style: disc; font-size: 15px; }
 
   /* « Outils et chiffres » (/outils/) : lignes des outils de l'accueil (outil-ligne), sur le fond de la page

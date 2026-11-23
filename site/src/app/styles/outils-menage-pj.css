@@ -33,9 +33,9 @@
   .somme-menage .cta-offres .bouton { width: 100%; justify-content: center; }
   .valeur-a-part { margin: 0; font-size: 16px; padding: var(--s3) var(--s4); border: 1px solid var(--filet); border-radius: var(--r); background: var(--papier); }
 
-  details.affiner { background: var(--papier); border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s3) var(--s4); }
-  details.affiner > summary { cursor: pointer; font: 700 17px var(--sans); min-height: 44px; display: flex; align-items: center; color: var(--lac-encre); }
-  details.affiner .note-outil { margin: var(--s2) 0 var(--s3); }
+  .affiner { background: var(--papier); border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s3) var(--s4); }
+  .affiner > .depliable-titre { cursor: pointer; font: 700 17px var(--sans); min-height: 44px; color: var(--lac-encre); }
+  .affiner .note-outil { margin: var(--s2) 0 var(--s3); }
   .categories { display: grid; gap: var(--s2) var(--s3); grid-template-columns: 1fr 1fr; }
   .categories .champ { margin: 0; }
   .categories label { font-size: 15px; }
@@ -90,8 +90,8 @@
   .carte-pj dl { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 6px var(--s3); margin: 0; font-size: 15px; }
   .carte-pj dt { font: 14px var(--narrow); color: var(--encre-2); }
   .carte-pj dd { margin: 0; }
-  .carte-pj details { margin-top: var(--s3); border-top: 1px solid var(--filet); padding-top: var(--s2); }
-  .carte-pj summary { cursor: pointer; font: 600 16px var(--narrow); color: var(--lac-encre); min-height: 40px; display: flex; align-items: center; }
+  .carte-pj .depliable { margin-top: var(--s3); border-top: 1px solid var(--filet); padding-top: var(--s2); }
+  .carte-pj .depliable-titre { cursor: pointer; font: 600 16px var(--narrow); color: var(--lac-encre); min-height: 40px; }
   .liste-domaines { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
   .liste-domaines li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s2); font-size: 15px; padding: 3px 0; }
   .liste-domaines li.actif { background: var(--info-teinte); border-radius: 4px; padding-inline: 6px; }

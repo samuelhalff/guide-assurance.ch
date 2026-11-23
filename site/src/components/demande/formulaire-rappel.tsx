@@ -8,6 +8,7 @@ import type { Demande } from "@shared/demande/schema";
 import { suivre, marquerLead } from "@/lib/analytics";
 import { DEMANDE, DEMANDE_ENVOYEE, TEXTE_CTA, lirePreremplissage } from "@/lib/demande";
 import { Turnstile } from "@/components/demande/turnstile";
+import { ChoixBoutons } from "@/components/controles";
 import { Consentements, Erreur, Puce, origine, typo } from "@/components/demande/formulaire-demande";
 
 type Locale = "fr" | "en";
@@ -192,13 +193,14 @@ export function FormulaireRappel({ locale }: { locale: Locale }) {
             <legend className="legende-champ">
               {typo(t.sujetQ, locale)} <span className="facultatif">({t.facultatif})</span>
             </legend>
-            <div className="puces">
-              {def.besoin.choix.map((c) => (
-                <Puce key={c.code} type="radio" name="sujet" checked={sujet === c.code} onChange={() => setSujet(c.code)}>
-                  {c.label[locale]}
-                </Puce>
-              ))}
-            </div>
+            <ChoixBoutons
+              variante="puce"
+              className="puces"
+              name="sujet"
+              value={sujet}
+              onChange={setSujet}
+              options={def.besoin.choix.map((c) => ({ value: c.code, label: c.label[locale] }))}
+            />
           </fieldset>
 
           <fieldset>
@@ -207,7 +209,7 @@ export function FormulaireRappel({ locale }: { locale: Locale }) {
             </legend>
             <div className="puces">
               {CRENEAUX.map((c) => (
-                <Puce key={c} type="checkbox" name="creneau" checked={creneau === c} onChange={() => setCreneau((x) => (x === c ? null : c))}>
+                <Puce key={c} name="creneau" checked={creneau === c} onChange={() => setCreneau((x) => (x === c ? null : c))}>
                   {CRENEAU_LABELS[c][locale]}
                 </Puce>
               ))}
