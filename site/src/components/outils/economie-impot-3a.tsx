@@ -14,7 +14,7 @@ const nfEn = new Intl.NumberFormat("en-GB", { maximumFractionDigits: 0 });
 const TXT = {
   fr: {
     canton: "Canton",
-    bientot: "Pour Berne, seules les communes du Jura bernois sont couvertes. Le canton du Jura suivra dès que nos chiffres auront pu être vérifiés sur sa calculette officielle.",
+    bientot: "Pour Berne, seules les communes du Jura bernois sont couvertes. Moutier fait partie du canton du Jura depuis 2026.",
     commune: "Commune de domicile",
     communeAide: (n: number) => `${n} communes. Le taux communal change l’économie de quelques dizaines de francs.`,
     communeInconnue: (c: string) => `Commune introuvable. Le calcul utilise ${c}.`,
@@ -49,6 +49,7 @@ const TXT = {
       VS: "Le Valais n’a pas d’impôt ecclésiastique cantonal. Les rares communes qui en perçoivent un ne sont pas prises en compte ici.",
       FR: "À Fribourg, les membres d’une Église reconnue paient en plus un impôt paroissial, qui n’est pas compris ici.",
       NE: "À Neuchâtel, la contribution ecclésiastique est volontaire et n’est pas comprise ici.",
+      JU: "Dans le Jura, les membres d’une Église reconnue paient en plus un impôt ecclésiastique, qui n’est pas compris ici.",
       BE: "Dans le Jura bernois, les membres d’une Église reconnue paient en plus un impôt paroissial, qui n’est pas compris ici.",
     } as Record<I.Canton, string>,
     plafondDepasse: (p: string) => `Le versement dépasse le plafond (${p} CHF par personne). Seul le montant autorisé est déductible.`,
@@ -66,11 +67,11 @@ const TXT = {
     lien: "Copier le lien de ce calcul",
     lienOk: "Lien copié.",
     limites:
-      "Estimation avec les barèmes 2026 de l’AFC et des cantons, vérifiée sur les calculettes officielles de Genève, de Vaud, du Valais, de Fribourg et de Neuchâtel, et sur le calculateur de l’AFC vers lequel Berne renvoie. Elle laisse de côté l’impôt sur la fortune, l’impôt ecclésiastique, la taxe personnelle, les parts privilégiées genevoises (sans effet si vous travaillez dans votre commune) et la garde alternée à Genève.",
+      "Estimation avec les barèmes 2026 de l’AFC et des cantons, vérifiée sur les calculettes officielles de Genève, de Vaud, du Valais, de Fribourg, de Neuchâtel et du Jura, et sur le calculateur de l’AFC vers lequel Berne renvoie. Elle laisse de côté l’impôt sur la fortune, l’impôt ecclésiastique, la taxe personnelle, les parts privilégiées genevoises (sans effet si vous travaillez dans votre commune) et la garde alternée à Genève.",
   },
   en: {
     canton: "Canton",
-    bientot: "For Bern, only the municipalities of the Bernese Jura are covered. The canton of Jura will follow once our figures can be checked against its official calculator.",
+    bientot: "For Bern, only the municipalities of the Bernese Jura are covered. Moutier has been part of the canton of Jura since 2026.",
     commune: "Municipality of residence",
     communeAide: (n: number) => `${n} municipalities. The municipal rate changes the saving by a few tens of francs.`,
     communeInconnue: (c: string) => `Municipality not found. The calculation uses ${c}.`,
@@ -103,6 +104,7 @@ const TXT = {
       VS: "Valais has no cantonal church tax. The few municipalities that levy one are not included here.",
       FR: "In Fribourg, members of a recognised church also pay a parish tax, which is not included here.",
       NE: "In Neuchâtel, the church contribution is voluntary and not included here.",
+      JU: "In Jura, members of a recognised church also pay a church tax, which is not included here.",
       BE: "In the Bernese Jura, members of a recognised church also pay a parish tax, which is not included here.",
     } as Record<I.Canton, string>,
     plafondDepasse: (p: string) => `The payment is above the cap (CHF ${p} per person). Only the allowed amount is deductible.`,
@@ -120,7 +122,7 @@ const TXT = {
     lien: "Copy the link to this calculation",
     lienOk: "Link copied.",
     limites:
-      "Estimate with the 2026 tax scales of the Federal Tax Administration and the cantons, checked against the official calculators of Geneva, Vaud, Valais, Fribourg and Neuchâtel, and against the federal calculator that Bern links to. It leaves out wealth tax, church tax, personal tax, Geneva’s “parts privilégiées” (no effect if you work in your municipality of residence) and shared custody in Geneva.",
+      "Estimate with the 2026 tax scales of the Federal Tax Administration and the cantons, checked against the official calculators of Geneva, Vaud, Valais, Fribourg, Neuchâtel and Jura, and against the federal calculator that Bern links to. It leaves out wealth tax, church tax, personal tax, Geneva’s “parts privilégiées” (no effect if you work in your municipality of residence) and shared custody in Geneva.",
   },
 };
 

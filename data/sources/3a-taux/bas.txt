@@ -1,5 +1,5 @@
 URL: https://www.bas.ch/fr/conditions-pour-personnes-privees
-Relevé: 2026-11-22T20:43:29+00:00
+Relevé: 2026-11-23T05:30:19+00:00
 Méthode: http
 Extrait retenu: Compte de prévoyance BAS 3 Taux d'intérêt Taux d'intérêt 0.200 %
 Validité: -

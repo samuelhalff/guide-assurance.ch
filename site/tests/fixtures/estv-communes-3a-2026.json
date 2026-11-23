@@ -1,0 +1,481 @@
+{
+ "source": "Calculateur fiscal de l'AFC (swisstaxcalculator.estv.admin.ch), API_calculateSimpleTaxes, année 2026, personne seule sans confession, revenu imposable 80000 et 72742 CHF, relevé le 2026-11-23. Montants arrondis au franc par l'AFC.",
+ "lignes": [
+  {
+   "canton": "GE",
+   "commune": "Avully",
+   "bfs": 6603,
+   "revenu": 80000,
+   "versement": 7258,
+   "avant": {
+    "ifd": 1378,
+    "cantonal": 9597,
+    "communal": 3742
+   },
+   "apres": {
+    "ifd": 1049,
+    "cantonal": 8315,
+    "communal": 3242
+   }
+  },
+  {
+   "canton": "GE",
+   "commune": "Genthod",
+   "bfs": 6622,
+   "revenu": 80000,
+   "versement": 7258,
+   "avant": {
+    "ifd": 1378,
+    "cantonal": 9597,
+    "communal": 1834
+   },
+   "apres": {
+    "ifd": 1049,
+    "cantonal": 8315,
+    "communal": 1589
+   }
+  },
+  {
+   "canton": "GE",
+   "commune": "Meyrin",
+   "bfs": 6630,
+   "revenu": 80000,
+   "versement": 7258,
+   "avant": {
+    "ifd": 1378,
+    "cantonal": 9597,
+    "communal": 3082
+   },
+   "apres": {
+    "ifd": 1049,
+    "cantonal": 8315,
+    "communal": 2670
+   }
+  },
+  {
+   "canton": "GE",
+   "commune": "Genève",
+   "bfs": 6621,
+   "revenu": 80000,
+   "versement": 7258,
+   "avant": {
+    "ifd": 1378,
+    "cantonal": 9597,
+    "communal": 3338
+   },
+   "apres": {
+    "ifd": 1049,
+    "cantonal": 8315,
+    "communal": 2892
+   }
+  },
+  {
+   "canton": "VD",
+   "commune": "La Praz",
+   "bfs": 5758,
+   "revenu": 80000,
+   "versement": 7258,
+   "avant": {
+    "ifd": 1378,
+    "cantonal": 9408,
+    "communal": 5303
+   },
+   "apres": {
+    "ifd": 1049,
+    "cantonal": 8250,
+    "communal": 4650
+   }
+  },
+  {
+   "canton": "VD",
+   "commune": "Eclépens",
+   "bfs": 5482,
+   "revenu": 80000,
+   "versement": 7258,
+   "avant": {
+    "ifd": 1378,
+    "cantonal": 9408,
+    "communal": 2939
+   },
+   "apres": {
+    "ifd": 1049,
+    "cantonal": 8250,
+    "communal": 2577
+   }
+  },
+  {
+   "canton": "VD",
+   "commune": "Montanaire",
+   "bfs": 5693,
+   "revenu": 80000,
+   "versement": 7258,
+   "avant": {
+    "ifd": 1378,
+    "cantonal": 9408,
+    "communal": 4472
+   },
+   "apres": {
+    "ifd": 1049,
+    "cantonal": 8250,
+    "communal": 3922
+   }
+  },
+  {
+   "canton": "VD",
+   "commune": "Lausanne",
+   "bfs": 5586,
+   "revenu": 80000,
+   "versement": 7258,
+   "avant": {
+    "ifd": 1378,
+    "cantonal": 9408,
+    "communal": 5015
+   },
+   "apres": {
+    "ifd": 1049,
+    "cantonal": 8250,
+    "communal": 4398
+   }
+  },
+  {
+   "canton": "VS",
+   "commune": "Leukerbad",
+   "bfs": 6111,
+   "revenu": 80000,
+   "versement": 7258,
+   "avant": {
+    "ifd": 1378,
+    "cantonal": 5904,
+    "communal": 8633
+   },
+   "apres": {
+    "ifd": 1049,
+    "cantonal": 4995,
+    "communal": 7515
+   }
+  },
+  {
+   "canton": "VS",
+   "commune": "Zwischbergen",
+   "bfs": 6011,
+   "revenu": 80000,
+   "versement": 7258,
+   "avant": {
+    "ifd": 1378,
+    "cantonal": 5904,
+    "communal": 5338
+   },
+   "apres": {
+    "ifd": 1049,
+    "cantonal": 4995,
+    "communal": 4594
+   }
+  },
+  {
+   "canton": "VS",
+   "commune": "Niedergesteln",
+   "bfs": 6198,
+   "revenu": 80000,
+   "versement": 7258,
+   "avant": {
+    "ifd": 1378,
+    "cantonal": 5904,
+    "communal": 6989
+   },
+   "apres": {
+    "ifd": 1049,
+    "cantonal": 4995,
+    "communal": 6090
+   }
+  },
+  {
+   "canton": "VS",
+   "commune": "Sion",
+   "bfs": 6266,
+   "revenu": 80000,
+   "versement": 7258,
+   "avant": {
+    "ifd": 1378,
+    "cantonal": 5904,
+    "communal": 5872
+   },
+   "apres": {
+    "ifd": 1049,
+    "cantonal": 4995,
+    "communal": 5054
+   }
+  },
+  {
+   "canton": "FR",
+   "commune": "Jaun",
+   "bfs": 2138,
+   "revenu": 80000,
+   "versement": 7258,
+   "avant": {
+    "ifd": 1378,
+    "cantonal": 7734,
+    "communal": 8057
+   },
+   "apres": {
+    "ifd": 1049,
+    "cantonal": 6750,
+    "communal": 7032
+   }
+  },
+  {
+   "canton": "FR",
+   "commune": "Greng",
+   "bfs": 2261,
+   "revenu": 80000,
+   "versement": 7258,
+   "avant": {
+    "ifd": 1378,
+    "cantonal": 7734,
+    "communal": 2578
+   },
+   "apres": {
+    "ifd": 1049,
+    "cantonal": 6750,
+    "communal": 2250
+   }
+  },
+  {
+   "canton": "FR",
+   "commune": "Neyruz",
+   "bfs": 2211,
+   "revenu": 80000,
+   "versement": 7258,
+   "avant": {
+    "ifd": 1378,
+    "cantonal": 7734,
+    "communal": 6526
+   },
+   "apres": {
+    "ifd": 1049,
+    "cantonal": 6750,
+    "communal": 5696
+   }
+  },
+  {
+   "canton": "FR",
+   "commune": "Fribourg",
+   "bfs": 2196,
+   "revenu": 80000,
+   "versement": 7258,
+   "avant": {
+    "ifd": 1378,
+    "cantonal": 7734,
+    "communal": 6445
+   },
+   "apres": {
+    "ifd": 1049,
+    "cantonal": 6750,
+    "communal": 5625
+   }
+  },
+  {
+   "canton": "NE",
+   "commune": "Les Verrières",
+   "bfs": 6511,
+   "revenu": 80000,
+   "versement": 7258,
+   "avant": {
+    "ifd": 1378,
+    "cantonal": 9985,
+    "communal": 6361
+   },
+   "apres": {
+    "ifd": 1049,
+    "cantonal": 8748,
+    "communal": 5573
+   }
+  },
+  {
+   "canton": "NE",
+   "commune": "Milvignes",
+   "bfs": 6416,
+   "revenu": 80000,
+   "versement": 7258,
+   "avant": {
+    "ifd": 1378,
+    "cantonal": 9985,
+    "communal": 5073
+   },
+   "apres": {
+    "ifd": 1049,
+    "cantonal": 8748,
+    "communal": 4445
+   }
+  },
+  {
+   "canton": "NE",
+   "commune": "Le Cerneux-Péquignot",
+   "bfs": 6434,
+   "revenu": 80000,
+   "versement": 7258,
+   "avant": {
+    "ifd": 1378,
+    "cantonal": 9985,
+    "communal": 6039
+   },
+   "apres": {
+    "ifd": 1049,
+    "cantonal": 8748,
+    "communal": 5291
+   }
+  },
+  {
+   "canton": "NE",
+   "commune": "Neuchâtel",
+   "bfs": 6458,
+   "revenu": 80000,
+   "versement": 7258,
+   "avant": {
+    "ifd": 1378,
+    "cantonal": 9985,
+    "communal": 5234
+   },
+   "apres": {
+    "ifd": 1049,
+    "cantonal": 8748,
+    "communal": 4586
+   }
+  },
+  {
+   "canton": "BE",
+   "commune": "Schelten",
+   "bfs": 708,
+   "revenu": 80000,
+   "versement": 7258,
+   "avant": {
+    "ifd": 1378,
+    "cantonal": 10139,
+    "communal": 7498
+   },
+   "apres": {
+    "ifd": 1049,
+    "cantonal": 9053,
+    "communal": 6695
+   }
+  },
+  {
+   "canton": "BE",
+   "commune": "Péry-La Heutte",
+   "bfs": 450,
+   "revenu": 80000,
+   "versement": 7258,
+   "avant": {
+    "ifd": 1378,
+    "cantonal": 10139,
+    "communal": 5282
+   },
+   "apres": {
+    "ifd": 1049,
+    "cantonal": 9053,
+    "communal": 4717
+   }
+  },
+  {
+   "canton": "BE",
+   "commune": "Court",
+   "bfs": 690,
+   "revenu": 80000,
+   "versement": 7258,
+   "avant": {
+    "ifd": 1378,
+    "cantonal": 10139,
+    "communal": 6612
+   },
+   "apres": {
+    "ifd": 1049,
+    "cantonal": 9053,
+    "communal": 5904
+   }
+  },
+  {
+   "canton": "BE",
+   "commune": "Saint-Imier",
+   "bfs": 443,
+   "revenu": 80000,
+   "versement": 7258,
+   "avant": {
+    "ifd": 1378,
+    "cantonal": 10139,
+    "communal": 5964
+   },
+   "apres": {
+    "ifd": 1049,
+    "cantonal": 9053,
+    "communal": 5325
+   }
+  },
+  {
+   "canton": "JU",
+   "commune": "Basse-Allaine",
+   "bfs": 6807,
+   "revenu": 80000,
+   "versement": 7258,
+   "avant": {
+    "ifd": 1378,
+    "cantonal": 8258,
+    "communal": 6809
+   },
+   "apres": {
+    "ifd": 1049,
+    "cantonal": 7236,
+    "communal": 5967
+   }
+  },
+  {
+   "canton": "JU",
+   "commune": "Les Breuleux",
+   "bfs": 6743,
+   "revenu": 80000,
+   "versement": 7258,
+   "avant": {
+    "ifd": 1378,
+    "cantonal": 8258,
+    "communal": 3767
+   },
+   "apres": {
+    "ifd": 1049,
+    "cantonal": 7236,
+    "communal": 3301
+   }
+  },
+  {
+   "canton": "JU",
+   "commune": "Courroux",
+   "bfs": 6709,
+   "revenu": 80000,
+   "versement": 7258,
+   "avant": {
+    "ifd": 1378,
+    "cantonal": 8258,
+    "communal": 6229
+   },
+   "apres": {
+    "ifd": 1049,
+    "cantonal": 7236,
+    "communal": 5459
+   }
+  },
+  {
+   "canton": "JU",
+   "commune": "Delémont",
+   "bfs": 6711,
+   "revenu": 80000,
+   "versement": 7258,
+   "avant": {
+    "ifd": 1378,
+    "cantonal": 8258,
+    "communal": 5505
+   },
+   "apres": {
+    "ifd": 1049,
+    "cantonal": 7236,
+    "communal": 4824
+   }
+  }
+ ]
+}

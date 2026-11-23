@@ -8,7 +8,9 @@ import { SimulateurFrontalier } from "@/components/outils/simulateur-frontalier"
 import { pageMetadata } from "@/lib/metadata";
 import { ORG_ID, WEBSITE_ID, breadcrumbLd, faqLd, graph, type Miette } from "@/lib/jsonld";
 import { FaqSections, faqOutilLd, type FaqOutil } from "@/components/site/faq-sections";
-import { MAJ_ISO, abs } from "@/lib/site";
+import { abs } from "@/lib/site";
+import { DATE_PAGE } from "@/lib/donnees";
+import { dateLongue } from "@/lib/i18n";
 import { OUTILS, OUTILS_EN } from "@/lib/nav";
 
 /* English version of /simulateur-frontalier/: same engine, English interface. */
@@ -61,7 +63,7 @@ const LD = graph(
     isPartOf: { "@id": WEBSITE_ID },
     publisher: { "@id": ORG_ID },
     datePublished: "2026-11-22",
-    dateModified: MAJ_ISO,
+    dateModified: DATE_PAGE.simulateur,
     breadcrumb: { "@id": `${URL_}#breadcrumb` },
     mainEntity: { "@id": `${URL_}#outil` },
     citation: [
@@ -116,7 +118,7 @@ export default function Page() {
 
         <div className="wrap faq">
           <FaqSections faq={FAQ} />
-          <p className="maj">Updated on 22 November 2026. Data: FOPH 2027, Urssaf 2026 and 2027.</p>
+          <p className="maj">Updated on {dateLongue(DATE_PAGE.simulateur, "en")}. Data: FOPH 2027, Urssaf 2026 and 2027.</p>
         </div>
       </main>
       <SiteFooter locale="en" altPath={OUTILS.simulateur} note="Estimate for information only. The amount Urssaf asks for and your insurer’s premium prevail." />

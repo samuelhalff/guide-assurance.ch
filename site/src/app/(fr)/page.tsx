@@ -7,7 +7,9 @@ import { AccueilFeuille, AccueilSituations } from "@/components/site/accueil-feu
 import { calculerSaison } from "@/components/site/saison";
 import { pageMetadata } from "@/lib/metadata";
 import { jsonLdAccueil } from "@/lib/jsonld-accueil";
-import { ORG_ID, WEBSITE_ID } from "@/lib/jsonld";
+import { ORG_ID, WEBSITE_ID, faqLd } from "@/lib/jsonld";
+import { FaqAccueil } from "@/components/site/faq-accueil";
+import type { QuestionFaq } from "@/components/site/guide-page";
 import { abs } from "@/lib/site";
 import { DATE_PAGE } from "@/lib/donnees";
 import { COMPTES_3A, RELEVE_LE, TAUX_MAX, TAUX_MIN, dateCh, tauxFr } from "@/lib/taux3a";
@@ -22,6 +24,31 @@ export const metadata: Metadata = pageMetadata({ title: TITRE, description: DESC
 
 /* Données structurées : entités communes (organisation, éditeur, site) de jsonld-accueil, page web et comparateur
    (même @id que sur la page du comparateur). */
+/* Questions fréquentes (affichées en bas de page et reprises telles quelles dans le nœud FAQPage). Faits tirés du site :
+   comparateur, page « Nos liens avec les assureurs », formulaire de rappel, zone desservie. */
+const FAQ: QuestionFaq[] = [
+  {
+    q: `Les outils de Guide Assurance sont-ils gratuits${N}?`,
+    a: "Oui, et ils fonctionnent sans inscription ni publicité. Les calculs se font dans votre navigateur, si bien que les montants saisis ne nous parviennent pas.",
+  },
+  {
+    q: `D’où viennent les primes maladie 2027 du comparateur${N}?`,
+    a: "Elles viennent de l’Office fédéral de la santé publique (OFSP), qui approuve chaque année les primes des assureurs. Le comparateur les reprend offre par offre, telles qu’elles figurent sur priminfo.admin.ch, et les moyennes cantonales de cette page sont celles que l’OFSP a publiées le 29 septembre 2026.",
+  },
+  {
+    q: `Les assureurs paient-ils pour figurer dans les listes${N}?`,
+    a: "Non, aucune place n’est payée. Le comparateur range les offres de la prime la plus basse à la plus haute, et Guide Assurance ne recommande aucun contrat.",
+  },
+  {
+    q: `Que se passe-t-il quand je demande à être rappelé${N}?`,
+    a: "Votre demande est transmise à un seul courtier en assurances partenaire, en Suisse romande, avec votre accord exprès. Un de ses conseillers vous appelle au moment que vous avez choisi, si vous en avez indiqué un, pour faire le point sur votre situation. Rien ne vous engage tant que vous n’avez pas signé.",
+  },
+  {
+    q: `Quels cantons le site couvre-t-il${N}?`,
+    a: `Il couvre la Suisse romande${N}: Genève, Vaud, le Valais, Fribourg, Neuchâtel, le Jura et le Jura bernois. Le comparateur donne les primes de chacune de leurs régions de primes, et les guides signalent les règles cantonales quand elles s’écartent du droit fédéral.`,
+  },
+];
+
 const LD = {
   "@context": "https://schema.org",
   "@graph": [
@@ -50,6 +77,7 @@ const LD = {
       isAccessibleForFree: true,
       provider: { "@id": ORG_ID },
     },
+    { ...faqLd(FAQ), "@id": abs("/#faq") },
   ],
 };
 
@@ -311,6 +339,8 @@ export default function Accueil() {
             </table>
           </div>
         </section>
+
+        <FaqAccueil titre="Questions fréquentes" faq={FAQ} />
       </main>
       <SiteFooter note="Primes : OFSP." />
     </>

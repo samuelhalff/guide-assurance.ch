@@ -57,7 +57,7 @@ Le délai et la couverture rétroactive des personnes qui viennent de s’instal
 
 La prime moyenne 2027, tous assurés confondus, est de 412,00 CHF par mois, en hausse de 5,0 % (OFSP, primes publiées le 29.09.2026). En moyenne suisse, un adulte paie 487,60 CHF par mois, un jeune adulte 338,80 CHF et un enfant 128,10 CHF.
 
-Les moyennes par canton romand et l’écart entre assureurs figurent sur la page [Primes 2027](/assurance-maladie/primes/).
+Les moyennes par canton romand et l’écart entre assureurs figurent sur la page [Primes 2027](/assurance-maladie/primes/). Le [baromètre des primes](/assurance-maladie/barometre-primes/) donne pour chaque canton la hausse et l’écart entre l’offre la plus basse et la plus haute.
 
 ## Que payez-vous en plus de la prime ?
 
@@ -106,7 +106,7 @@ La franchise ne peut être augmentée que pour le début d’une année civile (
 
 Changer d’assureur de base n’oblige pas à résilier vos complémentaires (art. 7, al. 7 et 8, LAMal) ; la page [Complémentaire santé](/complementaire-sante/) donne leurs propres délais.
 
-L’outil [Lettre de résiliation](/lettre-resiliation/) rédige la lettre et vérifie la date limite. Le calcul se fait dans votre navigateur.
+L’outil [Lettre de résiliation](/lettre-resiliation/) rédige la lettre et vérifie la date limite. Le calcul se fait dans votre navigateur. Pour ne pas oublier ces dates, la page [Rappels d’échéance](/rappels-echeances/) les met dans votre agenda, avec une alerte.
 
 ## Ce que cette page ne couvre pas
 

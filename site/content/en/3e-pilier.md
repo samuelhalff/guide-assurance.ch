@@ -6,7 +6,7 @@ description: "In 2027 you can pay CHF 7,373 into a pillar 3a with a pension fund
 h1: "Pillar 3: 2027 limits, 3a, 3b and death cover"
 rubrique: particuliers
 outils: [taux-3a, economie-impot-3a]
-updated: 2026-11-22
+updated: 2026-11-23
 sources:
   - { label: "Art. 7 OPP 3 (Fedlex)", url: "https://www.fedlex.admin.ch/eli/cc/1985/1778_1778_1778/fr#art_7" }
   - { label: "Art. 7a OPP 3 (Fedlex)", url: "https://www.fedlex.admin.ch/eli/cc/1985/1778_1778_1778/fr#art_7_a" }
@@ -53,7 +53,7 @@ Pillar 3a is tied savings, held in a bank account or an insurance policy. Paymen
 
 ## How much does a 3a account pay, and how much tax do you save?
 
-In our survey of 22.11.2026, bank 3a accounts paid between 0.05% and 0.65% a year. The [pillar 3a interest rate table](/en/pillar-3a/interest-rates/) lists them from the highest rate to the lowest. The tax saving depends on your income, municipality and family situation; the [pillar 3a tax savings calculator](/en/pillar-3a/tax-savings/) estimates it for Geneva and Vaud with the 2026 tax scales.
+In our survey of 22.11.2026, bank 3a accounts paid between 0.05% and 0.65% a year. The [pillar 3a interest rate table](/en/pillar-3a/interest-rates/) lists them from the highest rate to the lowest. The tax saving depends on your income, municipality and family situation; the [pillar 3a tax savings calculator](/en/pillar-3a/tax-savings/) estimates it with the 2026 tax scales for Geneva, Vaud, Valais, Fribourg, Neuchâtel, Jura and the Bernese Jura.
 
 ## Can pillar 3 cover death and disability?
 

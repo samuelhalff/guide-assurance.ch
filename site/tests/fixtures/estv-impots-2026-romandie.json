@@ -1,5 +1,5 @@
 {
-"source": "Calculateur fiscal de l'AFC (swisstaxcalculator.estv.admin.ch), API_calculateSimpleTaxes et API_calculateManyCapitalTaxes, année 2026, relevé le 22.11.2026 (sans confession ; retraits : homme de 65 ans). Montants arrondis au franc par l'AFC. BE : communes du Jura bernois seulement.",
+"source": "Calculateur fiscal de l'AFC (swisstaxcalculator.estv.admin.ch), API_calculateSimpleTaxes et API_calculateManyCapitalTaxes, année 2026, relevé le 22.11.2026 (sans confession ; retraits : homme de 65 ans). Montants arrondis au franc par l'AFC. BE : communes du Jura bernois seulement. JU : Moutier comprise.",
 "revenus": [
 {
 "canton": "VS",
@@ -1760,6 +1760,446 @@
 "ifd": 0,
 "cantonal": 1538,
 "communal": 1003
+},
+{
+"canton": "JU",
+"commune": "Les Bois",
+"bfs": 6742,
+"etat": "marie",
+"enfants": 0,
+"revenu": 374248,
+"ifd": 34526,
+"cantonal": 50668,
+"communal": 36445
+},
+{
+"canton": "JU",
+"commune": "Haute-Ajoie",
+"bfs": 6809,
+"etat": "seul",
+"enfants": 0,
+"revenu": 48546,
+"ifd": 361,
+"cantonal": 3901,
+"communal": 2943
+},
+{
+"canton": "JU",
+"commune": "Fahy",
+"bfs": 6789,
+"etat": "marie",
+"enfants": 0,
+"revenu": 42271,
+"ifd": 125,
+"cantonal": 2060,
+"communal": 1662
+},
+{
+"canton": "JU",
+"commune": "Alle",
+"bfs": 6771,
+"etat": "seul",
+"enfants": 0,
+"revenu": 100016,
+"ifd": 2684,
+"cantonal": 11191,
+"communal": 8835
+},
+{
+"canton": "JU",
+"commune": "Saulcy",
+"bfs": 6722,
+"etat": "marie",
+"enfants": 3,
+"revenu": 448579,
+"ifd": 43396,
+"cantonal": 62760,
+"communal": 48446
+},
+{
+"canton": "JU",
+"commune": "Les Enfers",
+"bfs": 6745,
+"etat": "seul",
+"enfants": 0,
+"revenu": 13313,
+"ifd": 0,
+"cantonal": 304,
+"communal": 219
+},
+{
+"canton": "JU",
+"commune": "Courroux",
+"bfs": 6709,
+"etat": "marie",
+"enfants": 2,
+"revenu": 30029,
+"ifd": 0,
+"cantonal": 932,
+"communal": 703
+},
+{
+"canton": "JU",
+"commune": "Porrentruy",
+"bfs": 6800,
+"etat": "seul",
+"enfants": 0,
+"revenu": 20092,
+"ifd": 37,
+"cantonal": 846,
+"communal": 609
+},
+{
+"canton": "JU",
+"commune": "Le Noirmont",
+"bfs": 6754,
+"etat": "monoparental",
+"enfants": 3,
+"revenu": 39544,
+"ifd": 0,
+"cantonal": 1810,
+"communal": 1080
+},
+{
+"canton": "JU",
+"commune": "Haute-Ajoie",
+"bfs": 6809,
+"etat": "monoparental",
+"enfants": 2,
+"revenu": 53153,
+"ifd": 0,
+"cantonal": 3185,
+"communal": 2402
+},
+{
+"canton": "JU",
+"commune": "Mettembert",
+"bfs": 6716,
+"etat": "seul",
+"enfants": 0,
+"revenu": 282800,
+"ifd": 23833,
+"cantonal": 40658,
+"communal": 31385
+},
+{
+"canton": "JU",
+"commune": "Rossemaison",
+"bfs": 6721,
+"etat": "monoparental",
+"enfants": 2,
+"revenu": 232212,
+"ifd": 15540,
+"cantonal": 27612,
+"communal": 19377
+},
+{
+"canton": "JU",
+"commune": "Les Enfers",
+"bfs": 6745,
+"etat": "marie",
+"enfants": 4,
+"revenu": 48633,
+"ifd": 0,
+"cantonal": 2656,
+"communal": 1910
+},
+{
+"canton": "JU",
+"commune": "Ederswiler",
+"bfs": 6713,
+"etat": "marie",
+"enfants": 4,
+"revenu": 152165,
+"ifd": 4604,
+"cantonal": 15952,
+"communal": 12314
+},
+{
+"canton": "JU",
+"commune": "Develier",
+"bfs": 6712,
+"etat": "marie",
+"enfants": 2,
+"revenu": 39098,
+"ifd": 0,
+"cantonal": 1764,
+"communal": 1207
+},
+{
+"canton": "JU",
+"commune": "Delémont",
+"bfs": 6711,
+"etat": "marie",
+"enfants": 2,
+"revenu": 326681,
+"ifd": 27812,
+"cantonal": 42939,
+"communal": 28626
+},
+{
+"canton": "JU",
+"commune": "Saignelégier",
+"bfs": 6757,
+"etat": "marie",
+"enfants": 1,
+"revenu": 95766,
+"ifd": 1338,
+"cantonal": 8284,
+"communal": 6685
+},
+{
+"canton": "JU",
+"commune": "Haute-Sorne",
+"bfs": 6729,
+"etat": "seul",
+"enfants": 0,
+"revenu": 39554,
+"ifd": 194,
+"cantonal": 2867,
+"communal": 2113
+},
+{
+"canton": "JU",
+"commune": "Ederswiler",
+"bfs": 6713,
+"etat": "monoparental",
+"enfants": 1,
+"revenu": 30356,
+"ifd": 0,
+"cantonal": 960,
+"communal": 741
+},
+{
+"canton": "JU",
+"commune": "Courchavon",
+"bfs": 6783,
+"etat": "marie",
+"enfants": 3,
+"revenu": 52361,
+"ifd": 0,
+"cantonal": 3091,
+"communal": 2060
+},
+{
+"canton": "JU",
+"commune": "Cornol",
+"bfs": 6782,
+"etat": "monoparental",
+"enfants": 2,
+"revenu": 163460,
+"ifd": 6596,
+"cantonal": 17489,
+"communal": 12580
+},
+{
+"canton": "JU",
+"commune": "Les Breuleux",
+"bfs": 6743,
+"etat": "seul",
+"enfants": 0,
+"revenu": 166923,
+"ifd": 8935,
+"cantonal": 21788,
+"communal": 9938
+},
+{
+"canton": "JU",
+"commune": "Alle",
+"bfs": 6771,
+"etat": "monoparental",
+"enfants": 3,
+"revenu": 518692,
+"ifd": 52509,
+"cantonal": 74326,
+"communal": 58678
+},
+{
+"canton": "JU",
+"commune": "Porrentruy",
+"bfs": 6800,
+"etat": "monoparental",
+"enfants": 3,
+"revenu": 23870,
+"ifd": 0,
+"cantonal": 479,
+"communal": 344
+},
+{
+"canton": "JU",
+"commune": "Les Enfers",
+"bfs": 6745,
+"etat": "monoparental",
+"enfants": 2,
+"revenu": 12825,
+"ifd": 0,
+"cantonal": 5,
+"communal": 4
+},
+{
+"canton": "JU",
+"commune": "Montfaucon",
+"bfs": 6751,
+"etat": "monoparental",
+"enfants": 1,
+"revenu": 10445,
+"ifd": 0,
+"cantonal": 0,
+"communal": 0
+},
+{
+"canton": "JU",
+"commune": "Cornol",
+"bfs": 6782,
+"etat": "monoparental",
+"enfants": 2,
+"revenu": 17182,
+"ifd": 0,
+"cantonal": 113,
+"communal": 81
+},
+{
+"canton": "JU",
+"commune": "Courgenay",
+"bfs": 6784,
+"etat": "monoparental",
+"enfants": 3,
+"revenu": 55760,
+"ifd": 0,
+"cantonal": 3490,
+"communal": 2510
+},
+{
+"canton": "JU",
+"commune": "Basse-Vendline",
+"bfs": 6812,
+"etat": "marie",
+"enfants": 3,
+"revenu": 40714,
+"ifd": 0,
+"cantonal": 1921,
+"communal": 1416
+},
+{
+"canton": "JU",
+"commune": "Châtillon",
+"bfs": 6704,
+"etat": "seul",
+"enfants": 0,
+"revenu": 139729,
+"ifd": 5982,
+"cantonal": 17479,
+"communal": 12266
+},
+{
+"canton": "JU",
+"commune": "Porrentruy",
+"bfs": 6800,
+"etat": "marie",
+"enfants": 2,
+"revenu": 10765,
+"ifd": 0,
+"cantonal": 0,
+"communal": 0
+},
+{
+"canton": "JU",
+"commune": "Pleigne",
+"bfs": 6719,
+"etat": "marie",
+"enfants": 4,
+"revenu": 31509,
+"ifd": 0,
+"cantonal": 1071,
+"communal": 789
+},
+{
+"canton": "JU",
+"commune": "Fontenais",
+"bfs": 6790,
+"etat": "marie",
+"enfants": 0,
+"revenu": 100087,
+"ifd": 1816,
+"cantonal": 8868,
+"communal": 7312
+},
+{
+"canton": "JU",
+"commune": "Movelier",
+"bfs": 6718,
+"etat": "monoparental",
+"enfants": 1,
+"revenu": 587023,
+"ifd": 61927,
+"cantonal": 85611,
+"communal": 67588
+},
+{
+"canton": "JU",
+"commune": "Ederswiler",
+"bfs": 6713,
+"etat": "marie",
+"enfants": 1,
+"revenu": 498380,
+"ifd": 50396,
+"cantonal": 70976,
+"communal": 54789
+},
+{
+"canton": "JU",
+"commune": "Pleigne",
+"bfs": 6719,
+"etat": "monoparental",
+"enfants": 3,
+"revenu": 20296,
+"ifd": 0,
+"cantonal": 246,
+"communal": 181
+},
+{
+"canton": "JU",
+"commune": "Le Bémont",
+"bfs": 6741,
+"etat": "seul",
+"enfants": 0,
+"revenu": 105130,
+"ifd": 3021,
+"cantonal": 11999,
+"communal": 8210
+},
+{
+"canton": "JU",
+"commune": "Clos du Doubs",
+"bfs": 6808,
+"etat": "monoparental",
+"enfants": 3,
+"revenu": 114897,
+"ifd": 1828,
+"cantonal": 10881,
+"communal": 8208
+},
+{
+"canton": "JU",
+"commune": "Develier",
+"bfs": 6712,
+"etat": "seul",
+"enfants": 0,
+"revenu": 11245,
+"ifd": 0,
+"cantonal": 204,
+"communal": 140
+},
+{
+"canton": "JU",
+"commune": "Muriaux",
+"bfs": 6753,
+"etat": "seul",
+"enfants": 0,
+"revenu": 21551,
+"ifd": 49,
+"cantonal": 981,
+"communal": 551
 }
 ],
 "capitaux": [
@@ -2162,6 +2602,106 @@
 "ifd": 13930,
 "cantonal": 25361,
 "communal": 16027
+},
+{
+"canton": "JU",
+"commune": "Haute-Ajoie",
+"bfs": 6809,
+"etat": "seul",
+"capital": 955605,
+"ifd": 21979,
+"cantonal": 44683,
+"communal": 33708
+},
+{
+"canton": "JU",
+"commune": "Soubey",
+"bfs": 6759,
+"etat": "marie",
+"capital": 76568,
+"ifd": 170,
+"cantonal": 2075,
+"communal": 1638
+},
+{
+"canton": "JU",
+"commune": "Les Bois",
+"bfs": 6742,
+"etat": "marie",
+"capital": 54212,
+"ifd": 51,
+"cantonal": 1390,
+"communal": 1000
+},
+{
+"canton": "JU",
+"commune": "Les Bois",
+"bfs": 6742,
+"etat": "marie",
+"capital": 23036,
+"ifd": 0,
+"cantonal": 590,
+"communal": 424
+},
+{
+"canton": "JU",
+"commune": "Alle",
+"bfs": 6771,
+"etat": "seul",
+"capital": 21728,
+"ifd": 10,
+"cantonal": 680,
+"communal": 537
+},
+{
+"canton": "JU",
+"commune": "Les Genevez",
+"bfs": 6748,
+"etat": "marie",
+"capital": 527326,
+"ifd": 10886,
+"cantonal": 18567,
+"communal": 13355
+},
+{
+"canton": "JU",
+"commune": "Saint-Brais",
+"bfs": 6758,
+"etat": "seul",
+"capital": 84105,
+"ifd": 327,
+"cantonal": 2793,
+"communal": 2205
+},
+{
+"canton": "JU",
+"commune": "Boncourt",
+"bfs": 6774,
+"etat": "marie",
+"capital": 65602,
+"ifd": 105,
+"cantonal": 1733,
+"communal": 943
+},
+{
+"canton": "JU",
+"commune": "Courgenay",
+"bfs": 6784,
+"etat": "seul",
+"capital": 484616,
+"ifd": 10094,
+"cantonal": 21863,
+"communal": 15726
+},
+{
+"canton": "JU",
+"commune": "Courrendlin",
+"bfs": 6708,
+"etat": "marie",
+"capital": 928443,
+"ifd": 21314,
+"cantonal": 33428,
+"communal": 26390
 }
 ]
 }

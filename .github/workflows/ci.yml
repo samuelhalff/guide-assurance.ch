@@ -23,7 +23,13 @@ jobs:
         working-directory: site
       - run: npm test
         working-directory: site
+      - name: Données ouvertes à jour (data/csv)
+        run: node --no-warnings scripts/donnees-ouvertes.mts ../data/csv && git diff --exit-code -- ../data/csv
+        working-directory: site
       - run: npm run build
+        working-directory: site
+      - name: Contrôles SEO du HTML généré (canonical, hreflang, JSON-LD, FAQ, sitemap)
+        run: npm run test:html
         working-directory: site
       - name: Aucune mention interdite dans le site généré
         run: "! grep -rli \"leman\"\"is\" site/out"

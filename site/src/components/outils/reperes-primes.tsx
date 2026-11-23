@@ -1,5 +1,6 @@
 import resume from "@/data/primes-2027-resume.json";
 import type { Locale } from "@/lib/i18n";
+import { PAGES_DONNEES, PAGES_DONNEES_EN } from "@/lib/nav";
 
 /* Tableau statique, lisible sans JavaScript : pour chaque canton, région de prime la plus peuplée, adulte de 26 ans et plus.
    Quatre profils (franchise 300 et 2500, avec et sans accident) : première prime de la liste et moyenne des offres ;
@@ -95,6 +96,10 @@ export function TableauReperes({ locale = "fr" }: { locale?: Locale }) {
           </div>
         ))}
       </div>
+      <p className="source-outil">
+        <a href={en ? PAGES_DONNEES_EN.regions : PAGES_DONNEES.regions}>{en ? "Premiums by premium region" : "Primes par région de prime"}</a>
+        {en ? ": median, quartiles and extremes for five standard profiles in each region." : `${T}: médiane, quartiles et extrêmes pour cinq profils types dans chaque région.`}
+      </p>
     </section>
   );
 }

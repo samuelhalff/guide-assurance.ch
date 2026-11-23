@@ -246,6 +246,11 @@
   .itineraires .pour { font-family: var(--narrow); color: var(--encre-2); }
   .itineraires tbody tr:hover { background: var(--papier); }
   .itineraires tbody tr:hover a { text-decoration: underline; }
+  /* Questions fréquentes : sous-sections sans le grand espacement des sections de l'accueil. */
+  .accueil .questions-frequentes { padding-top: 0; }
+  .questions-frequentes .q { padding: 0; max-width: 68ch; margin-top: var(--s5); }
+  .questions-frequentes .q h3 { font-size: 18px; font-weight: 700; line-height: 1.3; margin: 0 0 var(--s2); text-wrap: balance; }
+  .questions-frequentes .q p { margin: 0; text-wrap: pretty; }
 
   @media (max-width: 1080px) {
     .feuille { display: flex; flex-direction: column; }

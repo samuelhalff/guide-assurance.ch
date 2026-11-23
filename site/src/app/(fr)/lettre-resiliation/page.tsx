@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
@@ -8,7 +9,9 @@ import { LettreResiliation } from "@/components/outils/lettre-resiliation";
 import { pageMetadata } from "@/lib/metadata";
 import { ORG_ID, WEBSITE_ID, breadcrumbLd, faqLd, graph, type Miette } from "@/lib/jsonld";
 import { FaqSections, faqOutilLd, type FaqOutil } from "@/components/site/faq-sections";
-import { MAJ_ISO, abs } from "@/lib/site";
+import { abs } from "@/lib/site";
+import { DATE_PAGE } from "@/lib/donnees";
+import { dateLongue } from "@/lib/i18n";
 import { OUTILS } from "@/lib/nav";
 
 const PATH = OUTILS.lettre;
@@ -61,7 +64,7 @@ const LD = graph(
     isPartOf: { "@id": WEBSITE_ID },
     publisher: { "@id": ORG_ID },
     datePublished: "2026-11-22",
-    dateModified: MAJ_ISO,
+    dateModified: DATE_PAGE.lettre,
     breadcrumb: { "@id": `${URL_}#breadcrumb` },
     mainEntity: { "@id": `${URL_}#outil` },
     citation: [
@@ -107,10 +110,13 @@ export default function Page() {
           </p>
           <PartagerOutil path={PATH} title="Lettre de résiliation d’assurance maladie" text="Préparer sa lettre de résiliation LAMal ou complémentaire, avec la date limite calculée selon la loi." />
           <LettreResiliation aujourdhuiIso={new Date().toISOString().slice(0, 10)} />
+          <p className="lien-lettre">
+            Plusieurs contrats à suivre (auto, ménage, complémentaire) ? <Link href="/rappels-echeances/">Mettez leurs échéances dans votre agenda</Link>, avec une alerte avant chaque délai.
+          </p>
         </div>
 
         <div className="wrap faq">
-          <p className="maj">Mis à jour le 22 novembre 2026. Sources : Fedlex (LAMal, OAMal, LCA).</p>
+          <p className="maj">Mis à jour le {dateLongue(DATE_PAGE.lettre, "fr")}. Sources : Fedlex (LAMal, OAMal, LCA).</p>
           <FaqSections faq={FAQ} />
         </div>
       </main>

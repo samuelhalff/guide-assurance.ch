@@ -58,7 +58,7 @@ For people who have just arrived, the deadline and retroactive cover are explain
 
 The average 2027 premium, all insured persons combined, is CHF 412.00 a month, up 5.0% (FOPH, premiums published on 29.09.2026). On the Swiss average, an adult pays CHF 487.60 a month, a young adult CHF 338.80 and a child CHF 128.10.
 
-Averages by French-speaking canton and the gap between insurers are on the [2027 premiums](/en/health-insurance/premiums/) page.
+Averages by French-speaking canton and the gap between insurers are on the [2027 premiums](/en/health-insurance/premiums/) page. The [premium barometer](/en/health-insurance/premium-barometer/) gives the increase for each canton and the gap between the lowest and highest offer.
 
 ## What do you pay on top of the premium?
 
@@ -107,7 +107,7 @@ The deductible can be raised only for the start of a calendar year (art. 94 para
 
 Changing basic insurer does not oblige you to cancel your supplementary insurance (art. 7 para. 7 and 8 LAMal); its own deadlines are on the [Supplementary health insurance](/en/supplementary-health-insurance/) page.
 
-The [Cancellation letter](/en/cancellation-letter/) tool writes the letter and checks the deadline. The calculation runs in your browser.
+The [Cancellation letter](/en/cancellation-letter/) tool writes the letter and checks the deadline. The calculation runs in your browser. To remember these dates, the [renewal reminders](/en/renewal-reminders/) page puts them in your calendar, with an alert.
 
 ## What this page does not cover
 

@@ -12,7 +12,7 @@ import { ORG_ID, WEBSITE_ID, breadcrumbLd, faqLd, graph, type Miette } from "@/l
 import { abs } from "@/lib/site";
 import { DATE_IMPOTS, DATE_PAGE } from "@/lib/donnees";
 import { dateLongue } from "@/lib/i18n";
-import { OUTILS, OUTILS_EN } from "@/lib/nav";
+import { OUTILS, OUTILS_EN, PAGES_DONNEES, PAGES_DONNEES_EN } from "@/lib/nav";
 import type { Locale } from "@/lib/i18n";
 
 /* Pages « Taux des comptes 3a » et « Économie d'impôt 3a », en français et en anglais. Les fichiers de route
@@ -67,7 +67,7 @@ const TAUX = {
     appli: "Taux des comptes 3a",
     partage: `Les taux des comptes 3a de ${NB} banques suisses, relevés sur leurs pages et triés par taux.`,
     lienImpot: "Quelle économie d’impôt représente votre versement 3a ?",
-    lienImpotTexte: "Le calculateur l’estime avec les barèmes 2026 pour Genève, Vaud, le Valais, Fribourg, Neuchâtel et le Jura bernois.",
+    lienImpotTexte: "Le calculateur l’estime avec les barèmes 2026 pour Genève, Vaud, le Valais, Fribourg, Neuchâtel, le Jura et le Jura bernois.",
     faq: [
       {
         q: `Combien rapporte un compte 3a en 2026${N}?`,
@@ -109,7 +109,7 @@ const TAUX = {
     appli: "Pillar 3a interest rates",
     partage: `Pillar 3a account rates at ${NB} Swiss banks, read on their own pages and sorted by rate.`,
     lienImpot: "How much tax does your 3a payment save?",
-    lienImpotTexte: "The calculator estimates it with the 2026 tax scales for Geneva, Vaud, Valais, Fribourg, Neuchâtel and the Bernese Jura.",
+    lienImpotTexte: "The calculator estimates it with the 2026 tax scales for Geneva, Vaud, Valais, Fribourg, Neuchâtel, Jura and the Bernese Jura.",
     faq: [
       {
         q: "How much does a pillar 3a account pay in 2026?",
@@ -196,6 +196,10 @@ export function PageTaux3a({ locale }: { locale: Locale }) {
           <p className="lien-outil-3a">
             <a href={locale === "fr" ? OUTILS.impot3a : OUTILS_EN.impot3a}>{t.lienImpot}</a> {t.lienImpotTexte}
           </p>
+          <p className="lien-outil-3a">
+            <a href={locale === "fr" ? PAGES_DONNEES.historique3a : PAGES_DONNEES_EN.historique3a}>{locale === "fr" ? "Historique des taux 3a" : "Pillar 3a rate history"}</a>{" "}
+            {locale === "fr" ? "Chaque relevé hebdomadaire depuis le 22.11.2026, avec la moyenne, la médiane et le fichier CSV." : "Every weekly survey since 22.11.2026, with the mean, the median and the CSV file."}
+          </p>
         </div>
         <Faqs faq={t.faq} maj={t.maj} />
       </main>
@@ -213,7 +217,7 @@ const EXEMPLES: { etat: I.EtatCivil; enfants: number; revenu: number; versement:
   { etat: "seul", enfants: 0, revenu: 150000, versement: P26.avecLPP },
   { etat: "marie", enfants: 2, revenu: 140000, versement: 2 * P26.avecLPP },
 ];
-const COMMUNE_EX: Record<I.Canton, string> = { GE: "Genève", VD: "Lausanne", VS: "Sion", FR: "Fribourg", NE: "Neuchâtel", BE: "Saint-Imier" };
+const COMMUNE_EX: Record<I.Canton, string> = { GE: "Genève", VD: "Lausanne", VS: "Sion", FR: "Fribourg", NE: "Neuchâtel", JU: "Delémont", BE: "Saint-Imier" };
 const ex = (c: I.Canton, e: (typeof EXEMPLES)[number]) =>
   I.economie3a({ canton: c, commune: COMMUNE_EX[c], etat: e.etat, enfants: e.enfants, revenu: e.revenu }, e.versement);
 const EX_GE = EXEMPLES.map((e) => ex("GE", e));
@@ -221,7 +225,7 @@ const EX_VD = EXEMPLES.map((e) => ex("VD", e));
 const CAP_GE = I.impotCapital("GE", "Genève", "seul", 0, 100000);
 const CAP_VD = I.impotCapital("VD", "Lausanne", "seul", 0, 100000);
 /* Un exemple par canton ajouté : personne seule, 90 000 CHF, versement maximal ; retrait de 100 000 CHF. */
-const AUTRES: I.Canton[] = ["VS", "FR", "NE", "BE"];
+const AUTRES: I.Canton[] = ["VS", "FR", "NE", "JU", "BE"];
 const EX_AUTRES = AUTRES.map((c) => ({
   canton: c,
   commune: COMMUNE_EX[c],
@@ -235,7 +239,7 @@ const IMPOT = {
     alt: OUTILS_EN.impot3a,
     titre: `Économie d’impôt 3a en Suisse romande${N}: calcul 2026`,
     description:
-      "Ce qu’un versement 3a vous fait économiser d’impôt à Genève, dans les cantons de Vaud, du Valais, de Fribourg, de Neuchâtel ou dans le Jura bernois en 2026.",
+      "Ce qu’un versement 3a vous fait économiser d’impôt à Genève, dans les cantons de Vaud, du Valais, de Fribourg, de Neuchâtel, du Jura ou dans le Jura bernois en 2026.",
     h1: "Économie d’impôt grâce au 3e pilier",
     intro: `À Genève, une personne seule avec 90 000 CHF de revenu imposable économise environ ${nfFr.format(EX_GE[1].economie.total)} CHF d’impôt en versant ${nfFr.format(P26.avecLPP)} CHF sur son 3a en 2026 ; à Lausanne, environ ${nfFr.format(EX_VD[1].economie.total)} CHF. Indiquez votre situation pour votre propre estimation, impôt fédéral, cantonal et communal compris.`,
     prive: "Le calcul se fait dans votre navigateur. Nous ne recevons ni votre revenu ni votre commune.",
@@ -287,10 +291,10 @@ const IMPOT = {
       },
       {
         q: `D’où viennent les barèmes du calculateur${N}?`,
-        a: "Le calculateur reprend les barèmes 2026 de l’Administration fédérale des contributions pour l’impôt fédéral direct, et pour chaque canton les lois, barèmes et listes de coefficients communaux publiés par son administration fiscale. Les résultats ont été vérifiés le 22.11.2026 sur les calculettes officielles de Genève, de Vaud, du Valais, de Fribourg et de Neuchâtel, à quelques centimes près, et pour le Jura bernois sur le calculateur de l’AFC, vers lequel le canton de Berne renvoie. Le canton du Jura sera ajouté quand sa calculette officielle aura pu être consultée.",
+        a: "Le calculateur reprend les barèmes 2026 de l’Administration fédérale des contributions pour l’impôt fédéral direct, et pour chaque canton les lois, barèmes et listes de coefficients communaux publiés par son administration fiscale. Les résultats ont été vérifiés sur les calculettes officielles de Genève, de Vaud, du Valais, de Fribourg et de Neuchâtel le 22.11.2026, et du Jura le 23.11.2026, à quelques centimes près. Pour le Jura bernois, ils ont été vérifiés sur le calculateur de l’AFC, vers lequel le canton de Berne renvoie.",
       },
     ] as Faq[],
-    maj: `Mis à jour le ${dateLongue(DATE_IMPOTS, "fr")}, avec les barèmes 2026 de l’AFC et des administrations fiscales de Genève, Vaud, du Valais, de Fribourg, de Neuchâtel et de Berne, et les plafonds 3a de l’OFAS.`,
+    maj: `Mis à jour le ${dateLongue(DATE_IMPOTS, "fr")}, avec les barèmes 2026 de l’AFC et des administrations fiscales de Genève, Vaud, du Valais, de Fribourg, de Neuchâtel, du Jura et de Berne, et les plafonds 3a de l’OFAS.`,
     footer: "Cette estimation est donnée à titre d’information. Seule la taxation de l’administration fiscale fait foi.",
   },
   en: {
@@ -298,7 +302,7 @@ const IMPOT = {
     alt: OUTILS.impot3a,
     titre: "Pillar 3a tax savings in French-speaking Switzerland 2026",
     description:
-      "How much tax a pillar 3a payment saves you in Geneva, Vaud, Valais, Fribourg, Neuchâtel or the Bernese Jura, with 2026 tax scales checked canton by canton.",
+      "How much tax a pillar 3a payment saves you in Geneva, Vaud, Valais, Fribourg, Neuchâtel, Jura or the Bernese Jura, with 2026 tax scales checked canton by canton.",
     h1: "Tax savings from pillar 3a",
     intro: `In Geneva, a single person with CHF 90,000 of taxable income saves about CHF ${nfEn.format(EX_GE[1].economie.total)} in tax by paying CHF ${nfEn.format(P26.avecLPP)} into a 3a in 2026; in Lausanne, about CHF ${nfEn.format(EX_VD[1].economie.total)}. Enter your situation for your own estimate, including federal, cantonal and municipal tax.`,
     prive: "The calculation runs in your browser. We receive neither your income nor your municipality.",
@@ -350,10 +354,10 @@ const IMPOT = {
       },
       {
         q: "Where do the calculator’s tax scales come from?",
-        a: "The calculator uses the Federal Tax Administration’s 2026 scales for direct federal tax and, for each canton, the laws, scales and lists of municipal multipliers published by its tax administration. The results were checked on 22.11.2026 against the official calculators of Geneva, Vaud, Valais, Fribourg and Neuchâtel, to within a few centimes, and for the Bernese Jura against the Federal Tax Administration’s calculator, which the canton of Bern links to. The canton of Jura will be added once its official calculator can be consulted.",
+        a: "The calculator uses the Federal Tax Administration’s 2026 scales for direct federal tax and, for each canton, the laws, scales and lists of municipal multipliers published by its tax administration. The results were checked against the official calculators of Geneva, Vaud, Valais, Fribourg and Neuchâtel on 22.11.2026, and of Jura on 23.11.2026, to within a few centimes. For the Bernese Jura, they were checked against the Federal Tax Administration’s calculator, which the canton of Bern links to.",
       },
     ] as Faq[],
-    maj: `Updated on ${dateLongue(DATE_IMPOTS, "en")}, with 2026 tax scales from the Federal Tax Administration and the tax administrations of Geneva, Vaud, Valais, Fribourg, Neuchâtel and Bern, and 3a caps from the FSIO.`,
+    maj: `Updated on ${dateLongue(DATE_IMPOTS, "en")}, with 2026 tax scales from the Federal Tax Administration and the tax administrations of Geneva, Vaud, Valais, Fribourg, Neuchâtel, Jura and Bern, and 3a caps from the FSIO.`,
     footer: "This estimate is for information only. The tax administration’s assessment alone is authoritative.",
   },
 };
@@ -497,6 +501,10 @@ export function PageImpot3a({ locale }: { locale: Locale }) {
 
           <p className="lien-outil-3a">
             <a href={locale === "fr" ? OUTILS.taux3a : OUTILS_EN.taux3a}>{t.lienTaux}</a> {t.lienTauxTexte}
+          </p>
+          <p className="lien-outil-3a">
+            <a href={locale === "fr" ? PAGES_DONNEES.communes3a : PAGES_DONNEES_EN.communes3a}>{locale === "fr" ? "L’économie commune par commune" : "Savings municipality by municipality"}</a>{" "}
+            {locale === "fr" ? "Le même calcul pour un profil type, dans toutes les communes des cantons couverts, avec un tableau à trier." : "The same calculation for a standard profile, in every municipality of the cantons covered, in a sortable table."}
           </p>
         </div>
         <Faqs faq={t.faq} maj={t.maj} />

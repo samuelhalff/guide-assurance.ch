@@ -53,6 +53,8 @@ Six lines come up most often, and two of them are compulsory for every employer.
 - [Property insurance](/en/business/property-insurance/) protects stock, goods and machinery, and can cover business interruption. In Vaud, business contents must be insured with the ECA (cantonal building insurance institution) against fire and natural hazards.
 - [Cyber insurance for small businesses](/en/business/cyber-insurance/) is optional. It pays crisis costs after a cyberattack, business interruption and liability linked to data.
 
+Hiring cross-border workers or people moving to Switzerland? The [HR kit](/en/business/hr-kit/) is a one-page PDF in French and English on their health insurance deadlines.
+
 ## What can you compare between contracts?
 
 Offers differ on the same points in every line of cover. The first is what goes beyond the legal minimum, such as the above-minimum part or supplementary cover. Then come the amounts: insured salary, sum insured and benefit period. During waiting periods and up to the excess, the business pays itself. Finally, the exit conditions set the notice periods and what happens to employees or pensioners.

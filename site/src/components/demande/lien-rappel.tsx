@@ -3,7 +3,7 @@ import { useEffect, useRef, type RefObject } from "react";
 import { suivre } from "@/lib/analytics";
 import { RAPPEL, ecrirePreremplissage, lirePreremplissage } from "@/lib/demande";
 
-export type EmplacementRappel = "tete" | "accueil" | "guide" | "comparateur" | "produit" | "outil3a" | "lettre" | "frontalier";
+export type EmplacementRappel = "tete" | "accueil" | "guide" | "comparateur" | "produit" | "outil3a" | "lettre" | "frontalier" | "rappels" | "barometre" | "kit_rh" | "donnees" | "actualite";
 
 /* Vue d'un appel « Être rappelé » : rappel_vu {emplacement}, une fois par emplacement et par page, quand la moitié
    de l'appel est à l'écran. Rien d'autre ne part (aucune valeur saisie). La tête est exclue : toujours visible,

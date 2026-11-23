@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "Pour citer ces données, utilisez les informations ci-dessous. / If you use this data, please cite it as below."
+type: dataset
+title: "Guide Assurance : données ouvertes sur les primes LAMal 2027, l'économie d'impôt 3a et les taux 3a en Suisse romande"
+authors:
+  - name: "Guide Assurance (guide-assurance.ch)"
+url: "https://guide-assurance.ch/chiffres-cles-2027/"
+repository-code: "https://github.com/samuelhalff/guide-assurance.ch"
+license: CC-BY-4.0
+date-released: "2026-11-23"
+keywords:
+  - LAMal
+  - KVG
+  - health insurance premiums
+  - Switzerland
+  - pillar 3a
+  - tax
+  - open data
+abstract: >-
+  Fichiers CSV calculés à partir de données officielles : statistiques des primes LAMal 2027 par région de
+  prime et profil type (OFSP), économie d'impôt 2026 d'un versement 3a commune par commune pour un profil
+  type (barèmes AFC et cantonaux), relevés hebdomadaires des taux des comptes 3a (pages des banques).

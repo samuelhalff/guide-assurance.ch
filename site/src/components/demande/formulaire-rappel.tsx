@@ -5,7 +5,7 @@ import { CRENEAUX, CRENEAU_LABELS, FUNNEL_EVENTS, PORTE_RAPPEL, PORTES_DEF, RAPP
 import { CURRENT_CONSENT_VERSION } from "@shared/demande/consent-public";
 import { cantonFromNpa } from "@shared/demande/npa";
 import type { Demande } from "@shared/demande/schema";
-import { suivre } from "@/lib/analytics";
+import { suivre, marquerLead } from "@/lib/analytics";
 import { DEMANDE, DEMANDE_ENVOYEE, TEXTE_CTA, lirePreremplissage } from "@/lib/demande";
 import { Turnstile } from "@/components/demande/turnstile";
 import { Consentements, Erreur, Puce, origine, typo } from "@/components/demande/formulaire-demande";
@@ -156,6 +156,7 @@ export function FormulaireRappel({ locale }: { locale: Locale }) {
       const r = await fetch("/api/demande", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(corps) });
       if (r.status === 202) {
         suivre(FUNNEL_EVENTS.envoyee, { porte: PORTE_RAPPEL }, true);
+        marquerLead(PORTE_RAPPEL);
         window.location.assign(`${DEMANDE_ENVOYEE[locale]}?p=${PORTE_RAPPEL}`);
         return;
       }

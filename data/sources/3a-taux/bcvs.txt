@@ -1,5 +1,5 @@
 URL: https://www.bcvs.ch/prives/prevoyance-assurances/comptes-de-prevoyance/compte-epargne-3e-pilier
-Relevé: 2026-11-22T20:43:26+00:00
+Relevé: 2026-11-23T05:30:12+00:00
 Méthode: http
 Extrait retenu: Taux & conditions Monnaie CHF Taux d'intérêt 0.15%
 Validité: -

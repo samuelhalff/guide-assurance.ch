@@ -1,5 +1,5 @@
 /* node --no-warnings tests/impot3a.test.mts
-   Économie d'impôt 3a, année fiscale 2026 (GE, VD, IFD).
+   Économie d'impôt 3a, année fiscale 2026 (GE, VD, VS, FR, NE, JU, Jura bernois, IFD).
    1. Résultats des calculettes officielles, relevés le 22.11.2026 :
       - Genève : « Simulation fiscale 2026 », ge.ch/afcaelp1dmapublic/2026 (revenu saisi en « autres revenus »,
         sans déduction ; impôt sur le revenu hors taxe personnelle de 25 CHF) ;
@@ -168,6 +168,28 @@ const CAPITAL_OFFICIEL: [I.Canton, string, I.EtatCivil, number, number, number, 
   ["BE", "Saint-Imier", "seul", 100000, 2696, 1586, 1],
   ["BE", "Tavannes", "marie", 300000, 9377, 6052, 1],
 ];
+/* Jura : calculette officielle du canton (fixtures/ju-calculette-officielle-2026.json), 18 profils relevés le 23.11.2026
+   (Delémont, Porrentruy, Moutier et des petites communes ; seul, marié avec ou sans enfants, parent seul ; de 12 000
+   à 500 000 CHF). Au centime pour l'impôt d'État et l'impôt communal ; IFD à 5 centimes près (à 72 742 CHF, la
+   calculette jurassienne arrondit l'IFD aux 5 centimes les plus proches, nous à l'inférieur comme Genève et Vaud).
+   Les mêmes profils sur le calculateur de l'AFC : à 1 CHF près (l'AFC arrondit au franc). La calculette jurassienne n'a pas de mode capital : les
+   retraits sont contrôlés sur l'AFC plus bas. */
+const JU = JSON.parse(fs.readFileSync(new URL("./fixtures/ju-calculette-officielle-2026.json", import.meta.url), "utf8"));
+t(`Jura : calculette officielle 2026 (${JU.profils.length} profils) et AFC`, () => {
+  assert.ok(JU.profils.length >= 18);
+  for (const x of JU.profils) {
+    assert.ok(I.trouverCommune("JU", x.commune), `JU ${x.commune} absente`);
+    const r = I.impotRevenu({ canton: "JU", commune: x.commune, etat: x.etat, enfants: x.enfants, revenu: x.revenu, revenuIfd: x.revenuIfd });
+    const q = `JU ${x.id} ${x.commune} ${x.etat} ${x.revenu}`;
+    proche(r.cantonal, x.cantonal, 0.001, `${q} cantonal`);
+    proche(r.communal, x.communal, 0.001, `${q} communal`);
+    proche(r.ifd, x.ifd, 0.051, `${q} IFD`);
+    proche(r.cantonal, x.estv.cantonal, 1, `${q} cantonal AFC`);
+    proche(r.communal, x.estv.communal, 1, `${q} communal AFC`);
+    proche(r.ifd, x.estv.ifd, 1, `${q} IFD AFC`);
+  }
+});
+
 t("VS, FR, NE, Jura bernois : retraits en capital", () => {
   for (const [canton, commune, etat, capital, cant, comm, tol] of CAPITAL_OFFICIEL) {
     const r = I.impotCapital(canton, commune, etat, 0, capital);
@@ -176,11 +198,11 @@ t("VS, FR, NE, Jura bernois : retraits en capital", () => {
   }
 });
 
-/* Calculateur de l'AFC : 40 profils de revenu et 10 retraits par canton (fixtures/estv-impots-2026-romandie.json).
+/* Calculateur de l'AFC : 40 profils de revenu et 10 retraits par canton, Jura compris (fixtures/estv-impots-2026-romandie.json).
    Écarts connus : l'AFC arrondit au franc ; à Fribourg elle interpole le barème famille en ligne droite au lieu du pas
    par 100 CHF de la loi (quelques francs de plus ou de moins, 5 CHF au plus sur ces profils). */
 const AFC2 = JSON.parse(fs.readFileSync(new URL("./fixtures/estv-impots-2026-romandie.json", import.meta.url), "utf8"));
-t("AFC : profils de revenu VS, FR, NE, Jura bernois", () => {
+t("AFC : profils de revenu VS, FR, NE, JU, Jura bernois", () => {
   for (const c of AFC2.revenus) {
     const r = I.impotRevenu({ canton: c.canton, commune: c.commune, etat: c.etat, enfants: c.enfants, revenu: c.revenu });
     const q = `${c.canton} ${c.commune} ${c.etat} ${c.enfants} ${c.revenu}`;
@@ -191,7 +213,7 @@ t("AFC : profils de revenu VS, FR, NE, Jura bernois", () => {
     if (c.commune !== "Le Cerneux-Péquignot") proche(r.communal, c.communal, tol, `${q} communal`);
   }
 });
-t("AFC : retraits en capital VS, FR, NE, Jura bernois", () => {
+t("AFC : retraits en capital VS, FR, NE, JU, Jura bernois", () => {
   for (const c of AFC2.capitaux) {
     const r = I.impotCapital(c.canton, c.commune, c.etat, 0, c.capital);
     const q = `${c.canton} ${c.commune} ${c.etat} ${c.capital}`;
@@ -226,15 +248,18 @@ t("communes : 45 à Genève, 300 dans le canton de Vaud, coefficients plausibles
   for (const c of [...I.COMMUNES.GE, ...I.COMMUNES.VD]) assert.ok(c.coefficient >= 20 && c.coefficient <= 90, c.nom);
 });
 
-t("communes VS, FR, NE et Jura bernois : listes officielles 2026", () => {
+t("communes VS, FR, NE, JU et Jura bernois : listes officielles 2026", () => {
   assert.strictEqual(I.COMMUNES.VS.length, 122);
   assert.strictEqual(I.COMMUNES.FR.length, 119);
   assert.strictEqual(I.COMMUNES.NE.length, 24);
   assert.strictEqual(I.COMMUNES.BE.length, 39);
+  assert.strictEqual(I.COMMUNES.JU.length, 51); // Moutier dans le canton du Jura depuis le 01.01.2026
+  assert.strictEqual(I.trouverCommune("JU", "Moutier")!.coefficient, 2.3);
+  assert.strictEqual(I.trouverCommune("JU", "Delémont")!.coefficient, 1.9);
   assert.ok(!I.trouverCommune("BE", "Moutier"), "Moutier est jurassien depuis 2026");
   assert.strictEqual(I.trouverCommune("NE", "Le Cerneux-Péquignot")!.coefficient, 72);
   assert.deepStrictEqual([I.trouverCommune("VS", "Sion")!.coefficient, I.trouverCommune("VS", "Sion")!.indexation], [1.1, 176]);
-  for (const ct of ["VS", "FR", "NE", "BE"] as const) assert.ok(I.trouverCommune(ct, I.COMMUNE_DEFAUT[ct]), ct);
+  for (const ct of ["VS", "FR", "NE", "JU", "BE"] as const) assert.ok(I.trouverCommune(ct, I.COMMUNE_DEFAUT[ct]), ct);
 });
 
 t("plafonds 3a 2026 et 2027 (OFAS)", () => {

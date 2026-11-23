@@ -5,6 +5,8 @@ import * as D from "@/lib/engines/delais";
 import { outils } from "@/lib/nav";
 import type { Locale } from "@/lib/i18n";
 import { IconeTelephone, LienRappel } from "@/components/demande/lien-rappel";
+import { BoutonAgenda } from "@/components/outils/ajouter-agenda";
+import { evenementLettre } from "@/lib/ics";
 
 /* Lettre de résiliation : interface de mockups/v2/lettre-resiliation.html, délais par src/lib/engines/delais.ts.
    La lettre est rédigée dans le navigateur ; rien n'est envoyé ni gardé. */
@@ -355,6 +357,18 @@ export function LettreResiliation({ aujourdhuiIso, locale = "fr" }: { aujourdhui
           <button type="button" className="bouton second" onClick={copier}>{isEn ? "Copy the text" : "Copier le texte"}</button>
           <span className="copie-ok" role="status">{copie}</span>
         </div>
+        {r.dl && r.fin ? (
+          <div className="actions actions-agenda">
+            <BoutonAgenda
+              locale={locale}
+              type={type === "lamal" ? "lettre_lamal" : "lettre_lca"}
+              fichier={isEn ? "cancellation-deadline.ics" : "delai-resiliation.ics"}
+              evenements={() => (r.dl && r.fin ? [evenementLettre(type, r.dl, r.fin, isEn ? "en" : "fr")] : [])}
+            >
+              {isEn ? `Add ${fmtUI(r.dl)} to my calendar` : `Ajouter le ${fmt(r.dl)} à mon agenda`}
+            </BoutonAgenda>
+          </div>
+        ) : null}
         {faite ? (
           <p className="rappel-liste rappel-lettre">
             {type === "lamal"

@@ -1,0 +1,997 @@
+{
+ "annee": 2027,
+ "annee_precedente": 2026,
+ "genere_le": "2026-11-23",
+ "source": {
+  "primes": "OFSP, primes LAMal 2027 approuvées (priminfo.admin.ch)",
+  "moyennes": {
+   "publisher": "OFSP",
+   "urls": [
+    "https://www.bag.admin.ch/dam/fr/sd-web/J6IJ1GWn3TP9/kantonale%20monatliche%20mittlere%20Pr%C3%A4mie%20pro%20Altersklasse_PG2027.pdf",
+    "https://www.priminfo.admin.ch/downloads/medienmitteilung_2027_FR.pdf",
+    "https://www.bag.admin.ch/fr/newnsb/BfuGvedj0OOX",
+    "https://www.bag.admin.ch/fr/assurance-maladie-comparaison-des-primes",
+    "https://www.priminfo.admin.ch/downloads/wegweiser_GE-2027.pdf",
+    "https://www.priminfo.admin.ch/downloads/wegweiser_VD-2027.pdf",
+    "https://www.priminfo.admin.ch/downloads/wegweiser_NE-2027.pdf",
+    "https://www.priminfo.admin.ch/downloads/wegweiser_JU-2027.pdf",
+    "https://www.priminfo.admin.ch/downloads/wegweiser_FR-2027.pdf",
+    "https://www.priminfo.admin.ch/downloads/wegweiser_VS-2027.pdf"
+   ],
+   "published": "2026-09-29",
+   "retrieved": "2026-11-22"
+  },
+  "precedente": null
+ },
+ "national": {
+  "adulte": 487.6,
+  "adulte_prec": 464.8,
+  "variation_pct": 4.9
+ },
+ "cantons": [
+  {
+   "code": "GE",
+   "officiel": {
+    "adulte": 610.6,
+    "adulte_prec": 585.4,
+    "variation_pct": 4.3,
+    "jeune": 453.0,
+    "enfant": 157.7
+   },
+   "regions": [
+    {
+     "region": 0,
+     "commune": "Genève",
+     "assureurs": 21,
+     "profils": [
+      {
+       "cle": "adulte_300",
+       "classe": "adulte",
+       "franchise": 300,
+       "accident": true,
+       "standard": {
+        "n": 21,
+        "min": 711.2,
+        "q1": 745.5,
+        "med": 771.0,
+        "q3": 793.5,
+        "max": 915.7
+       },
+       "tous": {
+        "n": 106,
+        "min": 611.7,
+        "q1": 653.14,
+        "med": 686.05,
+        "q3": 720.15,
+        "max": 915.7
+       },
+       "prec": null
+      },
+      {
+       "cle": "adulte_2500",
+       "classe": "adulte",
+       "franchise": 2500,
+       "accident": true,
+       "standard": {
+        "n": 21,
+        "min": 582.9,
+        "q1": 617.2,
+        "med": 642.7,
+        "q3": 665.5,
+        "max": 787.7
+       },
+       "tous": {
+        "n": 106,
+        "min": 483.4,
+        "q1": 524.84,
+        "med": 558.15,
+        "q3": 591.82,
+        "max": 787.7
+       },
+       "prec": null
+      },
+      {
+       "cle": "jeune_300",
+       "classe": "jeune",
+       "franchise": 300,
+       "accident": true,
+       "standard": {
+        "n": 21,
+        "min": 471.8,
+        "q1": 549.4,
+        "med": 593.0,
+        "q3": 620.4,
+        "max": 722.0
+       },
+       "tous": {
+        "n": 106,
+        "min": 452.95,
+        "q1": 484.57,
+        "med": 531.85,
+        "q3": 559.4,
+        "max": 722.0
+       },
+       "prec": null
+      },
+      {
+       "cle": "enfant_0",
+       "classe": "enfant",
+       "franchise": 0,
+       "accident": true,
+       "standard": {
+        "n": 21,
+        "min": 156.5,
+        "q1": 182.3,
+        "med": 190.1,
+        "q3": 198.2,
+        "max": 229.0
+       },
+       "tous": {
+        "n": 106,
+        "min": 134.6,
+        "q1": 165.48,
+        "med": 176.75,
+        "q3": 189.4,
+        "max": 229.0
+       },
+       "prec": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "VD",
+   "officiel": {
+    "adulte": 543.5,
+    "adulte_prec": 526.6,
+    "variation_pct": 3.2,
+    "jeune": 382.1,
+    "enfant": 146.3
+   },
+   "regions": [
+    {
+     "region": 1,
+     "commune": "Lausanne",
+     "assureurs": 21,
+     "profils": [
+      {
+       "cle": "adulte_300",
+       "classe": "adulte",
+       "franchise": 300,
+       "accident": true,
+       "standard": {
+        "n": 21,
+        "min": 661.4,
+        "q1": 699.2,
+        "med": 720.8,
+        "q3": 732.4,
+        "max": 780.8
+       },
+       "tous": {
+        "n": 106,
+        "min": 584.3,
+        "q1": 615.8,
+        "med": 644.5,
+        "q3": 677.23,
+        "max": 780.8
+       },
+       "prec": null
+      },
+      {
+       "cle": "adulte_2500",
+       "classe": "adulte",
+       "franchise": 2500,
+       "accident": true,
+       "standard": {
+        "n": 21,
+        "min": 533.1,
+        "q1": 570.9,
+        "med": 592.5,
+        "q3": 604.1,
+        "max": 652.9
+       },
+       "tous": {
+        "n": 106,
+        "min": 456.0,
+        "q1": 487.8,
+        "med": 517.5,
+        "q3": 553.3,
+        "max": 652.9
+       },
+       "prec": null
+      },
+      {
+       "cle": "jeune_300",
+       "classe": "jeune",
+       "franchise": 300,
+       "accident": true,
+       "standard": {
+        "n": 21,
+        "min": 442.65,
+        "q1": 513.4,
+        "med": 525.1,
+        "q3": 561.0,
+        "max": 658.0
+       },
+       "tous": {
+        "n": 106,
+        "min": 424.95,
+        "q1": 456.45,
+        "med": 489.4,
+        "q3": 516.88,
+        "max": 658.0
+       },
+       "prec": null
+      },
+      {
+       "cle": "enfant_0",
+       "classe": "enfant",
+       "franchise": 0,
+       "accident": true,
+       "standard": {
+        "n": 21,
+        "min": 156.6,
+        "q1": 169.5,
+        "med": 178.5,
+        "q3": 187.0,
+        "max": 203.9
+       },
+       "tous": {
+        "n": 106,
+        "min": 140.1,
+        "q1": 154.43,
+        "med": 168.7,
+        "q3": 176.9,
+        "max": 203.9
+       },
+       "prec": null
+      }
+     ]
+    },
+    {
+     "region": 2,
+     "commune": "Yverdon-les-Bains",
+     "assureurs": 21,
+     "profils": [
+      {
+       "cle": "adulte_300",
+       "classe": "adulte",
+       "franchise": 300,
+       "accident": true,
+       "standard": {
+        "n": 21,
+        "min": 614.4,
+        "q1": 659.6,
+        "med": 677.6,
+        "q3": 685.0,
+        "max": 749.6
+       },
+       "tous": {
+        "n": 106,
+        "min": 559.1,
+        "q1": 584.0,
+        "med": 608.3,
+        "q3": 640.3,
+        "max": 749.6
+       },
+       "prec": null
+      },
+      {
+       "cle": "adulte_2500",
+       "classe": "adulte",
+       "franchise": 2500,
+       "accident": true,
+       "standard": {
+        "n": 21,
+        "min": 486.1,
+        "q1": 531.2,
+        "med": 549.6,
+        "q3": 556.7,
+        "max": 621.6
+       },
+       "tous": {
+        "n": 106,
+        "min": 431.1,
+        "q1": 455.7,
+        "med": 479.9,
+        "q3": 516.4,
+        "max": 621.6
+       },
+       "prec": null
+      },
+      {
+       "cle": "jeune_300",
+       "classe": "jeune",
+       "franchise": 300,
+       "accident": true,
+       "standard": {
+        "n": 21,
+        "min": 437.9,
+        "q1": 478.7,
+        "med": 494.2,
+        "q3": 532.5,
+        "max": 612.0
+       },
+       "tous": {
+        "n": 106,
+        "min": 408.3,
+        "q1": 429.85,
+        "med": 462.85,
+        "q3": 487.52,
+        "max": 612.0
+       },
+       "prec": null
+      },
+      {
+       "cle": "enfant_0",
+       "classe": "enfant",
+       "franchise": 0,
+       "accident": true,
+       "standard": {
+        "n": 21,
+        "min": 143.5,
+        "q1": 160.0,
+        "med": 168.3,
+        "q3": 176.95,
+        "max": 196.8
+       },
+       "tous": {
+        "n": 106,
+        "min": 128.9,
+        "q1": 147.33,
+        "med": 157.35,
+        "q3": 170.92,
+        "max": 196.8
+       },
+       "prec": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "VS",
+   "officiel": {
+    "adulte": 460.9,
+    "adulte_prec": 436.1,
+    "variation_pct": 5.7,
+    "jeune": 310.1,
+    "enfant": 116.5
+   },
+   "regions": [
+    {
+     "region": 1,
+     "commune": "Sion",
+     "assureurs": 24,
+     "profils": [
+      {
+       "cle": "adulte_300",
+       "classe": "adulte",
+       "franchise": 300,
+       "accident": true,
+       "standard": {
+        "n": 24,
+        "min": 574.2,
+        "q1": 592.35,
+        "med": 601.85,
+        "q3": 624.88,
+        "max": 652.9
+       },
+       "tous": {
+        "n": 112,
+        "min": 507.6,
+        "q1": 530.0,
+        "med": 552.35,
+        "q3": 578.27,
+        "max": 652.9
+       },
+       "prec": null
+      },
+      {
+       "cle": "adulte_2500",
+       "classe": "adulte",
+       "franchise": 2500,
+       "accident": true,
+       "standard": {
+        "n": 24,
+        "min": 445.9,
+        "q1": 464.8,
+        "med": 473.8,
+        "q3": 496.65,
+        "max": 524.6
+       },
+       "tous": {
+        "n": 112,
+        "min": 379.3,
+        "q1": 402.22,
+        "med": 425.3,
+        "q3": 449.97,
+        "max": 524.6
+       },
+       "prec": null
+      },
+      {
+       "cle": "jeune_300",
+       "classe": "jeune",
+       "franchise": 300,
+       "accident": true,
+       "standard": {
+        "n": 24,
+        "min": 391.95,
+        "q1": 435.13,
+        "med": 454.55,
+        "q3": 467.62,
+        "max": 517.2
+       },
+       "tous": {
+        "n": 112,
+        "min": 368.0,
+        "q1": 391.91,
+        "med": 424.0,
+        "q3": 451.15,
+        "max": 517.2
+       },
+       "prec": null
+      },
+      {
+       "cle": "enfant_0",
+       "classe": "enfant",
+       "franchise": 0,
+       "accident": true,
+       "standard": {
+        "n": 24,
+        "min": 127.9,
+        "q1": 139.59,
+        "med": 143.55,
+        "q3": 150.55,
+        "max": 177.9
+       },
+       "tous": {
+        "n": 112,
+        "min": 117.4,
+        "q1": 128.2,
+        "med": 135.35,
+        "q3": 142.38,
+        "max": 177.9
+       },
+       "prec": null
+      }
+     ]
+    },
+    {
+     "region": 2,
+     "commune": "Brig-Glis",
+     "assureurs": 26,
+     "profils": [
+      {
+       "cle": "adulte_300",
+       "classe": "adulte",
+       "franchise": 300,
+       "accident": true,
+       "standard": {
+        "n": 26,
+        "min": 494.45,
+        "q1": 517.85,
+        "med": 537.1,
+        "q3": 565.55,
+        "max": 616.6
+       },
+       "tous": {
+        "n": 124,
+        "min": 429.0,
+        "q1": 470.6,
+        "med": 498.35,
+        "q3": 525.12,
+        "max": 616.6
+       },
+       "prec": null
+      },
+      {
+       "cle": "adulte_2500",
+       "classe": "adulte",
+       "franchise": 2500,
+       "accident": true,
+       "standard": {
+        "n": 26,
+        "min": 367.7,
+        "q1": 390.36,
+        "med": 408.8,
+        "q3": 437.25,
+        "max": 488.6
+       },
+       "tous": {
+        "n": 124,
+        "min": 317.9,
+        "q1": 347.1,
+        "med": 370.05,
+        "q3": 398.1,
+        "max": 488.6
+       },
+       "prec": null
+      },
+      {
+       "cle": "jeune_300",
+       "classe": "jeune",
+       "franchise": 300,
+       "accident": true,
+       "standard": {
+        "n": 26,
+        "min": 362.1,
+        "q1": 389.93,
+        "med": 405.85,
+        "q3": 432.35,
+        "max": 467.5
+       },
+       "tous": {
+        "n": 124,
+        "min": 313.2,
+        "q1": 361.6,
+        "med": 379.65,
+        "q3": 402.13,
+        "max": 467.5
+       },
+       "prec": null
+      },
+      {
+       "cle": "enfant_0",
+       "classe": "enfant",
+       "franchise": 0,
+       "accident": true,
+       "standard": {
+        "n": 26,
+        "min": 104.85,
+        "q1": 122.65,
+        "med": 131.2,
+        "q3": 134.7,
+        "max": 165.8
+       },
+       "tous": {
+        "n": 124,
+        "min": 93.3,
+        "q1": 113.35,
+        "med": 122.0,
+        "q3": 130.39,
+        "max": 165.8
+       },
+       "prec": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "FR",
+   "officiel": {
+    "adulte": 465.5,
+    "adulte_prec": 442.6,
+    "variation_pct": 5.2,
+    "jeune": 318.1,
+    "enfant": 120.1
+   },
+   "regions": [
+    {
+     "region": 1,
+     "commune": "Fribourg",
+     "assureurs": 23,
+     "profils": [
+      {
+       "cle": "adulte_300",
+       "classe": "adulte",
+       "franchise": 300,
+       "accident": true,
+       "standard": {
+        "n": 23,
+        "min": 593.3,
+        "q1": 612.7,
+        "med": 629.8,
+        "q3": 651.7,
+        "max": 699.7
+       },
+       "tous": {
+        "n": 115,
+        "min": 513.2,
+        "q1": 547.5,
+        "med": 566.3,
+        "q3": 602.3,
+        "max": 699.7
+       },
+       "prec": null
+      },
+      {
+       "cle": "adulte_2500",
+       "classe": "adulte",
+       "franchise": 2500,
+       "accident": true,
+       "standard": {
+        "n": 23,
+        "min": 465.0,
+        "q1": 484.4,
+        "med": 501.5,
+        "q3": 523.4,
+        "max": 571.7
+       },
+       "tous": {
+        "n": 115,
+        "min": 384.9,
+        "q1": 419.4,
+        "med": 441.3,
+        "q3": 474.75,
+        "max": 571.7
+       },
+       "prec": null
+      },
+      {
+       "cle": "jeune_300",
+       "classe": "jeune",
+       "franchise": 300,
+       "accident": true,
+       "standard": {
+        "n": 23,
+        "min": 402.45,
+        "q1": 450.35,
+        "med": 480.4,
+        "q3": 497.95,
+        "max": 604.8
+       },
+       "tous": {
+        "n": 115,
+        "min": 374.6,
+        "q1": 410.7,
+        "med": 436.3,
+        "q3": 463.6,
+        "max": 604.8
+       },
+       "prec": null
+      },
+      {
+       "cle": "enfant_0",
+       "classe": "enfant",
+       "franchise": 0,
+       "accident": true,
+       "standard": {
+        "n": 23,
+        "min": 137.5,
+        "q1": 147.25,
+        "med": 151.5,
+        "q3": 167.2,
+        "max": 180.9
+       },
+       "tous": {
+        "n": 115,
+        "min": 119.6,
+        "q1": 133.55,
+        "med": 146.2,
+        "q3": 155.5,
+        "max": 180.9
+       },
+       "prec": null
+      }
+     ]
+    },
+    {
+     "region": 2,
+     "commune": "Bulle",
+     "assureurs": 23,
+     "profils": [
+      {
+       "cle": "adulte_300",
+       "classe": "adulte",
+       "franchise": 300,
+       "accident": true,
+       "standard": {
+        "n": 23,
+        "min": 551.0,
+        "q1": 563.75,
+        "med": 587.2,
+        "q3": 597.85,
+        "max": 642.3
+       },
+       "tous": {
+        "n": 116,
+        "min": 479.5,
+        "q1": 504.7,
+        "med": 526.95,
+        "q3": 559.0,
+        "max": 642.3
+       },
+       "prec": null
+      },
+      {
+       "cle": "adulte_2500",
+       "classe": "adulte",
+       "franchise": 2500,
+       "accident": true,
+       "standard": {
+        "n": 23,
+        "min": 422.7,
+        "q1": 435.5,
+        "med": 458.9,
+        "q3": 473.25,
+        "max": 514.3
+       },
+       "tous": {
+        "n": 116,
+        "min": 353.8,
+        "q1": 377.6,
+        "med": 402.75,
+        "q3": 431.9,
+        "max": 514.3
+       },
+       "prec": null
+      },
+      {
+       "cle": "jeune_300",
+       "classe": "jeune",
+       "franchise": 300,
+       "accident": true,
+       "standard": {
+        "n": 23,
+        "min": 398.7,
+        "q1": 413.75,
+        "med": 444.5,
+        "q3": 456.3,
+        "max": 549.6
+       },
+       "tous": {
+        "n": 116,
+        "min": 354.1,
+        "q1": 386.55,
+        "med": 403.9,
+        "q3": 422.6,
+        "max": 549.6
+       },
+       "prec": null
+      },
+      {
+       "cle": "enfant_0",
+       "classe": "enfant",
+       "franchise": 0,
+       "accident": true,
+       "standard": {
+        "n": 23,
+        "min": 124.3,
+        "q1": 133.45,
+        "med": 138.0,
+        "q3": 153.0,
+        "max": 167.3
+       },
+       "tous": {
+        "n": 116,
+        "min": 107.5,
+        "q1": 121.7,
+        "med": 134.45,
+        "q3": 146.48,
+        "max": 167.3
+       },
+       "prec": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "NE",
+   "officiel": {
+    "adulte": 558.8,
+    "adulte_prec": 530.8,
+    "variation_pct": 5.3,
+    "jeune": 377.6,
+    "enfant": 140.8
+   },
+   "regions": [
+    {
+     "region": 0,
+     "commune": "Neuchâtel",
+     "assureurs": 21,
+     "profils": [
+      {
+       "cle": "adulte_300",
+       "classe": "adulte",
+       "franchise": 300,
+       "accident": true,
+       "standard": {
+        "n": 21,
+        "min": 675.6,
+        "q1": 706.2,
+        "med": 730.2,
+        "q3": 757.7,
+        "max": 835.0
+       },
+       "tous": {
+        "n": 107,
+        "min": 583.4,
+        "q1": 625.65,
+        "med": 648.8,
+        "q3": 705.35,
+        "max": 835.0
+       },
+       "prec": null
+      },
+      {
+       "cle": "adulte_2500",
+       "classe": "adulte",
+       "franchise": 2500,
+       "accident": true,
+       "standard": {
+        "n": 21,
+        "min": 547.3,
+        "q1": 577.9,
+        "med": 602.2,
+        "q3": 629.7,
+        "max": 706.7
+       },
+       "tous": {
+        "n": 107,
+        "min": 465.4,
+        "q1": 498.5,
+        "med": 521.3,
+        "q3": 577.2,
+        "max": 706.7
+       },
+       "prec": null
+      },
+      {
+       "cle": "jeune_300",
+       "classe": "jeune",
+       "franchise": 300,
+       "accident": true,
+       "standard": {
+        "n": 21,
+        "min": 447.05,
+        "q1": 532.3,
+        "med": 548.5,
+        "q3": 583.2,
+        "max": 651.3
+       },
+       "tous": {
+        "n": 107,
+        "min": 425.9,
+        "q1": 465.45,
+        "med": 497.5,
+        "q3": 541.65,
+        "max": 651.3
+       },
+       "prec": null
+      },
+      {
+       "cle": "enfant_0",
+       "classe": "enfant",
+       "franchise": 0,
+       "accident": true,
+       "standard": {
+        "n": 21,
+        "min": 155.6,
+        "q1": 166.4,
+        "med": 171.3,
+        "q3": 182.4,
+        "max": 246.4
+       },
+       "tous": {
+        "n": 107,
+        "min": 128.4,
+        "q1": 149.25,
+        "med": 161.25,
+        "q3": 170.9,
+        "max": 246.4
+       },
+       "prec": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "JU",
+   "officiel": {
+    "adulte": 551.0,
+    "adulte_prec": 520.5,
+    "variation_pct": 5.9,
+    "jeune": 346.1,
+    "enfant": 134.8
+   },
+   "regions": [
+    {
+     "region": 0,
+     "commune": "Delémont",
+     "assureurs": 21,
+     "profils": [
+      {
+       "cle": "adulte_300",
+       "classe": "adulte",
+       "franchise": 300,
+       "accident": true,
+       "standard": {
+        "n": 21,
+        "min": 655.8,
+        "q1": 688.0,
+        "med": 703.5,
+        "q3": 735.3,
+        "max": 810.6
+       },
+       "tous": {
+        "n": 105,
+        "min": 584.3,
+        "q1": 616.0,
+        "med": 642.3,
+        "q3": 687.0,
+        "max": 810.6
+       },
+       "prec": null
+      },
+      {
+       "cle": "adulte_2500",
+       "classe": "adulte",
+       "franchise": 2500,
+       "accident": true,
+       "standard": {
+        "n": 21,
+        "min": 527.5,
+        "q1": 560.0,
+        "med": 575.5,
+        "q3": 607.0,
+        "max": 682.3
+       },
+       "tous": {
+        "n": 105,
+        "min": 456.0,
+        "q1": 489.4,
+        "med": 516.0,
+        "q3": 558.7,
+        "max": 682.3
+       },
+       "prec": null
+      },
+      {
+       "cle": "jeune_300",
+       "classe": "jeune",
+       "franchise": 300,
+       "accident": true,
+       "standard": {
+        "n": 21,
+        "min": 448.4,
+        "q1": 501.6,
+        "med": 534.4,
+        "q3": 568.0,
+        "max": 640.5
+       },
+       "tous": {
+        "n": 105,
+        "min": 407.1,
+        "q1": 448.0,
+        "med": 491.1,
+        "q3": 522.5,
+        "max": 640.5
+       },
+       "prec": null
+      },
+      {
+       "cle": "enfant_0",
+       "classe": "enfant",
+       "franchise": 0,
+       "accident": true,
+       "standard": {
+        "n": 21,
+        "min": 150.7,
+        "q1": 161.0,
+        "med": 167.1,
+        "q3": 176.5,
+        "max": 211.1
+       },
+       "tous": {
+        "n": 105,
+        "min": 128.1,
+        "q1": 145.6,
+        "med": 154.5,
+        "q3": 171.7,
+        "max": 211.1
+       },
+       "prec": null
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "date_donnees": "2026-11-22"
+}

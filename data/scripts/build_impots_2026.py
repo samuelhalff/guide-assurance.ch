@@ -101,7 +101,9 @@ def main():
     fr_communes = liste("fr_communes_2026.json", ["coefficient"])
     ne_communes = liste("ne_communes_2026.json", ["coefficient_pct"])
     be_communes = liste("be_jura_bernois_communes_2026.json", ["coefficient"])
+    ju_communes = liste("ju_communes_2026.json", ["coefficient"])
     assert len(vs_communes) == 122 and len(fr_communes) == 119 and len(ne_communes) == 24 and len(be_communes) == 39
+    assert len(ju_communes) == 51  # 50 communes jurassiennes + Moutier (canton du Jura depuis le 01.01.2026)
 
     sortie = {
         "annee": ANNEE,
@@ -189,6 +191,24 @@ def main():
             "capitalSeuil": 5300,
             "communes": be_communes,
         },
+        "ju": {
+            "source": "Service des contributions du canton du Jura : « Tarifs 2026 » (montants indexés 2026, quotité cantonale "
+                      "2,85) et « Quotités d'impôt communales 2026 » (jura.ch, page Personnes physiques), relevés le "
+                      "22.11.2026 ; loi d'impôt RSJU 641.11, art. 35 et 37. Contrôlé sur la calculette officielle "
+                      "guichet.jura.ch/ExternalServices/TaxCalculator_v2 le 23.11.2026.",
+            # LI JU art. 35 al. 2 et 1 : [largeur de tranche, taux unitaire %] ; montants indexés et taux réduits
+            # (art. 217i) tels que publiés dans les Tarifs 2026 (taux = « par 100 fr. en plus » / 2,85).
+            "seul": [[6900, 0], [7800, 1.667], [14000, 3.149], [21800, 4.029], [42200, 4.909], [112500, 5.558], [1e12, 5.789]],
+            # Couples mariés et parents seuls avec enfant à charge (art. 35 al. 1).
+            "famille": [[12600, 0], [6200, 0.880], [9300, 2.269], [20300, 3.242], [42200, 4.122], [112500, 4.771],
+                        [234500, 5.697], [1e12, 5.789]],
+            "quotiteCantonale": 2.85,
+            # art. 37 al. 2 : prestations en capital de prévoyance, taux unitaires par tranche de 53 100 CHF (indexée :
+            # 56 700 CHF en 2026), multipliés par les quotités.
+            "capitalSeul": [[56700, 1.1], [56700, 1.3], [1e12, 1.7]],
+            "capitalFamille": [[56700, 0.9], [56700, 1.1], [1e12, 1.3]],
+            "communes": ju_communes,
+        },
         "plafonds3a": {
             "2026": {"avecLPP": 7258, "sansLPP": 36288},
             "2027": {"avecLPP": 7373, "sansLPP": 36864},
@@ -197,7 +217,7 @@ def main():
     os.makedirs(os.path.dirname(SORTIE), exist_ok=True)
     json.dump(sortie, open(SORTIE, "w"), ensure_ascii=False, separators=(",", ":"))
     print(f"écrit {SORTIE} : GE {len(communes['GE'])}, VD {len(communes['VD'])}, VS {len(vs_communes)}, FR {len(fr_communes)}, "
-          f"NE {len(ne_communes)}, Jura bernois {len(be_communes)} communes")
+          f"NE {len(ne_communes)}, Jura bernois {len(be_communes)}, JU {len(ju_communes)} communes")
 
 
 if __name__ == "__main__":

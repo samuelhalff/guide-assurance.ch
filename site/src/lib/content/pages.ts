@@ -5,6 +5,7 @@ import { marked } from "marked";
 import { remplacementsMesure } from "@/lib/content/mesure";
 import { PAGES_EN_FR, PAGES_FR_EN, type Locale } from "@/lib/i18n";
 import { lireLanding, type Landing } from "@/lib/landing";
+import { DATE_TEXTE, maxIso } from "@/lib/donnees";
 
 /* Pages rédigées en Markdown (content/fr/*.md), lues au build. Le texte vient de research/06-produits.md. */
 export type Rubrique = "particuliers" | "entreprises" | "situations" | "legal";
@@ -94,3 +95,7 @@ export function autreLangue(path: string, locale: Locale): string | undefined {
   const fixe = locale === "fr" ? PAGES_FR_EN[path] : PAGES_EN_FR[path];
   return fixe ?? equivalent(path, locale);
 }
+
+/* Date de la page « Tous les guides » d'une langue : son propre texte, ou le guide listé le plus récemment mis à jour. */
+export const dateIndexGuides = (locale: Locale) =>
+  maxIso(DATE_TEXTE.guides, ...toutesLesPages(locale).filter((p) => p.rubrique !== "legal").map((p) => p.updated));

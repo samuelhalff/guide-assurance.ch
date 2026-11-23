@@ -5,7 +5,7 @@ description: "En 2027, le plafond 3a est de 7 373 CHF avec caisse de pension e
 h1: "3e pilier : plafonds 2027, 3a, 3b et couverture décès"
 rubrique: particuliers
 outils: [taux-3a, economie-impot-3a]
-updated: 2026-11-22
+updated: 2026-11-23
 sources:
   - { label: "Art. 7 OPP 3 (Fedlex)", url: "https://www.fedlex.admin.ch/eli/cc/1985/1778_1778_1778/fr#art_7" }
   - { label: "Art. 7a OPP 3 (Fedlex)", url: "https://www.fedlex.admin.ch/eli/cc/1985/1778_1778_1778/fr#art_7_a" }
@@ -52,7 +52,7 @@ Le 3a est une épargne liée, sous forme de compte bancaire ou de police d’ass
 
 ## Combien rapporte un compte 3a et combien d’impôt économise-t-on ?
 
-Selon nos relevés du 22.11.2026, les comptes 3a des banques rapportent entre 0,05 % et 0,65 % par an. Le [tableau des taux 3a](/3e-pilier/taux-3a/) les présente du taux le plus élevé au plus bas. L’économie d’impôt dépend de votre revenu, de votre commune et de votre situation de famille ; le [calculateur d’économie d’impôt 3a](/3e-pilier/economie-impot/) en donne une estimation pour Genève et Vaud avec les barèmes 2026.
+Selon nos relevés du 22.11.2026, les comptes 3a des banques rapportent entre 0,05 % et 0,65 % par an. Le [tableau des taux 3a](/3e-pilier/taux-3a/) les présente du taux le plus élevé au plus bas. L’économie d’impôt dépend de votre revenu, de votre commune et de votre situation de famille ; le [calculateur d’économie d’impôt 3a](/3e-pilier/economie-impot/) en donne une estimation avec les barèmes 2026 pour Genève, Vaud, le Valais, Fribourg, Neuchâtel, le Jura et le Jura bernois.
 
 ## Comment couvrir le décès et l’invalidité ?
 

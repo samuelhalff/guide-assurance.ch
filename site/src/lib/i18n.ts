@@ -67,5 +67,17 @@ export const PAGES_FR_EN: Record<string, string> = {
   "/assurance-maladie/comparateur/": "/en/health-insurance/compare/",
   "/3e-pilier/taux-3a/": "/en/pillar-3a/interest-rates/",
   "/3e-pilier/economie-impot/": "/en/pillar-3a/tax-savings/",
+  /* Pages de données (rapport 08, idées 2, 3, 6, 9) : chemins aussi dans lib/nav.ts (PAGES_DONNEES, SLUG_CANTON_3A). */
+  "/assurance-maladie/primes/regions/": "/en/health-insurance/premiums/regions/",
+  "/chiffres-cles-2027/": "/en/key-figures-2027/",
+  "/3e-pilier/taux-3a/historique/": "/en/pillar-3a/interest-rates/history/",
+  "/3e-pilier/economie-impot/communes/": "/en/pillar-3a/tax-savings/municipalities/",
+  "/3e-pilier/economie-impot/communes/geneve/": "/en/pillar-3a/tax-savings/municipalities/geneva/",
+  "/3e-pilier/economie-impot/communes/vaud/": "/en/pillar-3a/tax-savings/municipalities/vaud/",
+  "/3e-pilier/economie-impot/communes/valais/": "/en/pillar-3a/tax-savings/municipalities/valais/",
+  "/3e-pilier/economie-impot/communes/fribourg/": "/en/pillar-3a/tax-savings/municipalities/fribourg/",
+  "/3e-pilier/economie-impot/communes/neuchatel/": "/en/pillar-3a/tax-savings/municipalities/neuchatel/",
+  "/3e-pilier/economie-impot/communes/jura-bernois/": "/en/pillar-3a/tax-savings/municipalities/bernese-jura/",
+  "/3e-pilier/economie-impot/communes/jura/": "/en/pillar-3a/tax-savings/municipalities/jura/",
 };
 export const PAGES_EN_FR: Record<string, string> = Object.fromEntries(Object.entries(PAGES_FR_EN).map(([fr, en]) => [en, fr]));

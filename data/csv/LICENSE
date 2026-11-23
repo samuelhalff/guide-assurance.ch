@@ -1,0 +1,31 @@
+Données ouvertes de guide-assurance.ch (dossier data/csv/)
+Licence : Creative Commons Attribution 4.0 International (CC BY 4.0)
+Texte de la licence : https://creativecommons.org/licenses/by/4.0/legalcode.fr
+
+Vous pouvez copier, distribuer, modifier et réutiliser ces fichiers, y compris à des fins commerciales,
+à condition de citer la source : « Guide Assurance (guide-assurance.ch), d'après » suivi des sources
+d'origine ci-dessous, avec la date des données.
+
+Sources d'origine
+- primes-2027-regions.csv : primes 2027 de l'assurance obligatoire des soins approuvées par l'Office
+  fédéral de la santé publique (OFSP / BAG), publiées sur priminfo.admin.ch ; régions de primes 2027,
+  communes, population et prime moyenne estimée : fichier officiel des régions de primes de l'OFSP.
+  Statistiques (quartiles, médiane, extrêmes) calculées par Guide Assurance.
+- economie-impot-3a-communes-2026.csv : barèmes 2026 de l'impôt fédéral direct (Administration fédérale
+  des contributions, AFC / ESTV) et des impôts cantonaux et communaux publiés par les administrations
+  fiscales de Genève, Vaud, Valais, Fribourg, Neuchâtel et Berne ; plafond 3a publié par l'OFAS.
+  Économies calculées par Guide Assurance pour un profil type, contrôlées sur les calculettes officielles.
+- taux-3a-historique.csv : taux d'intérêt de base des comptes 3a lus sur les pages officielles et les fiches
+  de taux des banques, chaque lundi. Les taux restent la propriété d'information des banques ; seule la
+  page de la banque fait foi.
+
+Les données publiques d'origine (OFSP, AFC, cantons) sont librement réutilisables selon les conditions de
+leurs éditeurs (opendata.swiss, conditions d'utilisation des sites de la Confédération). Ces fichiers sont
+fournis tels quels, sans garantie ; ils ne constituent pas un conseil.
+
+---
+
+Open data from guide-assurance.ch (folder data/csv/), licensed under CC BY 4.0
+(https://creativecommons.org/licenses/by/4.0/). Credit: "Guide Assurance (guide-assurance.ch), from" the
+original sources listed above (FOPH/BAG premiums and premium regions; Federal Tax Administration and
+cantonal tax scales; banks' published 3a rates), with the data date. Provided as is, without warranty.

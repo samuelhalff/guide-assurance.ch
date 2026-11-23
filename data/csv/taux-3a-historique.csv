@@ -1,0 +1,35 @@
+date_releve,id_compte,banque,taux_pct,taux_valable_des
+2026-11-22,ca-next-bank,CA next bank,0.65,2026-08-01
+2026-11-22,cic,Banque CIC,0.6,2025-05-01
+2026-11-22,bcf,BCF,0.4,
+2026-11-22,wir,Banque WIR,0.3,2026-10-21
+2026-11-22,bcge,BCGE,0.25,2026-11-01
+2026-11-22,bcn,BCN,0.25,
+2026-11-22,bas,ABS,0.2,
+2026-11-22,cler,Banque Cler,0.2,
+2026-11-22,migros,Banque Migros,0.2,
+2026-11-22,raiffeisen,Raiffeisen,0.2,2026-02-01
+2026-11-22,valiant,Valiant,0.2,2026-09-22
+2026-11-22,bcvs,BCVs,0.15,
+2026-11-22,bcj,BCJ,0.1,2026-09-01
+2026-11-22,swissquote,Swissquote,0.1,
+2026-11-22,ubs,UBS,0.1,2026-06-24
+2026-11-22,bcv,BCV,0.05,
+2026-11-22,postfinance,PostFinance,0.05,
+2026-11-23,ca-next-bank,CA next bank,0.65,2026-08-01
+2026-11-23,cic,Banque CIC,0.6,2025-05-01
+2026-11-23,bcf,BCF,0.4,
+2026-11-23,wir,Banque WIR,0.3,2026-10-21
+2026-11-23,bcge,BCGE,0.25,2026-11-01
+2026-11-23,bcn,BCN,0.25,
+2026-11-23,bas,ABS,0.2,
+2026-11-23,cler,Banque Cler,0.2,
+2026-11-23,migros,Banque Migros,0.2,
+2026-11-23,raiffeisen,Raiffeisen,0.2,2026-02-01
+2026-11-23,valiant,Valiant,0.2,2026-09-22
+2026-11-23,bcvs,BCVs,0.15,
+2026-11-23,bcj,BCJ,0.1,2026-09-01
+2026-11-23,swissquote,Swissquote,0.1,
+2026-11-23,ubs,UBS,0.1,2026-06-24
+2026-11-23,bcv,BCV,0.05,
+2026-11-23,postfinance,PostFinance,0.05,

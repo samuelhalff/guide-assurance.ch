@@ -1,5 +1,5 @@
 URL: https://www.cler.ch/fr/vorsorgen-und-nachlass/vorsorgemoeglichkeiten/compte-de-prevoyance-3
-Relevé: 2026-11-22T20:43:28+00:00
+Relevé: 2026-11-23T05:30:18+00:00
 Méthode: http
 Extrait retenu: Compte seul: 0,200% Dans le cadre d'un pack Clientèle privée: 0,250%
 Validité: -

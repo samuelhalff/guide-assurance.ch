@@ -7,7 +7,9 @@ import { AccueilFeuille, AccueilSituations } from "@/components/site/accueil-feu
 import { calculerSaison } from "@/components/site/saison";
 import { pageMetadata } from "@/lib/metadata";
 import { jsonLdAccueil } from "@/lib/jsonld-accueil";
-import { ORG_ID, WEBSITE_ID } from "@/lib/jsonld";
+import { ORG_ID, WEBSITE_ID, faqLd } from "@/lib/jsonld";
+import { FaqAccueil } from "@/components/site/faq-accueil";
+import type { QuestionFaq } from "@/components/site/guide-page";
 import { abs } from "@/lib/site";
 import { DATE_PAGE } from "@/lib/donnees";
 import { COMPTES_3A, RELEVE_LE, TAUX_MAX, TAUX_MIN, dateCh, tauxEn } from "@/lib/taux3a";
@@ -19,6 +21,30 @@ const DESCRIPTION =
   "2027 health insurance premiums from the insurers active in your part of French-speaking Switzerland (FOPH data). No sign-up or ads; runs in your browser.";
 
 export const metadata: Metadata = pageMetadata({ title: TITRE, description: DESCRIPTION, path: "/en/", locale: "en", frPath: "/" });
+
+/* Frequently asked questions (shown at the bottom of the page and repeated word for word in the FAQPage node). */
+const FAQ: QuestionFaq[] = [
+  {
+    q: "Are Guide Assurance’s tools free?",
+    a: "Yes, and they work with no sign-up and no ads. The calculations run in your browser, so the amounts you enter never reach us.",
+  },
+  {
+    q: "Where do the 2027 premiums in the comparison tool come from?",
+    a: "They come from the Federal Office of Public Health (FOPH), which approves insurers’ premiums every year. The comparison tool shows them offer by offer, as published on priminfo.admin.ch, and the cantonal averages on this page are the ones the FOPH published on 29 September 2026.",
+  },
+  {
+    q: "Do insurers pay to appear in the lists?",
+    a: "No, no place in the lists is paid for. The comparison tool sorts offers from the lowest premium to the highest, and Guide Assurance does not recommend any policy.",
+  },
+  {
+    q: "What happens when I ask for a call-back?",
+    a: "Your request goes to a single partner insurance broker in French-speaking Switzerland, with your express consent. One of its advisers calls you at the time you chose, if you gave one, to go over your situation. Nothing binds you until you have signed.",
+  },
+  {
+    q: "Which cantons does the site cover?",
+    a: "It covers French-speaking Switzerland: Geneva, Vaud, Valais, Fribourg, Neuchâtel, Jura and the Bernese Jura. The comparison tool gives the premiums for each of their premium regions, and the guides point out cantonal rules where they depart from federal law.",
+  },
+];
 
 const LD = {
   "@context": "https://schema.org",
@@ -48,6 +74,7 @@ const LD = {
       isAccessibleForFree: true,
       provider: { "@id": ORG_ID },
     },
+    { ...faqLd(FAQ), "@id": abs("/en/#faq") },
   ],
 };
 
@@ -309,6 +336,8 @@ export default function Home() {
             </table>
           </div>
         </section>
+
+        <FaqAccueil titre="Frequently asked questions" faq={FAQ} />
       </main>
       <SiteFooter locale="en" altPath="/" note="Premiums: FOPH." />
     </>

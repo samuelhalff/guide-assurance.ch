@@ -46,18 +46,22 @@ export type Evenement =
   /* Même formulaire en tête d'une page produit (assurance maladie, primes, nouveaux arrivants), sans aucune valeur saisie. */
   | "comparateur_produit"
   | "outil_partage"
+  /* Fichier d'agenda .ics créé dans le navigateur ({ type: lamal | semestre | 3a | echeances | lettre_lamal | lettre_lca | contrats }), aucune date ni valeur saisie. */
+  | "ics_telecharge"
   /* Tunnel de demande (PostHog seulement, jamais de valeur saisie) : voir FUNNEL_EVENTS (shared/demande). */
   | "demande_ouverte"
   | "demande_etape"
   | "demande_envoyee"
-  /* Clic sur un appel « Être rappelé » ({ emplacement: tete | accueil | guide | comparateur | produit | outil3a | lettre | frontalier }), avant le formulaire court. */
+  /* Clic sur un appel « Être rappelé » ({ emplacement: tete | accueil | guide | comparateur | produit | outil3a | lettre | frontalier | rappels | barometre | kit_rh | donnees | actualite }), avant le formulaire court. */
   | "rappel_ouvert"
   /* Appel « Être rappelé » vu à l'écran ({ emplacement }), une fois par emplacement et par page, sans aucune valeur saisie. */
   | "rappel_vu"
   /* Assistant (PostHog seulement, jamais de contenu de la conversation ni de dataLayer). */
   | "assistant_ouvert"
   | "assistant_message"
-  | "assistant_vers_demande";
+  | "assistant_vers_demande"
+  /* Nom recommandé par GA4 pour une demande envoyée ({ porte }), sur la page de remerciement seulement : voir mesurerLead. */
+  | "generate_lead";
 
 type Props = Record<string, string | number | boolean>;
 type PH = {
@@ -82,6 +86,34 @@ export function suivre(e: Evenement, p?: Props, avantDepart = false) {
     /* Commande gtag : la balise Google chargée par GTM la transmet à GA4 sans balise d'événement à configurer dans GTM. */
     w.gtag?.("event", e, p ?? {});
   }
+}
+
+/* Conversion GA4 (rapport 09, G5). demande_envoyee part du formulaire, dont la mise en page n'a ni GTM ni dataLayer :
+   GA4 ne la voit jamais. Le formulaire laisse donc la porte (constante du site, jamais une valeur saisie) dans
+   sessionStorage juste avant d'ouvrir la page de remerciement, qui a GTM ; cette page la lit, l'efface et envoie
+   generate_lead { porte } au dataLayer seulement (PostHog a déjà demande_envoyee). Une visite directe ou un
+   rechargement de la page de remerciement ne trouve pas de marque et n'envoie rien. */
+export const CLE_LEAD = "ga-demande-envoyee";
+export function marquerLead(porte: string) {
+  try {
+    sessionStorage.setItem(CLE_LEAD, porte);
+  } catch {
+    /* stockage refusé : pas de conversion GA4, la demande part quand même */
+  }
+}
+export function mesurerLead(portesValides: readonly string[]) {
+  if (!GTM_ID || typeof window === "undefined") return;
+  let porte: string | null = null;
+  try {
+    porte = sessionStorage.getItem(CLE_LEAD);
+    sessionStorage.removeItem(CLE_LEAD);
+  } catch {
+    return;
+  }
+  if (!porte || !portesValides.includes(porte)) return;
+  const w = window as unknown as W;
+  w.dataLayer?.push({ event: "generate_lead", porte });
+  w.gtag?.("event", "generate_lead", { porte });
 }
 
 /* Formulaire de demande : PostHog seul, sans cookie (mémoire), et jamais de dataLayer. */

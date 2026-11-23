@@ -1,5 +1,5 @@
 URL: https://www.postfinance.ch/fr/particuliers/prevoyance/compte-prevoyance-3a.html
-Relevé: 2026-11-22T20:43:25+00:00
+Relevé: 2026-11-23T05:30:09+00:00
 Méthode: http
 Extrait retenu: Votre avoir en compte est rémunéré à hauteur de 0,05%
 Validité: -

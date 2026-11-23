@@ -8,7 +8,9 @@ import { SimulateurFrontalier } from "@/components/outils/simulateur-frontalier"
 import { pageMetadata } from "@/lib/metadata";
 import { ORG_ID, WEBSITE_ID, breadcrumbLd, faqLd, graph, type Miette } from "@/lib/jsonld";
 import { FaqSections, faqOutilLd, type FaqOutil } from "@/components/site/faq-sections";
-import { MAJ_ISO, abs } from "@/lib/site";
+import { abs } from "@/lib/site";
+import { DATE_PAGE } from "@/lib/donnees";
+import { dateLongue } from "@/lib/i18n";
 import { OUTILS } from "@/lib/nav";
 
 const PATH = OUTILS.simulateur;
@@ -60,7 +62,7 @@ const LD = graph(
     isPartOf: { "@id": WEBSITE_ID },
     publisher: { "@id": ORG_ID },
     datePublished: "2026-11-22",
-    dateModified: MAJ_ISO,
+    dateModified: DATE_PAGE.simulateur,
     breadcrumb: { "@id": `${URL_}#breadcrumb` },
     mainEntity: { "@id": `${URL_}#outil` },
     citation: [
@@ -110,7 +112,7 @@ export default function Page() {
 
         <div className="wrap faq">
           <FaqSections faq={FAQ} />
-          <p className="maj">Mis à jour le 22 novembre 2026. Données : OFSP 2027, Urssaf 2026 et 2027.</p>
+          <p className="maj">Mis à jour le {dateLongue(DATE_PAGE.simulateur, "fr")}. Données : OFSP 2027, Urssaf 2026 et 2027.</p>
         </div>
       </main>
       <SiteFooter note="Estimation donnée à titre d’information. Le montant appelé par l’Urssaf et la prime de votre assureur font foi." altPath="/en/cross-border-calculator/" />

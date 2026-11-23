@@ -4,11 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && node scripts/apres-build-actualites.mjs",
     "start": "next start",
     "lint": "eslint",
-    "test": "node --no-warnings tests/delais.test.mts && node --no-warnings tests/frontaliers.test.mts && node --no-warnings tests/primes.test.mts && node --no-warnings tests/impot3a.test.mts",
-    "typecheck": "tsc --noEmit"
+    "test": "node --no-warnings tests/delais.test.mts && node --no-warnings tests/frontaliers.test.mts && node --no-warnings tests/primes.test.mts && node --no-warnings tests/impot3a.test.mts && node --no-warnings tests/ics.test.mts && node --no-warnings tests/donnees.test.mts && node --no-warnings tests/actualites.test.mts",
+    "typecheck": "tsc --noEmit",
+    "test:html": "node --no-warnings tests/html.test.mts",
+    "lighthouse": "npx -y @lhci/cli@0.16.1 autorun --config=lighthouserc.mobile.json",
+    "lighthouse:desktop": "npx -y @lhci/cli@0.16.1 autorun --config=lighthouserc.desktop.json"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",

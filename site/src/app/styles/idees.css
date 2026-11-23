@@ -1,0 +1,82 @@
+/* Pages des idées 1, 4, 7 et 8 (rapport 08) : rappels d'agenda, baromètre des primes, page « Intégrer », kit RH.
+   Mobile d'abord (390 px). Les widgets eux-mêmes ont leur propre feuille (widget.css), hors de ce fichier. */
+@layer components {
+  /* Bouton « Ajouter à mon agenda » (lettre de résiliation, page des rappels) */
+  .bouton-agenda { display: inline-flex; align-items: center; gap: 8px; }
+  .bouton-agenda svg { width: 18px; height: 18px; flex: none; }
+  .bouton-agenda[disabled] { opacity: .55; cursor: not-allowed; }
+  .agenda-ok { font: 15px var(--narrow); color: var(--encre-2); align-self: center; }
+  .actions-agenda { margin-top: var(--s3); align-items: center; }
+  .lien-lettre { font: 16px var(--narrow); margin: var(--s4) 0 0; }
+
+  /* Page des rappels */
+  .bloc-rappels { display: grid; gap: var(--s4); }
+  .bloc-rappels + .bloc-rappels { margin-top: var(--s5); }
+  .bloc-rappels h2 { font-size: 22px; }
+  .aide-bloc { font: 16px var(--narrow); color: var(--encre-2); margin: 0; }
+  .cases-fixes .case { margin: 0 0 var(--s2); }
+  .contrat-ligne { border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s4); margin: 0; display: grid; gap: var(--s3); background: var(--carte); min-width: 0; }
+  .contrat-ligne legend { font: 600 15px var(--narrow); color: var(--encre-2); padding: 0 6px; }
+  .contrat-ligne .champ { margin: 0; min-width: 0; }
+  .contrat-ligne .deux { grid-template-columns: 1fr; gap: var(--s3); }
+  .rappel-calcule { color: var(--encre); }
+  .rappel-calcule b { font-weight: 700; }
+  .commande.retirer { color: var(--encre-2); justify-self: start; }
+  .commande.plus { justify-self: start; }
+
+  /* Baromètre */
+  .lead-barometre { font-size: 19px; line-height: 1.45; margin: var(--s4) 0 0; max-width: 62ch; }
+  .faits-barometre { background: var(--papier); border: 1px solid var(--filet); border-left: 4px solid var(--sentier); border-radius: var(--r); padding: var(--s4); margin: var(--s5) 0; }
+  .faits-barometre .titre-faits { font: 600 15px var(--narrow); color: var(--encre-2); margin: 0 0 var(--s2); }
+  .faits-barometre ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
+  .section-barometre { margin: var(--s7) 0 0; }
+  .section-barometre > h2 { margin-bottom: var(--s3); }
+  .section-barometre > p { max-width: 65ch; }
+  .region-barometre { margin: var(--s5) 0 0; }
+  .region-barometre h3 { font-size: 19px; margin: 0 0 var(--s2); }
+  .defile { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: var(--r); margin: 0 0 var(--s3); }
+  .defile:focus-visible { outline: 2px solid var(--lac-encre); outline-offset: 2px; }
+  table.table-barometre, table.table-cantons { font-size: 15px; }
+  table.table-barometre th, table.table-barometre td, table.table-cantons th, table.table-cantons td { padding: 8px 8px; white-space: nowrap; }
+  table.table-barometre :is(td, th):first-child, table.table-cantons :is(td, th):first-child { white-space: normal; min-width: 8.5em; }
+  table.table-barometre th, table.table-barometre td { padding: 8px 6px; }
+  table.table-barometre .q { display: none; }
+  table.table-cantons .ligne-suisse td { font-weight: 700; border-top: 1.5px solid var(--encre); }
+  .liste-cantons { list-style: none; padding: 0; margin: var(--s3) 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2); }
+  .liste-cantons a { display: block; padding: 10px 12px; border: 1px solid var(--filet); border-radius: var(--r); background: var(--papier); font-weight: 600; text-decoration: none; }
+  .liste-cantons a:hover { border-color: var(--sentier); }
+  .sources-barometre { font: 15px var(--narrow); color: var(--encre-2); padding-left: 1.1em; }
+  .sources-barometre li { margin: 0 0 4px; }
+
+  /* Page « Intégrer » */
+  .grille-widgets { display: grid; gap: var(--s7); margin: var(--s6) 0 0; }
+  .grille-widgets h2 { margin-bottom: var(--s3); }
+  .grille-widgets section > p { max-width: 62ch; }
+  .widget-bloc { display: grid; gap: var(--s3); margin-top: var(--s4); }
+  .widget-bloc .champ { margin: 0; max-width: 420px; }
+  .widget-apercu { border: 0; max-width: 420px; width: 100%; display: block; border-radius: var(--r); background: transparent; }
+  .code-label { font: 600 15px var(--narrow); color: var(--encre-2); }
+  .saisie.code-widget { font: 13px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; min-height: 96px; word-break: break-all; }
+  .widget-bloc .actions { margin-top: 0; }
+
+  /* Kit RH */
+  .kit-grille { display: grid; gap: var(--s5); margin: var(--s5) 0 0; }
+  .kit-apercu { display: block; max-width: 340px; border: 1px solid var(--filet); border-radius: var(--r); overflow: hidden; box-shadow: 0 6px 20px rgb(0 0 0 / .08); }
+  .kit-apercu img { display: block; width: 100%; height: auto; }
+  .kit-actions { display: grid; gap: var(--s3); align-content: start; }
+  .kit-actions .bouton { justify-content: center; }
+  .kit-actions h2 { margin-top: var(--s4); }
+  .kit-contenu { margin: 0; padding-left: 1.1em; display: grid; gap: var(--s2); }
+  .page-kit .rappel-liste, .page-barometre .rappel-liste, .page-rappels .rappel-liste { margin: var(--s6) 0 0; }
+
+  @media (min-width: 600px) {
+    .contrat-ligne .deux { grid-template-columns: 1fr 1fr; }
+    table.table-barometre .q { display: table-cell; }
+    .liste-cantons { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (min-width: 900px) {
+    .kit-grille { grid-template-columns: 340px 1fr; gap: var(--s6); }
+    .grille-widgets { grid-template-columns: 1fr 1fr; gap: var(--s6); }
+    .grille-widgets section:first-child { grid-column: 1 / -1; }
+  }
+}

@@ -1,11 +1,12 @@
 /* Images de partage (Open Graph) par page, générées au build par src/app/og-pages/[nom]/route.tsx
    (next/og, export statique) : rubrique, titre de la page, date de mise à jour. Une page absente de la liste
    garde l'image générale de sa langue (accueil). */
-import { OUTILS, OUTILS_EN } from "@/lib/nav";
-import { MAJ_ISO } from "@/lib/site";
-import { DATE_PAGE } from "@/lib/donnees";
+import { OUTILS, OUTILS_EN, PAGES_DONNEES, PAGES_DONNEES_EN, SLUG_CANTON_3A } from "@/lib/nav";
+import { DATE_PAGE, DATE_PAGE_DONNEES } from "@/lib/donnees";
 import { dateLongue, type Locale } from "@/lib/i18n";
-import { toutesLesPages, type PageContenu } from "@/lib/content/pages";
+import { dateIndexGuides, toutesLesPages, type PageContenu } from "@/lib/content/pages";
+import { pagesIdees } from "@/lib/pages-idees";
+import { BASE_ACTUALITES, articlesPublies, cheminArticle } from "@/lib/actualites";
 
 export type Partage = { path: string; cle: string; locale: Locale; rubrique: string; titre: string; maj: string };
 
@@ -35,18 +36,43 @@ function pagesTsx(): Omit<Partage, "cle">[] {
   return [
     { path: "/", locale: "fr", rubrique: "Suisse romande", titre: "Comparez vos primes maladie 2027, sans faux pas", maj: DATE_PAGE.accueil },
     { path: "/en/", locale: "en", rubrique: "French-speaking Switzerland", titre: "Compare your 2027 health insurance premiums", maj: DATE_PAGE.accueil },
-    { path: "/guides/", locale: "fr", rubrique: "Guides", titre: "Tous les guides d’assurance", maj: MAJ_ISO },
-    { path: "/en/guides/", locale: "en", rubrique: "Guides", titre: "All insurance guides", maj: MAJ_ISO },
+    { path: "/guides/", locale: "fr", rubrique: "Guides", titre: "Tous les guides d’assurance", maj: dateIndexGuides("fr") },
+    { path: "/en/guides/", locale: "en", rubrique: "Guides", titre: "All insurance guides", maj: dateIndexGuides("en") },
     { path: OUTILS.comparateur, locale: "fr", rubrique: OUTIL_FR, titre: "Comparer les primes de l’assurance maladie 2027", maj: DATE_PAGE.comparateur },
     { path: OUTILS_EN.comparateur, locale: "en", rubrique: OUTIL_EN, titre: "Compare 2027 health insurance premiums", maj: DATE_PAGE.comparateur },
-    { path: OUTILS.lettre, locale: "fr", rubrique: OUTIL_FR, titre: "Votre lettre de résiliation d’assurance maladie", maj: MAJ_ISO },
-    { path: OUTILS_EN.lettre, locale: "en", rubrique: OUTIL_EN, titre: "Your health insurance cancellation letter", maj: MAJ_ISO },
-    { path: OUTILS.simulateur, locale: "fr", rubrique: OUTIL_FR, titre: "Frontalier : LAMal ou assurance maladie française ?", maj: MAJ_ISO },
-    { path: OUTILS_EN.simulateur, locale: "en", rubrique: OUTIL_EN, titre: "Cross-border worker: LAMal or French health insurance?", maj: MAJ_ISO },
+    { path: OUTILS.lettre, locale: "fr", rubrique: OUTIL_FR, titre: "Votre lettre de résiliation d’assurance maladie", maj: DATE_PAGE.lettre },
+    { path: OUTILS_EN.lettre, locale: "en", rubrique: OUTIL_EN, titre: "Your health insurance cancellation letter", maj: DATE_PAGE.lettre },
+    { path: OUTILS.simulateur, locale: "fr", rubrique: OUTIL_FR, titre: "Frontalier : LAMal ou assurance maladie française ?", maj: DATE_PAGE.simulateur },
+    { path: OUTILS_EN.simulateur, locale: "en", rubrique: OUTIL_EN, titre: "Cross-border worker: LAMal or French health insurance?", maj: DATE_PAGE.simulateur },
     { path: OUTILS.taux3a, locale: "fr", rubrique: OUTIL_FR, titre: "Taux d’intérêt des comptes 3a", maj: DATE_PAGE.taux3a },
     { path: OUTILS_EN.taux3a, locale: "en", rubrique: OUTIL_EN, titre: "Pillar 3a account interest rates", maj: DATE_PAGE.taux3a },
     { path: OUTILS.impot3a, locale: "fr", rubrique: OUTIL_FR, titre: "Économie d’impôt grâce au 3e pilier", maj: DATE_PAGE.impot3a },
     { path: OUTILS_EN.impot3a, locale: "en", rubrique: OUTIL_EN, titre: "Tax savings from pillar 3a", maj: DATE_PAGE.impot3a },
+    ...pagesDonnees(),
+  ];
+}
+
+/* Pages de données (rapport 08, idées 2, 3, 6, 9). */
+const NOMS_3A = {
+  fr: { GE: "Genève", VD: "Vaud", VS: "Valais", FR: "Fribourg", NE: "Neuchâtel", JU: "Jura", BE: "Jura bernois" },
+  en: { GE: "Geneva", VD: "Vaud", VS: "Valais", FR: "Fribourg", NE: "Neuchâtel", JU: "Jura", BE: "Bernese Jura" },
+} as const;
+function pagesDonnees(): Omit<Partage, "cle">[] {
+  const D = DATE_PAGE_DONNEES;
+  const cantons = (Object.keys(NOMS_3A.fr) as (keyof typeof NOMS_3A.fr)[]).flatMap((c) => [
+    { path: `${PAGES_DONNEES.communes3a}${SLUG_CANTON_3A.fr[c]}/`, locale: "fr" as const, rubrique: "Données", titre: `Économie d’impôt 3a par commune : ${NOMS_3A.fr[c]}`, maj: D.communes3a },
+    { path: `${PAGES_DONNEES_EN.communes3a}${SLUG_CANTON_3A.en[c]}/`, locale: "en" as const, rubrique: "Data", titre: `Pillar 3a tax savings by municipality: ${NOMS_3A.en[c]}`, maj: D.communes3a },
+  ]);
+  return [
+    { path: PAGES_DONNEES.chiffres, locale: "fr", rubrique: "Données", titre: "Chiffres clés 2027 : assurance maladie et 3e pilier", maj: D.chiffres },
+    { path: PAGES_DONNEES_EN.chiffres, locale: "en", rubrique: "Data", titre: "2027 key figures: health insurance and pillar 3a", maj: D.chiffres },
+    { path: PAGES_DONNEES.regions, locale: "fr", rubrique: "Données", titre: "Primes LAMal 2027 par région de prime", maj: D.regions },
+    { path: PAGES_DONNEES_EN.regions, locale: "en", rubrique: "Data", titre: "2027 health insurance premiums by premium region", maj: D.regions },
+    { path: PAGES_DONNEES.historique3a, locale: "fr", rubrique: "Données", titre: "Historique des taux des comptes 3a", maj: D.historique3a },
+    { path: PAGES_DONNEES_EN.historique3a, locale: "en", rubrique: "Data", titre: "Pillar 3a interest rate history", maj: D.historique3a },
+    { path: PAGES_DONNEES.communes3a, locale: "fr", rubrique: "Données", titre: "Économie d’impôt 3a commune par commune", maj: D.communes3a },
+    { path: PAGES_DONNEES_EN.communes3a, locale: "en", rubrique: "Data", titre: "Pillar 3a tax savings, municipality by municipality", maj: D.communes3a },
+    ...cantons,
   ];
 }
 
@@ -56,7 +82,20 @@ export function pagesPartage(): Partage[] {
   const guides = (["fr", "en"] as const).flatMap((l) =>
     toutesLesPages(l).map((p) => ({ path: p.slug, locale: l, rubrique: rubriqueGuide(p), titre: p.h1, maj: p.updated })),
   );
-  cache = [...pagesTsx(), ...guides].map((p) => ({ ...p, cle: clePartage(p.path) }));
+  const idees = pagesIdees().flatMap((p) => [
+    { path: p.fr, locale: "fr" as const, rubrique: p.rubriqueFr, titre: p.titreFr, maj: p.lastmod },
+    { path: p.en, locale: "en" as const, rubrique: p.rubriqueEn, titre: p.titreEn, maj: p.lastmod },
+  ]);
+  /* Actualités publiées (et leur liste dès le premier article) ; jamais les brouillons. */
+  const actus = (["fr", "en"] as const).flatMap((l) => {
+    const xs = articlesPublies(l);
+    const rub = l === "fr" ? "Actualités" : "News";
+    return [
+      ...(xs.length ? [{ path: BASE_ACTUALITES[l], locale: l, rubrique: rub, titre: l === "fr" ? "Actualités de l’assurance en Suisse romande" : "Insurance news, French-speaking Switzerland", maj: xs[0].dateModified }] : []),
+      ...xs.map((a) => ({ path: cheminArticle(a), locale: l, rubrique: rub, titre: a.title, maj: a.dateModified })),
+    ];
+  });
+  cache = [...pagesTsx(), ...guides, ...idees, ...actus].map((p) => ({ ...p, cle: clePartage(p.path) }));
   return cache;
 }
 

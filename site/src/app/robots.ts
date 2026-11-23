@@ -7,7 +7,8 @@ export const dynamic = "force-static";
    Ouvert (Sam, 22.11.2026 : « Go public ») : moteurs de recherche et robots d'IA explicitement accueillis (GEO),
    formulaires de demande exclus de l'exploration. */
 const IA = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-SearchBot", "Claude-User", "PerplexityBot", "Perplexity-User", "Google-Extended", "Applebot-Extended", "Bingbot", "MistralAI-User", "CCBot"];
-const FERME = ["/demande/", "/en/request/", "/demande-envoyee/", "/en/request-sent/"];
+/* Aperçus des brouillons d'actualités (adresses à jeton, noindex) : jamais explorés. */
+const FERME = ["/demande/", "/en/request/", "/demande-envoyee/", "/en/request-sent/", "/apercu/", "/en/preview/"];
 
 export default function robots(): MetadataRoute.Robots {
   return {

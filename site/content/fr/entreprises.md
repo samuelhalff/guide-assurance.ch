@@ -52,6 +52,8 @@ Six branches reviennent le plus souvent, dont deux sont obligatoires pour tout e
 - L’[assurance choses](/entreprises/assurance-choses/) protège l’inventaire, les marchandises et les machines, et peut couvrir l’interruption d’exploitation. À Vaud, le mobilier d’entreprise est obligatoirement assuré à l’ECA contre l’incendie et les éléments naturels.
 - La [cyber-assurance pour PME](/entreprises/cyber/), facultative, paie les frais de crise après une cyberattaque, l’interruption d’exploitation et la RC liée aux données.
 
+Vous engagez des frontaliers ou des personnes qui arrivent en Suisse ? Le [kit RH](/entreprises/kit-rh/) est une fiche PDF d’une page, en français et en anglais, sur leurs délais d’assurance maladie.
+
 ## Sur quels points les contrats diffèrent-ils ?
 
 Dans chaque branche, les offres se distinguent sur les mêmes points. Le premier est la part qui va au-delà du minimum légal, comme la part surobligatoire ou les complémentaires. Les montants comptent ensuite : salaire assuré, somme d’assurance et durée d’indemnisation. Pendant les délais d’attente et dans la limite des franchises, c’est l’entreprise qui paie. Les conditions de sortie, enfin, fixent les délais de résiliation et ce que deviennent les collaborateurs ou les rentiers.

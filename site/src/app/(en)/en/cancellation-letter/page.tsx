@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
@@ -8,7 +9,9 @@ import { LettreResiliation } from "@/components/outils/lettre-resiliation";
 import { pageMetadata } from "@/lib/metadata";
 import { ORG_ID, WEBSITE_ID, breadcrumbLd, faqLd, graph, type Miette } from "@/lib/jsonld";
 import { FaqSections, faqOutilLd, type FaqOutil } from "@/components/site/faq-sections";
-import { MAJ_ISO, abs } from "@/lib/site";
+import { abs } from "@/lib/site";
+import { DATE_PAGE } from "@/lib/donnees";
+import { dateLongue } from "@/lib/i18n";
 import { OUTILS, OUTILS_EN } from "@/lib/nav";
 
 /* English version of /lettre-resiliation/: English interface, same engine. The letter itself stays in French. */
@@ -62,7 +65,7 @@ const LD = graph(
     isPartOf: { "@id": WEBSITE_ID },
     publisher: { "@id": ORG_ID },
     datePublished: "2026-11-22",
-    dateModified: MAJ_ISO,
+    dateModified: DATE_PAGE.lettre,
     breadcrumb: { "@id": `${URL_}#breadcrumb` },
     mainEntity: { "@id": `${URL_}#outil` },
     citation: [
@@ -113,10 +116,13 @@ export default function Page() {
             text="Prepare a LAMal or supplementary insurance cancellation letter, with the deadline calculated under the law."
           />
           <LettreResiliation locale="en" aujourdhuiIso={new Date().toISOString().slice(0, 10)} />
+          <p className="lien-lettre">
+            Several contracts to keep track of (car, household, supplementary)? <Link href="/en/renewal-reminders/">Put their renewal dates in your calendar</Link>, with an alert before each deadline.
+          </p>
         </div>
 
         <div className="wrap faq">
-          <p className="maj">Updated on 22 November 2026. Sources: Fedlex (LAMal, OAMal, LCA).</p>
+          <p className="maj">Updated on {dateLongue(DATE_PAGE.lettre, "en")}. Sources: Fedlex (LAMal, OAMal, LCA).</p>
           <FaqSections faq={FAQ} />
         </div>
       </main>

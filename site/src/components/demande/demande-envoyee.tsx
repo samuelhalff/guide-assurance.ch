@@ -1,5 +1,6 @@
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
+import { MesureLead } from "@/components/demande/mesure-lead";
 
 /* Page de remerciement (avec GTM : elle vit dans (fr)/(en) pour la conversion). Aucune donnée personnelle
    dans l'adresse : seule la porte (?p=) y figure. */
@@ -38,6 +39,7 @@ export function DemandeEnvoyee({ locale }: { locale: "fr" | "en" }) {
   const t = T[locale];
   return (
     <div className="page-outil">
+      <MesureLead />
       <SiteHeader locale={locale} altPath={t.autre} rappel={false} />
       <main>
         <div className="wrap envoyee">

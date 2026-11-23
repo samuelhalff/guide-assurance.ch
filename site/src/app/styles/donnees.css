@@ -1,0 +1,67 @@
+/* Pages de données (rapport 08, idées 2, 3, 6 et 9) : primes par région, économie 3a par commune, historique des
+   taux 3a, chiffres clés 2027. Mobile d'abord (390 px) ; tableaux larges défilent dans leur cadre. */
+@layer components {
+  .page-donnees .reperes-statiques { margin-bottom: var(--s6); }
+  .defile-table { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 0 var(--s3); border-radius: var(--r); }
+  .defile-table:focus-visible { outline: 2px solid var(--lac-encre); outline-offset: 2px; }
+  table.table-donnees { min-width: 100%; font-variant-numeric: tabular-nums; }
+  table.table-donnees th, table.table-donnees td { white-space: nowrap; }
+  table.table-donnees td.num, table.table-donnees th.num { text-align: right; }
+  table.table-donnees tbody th { font-weight: 600; text-align: left; }
+  table.table-donnees caption { white-space: normal; position: sticky; left: 0; max-width: calc(100vw - 32px); }
+  table.table-donnees small { display: block; font: 13px var(--narrow); color: var(--encre-2); }
+  table.table-donnees th button.tri {
+    all: unset; cursor: pointer; display: inline-flex; gap: 4px; align-items: center; min-height: 32px;
+    font: inherit; color: inherit;
+  }
+  table.table-donnees th button.tri:focus-visible { outline: 2px solid var(--lac-encre); outline-offset: 2px; border-radius: 4px; }
+  table.table-donnees th[aria-sort] button.tri { color: var(--encre); }
+  .tri .fleche { font-size: 11px; opacity: .7; }
+  .telechargement { margin: var(--s3) 0 0; font-size: 16px; }
+  .telechargement a { font-weight: 700; }
+  .telechargement span, .telechargement small { display: block; font: 14px var(--narrow); color: var(--encre-2); }
+  .region-prime { scroll-margin-top: 80px; padding-top: var(--s2); border-top: 1px solid var(--filet); }
+  .lien-region { margin: var(--s3) 0; }
+  .lien-region a { font-weight: 700; }
+  .communes-region { margin: var(--s3) 0 0; font-size: 16px; }
+  .communes-region summary { cursor: pointer; font-weight: 600; min-height: 44px; display: flex; align-items: center; }
+  .communes-region p { margin: var(--s2) 0 0; color: var(--encre-2); }
+  .autres-cantons ul { list-style: none; padding: 0; margin: var(--s2) 0 0; display: flex; flex-wrap: wrap; gap: var(--s2); }
+  .autres-cantons a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--s3); border: 1px solid var(--filet); border-radius: var(--r); background: var(--papier); }
+  .autres-cantons a[aria-current="page"] { border-color: var(--encre); font-weight: 700; }
+
+  /* Graphique des taux 3a : couleurs par jetons, donc lisible en thème clair comme en sombre. */
+  .graphique-3a { margin: var(--s4) 0; }
+  .graphique-3a svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .graphique-3a .grille { stroke: var(--filet); stroke-width: 1; }
+  .graphique-3a .axe { fill: var(--encre-2); font: 12px var(--narrow); }
+  .graphique-3a polygon.bande { fill: var(--lac); opacity: .14; }
+  .graphique-3a .ligne { fill: none; stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+  .graphique-3a .moyenne { stroke: var(--lac-encre); }
+  .graphique-3a .mediane { stroke: var(--ocre); }
+  .graphique-3a .ligne.mediane { stroke-dasharray: 6 4; }
+  .graphique-3a .point { stroke: var(--papier); stroke-width: 1.5; }
+  .graphique-3a .point.moyenne { fill: var(--lac-encre); }
+  .graphique-3a .point.mediane { fill: var(--ocre); }
+  .graphique-3a figcaption { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4); font: 14px var(--narrow); color: var(--encre-2); margin-top: var(--s2); }
+  .graphique-3a .cle::before { content: ""; display: inline-block; width: 18px; height: 3px; vertical-align: middle; margin-right: 6px; }
+  .graphique-3a .cle.moyenne::before { background: var(--lac-encre); }
+  .graphique-3a .cle.mediane::before { background: repeating-linear-gradient(90deg, var(--ocre) 0 6px, transparent 6px 10px); }
+  .graphique-3a .cle.bande::before { height: 10px; background: var(--lac); opacity: .3; }
+
+  /* Chiffres clés : une phrase par fait, avec ancre, validité, source et méthode. */
+  .sommaire-chiffres ul { margin: 0 0 var(--s6); padding-left: 1.2em; list-style: disc; }
+  .sommaire-chiffres li { margin-bottom: var(--s2); }
+  .chiffres-groupe { scroll-margin-top: 80px; }
+  ol.faits { list-style: none; margin: var(--s4) 0 0; padding: 0; display: grid; gap: var(--s3); }
+  .fait { scroll-margin-top: 80px; background: var(--papier); border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s3) var(--s4); }
+  .fait:target { border-color: var(--lac-encre); box-shadow: 0 0 0 2px var(--lac-encre) inset; }
+  .fait-texte { margin: 0; font-size: 17px; }
+  .fait .ancre { color: var(--encre-2); text-decoration: none; padding: 0 4px; }
+  .fait .ancre:hover, .fait .ancre:focus-visible { color: var(--lac-encre); text-decoration: underline; }
+  .fait-meta { margin: var(--s2) 0 0; font: 14px var(--narrow); color: var(--encre-2); }
+  .fait-meta > span { display: block; margin-top: 2px; }
+  .sources-chiffres { margin: 0 0 var(--s6); }
+  .sources-chiffres summary { cursor: pointer; font-weight: 600; min-height: 44px; display: flex; align-items: center; }
+  .sources-chiffres ul { margin: var(--s2) 0 0; padding-left: 1.2em; list-style: disc; font-size: 15px; }
+}

@@ -1,0 +1,293 @@
+{
+ "source": "Calculette officielle du canton du Jura, « Simulation du montant d'impôt - Personnes physiques (impôts ordinaires) », https://guichet.jura.ch/ExternalServices/TaxCalculator_v2/calculator.aspx, année fiscale 2026, relevée le 23.11.2026 (revenu imposable saisi directement, fortune 0, confession « Sans - autre confession », parent seul = « Famille monoparentale »). Colonne estv : calculateur fiscal de l'AFC (API_calculateSimpleTaxes), mêmes profils, même jour, arrondi au franc.",
+ "profils": [
+  {
+   "id": "A",
+   "commune": "Delémont",
+   "etat": "seul",
+   "enfants": 0,
+   "revenu": 80000,
+   "revenuIfd": 80000,
+   "ifd": 1378.2,
+   "cantonal": 8257.5,
+   "communal": 5505.0,
+   "estv": {
+    "ifd": 1378,
+    "cantonal": 8258,
+    "communal": 5505
+   }
+  },
+  {
+   "id": "A2",
+   "commune": "Delémont",
+   "etat": "seul",
+   "enfants": 0,
+   "revenu": 72742,
+   "revenuIfd": 72742,
+   "ifd": 1048.6,
+   "cantonal": 7236.15,
+   "communal": 4824.1,
+   "estv": {
+    "ifd": 1049,
+    "cantonal": 7236,
+    "communal": 4824
+   }
+  },
+  {
+   "id": "A3",
+   "commune": "Delémont",
+   "etat": "seul",
+   "enfants": 0,
+   "revenu": 30000,
+   "revenuIfd": 30000,
+   "ifd": 113.95,
+   "cantonal": 1776.3,
+   "communal": 1184.2,
+   "estv": {
+    "ifd": 114,
+    "cantonal": 1776,
+    "communal": 1184
+   }
+  },
+  {
+   "id": "B2",
+   "commune": "Porrentruy",
+   "etat": "seul",
+   "enfants": 0,
+   "revenu": 55000,
+   "revenuIfd": 55000,
+   "ifd": 532.8,
+   "cantonal": 4759.8,
+   "communal": 3423.75,
+   "estv": {
+    "ifd": 533,
+    "cantonal": 4760,
+    "communal": 3424
+   }
+  },
+  {
+   "id": "K",
+   "commune": "Boncourt",
+   "etat": "seul",
+   "enfants": 0,
+   "revenu": 15000,
+   "revenuIfd": 15000,
+   "ifd": 0.0,
+   "cantonal": 397.5,
+   "communal": 216.2,
+   "estv": {
+    "ifd": 0,
+    "cantonal": 398,
+    "communal": 216
+   }
+  },
+  {
+   "id": "G",
+   "commune": "Les Breuleux",
+   "etat": "seul",
+   "enfants": 0,
+   "revenu": 65000,
+   "revenuIfd": 65000,
+   "ifd": 819.9,
+   "cantonal": 6158.9,
+   "communal": 2809.3,
+   "estv": {
+    "ifd": 820,
+    "cantonal": 6159,
+    "communal": 2809
+   }
+  },
+  {
+   "id": "I",
+   "commune": "Ederswiler",
+   "etat": "seul",
+   "enfants": 0,
+   "revenu": 120000,
+   "revenuIfd": 120000,
+   "ifd": 4248.55,
+   "cantonal": 14358.7,
+   "communal": 11083.9,
+   "estv": {
+    "ifd": 4249,
+    "cantonal": 14359,
+    "communal": 11084
+   }
+  },
+  {
+   "id": "E",
+   "commune": "Saignelégier",
+   "etat": "seul",
+   "enfants": 0,
+   "revenu": 250000,
+   "revenuIfd": 250000,
+   "ifd": 19503.35,
+   "cantonal": 35246.05,
+   "communal": 28444.15,
+   "estv": {
+    "ifd": 19503,
+    "cantonal": 35246,
+    "communal": 28444
+   }
+  },
+  {
+   "id": "N",
+   "commune": "Fahy",
+   "etat": "seul",
+   "enfants": 0,
+   "revenu": 450000,
+   "revenuIfd": 450000,
+   "ifd": 45903.35,
+   "cantonal": 68243.35,
+   "communal": 55073.55,
+   "estv": {
+    "ifd": 45903,
+    "cantonal": 68244,
+    "communal": 55074
+   }
+  },
+  {
+   "id": "B",
+   "commune": "Porrentruy",
+   "etat": "marie",
+   "enfants": 0,
+   "revenu": 120000,
+   "revenuIfd": 120000,
+   "ifd": 2929.0,
+   "cantonal": 11587.7,
+   "communal": 8335.0,
+   "estv": {
+    "ifd": 2929,
+    "cantonal": 11588,
+    "communal": 8335
+   }
+  },
+  {
+   "id": "C",
+   "commune": "Delémont",
+   "etat": "marie",
+   "enfants": 2,
+   "revenu": 100000,
+   "revenuIfd": 95000,
+   "ifd": 1040.0,
+   "cantonal": 8868.25,
+   "communal": 5912.15,
+   "estv": {
+    "ifd": 1040,
+    "cantonal": 8868,
+    "communal": 5912
+   }
+  },
+  {
+   "id": "D",
+   "commune": "Porrentruy",
+   "etat": "monoparental",
+   "enfants": 1,
+   "revenu": 70000,
+   "revenuIfd": 70000,
+   "ifd": 393.0,
+   "cantonal": 5170.05,
+   "communal": 3718.8,
+   "estv": {
+    "ifd": 393,
+    "cantonal": 5170,
+    "communal": 3719
+   }
+  },
+  {
+   "id": "M",
+   "commune": "Mettembert",
+   "etat": "monoparental",
+   "enfants": 2,
+   "revenu": 85000,
+   "revenuIfd": 85000,
+   "ifd": 639.0,
+   "cantonal": 6932.2,
+   "communal": 5351.2,
+   "estv": {
+    "ifd": 639,
+    "cantonal": 6932,
+    "communal": 5351
+   }
+  },
+  {
+   "id": "F",
+   "commune": "Moutier",
+   "etat": "marie",
+   "enfants": 3,
+   "revenu": 90000,
+   "revenuIfd": 90000,
+   "ifd": 576.0,
+   "cantonal": 7519.6,
+   "communal": 6068.45,
+   "estv": {
+    "ifd": 576,
+    "cantonal": 7520,
+    "communal": 6068
+   }
+  },
+  {
+   "id": "H",
+   "commune": "Soubey",
+   "etat": "marie",
+   "enfants": 0,
+   "revenu": 60000,
+   "revenuIfd": 60000,
+   "ifd": 369.0,
+   "cantonal": 3995.3,
+   "communal": 3154.15,
+   "estv": {
+    "ifd": 369,
+    "cantonal": 3995,
+    "communal": 3154
+   }
+  },
+  {
+   "id": "J",
+   "commune": "Haute-Sorne",
+   "etat": "marie",
+   "enfants": 0,
+   "revenu": 500000,
+   "revenuIfd": 500000,
+   "ifd": 50880.0,
+   "cantonal": 71256.75,
+   "communal": 52504.95,
+   "estv": {
+    "ifd": 50880,
+    "cantonal": 71257,
+    "communal": 52505
+   }
+  },
+  {
+   "id": "L",
+   "commune": "Delémont",
+   "etat": "marie",
+   "enfants": 0,
+   "revenu": 12000,
+   "revenuIfd": 12000,
+   "ifd": 0.0,
+   "cantonal": 0.0,
+   "communal": 0.0,
+   "estv": {
+    "ifd": 0,
+    "cantonal": 0,
+    "communal": 0
+   }
+  },
+  {
+   "id": "O",
+   "commune": "Porrentruy",
+   "etat": "marie",
+   "enfants": 0,
+   "revenu": 250000,
+   "revenuIfd": 250000,
+   "ifd": 18380.0,
+   "cantonal": 30502.0,
+   "communal": 21940.05,
+   "estv": {
+    "ifd": 18380,
+    "cantonal": 30502,
+    "communal": 21940
+   }
+  }
+ ]
+}

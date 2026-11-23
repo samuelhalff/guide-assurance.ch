@@ -1,5 +1,5 @@
 URL: https://www.ubs.com/ch/fr/services/accounts-and-cards/interest-rates-privates.html
-Relevé: 2026-11-22T20:43:19+00:00
+Relevé: 2026-11-23T05:30:01+00:00
 Méthode: playwright
 Extrait retenu: Compte Fisca 3a UBS CHF 0,100%
 Validité: Valable à partir du 24e juin 2026

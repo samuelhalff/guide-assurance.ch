@@ -1,28 +1,28 @@
 /* Économie d'impôt 3a : impôt sur le revenu 2026 (fédéral, cantonal, communal) pour Genève, Vaud, le Valais, Fribourg,
-   Neuchâtel et le Jura bernois, avant et après un versement 3a, et impôt séparé sur un retrait en capital.
+   Neuchâtel, le Jura et le Jura bernois, avant et après un versement 3a, et impôt séparé sur un retrait en capital.
    Données : site/src/data/impots-2026.json, produit par data/scripts/build_impots_2026.py (barèmes 2026 de l'AFC et des
    cantons, coefficients communaux officiels). Vérifié sur les calculettes officielles de chaque canton et sur le
    calculateur de l'AFC (tests/impot3a.test.mts). Aucun appel réseau : tout se calcule
    dans le navigateur. Montants en CHF, arrondis aux 5 centimes comme les calculettes cantonales. */
 import D from "../../data/impots-2026.json" with { type: "json" };
 
-export type Canton = "GE" | "VD" | "VS" | "FR" | "NE" | "BE";
+export type Canton = "GE" | "VD" | "VS" | "FR" | "NE" | "JU" | "BE";
 export type EtatCivil = "seul" | "marie" | "monoparental";
 export type Ligne = [montant: number, impot: number, taux: number];
 
 export const ANNEE_FISCALE = D.annee;
 export const DONNEES = D;
-export const CANTONS: Canton[] = ["GE", "VD", "VS", "FR", "NE", "BE"];
+export const CANTONS: Canton[] = ["GE", "VD", "VS", "FR", "NE", "JU", "BE"];
 /* Berne : seulement les communes de l'arrondissement du Jura bernois. */
 export const NOM_CANTON: Record<"fr" | "en", Record<Canton, string>> = {
-  fr: { GE: "Genève", VD: "Vaud", VS: "Valais", FR: "Fribourg", NE: "Neuchâtel", BE: "Jura bernois" },
-  en: { GE: "Geneva", VD: "Vaud", VS: "Valais", FR: "Fribourg", NE: "Neuchâtel", BE: "Bernese Jura" },
+  fr: { GE: "Genève", VD: "Vaud", VS: "Valais", FR: "Fribourg", NE: "Neuchâtel", JU: "Jura", BE: "Jura bernois" },
+  en: { GE: "Geneva", VD: "Vaud", VS: "Valais", FR: "Fribourg", NE: "Neuchâtel", JU: "Jura", BE: "Bernese Jura" },
 };
 export const MAX_ENFANTS = 5;
 /* Vaud : blocage du quotient relevé pour 1 à 3 enfants chez un parent seul (calculette ACI). */
 export const maxEnfants = (canton: Canton, etat: EtatCivil) => (etat === "seul" ? 0 : canton === "VD" && etat === "monoparental" ? D.vd.blocage.monoparental.length : MAX_ENFANTS);
 
-/* coefficient : GE et VD en centimes ou %, FR et NE en % de l'impôt de base, VS facteur (1 à 1,5), BE quotité
+/* coefficient : GE et VD en centimes ou %, FR et NE en % de l'impôt de base, VS facteur (1 à 1,5), JU et BE quotité
    (facteur). indexation : Valais seulement (indexation communale du barème, en %). */
 export type Commune = { nom: string; bfs: number; coefficient: number; indexation?: number };
 const lire = (rows: (string | number)[][]): Commune[] =>
@@ -33,9 +33,10 @@ export const COMMUNES: Record<Canton, Commune[]> = {
   VS: lire(D.vs.communes),
   FR: lire(D.fr.communes),
   NE: lire(D.ne.communes),
+  JU: lire(D.ju.communes),
   BE: lire(D.be.communes),
 };
-export const COMMUNE_DEFAUT: Record<Canton, string> = { GE: "Genève", VD: "Lausanne", VS: "Sion", FR: "Fribourg", NE: "Neuchâtel", BE: "Saint-Imier" };
+export const COMMUNE_DEFAUT: Record<Canton, string> = { GE: "Genève", VD: "Lausanne", VS: "Sion", FR: "Fribourg", NE: "Neuchâtel", JU: "Delémont", BE: "Saint-Imier" };
 export const trouverCommune = (canton: Canton, nom: string) =>
   COMMUNES[canton].find((c) => c.nom.localeCompare(nom, "fr", { sensitivity: "base" }) === 0);
 
@@ -141,6 +142,7 @@ export function impotRevenu(p: Profil): Impots {
   } else if (p.canton === "VS") icc = revenuVS(revenu, fam, enfants, c);
   else if (p.canton === "FR") icc = revenuFR(revenu, fam, c);
   else if (p.canton === "NE") icc = revenuNE(revenu, fam, enfants, c);
+  else if (p.canton === "JU") icc = revenuJU(revenu, fam, c);
   else icc = revenuBE(revenu, fam, c);
   return { ifd, ...icc, total: r05(ifd + icc.cantonal + icc.communal) };
 }
@@ -272,6 +274,20 @@ function capitalBE(k: number, fam: boolean, c: Commune): ICC {
   return { cantonal: r05(s * D.be.quotiteCantonale), communal: r05(s * c.coefficient) };
 }
 
+/* Jura (LI JU art. 35 et 37) : impôt simple par tranches sur le revenu arrondi à la centaine, tarif famille pour un
+   couple ou un parent seul ; impôt d'État = simple x 2,85, communal = simple x quotité de la commune, chacun arrondi
+   aux 5 centimes (au centime près de la calculette officielle). Capital : taux unitaires propres (0,9 à 1,7 %), mêmes
+   quotités. */
+function quotitesJU(s: number, c: Commune): ICC {
+  return { cantonal: r05(s * D.ju.quotiteCantonale), communal: r05(s * c.coefficient) };
+}
+function revenuJU(revenu: number, fam: boolean, c: Commune): ICC {
+  return quotitesJU(tranches(fam ? D.ju.famille : D.ju.seul, cent(revenu)), c);
+}
+function capitalJU(k: number, fam: boolean, c: Commune): ICC {
+  return quotitesJU(tranches(fam ? D.ju.capitalFamille : D.ju.capitalSeul, cent(k)), c);
+}
+
 export type Economie = { avant: Impots; apres: Impots; economie: Impots; part: number; versement: number };
 
 /* Économie de l'année : impôt sur le revenu sans le versement, moins l'impôt avec le versement déduit des deux revenus. */
@@ -308,6 +324,7 @@ export function impotCapital(canton: Canton, commune: string, etat: EtatCivil, e
   } else if (canton === "VS") icc = capitalVS(k, fam, c);
   else if (canton === "FR") icc = capitalFR(k, fam, c);
   else if (canton === "NE") icc = capitalNE(k, fam, c);
+  else if (canton === "JU") icc = capitalJU(k, fam, c);
   else icc = capitalBE(k, fam, c);
   const total = r05(ifd + icc.cantonal + icc.communal);
   return { ifd, ...icc, total, taux: k > 0 ? total / k : 0 };

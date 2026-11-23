@@ -21,7 +21,7 @@ import {
 import { CURRENT_CONSENT_VERSION, findConsent, renderConsent } from "@shared/demande/consent-public";
 import { cantonFromNpa } from "@shared/demande/npa";
 import type { Demande } from "@shared/demande/schema";
-import { suivre } from "@/lib/analytics";
+import { suivre, marquerLead } from "@/lib/analytics";
 import { DEMANDE_ENVOYEE, TEXTE_CTA, effacerPreremplissage, estPorte, lirePreremplissage } from "@/lib/demande";
 import { Turnstile } from "@/components/demande/turnstile";
 
@@ -321,6 +321,7 @@ export function FormulaireDemande({ locale }: { locale: Locale }) {
       const r = await fetch("/api/demande", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(corps) });
       if (r.status === 202) {
         suivre(FUNNEL_EVENTS.envoyee, { porte }, true);
+        marquerLead(porte);
         effacerPreremplissage();
         window.location.assign(`${DEMANDE_ENVOYEE[locale]}?p=${porte}`);
         return;

@@ -2,13 +2,17 @@
    pages Markdown et des fichiers de données : les dates et les nombres suivent chaque relevé automatique.
    Règle (Sam, 22.11.2026) : l'éditeur n'est jamais nommé dans ces fichiers ; le build échoue s'il apparaît. */
 import { abs } from "@/lib/site";
-import { OUTILS, OUTILS_EN } from "@/lib/nav";
+import { OUTILS, OUTILS_EN, PAGES_DONNEES, PAGES_DONNEES_EN } from "@/lib/nav";
+import { chiffresClesMarkdown } from "@/lib/chiffres-cles";
+import { ANNEE_BAROMETRE, DATE_BAROMETRE, barometreMarkdown } from "@/lib/barometre";
+import { ROUTES_IDEES, cheminBarometre } from "@/lib/pages-idees";
 import { toutesLesPages, type PageContenu, type Rubrique } from "@/lib/content/pages";
 import { DATE_IMPOTS, DATE_PRIMES, DATE_TAUX_3A } from "@/lib/donnees";
 import { COMPTES_3A, dateCh } from "@/lib/taux3a";
 import { dateLongue, type Locale } from "@/lib/i18n";
 import IMPOTS from "@/data/impots-2026.json";
 import EU from "@/data/primes-eu-fr-2027.json";
+import { lignesLlms, textesLlms, tousLesArticles } from "@/lib/actualites";
 
 const N = " ";
 const NB_BANQUES = COMPTES_3A.length;
@@ -49,6 +53,10 @@ function outilsFr(): string[] {
     lienFr("Économie d'impôt 3a en Suisse romande", OUTILS.impot3a, `impôt fédéral, cantonal et communal économisé par un versement 3a pour ${cantonsImpot("fr")} (toutes les communes), et impôt sur un retrait en capital, barèmes ${IMPOTS.annee} vérifiés le ${dateCh(DATE_IMPOTS)} sur les calculettes officielles, calcul dans le navigateur.`),
     lienFr(`Simulateur frontalier${N}: LAMal ou assurance maladie française${N}?`, OUTILS.simulateur, `compare la cotisation Urssaf et les primes LAMal 2027 des ${NB_ASSUREURS_EU} assureurs pour un foyer qui vit en France et travaille à Genève ou dans le canton de Vaud.`),
     lienFr("Lettre de résiliation d'assurance maladie", OUTILS.lettre, "calcule la date limite de réception (art. 7 LAMal, art. 35a LCA) et rédige la lettre de résiliation de l'assurance de base ou d'une complémentaire."),
+    lienFr("Rappels d'échéance dans l'agenda", ROUTES_IDEES.rappels.fr, `fichier d'agenda .ics créé dans le navigateur, sans e-mail${N}: 30 novembre (résiliation LAMal, art. 7 LAMal), 31 décembre (versement 3a), 31 mars (franchise 300) et échéances des contrats saisis, avec une alerte avant chacune.`),
+    lienFr(`Baromètre des primes maladie ${ANNEE_BAROMETRE}`, ROUTES_IDEES.barometre.fr, `prime moyenne ${ANNEE_BAROMETRE} et hausse par canton romand (OFSP), écart entre offres par région de prime et profil type, sans assureur nommé${N}; une page par canton, mise à jour le ${dateCh(DATE_BAROMETRE)}.`),
+    lienFr("Widgets à intégrer", ROUTES_IDEES.integrer.fr, `encadrés sans cookie pour d'autres sites${N}: compte à rebours de résiliation LAMal, prime médiane d'une région, taux 3a.`),
+    lienFr("Kit RH frontaliers et nouveaux arrivants", ROUTES_IDEES.kitRh.fr, `fiche PDF d'une page (FR, EN)${N}: délai de 3 mois du droit d'option (art. 3 LAMal), délai d'affiliation de 3 mois (art. 3 et 5 LAMal), couverture accidents (art. 13 OLAA).`),
   ];
 }
 
@@ -59,6 +67,28 @@ function outilsEn(): string[] {
     lienEn("Pillar 3a tax savings in French-speaking Switzerland", OUTILS_EN.impot3a, `federal, cantonal and municipal tax saved by a 3a payment in ${cantonsImpot("en")} (every municipality), plus tax on a capital withdrawal; ${IMPOTS.annee} scales checked on ${dateCh(DATE_IMPOTS)} against the official calculators; runs in the browser.`),
     lienEn("Cross-border calculator: LAMal or French health insurance?", OUTILS_EN.simulateur, `compares the Urssaf contribution with the 2027 LAMal premiums of the ${NB_ASSUREURS_EU} insurers for a household living in France and working in Geneva or Vaud.`),
     lienEn("Health insurance cancellation letter", OUTILS_EN.lettre, "calculates the date by which the insurer must receive the letter (art. 7 LAMal, art. 35a LCA) and drafts the letter in French for basic or supplementary insurance."),
+    lienEn("Renewal reminders in your calendar", ROUTES_IDEES.rappels.en, "an .ics calendar file created in the browser, no e-mail: 30 November (LAMal cancellation, art. 7 LAMal), 31 December (pillar 3a payment), 31 March (CHF 300 deductible) and the renewal dates of contracts entered, with alerts before each."),
+    lienEn(`${ANNEE_BAROMETRE} health premium barometer`, ROUTES_IDEES.barometre.en, `${ANNEE_BAROMETRE} average premium and increase by French-speaking canton (FOPH), gap between offers by premium region and standard profile, no insurer named; one page per canton, updated on ${dateCh(DATE_BAROMETRE)}.`),
+    lienEn("Embeddable widgets", ROUTES_IDEES.integrer.en, "cookie-free boxes for other sites: LAMal cancellation countdown, median premium of a region, pillar 3a rates."),
+    lienEn("HR kit for cross-border workers and newcomers", ROUTES_IDEES.kitRh.en, "one-page PDF (FR, EN): 3-month right of option (art. 3 LAMal), 3-month enrolment deadline (art. 3 and 5 LAMal), accident cover (art. 13 OLAA)."),
+  ];
+}
+
+/* Pages de données (rapport 08, idées 2, 3, 6, 9), avec leurs fichiers CSV (licence CC BY 4.0). */
+function donneesFr(): string[] {
+  return [
+    lienFr("Chiffres clés 2027", PAGES_DONNEES.chiffres, `primes moyennes 2027 par canton romand (OFSP), écart entre l'offre la plus basse et la plus haute par région, plafonds et taux 3a, délais${N}; une phrase datée et sourcée par chiffre, avec une ancre.`),
+    lienFr("Primes LAMal 2027 par région de prime", PAGES_DONNEES.regions, `médiane, quartiles, minimum et maximum des offres 2027 pour des profils types dans chaque région de prime romande${N}; CSV${N}: ${abs("/data/primes-2027-regions.csv")}`),
+    lienFr("Économie d'impôt 3a par commune", PAGES_DONNEES.communes3a, `économie d'impôt 2026 d'un versement 3a pour une personne seule avec 80${N}000 francs de revenu imposable, dans chaque commune de ${cantonsImpot("fr")}${N}; CSV${N}: ${abs("/data/economie-impot-3a-communes-2026.csv")}`),
+    lienFr("Historique des taux 3a", PAGES_DONNEES.historique3a, `taux des comptes 3a relevés chaque lundi depuis le 22.11.2026, moyenne et médiane par relevé${N}; CSV${N}: ${abs("/data/taux-3a-historique.csv")}`),
+  ];
+}
+function donneesEn(): string[] {
+  return [
+    lienEn("2027 key figures", PAGES_DONNEES_EN.chiffres, "2027 average premiums by French-speaking canton (FOPH), gap between the lowest and highest offer by region, pillar 3a caps and rates, deadlines; one dated, sourced sentence per figure, with an anchor."),
+    lienEn("2027 health insurance premiums by premium region", PAGES_DONNEES_EN.regions, `median, quartiles, minimum and maximum of 2027 offers for standard profiles in each premium region of French-speaking Switzerland; CSV: ${abs("/data/primes-2027-regions.csv")}`),
+    lienEn("Pillar 3a tax savings by municipality", PAGES_DONNEES_EN.communes3a, `2026 tax saved by a 3a payment for a single person with CHF 80,000 taxable income, in every municipality of ${cantonsImpot("en")}; CSV: ${abs("/data/economie-impot-3a-communes-2026.csv")}`),
+    lienEn("Pillar 3a rate history", PAGES_DONNEES_EN.historique3a, `pillar 3a account rates read every Monday since 22.11.2026, mean and median per survey; CSV: ${abs("/data/taux-3a-historique.csv")}`),
   ];
 }
 
@@ -85,6 +115,12 @@ export function llmsTxt(): string {
     "",
     ...outilsFr(),
     "",
+    "## Données",
+    "",
+    ...donneesFr(),
+    "",
+    /* Actualités publiées seulement (jamais les brouillons). */
+    ...(lignesLlms(tousLesArticles("fr"), abs).length ? ["## Actualités", "", ...lignesLlms(tousLesArticles("fr"), abs), ""] : []),
     "## Assurances",
     "",
     "Chaque page donne la règle en une phrase, ce qui fait varier la prime et, pour les branches sans prix publics, la possibilité d'être rappelé par un conseiller d'un courtier partenaire.",
@@ -108,6 +144,11 @@ export function llmsTxt(): string {
     "",
     ...outilsEn(),
     "",
+    "### Data",
+    "",
+    ...donneesEn(),
+    "",
+    ...(lignesLlms(tousLesArticles("en"), abs).length ? ["### News", "", ...lignesLlms(tousLesArticles("en"), abs), ""] : []),
     "### Pages",
     "",
     lienEn("Home", "/en/", "2027 average basic health insurance premiums by canton in French-speaking Switzerland, cancellation deadlines, guides."),
@@ -168,8 +209,22 @@ export function llmsFullTxt(): string {
     "",
     `Index${N}: ${abs("/llms.txt")}`,
     "",
+    "---",
+    "",
+    chiffresClesMarkdown("fr"),
+    "---",
+    "",
+    barometreMarkdown("fr", (c) => abs(cheminBarometre(c, "fr"))),
     ...pages("fr").flatMap((p) => ["---", "", pageComplete(p)]),
+    ...textesLlms(tousLesArticles("fr"), abs).flatMap((t) => ["---", "", t]),
+    "---",
+    "",
+    chiffresClesMarkdown("en"),
+    "---",
+    "",
+    barometreMarkdown("en", (c) => abs(cheminBarometre(c, "en"))),
     ...pages("en").flatMap((p) => ["---", "", pageComplete(p)]),
+    ...textesLlms(tousLesArticles("en"), abs).flatMap((t) => ["---", "", t]),
   ];
   return verifier(L.join("\n"), "llms-full.txt");
 }

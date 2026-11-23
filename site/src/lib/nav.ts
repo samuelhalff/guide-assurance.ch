@@ -10,7 +10,12 @@ export const NAV: { id: Rubrique; href: string; label: string }[] = [
   { id: "guides", href: "/guides/", label: "Guides" },
 ];
 
+/* « Actualités » : seulement quand au moins un article est publié (compté au build, next.config.ts). */
+const AVEC_ACTUS_FR = (process.env.NEXT_PUBLIC_ACTUALITES_FR ?? "0") !== "0";
+const AVEC_ACTUS_EN = (process.env.NEXT_PUBLIC_ACTUALITES_EN ?? "0") !== "0";
+
 export const PIED: { href: string; label: string }[] = [
+  ...(AVEC_ACTUS_FR ? [{ href: "/actualites/", label: "Actualités" }] : []),
   { href: "/methodologie/", label: "Méthodologie" },
   { href: "/independance/", label: "Nos liens avec les assureurs" },
   { href: "/confidentialite/", label: "Confidentialité" },
@@ -36,6 +41,7 @@ export const NAV_EN: typeof NAV = [
 ];
 
 export const PIED_EN: typeof PIED = [
+  ...(AVEC_ACTUS_EN ? [{ href: "/en/news/", label: "News" }] : []),
   { href: "/en/methodology/", label: "Methodology" },
   { href: "/en/independence/", label: "Ties with insurers" },
   { href: "/en/privacy/", label: "Privacy" },
@@ -53,3 +59,23 @@ export const OUTILS_EN = {
 export const nav = (locale: "fr" | "en") => (locale === "en" ? NAV_EN : NAV);
 export const pied = (locale: "fr" | "en") => (locale === "en" ? PIED_EN : PIED);
 export const outils = (locale: "fr" | "en") => (locale === "en" ? OUTILS_EN : OUTILS);
+
+/* Pages de données (rapport 08, idées 2, 3, 6 et 9) : historique des taux 3a, chiffres clés 2027, économie d'impôt 3a
+   par commune (une page par canton sous communes3a), primes 2027 par région de prime. */
+export const PAGES_DONNEES = {
+  regions: "/assurance-maladie/primes/regions/",
+  chiffres: "/chiffres-cles-2027/",
+  historique3a: "/3e-pilier/taux-3a/historique/",
+  communes3a: "/3e-pilier/economie-impot/communes/",
+} as const;
+export const PAGES_DONNEES_EN = {
+  regions: "/en/health-insurance/premiums/regions/",
+  chiffres: "/en/key-figures-2027/",
+  historique3a: "/en/pillar-3a/interest-rates/history/",
+  communes3a: "/en/pillar-3a/tax-savings/municipalities/",
+} as const;
+/* Slug des pages cantonales de l'économie d'impôt par commune. */
+export const SLUG_CANTON_3A = {
+  fr: { GE: "geneve", VD: "vaud", VS: "valais", FR: "fribourg", NE: "neuchatel", JU: "jura", BE: "jura-bernois" },
+  en: { GE: "geneva", VD: "vaud", VS: "valais", FR: "fribourg", NE: "neuchatel", JU: "jura", BE: "bernese-jura" },
+} as const;

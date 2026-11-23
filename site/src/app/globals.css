@@ -8,6 +8,9 @@
 @import "./styles/guide.css";
 @import "./styles/demande.css";
 @import "./styles/assistant.css";
+@import "./styles/donnees.css";
+@import "./styles/idees.css";
+@import "./styles/actualites.css";
 
 @custom-variant dark (&:is(.dark *));
 

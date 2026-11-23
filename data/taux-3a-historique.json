@@ -1,0 +1,222 @@
+{
+ "description": "Taux de base des comptes 3a (en % par an, adulte, premier franc) relevés sur les pages officielles des banques ou leurs fiches de taux PDF, jamais sur un comparateur. Un relevé par date ; les valeurs passées ne sont jamais corrigées. Relevé automatique chaque lundi (infra/refresh/taux3a.py).",
+ "releves": [
+  {
+   "date": "2026-11-22",
+   "source": "relevé initial (data/taux-3a.json)",
+   "comptes": [
+    {
+     "id": "bas",
+     "banque": "ABS",
+     "taux": 0.2,
+     "taux_valable_des": null
+    },
+    {
+     "id": "bcf",
+     "banque": "BCF",
+     "taux": 0.4,
+     "taux_valable_des": null
+    },
+    {
+     "id": "bcge",
+     "banque": "BCGE",
+     "taux": 0.25,
+     "taux_valable_des": "2026-11-01"
+    },
+    {
+     "id": "bcj",
+     "banque": "BCJ",
+     "taux": 0.1,
+     "taux_valable_des": "2026-09-01"
+    },
+    {
+     "id": "bcn",
+     "banque": "BCN",
+     "taux": 0.25,
+     "taux_valable_des": null
+    },
+    {
+     "id": "bcv",
+     "banque": "BCV",
+     "taux": 0.05,
+     "taux_valable_des": null
+    },
+    {
+     "id": "bcvs",
+     "banque": "BCVs",
+     "taux": 0.15,
+     "taux_valable_des": null
+    },
+    {
+     "id": "ca-next-bank",
+     "banque": "CA next bank",
+     "taux": 0.65,
+     "taux_valable_des": "2026-08-01"
+    },
+    {
+     "id": "cic",
+     "banque": "Banque CIC",
+     "taux": 0.6,
+     "taux_valable_des": "2025-05-01"
+    },
+    {
+     "id": "cler",
+     "banque": "Banque Cler",
+     "taux": 0.2,
+     "taux_valable_des": null
+    },
+    {
+     "id": "migros",
+     "banque": "Banque Migros",
+     "taux": 0.2,
+     "taux_valable_des": null
+    },
+    {
+     "id": "postfinance",
+     "banque": "PostFinance",
+     "taux": 0.05,
+     "taux_valable_des": null
+    },
+    {
+     "id": "raiffeisen",
+     "banque": "Raiffeisen",
+     "taux": 0.2,
+     "taux_valable_des": "2026-02-01"
+    },
+    {
+     "id": "swissquote",
+     "banque": "Swissquote",
+     "taux": 0.1,
+     "taux_valable_des": null
+    },
+    {
+     "id": "ubs",
+     "banque": "UBS",
+     "taux": 0.1,
+     "taux_valable_des": "2026-06-24"
+    },
+    {
+     "id": "valiant",
+     "banque": "Valiant",
+     "taux": 0.2,
+     "taux_valable_des": "2026-09-22"
+    },
+    {
+     "id": "wir",
+     "banque": "Banque WIR",
+     "taux": 0.3,
+     "taux_valable_des": "2026-10-21"
+    }
+   ]
+  },
+  {
+   "date": "2026-11-23",
+   "source": "relevé automatique, aucun changement (infra/refresh/taux3a.py)",
+   "comptes": [
+    {
+     "id": "bas",
+     "banque": "ABS",
+     "taux": 0.2,
+     "taux_valable_des": null
+    },
+    {
+     "id": "bcf",
+     "banque": "BCF",
+     "taux": 0.4,
+     "taux_valable_des": null
+    },
+    {
+     "id": "bcge",
+     "banque": "BCGE",
+     "taux": 0.25,
+     "taux_valable_des": "2026-11-01"
+    },
+    {
+     "id": "bcj",
+     "banque": "BCJ",
+     "taux": 0.1,
+     "taux_valable_des": "2026-09-01"
+    },
+    {
+     "id": "bcn",
+     "banque": "BCN",
+     "taux": 0.25,
+     "taux_valable_des": null
+    },
+    {
+     "id": "bcv",
+     "banque": "BCV",
+     "taux": 0.05,
+     "taux_valable_des": null
+    },
+    {
+     "id": "bcvs",
+     "banque": "BCVs",
+     "taux": 0.15,
+     "taux_valable_des": null
+    },
+    {
+     "id": "ca-next-bank",
+     "banque": "CA next bank",
+     "taux": 0.65,
+     "taux_valable_des": "2026-08-01"
+    },
+    {
+     "id": "cic",
+     "banque": "Banque CIC",
+     "taux": 0.6,
+     "taux_valable_des": "2025-05-01"
+    },
+    {
+     "id": "cler",
+     "banque": "Banque Cler",
+     "taux": 0.2,
+     "taux_valable_des": null
+    },
+    {
+     "id": "migros",
+     "banque": "Banque Migros",
+     "taux": 0.2,
+     "taux_valable_des": null
+    },
+    {
+     "id": "postfinance",
+     "banque": "PostFinance",
+     "taux": 0.05,
+     "taux_valable_des": null
+    },
+    {
+     "id": "raiffeisen",
+     "banque": "Raiffeisen",
+     "taux": 0.2,
+     "taux_valable_des": "2026-02-01"
+    },
+    {
+     "id": "swissquote",
+     "banque": "Swissquote",
+     "taux": 0.1,
+     "taux_valable_des": null
+    },
+    {
+     "id": "ubs",
+     "banque": "UBS",
+     "taux": 0.1,
+     "taux_valable_des": "2026-06-24"
+    },
+    {
+     "id": "valiant",
+     "banque": "Valiant",
+     "taux": 0.2,
+     "taux_valable_des": "2026-09-22"
+    },
+    {
+     "id": "wir",
+     "banque": "Banque WIR",
+     "taux": 0.3,
+     "taux_valable_des": "2026-10-21"
+    }
+   ]
+  }
+ ],
+ "notes_bns": []
+}

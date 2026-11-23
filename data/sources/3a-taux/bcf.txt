@@ -1,5 +1,5 @@
 URL: https://www.bcf.ch/fr/prives/prevoyance-et-assurances/comptes-de-prevoyance/compte-epargne3
-Relevé: 2026-11-22T20:43:27+00:00
+Relevé: 2026-11-23T05:30:12+00:00
 Méthode: http
 Extrait retenu: Tarifs et conditions Monnaie CHF Taux d'intérêt 0.400%
 Validité: -

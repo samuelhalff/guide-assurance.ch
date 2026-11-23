@@ -1,5 +1,5 @@
 URL: https://www.bcn.ch/prives/prevoyance/comptes-de-prevoyance/epargne-3
-Relevé: 2026-11-22T20:43:27+00:00
+Relevé: 2026-11-23T05:30:13+00:00
 Méthode: http
 Extrait retenu: Taux d'intérêt créditeur 0,2500%
 Validité: -
