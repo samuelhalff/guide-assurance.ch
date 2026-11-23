@@ -1,0 +1,62 @@
+name: "nginx : conf de guide-assurance.ch"
+
+# Remplace infra/deploy.sh --nginx. Envoie infra/proxy-extra/guide-assurance.conf au proxy partagé par la clé
+# « github-actions guide-assurance (nginx) » (utilisateur ga-deploy, commande forcée /usr/local/sbin/ga-nginx-entry,
+# sudo limité à /usr/local/sbin/ga-nginx-install) : sauvegarde datée, nginx -t, reload, retour à la conf
+# précédente si le test échoue. « check » montre seulement le diff avec la conf en place.
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "check (diff seulement) ou install"
+        type: choice
+        options: [check, install]
+        default: check
+      logrotate:
+        description: "installer aussi /etc/cron.daily/guide-assurance-logs (infra/logrotate)"
+        type: boolean
+        default: false
+
+concurrency:
+  group: guide-assurance-nginx
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  nginx:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - name: Accès SSH
+        env:
+          KEY: ${{ secrets.NGINX_SSH_KEY }}
+          KNOWN_HOSTS: ${{ secrets.DEPLOY_SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          install -d -m 700 ~/.ssh; umask 077
+          printf '%s\n' "$KEY" > ~/.ssh/ga_nginx
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts_deploy
+      - name: Conf nginx (${{ inputs.mode }})
+        env:
+          HOST: ${{ secrets.DEPLOY_SSH_HOST }}
+        run: |
+          ssh -i ~/.ssh/ga_nginx -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes \
+            -o UserKnownHostsFile=$HOME/.ssh/known_hosts_deploy "ga-deploy@$HOST" "${{ inputs.mode }}" \
+            < infra/proxy-extra/guide-assurance.conf
+      - name: Rotation des journaux
+        if: inputs.logrotate && inputs.mode == 'install'
+        env:
+          HOST: ${{ secrets.DEPLOY_SSH_HOST }}
+        run: |
+          ssh -i ~/.ssh/ga_nginx -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes \
+            -o UserKnownHostsFile=$HOME/.ssh/known_hosts_deploy "ga-deploy@$HOST" logrotate \
+            < infra/logrotate/guide-assurance-logs.sh
+      - name: Contrôle en ligne
+        if: inputs.mode == 'install'
+        run: |
+          for u in https://guide-assurance.ch/ https://www.guide-assurance.ch/ https://leads.guide-assurance.ch/; do
+            printf '%s %s\n' "$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "$u")" "$u"
+          done
