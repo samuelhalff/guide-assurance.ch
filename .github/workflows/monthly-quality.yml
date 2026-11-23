@@ -37,11 +37,13 @@ jobs:
         id: lh
         continue-on-error: true
         working-directory: site
-        run: npm run lighthouse 2>&1 | tee ../lighthouse.txt
+        shell: bash
+        run: npm run lighthouse 2>&1 | sed -u 's/\x1b\[[0-9;]*m//g' | tee ../lighthouse.txt
 
       - name: Liens internes
         id: liens
         continue-on-error: true
+        shell: bash
         run: node scripts/check-links.mjs site/out 2>&1 | tee liens.txt
 
       - name: Rapport
