@@ -276,7 +276,7 @@
     "en": "90 days; one year for divorce"
    },
    "franchise": {
-    "fr": "Aucune, ou 10 % des frais externes si la police le prévoit",
+    "fr": "Aucune, ou 10 % des frais externes si la police le prévoit",
     "en": "None, or 10% of external costs if the policy says so"
    },
    "valeurMin": {
@@ -311,7 +311,7 @@
    "produit": "Privatrechtsschutz Paket",
    "couverture": "prive-circulation",
    "doc": {
-    "titre": "AVB Privatrechtsschutz – Paket",
+    "titre": "AVB Privatrechtsschutz (Paket)",
     "version": "Ausgabe 2024 (AVBPP24), en allemand",
     "url": "https://www.cooprecht.ch/wp-content/uploads/2026/04/CRS_AVB_Privatrechtsschutz-Paket_Web_DE.pdf",
     "langue": "de"
@@ -796,7 +796,7 @@
     "internet": {
      "s": "oui",
      "note": {
-      "fr": "10 % de la somme assurée",
+      "fr": "10 % de la somme assurée",
       "en": "10% of the sum insured"
      }
     },

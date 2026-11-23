@@ -56,7 +56,7 @@ const T = {
     miettes: [{ name: "Accueil", href: "/" }, { name: "Ménage et RC", href: "/assurance-menage-rc/" }, { name: "Somme d’assurance ménage" }] as Miette[],
     appli: "Calculateur de la somme d’assurance ménage",
     partage: "Estimer la somme d’assurance de son ménage en trois réponses, avec deux méthodes publiées par des assureurs.",
-    exTitre: "Exemples de sommes, réserve de 10 % comprise",
+    exTitre: "Exemples de sommes, réserve de 10 % comprise",
     exTexte: `Les montants sont en CHF et incluent la réserve de 10${N}% que les deux assureurs conseillent. Ils ne comptent ni les objets coûteux ajoutés à part ni les bijoux.`,
     exCap: "Somme d’assurance ménage selon les méthodes Baloise et Zurich, en CHF",
     thMenage: "Ménage",
@@ -108,7 +108,7 @@ const T = {
       {
         q: `Quand faut-il revoir sa somme d’assurance${N}?`,
         a: [
-          "Après un déménagement, une naissance, une mise en ménage ou un achat important, comme un vélo électrique, un ordinateur ou un canapé. La réserve de 10 % absorbe les petits achats ; au-delà, signalez la nouvelle valeur à votre assureur, qui adapte la somme et la prime.",
+          "Après un déménagement, une naissance, une mise en ménage ou un achat important, comme un vélo électrique, un ordinateur ou un canapé. La réserve de 10 % absorbe les petits achats ; au-delà, signalez la nouvelle valeur à votre assureur, qui adapte la somme et la prime.",
         ],
       },
     ] as FaqOutil[],

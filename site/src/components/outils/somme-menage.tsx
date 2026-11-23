@@ -36,7 +36,7 @@ const TXT = {
     baloise: "Grille Baloise (formulaire 140.1173, 2023)",
     zurich: "Feuille d’inventaire Zurich (ZH56108f, 2024)",
     horsGrille: "hors grille",
-    detailCap: "Somme selon chaque méthode, réserve de 10 % comprise, en CHF",
+    detailCap: "Somme selon chaque méthode, réserve de 10 % comprise, en CHF",
     affiner: "Affiner : ajouter vos objets coûteux",
     affinerTexte: "Les deux méthodes comptent déjà les meubles, l’électroménager, la vaisselle, le linge et les vêtements. Ajoutez ici, en valeur à neuf, ce que vous avez de plus : la grille Baloise les laisse de côté, et la formule Zurich n’en compte qu’une petite partie.",
     extras: {
