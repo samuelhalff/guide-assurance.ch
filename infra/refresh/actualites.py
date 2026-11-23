@@ -349,10 +349,11 @@ Règles absolues :
 - N'utilise QUE les faits et les nombres présents dans le DOSSIER fourni. Aucun nombre qui n'y figure pas tel quel (sauf années et petits entiers). Si un chiffre manque, écris sans lui.
 - Ne nomme aucune entreprise : aucun assureur, aucune banque, aucun courtier, aucun comparateur. Jamais le nom du courtier partenaire, jamais « West Bay ».
 - Aucune recommandation, aucun superlatif commercial (meilleur, moins cher, idéal, garanti), jamais « indépendant », jamais « tous les assureurs », rien sur des commissions, la rémunération ou les données personnelles.
+- En anglais aussi : jamais cheapest, best, ideal, guaranteed, independent, all insurers.
 - Ton neutre et factuel, pas d'injonction (pas de « il faut », « vous devez »).
-- Structure : une réponse directe en 2 à 4 phrases avant le premier intertitre ; 4 à 7 intertitres H2 (« ## ») formulés comme des questions ; pas de H1 ; phrases complètes, pas de style télégraphique « Étiquette : valeur ».
+- Structure : une réponse directe en 2 à 4 phrases avant le premier intertitre ; des intertitres H2 (« ## ») qui sont tous des questions terminées par « ? » (en anglais aussi) ; pas de H1 ; phrases complètes, pas de style télégraphique « Étiquette : valeur ».
 - Français de Suisse : espace fine insécable U+202F avant ; : ! ? et à l'intérieur des guillemets « » ; pas de tiret long ni demi-cadratin ; pas de tournure « pas X mais Y ».
-- Longueur du champ markdown (impératif, contrôlé automatiquement, en dessous l'article est jeté) : 750 à 900 mots en français ; l'anglais est une adaptation (pas une traduction mot à mot) de 650 à 800 mots. Pour y arriver : 5 ou 6 intertitres, 2 ou 3 paragraphes de 50 à 80 mots sous chacun. Compte les mots avant de répondre.
+- Longueur du champ markdown (impératif, contrôlé automatiquement, en dessous l'article est jeté) : 750 à 900 mots en français ; l'anglais est une adaptation (pas une traduction mot à mot) de 650 à 800 mots. Pour y arriver, dans chaque langue : exactement 6 intertitres « ## » et, sous chacun, exactement 3 paragraphes de 45 à 60 mots chacun (pas de listes à puces). Compte les mots avant de répondre : un texte trop court est jeté.
 - Anglais : aucune espace fine ni insécable, ponctuation anglaise collée au mot (« word: », jamais « word : »), guillemets droits ou “ ”.
 - FAQ : 4 questions, réponses de 40 à 110 mots, cohérentes avec le corps.
 - Sources : 3 à 6, chacune une URL https exacte tirée du DOSSIER (pages officielles), au moins 2 officielles (admin.ch, fedlex, finma.ch, snb.ch, sites cantonaux).
@@ -523,8 +524,11 @@ def rediger(log: C.Log, a, d: dict, env: dict) -> int:
         else:
             brut = appel_llm(env, REGLES, consigne + "\n\nTA RÉPONSE PRÉCÉDENTE :\n" + json.dumps(art, ensure_ascii=False)
                              + "\n\nELLE A ÉCHOUÉ AUX CONTRÔLES AUTOMATIQUES SUIVANTS :\n- " + "\n- ".join(echecs)
-                             + "\n\nCorrige tous ces points (allonge ou raccourcis le texte, raccourcis le titre, etc.) "
-                             "sans enfreindre les autres règles, et renvoie l'objet JSON complet.", log)
+                             + "\n\nCorrige tous ces points sans enfreindre les autres règles. Texte trop court : ajoute des "
+                             "paragraphes complets de 45 à 60 mots sous les intertitres jusqu'à dépasser 780 mots en français "
+                             "et 680 en anglais (garde tout ce qui est juste). Titre trop long : 55 caractères au plus. "
+                             "Intertitre sans question : reformule-le en question terminée par « ? ». "
+                             "Renvoie l'objet JSON complet.", log)
         art = nettoyer_en(extraire_json(brut))
         r = verifier_brouillon(log, d, art, jour, corpus)
         if isinstance(r, int):
