@@ -76,3 +76,5 @@ Le droit de révocation dure 14 jours dès la proposition ou l’acceptation du 
 ## Ce que cette page ne couvre pas
 
 Cette page ne calcule pas votre économie d’impôt, qui dépend du canton. Elle n’annonce pas non plus les modifications de l’OPP 3 encore en préparation. L’OFAS et le Conseil fédéral publient les montants officiels ; le texte de référence est l’[OPP 3 sur Fedlex](https://www.fedlex.admin.ch/eli/cc/1985/1778_1778_1778/fr).
+
+Pour la déclaration d’impôts elle-même, Ark Fiduciaire, notre partenaire fiduciaire à Genève, peut [préparer votre déclaration et y faire valoir vos versements 3a](https://ark-fid.ch/fr/services/fiscalite/). Ark et l’éditeur de ce site ont un administrateur en commun.

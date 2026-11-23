@@ -74,3 +74,5 @@ Les contrats d’assurance privée (complémentaire LAA, perte de gain maladie e
 ## Ce que cette page ne couvre pas
 
 Cette section ne calcule aucune prime et ne traite pas des assurances sociales gérées par les caisses de compensation (AVS, AI, APG, allocations familiales). Elle ne remplace pas l’avis d’un spécialiste pour votre entreprise. Les textes de référence sont la [LPP](https://www.fedlex.admin.ch/eli/cc/1983/797_797_797/fr), la [LAA](https://www.fedlex.admin.ch/eli/cc/1982/1676_1676_1676/fr), le [CO](https://www.fedlex.admin.ch/eli/cc/27/317_321_377/fr) et la [LCA](https://www.fedlex.admin.ch/eli/cc/24/719_735_717/fr) sur Fedlex.
+
+Si vous fondez une sàrl ou une SA, Ark Fiduciaire, notre partenaire fiduciaire, peut [se charger de la constitution de votre société à Genève](https://ark-fid.ch/fr/services/constitution-entreprise/). Ark et l’éditeur de ce site ont un administrateur en commun.

@@ -127,6 +127,13 @@
   .marge a:hover { color: var(--bande-titre); }
   .marge a:focus-visible { outline-color: var(--bande-focus); }
   .marge nav { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s5); }
+  .marge .credit {
+    flex-basis: 100%; margin: 0; display: flex; align-items: center; gap: .45em;
+    font-size: 13px; color: var(--bande-texte-3);
+  }
+  .marge .credit a { display: inline-flex; padding: 6px 0; opacity: .85; }
+  .marge .credit a:hover { opacity: 1; }
+  .marge .credit img { display: block; height: 15px; width: auto; }
 
   /* ===== Fil d'Ariane ===== */
   .fil { font-family: var(--narrow); font-size: 15px; color: var(--encre-2); margin: var(--s4) 0 var(--s3); }

@@ -75,3 +75,5 @@ Private insurance contracts (supplementary LAA, IJM under the LCA, liability, pr
 ## What this page does not cover
 
 This section calculates no premium. It does not deal with the social insurances run by the compensation funds (AVS, old-age and survivors’ insurance; AI, disability insurance; APG, loss of earnings compensation; family allowances), and it does not replace the advice of a specialist for your business. The reference texts on Fedlex are the [LPP](https://www.fedlex.admin.ch/eli/cc/1983/797_797_797/fr), the [LAA](https://www.fedlex.admin.ch/eli/cc/1982/1676_1676_1676/fr), the [CO](https://www.fedlex.admin.ch/eli/cc/27/317_321_377/fr) and the [LCA](https://www.fedlex.admin.ch/eli/cc/24/719_735_717/fr).
+
+If you are founding a Sàrl or an SA, Ark Fiduciaire, our fiduciary partner, can [take care of incorporating your company in Geneva](https://ark-fid.ch/en/services/incorporation/). Ark and the publisher of this site share a board member.

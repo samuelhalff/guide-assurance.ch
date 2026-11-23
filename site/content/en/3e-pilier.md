@@ -77,3 +77,5 @@ The right of withdrawal lasts 14 days from the proposal or the acceptance of the
 ## What this page does not cover
 
 This page does not calculate your tax saving, which depends on the canton, and does not announce any change to the OPP 3 that is still in preparation. The FSIO (OFAS) and the Federal Council publish the official amounts. The reference text is the [OPP 3 on Fedlex](https://www.fedlex.admin.ch/eli/cc/1985/1778_1778_1778/fr).
+
+For the tax return itself, Ark Fiduciaire, our fiduciary partner in Geneva, can [prepare your return and claim your 3a payments](https://ark-fid.ch/en/services/taxes/). Ark and the publisher of this site share a board member.
