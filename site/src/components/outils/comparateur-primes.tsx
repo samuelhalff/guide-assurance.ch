@@ -71,7 +71,7 @@ const TXT = {
     types: { BASE: "Standard : libre choix du médecin", PRAXIS: "Premier contact : votre cabinet désigné (médecin de famille ou HMO)", TEL_DIG: "Premier contact : appel ou application", PHARM: "Premier contact : pharmacie partenaire", FLEX: "Premier contact : au choix (cabinet, appel ou pharmacie)" } as Record<P.TypeModele, string>,
     typesCourts: { BASE: "Standard, libre choix", PRAXIS: "Médecin de famille ou HMO", TEL_DIG: "Appel ou application d’abord", PHARM: "Pharmacie d’abord", FLEX: "Premier contact au choix" } as Record<P.TypeModele, string>,
     titre: (lieu: string) => `Assurance maladie à ${lieu}`,
-    plusBasse: `Prime la plus basse pour ce profil${T}:`,
+    plusBasse: `Montant le plus bas pour ce profil, après redistribution${T}:`,
     lienProfil: "Copier le lien de ce profil",
     lienCopie: "Lien copié. Votre lieu, vos années de naissance et vos franchises figurent après le signe #, une partie de l’adresse que le navigateur ne transmet pas à notre serveur.",
     trier: "Trier",
@@ -100,7 +100,7 @@ const TXT = {
     resume: (n: number, lieu: string, cl: string, fr: number, acc: boolean) =>
       `${n} offre${n > 1 ? "s" : ""} pour ${cl} à ${lieu}, franchise ${nfFr(fr)}${NB}CHF, ${acc ? "avec" : "sans"} accident.`,
     tri: "Triées de la prime la plus basse à la plus haute.",
-    fourchette: (a: string, b: string, m: string, u: string) => `Les primes vont de ${a} à ${b} ${u}, pour une moyenne de ${m}.`,
+    fourchette: (a: string, b: string, m: string, u: string) => `Après redistribution des taxes environnementales, vous payez de ${a} à ${b} ${u}, pour une moyenne de ${m}.`,
     memes: "La loi (LAMal) fixe les prestations de l’assurance de base, qui sont donc identiques d’un assureur à l’autre. Les offres diffèrent par la prime, les règles du modèle et le service.",
     caption: "Primes 2027 de chaque offre, triées de la plus basse à la plus haute, avec l’écart annuel par rapport à la première offre et à la moyenne de la liste.",
     thOffre: "Assureur et modèle",
@@ -180,7 +180,7 @@ const TXT = {
     types: { BASE: "Standard: free choice of doctor", PRAXIS: "First contact: your designated practice (family doctor or HMO)", TEL_DIG: "First contact: a call or an app", PHARM: "First contact: a partner pharmacy", FLEX: "First contact: your choice (practice, call or pharmacy)" } as Record<P.TypeModele, string>,
     typesCourts: { BASE: "Standard, free choice", PRAXIS: "Family doctor or HMO", TEL_DIG: "Call or app first", PHARM: "Pharmacy first", FLEX: "First contact of your choice" } as Record<P.TypeModele, string>,
     titre: (lieu: string) => `Health insurance in ${lieu}`,
-    plusBasse: "Lowest premium for this profile:",
+    plusBasse: "Lowest amount for this profile, after redistribution:",
     lienProfil: "Copy the link to this profile",
     lienCopie: "Link copied. Your place, years of birth and deductibles sit after the # sign, a part of the address that the browser does not send to our server.",
     trier: "Sort",
@@ -209,7 +209,7 @@ const TXT = {
     resume: (n: number, lieu: string, cl: string, fr: number, acc: boolean) =>
       `${n} offer${n > 1 ? "s" : ""} for ${cl} in ${lieu}, deductible CHF${NB}${nfEn(fr)}, ${acc ? "with" : "without"} accident cover.`,
     tri: "Sorted from the lowest to the highest premium.",
-    fourchette: (a: string, b: string, m: string, u: string) => `Premiums range from ${a} to ${b} ${u}, with an average of ${m}.`,
+    fourchette: (a: string, b: string, m: string, u: string) => `After the environmental levy redistribution, you pay from ${a} to ${b} ${u}, with an average of ${m}.`,
     memes: "The law (LAMal) sets the benefits of basic insurance, so they are identical from one insurer to the next. Offers differ in the premium, the rules of the model and the service.",
     caption: "2027 premiums of each offer, sorted from the lowest to the highest, with the yearly difference from the first offer and from the average of the list.",
     thOffre: "Insurer and model",
@@ -572,11 +572,11 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
               {seul ? t.resume(r.total, lieu.communes, t.classeCourt[seul.classe], seul.franchise, seul.accident) : t.resumeFoyer(r.total, lieu.communes, pers.length)}{" "}
               <b>{t.triCourt[tri]}</b>
             </p>
-            {r.total ? <p className="fourchette">{t.fourchette(chf(prix(r.min), parAn ? 0 : 2), chf(prix(r.max), parAn ? 0 : 2), chf(prix(r.moyenne), parAn ? 0 : 2), parAn ? t.an : t.mois)}</p> : null}
+            {r.total ? <p className="fourchette">{t.fourchette(chf(prix(r.min - redis), parAn ? 0 : 2), chf(prix(r.max - redis), parAn ? 0 : 2), chf(prix(r.moyenne - redis), parAn ? 0 : 2), parAn ? t.an : t.mois)}</p> : null}
             {!seul ? <p className="note-outil">{t.foyerNote}</p> : null}
             {r.total ? (
               <p className="plus-basse">
-                {t.plusBasse} <b>{r.offres[0].assureur}, {r.offres[0].produit}</b> · {chf(prix(r.offres[0].mensuel), parAn ? 0 : 2)} {parAn ? t.an : t.mois}
+                {t.plusBasse} <b>{r.offres[0].assureur}, {r.offres[0].produit}</b> · {chf(prix(r.offres[0].mensuel - redis), parAn ? 0 : 2)} {parAn ? t.an : t.mois}
               </p>
             ) : null}
 

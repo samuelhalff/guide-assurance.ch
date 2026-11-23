@@ -109,7 +109,7 @@ export default function Page() {
           </p>
           <PartagerOutil path={PATH} title="Comparer les primes LAMal 2027" text="Les primes LAMal 2027 pour votre NPA, votre âge et votre franchise, triées de la plus basse à la plus haute." />
           <ComparateurPrimes donneesDu={DATE_PRIMES} />
-          <TableauReperes locale="fr" />
+          <TableauReperes locale="fr" replie />
         </div>
 
         <div className="wrap faq">

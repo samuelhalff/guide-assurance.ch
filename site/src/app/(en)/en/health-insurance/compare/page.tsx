@@ -109,7 +109,7 @@ export default function Page() {
           </p>
           <PartagerOutil path={PATH} title="Compare 2027 LAMal premiums" text="The 2027 LAMal premiums for your postcode, age and deductible, sorted from lowest to highest." locale="en" />
           <ComparateurPrimes locale="en" donneesDu={DATE_PRIMES} />
-          <TableauReperes locale="en" />
+          <TableauReperes locale="en" replie />
         </div>
 
         <div className="wrap faq">

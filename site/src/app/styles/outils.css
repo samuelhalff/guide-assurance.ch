@@ -290,3 +290,8 @@
   .page-lettre .lettre { border: 0; box-shadow: none; padding: 0; font-size: 11pt; }
   .page-lettre .lettre .vide { background: none; color: var(--doc-encre); }
 }
+@layer components {
+  .reperes-details { margin-top: var(--s4); }
+  .reperes-details > summary { cursor: pointer; font-weight: 700; color: var(--bande-titre, var(--encre)); text-decoration: underline; text-underline-offset: 3px; padding: var(--s3) 0; }
+  .reperes-details[open] > summary { margin-bottom: var(--s4); }
+}

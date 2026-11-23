@@ -19,7 +19,7 @@ const NOM = {
 } as Record<Locale, Record<string, string>>;
 const MULTI = ["VD", "VS", "FR"];
 
-export function TableauReperes({ locale = "fr" }: { locale?: Locale }) {
+export function TableauReperes({ locale = "fr", replie = false }: { locale?: Locale; replie?: boolean }) {
   const en = locale === "en";
   const nf = (c: number) =>
     en
@@ -30,14 +30,7 @@ export function TableauReperes({ locale = "fr" }: { locale?: Locale }) {
   const min = Math.min(...bas);
   const max = Math.max(...bas);
   const chf = (c: number) => (en ? `CHF${NB}${nf(c)}` : `${nf(c)}${NB}CHF`);
-  return (
-    <section className="reperes-statiques" aria-labelledby="reperes-titre">
-      <h2 id="reperes-titre">{en ? "How much does basic insurance cost an adult in 2027?" : `Combien coûte l’assurance de base d’un adulte en 2027${T}?`}</h2>
-      <p>
-        {en
-          ? `For an adult aged 26 or over, with a CHF 300 deductible and accident cover, the first premium in the list ranges from ${chf(min)} to ${chf(max)} a month depending on the canton (main premium region). For each canton, the tables below show four profiles (CHF 300 and CHF 2,500 deductible, with and without accident cover), followed by the first five offers for the CHF 300 deductible with accident cover. Source: FOPH (OFSP), 2027 premiums.`
-          : `Pour un adulte de 26 ans et plus, avec une franchise de 300${NB}CHF et la couverture accident, la première prime de la liste va de ${chf(min)} à ${chf(max)} par mois selon le canton (région de prime principale). Pour chaque canton, les tableaux ci-dessous donnent quatre profils (franchise de 300 et de 2500${NB}CHF, avec et sans accident), puis les cinq premières offres pour la franchise de 300${NB}CHF avec accident. Source${T}: OFSP, primes 2027.`}
-      </p>
+  const grille = (
       <div className="reperes-grille">
         {cantons.map((c) => (
           <div key={c.canton}>
@@ -96,6 +89,21 @@ export function TableauReperes({ locale = "fr" }: { locale?: Locale }) {
           </div>
         ))}
       </div>
+  );
+  return (
+    <section className="reperes-statiques" aria-labelledby="reperes-titre">
+      <h2 id="reperes-titre">{en ? "How much does basic insurance cost an adult in 2027?" : `Combien coûte l’assurance de base d’un adulte en 2027${T}?`}</h2>
+      <p>
+        {en
+          ? `For an adult aged 26 or over, with a CHF 300 deductible and accident cover, the first premium in the list ranges from ${chf(min)} to ${chf(max)} a month depending on the canton (main premium region). For each canton, the tables below show four profiles (CHF 300 and CHF 2,500 deductible, with and without accident cover), followed by the first five offers for the CHF 300 deductible with accident cover. Source: FOPH (OFSP), 2027 premiums.`
+          : `Pour un adulte de 26 ans et plus, avec une franchise de 300${NB}CHF et la couverture accident, la première prime de la liste va de ${chf(min)} à ${chf(max)} par mois selon le canton (région de prime principale). Pour chaque canton, les tableaux ci-dessous donnent quatre profils (franchise de 300 et de 2500${NB}CHF, avec et sans accident), puis les cinq premières offres pour la franchise de 300${NB}CHF avec accident. Source${T}: OFSP, primes 2027.`}
+      </p>
+      {replie ? (
+        <details className="reperes-details">
+          <summary>{en ? "Show the reference premiums for all 26 cantons" : "Voir les primes repères des 26 cantons"}</summary>
+          {grille}
+        </details>
+      ) : grille}
       <p className="source-outil">
         <a href={en ? PAGES_DONNEES_EN.regions : PAGES_DONNEES.regions}>{en ? "Premiums by premium region" : "Primes par région de prime"}</a>
         {en ? ": median, quartiles and extremes for five standard profiles in each region." : `${T}: médiane, quartiles et extrêmes pour cinq profils types dans chaque région.`}
