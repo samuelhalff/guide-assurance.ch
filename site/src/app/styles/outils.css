@@ -122,7 +122,7 @@
   .choix-lieu { margin-bottom: var(--s4); }
   .pastilles { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s2); margin: var(--s1) 0 var(--s2); }
   .pastilles-2 { grid-template-columns: 1fr 1fr; }
-  .pastille { position: relative; cursor: pointer; }
+  .pastille { position: relative; display: grid; cursor: pointer; }
   .pastille span {
     display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 6px 8px; text-align: center;
     border: 1px solid var(--filet); border-radius: var(--r); background: var(--papier); font: 600 16px var(--narrow);
