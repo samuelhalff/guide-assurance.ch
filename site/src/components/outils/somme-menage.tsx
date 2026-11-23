@@ -10,7 +10,7 @@ import { DEMANDE_PORTE } from "@/lib/demande-porte";
    objets coûteux. Tout se calcule ici ; seule la somme arrondie part dans le lien « Recevoir des offres », si le
    visiteur clique. Aucune valeur saisie n'est mesurée. */
 const N = " ";
-const nf = { fr: new Intl.NumberFormat("fr-CH", { maximumFractionDigits: 0 }), en: new Intl.NumberFormat("en-GB", { maximumFractionDigits: 0 }) };
+const nf = { fr: { format: (x: number) => S.formaterMontant(x, "fr") }, en: { format: (x: number) => S.formaterMontant(x, "en") } };
 const demi = (x: number, l: Locale) => (l === "fr" ? String(x).replace(".", ",") : String(x));
 
 const TXT = {

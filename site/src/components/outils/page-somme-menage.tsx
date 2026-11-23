@@ -16,8 +16,8 @@ import { OUTILS, OUTILS_EN } from "@/lib/nav";
 /* « Calculateur de la somme d'assurance ménage » (/assurance-menage-rc/calculateur-somme/ et version anglaise). Les
    fichiers de route ne font qu'appeler ces fonctions. Méthodes et sources : src/lib/engines/somme-menage.ts. */
 const N = " ";
-const nfFr = new Intl.NumberFormat("fr-CH", { maximumFractionDigits: 0 });
-const nfEn = new Intl.NumberFormat("en-GB", { maximumFractionDigits: 0 });
+const nfFr = { format: (x: number) => S.formaterMontant(x, "fr") };
+const nfEn = { format: (x: number) => S.formaterMontant(x, "en") };
 
 const SRC = {
   baloiseFr: "https://baloise.ch/dam/jcr:d680ea0d-346b-4620-b9e9-1c461d754691/determination%20de%20la%20somme%20assuree%20relative%20au%20mobilier%20de%20menage.pdf",

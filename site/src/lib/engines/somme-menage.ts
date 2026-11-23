@@ -110,3 +110,11 @@ export function indemniteProportionnelle(sommeAssuree: number, valeur: number, d
 
 /* Part de la valeur couverte par la somme assurée (1 = couverture complète). */
 export const tauxCouverture = (sommeAssuree: number, valeur: number) => (sommeAssuree > 0 && valeur > 0 ? Math.min(1, sommeAssuree / valeur) : 0);
+
+/* Montant entier groupé par milliers, sans Intl : l'ICU de Node (build) et celle du navigateur ne donnent pas le même
+   séparateur pour fr-CH (apostrophe ou espace fine), ce qui casse l'hydratation. FR : espace fine U+202F ; EN : virgule. */
+export function formaterMontant(x: number, langue: "fr" | "en"): string {
+  const n = Math.round(Number.isFinite(x) ? x : 0);
+  const s = String(Math.abs(n)).replace(/\B(?=(\d{3})+(?!\d))/g, langue === "fr" ? " " : ",");
+  return n < 0 ? `-${s}` : s;
+}

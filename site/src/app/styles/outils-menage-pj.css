@@ -111,6 +111,10 @@
   table.table-pj td { min-width: 8em; }
   table.table-domaines thead th { min-width: 7.5em; vertical-align: bottom; }
   table.table-domaines tbody th { font: 600 15px var(--narrow); white-space: nowrap; position: sticky; left: 0; background: var(--papier); }
+  /* 12 colonnes : le cadre défile dans les deux sens et garde visibles les noms des contrats et des domaines. */
+  .defile-domaines { max-height: calc(100vh - 140px); max-height: calc(100dvh - 140px); overflow: auto; overscroll-behavior: contain; }
+  table.table-domaines thead th { position: sticky; top: 0; z-index: 1; background: var(--papier); box-shadow: inset 0 -1px 0 var(--filet); }
+  table.table-domaines thead th:first-child { left: 0; z-index: 2; }
   table.table-domaines tr.actif th, table.table-domaines tr.actif td { background: var(--info-teinte); }
   .exclusions-pj { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4) var(--s6); margin: 0; }
   .exclusions-pj dt { font-weight: 700; }

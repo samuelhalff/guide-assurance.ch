@@ -83,4 +83,13 @@ t("Lecture des montants saisis", () => {
   assert.equal(S.arrondiMillier(103000), 103000);
 });
 
+t("Format des montants, identique au build et au navigateur", () => {
+  assert.equal(S.formaterMontant(110000, "fr"), "110\u202f000");
+  assert.equal(S.formaterMontant(96800, "en"), "96,800");
+  assert.equal(S.formaterMontant(1234567, "fr"), "1\u202f234\u202f567");
+  assert.equal(S.formaterMontant(999, "fr"), "999");
+  assert.equal(S.formaterMontant(NaN, "fr"), "0");
+  assert.equal(S.lireMontant(S.formaterMontant(110000, "fr")), 110000);
+});
+
 console.log(`somme-menage : ${n} groupes de tests réussis`);

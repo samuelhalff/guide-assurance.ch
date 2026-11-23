@@ -174,7 +174,7 @@ export function GarantiesPj({ locale }: { locale: Locale }) {
       {/* Ordinateur : tableaux */}
       <div className="tables-pj">
         <h3>{t.domainesTitre}</h3>
-        <div className="defile">
+        <div className="defile defile-domaines" tabIndex={0} role="region" aria-label={t.domainesCap}>
           <table className="assureurs table-domaines">
             <caption className="visually-hidden">{t.domainesCap}</caption>
             <thead>
