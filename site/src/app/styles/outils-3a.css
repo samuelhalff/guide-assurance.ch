@@ -52,7 +52,7 @@
   .detail-3a tr.total th, .detail-3a tr.total td { border-top: 1.5px solid var(--encre); border-bottom: 0; }
   .resultat-3a .rappel-liste { margin: 0; }
   .retrait-3a { background: var(--papier); border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s3) var(--s4); }
-  .retrait-3a .depliable-titre { cursor: pointer; font: 700 17px var(--sans); min-height: 32px; color: var(--lac-encre); }
+  .retrait-3a .depliable-titre { font: 700 17px var(--sans); min-height: 32px; color: var(--lac-encre); }
   .retrait-3a .note-outil { margin: var(--s2) 0; }
   .retrait-3a .champ { margin: var(--s3) 0 var(--s2); }
   .retrait-res { margin: var(--s2) 0; font-size: 17px; }

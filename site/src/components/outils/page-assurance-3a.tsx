@@ -25,7 +25,6 @@ type Produit = { nom: string; pilier: string; type: string; primes_fr: string; r
 type Assureur = { id: string; nom: string; entite: string; lu_le: string; produits: Produit[] };
 
 const T = " ";
-const NBSP = " ";
 const LU_LE: string = D.lu_le;
 export const ASSUREURS_3A: Assureur[] = [...(D.assureurs as Assureur[])].sort((a, b) => a.nom.localeCompare(b.nom, "fr"));
 const NB = ASSUREURS_3A.length;

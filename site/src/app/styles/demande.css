@@ -144,8 +144,8 @@
   .tel-num { font-weight: 700; font-variant-numeric: tabular-nums; }
   .precis { border: 1px solid var(--filet); border-radius: var(--r); background: var(--papier); padding: 0 var(--s4); }
   .precis > .depliable-titre {
-    display: flex; align-items: center; justify-content: space-between; gap: var(--s3); min-height: 56px; width: 100%;
-    font: 700 17px var(--narrow); color: var(--encre); cursor: pointer;
+    justify-content: space-between; gap: var(--s3); min-height: 56px;
+    font: 700 17px var(--narrow); color: var(--encre);
   }
   .precis[data-open] { padding-bottom: var(--s4); }
   .precis .depliable-contenu { display: grid; gap: var(--s4); }

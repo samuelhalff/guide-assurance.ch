@@ -168,7 +168,6 @@
   }
   .option small { display: block; font: 15px var(--narrow); color: var(--encre-2); margin-top: 2px; }
   .option:hover { border-color: var(--encre-2); }
-  .duree { font: 500 14px var(--narrow); color: var(--encre-2); white-space: nowrap; }
   @media (prefers-reduced-motion: reduce) { .option { transition: none; } }
 
   /* ===== Champs : 48 px, label permanent, police ≥ 16 px ===== */
@@ -244,6 +243,6 @@
   @media (max-width: 374px) { .rappel-tete .rappel-court { display: none; } }
   @media (prefers-reduced-motion: reduce) { .rappel-tete { transition: none; } }
   /* Titres équilibrés, pas de mot seul en fin de titre ; paragraphes sans veuve (passe d'écriture 22.11.2026). */
-  h1, h2, h3, summary { text-wrap: balance; }
+  h1, h2, h3 { text-wrap: balance; }
   p, li, dd { text-wrap: pretty; }
 }

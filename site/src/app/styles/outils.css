@@ -30,7 +30,7 @@
   .case small { display: block; font: 14px var(--narrow); color: var(--encre-2); }
   .note-outil { font: 15px var(--narrow); color: var(--encre-2); margin: 0; }
   .aide-revenus { font: 15px var(--narrow); color: var(--encre-2); margin: 0 0 var(--s2); }
-  .aide-revenus .depliable-titre { cursor: pointer; color: var(--lac-encre); min-height: 32px; }
+  .aide-revenus .depliable-titre { color: var(--lac-encre); min-height: 32px; }
   .aide-revenus p { margin: var(--s2) 0; }
 
   /* Délai : encadré d'alerte */
@@ -157,7 +157,7 @@
   .carte-prime .ecarts b { color: var(--encre); font-weight: 700; font-variant-numeric: tabular-nums; }
   .carte-prime .ecarts .vs-actuelle { color: var(--encre); }
   .rappel-liste { margin: var(--s3) 0 var(--s2); padding: var(--s3) var(--s4); background: var(--info-teinte); border-radius: var(--r); font-size: 16px; }
-  .rappel-liste a, .rappel-collant a { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; }
+  .rappel-liste a { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; }
   .rappel-liste svg { vertical-align: -2px; }
   .rappel-bureau { display: none; }
   .barre-collante {
@@ -175,7 +175,7 @@
   .caisse-actuelle { margin-bottom: var(--s3); }
   .caisse-actuelle > p { grid-column: 1 / -1; margin: 0; }
   .detail-offre { grid-column: 2 / -1; font: 14px var(--narrow); margin-top: var(--s1); }
-  .detail-offre .depliable-titre { cursor: pointer; color: var(--lac-encre); min-height: 32px; }
+  .detail-offre .depliable-titre { color: var(--lac-encre); min-height: 32px; }
   .detail-offre ul { margin: 0 0 var(--s1); padding-left: 1.1em; list-style: disc; color: var(--encre-2); }
   .rappel-offre { grid-column: 2 / -1; font: 14px var(--narrow); color: var(--lac-encre); justify-self: start; }
   .outil-comparateur fieldset.personne { border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s3) var(--s3) 0; margin: 0 0 var(--s3); }
@@ -188,7 +188,6 @@
     font: 600 16px var(--narrow); color: var(--lac-encre); margin: 0 0 var(--s3);
   }
   .ajouter-personne:hover { border-color: var(--encre-2); }
-  .franchise-aide { margin-bottom: var(--s3) !important; }
   .voir-primes { width: 100%; justify-content: center; }
   .avec-coche { position: relative; }
   .avec-coche .saisie { padding-right: 38px; }
@@ -211,7 +210,7 @@
   .integrite p:last-child { margin: 0; }
   .integrite b { color: var(--encre); font-weight: 600; }
   .franchises { margin-top: var(--s5); border-top: 1px solid var(--filet); padding-top: var(--s3); }
-  .franchises .depliable-titre { cursor: pointer; font: 700 17px var(--sans); min-height: 44px; }
+  .franchises .depliable-titre { font: 700 17px var(--sans); }
   .franchises .depliable-contenu > p { font: 15px var(--narrow); color: var(--encre-2); margin: var(--s2) 0 var(--s3); }
   .franchises tr[aria-current] td { font-weight: 700; background: var(--sentier-teinte); }
   .apres-comparateur p { margin: 0 0 var(--s2); font-size: 16px; }
@@ -293,7 +292,7 @@
 }
 @layer components {
   .reperes-details { margin-top: var(--s4); }
-  .reperes-details > .depliable-titre { cursor: pointer; font-weight: 700; color: var(--bande-titre, var(--encre)); text-decoration: underline; text-underline-offset: 3px; padding: var(--s3) 0; }
+  .reperes-details > .depliable-titre { font-weight: 700; color: var(--bande-titre, var(--encre)); text-decoration: underline; text-underline-offset: 3px; padding: var(--s3) 0; }
   .reperes-details[data-open] > .depliable-titre { margin-bottom: var(--s4); }
 }
 @layer components {
@@ -317,7 +316,7 @@
   .outil-frontalier .pastille small { display: block; font: 400 13px var(--narrow); color: var(--encre-2); margin-top: 2px; }
   .outil-frontalier .ajouts { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2); }
   .outil-frontalier .ajouts .ajouter-personne { margin: 0; }
-  .taux-change .depliable-titre { cursor: pointer; font: 600 16px var(--narrow); color: var(--lac-encre); min-height: 44px; }
+  .taux-change .depliable-titre { font: 600 16px var(--narrow); color: var(--lac-encre); }
   .taux-change .champ { margin-top: var(--s2); max-width: 16em; }
   .taux-change .aide { display: block; font: 14px var(--narrow); color: var(--encre-2); margin-top: 4px; }
   .page-outil .titre-resultat { font-size: 21px; margin: 0 0 var(--s3); }
