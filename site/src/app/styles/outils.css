@@ -23,6 +23,9 @@
   .sous-q { font: 600 16px var(--narrow); margin: var(--s3) 0 2px; }
   .deux { display: grid; grid-template-columns: 7em 1fr; gap: var(--s3); }
   .ligne { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3); }
+  /* Champs côte à côte : libellé, champ et aide partagent les lignes de la grille (subgrid), pour que les champs restent alignés même quand un libellé passe sur deux lignes ou qu’un seul a une aide. */
+  :is(.ligne, .categories) > .champ { grid-row: span 3; grid-template-rows: subgrid; row-gap: 4px; }
+  :is(.ligne, .categories) > .champ > label { align-self: end; }
   .case { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; font-size: 16px; margin: var(--s2) 0 var(--s3); cursor: pointer; }
   .case input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--sentier); }
   .case small { display: block; font: 14px var(--narrow); color: var(--encre-2); }
@@ -301,7 +304,7 @@
   .reperes-details[open] > summary { margin-bottom: var(--s4); }
 }
 @layer components {
-  .outil-comparateur .aide-champ { display: block; margin-top: var(--s1); font-size: 14px; line-height: 1.4; color: var(--encre-douce, var(--encre)); opacity: .8; }
+  .outil-comparateur .aide-champ { display: block; margin-top: var(--s1); font: 14px/1.4 var(--narrow); color: var(--encre-2); }
 }
 
 /* Simulateur frontalier, foyer personne par personne (simulateur-frontalier.tsx). Mobile d'abord. */

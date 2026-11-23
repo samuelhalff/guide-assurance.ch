@@ -180,7 +180,7 @@
   @media (prefers-reduced-motion: reduce) { .option, .repere { transition: none; } }
 
   /* ===== Champs : 48 px, label permanent, police ≥ 16 px ===== */
-  .champ { display: grid; gap: 4px; margin-bottom: var(--s3); }
+  .champ { display: grid; gap: 4px; align-content: start; margin-bottom: var(--s3); }
   .champ label { font: 600 16px var(--narrow); }
   .champ .aide { font: 15px var(--narrow); color: var(--encre-2); }
   .saisie {
