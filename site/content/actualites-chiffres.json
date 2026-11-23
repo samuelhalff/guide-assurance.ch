@@ -1,0 +1,1118 @@
+{
+ "articles": [
+  {
+   "fichier": "fr/actualites/taux-3a-decisions-bns.md",
+   "faits": [
+    {
+     "cle": "calc:taux3a.min",
+     "decimales": 2,
+     "texte": "0,05",
+     "contexte": "entre 0,05 %"
+    },
+    {
+     "cle": "calc:taux3a.max",
+     "decimales": 2,
+     "texte": "0,65",
+     "contexte": "et 0,65 % par an"
+    },
+    {
+     "cle": "calc:taux3a.min",
+     "decimales": 2,
+     "texte": "0,05",
+     "contexte": "y va de 0,05 %"
+    },
+    {
+     "cle": "calc:taux3a.max",
+     "decimales": 2,
+     "texte": "0,65",
+     "contexte": "à 0,65 % par an, avec"
+    },
+    {
+     "cle": "calc:taux3a.mediane",
+     "decimales": 2,
+     "texte": "0,20",
+     "contexte": "médiane de 0,20 %"
+    },
+    {
+     "cle": "calc:taux3a.min",
+     "decimales": 2,
+     "texte": "0,05",
+     "contexte": "le plus bas est de 0,05 %"
+    },
+    {
+     "cle": "calc:taux3a.max",
+     "decimales": 2,
+     "texte": "0,65",
+     "contexte": "le plus haut de 0,65 %"
+    },
+    {
+     "cle": "calc:taux3a.nombre",
+     "decimales": 0,
+     "texte": "17",
+     "contexte": "comptes 3a de 17 banques"
+    },
+    {
+     "cle": "calc:taux3a.nombre",
+     "decimales": 0,
+     "texte": "17",
+     "contexte": "pages officielles de 17 banques"
+    },
+    {
+     "cle": "calc:taux3a.nombre",
+     "decimales": 0,
+     "texte": "17",
+     "contexte": "des 17 banques que nous suivons"
+    },
+    {
+     "cle": "calc:taux3a.nombre",
+     "decimales": 0,
+     "texte": "17",
+     "contexte": "Onze banques sur 17 offrent"
+    },
+    {
+     "cle": "calc:taux3a.nombre",
+     "decimales": 0,
+     "texte": "17",
+     "contexte": "Sept des 17 banques"
+    }
+   ]
+  },
+  {
+   "fichier": "en/actualites/pillar-3a-rates-snb-decisions.md",
+   "faits": [
+    {
+     "cle": "calc:taux3a.min",
+     "decimales": 2,
+     "texte": "0.05",
+     "contexte": "between 0.05% and"
+    },
+    {
+     "cle": "calc:taux3a.max",
+     "decimales": 2,
+     "texte": "0.65",
+     "contexte": "and 0.65% a year"
+    },
+    {
+     "cle": "calc:taux3a.min",
+     "decimales": 2,
+     "texte": "0.05",
+     "contexte": "ranges from 0.05% to"
+    },
+    {
+     "cle": "calc:taux3a.max",
+     "decimales": 2,
+     "texte": "0.65",
+     "contexte": "to 0.65% a year"
+    },
+    {
+     "cle": "calc:taux3a.mediane",
+     "decimales": 2,
+     "texte": "0.20",
+     "contexte": "median of 0.20%"
+    },
+    {
+     "cle": "calc:taux3a.min",
+     "decimales": 2,
+     "texte": "0.05",
+     "contexte": "The lowest rate is 0.05%"
+    },
+    {
+     "cle": "calc:taux3a.max",
+     "decimales": 2,
+     "texte": "0.65",
+     "contexte": "the highest 0.65%"
+    },
+    {
+     "cle": "calc:taux3a.nombre",
+     "decimales": 0,
+     "texte": "17",
+     "contexte": "accounts at 17 banks pay"
+    },
+    {
+     "cle": "calc:taux3a.nombre",
+     "decimales": 0,
+     "texte": "17",
+     "contexte": "official pages of 17 banks"
+    },
+    {
+     "cle": "calc:taux3a.nombre",
+     "decimales": 0,
+     "texte": "17",
+     "contexte": "at the 17 banks we track"
+    },
+    {
+     "cle": "calc:taux3a.nombre",
+     "decimales": 0,
+     "texte": "17",
+     "contexte": "3a accounts at 17 banks active"
+    },
+    {
+     "cle": "calc:taux3a.nombre",
+     "decimales": 0,
+     "texte": "17",
+     "contexte": "Eleven of the 17 banks"
+    },
+    {
+     "cle": "calc:taux3a.nombre",
+     "decimales": 0,
+     "texte": "17",
+     "contexte": "Seven of the 17 banks"
+    }
+   ]
+  },
+  {
+   "fichier": "fr/actualites/primes-2027-hausse-par-canton.md",
+   "faits": [
+    {
+     "cle": "barometre.json:national.variation_pct",
+     "decimales": 1,
+     "texte": "4,9",
+     "contexte": "et de 4,9 % pour toute la Suisse"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VD].officiel.variation_pct",
+     "decimales": 1,
+     "texte": "3,2",
+     "contexte": "de 3,2 % dans le canton de Vaud"
+    },
+    {
+     "cle": "barometre.json:cantons[code=JU].officiel.variation_pct",
+     "decimales": 1,
+     "texte": "5,9",
+     "contexte": "5,9 % dans le Jura"
+    },
+    {
+     "cle": "barometre.json:national.adulte_prec",
+     "decimales": 2,
+     "texte": "464,80",
+     "contexte": "passe de 464,80 CHF en 2026"
+    },
+    {
+     "cle": "barometre.json:national.adulte",
+     "decimales": 2,
+     "texte": "487,60",
+     "contexte": "à 487,60 CHF en 2027"
+    },
+    {
+     "cle": "barometre.json:national.variation_pct",
+     "decimales": 1,
+     "texte": "4,9",
+     "contexte": "une hausse de 4,9 %"
+    },
+    {
+     "cle": "barometre.json:cantons[code=JU].officiel.adulte_prec",
+     "decimales": 2,
+     "texte": "520,50",
+     "contexte": "passe de 520,50 CHF"
+    },
+    {
+     "cle": "barometre.json:cantons[code=JU].officiel.adulte",
+     "decimales": 2,
+     "texte": "551,00",
+     "contexte": "à 551,00 CHF par mois"
+    },
+    {
+     "cle": "barometre.json:cantons[code=JU].officiel.variation_pct",
+     "decimales": 1,
+     "texte": "5,9",
+     "contexte": "soit 5,9 % de plus"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VS].officiel.variation_pct",
+     "decimales": 1,
+     "texte": "5,7",
+     "contexte": "Le Valais (5,7 %)"
+    },
+    {
+     "cle": "barometre.json:cantons[code=NE].officiel.variation_pct",
+     "decimales": 1,
+     "texte": "5,3",
+     "contexte": "Neuchâtel (5,3 %)"
+    },
+    {
+     "cle": "barometre.json:cantons[code=FR].officiel.variation_pct",
+     "decimales": 1,
+     "texte": "5,2",
+     "contexte": "Fribourg (5,2 %)"
+    },
+    {
+     "cle": "barometre.json:cantons[code=GE].officiel.variation_pct",
+     "decimales": 1,
+     "texte": "4,3",
+     "contexte": "Genève (4,3 %)"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VD].officiel.variation_pct",
+     "decimales": 1,
+     "texte": "3,2",
+     "contexte": "Vaud (3,2 %)"
+    },
+    {
+     "cle": "barometre.json:national.adulte_prec",
+     "decimales": 2,
+     "texte": "464,80",
+     "contexte": "de 464,80 CHF à"
+    },
+    {
+     "cle": "barometre.json:national.adulte",
+     "decimales": 2,
+     "texte": "487,60",
+     "contexte": "à 487,60 CHF par mois"
+    },
+    {
+     "cle": "barometre.json:cantons[code=JU].officiel.adulte_prec",
+     "decimales": 2,
+     "texte": "520,50",
+     "contexte": "| Jura | 520,50 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=JU].officiel.adulte",
+     "decimales": 2,
+     "texte": "551,00",
+     "contexte": "| 551,00 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=JU].officiel.variation_pct",
+     "decimales": 1,
+     "texte": "5,9",
+     "contexte": "| 5,9 % |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VS].officiel.adulte_prec",
+     "decimales": 2,
+     "texte": "436,10",
+     "contexte": "| Valais | 436,10 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VS].officiel.adulte",
+     "decimales": 2,
+     "texte": "460,90",
+     "contexte": "| 460,90 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VS].officiel.variation_pct",
+     "decimales": 1,
+     "texte": "5,7",
+     "contexte": "| 5,7 % |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=NE].officiel.adulte_prec",
+     "decimales": 2,
+     "texte": "530,80",
+     "contexte": "| Neuchâtel | 530,80 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=NE].officiel.adulte",
+     "decimales": 2,
+     "texte": "558,80",
+     "contexte": "| 558,80 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=NE].officiel.variation_pct",
+     "decimales": 1,
+     "texte": "5,3",
+     "contexte": "| 5,3 % |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=FR].officiel.adulte_prec",
+     "decimales": 2,
+     "texte": "442,60",
+     "contexte": "| Fribourg | 442,60 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=FR].officiel.adulte",
+     "decimales": 2,
+     "texte": "465,50",
+     "contexte": "| 465,50 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=FR].officiel.variation_pct",
+     "decimales": 1,
+     "texte": "5,2",
+     "contexte": "| 5,2 % |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=GE].officiel.adulte_prec",
+     "decimales": 2,
+     "texte": "585,40",
+     "contexte": "| Genève | 585,40 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=GE].officiel.adulte",
+     "decimales": 2,
+     "texte": "610,60",
+     "contexte": "| 610,60 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=GE].officiel.variation_pct",
+     "decimales": 1,
+     "texte": "4,3",
+     "contexte": "| 4,3 % |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VD].officiel.adulte_prec",
+     "decimales": 2,
+     "texte": "526,60",
+     "contexte": "| Vaud | 526,60 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VD].officiel.adulte",
+     "decimales": 2,
+     "texte": "543,50",
+     "contexte": "| 543,50 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VD].officiel.variation_pct",
+     "decimales": 1,
+     "texte": "3,2",
+     "contexte": "| 3,2 % |"
+    },
+    {
+     "cle": "barometre.json:national.adulte_prec",
+     "decimales": 2,
+     "texte": "464,80",
+     "contexte": "| Suisse | 464,80 CHF |"
+    },
+    {
+     "cle": "barometre.json:national.adulte",
+     "decimales": 2,
+     "texte": "487,60",
+     "contexte": "| 487,60 CHF |"
+    },
+    {
+     "cle": "barometre.json:national.variation_pct",
+     "decimales": 1,
+     "texte": "4,9",
+     "contexte": "| 4,9 % |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=GE].officiel.adulte",
+     "decimales": 2,
+     "texte": "610,60",
+     "contexte": "avec 610,60 CHF par mois"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VS].officiel.adulte",
+     "decimales": 2,
+     "texte": "460,90",
+     "contexte": "la plus basse, à 460,90 CHF"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VS].officiel.jeune",
+     "decimales": 2,
+     "texte": "310,10",
+     "contexte": "va de 310,10 CHF par mois en Valais"
+    },
+    {
+     "cle": "barometre.json:cantons[code=GE].officiel.jeune",
+     "decimales": 2,
+     "texte": "453,00",
+     "contexte": "à 453,00 CHF à Genève"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VS].officiel.enfant",
+     "decimales": 2,
+     "texte": "116,50",
+     "contexte": "va de 116,50 CHF en Valais"
+    },
+    {
+     "cle": "barometre.json:cantons[code=GE].officiel.enfant",
+     "decimales": 2,
+     "texte": "157,70",
+     "contexte": "à 157,70 CHF à Genève"
+    }
+   ]
+  },
+  {
+   "fichier": "en/actualites/2027-premiums-increase-by-canton.md",
+   "faits": [
+    {
+     "cle": "barometre.json:cantons[code=VD].officiel.variation_pct",
+     "decimales": 1,
+     "texte": "3.2",
+     "contexte": "by 3.2% in Vaud"
+    },
+    {
+     "cle": "barometre.json:cantons[code=JU].officiel.variation_pct",
+     "decimales": 1,
+     "texte": "5.9",
+     "contexte": "by 5.9% in Jura"
+    },
+    {
+     "cle": "barometre.json:national.variation_pct",
+     "decimales": 1,
+     "texte": "4.9",
+     "contexte": "by 4.9% across Switzerland"
+    },
+    {
+     "cle": "barometre.json:national.adulte_prec",
+     "decimales": 2,
+     "texte": "464.80",
+     "contexte": "goes from CHF 464.80 in 2026"
+    },
+    {
+     "cle": "barometre.json:national.adulte",
+     "decimales": 2,
+     "texte": "487.60",
+     "contexte": "to CHF 487.60 in 2027"
+    },
+    {
+     "cle": "barometre.json:national.variation_pct",
+     "decimales": 1,
+     "texte": "4.9",
+     "contexte": "an increase of 4.9%"
+    },
+    {
+     "cle": "barometre.json:cantons[code=JU].officiel.adulte_prec",
+     "decimales": 2,
+     "texte": "520.50",
+     "contexte": "goes from CHF 520.50"
+    },
+    {
+     "cle": "barometre.json:cantons[code=JU].officiel.adulte",
+     "decimales": 2,
+     "texte": "551.00",
+     "contexte": "to CHF 551.00 a month"
+    },
+    {
+     "cle": "barometre.json:cantons[code=JU].officiel.variation_pct",
+     "decimales": 1,
+     "texte": "5.9",
+     "contexte": "up 5.9%"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VS].officiel.variation_pct",
+     "decimales": 1,
+     "texte": "5.7",
+     "contexte": "Valais (5.7%)"
+    },
+    {
+     "cle": "barometre.json:cantons[code=NE].officiel.variation_pct",
+     "decimales": 1,
+     "texte": "5.3",
+     "contexte": "Neuchâtel (5.3%)"
+    },
+    {
+     "cle": "barometre.json:cantons[code=FR].officiel.variation_pct",
+     "decimales": 1,
+     "texte": "5.2",
+     "contexte": "Fribourg (5.2%)"
+    },
+    {
+     "cle": "barometre.json:cantons[code=GE].officiel.variation_pct",
+     "decimales": 1,
+     "texte": "4.3",
+     "contexte": "Geneva (4.3%)"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VD].officiel.variation_pct",
+     "decimales": 1,
+     "texte": "3.2",
+     "contexte": "Vaud (3.2%)"
+    },
+    {
+     "cle": "barometre.json:cantons[code=JU].officiel.variation_pct",
+     "decimales": 1,
+     "texte": "5.9",
+     "contexte": "5.9% in Jura at the high end"
+    },
+    {
+     "cle": "barometre.json:national.variation_pct",
+     "decimales": 1,
+     "texte": "4.9",
+     "contexte": "the increase at 4.9%"
+    },
+    {
+     "cle": "barometre.json:national.adulte_prec",
+     "decimales": 2,
+     "texte": "464.80",
+     "contexte": "from CHF 464.80 to"
+    },
+    {
+     "cle": "barometre.json:national.adulte",
+     "decimales": 2,
+     "texte": "487.60",
+     "contexte": "to CHF 487.60 a month"
+    },
+    {
+     "cle": "barometre.json:cantons[code=JU].officiel.adulte_prec",
+     "decimales": 2,
+     "texte": "520.50",
+     "contexte": "| Jura | CHF 520.50 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=JU].officiel.adulte",
+     "decimales": 2,
+     "texte": "551.00",
+     "contexte": "| CHF 551.00 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=JU].officiel.variation_pct",
+     "decimales": 1,
+     "texte": "5.9",
+     "contexte": "| 5.9% |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VS].officiel.adulte_prec",
+     "decimales": 2,
+     "texte": "436.10",
+     "contexte": "| Valais | CHF 436.10 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VS].officiel.adulte",
+     "decimales": 2,
+     "texte": "460.90",
+     "contexte": "| CHF 460.90 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VS].officiel.variation_pct",
+     "decimales": 1,
+     "texte": "5.7",
+     "contexte": "| 5.7% |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=NE].officiel.adulte_prec",
+     "decimales": 2,
+     "texte": "530.80",
+     "contexte": "| Neuchâtel | CHF 530.80 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=NE].officiel.adulte",
+     "decimales": 2,
+     "texte": "558.80",
+     "contexte": "| CHF 558.80 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=NE].officiel.variation_pct",
+     "decimales": 1,
+     "texte": "5.3",
+     "contexte": "| 5.3% |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=FR].officiel.adulte_prec",
+     "decimales": 2,
+     "texte": "442.60",
+     "contexte": "| Fribourg | CHF 442.60 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=FR].officiel.adulte",
+     "decimales": 2,
+     "texte": "465.50",
+     "contexte": "| CHF 465.50 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=FR].officiel.variation_pct",
+     "decimales": 1,
+     "texte": "5.2",
+     "contexte": "| 5.2% |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=GE].officiel.adulte_prec",
+     "decimales": 2,
+     "texte": "585.40",
+     "contexte": "| Geneva | CHF 585.40 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=GE].officiel.adulte",
+     "decimales": 2,
+     "texte": "610.60",
+     "contexte": "| CHF 610.60 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=GE].officiel.variation_pct",
+     "decimales": 1,
+     "texte": "4.3",
+     "contexte": "| 4.3% |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VD].officiel.adulte_prec",
+     "decimales": 2,
+     "texte": "526.60",
+     "contexte": "| Vaud | CHF 526.60 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VD].officiel.adulte",
+     "decimales": 2,
+     "texte": "543.50",
+     "contexte": "| CHF 543.50 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VD].officiel.variation_pct",
+     "decimales": 1,
+     "texte": "3.2",
+     "contexte": "| 3.2% |"
+    },
+    {
+     "cle": "barometre.json:national.adulte_prec",
+     "decimales": 2,
+     "texte": "464.80",
+     "contexte": "| Switzerland | CHF 464.80 |"
+    },
+    {
+     "cle": "barometre.json:national.adulte",
+     "decimales": 2,
+     "texte": "487.60",
+     "contexte": "| CHF 487.60 |"
+    },
+    {
+     "cle": "barometre.json:national.variation_pct",
+     "decimales": 1,
+     "texte": "4.9",
+     "contexte": "| 4.9% |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=GE].officiel.adulte",
+     "decimales": 2,
+     "texte": "610.60",
+     "contexte": "at CHF 610.60 a month"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VS].officiel.adulte",
+     "decimales": 2,
+     "texte": "460.90",
+     "contexte": "the lowest, at CHF 460.90"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VS].officiel.jeune",
+     "decimales": 2,
+     "texte": "310.10",
+     "contexte": "from CHF 310.10 a month in Valais"
+    },
+    {
+     "cle": "barometre.json:cantons[code=GE].officiel.jeune",
+     "decimales": 2,
+     "texte": "453.00",
+     "contexte": "to CHF 453.00 in Geneva"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VS].officiel.enfant",
+     "decimales": 2,
+     "texte": "116.50",
+     "contexte": "from CHF 116.50 in Valais"
+    },
+    {
+     "cle": "barometre.json:cantons[code=GE].officiel.enfant",
+     "decimales": 2,
+     "texte": "157.70",
+     "contexte": "to CHF 157.70 in Geneva"
+    }
+   ]
+  },
+  {
+   "fichier": "fr/actualites/ecart-primes-2027-par-region.md",
+   "faits": [
+    {
+     "cle": "barometre.json:cantons[code=GE].regions[region=0].profils[cle=adulte_300].tous.min",
+     "decimales": 2,
+     "texte": "611,70",
+     "contexte": "| Genève | 611,70 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=GE].regions[region=0].profils[cle=adulte_300].tous.med",
+     "decimales": 2,
+     "texte": "686,05",
+     "contexte": "| 686,05 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=GE].regions[region=0].profils[cle=adulte_300].tous.max",
+     "decimales": 2,
+     "texte": "915,70",
+     "contexte": "| 915,70 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VS].regions[region=2].profils[cle=adulte_300].tous.min",
+     "decimales": 2,
+     "texte": "429,00",
+     "contexte": "| VS 2 (Brigue-Glis) | 429,00 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VS].regions[region=2].profils[cle=adulte_300].tous.med",
+     "decimales": 2,
+     "texte": "498,35",
+     "contexte": "| 498,35 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VS].regions[region=2].profils[cle=adulte_300].tous.max",
+     "decimales": 2,
+     "texte": "616,60",
+     "contexte": "| 616,60 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=NE].regions[region=0].profils[cle=adulte_300].tous.min",
+     "decimales": 2,
+     "texte": "583,40",
+     "contexte": "| Neuchâtel | 583,40 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=NE].regions[region=0].profils[cle=adulte_300].tous.med",
+     "decimales": 2,
+     "texte": "648,80",
+     "contexte": "| 648,80 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=NE].regions[region=0].profils[cle=adulte_300].tous.max",
+     "decimales": 2,
+     "texte": "835,00",
+     "contexte": "| 835,00 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=JU].regions[region=0].profils[cle=adulte_300].tous.min",
+     "decimales": 2,
+     "texte": "584,30",
+     "contexte": "| Jura | 584,30 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=JU].regions[region=0].profils[cle=adulte_300].tous.max",
+     "decimales": 2,
+     "texte": "810,60",
+     "contexte": "| 810,60 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=FR].regions[region=1].profils[cle=adulte_300].tous.min",
+     "decimales": 2,
+     "texte": "513,20",
+     "contexte": "| FR 1 (Fribourg) | 513,20 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=FR].regions[region=1].profils[cle=adulte_300].tous.med",
+     "decimales": 2,
+     "texte": "566,30",
+     "contexte": "| 566,30 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=FR].regions[region=1].profils[cle=adulte_300].tous.max",
+     "decimales": 2,
+     "texte": "699,70",
+     "contexte": "| 699,70 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VD].regions[region=2].profils[cle=adulte_300].tous.min",
+     "decimales": 2,
+     "texte": "559,10",
+     "contexte": "| VD 2 (Yverdon-les-Bains) | 559,10 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VD].regions[region=2].profils[cle=adulte_300].tous.med",
+     "decimales": 2,
+     "texte": "608,30",
+     "contexte": "| 608,30 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VD].regions[region=2].profils[cle=adulte_300].tous.max",
+     "decimales": 2,
+     "texte": "749,60",
+     "contexte": "| 749,60 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=FR].regions[region=2].profils[cle=adulte_300].tous.min",
+     "decimales": 2,
+     "texte": "479,50",
+     "contexte": "| FR 2 (Bulle) | 479,50 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=FR].regions[region=2].profils[cle=adulte_300].tous.med",
+     "decimales": 2,
+     "texte": "526,95",
+     "contexte": "| 526,95 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=FR].regions[region=2].profils[cle=adulte_300].tous.max",
+     "decimales": 2,
+     "texte": "642,30",
+     "contexte": "642,30 CHF | 34 % |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VD].regions[region=1].profils[cle=adulte_300].tous.min",
+     "decimales": 2,
+     "texte": "584,30",
+     "contexte": "| VD 1 (Lausanne) | 584,30 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VD].regions[region=1].profils[cle=adulte_300].tous.med",
+     "decimales": 2,
+     "texte": "644,50",
+     "contexte": "| 644,50 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VD].regions[region=1].profils[cle=adulte_300].tous.max",
+     "decimales": 2,
+     "texte": "780,80",
+     "contexte": "| 780,80 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VS].regions[region=1].profils[cle=adulte_300].tous.min",
+     "decimales": 2,
+     "texte": "507,60",
+     "contexte": "| VS 1 (Sion) | 507,60 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VS].regions[region=1].profils[cle=adulte_300].tous.med",
+     "decimales": 2,
+     "texte": "552,35",
+     "contexte": "| 552,35 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VS].regions[region=1].profils[cle=adulte_300].tous.max",
+     "decimales": 2,
+     "texte": "652,90",
+     "contexte": "| 652,90 CHF |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=JU].regions[region=0].profils[cle=adulte_300].tous.n",
+     "decimales": 0,
+     "texte": "105",
+     "contexte": "de 105 dans le Jura"
+    },
+    {
+     "cle": "primes-2027-resume.json:cantons[canton=BE].nombre",
+     "decimales": 0,
+     "texte": "129",
+     "contexte": "à 129 dans la région BE 2"
+    },
+    {
+     "cle": "barometre.json:cantons[code=GE].regions[region=0].profils[cle=adulte_300].standard.min",
+     "decimales": 2,
+     "texte": "711,20",
+     "contexte": "de 711,20 CHF par mois"
+    },
+    {
+     "cle": "barometre.json:cantons[code=GE].regions[region=0].profils[cle=adulte_300].standard.max",
+     "decimales": 2,
+     "texte": "915,70",
+     "contexte": "la plus haute de 915,70 CHF"
+    },
+    {
+     "cle": "barometre.json:cantons[code=GE].regions[region=0].profils[cle=adulte_300].tous.med",
+     "decimales": 2,
+     "texte": "686,05",
+     "contexte": "elle est de 686,05 CHF par mois"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VS].regions[region=2].profils[cle=adulte_300].tous.med",
+     "decimales": 2,
+     "texte": "498,35",
+     "contexte": "elle est de 498,35 CHF"
+    }
+   ]
+  },
+  {
+   "fichier": "en/actualites/2027-premium-gap-by-region.md",
+   "faits": [
+    {
+     "cle": "barometre.json:cantons[code=GE].regions[region=0].profils[cle=adulte_300].tous.min",
+     "decimales": 2,
+     "texte": "611.70",
+     "contexte": "| Geneva | CHF 611.70 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=GE].regions[region=0].profils[cle=adulte_300].tous.med",
+     "decimales": 2,
+     "texte": "686.05",
+     "contexte": "| CHF 686.05 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=GE].regions[region=0].profils[cle=adulte_300].tous.max",
+     "decimales": 2,
+     "texte": "915.70",
+     "contexte": "| CHF 915.70 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VS].regions[region=2].profils[cle=adulte_300].tous.min",
+     "decimales": 2,
+     "texte": "429.00",
+     "contexte": "| VS 2 (Brig-Glis) | CHF 429.00 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VS].regions[region=2].profils[cle=adulte_300].tous.med",
+     "decimales": 2,
+     "texte": "498.35",
+     "contexte": "| CHF 498.35 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VS].regions[region=2].profils[cle=adulte_300].tous.max",
+     "decimales": 2,
+     "texte": "616.60",
+     "contexte": "| CHF 616.60 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=NE].regions[region=0].profils[cle=adulte_300].tous.min",
+     "decimales": 2,
+     "texte": "583.40",
+     "contexte": "| Neuchâtel | CHF 583.40 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=NE].regions[region=0].profils[cle=adulte_300].tous.med",
+     "decimales": 2,
+     "texte": "648.80",
+     "contexte": "| CHF 648.80 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=NE].regions[region=0].profils[cle=adulte_300].tous.max",
+     "decimales": 2,
+     "texte": "835.00",
+     "contexte": "| CHF 835.00 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=JU].regions[region=0].profils[cle=adulte_300].tous.min",
+     "decimales": 2,
+     "texte": "584.30",
+     "contexte": "| Jura | CHF 584.30 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=JU].regions[region=0].profils[cle=adulte_300].tous.max",
+     "decimales": 2,
+     "texte": "810.60",
+     "contexte": "| CHF 810.60 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=FR].regions[region=1].profils[cle=adulte_300].tous.min",
+     "decimales": 2,
+     "texte": "513.20",
+     "contexte": "| FR 1 (Fribourg) | CHF 513.20 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=FR].regions[region=1].profils[cle=adulte_300].tous.med",
+     "decimales": 2,
+     "texte": "566.30",
+     "contexte": "| CHF 566.30 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=FR].regions[region=1].profils[cle=adulte_300].tous.max",
+     "decimales": 2,
+     "texte": "699.70",
+     "contexte": "| CHF 699.70 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VD].regions[region=2].profils[cle=adulte_300].tous.min",
+     "decimales": 2,
+     "texte": "559.10",
+     "contexte": "| VD 2 (Yverdon-les-Bains) | CHF 559.10 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VD].regions[region=2].profils[cle=adulte_300].tous.med",
+     "decimales": 2,
+     "texte": "608.30",
+     "contexte": "| CHF 608.30 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VD].regions[region=2].profils[cle=adulte_300].tous.max",
+     "decimales": 2,
+     "texte": "749.60",
+     "contexte": "| CHF 749.60 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=FR].regions[region=2].profils[cle=adulte_300].tous.min",
+     "decimales": 2,
+     "texte": "479.50",
+     "contexte": "| FR 2 (Bulle) | CHF 479.50 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=FR].regions[region=2].profils[cle=adulte_300].tous.med",
+     "decimales": 2,
+     "texte": "526.95",
+     "contexte": "| CHF 526.95 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=FR].regions[region=2].profils[cle=adulte_300].tous.max",
+     "decimales": 2,
+     "texte": "642.30",
+     "contexte": "CHF 642.30 | 34% |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VD].regions[region=1].profils[cle=adulte_300].tous.min",
+     "decimales": 2,
+     "texte": "584.30",
+     "contexte": "| VD 1 (Lausanne) | CHF 584.30 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VD].regions[region=1].profils[cle=adulte_300].tous.med",
+     "decimales": 2,
+     "texte": "644.50",
+     "contexte": "| CHF 644.50 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VD].regions[region=1].profils[cle=adulte_300].tous.max",
+     "decimales": 2,
+     "texte": "780.80",
+     "contexte": "| CHF 780.80 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VS].regions[region=1].profils[cle=adulte_300].tous.min",
+     "decimales": 2,
+     "texte": "507.60",
+     "contexte": "| VS 1 (Sion) | CHF 507.60 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VS].regions[region=1].profils[cle=adulte_300].tous.med",
+     "decimales": 2,
+     "texte": "552.35",
+     "contexte": "| CHF 552.35 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VS].regions[region=1].profils[cle=adulte_300].tous.max",
+     "decimales": 2,
+     "texte": "652.90",
+     "contexte": "| CHF 652.90 |"
+    },
+    {
+     "cle": "barometre.json:cantons[code=JU].regions[region=0].profils[cle=adulte_300].tous.n",
+     "decimales": 0,
+     "texte": "105",
+     "contexte": "from 105 in Jura"
+    },
+    {
+     "cle": "primes-2027-resume.json:cantons[canton=BE].nombre",
+     "decimales": 0,
+     "texte": "129",
+     "contexte": "to 129 in region BE 2"
+    },
+    {
+     "cle": "barometre.json:cantons[code=GE].regions[region=0].profils[cle=adulte_300].standard.min",
+     "decimales": 2,
+     "texte": "711.20",
+     "contexte": "is then CHF 711.20 a month"
+    },
+    {
+     "cle": "barometre.json:cantons[code=GE].regions[region=0].profils[cle=adulte_300].standard.max",
+     "decimales": 2,
+     "texte": "915.70",
+     "contexte": "the highest CHF 915.70"
+    },
+    {
+     "cle": "barometre.json:cantons[code=GE].regions[region=0].profils[cle=adulte_300].tous.med",
+     "decimales": 2,
+     "texte": "686.05",
+     "contexte": "it is CHF 686.05 a month"
+    },
+    {
+     "cle": "barometre.json:cantons[code=VS].regions[region=2].profils[cle=adulte_300].tous.med",
+     "decimales": 2,
+     "texte": "498.35",
+     "contexte": "it is CHF 498.35"
+    }
+   ]
+  },
+  {
+   "fichier": "fr/actualites/efas-financement-uniforme-2028.md",
+   "faits": [
+    {
+     "cle": "barometre.json:national.variation_pct",
+     "decimales": 1,
+     "texte": "4,9",
+     "contexte": "augmente de 4,9 % pour l’ensemble"
+    }
+   ]
+  },
+  {
+   "fichier": "en/actualites/efas-uniform-financing-2028.md",
+   "faits": [
+    {
+     "cle": "barometre.json:national.variation_pct",
+     "decimales": 1,
+     "texte": "4.9",
+     "contexte": "goes up by 4.9% across Switzerland"
+    }
+   ]
+  }
+ ]
+}

@@ -61,6 +61,7 @@ NAMES = {
     "impots": "barèmes d'impôt",
     "digest": "point mensuel",
     "actualites": "actualités",
+    "chiffres": "chiffres des actualités",
 }
 
 DRY = False  # dry-run : l'état (state/*.json) n'est pas modifié

@@ -11,14 +11,15 @@ Les données chiffrées du site sont relevées à la source selon un calendrier 
 | Frontaliers (`frontalier.py`) | 06:45, chaque jour en janvier, sinon le 1er du mois | Urssaf (PASS), opendata.swiss (Prämien_EU) | alerte seulement |
 | Barèmes d'impôt (`impots.py`) | le 1er du mois, 07:00 | calculateur de l'AFC (GE/VD, 2026 et 2027) | alerte seulement |
 | Point mensuel (`digest.py`) | le 1er du mois, 08:00 | `state/*.json` | e-mail « tout va bien » ou « données à vérifier » |
-| Actualités (`actualites.py`) | à la main (`actualites.yml`) ; planification préparée, pas active | données du site, flux RSS de la BNS, pages officielles | brouillon FR + EN vérifié, ouvert en **pull request** ; fusionner = publier |
+| Chiffres des actualités (`chiffres.py`) | lundi 08:15 | manifeste `site/content/actualites-chiffres.json`, données de `site/src/data` | **mise à jour automatique** de l'article (chiffre, `dateModified`, ligne « Mis à jour le … »), vérificateur relancé, publication ; alerte seulement en cas d'échec |
+| Actualités (`actualites.py`) | 07:30 et 10:15 | données du site, flux RSS de la BNS, pages officielles | article FR + EN vérifié automatiquement puis **publié directement** ; contrôle en échec : article jeté, alerte |
 
 GitHub planifie en UTC : chaque tâche a deux lignes cron (heure d'hiver, heure d'été). `_refresh.yml` calcule l'heure de Zurich de la ligne qui a déclenché le passage et passe `--scheduled --at H --utc-hour h` : seule la ligne qui tombe à l'heure H s'exécute, même si GitHub la lance en retard.
 
 ## Déroulé d'un relevé
 
 1. **Relevé**, puis **contrôles** : schéma ; nombre de lignes à ±10 % du relevé précédent ; plages plausibles ; écart maximal par valeur (0,5 point pour un taux 3a, 25 % pour une prime) ; second relevé des banques modifiées ; texte rédigé à la main (`affiche_*`, `conditions_*`) qui cite une ancienne valeur.
-2. Si une page ne se lit plus ou si une valeur est invraisemblable : **rien n'est écrit ni publié**, une alerte part.
+2. Si une page ne se lit plus ou si une valeur est invraisemblable : **rien n'est écrit ni publié**, une alerte part. Exception pour les taux 3a : une banque illisible (même avec le navigateur sans tête) garde son dernier taux vérifié et sa date de relevé ; elle est marquée « non relevée cette semaine » dans le résumé du passage et dans l'e-mail, les autres banques sont publiées. Au-delà de la moitié des banques illisibles, rien n'est publié.
 3. Si tout est valide et qu'il y a un changement : sauvegarde, écriture des données, `npm test`, `npm run build`, données ouvertes (`data/csv`), mentions interdites dans `site/out` (`scripts/check-forbidden.sh`). Puis commit sur `main` (auteur `guide-assurance-bot`), déploiement depuis le runner (`scripts/deploy-site.sh`) et vérification en ligne : HTTP 200, fichier en ligne identique au build, nouvelle valeur présente. Si les tests ou le build échouent, les données sont remises à l'état précédent et rien n'est committé.
 4. État de chaque jeu dans `state/<jeu>.json`, alertes déjà envoyées dans `state/alertes.json` (pas de renvoi d'une alerte identique avant 7 jours, 30 pour les alertes de veille). Ce dossier est restauré depuis la branche `refresh-state` au début du passage et y est réenregistré à la fin. Le journal (`logs/<jeu>.log`) est gardé 90 jours comme artefact du passage.
 5. Relevés et déploiements partagent le groupe de concurrence `guide-assurance-prod`. Un e-mail d'alerte qui ne part pas fait échouer le passage (GitHub prévient alors par e-mail).

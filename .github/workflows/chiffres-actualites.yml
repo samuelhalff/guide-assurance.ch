@@ -1,0 +1,37 @@
+name: "Actualités : chiffres à jour (lundi 08:15)"
+
+# infra/refresh/chiffres.py : compare les chiffres cités dans les actualités publiées (manifeste
+# site/content/actualites-chiffres.json) avec les données actuelles du site, après le relevé 3a du lundi matin.
+# Écart : l'article est mis à jour automatiquement (chiffre, dateModified, ligne « Mis à jour le … »), le
+# vérificateur des actualités est relancé, puis tests, build, commit sur main et déploiement. E-mail seulement en
+# cas d'échec. « forcer_ecart » : essai sur une branche essai/… (jamais main, pas de déploiement), à supprimer ensuite.
+# Lignes en UTC (hiver, été) : seule celle qui tombe à 8 h à Zurich s'exécute.
+on:
+  schedule:
+    - cron: "15 7 * * 1"
+    - cron: "15 6 * * 1"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "--dry-run : compare et affiche, rien d'écrit ni publié"
+        type: boolean
+        default: true
+      forcer_ecart:
+        description: "essai : écart simulé sur le premier chiffre ; sans dry_run, commit sur une branche essai/… (jamais main)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+jobs:
+  chiffres:
+    uses: ./.github/workflows/_refresh.yml
+    with:
+      dataset: chiffres
+      at: 8
+      dry_run: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+      args: ${{ inputs.forcer_ecart && (inputs.dry_run && '--simulate-change' || '--forcer-ecart') || '' }}
+    secrets: inherit

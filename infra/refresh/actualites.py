@@ -14,10 +14,12 @@ Chaque passage (cron quotidien, 07:30 Zurich) :
 
 Rien n'est publié sans accord. Accord manuel (Sam le dit en session) : actualites.py --approve <slug-fr>.
 
-GitHub Actions (.github/workflows/actualites.yml) : le brouillon vérifié part dans une pull request (branche
-actualite/<slug-fr>, status: published dans la branche) avec l'aperçu et les sources ; Sam reçoit le lien par e-mail.
-Fusionner la pull request = publier (le push sur main déploie). Pas d'accord par lien signé dans ce mode.
-Clé du LLM : secret ANTHROPIC_API_KEY (ou AZURE_OPENAI_*). Absente : alerte « clé manquante », passage en échec.
+GitHub Actions (.github/workflows/actualites.yml), entièrement automatique (décision de Sam du 23.11.2026) :
+un article qui passe tous les contrôles automatiques est écrit en status: published, testé, construit, committé sur
+main et déployé (sitemap, flux et IndexNow suivent avec le déploiement). Un article qui échoue est jeté et une
+alerte part. Ni pull request ni accord à donner.
+Clé du LLM : la même que l'assistant des demandes (secrets AZURE_OPENAI_*), ou ANTHROPIC_API_KEY.
+Absente : alerte « clé manquante », passage en échec.
 """
 from __future__ import annotations
 
@@ -98,7 +100,7 @@ def lire_env() -> dict:
             if m and not ligne.lstrip().startswith("#"):
                 e[m.group(1)] = m.group(2).strip().strip('"').strip("'")
     for k in ("ANTHROPIC_API_KEY", "AZURE_OPENAI_ENDPOINT", "AZURE_OPENAI_API_KEY", "AZURE_OPENAI_DEPLOYMENT",
-              "ACTUALITES_APPROBATION_CLE", "LEADS_URL"):
+              "AZURE_OPENAI_API_VERSION", "ACTUALITES_APPROBATION_CLE", "LEADS_URL"):
         if os.environ.get(k):
             e[k] = os.environ[k]
     return e
@@ -169,11 +171,8 @@ def empreinte(fr: Path, en: Path | None) -> str:
 
 
 def brouillons() -> list[str]:
-    if C.CI:  # brouillons = pull requests ouvertes sur une branche actualite/*
-        r = subprocess.run(["gh", "pr", "list", "--state", "open", "--json", "headRefName", "--jq",
-                            '.[].headRefName | select(startswith("actualite/"))'],
-                           cwd=C.ROOT, capture_output=True, text=True, timeout=60)
-        return sorted(ln.removeprefix("actualite/") for ln in r.stdout.split() if ln)
+    if C.CI:  # publication automatique : rien n'attend d'accord
+        return []
     return sorted(p.stem for p in CONTENT["fr"].glob("*.md")
                   if fm(p.read_text(encoding="utf-8"))[0].get("status") == "draft")
 
@@ -386,7 +385,7 @@ def appel_llm(env: dict, systeme: str, utilisateur: str, log: C.Log) -> str:
     if env.get("AZURE_OPENAI_ENDPOINT") and env.get("AZURE_OPENAI_API_KEY"):
         dep = env.get("AZURE_OPENAI_DEPLOYMENT", "gpt-4.1")
         url = (env["AZURE_OPENAI_ENDPOINT"].rstrip("/") + f"/openai/deployments/{urllib.parse.quote(dep)}"
-               "/chat/completions?api-version=2025-01-01-preview")
+               "/chat/completions?api-version=" + urllib.parse.quote(env.get("AZURE_OPENAI_API_VERSION") or "2025-01-01-preview"))
         corps = {"messages": [{"role": "system", "content": systeme}, {"role": "user", "content": utilisateur}],
                  "response_format": {"type": "json_object"}, "max_tokens": 12000, "temperature": 0.3}
         req = urllib.request.Request(url, data=json.dumps(corps).encode(), method="POST",
@@ -546,7 +545,7 @@ def rediger(log: C.Log, a, d: dict, env: dict) -> int:
             log(f"[dry-run] brouillon valide : {slug_fr} / {slug_en} (non enregistré)")
             return 0
         if C.CI:
-            return ouvrir_pr(log, a, d, art, jour, slug_fr, slug_en, lues)
+            return publier_direct(log, a, d, art, jour, slug_fr, slug_en)
         dest_fr, dest_en = CONTENT["fr"] / f_fr.name, CONTENT["en"] / f_en.name
         dest_fr.write_text(f_fr.read_text(encoding="utf-8"), encoding="utf-8")
         dest_en.write_text(f_en.read_text(encoding="utf-8"), encoding="utf-8")
@@ -562,66 +561,35 @@ def rediger(log: C.Log, a, d: dict, env: dict) -> int:
     return 0
 
 
-def ouvrir_pr(log: C.Log, a, d: dict, art: dict, jour: str, slug_fr: str, slug_en: str, lues: list[dict]) -> int:
-    """GitHub Actions : branche actualite/<slug>, articles en status: published, pull request, e-mail à Sam."""
-    branche = f"actualite/{slug_fr}"
+def publier_direct(log: C.Log, a, d: dict, art: dict, jour: str, slug_fr: str, slug_en: str) -> int:
+    """GitHub Actions : l'article vérifié est écrit en status: published, puis testé, construit, committé sur main,
+    déployé et vérifié en ligne (common.publish). Échec : articles retirés, alerte."""
     dest_fr, dest_en = CONTENT["fr"] / f"{slug_fr}.md", CONTENT["en"] / f"{slug_en}.md"
-    textes = {"fr": ecrire_article(art["fr"], "fr", jour, None, "published"),
-              "en": ecrire_article(art["en"], "en", jour, slug_fr, "published")}
-    git = ["git", "-c", "user.name=guide-assurance-bot", "-c", "user.email=41898282+github-actions[bot]@users.noreply.github.com"]
-    code, _ = C.sh(log, ["git", "switch", "-c", branche], C.ROOT)
-    if code:
-        C.alert(log, DS, "données à vérifier", [f"Impossible de créer la branche {html.escape(branche)}. Aucun brouillon proposé."], a.dry_run)
+    for p, texte in ((dest_fr, ecrire_article(art["fr"], "fr", jour, None, "published")),
+                     (dest_en, ecrire_article(art["en"], "en", jour, slug_fr, "published"))):
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(texte, encoding="utf-8")
+    log(f"article écrit : {dest_fr.relative_to(C.ROOT)}, {dest_en.relative_to(C.ROOT)}")
+    checks = [{"url": f"{BASE['fr']}{slug_fr}/", "out": f"actualites/{slug_fr}/index.html", "values": [re.escape(slug_fr)]},
+              {"url": f"{BASE['en']}{slug_en}/", "out": f"en/news/{slug_en}/index.html", "values": [re.escape(slug_en)]}]
+    published, why = C.publish(log, [dest_fr, dest_en], C.Backup([]), checks)
+    log(why)
+    if not published:
+        if subprocess.run(["git", "cat-file", "-e", f"HEAD:{dest_fr.relative_to(C.ROOT)}"], cwd=C.ROOT,
+                          capture_output=True).returncode != 0:  # pas committé : on retire l'article
+            dest_fr.unlink(missing_ok=True)
+            dest_en.unlink(missing_ok=True)
+        C.record_run(DS, "echec", why[:300], success=False)
+        C.alert(log, DS, "article non publié",
+                [f"Déclencheur : {html.escape(d['raison'])}. L'article « {html.escape(art['fr']['title'])} » a passé les contrôles "
+                 "automatiques, mais sa publication a échoué :", html.escape(why)], a.dry_run)
         return 1
-    try:
-        for p, loc in ((dest_fr, "fr"), (dest_en, "en")):
-            p.parent.mkdir(parents=True, exist_ok=True)
-            p.write_text(textes[loc], encoding="utf-8")
-        titre = art["fr"]["title"]
-        C.sh(log, ["git", "add", str(dest_fr), str(dest_en)], C.ROOT)
-        code, _ = C.sh(log, [*git, "commit", "-m", f"Actualité : {titre}"], C.ROOT)
-        if not code:
-            code, _ = C.sh(log, ["git", "push", "-u", "origin", branche], C.ROOT, timeout=300)
-        if code:
-            C.alert(log, DS, "données à vérifier", [f"Le brouillon « {html.escape(titre)} » n'a pas pu être poussé sur GitHub."], a.dry_run)
-            return 1
-
-        def sans_fm(s: str) -> str:
-            return re.sub(r"^---\n.*?\n---\n", "", s, count=1, flags=re.S).strip()
-        sources = "\n".join(f"- [{s['label']}]({s['url']})" for s in art["fr"]["sources"])
-        relues = "\n".join(f"- {x['url']}" for x in lues) or "- aucune (données du site seulement)"
-        corps = (f"Brouillon rédigé par le LLM et vérifié par `site/scripts/verifier-actualite.mts`.\n\n"
-                 f"**Déclencheur :** {d['raison']}\n\n"
-                 "**Fusionner cette pull request publie l'article** (FR et EN) : le push sur main déploie le site. "
-                 "La fermer sans fusionner l'abandonne. Le texte peut être corrigé dans la branche avant la fusion.\n\n"
-                 f"### Sources citées\n{sources}\n\n### Pages officielles relues par le script\n{relues}\n\n"
-                 f"### Aperçu FR : {art['fr']['title']}\n\n*{art['fr']['description']}*\n\n{sans_fm(textes['fr'])}\n\n"
-                 f"### Aperçu EN : {art['en']['title']}\n\n*{art['en']['description']}*\n\n{sans_fm(textes['en'])}\n")
-        if len(corps) > 60000:
-            corps = corps[:60000] + "\n\n(aperçu tronqué : voir les fichiers de la pull request)"
-        with tempfile.NamedTemporaryFile("w", suffix=".md", delete=False, encoding="utf-8") as f:
-            f.write(corps)
-        r = subprocess.run(["gh", "pr", "create", "--base", "main", "--head", branche, "--title", f"Actualité : {titre}",
-                            "--body-file", f.name], cwd=C.ROOT, capture_output=True, text=True, timeout=120)
-        url = r.stdout.strip().splitlines()[-1] if r.returncode == 0 and r.stdout.strip() else ""
-        if not url:
-            log("gh pr create : " + (r.stderr or r.stdout)[-300:])
-            C.alert(log, DS, "données à vérifier", [f"Le brouillon « {html.escape(titre)} » est sur la branche {html.escape(branche)}, "
-                                                    "mais la pull request n'a pas pu être ouverte."], a.dry_run)
-            return 1
-        log(f"pull request ouverte : {url}")
-        # Contrôle de build de la branche (les pull requests ouvertes par GITHUB_TOKEN ne lancent pas la CI d'elles-mêmes).
-        C.sh(log, ["gh", "workflow", "run", "ci-deploy.yml", "--ref", branche], C.ROOT)
-        C.record_run(DS, "alerte", f"brouillon {slug_fr} en attente (pull request)", success=True)
-        C.alert(log, DS, "article à relire",
-                [f"Un brouillon d'article attend votre relecture. Déclencheur : {html.escape(d['raison'])}.",
-                 f"<b>{html.escape(titre)}</b><br>{html.escape(art['fr']['description'])}",
-                 f'Aperçu, sources et texte complet : <a href="{html.escape(url)}">{html.escape(url)}</a>',
-                 "Fusionner la pull request publie l'article (français et anglais). La fermer l'abandonne."],
-                a.dry_run, dedupe_days=0)
-        return 0
-    finally:
-        C.sh(log, ["git", "switch", "main"], C.ROOT)
+    C.record_run(DS, "publie", f"{slug_fr} publié", success=True, published=True)
+    f = os.environ.get("GITHUB_STEP_SUMMARY")
+    if f:
+        with open(f, "a", encoding="utf-8") as fh:
+            fh.write(f"### Actualité publiée\n\n{art['fr']['title']}\n\n{C.LIVE}{BASE['fr']}{slug_fr}/ ; {C.LIVE}{BASE['en']}{slug_en}/\n")
+    return 0
 
 
 def run(log: C.Log, a) -> int:

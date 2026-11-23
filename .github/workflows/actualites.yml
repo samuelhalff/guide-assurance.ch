@@ -1,20 +1,22 @@
-name: "Actualités : brouillon en pull request"
+name: "Actualités : rédaction et publication automatiques"
 
-# infra/refresh/actualites.py : cherche un déclencheur (primes OFSP, taux 3a, décision BNS, rendez-vous mensuel),
-# fait rédiger FR + EN par le LLM, vérifie (site/scripts/verifier-actualite.mts) et ouvre une pull request
-# (status: published dans la branche, aperçu et sources dans la description). E-mail à sh@houle.ai avec le lien.
-# Fusionner = publier (le push sur main déploie). Sans clé de LLM : alerte « clé manquante » et passage en échec.
-#
-# Planification préparée mais pas active (comme dans l'ancien crontab, en attente de l'accord de Sam) :
-# décommenter le bloc schedule pour 07:30 et 10:15 à Zurich, et ajouter at: 10 pour la seconde ligne si besoin.
+# infra/refresh/actualites.py : cherche un déclencheur (nouvelles primes OFSP, variation des taux 3a, décision de la
+# BNS, rendez-vous mensuel), fait rédiger FR + EN par le LLM (même fournisseur que l'assistant des demandes),
+# vérifie (site/scripts/verifier-actualite.mts : noms interdits, pas de recommandation, chaque chiffre présent dans
+# les sources fournies, au moins 3 sources, typographie, longueur). Tout passe : article publié directement
+# (commit sur main, tests, build, déploiement ; sitemap, flux et IndexNow suivent). Un contrôle échoue : article
+# jeté, alerte à sh@houle.ai. Sans clé de LLM : alerte « clé manquante », passage en échec.
+# 07:30 et 10:15 à Zurich ; lignes UTC hiver et été, seule celle qui tombe à l'heure prévue s'exécute.
 on:
-  # schedule:
-  #   - cron: "30 5 * * *"
-  #   - cron: "30 6 * * *"
+  schedule:
+    - cron: "30 6 * * *"
+    - cron: "30 5 * * *"
+    - cron: "15 9 * * *"
+    - cron: "15 8 * * *"
   workflow_dispatch:
     inputs:
       dry_run:
-        description: "--dry-run : rien d'écrit, pas de pull request, pas d'e-mail"
+        description: "--dry-run : rédige et vérifie, rien d'écrit ni publié, pas d'e-mail"
         type: boolean
         default: true
       only:
@@ -29,11 +31,19 @@ permissions:
   actions: write
 
 jobs:
-  actualites:
+  matin:
     uses: ./.github/workflows/_refresh.yml
     with:
       dataset: actualites
       at: 7
       dry_run: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
       args: ${{ (inputs.only && inputs.only != 'aucun') && format('--only {0}', inputs.only) || '' }}
+    secrets: inherit
+  fin-de-matinee:
+    if: always() && github.event_name == 'schedule'
+    needs: matin
+    uses: ./.github/workflows/_refresh.yml
+    with:
+      dataset: actualites
+      at: 10
     secrets: inherit
