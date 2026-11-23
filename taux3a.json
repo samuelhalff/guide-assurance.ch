@@ -1,6 +1,7 @@
 {
- "dernier_releve": "2026-11-23T06:30:20+01:00",
- "dernier_statut": "ok",
- "dernier_message": "aucun changement",
- "dernier_succes": "2026-11-23T06:30:20+01:00"
+ "dernier_releve": "2026-11-23T11:11:00+01:00",
+ "dernier_statut": "publie",
+ "dernier_message": "historique seul : Publié sur guide-assurance.ch le 23.11.2026 à 11:11, valeurs vérifiées en ligne.",
+ "dernier_succes": "2026-11-23T11:11:00+01:00",
+ "derniere_publication": "2026-11-23T11:11:00+01:00"
 }
