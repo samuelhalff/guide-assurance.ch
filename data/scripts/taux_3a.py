@@ -227,11 +227,15 @@ def http_get(url: str, retries: int = 2) -> tuple[bytes, str, str]:
     raise RuntimeError(f"HTTP {url}: {last}")
 
 
-def render(url: str) -> str:
-    r = subprocess.run(["node", str(RENDER), url, "5000"], capture_output=True, text=True, timeout=240)
-    if r.returncode != 0 or len(r.stdout) < 1000:
-        raise RuntimeError(f"playwright {url}: {r.stderr.strip()[-300:]}")
-    return r.stdout
+def render(url: str, retries: int = 1) -> str:
+    err = ""
+    for attempt in range(retries + 1):
+        r = subprocess.run(["node", str(RENDER), url, "5000"], capture_output=True, text=True, timeout=240)
+        if r.returncode == 0 and len(r.stdout) >= 1000:
+            return r.stdout
+        err = r.stderr.strip()[-300:]
+        time.sleep(5 * (attempt + 1))
+    raise RuntimeError(f"playwright {url}: {err}")
 
 
 def parse_num(s: str) -> float:
@@ -282,8 +286,15 @@ def fetch_bank(cfg: dict, save: bool = True) -> dict:
                 raise RuntimeError("la réponse n'est pas un PDF")
             lines, ext = pdf_to_lines(raw), "pdf"
         else:
-            raw, read_url, ctype = http_get(url)
-            lines, ext = html_to_lines(decode(raw, ctype)), "html"
+            try:
+                raw, read_url, ctype = http_get(url)
+                lines, ext = html_to_lines(decode(raw, ctype)), "html"
+            except RuntimeError:
+                # Refus ou coupure en HTTP simple (certains sites filtrent les adresses des serveurs d'intégration
+                # continue) : second essai avec un vrai navigateur sans tête.
+                html = render(url)
+                raw, read_url, lines, ext = html.encode(), url, html_to_lines(html), "html"
+                method = "playwright (secours)"
 
         flat = " ".join(lines)
         m = re.search(cfg["rule"], flat, re.I)

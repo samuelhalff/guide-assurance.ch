@@ -2,7 +2,9 @@
 """Taux des comptes 3a : relevé hebdomadaire, publication automatique si valide.
 
 Relevé : data/scripts/taux_3a.py (pages et fiches PDF officielles des 17 banques).
-Contrôles : toutes les banques lues (sinon : structure de page changée -> alerte, rien publié),
+Contrôles : une banque illisible (page modifiée, ou refus même avec le navigateur sans tête) garde son dernier taux
+vérifié et sa date de relevé, est signalée comme non relevée cette semaine (résumé du passage et e-mail) ; plus de la
+moitié des banques illisibles -> alerte, rien publié ;
 nombre de banques = nombre en base ±10 %, taux entre 0 et 3 %, écart ≤ 0,5 point par relevé,
 date de validité plausible, second relevé de chaque banque modifiée (valeur stable),
 textes rédigés à la main (affiche_*, conditions_*) qui citent une ancienne valeur -> alerte sans publication.
@@ -14,6 +16,7 @@ from __future__ import annotations
 import datetime as dt
 import importlib.util
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -34,12 +37,17 @@ def load_module(path: Path = SCRIPT, name: str = "taux_3a"):
     return m
 
 
-def archive(log: C.Log, T, stored: dict, results: list[dict], dry_run: bool) -> list[Path]:
+def archive(log: C.Log, T, stored: dict, results: list[dict], dry_run: bool, stale_ids: list[str] | None = None) -> list[Path]:
     """Historique (data/taux-3a-historique.json) : chaque relevé valide des 17 banques y entre, avec les valeurs
     lues, qu'un taux ait changé ou non. Une semaine non archivée est perdue pour de bon."""
     H = load_module(HIST_SCRIPT, "taux_3a_historique")
     today = dt.date.today().isoformat()
-    releve = H.releve_depuis(T.apply(stored, results, today), today, "relevé automatique (infra/refresh/taux3a.py)")
+    data = T.apply(stored, results, today)
+    releve = H.releve_depuis(data, today, "relevé automatique (infra/refresh/taux3a.py)")
+    lu = {c["id"]: c.get("lu_le") for c in data["comptes"]}
+    for c in releve["comptes"]:
+        if c["id"] in (stale_ids or []):
+            c["lu_le"] = lu.get(c["id"])  # non relevée cette semaine : dernier taux vérifié, daté de son relevé
     if dry_run:
         log(f"[dry-run] archiverait le relevé du {today} ({len(releve['comptes'])} comptes) dans {H.HIST_FILE.name}")
         return []
@@ -57,6 +65,14 @@ def values_of(c: dict) -> dict:
     v = {"taux": c.get("taux")}
     v.update({f"variante {k}": x for k, x in (c.get("taux_variantes") or {}).items()})
     return v
+
+
+def resume_ci(lignes: list[str]) -> None:
+    """Résumé du passage GitHub Actions (onglet Summary)."""
+    f = os.environ.get("GITHUB_STEP_SUMMARY")
+    if f:
+        with open(f, "a", encoding="utf-8") as fh:
+            fh.write("\n".join(lignes) + "\n")
 
 
 def run(log: C.Log, a) -> int:
@@ -123,7 +139,7 @@ def run(log: C.Log, a) -> int:
         changes.append((r["id"], nom, "; ".join(parts), r))
 
     # --- second relevé des banques modifiées (valeur stable ?)
-    if changes and not failures and not problems and not a.simulate_change:
+    if changes and not problems and not a.simulate_change:
         for bid, nom, _, r in changes:
             cfg = next(b for b in T.BANKS if b["id"] == bid)
             r2 = T.fetch_bank(cfg, save=False)
@@ -135,7 +151,18 @@ def run(log: C.Log, a) -> int:
         log(f"  changement {nom} : {txt}")
     chg_html = "<br>".join(f"{nom} : {txt}" for _, nom, txt, _ in changes)
 
-    if failures:
+    # Banques non relevées cette semaine : dernier taux vérifié et date de relevé conservés.
+    stale = []
+    for f in failures:
+        old = by_id.get(f["id"], {})
+        stale.append(f"{names.get(f['id'], f['id'])} : {f['erreur'][:160]} ; dernier taux vérifié "
+                     f"{fr(old['taux']) if old.get('taux') is not None else '—'}, relevé le {old.get('lu_le') or '—'}")
+    resume_ci(["### Taux 3a", "", "| Banque | Taux | Statut |", "|---|---|---|"]
+              + [f"| {names.get(r['id'], r['id'])} | {fr(r['taux'])} | relevé |" for r in ok]
+              + [f"| {names.get(f['id'], f['id'])} | {fr(by_id[f['id']]['taux']) if by_id.get(f['id'], {}).get('taux') is not None else '—'} "
+                 f"| **non relevé cette semaine** (dernier relevé le {by_id.get(f['id'], {}).get('lu_le') or '—'}) |" for f in failures])
+    stale_html = ("Banques non relevées cette semaine (dernier taux vérifié conservé) :<br>" + "<br>".join(stale)) if stale else ""
+    if failures and len(failures) > len(results) / 2:
         lst = "<br>".join(f"{names.get(f['id'], f['id'])} : {f['erreur']}" for f in failures)
         for f in failures:
             log(f"  échec {f['id']} : {f['erreur']}")
@@ -152,16 +179,20 @@ def run(log: C.Log, a) -> int:
         C.record_run(DS, "invalide", "; ".join(problems)[:300], success=False)
         C.alert(log, DS, "données à vérifier",
                 ["Relevé des taux 3a : valeurs invraisemblables, publication bloquée :<br>" + "<br>".join(problems),
-                 ("Changements lus :<br>" + chg_html) if changes else "", "Rien n'a été publié."], a.dry_run)
+                 ("Changements lus :<br>" + chg_html) if changes else "", stale_html, "Rien n'a été publié."], a.dry_run)
         return 1
+    for f in failures:
+        log(f"  non relevée cette semaine {f['id']} : {f['erreur']} (dernier taux vérifié conservé)")
     if not a.simulate_change and not a.simulate_parser_failure:
-        hist = archive(log, T, stored, results, a.dry_run)
+        hist = archive(log, T, stored, results, a.dry_run, [f["id"] for f in failures])
     else:
         hist = []
     if not changes:
         if not hist or a.dry_run:
             log("aucun changement" + (" ; [dry-run] l'historique serait publié" if hist else ""))
             C.record_run(DS, "ok", "aucun changement", success=True)
+            if stale:
+                C.alert(log, DS, "données à vérifier", ["Relevé des taux 3a : aucun taux modifié chez les banques lues.", stale_html], a.dry_run)
             return 0
         # Taux inchangés, mais le relevé de la semaine est un point réel de l'historique : il part en ligne tout de suite.
         published, why = C.publish(log, hist, C.Backup([]), [])
@@ -170,18 +201,21 @@ def run(log: C.Log, a) -> int:
                      success=True, published=published)
         if not published:
             C.alert(log, DS, "données à vérifier",
-                    ["Relevé des taux 3a : aucun taux modifié, mais le relevé hebdomadaire n'a pas pu être publié dans l'historique.", why], False)
+                    ["Relevé des taux 3a : aucun taux modifié, mais le relevé hebdomadaire n'a pas pu être publié dans l'historique.", why, stale_html], False)
+        elif stale:
+            C.alert(log, DS, "données à vérifier",
+                    ["Relevé des taux 3a : aucun taux modifié chez les banques lues ; relevé hebdomadaire publié dans l'historique.", stale_html], False)
         return 0 if published else 1
     if human:
         C.record_run(DS, "alerte", "texte rédigé à relire", success=True)
         C.alert(log, DS, "données à vérifier",
                 ["Relevé des taux 3a : changement(s) lu(s) sur les sites des banques :<br>" + chg_html,
                  "Un texte rédigé à la main cite encore l'ancienne valeur :<br>" + "<br>".join(sorted(set(human))),
-                 "Rien n'a été publié : il faut d'abord adapter ce texte (data/taux-3a.json)."], a.dry_run)
+                 "Rien n'a été publié : il faut d'abord adapter ce texte (data/taux-3a.json).", stale_html], a.dry_run)
         return 1
     if a.dry_run:
         log(f"[dry-run] écrirait {T.DATA_FILE} et {T.SITE_FILE}, puis tests, build, déploiement et vérification en ligne")
-        C.alert(log, DS, "données mises à jour", ["Taux 3a modifiés :<br>" + chg_html, "(dry-run : rien publié)"], True)
+        C.alert(log, DS, "données mises à jour", ["Taux 3a modifiés :<br>" + chg_html, stale_html, "(dry-run : rien publié)"], True)
         return 0
 
     today = dt.date.today().isoformat()
@@ -199,7 +233,7 @@ def run(log: C.Log, a) -> int:
     log(why)
     C.record_run(DS, "publie" if published else "ecrit_non_publie", why, success=True, published=published)
     C.alert(log, DS, "données mises à jour" if published else "données à vérifier",
-            ["Taux 3a modifiés sur les sites des banques :<br>" + chg_html, why], False)
+            ["Taux 3a modifiés sur les sites des banques :<br>" + chg_html, why, stale_html], False)
     return 0 if published else 1
 
 

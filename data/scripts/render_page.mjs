@@ -5,7 +5,9 @@ import { createRequire } from 'node:module';
 import { existsSync } from 'node:fs';
 import { homedir } from 'node:os';
 
-const require = createRequire('/home/sam/dev/episto/node_modules/');
+// Playwright : data/scripts/node_modules (npm ci dans data/scripts ; en CI, .github/actions/setup-site),
+// ou le dossier node_modules désigné par PLAYWRIGHT_NODE_MODULES.
+const require = createRequire(process.env.PLAYWRIGHT_NODE_MODULES ? `${process.env.PLAYWRIGHT_NODE_MODULES.replace(/\/$/, '')}/` : import.meta.url);
 const { chromium } = require('playwright');
 
 const url = process.argv[2];
@@ -20,7 +22,8 @@ if (existsSync(shell)) opts.executablePath = shell;
 const UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36';
 const browser = await chromium.launch(opts);
 try {
-  const ctx = await browser.newContext({ userAgent: UA, locale: 'fr-CH', viewport: { width: 1366, height: 900 } });
+  const ctx = await browser.newContext({ userAgent: UA, locale: 'fr-CH', timezoneId: 'Europe/Zurich', viewport: { width: 1366, height: 900 },
+    extraHTTPHeaders: { 'Accept-Language': 'fr-CH,fr;q=0.9,de-CH;q=0.7,en;q=0.6' } });
   const page = await ctx.newPage();
   await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
   try { await page.waitForLoadState('networkidle', { timeout: 20000 }); } catch {}

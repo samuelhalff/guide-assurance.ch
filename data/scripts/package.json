@@ -1,0 +1,8 @@
+{
+  "name": "guide-assurance-data-scripts",
+  "private": true,
+  "description": "Navigateur sans tête pour les pages des banques rendues en JavaScript (render_page.mjs).",
+  "dependencies": {
+    "playwright": "1.61.1"
+  }
+}
