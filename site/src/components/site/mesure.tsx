@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useReportWebVitals } from "next/web-vitals";
-import { CONSENTEMENT_REQUIS, GTM_ID, MESURE_ACTIVE, apresChargement, demarrerPostHog, ecrireChoix, lireChoix, memoriserUtm, persistantNavigateur, suivre, versGA } from "@/lib/analytics";
+import { CONSENTEMENT_REQUIS, GTM_ID, MESURE_ACTIVE, apresChargement, demarrerPostHog, ecrireChoix, lireChoix, memoriserAttribution, memoriserUtm, persistantNavigateur, suivre, versGA } from "@/lib/analytics";
 import { extensionTelechargement, utmDepuis } from "@/lib/mesure-regles";
 
 /* Une seule règle partout : sans choix, tout est actif ; seul « Refuser » l'arrête. */
@@ -31,6 +31,8 @@ export function Mesure({ locale = "fr" }: { locale?: "fr" | "en" }) {
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     if (!MESURE_ACTIVE) return;
+    /* Attribution au premier contact (sessionStorage, sauf refus), avant tout événement. */
+    memoriserAttribution();
     /* PostHog (environ 220 Ko) se charge après l'affichage ; les événements antérieurs attendent dans la file. */
     apresChargement(() => void demarrerPostHog(persistantNavigateur()));
     if (CONSENTEMENT_REQUIS && lireChoix() === null) setVisible(true);

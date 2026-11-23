@@ -78,5 +78,43 @@ eq('pdf', M.extensionTelechargement('/kit-rh/guide-assurance-kit-rh-fr.pdf'), 'p
 eq('csv', M.extensionTelechargement('/data/primes-2027-regions.csv'), 'csv');
 eq('page', M.extensionTelechargement('/assurance-maladie/'), null);
 
+/* Canal d'acquisition au premier contact */
+const H = 'guide-assurance.ch';
+const canaux: [string, string, string][] = [
+  ['https://www.google.com/', '', 'google'], ['https://www.google.ch/', '', 'google'], ['android-app://com.google.android.googlequicksearchbox/', '', 'google'],
+  ['https://www.bing.com/search?q=x', '', 'bing'], ['https://duckduckgo.com/', '', 'autre_recherche'], ['https://www.ecosia.org/', '', 'autre_recherche'], ['https://search.brave.com/', '', 'autre_recherche'],
+  ['https://chatgpt.com/', '', 'ia'], ['', '?utm_source=chatgpt.com', 'ia'], ['https://www.perplexity.ai/', '', 'ia'], ['https://gemini.google.com/app', '', 'ia'],
+  ['https://copilot.microsoft.com/', '', 'ia'], ['https://claude.ai/', '', 'ia'],
+  ['https://www.facebook.com/', '', 'reseau_social'], ['https://t.co/abc', '', 'reseau_social'], ['https://www.linkedin.com/', '', 'reseau_social'], ['', '?utm_source=linkedin&utm_medium=social', 'reseau_social'],
+  ['https://www.comparis.ch/forum', '', 'referent'], ['', '?utm_source=newsletter&utm_medium=email', 'referent'],
+  ['', '', 'direct'], ['https://guide-assurance.ch/assurance-maladie/', '', 'direct'], ['https://www.guide-assurance.ch/', '', 'direct'], ['pas une adresse', '', 'direct'],
+  ['https://www.google.com/', '?gclid=abc', 'payant'], ['', '?utm_source=google&utm_medium=cpc', 'payant'], ['https://www.bing.com/', '?msclkid=1', 'payant'], ['', '?gbraid=x', 'payant'],
+  ['', '?utm_source=google&utm_medium=organic', 'google'],
+];
+for (const [r, q, exp] of canaux) eq(`canal(${r || '∅'}, ${q || '∅'})`, M.canalAcquisition(r, q, H), exp);
+eq('attribution complète (IA par utm)', M.attributionDepuis('', '?utm_source=chatgpt.com&utm_medium=referral', '/assurance-maladie/', H),
+  { canal: 'ia', page_arrivee: '/assurance-maladie/', utm_source: 'chatgpt.com', utm_medium: 'referral', ai_source: 'chatgpt' });
+eq('attribution complète (google)', M.attributionDepuis('https://www.google.ch/', '', '/', H), { canal: 'google', page_arrivee: '/', referent_domaine: 'google.ch' });
+eq('attribution : chemin seul tronqué, jamais la requête', M.attributionDepuis('', '?q=secret', '/' + 'a'.repeat(300), H).page_arrivee.length, 100);
+eq('attribution : référent du site ignoré', M.attributionDepuis('https://guide-assurance.ch/x/', '', '/y/', H).referent_domaine, undefined);
+/* Lecture : clés connues seulement, rien d'autre ne passe (pas de valeur saisie possible). */
+eq('attributionLue filtre', M.attributionLue(JSON.stringify({ canal: 'google', page_arrivee: '/', nom: 'Jean', email: 'a@b.ch', utm_source: 'x', n: 3 })), { canal: 'google', page_arrivee: '/', utm_source: 'x' });
+eq('attributionLue vide', M.attributionLue(null), {});
+eq('attributionLue illisible', M.attributionLue('{'), {});
+eq('attributionLue sans canal', M.attributionLue(JSON.stringify({ page_arrivee: '/' })), {});
+/* demande_envoyee : mêmes propriétés que rappel_ouvert et assistant_vers_demande, propriétés de l'événement prioritaires. */
+{
+  const a = M.attributionLue(JSON.stringify(M.attributionDepuis('https://www.google.com/', '?utm_campaign=lamal', '/primes/', H)));
+  const env = M.proprietesConversion('demande_envoyee', { porte: 'lamal' }, a);
+  eq('demande_envoyee porte l\'attribution', env, { canal: 'google', referent_domaine: 'google.com', page_arrivee: '/primes/', utm_campaign: 'lamal', porte: 'lamal' });
+  const rap = M.proprietesConversion('rappel_ouvert', { emplacement: 'tete' }, a) as Record<string, unknown>;
+  const ast = M.proprietesConversion('assistant_vers_demande', { porte: 'lamal', formulaire: 'rappel' }, a) as Record<string, unknown>;
+  const cle = (o: Record<string, unknown>) => ['canal', 'page_arrivee', 'utm_campaign', 'referent_domaine'].map((k) => o[k]);
+  eq('mêmes propriétés d\'attribution sur les trois conversions', [cle(rap), cle(ast)], [cle(env as Record<string, unknown>), cle(env as Record<string, unknown>)]);
+  eq('propriété propre prioritaire', (M.proprietesConversion('demande_envoyee', { canal: 'x' }, a) as Record<string, unknown>).canal, 'x');
+  eq('événement hors conversion inchangé', M.proprietesConversion('faq_ouverte', { question_index: 1 }, a), { question_index: 1 });
+  eq('sans attribution (refus) : inchangé', M.proprietesConversion('demande_envoyee', { porte: 'lamal' }, {}), { porte: 'lamal' });
+}
+
 console.log(ko ? `${ko}/${n} échecs` : `mesure : ${n} vérifications OK`);
 if (ko) process.exit(1);

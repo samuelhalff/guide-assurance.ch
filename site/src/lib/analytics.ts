@@ -4,7 +4,7 @@
    balises Google ; il se charge d'office et respecte l'état de consentement. PostHog (EU) : persistant et avec
    enregistrement de session sauf refus ; en mémoire, sans enregistrement, après un refus.
    Jamais de valeur saisie, jamais de contenu de l'assistant, jamais d'enregistrement sur le formulaire de demande. */
-import { ACCORDE, REFUSE, persistantParDefaut, replayAutorise, scriptAmorce, type Choix } from "@/lib/mesure-regles";
+import { ACCORDE, REFUSE, attributionDepuis, attributionLue, persistantParDefaut, proprietesConversion, replayAutorise, scriptAmorce, type Choix } from "@/lib/mesure-regles";
 export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID ?? "";
 export const POSTHOG_TOKEN = process.env.NEXT_PUBLIC_POSTHOG_TOKEN ?? "";
 export const POSTHOG_HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://eu.i.posthog.com";
@@ -71,6 +71,10 @@ type PH = {
   set_config: (c: Record<string, unknown>) => void;
   startSessionRecording: (o?: boolean) => void;
   stopSessionRecording: () => void;
+  get_distinct_id: () => string;
+  get_session_id: () => string;
+  register_for_session: (p: Props) => void;
+  unregister_for_session: (k: string) => void;
 };
 type W = { dataLayer?: unknown[]; gtag?: (...a: unknown[]) => void };
 
@@ -82,8 +86,10 @@ let versDataLayer = true;
 /* Événements d'outil : chacun part aussi vers GA4 sous le nom standard select_content { content_type, content_id }. */
 const OUTILS: readonly Evenement[] = ["situation_choisie", "simulateur_utilise", "lettre_copiee", "lettre_imprimee", "comparateur_utilise", "impot3a_utilise", "comparateur_accueil", "comparateur_produit", "outil_partage", "ics_telecharge"];
 
-export function suivre(e: Evenement, p?: Props, avantDepart = false) {
+export function suivre(e: Evenement, p0?: Props, avantDepart = false) {
   if (!MESURE_ACTIVE || typeof window === "undefined") return;
+  const p = proprietesConversion(e, p0, lireAttribution());
+  if (avantDepart) memoriserIdentite();
   /* avantDepart : la page va changer, l'événement part tout de suite par sendBeacon. */
   if (ph) ph.capture(e, p, avantDepart ? { transport: "sendBeacon", send_instantly: true } : undefined);
   else if (POSTHOG_TOKEN) file.push([e, p]);
@@ -110,6 +116,63 @@ export function versGA(e: Evenement, p?: Props) {
    l'adresse d'arrivée de la session (memoriserUtm). Une visite directe ou un rechargement de la page de remerciement
    ne trouve pas de marque et n'envoie rien. */
 export const CLE_LEAD = "ga-demande-envoyee";
+/* Attribution au premier contact (décision du 23.11.2026) : le formulaire de demande mesure sans cookie, son
+   demande_envoyee arrivait donc dans une session anonyme neuve, comptée « directe ». À la première page de la session,
+   sauf refus, le canal d'arrivée, le domaine d'origine, les UTM, le chemin d'arrivée et la source IA sont gardés dans
+   sessionStorage (jamais un cookie, effacé à la fermeture de l'onglet, effacé par « Refuser ») ; les événements de
+   conversion (CONVERSIONS) les portent, vers PostHog et GA4. Aucune valeur saisie. */
+export const CLE_ATTRIBUTION = "ga-attribution";
+/* Identifiant PostHog du visiteur et de la session (déjà gardés par PostHog sur le site, sauf refus), recopiés dans
+   sessionStorage pour que le formulaire, en mémoire, rattache la demande à la même personne et à la même session. */
+export const CLE_IDENTITE = "ga-ph";
+export function memoriserAttribution() {
+  if (typeof window === "undefined" || lireChoix() === "non") return;
+  try {
+    if (sessionStorage.getItem(CLE_ATTRIBUTION)) return;
+    const a = attributionDepuis(document.referrer, window.location.search, window.location.pathname, window.location.hostname);
+    sessionStorage.setItem(CLE_ATTRIBUTION, JSON.stringify(a));
+  } catch {
+    /* stockage refusé : les événements partent sans attribution */
+  }
+}
+export function lireAttribution(): Record<string, string> {
+  if (typeof window === "undefined" || lireChoix() === "non") return {};
+  try {
+    return attributionLue(sessionStorage.getItem(CLE_ATTRIBUTION));
+  } catch {
+    return {};
+  }
+}
+function oublierAttribution() {
+  try {
+    sessionStorage.removeItem(CLE_ATTRIBUTION);
+    sessionStorage.removeItem(CLE_IDENTITE);
+    sessionStorage.removeItem(CLE_UTM);
+  } catch {
+    /* rien à effacer */
+  }
+}
+/* Seulement sur le site, en mode persistant (pas de refus) : le formulaire, lui, ne fait que relire. */
+function memoriserIdentite() {
+  if (!ph || !modeSite || persistanceAppliquee !== true || lireChoix() === "non") return;
+  try {
+    const d = ph.get_distinct_id();
+    const s = ph.get_session_id();
+    if (d) sessionStorage.setItem(CLE_IDENTITE, JSON.stringify({ d: String(d).slice(0, 200), s: String(s ?? "").slice(0, 200) }));
+  } catch {
+    /* stockage refusé */
+  }
+}
+function lireIdentite(): { distinctID?: string; sessionID?: string } {
+  if (lireChoix() === "non") return {};
+  try {
+    const v = JSON.parse(sessionStorage.getItem(CLE_IDENTITE) ?? "null") as { d?: unknown; s?: unknown } | null;
+    if (!v || typeof v.d !== "string" || !/^[\w-]{1,200}$/.test(v.d)) return {};
+    return { distinctID: v.d, ...(typeof v.s === "string" && /^[\w-]{1,200}$/.test(v.s) ? { sessionID: v.s } : {}) };
+  } catch {
+    return {};
+  }
+}
 export const CLE_UTM = "ga-utm";
 export function marquerLead(porte: string) {
   try {
@@ -148,7 +211,7 @@ export function mesurerLead(portesValides: readonly string[]) {
     return;
   }
   if (!porte || !portesValides.includes(porte)) return;
-  const p = { porte, ...lireUtm() };
+  const p = { ...lireUtm(), ...lireAttribution(), porte };
   const w = window as unknown as W;
   w.dataLayer?.push({ event: "generate_lead", ...p });
   w.gtag?.("event", "generate_lead", p);
@@ -158,6 +221,8 @@ export function mesurerLead(portesValides: readonly string[]) {
 export function demarrerMesureDemande() {
   versDataLayer = false;
   modeSite = false;
+  /* Arrivée directe sur le formulaire (lien externe) : l'attribution se prend ici ; sinon celle du site est gardée. */
+  memoriserAttribution();
   void demarrerPostHog(false);
 }
 
@@ -181,6 +246,10 @@ export function ecrireChoix(c: "oui" | "non") {
     /* navigation privée : le choix vaut pour la page */
   }
   (window as unknown as W).gtag?.("consent", "update", c === "oui" ? ACCORDE : REFUSE);
+  if (c === "non") {
+    oublierAttribution();
+    for (const k of ["canal", "ai_source"]) ph?.unregister_for_session(k);
+  } else memoriserAttribution();
 }
 
 /* Après l'affichage : fin du chargement de la page, puis un moment libre (3 s au plus). Les événements attendent dans `file`. */
@@ -213,6 +282,7 @@ async function appliquer(persistant: boolean) {
   const p = ph as PH;
   persistanceAppliquee = persistant;
   p.set_config({ persistence: persistant ? "localStorage+cookie" : "memory" });
+  if (persistant) memoriserIdentite();
   if (replayVoulu(persistant)) {
     await import("posthog-js/dist/lazy-recorder");
     p.startSessionRecording(true);
@@ -228,6 +298,7 @@ async function initPostHog(persistant: boolean) {
     ...(site && replayVoulu(persistant) ? [import("posthog-js/dist/lazy-recorder")] : []),
   ]);
   persistanceAppliquee = persistant;
+  const identite = site ? {} : lireIdentite();
   /* Configuration distante fournie d'avance : advanced_disable_flags coupe /flags et la configuration distante, sans
      laquelle l'enregistrement de session ne démarre jamais. Le site la déclare donc lui-même (aucune requête de plus,
      aucun script tiers). L'enregistrement reste coupé (disable_session_recording) tant qu'appliquer ne l'a pas lancé. */
@@ -272,8 +343,14 @@ async function initPostHog(persistant: boolean) {
     advanced_disable_flags: true,
     property_denylist: ["$ip"],
     respect_dnt: true,
+    /* Formulaire de demande : reprend l'identifiant et la session du site (CLE_IDENTITE), sauf refus. */
+    ...(!site && identite.distinctID ? { bootstrap: { distinctID: identite.distinctID, isIdentifiedID: false, ...(identite.sessionID ? { sessionID: identite.sessionID } : {}) } } : {}),
   });
   ph = posthog as unknown as PH;
+  if (site && persistant) memoriserIdentite();
+  /* Canal et source IA sur tous les événements de la session (pages vues comprises), pour les tunnels par canal. */
+  const a = lireAttribution();
+  if (a.canal) ph.register_for_session({ canal: a.canal, ...(a.ai_source ? { ai_source: a.ai_source } : {}) });
   if (replayVoulu(persistant)) ph.startSessionRecording(true);
   for (const [e, p] of file.splice(0)) ph.capture(e, p);
 }
