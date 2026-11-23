@@ -4,7 +4,8 @@ title: "Protection juridique : choix de l’avocat et délai de carence"
 description: "La protection juridique est facultative. Voici ce qu’elle couvre, le délai de carence, le libre choix de l’avocat (art. 167 OS) et la résiliation."
 h1: "Assurance protection juridique en Suisse romande : ce qui est couvert"
 rubrique: particuliers
-updated: 2026-11-22
+updated: 2026-11-23
+outils: [garanties-pj]
 landing:
   action: rappel
   sujet: autre

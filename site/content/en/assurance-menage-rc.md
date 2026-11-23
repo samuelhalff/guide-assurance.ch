@@ -5,7 +5,8 @@ title: "Household and liability insurance in Switzerland"
 description: "Household and liability insurance in French-speaking Switzerland: contents cover compulsory in Vaud, Fribourg and Jura; landlords often ask for liability."
 h1: "Household and liability insurance in French-speaking Switzerland"
 rubrique: particuliers
-updated: 2026-11-22
+updated: 2026-11-23
+outils: [somme-menage]
 landing:
   action: rappel
   sujet: autre

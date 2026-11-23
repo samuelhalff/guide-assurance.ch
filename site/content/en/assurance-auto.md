@@ -5,7 +5,7 @@ title: "Car insurance in Switzerland: liability, casco"
 description: "Car liability insurance of at least CHF 5 million is compulsory in Switzerland; casco cover is optional. Excesses, bonus, gross negligence, cancellation."
 h1: "Car insurance in Switzerland: compulsory liability and casco cover"
 rubrique: particuliers
-updated: 2026-11-22
+updated: 2026-11-23
 landing:
   action: rappel
   sujet: autre
@@ -84,6 +84,12 @@ The contract can be cancelled for the end of the 3rd year, then of each year, wi
 When the vehicle is sold or changes keeper, the rights and obligations of the contract pass to the new keeper. The old contract lapses if the new registration certificate is issued with another insurer, and the old insurer can cancel within 14 days of learning of the change (art. 67 LCR). Handing in the plates at the cantonal office suspends the insurance (art. 68 para. 3 LCR).
 
 If you are arriving in Switzerland with a vehicle, liability cover must be in place before you drive, and registration requires the insurance certificate. The [Moving to Switzerland](/en/moving-to-switzerland/) guide covers these steps.
+
+## How do you get car insurance quotes?
+
+Fill in your vehicle, the drivers and the cover you want in the form. An adviser from a partner broker gets back to you with quotes. The request is free and commits you to nothing.
+
+<div class="cta-demande cta-guide-auto"><a class="bouton" href="/en/request/auto/">Get car insurance quotes</a></div>
 
 ## What this page does not cover
 

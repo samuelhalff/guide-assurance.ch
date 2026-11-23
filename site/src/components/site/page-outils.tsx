@@ -19,6 +19,8 @@ import * as I from "@/lib/engines/impot3a";
 import * as C from "@/lib/engines/communes-3a";
 import * as H from "@/lib/engines/historique-3a";
 import EU from "@/data/primes-eu-fr-2027.json";
+import * as SM from "@/lib/engines/somme-menage";
+import { LU_LE as LU_LE_PJ, NB_CONTRATS as NB_CONTRATS_PJ } from "@/lib/garanties-pj";
 
 /* « Outils et chiffres » (/outils/, /en/tools/) : les outils et les pages de données en deux groupes, une phrase
    par page avec son chiffre clé daté, tiré des mêmes fichiers que les pages elles-mêmes. Menu principal. */
@@ -39,6 +41,7 @@ function chiffres() {
     ecoMax: Math.max(...tabs.map((t) => t.max.economie)),
     nbCommunes: tabs.reduce((n, t) => n + t.lignes.length, 0),
     plafond27: I.PLAFONDS["2027"].avecLPP,
+    menage: SM.estimer({ pieces: 3.5, personnes: 2, standard: "moyen" }),
   };
 }
 
@@ -100,6 +103,22 @@ function lignes(l: Locale) {
           texte: "Le calcul estime l’impôt fédéral, cantonal et communal qu’un versement 3a vous fait économiser, selon votre commune, votre revenu et votre famille.",
           cta: "Calculer",
         },
+        {
+          href: o.sommeMenage,
+          titre: "Somme d’assurance ménage",
+          chiffre: chf(K.menage.somme, l),
+          legende: `somme estimée pour un 3,5 pièces à deux, standard moyen, réserve de 10${N}% comprise (méthodes Baloise et Zurich)`,
+          texte: "Trois réponses suffisent pour estimer la valeur à neuf de votre mobilier, avec la règle de la sous-assurance appliquée à votre police actuelle.",
+          cta: "Calculer ma somme",
+        },
+        {
+          href: o.garantiesPj,
+          titre: `Protection juridique${N}: ce que couvrent les contrats`,
+          chiffre: `${NB_CONTRATS_PJ} contrats`,
+          legende: `garanties lues dans les conditions générales des assureurs le ${dateCh(LU_LE_PJ)}, par ordre alphabétique`,
+          texte: "Domaines couverts, plafond par cas, délai de carence et choix de l’avocat, contrat par contrat, sans prime ni classement.",
+          cta: "Voir les garanties",
+        },
       ]
     : [
         {
@@ -149,6 +168,22 @@ function lignes(l: Locale) {
           legende: "maximum 3a payment in 2027 with a pension fund (FSIO)",
           texte: "The calculator estimates the federal, cantonal and municipal tax a 3a payment saves you, based on your municipality, income and family.",
           cta: "Calculate",
+        },
+        {
+          href: o.sommeMenage,
+          titre: "Household contents sum insured",
+          chiffre: chf(K.menage.somme, l),
+          legende: "estimated sum for a 3.5-room flat shared by two, medium standard, 10% reserve included (Baloise and Zurich methods)",
+          texte: "Three answers are enough to estimate the replacement value of your belongings, with the underinsurance rule applied to your current policy.",
+          cta: "Work out my sum",
+        },
+        {
+          href: o.garantiesPj,
+          titre: "Legal protection: what the policies cover",
+          chiffre: `${NB_CONTRATS_PJ} policies`,
+          legende: `cover read in insurers’ general terms on ${dateCh(LU_LE_PJ)}, in alphabetical order`,
+          texte: "Areas covered, limit per case, waiting period and choice of lawyer, policy by policy, with no premiums or ranking.",
+          cta: "See the cover",
         },
       ];
 
@@ -243,7 +278,7 @@ function lignes(l: Locale) {
 const TXT = {
   fr: {
     titre: "Outils et chiffres : primes LAMal, 3e pilier, délais",
-    description: "Comparateur LAMal, lettre de résiliation, simulateur frontalier, taux et impôt 3a, chiffres clés 2027 et baromètre des primes : gratuits, datés et sourcés.",
+    description: "Comparateur LAMal, lettre de résiliation, simulateur frontalier, taux et impôt 3a, chiffres clés 2027 et baromètre des primes : gratuits, datés et sourcés.",
     h1: "Outils gratuits et chiffres de l’assurance en Suisse romande",
     intro: "Les outils calculent dans votre navigateur, sans inscription. Les pages de chiffres reprennent les données officielles avec leur date et leur source, sans nommer d’assureur ni de banque.",
     h2Outils: "Outils",
@@ -273,7 +308,7 @@ const TXT = {
       },
       {
         q: `Puis-je reprendre ces chiffres sur mon site${N}?`,
-        a: `Oui. Les fichiers CSV des pages de données sont publiés sous licence CC${N}BY${N}4.0, en citant la source. Pour afficher un chiffre tenu à jour, les widgets de la page «${N}Intégrer nos outils${N}» s’ajoutent par un simple code à copier.`,
+        a: `Oui. Les fichiers CSV des pages de données sont publiés sous licence CC${N}BY${N}4.0, en citant la source. Pour afficher un chiffre tenu à jour, les widgets de la page « ${N}Intégrer nos outils${N} » s’ajoutent par un simple code à copier.`,
       },
       {
         q: `Ces outils remplacent-ils un conseil${N}?`,

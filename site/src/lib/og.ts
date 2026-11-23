@@ -50,6 +50,10 @@ function pagesTsx(): Omit<Partage, "cle">[] {
     { path: OUTILS_EN.taux3a, locale: "en", rubrique: OUTIL_EN, titre: "Pillar 3a account interest rates", maj: DATE_PAGE.taux3a },
     { path: OUTILS.impot3a, locale: "fr", rubrique: OUTIL_FR, titre: "Économie d’impôt grâce au 3e pilier", maj: DATE_PAGE.impot3a },
     { path: OUTILS_EN.impot3a, locale: "en", rubrique: OUTIL_EN, titre: "Tax savings from pillar 3a", maj: DATE_PAGE.impot3a },
+    { path: OUTILS.sommeMenage, locale: "fr", rubrique: OUTIL_FR, titre: "Calculer la somme d’assurance de son ménage", maj: DATE_PAGE.sommeMenage },
+    { path: OUTILS_EN.sommeMenage, locale: "en", rubrique: OUTIL_EN, titre: "Work out the sum insured for your household contents", maj: DATE_PAGE.sommeMenage },
+    { path: OUTILS.garantiesPj, locale: "fr", rubrique: "Protection juridique", titre: "Protection juridique : ce que couvrent les contrats", maj: DATE_PAGE.garantiesPj },
+    { path: OUTILS_EN.garantiesPj, locale: "en", rubrique: "Legal protection", titre: "Legal protection insurance: what the policies cover", maj: DATE_PAGE.garantiesPj },
     ...pagesDonnees(),
   ];
 }

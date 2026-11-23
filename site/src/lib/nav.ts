@@ -36,6 +36,8 @@ export const OUTILS = {
   comparateur: "/assurance-maladie/comparateur/",
   taux3a: "/3e-pilier/taux-3a/",
   impot3a: "/3e-pilier/economie-impot/",
+  sommeMenage: "/assurance-menage-rc/calculateur-somme/",
+  garantiesPj: "/protection-juridique/comparatif-garanties/",
 } as const;
 
 /* Version anglaise (sous /en/). */
@@ -66,6 +68,8 @@ export const OUTILS_EN = {
   comparateur: "/en/health-insurance/compare/",
   taux3a: "/en/pillar-3a/interest-rates/",
   impot3a: "/en/pillar-3a/tax-savings/",
+  sommeMenage: "/en/household-and-liability-insurance/sum-insured-calculator/",
+  garantiesPj: "/en/legal-protection-insurance/cover-compared/",
 } as const;
 
 export const nav = (locale: "fr" | "en") => (locale === "en" ? NAV_EN : NAV);

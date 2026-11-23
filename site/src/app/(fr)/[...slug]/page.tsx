@@ -15,6 +15,8 @@ const OUTILS_LIES: Record<string, { href: string; titre: string; detail: string 
   "lettre-resiliation": { href: OUTILS.lettre, titre: "Lettre de résiliation", detail: "Date limite et lettre prête à imprimer" },
   "taux-3a": { href: OUTILS.taux3a, titre: "Comptes 3a : taux d’intérêt", detail: "17 banques, taux relevés sur leurs pages" },
   "economie-impot-3a": { href: OUTILS.impot3a, titre: "Économie d’impôt 3a", detail: "Suisse romande, barèmes 2026" },
+  "somme-menage": { href: OUTILS.sommeMenage, titre: "Calculer la somme d’assurance ménage", detail: "Trois questions, méthodes Baloise et Zurich" },
+  "garanties-pj": { href: OUTILS.garantiesPj, titre: "Protection juridique : ce que couvrent les contrats", detail: "12 contrats lus dans leurs CGA, sans classement" },
 };
 
 type Params = { slug: string[] };

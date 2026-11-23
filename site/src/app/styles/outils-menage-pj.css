@@ -1,0 +1,136 @@
+/* Calculateur de la somme d'assurance ménage et tableau des garanties de protection juridique. Mobile d'abord (390 px).
+   Reprend les composants communs des outils (.form, .pastille, .champ, table.assureurs, .cta-demande, .barre-demande). */
+@layer components {
+  /* ---------- Appels « Recevoir des offres » ---------- */
+  .cta-offres { margin: var(--s4) 0 0; }
+  .cta-offres.apres-tableau { margin: var(--s6) 0 var(--s7); }
+  .cta-guide-auto { margin: var(--s3) 0 var(--s5); }
+  .en-bref {
+    margin: var(--s5) 0 0; padding: var(--s3) var(--s4); max-width: 68ch;
+    background: var(--info-teinte); border: 1px solid var(--lac-trait); border-radius: var(--r); font-size: 16px;
+  }
+  .en-bref b { font-weight: 700; }
+  .en-bref ul { margin: var(--s2) 0 0; padding-left: 1.2em; list-style: disc; }
+  .en-bref li { margin-bottom: 2px; }
+
+  /* ---------- Calculateur ménage ---------- */
+  .outil-menage { margin-top: var(--s4); }
+  .outil-menage .form fieldset { margin-bottom: var(--s4); }
+  .outil-menage .form legend { font-size: 17px; margin-bottom: var(--s2); }
+  .outil-menage .pastilles-6 { grid-template-columns: repeat(6, 1fr); }
+  .outil-menage .pastilles-3 { grid-template-columns: repeat(3, 1fr); }
+  .outil-menage .pastille small { display: block; font: 13px var(--narrow); color: var(--encre-2); font-weight: 400; }
+  .outil-menage .pastille span { flex-direction: column; line-height: 1.15; }
+  .resultat-menage { display: grid; gap: var(--s3); align-content: start; }
+  .somme-menage {
+    background: var(--papier); border: 1.5px solid var(--encre); border-radius: var(--r); padding: var(--s4);
+  }
+  .page-outil .somme-menage h2 { font: 700 16px var(--narrow); color: var(--encre-2); margin: 0; letter-spacing: 0; }
+  .somme-menage .montant { font: 800 40px/1.1 var(--sans); letter-spacing: -.02em; margin: 4px 0 0; font-variant-numeric: tabular-nums; }
+  .somme-menage .montant small { font: 600 18px var(--narrow); color: var(--encre-2); letter-spacing: 0; }
+  .somme-menage .base { margin: 2px 0 0; font: 15px var(--narrow); color: var(--encre-2); }
+  .page-outil .somme-menage .cta-offres { margin: var(--s4) 0 0; }
+  .somme-menage .cta-offres .bouton { width: 100%; justify-content: center; }
+  .valeur-a-part { margin: 0; font-size: 16px; padding: var(--s3) var(--s4); border: 1px solid var(--filet); border-radius: var(--r); background: var(--papier); }
+
+  details.affiner { background: var(--papier); border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s3) var(--s4); }
+  details.affiner > summary { cursor: pointer; font: 700 17px var(--sans); min-height: 44px; display: flex; align-items: center; color: var(--lac-encre); }
+  details.affiner .note-outil { margin: var(--s2) 0 var(--s3); }
+  .categories { display: grid; gap: var(--s2) var(--s3); grid-template-columns: 1fr 1fr; }
+  .categories .champ { margin: 0; }
+  .categories label { font-size: 15px; }
+  .categories .saisie { font-variant-numeric: tabular-nums; }
+  .categories .champ.large { grid-column: 1 / -1; }
+  .total-affine { margin: var(--s3) 0 0; font-size: 16px; }
+  .total-affine b { font-variant-numeric: tabular-nums; }
+
+  .sous-assurance { margin: var(--s6) 0 0; }
+  .sous-assurance h2 { margin-bottom: var(--s3); }
+  .sous-assurance > p { max-width: 68ch; margin: 0 0 var(--s3); }
+  .verif-police { background: var(--papier); border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s4); max-width: 44rem; }
+  .verif-police .ligne .champ { margin: 0; }
+  .verif-police .reponse { margin: var(--s3) 0 0; font-size: 17px; }
+  .verif-police .reponse b { font-variant-numeric: tabular-nums; }
+  .jauge { display: block; height: 8px; border-radius: 4px; background: var(--filet); margin: var(--s2) 0 0; overflow: hidden; }
+  .jauge > span { display: block; height: 100%; background: var(--lac-encre); border-radius: 4px; transition: width .3s cubic-bezier(.16, 1, .3, 1); }
+  .reperes-menage { margin: var(--s6) 0 0; }
+  .reperes-menage h2 { margin-bottom: var(--s3); }
+  .reperes-menage > p { max-width: 68ch; margin: 0 0 var(--s3); }
+  .reperes-menage td, .reperes-menage th { vertical-align: top; }
+  /* .reperes-statiques th est en nowrap : ici les intitulés de ligne sont longs, ils passent à la ligne. */
+  .reperes-menage th, .garanties-pj thead th, table.table-pj tbody th { white-space: normal; }
+  .reperes-menage td.src { font: 14px var(--narrow); color: var(--encre-2); text-align: left; }
+
+  /* ---------- Garanties protection juridique ---------- */
+  .garanties-pj { margin: var(--s5) 0 0; }
+  .filtre-domaine { border: 0; padding: 0; margin: 0 0 var(--s4); min-width: 0; }
+  .filtre-domaine legend { font: 700 17px var(--sans); margin: 0 0 var(--s2); padding: 0; }
+  .puces-domaine { display: flex; flex-wrap: wrap; gap: var(--s2); margin: 0 0 var(--s2); }
+  .puces-domaine .pastille span { min-height: 40px; padding: 6px 12px; font-size: 15px; font-weight: 600; }
+  /* Mobile : une seule rangée qui défile, pour que les contrats restent près du haut. */
+  @media (max-width: 699px) {
+    .puces-domaine { flex-wrap: nowrap; overflow-x: auto; margin-inline: calc(-1 * var(--s4)); padding: 2px var(--s4) var(--s2); scrollbar-width: thin; }
+    .puces-domaine .pastille { flex: 0 0 auto; }
+    .puces-domaine .pastille span { white-space: nowrap; }
+  }
+  .statut { display: inline-flex; align-items: center; gap: 5px; font: 15px var(--narrow); color: var(--encre); flex-wrap: wrap; }
+  .statut small { flex-basis: 100%; font-size: 13px; color: var(--encre-2); }
+  .ic-statut { flex: 0 0 16px; }
+  .ic-oui { color: var(--lac-encre); }
+  .ic-option, .ic-conseil { color: var(--ocre); }
+  .ic-non, .ic-nd { color: var(--encre-2); }
+  .statut-non > span, .statut-nd > span { color: var(--encre-2); }
+
+  .cartes-pj { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s3); }
+  .carte-pj { background: var(--papier); border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s4); }
+  .page-outil .carte-pj h3 { font: 800 20px/1.15 var(--sans); margin: 0; letter-spacing: -.01em; }
+  .carte-pj h3 span { display: block; font: 600 16px var(--narrow); color: var(--encre-2); margin-top: 2px; letter-spacing: 0; }
+  .carte-pj .couverture { margin: var(--s1) 0 var(--s3); font: 14px var(--narrow); color: var(--encre-2); }
+  .carte-pj .en-evidence { display: grid; gap: 2px; margin: 0 0 var(--s3); padding: var(--s2) var(--s3); background: var(--info-teinte); border-radius: var(--r); font-size: 15px; }
+  .carte-pj dl { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 6px var(--s3); margin: 0; font-size: 15px; }
+  .carte-pj dt { font: 14px var(--narrow); color: var(--encre-2); }
+  .carte-pj dd { margin: 0; }
+  .carte-pj details { margin-top: var(--s3); border-top: 1px solid var(--filet); padding-top: var(--s2); }
+  .carte-pj summary { cursor: pointer; font: 600 16px var(--narrow); color: var(--lac-encre); min-height: 40px; display: flex; align-items: center; }
+  .liste-domaines { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+  .liste-domaines li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s2); font-size: 15px; padding: 3px 0; }
+  .liste-domaines li.actif { background: var(--info-teinte); border-radius: 4px; padding-inline: 6px; }
+  .exclusions { margin: 0; padding-left: 1.2em; list-style: disc; font-size: 15px; }
+  .exclusions li { margin-bottom: 3px; }
+  .carte-pj .doc { margin: var(--s3) 0 0; font: 14px var(--narrow); color: var(--encre-2); overflow-wrap: anywhere; }
+
+  .tables-pj { display: none; }
+  .page-outil .tables-pj h3 { font-size: 21px; margin: var(--s6) 0 var(--s3); }
+  .page-outil .tables-pj h3:first-child { margin-top: var(--s2); }
+  .defile { overflow-x: auto; }
+  table.table-pj th, table.table-pj td, table.table-domaines th, table.table-domaines td { text-align: left; vertical-align: top; font-size: 15px; }
+  table.table-pj tbody th { min-width: 12em; font-weight: 400; }
+  table.table-pj tbody th b, table.table-domaines thead th b { display: block; font-weight: 700; }
+  table.table-pj .produit, table.table-pj .type, table.table-domaines thead th span { display: block; font: 14px var(--narrow); color: var(--encre-2); }
+  table.table-pj .doc { display: inline-block; margin-top: 4px; font: 13px var(--narrow); color: var(--lac-encre); }
+  table.table-pj td { min-width: 8em; }
+  table.table-domaines thead th { min-width: 7.5em; vertical-align: bottom; }
+  table.table-domaines tbody th { font: 600 15px var(--narrow); white-space: nowrap; position: sticky; left: 0; background: var(--papier); }
+  table.table-domaines tr.actif th, table.table-domaines tr.actif td { background: var(--info-teinte); }
+  .exclusions-pj { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4) var(--s6); margin: 0; }
+  .exclusions-pj dt { font-weight: 700; }
+  .exclusions-pj dd { margin: var(--s1) 0 0; }
+  .exclusions-pj ul { margin: 0 0 var(--s1); padding-left: 1.2em; list-style: disc; font-size: 15px; }
+  .sources-pj { margin: var(--s6) 0 0; }
+  .sources-pj h2 { margin-bottom: var(--s3); }
+  .sources-pj ol { margin: 0; padding-left: 1.3em; list-style: decimal; font: 15px/1.45 var(--narrow); max-width: 80ch; }
+  .sources-pj li { margin-bottom: 6px; overflow-wrap: anywhere; }
+
+  @media (min-width: 720px) {
+    .categories { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (min-width: 1000px) {
+    .outil-menage { grid-template-columns: minmax(320px, .9fr) minmax(0, 1.1fr); align-items: start; }
+    .outil-menage .form { position: sticky; top: calc(57px + var(--s4)); padding: var(--s5); }
+    .cartes-pj { display: none; }
+    .tables-pj { display: block; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .jauge > span { transition: none; }
+  }
+}

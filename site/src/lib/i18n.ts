@@ -68,6 +68,8 @@ export const PAGES_FR_EN: Record<string, string> = {
   "/assurance-maladie/comparateur/": "/en/health-insurance/compare/",
   "/3e-pilier/taux-3a/": "/en/pillar-3a/interest-rates/",
   "/3e-pilier/economie-impot/": "/en/pillar-3a/tax-savings/",
+  "/assurance-menage-rc/calculateur-somme/": "/en/household-and-liability-insurance/sum-insured-calculator/",
+  "/protection-juridique/comparatif-garanties/": "/en/legal-protection-insurance/cover-compared/",
   /* Pages de données (rapport 08, idées 2, 3, 6, 9) : chemins aussi dans lib/nav.ts (PAGES_DONNEES, SLUG_CANTON_3A). */
   "/assurance-maladie/primes/regions/": "/en/health-insurance/premiums/regions/",
   "/chiffres-cles-2027/": "/en/key-figures-2027/",

@@ -13,6 +13,8 @@ import { dateLongue, type Locale } from "@/lib/i18n";
 import IMPOTS from "@/data/impots-2026.json";
 import EU from "@/data/primes-eu-fr-2027.json";
 import { lignesLlms, textesLlms, tousLesArticles } from "@/lib/actualites";
+import { CONTRATS as CONTRATS_PJ, LU_LE as LU_LE_PJ, garantiesPjMarkdown } from "@/lib/garanties-pj";
+import * as SM from "@/lib/engines/somme-menage";
 
 const N = " ";
 const NB_BANQUES = COMPTES_3A.length;
@@ -53,6 +55,8 @@ function outilsFr(): string[] {
     lienFr("Économie d'impôt 3a en Suisse romande", OUTILS.impot3a, `impôt fédéral, cantonal et communal économisé par un versement 3a pour ${cantonsImpot("fr")} (toutes les communes), et impôt sur un retrait en capital, barèmes ${IMPOTS.annee} vérifiés le ${dateCh(DATE_IMPOTS)} sur les calculettes officielles, calcul dans le navigateur.`),
     lienFr(`Simulateur frontalier${N}: LAMal ou assurance maladie française${N}?`, OUTILS.simulateur, `compare la cotisation Urssaf et les primes LAMal 2027 des ${NB_ASSUREURS_EU} assureurs pour un foyer qui vit en France et travaille à Genève ou dans le canton de Vaud.`),
     lienFr("Lettre de résiliation d'assurance maladie", OUTILS.lettre, "calcule la date limite de réception (art. 7 LAMal, art. 35a LCA) et rédige la lettre de résiliation de l'assurance de base ou d'une complémentaire."),
+    lienFr("Calculateur de la somme d'assurance ménage", OUTILS.sommeMenage, `valeur à neuf du mobilier selon les pièces, les personnes et le standard d'équipement, avec la grille Baloise (formulaire 140.1173, 2023) et la formule de la feuille d'inventaire Zurich (05.2024), réserve de 10${N}%${N}; pour un 3,5 pièces à deux, standard moyen${N}: ${SM.estimer({ pieces: 3.5, personnes: 2, standard: "moyen" }).somme} CHF. Règle proportionnelle de l'art. 51a LCA. Calcul dans le navigateur.`),
+    lienFr(`Protection juridique${N}: ce que couvrent les contrats`, OUTILS.garantiesPj, `${CONTRATS_PJ.length} contrats de protection juridique privée et circulation, lus dans leurs CGA le ${dateCh(LU_LE_PJ)}${N}: domaines couverts, plafond par cas, délai de carence, franchise, libre choix de l'avocat (art. 167 OS). Ordre alphabétique, sans prime ni classement.`),
     lienFr("Rappels d'échéance dans l'agenda", ROUTES_IDEES.rappels.fr, `fichier d'agenda .ics créé dans le navigateur, sans e-mail${N}: 30 novembre (résiliation LAMal, art. 7 LAMal), 31 décembre (versement 3a), 31 mars (franchise 300) et échéances des contrats saisis, avec une alerte avant chacune.`),
     lienFr(`Baromètre des primes maladie ${ANNEE_BAROMETRE}`, ROUTES_IDEES.barometre.fr, `prime moyenne ${ANNEE_BAROMETRE} et hausse par canton romand (OFSP), écart entre offres par région de prime et profil type, sans assureur nommé${N}; une page par canton, mise à jour le ${dateCh(DATE_BAROMETRE)}.`),
     lienFr("Widgets à intégrer", ROUTES_IDEES.integrer.fr, `encadrés sans cookie pour d'autres sites${N}: compte à rebours de résiliation LAMal, prime médiane d'une région, taux 3a.`),
@@ -67,6 +71,8 @@ function outilsEn(): string[] {
     lienEn("Pillar 3a tax savings in French-speaking Switzerland", OUTILS_EN.impot3a, `federal, cantonal and municipal tax saved by a 3a payment in ${cantonsImpot("en")} (every municipality), plus tax on a capital withdrawal; ${IMPOTS.annee} scales checked on ${dateCh(DATE_IMPOTS)} against the official calculators; runs in the browser.`),
     lienEn("Cross-border calculator: LAMal or French health insurance?", OUTILS_EN.simulateur, `compares the Urssaf contribution with the 2027 LAMal premiums of the ${NB_ASSUREURS_EU} insurers for a household living in France and working in Geneva or Vaud.`),
     lienEn("Health insurance cancellation letter", OUTILS_EN.lettre, "calculates the date by which the insurer must receive the letter (art. 7 LAMal, art. 35a LCA) and drafts the letter in French for basic or supplementary insurance."),
+    lienEn("Household contents sum insured calculator", OUTILS_EN.sommeMenage, `replacement value of household contents from rooms, people and furnishing standard, using the Baloise grid (form 140.1173, 2023) and the Zurich inventory-sheet formula (05.2024), plus a 10% reserve; for a 3.5-room flat shared by two, medium standard: CHF ${SM.estimer({ pieces: 3.5, personnes: 2, standard: "moyen" }).somme}. Proportional rule of art. 51a LCA. Runs in the browser.`),
+    lienEn("Legal protection insurance: what the policies cover", OUTILS_EN.garantiesPj, `${CONTRATS_PJ.length} private and traffic legal protection policies, read in their general terms on ${dateCh(LU_LE_PJ)}: areas covered, limit per case, waiting period, excess, free choice of lawyer (art. 167 OS). Alphabetical order, no premiums or ranking.`),
     lienEn("Renewal reminders in your calendar", ROUTES_IDEES.rappels.en, "an .ics calendar file created in the browser, no e-mail: 30 November (LAMal cancellation, art. 7 LAMal), 31 December (pillar 3a payment), 31 March (CHF 300 deductible) and the renewal dates of contracts entered, with alerts before each."),
     lienEn(`${ANNEE_BAROMETRE} health premium barometer`, ROUTES_IDEES.barometre.en, `${ANNEE_BAROMETRE} average premium and increase by French-speaking canton (FOPH), gap between offers by premium region and standard profile, no insurer named; one page per canton, updated on ${dateCh(DATE_BAROMETRE)}.`),
     lienEn("Embeddable widgets", ROUTES_IDEES.integrer.en, "cookie-free boxes for other sites: LAMal cancellation countdown, median premium of a region, pillar 3a rates."),
@@ -217,6 +223,9 @@ export function llmsFullTxt(): string {
     "---",
     "",
     barometreMarkdown("fr", (c) => abs(cheminBarometre(c, "fr"))),
+    "---",
+    "",
+    garantiesPjMarkdown("fr", abs(OUTILS.garantiesPj)),
     ...pages("fr").flatMap((p) => ["---", "", pageComplete(p)]),
     ...textesLlms(tousLesArticles("fr"), abs).flatMap((t) => ["---", "", t]),
     "---",
@@ -225,6 +234,9 @@ export function llmsFullTxt(): string {
     "---",
     "",
     barometreMarkdown("en", (c) => abs(cheminBarometre(c, "en"))),
+    "---",
+    "",
+    garantiesPjMarkdown("en", abs(OUTILS_EN.garantiesPj)),
     ...pages("en").flatMap((p) => ["---", "", pageComplete(p)]),
     ...textesLlms(tousLesArticles("en"), abs).flatMap((t) => ["---", "", t]),
   ];

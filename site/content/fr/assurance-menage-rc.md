@@ -4,7 +4,8 @@ title: "Assurance ménage et RC privée en Suisse romande"
 description: "Assurance ménage et RC privée en Suisse romande : mobilier obligatoire à Vaud, Fribourg et au Jura, RC souvent exigée par le bailleur, options à vérifier."
 h1: "Assurance ménage et RC privée en Suisse romande : obligations et options"
 rubrique: particuliers
-updated: 2026-11-22
+updated: 2026-11-23
+outils: [somme-menage]
 landing:
   action: rappel
   sujet: autre

@@ -4,7 +4,7 @@ title: "Assurance auto en Suisse : RC obligatoire et casco"
 description: "Assurance auto en Suisse : RC obligatoire d’au moins 5 millions CHF (art. 3 OAV), casco partielle ou complète, franchises, bonus, faute grave, résiliation."
 h1: "Assurance auto en Suisse romande : RC obligatoire et cascos"
 rubrique: particuliers
-updated: 2026-11-22
+updated: 2026-11-23
 landing:
   action: rappel
   sujet: autre
@@ -83,6 +83,12 @@ Le contrat se résilie pour la fin de la 3e année, puis de chaque année, avec 
 En cas de vente ou de changement de détenteur, les droits et obligations du contrat passent au nouveau détenteur. L’ancien contrat tombe si le nouveau permis de circulation est établi avec une autre assurance, et l’ancien assureur peut résilier dans les 14 jours après avoir appris le changement (art. 67 LCR). Le dépôt des plaques auprès de l’office cantonal suspend l’assurance (art. 68, al. 3, LCR).
 
 Si vous arrivez en Suisse avec un véhicule, la RC doit être conclue avant de circuler, et l’immatriculation exige l’attestation d’assurance. Le guide [Nouveaux arrivants](/nouveaux-arrivants/) reprend ces étapes.
+
+## Comment recevoir des offres d’assurance auto ?
+
+Indiquez votre véhicule, les conducteurs et la couverture voulue dans le formulaire. Un conseiller d’un courtier partenaire vous recontacte avec des offres. La demande est gratuite et ne vous engage à rien.
+
+<div class="cta-demande cta-guide-auto"><a class="bouton" href="/demande/auto/">Recevoir des offres auto</a></div>
 
 ## Ce que cette page ne couvre pas
 

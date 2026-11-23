@@ -5,7 +5,8 @@ title: "Legal protection insurance in Switzerland"
 description: "Legal protection insurance is optional in Switzerland. This page covers its scope, the waiting period, free choice of lawyer and cancellation rules."
 h1: "Legal protection insurance in Switzerland: what is covered"
 rubrique: particuliers
-updated: 2026-11-22
+updated: 2026-11-23
+outils: [garanties-pj]
 landing:
   action: rappel
   sujet: autre

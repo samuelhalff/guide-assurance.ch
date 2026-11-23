@@ -24,7 +24,9 @@ export const DATE_TEXTE = {
   lettre: "2026-11-22",
   taux3a: "2026-11-22",
   impot3a: "2026-11-23", // canton du Jura ajouté
-  outils: "2026-11-23", // page « Outils et chiffres » créée
+  outils: "2026-11-23", // page « Outils et chiffres » créée ; calculateur ménage et garanties PJ ajoutés
+  sommeMenage: "2026-11-23", // calculateur de la somme d'assurance ménage créé
+  garantiesPj: "2026-11-23", // tableau des garanties de protection juridique créé (CGA lues le 23.11.2026)
   guides: "2026-11-23", // questions fréquentes ajoutées ; la liste suit aussi la date des guides (lib/content/pages.ts)
 } as const;
 
@@ -35,6 +37,8 @@ export const DATE_PAGE = {
   impot3a: maxIso(DATE_TEXTE.impot3a, DATE_IMPOTS),
   simulateur: DATE_TEXTE.simulateur,
   lettre: DATE_TEXTE.lettre,
+  sommeMenage: DATE_TEXTE.sommeMenage,
+  garantiesPj: DATE_TEXTE.garantiesPj,
   /* L'accueil affiche les primes moyennes et les taux 3a. */
   accueil: maxIso(DATE_TEXTE.accueil, DATE_PRIMES, DATE_TAUX_3A),
 } as const;

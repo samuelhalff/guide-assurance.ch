@@ -28,6 +28,11 @@ export type Evenement =
   /* Calculateur « Économie d'impôt 3a » : une fois, au premier résultat, sans aucune valeur saisie. */
   | "impot3a_utilise"
   /* Formulaire de l'accueil (NPA + année) envoyé vers le comparateur, sans aucune valeur saisie. */
+  /* Calculateur de la somme d'assurance ménage : une fois, au premier changement de réponse ; « Affiner » ouvert. Aucune valeur saisie. */
+  | "somme_menage_utilise"
+  | "somme_menage_affiner"
+  /* Tableau des garanties de protection juridique : un domaine choisi dans le filtre (une fois par page), sans autre donnée. */
+  | "garanties_pj_filtre"
   | "comparateur_accueil"
   /* Même formulaire en tête d'une page produit (assurance maladie, primes, nouveaux arrivants), sans aucune valeur saisie. */
   | "comparateur_produit"
@@ -84,7 +89,7 @@ const file: [Evenement, Props | undefined][] = [];
 let versDataLayer = true;
 
 /* Événements d'outil : chacun part aussi vers GA4 sous le nom standard select_content { content_type, content_id }. */
-const OUTILS: readonly Evenement[] = ["situation_choisie", "simulateur_utilise", "lettre_copiee", "lettre_imprimee", "comparateur_utilise", "impot3a_utilise", "comparateur_accueil", "comparateur_produit", "outil_partage", "ics_telecharge"];
+const OUTILS: readonly Evenement[] = ["situation_choisie", "simulateur_utilise", "lettre_copiee", "lettre_imprimee", "comparateur_utilise", "impot3a_utilise", "somme_menage_utilise", "somme_menage_affiner", "garanties_pj_filtre", "comparateur_accueil", "comparateur_produit", "outil_partage", "ics_telecharge"];
 
 export function suivre(e: Evenement, p0?: Props, avantDepart = false) {
   if (!MESURE_ACTIVE || typeof window === "undefined") return;

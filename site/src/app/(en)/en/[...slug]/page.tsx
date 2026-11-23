@@ -16,6 +16,8 @@ const OUTILS_LIES: Record<string, { href: string; titre: string; detail: string 
   "lettre-resiliation": { href: OUTILS_EN.lettre, titre: "Cancellation letter", detail: "Deadline and a letter ready to print" },
   "taux-3a": { href: OUTILS_EN.taux3a, titre: "Pillar 3a accounts: interest rates", detail: "17 banks, rates read on their own pages" },
   "economie-impot-3a": { href: OUTILS_EN.impot3a, titre: "Pillar 3a tax savings", detail: "French-speaking Switzerland, 2026 tax scales" },
+  "somme-menage": { href: OUTILS_EN.sommeMenage, titre: "Work out your household sum insured", detail: "Three questions, Baloise and Zurich methods" },
+  "garanties-pj": { href: OUTILS_EN.garantiesPj, titre: "Legal protection: what the policies cover", detail: "12 policies read in their terms, no ranking" },
 };
 
 type Params = { slug: string[] };

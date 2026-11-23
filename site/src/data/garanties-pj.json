@@ -1,0 +1,1730 @@
+{
+ "lu_le": "2026-11-23",
+ "source": "courtier/research/pj-cga/garanties.json (CGA téléchargées et lues le 23.11.2026)",
+ "contrats": [
+  {
+   "id": "axa-particuliers",
+   "assureur": "AXA",
+   "porteur": "AXA-ARAG Protection juridique SA",
+   "produit": "Protection juridique pour particuliers",
+   "couverture": "prive-circulation",
+   "variante": {
+    "fr": "modules B à H, à choisir",
+    "en": "modules B to H, chosen individually"
+   },
+   "doc": {
+    "titre": "CGA Assurance de protection juridique pour particuliers",
+    "version": "édition 2021 (16541FR)",
+    "url": "https://www.axa.ch/servlets/external/docstoredocument?accesscode=agu1b",
+    "langue": "fr"
+   },
+   "domaines": {
+    "travail": {
+     "s": "option",
+     "note": {
+      "fr": "module Travail (E)",
+      "en": "Employment module (E)"
+     }
+    },
+    "bail": {
+     "s": "option",
+     "note": {
+      "fr": "module Domicile (B)",
+      "en": "Home module (B)"
+     }
+    },
+    "contrats": {
+     "s": "option",
+     "note": {
+      "fr": "module Domicile (B), contrats d’usage privé",
+      "en": "Home module (B), private-use contracts"
+     }
+    },
+    "assurances": {
+     "s": "option",
+     "note": {
+      "fr": "réparti entre les modules B, C et D",
+      "en": "split across modules B, C and D"
+     }
+    },
+    "patients": {
+     "s": "option",
+     "note": {
+      "fr": "module Santé (D) ; à l’étranger, urgences seulement",
+      "en": "Health module (D); abroad, emergencies only"
+     }
+    },
+    "dommages": {
+     "s": "option",
+     "note": {
+      "fr": "pour réclamer, pas pour se défendre",
+      "en": "to claim, not to defend"
+     }
+    },
+    "penal": {
+     "s": "option",
+     "note": {
+      "fr": "infractions par négligence ; intentionnelles remboursées après acquittement",
+      "en": "negligence offences; intentional ones repaid after acquittal"
+     }
+    },
+    "circulation": {
+     "s": "option",
+     "note": {
+      "fr": "module Circulation et voyages (C)",
+      "en": "Traffic and travel module (C)"
+     }
+    },
+    "voyage": {
+     "s": "option",
+     "note": {
+      "fr": "module Circulation et voyages (C)",
+      "en": "Traffic and travel module (C)"
+     }
+    },
+    "internet": {
+     "s": "option",
+     "note": {
+      "fr": "module Domicile (B) : fraude à la carte, cyberharcèlement",
+      "en": "Home module (B): card fraud, cyberbullying"
+     }
+    },
+    "propriete": {
+     "s": "option",
+     "note": {
+      "fr": "module Domicile (B) : voisinage, droits réels, construction jusqu’à 200 000 CHF",
+      "en": "Home module (B): neighbours, property rights, building up to CHF 200,000"
+     }
+    },
+    "famille": {
+     "s": "option",
+     "note": {
+      "fr": "module Famille (F) : médiation, conseil jusqu’à 1 000 CHF, succession 3 000 CHF",
+      "en": "Family module (F): mediation, advice up to CHF 1,000, inheritance CHF 3,000"
+     }
+    },
+    "fiscal": {
+     "s": "option",
+     "note": {
+      "fr": "module Impôts (G)",
+      "en": "Tax module (G)"
+     }
+    },
+    "administratif": {
+     "s": "option",
+     "note": {
+      "fr": "autorités désignées seulement (constructions, animaux, école, protection de l’adulte)",
+      "en": "named authorities only (building, animals, school, adult protection)"
+     }
+    }
+   },
+   "plafond": {
+    "suisse": {
+     "fr": "Fixé dans la police",
+     "en": "Set in the policy"
+    },
+    "europe": {
+     "fr": "Fixé dans la police",
+     "en": "Set in the policy"
+    },
+    "monde": {
+     "fr": "Fixé dans la police",
+     "en": "Set in the policy"
+    }
+   },
+   "carence": {
+    "fr": "Aucun délai général ; certains modules exigent d’être assuré à une date donnée",
+    "en": "No general waiting period; some modules require cover at a given date"
+   },
+   "franchise": {
+    "fr": "Choisie dans la police ; aucune pour un simple conseil",
+    "en": "Chosen in the policy; none for advice only"
+   },
+   "valeurMin": {
+    "fr": "Non précisée",
+    "en": "Not stated"
+   },
+   "libreChoix": {
+    "fr": "En procédure judiciaire ou administrative, et en cas de conflit d’intérêts (A5)",
+    "en": "In court or administrative proceedings, and in a conflict of interest (A5)"
+   },
+   "exclusions": {
+    "fr": [
+     "Défense contre une demande de dommages-intérêts (A7 c)",
+     "Crimes, dont les délits de chauffard (A7 e)",
+     "Activité indépendante au-delà de 36 000 CHF de chiffre d’affaires (A7 g)",
+     "Titres, cryptomonnaies et placements (A7 h)",
+     "Litiges entre personnes assurées par la même police (A7 j)"
+    ],
+    "en": [
+     "Defence against a damages claim (A7 c)",
+     "Felonies, including reckless-driving offences (A7 e)",
+     "Self-employment above CHF 36,000 turnover (A7 g)",
+     "Securities, crypto and investments (A7 h)",
+     "Disputes between people insured under the same policy (A7 j)"
+    ]
+   }
+  },
+  {
+   "id": "cap-privalex",
+   "assureur": "CAP",
+   "porteur": "CAP Compagnie d’Assurance de Protection Juridique SA",
+   "produit": "privaLex, protection juridique privée",
+   "couverture": "prive",
+   "doc": {
+    "titre": "CG privaLex Protection juridique pour particuliers",
+    "version": "édition 09.2023 (ZRRA206)",
+    "url": "https://www.acs.ch/media/docs/vorteile/Conditions-g-n-rales-CG-privaLex-_09.2023.pdf",
+    "langue": "fr"
+   },
+   "domaines": {
+    "travail": {
+     "s": "oui",
+     "note": {
+      "fr": "jusqu’à 300 000 CHF de valeur litigieuse",
+      "en": "up to CHF 300,000 in dispute"
+     }
+    },
+    "bail": {
+     "s": "oui"
+    },
+    "contrats": {
+     "s": "oui"
+    },
+    "assurances": {
+     "s": "oui"
+    },
+    "patients": {
+     "s": "oui"
+    },
+    "dommages": {
+     "s": "oui",
+     "note": {
+      "fr": "pour réclamer, pas pour se défendre",
+      "en": "to claim, not to defend"
+     }
+    },
+    "penal": {
+     "s": "oui",
+     "note": {
+      "fr": "négligence ; intentionnel seulement si acquitté",
+      "en": "negligence; intentional only if acquitted"
+     }
+    },
+    "circulation": {
+     "s": "option",
+     "note": {
+      "fr": "module circulation ; sans lui, comme piéton, cycliste ou passager",
+      "en": "traffic module; without it, as pedestrian, cyclist or passenger"
+     }
+    },
+    "voyage": {
+     "s": "nd"
+    },
+    "internet": {
+     "s": "option",
+     "note": {
+      "fr": "complément Multi Risk, 15 000 CHF",
+      "en": "Multi Risk add-on, CHF 15,000"
+     }
+    },
+    "propriete": {
+     "s": "oui",
+     "note": {
+      "fr": "biens mobiliers ; droit foncier : conseil, 1 500 CHF",
+      "en": "movables; land law: advice, CHF 1,500"
+     }
+    },
+    "famille": {
+     "s": "conseil",
+     "note": {
+      "fr": "1 500 CHF ; divorce : médiation 15 000 CHF après un an",
+      "en": "CHF 1,500; divorce: mediation CHF 15,000 after one year"
+     }
+    },
+    "fiscal": {
+     "s": "conseil",
+     "note": {
+      "fr": "1 500 CHF ; litiges dans le complément Multi Risk",
+      "en": "CHF 1,500; disputes in the Multi Risk add-on"
+     }
+    },
+    "administratif": {
+     "s": "oui",
+     "note": {
+      "fr": "service public, aide aux victimes, sanctions ; le reste en complément",
+      "en": "public service, victim support, sanctions; the rest as add-on"
+     }
+    }
+   },
+   "plafond": {
+    "suisse": {
+     "fr": "750 000 CHF",
+     "en": "CHF 750,000"
+    },
+    "europe": {
+     "fr": "750 000 CHF",
+     "en": "CHF 750,000"
+    },
+    "monde": {
+     "fr": "150 000 CHF",
+     "en": "CHF 150,000"
+    }
+   },
+   "carence": {
+    "fr": "90 jours ; un an pour le divorce",
+    "en": "90 days; one year for divorce"
+   },
+   "franchise": {
+    "fr": "Aucune, ou 10 % des frais externes si la police le prévoit",
+    "en": "None, or 10% of external costs if the policy says so"
+   },
+   "valeurMin": {
+    "fr": "Non précisée",
+    "en": "Not stated"
+   },
+   "libreChoix": {
+    "fr": "Procédure réservée aux avocats, conflit d’intérêts ou litige avec une société Allianz (C9)",
+    "en": "Proceedings reserved to lawyers, conflict of interest or dispute with an Allianz company (C9)"
+   },
+   "exclusions": {
+    "fr": [
+     "Mandats et participation dans une société (C1 c)",
+     "Activité indépendante, sauf complément (C1 d)",
+     "Construction soumise à permis, achat ou vente d’immeuble, sauf Multi Risk (C1 e, f)",
+     "Placements et opérations spéculatives (C1 g)",
+     "Défense contre une demande de dommages-intérêts (C1 n)"
+    ],
+    "en": [
+     "Directorships and company shareholdings (C1 c)",
+     "Self-employment, unless add-on (C1 d)",
+     "Building work needing a permit, buying or selling property, unless Multi Risk (C1 e, f)",
+     "Investments and speculation (C1 g)",
+     "Defence against a damages claim (C1 n)"
+    ]
+   }
+  },
+  {
+   "id": "coop-paket",
+   "assureur": "Coop Protection Juridique",
+   "porteur": "Coop Rechtsschutz AG",
+   "produit": "Privatrechtsschutz Paket",
+   "couverture": "prive-circulation",
+   "doc": {
+    "titre": "AVB Privatrechtsschutz – Paket",
+    "version": "Ausgabe 2024 (AVBPP24), en allemand",
+    "url": "https://www.cooprecht.ch/wp-content/uploads/2026/04/CRS_AVB_Privatrechtsschutz-Paket_Web_DE.pdf",
+    "langue": "de"
+   },
+   "domaines": {
+    "travail": {
+     "s": "oui",
+     "note": {
+      "fr": "frais externes au prorata au-delà de 150 000 CHF de valeur litigieuse",
+      "en": "external costs pro rata above CHF 150,000 in dispute"
+     }
+    },
+    "bail": {
+     "s": "oui"
+    },
+    "contrats": {
+     "s": "oui",
+     "note": {
+      "fr": "travaux soumis à permis : 7 500 CHF",
+      "en": "works needing a permit: CHF 7,500"
+     }
+    },
+    "assurances": {
+     "s": "oui"
+    },
+    "patients": {
+     "s": "oui"
+    },
+    "dommages": {
+     "s": "oui",
+     "note": {
+      "fr": "pour réclamer, pas pour se défendre",
+      "en": "to claim, not to defend"
+     }
+    },
+    "penal": {
+     "s": "oui",
+     "note": {
+      "fr": "intentionnel seulement si acquitté",
+      "en": "intentional only if acquitted"
+     }
+    },
+    "circulation": {
+     "s": "oui"
+    },
+    "voyage": {
+     "s": "oui"
+    },
+    "internet": {
+     "s": "oui",
+     "note": {
+      "fr": "75 000 CHF",
+      "en": "CHF 75,000"
+     }
+    },
+    "propriete": {
+     "s": "oui",
+     "note": {
+      "fr": "logement occupé en Suisse ; achat ou vente : 7 500 CHF",
+      "en": "own home in Switzerland; purchase or sale: CHF 7,500"
+     }
+    },
+    "famille": {
+     "s": "conseil"
+    },
+    "fiscal": {
+     "s": "oui",
+     "note": {
+      "fr": "recours contre une taxation suisse, 7 500 CHF",
+      "en": "appeal against a Swiss assessment, CHF 7,500"
+     }
+    },
+    "administratif": {
+     "s": "oui",
+     "note": {
+      "fr": "permis de conduire, construction ; le reste : conseil",
+      "en": "driving licence, building law; the rest: advice"
+     }
+    }
+   },
+   "plafond": {
+    "suisse": {
+     "fr": "750 000 CHF",
+     "en": "CHF 750,000"
+    },
+    "europe": {
+     "fr": "750 000 CHF",
+     "en": "CHF 750,000"
+    },
+    "monde": {
+     "fr": "750 000 CHF",
+     "en": "CHF 750,000"
+    }
+   },
+   "carence": {
+    "fr": "3 mois ; un an pour l’achat ou la vente d’un bien",
+    "en": "3 months; one year for buying or selling property"
+   },
+   "franchise": {
+    "fr": "Non précisé",
+    "en": "Not stated"
+   },
+   "valeurMin": {
+    "fr": "Non précisée",
+    "en": "Not stated"
+   },
+   "libreChoix": {
+    "fr": "Quand un avocat est nécessaire, notamment en procédure ou en conflit d’intérêts (ch. 13)",
+    "en": "When a lawyer is needed, notably in proceedings or a conflict of interest (s. 13)"
+   },
+   "exclusions": {
+    "fr": [
+     "Infractions et cas provoqués intentionnellement (ch. 6)",
+     "Défense contre une demande de dommages-intérêts (ch. 16.1)",
+     "Activité indépendante au-delà de 20 000 CHF : conseil seulement (ch. 17)",
+     "Titres, cryptomonnaies, jeux d’argent : conseil seulement (ch. 17)",
+     "Rappels et amendes d’impôt, réclamations (ch. 16.20)"
+    ],
+    "en": [
+     "Intentional offences and intentionally caused cases (s. 6)",
+     "Defence against a damages claim (s. 16.1)",
+     "Self-employment above CHF 20,000: advice only (s. 17)",
+     "Securities, crypto, gambling: advice only (s. 17)",
+     "Back taxes, tax penalties and objections (s. 16.20)"
+    ]
+   }
+  },
+  {
+   "id": "generali-privee",
+   "assureur": "Generali",
+   "porteur": "Fortuna Compagnie d’Assurance de Protection Juridique SA",
+   "produit": "Protection juridique privée",
+   "couverture": "prive",
+   "variante": {
+    "fr": "Top ; Basic : 250 000 CHF, Suisse seulement, moins de domaines",
+    "en": "Top; Basic: CHF 250,000, Switzerland only, fewer areas"
+   },
+   "doc": {
+    "titre": "CGA Protection juridique pour particuliers",
+    "version": "édition 02.2024",
+    "url": "https://www.generali.ch/content/dam/generali/pdf/produktdokumente/avb-ki/rechtsschutz/avb-protection-juridique-particuliers-fr.pdf",
+    "langue": "fr"
+   },
+   "domaines": {
+    "travail": {
+     "s": "oui",
+     "note": {
+      "fr": "au prorata au-delà de 300 000 CHF de valeur litigieuse",
+      "en": "pro rata above CHF 300,000 in dispute"
+     }
+    },
+    "bail": {
+     "s": "oui"
+    },
+    "contrats": {
+     "s": "oui",
+     "note": {
+      "fr": "Top",
+      "en": "Top"
+     }
+    },
+    "assurances": {
+     "s": "oui",
+     "note": {
+      "fr": "Top",
+      "en": "Top"
+     }
+    },
+    "patients": {
+     "s": "oui",
+     "note": {
+      "fr": "Top",
+      "en": "Top"
+     }
+    },
+    "dommages": {
+     "s": "oui"
+    },
+    "penal": {
+     "s": "oui",
+     "note": {
+      "fr": "infractions par négligence",
+      "en": "negligence offences"
+     }
+    },
+    "circulation": {
+     "s": "option",
+     "note": {
+      "fr": "produit circulation séparé",
+      "en": "separate traffic product"
+     }
+    },
+    "voyage": {
+     "s": "oui",
+     "note": {
+      "fr": "Top",
+      "en": "Top"
+     }
+    },
+    "internet": {
+     "s": "oui",
+     "note": {
+      "fr": "Top ; protection des données 10 000 CHF",
+      "en": "Top; data protection CHF 10,000"
+     }
+    },
+    "propriete": {
+     "s": "oui",
+     "note": {
+      "fr": "Top ; propriétaires : module immeuble",
+      "en": "Top; owners: property module"
+     }
+    },
+    "famille": {
+     "s": "oui",
+     "note": {
+      "fr": "Top ; médiation et succession, 10 000 CHF",
+      "en": "Top; mediation and inheritance, CHF 10,000"
+     }
+    },
+    "fiscal": {
+     "s": "oui",
+     "note": {
+      "fr": "Top ; 10 000 CHF",
+      "en": "Top; CHF 10,000"
+     }
+    },
+    "administratif": {
+     "s": "oui",
+     "note": {
+      "fr": "Top ; nationalité, école, animaux, douane, 10 000 CHF chacun",
+      "en": "Top; citizenship, school, animals, customs, CHF 10,000 each"
+     }
+    }
+   },
+   "plafond": {
+    "suisse": {
+     "fr": "1 000 000 CHF",
+     "en": "CHF 1,000,000"
+    },
+    "europe": {
+     "fr": "Pas de zone Europe distincte",
+     "en": "No separate Europe zone"
+    },
+    "monde": {
+     "fr": "1 000 000 CHF pour internet, voyage, RC, pénal et contrats",
+     "en": "CHF 1,000,000 for internet, travel, liability, criminal and contracts"
+    }
+   },
+   "carence": {
+    "fr": "Aucun (Top) ; 60 jours (Basic)",
+    "en": "None (Top); 60 days (Basic)"
+   },
+   "franchise": {
+    "fr": "Non précisé",
+    "en": "Not stated"
+   },
+   "valeurMin": {
+    "fr": "Non précisée",
+    "en": "Not stated"
+   },
+   "libreChoix": {
+    "fr": "Procédure réservée aux avocats ou conflit d’intérêts, avec l’accord de Fortuna (C2)",
+    "en": "Proceedings reserved to lawyers or conflict of interest, with Fortuna’s agreement (C2)"
+   },
+   "exclusions": {
+    "fr": [
+     "Activité indépendante, principale ou accessoire (B4 art. 1 d)",
+     "Défense contre une demande de dommages-intérêts (B4 art. 1 h)",
+     "Poursuites et encaissement (B4 art. 1 m)",
+     "Placements, cryptomonnaies, secteur financier (B4 art. 2 b)",
+     "Contrats sur des immeubles, droit des étrangers (B4 art. 2 d, h)"
+    ],
+    "en": [
+     "Self-employment, main or side (B4 art. 1 d)",
+     "Defence against a damages claim (B4 art. 1 h)",
+     "Debt enforcement and collection (B4 art. 1 m)",
+     "Investments, crypto, financial sector (B4 art. 2 b)",
+     "Property contracts, immigration law (B4 art. 2 d, h)"
+    ]
+   }
+  },
+  {
+   "id": "generali-circulation",
+   "assureur": "Generali",
+   "porteur": "Fortuna Compagnie d’Assurance de Protection Juridique SA",
+   "produit": "Protection juridique circulation",
+   "couverture": "circulation",
+   "variante": {
+    "fr": "Top ; Basic : 250 000 CHF, Suisse seulement, moins de domaines",
+    "en": "Top; Basic: CHF 250,000, Switzerland only, fewer areas"
+   },
+   "doc": {
+    "titre": "CGA Protection juridique pour particuliers",
+    "version": "édition 02.2024",
+    "url": "https://www.generali.ch/content/dam/generali/pdf/produktdokumente/avb-ki/rechtsschutz/avb-protection-juridique-particuliers-fr.pdf",
+    "langue": "fr"
+   },
+   "domaines": {
+    "travail": {
+     "s": "non"
+    },
+    "bail": {
+     "s": "non"
+    },
+    "contrats": {
+     "s": "oui",
+     "note": {
+      "fr": "Top ; contrats sur le véhicule",
+      "en": "Top; vehicle contracts"
+     }
+    },
+    "assurances": {
+     "s": "oui",
+     "note": {
+      "fr": "Top",
+      "en": "Top"
+     }
+    },
+    "patients": {
+     "s": "oui",
+     "note": {
+      "fr": "Top ; suite d’un accident de la route",
+      "en": "Top; after a road accident"
+     }
+    },
+    "dommages": {
+     "s": "oui"
+    },
+    "penal": {
+     "s": "oui",
+     "note": {
+      "fr": "infractions par négligence",
+      "en": "negligence offences"
+     }
+    },
+    "circulation": {
+     "s": "oui"
+    },
+    "voyage": {
+     "s": "non"
+    },
+    "internet": {
+     "s": "non"
+    },
+    "propriete": {
+     "s": "oui",
+     "note": {
+      "fr": "Top ; droits réels sur le véhicule",
+      "en": "Top; property rights in the vehicle"
+     }
+    },
+    "famille": {
+     "s": "non"
+    },
+    "fiscal": {
+     "s": "oui",
+     "note": {
+      "fr": "impôt cantonal sur les véhicules",
+      "en": "cantonal vehicle tax"
+     }
+    },
+    "administratif": {
+     "s": "oui",
+     "note": {
+      "fr": "retrait de permis",
+      "en": "licence withdrawal"
+     }
+    }
+   },
+   "plafond": {
+    "suisse": {
+     "fr": "1 000 000 CHF",
+     "en": "CHF 1,000,000"
+    },
+    "europe": {
+     "fr": "Pas de zone Europe distincte",
+     "en": "No separate Europe zone"
+    },
+    "monde": {
+     "fr": "1 000 000 CHF pour contrats du véhicule, RC et pénal",
+     "en": "CHF 1,000,000 for vehicle contracts, liability and criminal"
+    }
+   },
+   "carence": {
+    "fr": "Aucun (Top) ; 60 jours (Basic)",
+    "en": "None (Top); 60 days (Basic)"
+   },
+   "franchise": {
+    "fr": "Non précisé",
+    "en": "Not stated"
+   },
+   "valeurMin": {
+    "fr": "Non précisée",
+    "en": "Not stated"
+   },
+   "libreChoix": {
+    "fr": "Procédure réservée aux avocats ou conflit d’intérêts, avec l’accord de Fortuna (C2)",
+    "en": "Proceedings reserved to lawyers or conflict of interest, with Fortuna’s agreement (C2)"
+   },
+   "exclusions": {
+    "fr": [
+     "Alcool dès 1,5 ‰ ou autre incapacité de conduire (B4 art. 3 a)",
+     "Conduite sans permis valable (B4 art. 3 b)",
+     "Véhicule sans plaques valables ou sans assurance légale (B4 art. 3 c)",
+     "Modifications non autorisées du véhicule (B4 art. 3 d)",
+     "Courses et compétitions (B4 art. 3 e)"
+    ],
+    "en": [
+     "Alcohol from 1.5‰ or other unfitness to drive (B4 art. 3 a)",
+     "Driving without a valid licence (B4 art. 3 b)",
+     "Vehicle without valid plates or compulsory insurance (B4 art. 3 c)",
+     "Unauthorised vehicle modifications (B4 art. 3 d)",
+     "Races and competitions (B4 art. 3 e)"
+    ]
+   }
+  },
+  {
+   "id": "helvetia-pj",
+   "assureur": "Helvetia",
+   "porteur": "Coop Protection Juridique SA",
+   "produit": "Protection juridique, clients privés",
+   "couverture": "prive",
+   "variante": {
+    "fr": "module de base ; travail, bail, circulation et immeuble en modules",
+    "en": "base module; employment, tenancy, traffic and property as modules"
+   },
+   "doc": {
+    "titre": "CGA Helvetia Protection juridique",
+    "version": "édition 09.2021 (120014242)",
+    "url": "https://www.helvetia.com/content/dam/os/ch/web/documents/private-customers/sach-kautionen/fr/protection-juridique-cga.pdf",
+    "langue": "fr"
+   },
+   "domaines": {
+    "travail": {
+     "s": "option",
+     "note": {
+      "fr": "frais externes au prorata au-delà de 150 000 CHF",
+      "en": "external costs pro rata above CHF 150,000"
+     }
+    },
+    "bail": {
+     "s": "option"
+    },
+    "contrats": {
+     "s": "oui"
+    },
+    "assurances": {
+     "s": "oui"
+    },
+    "patients": {
+     "s": "oui"
+    },
+    "dommages": {
+     "s": "oui",
+     "note": {
+      "fr": "pour réclamer, pas pour se défendre",
+      "en": "to claim, not to defend"
+     }
+    },
+    "penal": {
+     "s": "oui",
+     "note": {
+      "fr": "intentionnel seulement si acquitté",
+      "en": "intentional only if acquitted"
+     }
+    },
+    "circulation": {
+     "s": "option",
+     "note": {
+      "fr": "module circulation",
+      "en": "traffic module"
+     }
+    },
+    "voyage": {
+     "s": "oui",
+     "note": {
+      "fr": "comme litige contractuel",
+      "en": "as a contract dispute"
+     }
+    },
+    "internet": {
+     "s": "oui",
+     "note": {
+      "fr": "10 % de la somme assurée",
+      "en": "10% of the sum insured"
+     }
+    },
+    "propriete": {
+     "s": "option",
+     "note": {
+      "fr": "modules immeuble",
+      "en": "property modules"
+     }
+    },
+    "famille": {
+     "s": "conseil"
+    },
+    "fiscal": {
+     "s": "conseil"
+    },
+    "administratif": {
+     "s": "conseil"
+    }
+   },
+   "plafond": {
+    "suisse": {
+     "fr": "Fixé dans la police",
+     "en": "Set in the policy"
+    },
+    "europe": {
+     "fr": "Fixé dans la police",
+     "en": "Set in the policy"
+    },
+    "monde": {
+     "fr": "Fixé dans la police",
+     "en": "Set in the policy"
+    }
+   },
+   "carence": {
+    "fr": "3 mois pour la plupart des litiges contractuels ; aucun pour le pénal et les dommages",
+    "en": "3 months for most contract disputes; none for criminal and damages"
+   },
+   "franchise": {
+    "fr": "Non précisé",
+    "en": "Not stated"
+   },
+   "valeurMin": {
+    "fr": "Non précisée",
+    "en": "Not stated"
+   },
+   "libreChoix": {
+    "fr": "Pas de clause trouvée dans ces CGA ; l’art. 167 OS exige ce droit",
+    "en": "No clause found in these terms; art. 167 OS requires this right"
+   },
+   "exclusions": {
+    "fr": [
+     "Activité indépendante au-delà de 20 000 CHF : conseil seulement (A1 a)",
+     "Achat, vente ou location d’immeubles (A1 b)",
+     "Titres, affaires financières, jeux d’argent (A1 f)",
+     "Infractions intentionnelles (A11, A12)",
+     "Litiges entre personnes assurées par la même police (A10)"
+    ],
+    "en": [
+     "Self-employment above CHF 20,000: advice only (A1 a)",
+     "Buying, selling or letting property (A1 b)",
+     "Securities, financial dealings, gambling (A1 f)",
+     "Intentional offences (A11, A12)",
+     "Disputes between people insured under the same policy (A10)"
+    ]
+   }
+  },
+  {
+   "id": "orion-privee",
+   "assureur": "Orion",
+   "porteur": "Orion Assurance de Protection Juridique SA",
+   "produit": "Protection juridique privée",
+   "couverture": "prive",
+   "variante": {
+    "fr": "Standard, vendu par Zurich ; Premium : 1 000 000 CHF, 300 000 CHF hors d’Europe",
+    "en": "Standard, sold by Zurich; Premium: CHF 1,000,000, CHF 300,000 outside Europe"
+   },
+   "doc": {
+    "titre": "CGA Protection juridique privée et circulation",
+    "version": "édition 01/2022 (4282)",
+    "url": "https://www.zurich.ch/-/media/zurich-site/content/privatkunden/haftung-recht/dokumente/avb-privat-verkehrsrechtsschutzversicherung/avb-privat-verkehrsrechtschutz-versicherung.pdf?sc_lang=fr",
+    "langue": "fr"
+   },
+   "domaines": {
+    "travail": {
+     "s": "oui",
+     "note": {
+      "fr": "Suisse et pays voisins ; Standard : cadres dirigeants exclus",
+      "en": "Switzerland and neighbouring countries; Standard: senior managers excluded"
+     }
+    },
+    "bail": {
+     "s": "oui",
+     "note": {
+      "fr": "logement en Suisse",
+      "en": "home in Switzerland"
+     }
+    },
+    "contrats": {
+     "s": "oui",
+     "note": {
+      "fr": "achat d’immeuble et construction exclus",
+      "en": "property purchase and building excluded"
+     }
+    },
+    "assurances": {
+     "s": "oui"
+    },
+    "patients": {
+     "s": "oui",
+     "note": {
+      "fr": "à l’étranger, urgences seulement",
+      "en": "abroad, emergencies only"
+     }
+    },
+    "dommages": {
+     "s": "oui",
+     "note": {
+      "fr": "pour réclamer ; pas au volant d’un véhicule",
+      "en": "to claim; not as a driver"
+     }
+    },
+    "penal": {
+     "s": "oui",
+     "note": {
+      "fr": "négligence ; intentionnel seulement si acquitté",
+      "en": "negligence; intentional only if acquitted"
+     }
+    },
+    "circulation": {
+     "s": "option",
+     "note": {
+      "fr": "produit circulation séparé ; couvert au volant d’un véhicule d’autrui",
+      "en": "separate traffic product; covered when driving someone else’s vehicle"
+     }
+    },
+    "voyage": {
+     "s": "oui",
+     "note": {
+      "fr": "contrats de voyage à l’étranger",
+      "en": "travel contracts abroad"
+     }
+    },
+    "internet": {
+     "s": "oui",
+     "note": {
+      "fr": "hameçonnage, harcèlement ; 5 000 CHF en Standard",
+      "en": "phishing, harassment; CHF 5,000 in Standard"
+     }
+    },
+    "propriete": {
+     "s": "oui",
+     "note": {
+      "fr": "voisinage et logement occupé, 10 000 CHF en Standard",
+      "en": "neighbours and own home, CHF 10,000 in Standard"
+     }
+    },
+    "famille": {
+     "s": "oui",
+     "note": {
+      "fr": "médiation et succession ; 500 CHF en Standard, 3 000 CHF en Premium",
+      "en": "mediation and inheritance; CHF 500 in Standard, CHF 3,000 in Premium"
+     }
+    },
+    "fiscal": {
+     "s": "oui",
+     "note": {
+      "fr": "recours seulement ; 500 CHF en Standard",
+      "en": "appeals only; CHF 500 in Standard"
+     }
+    },
+    "administratif": {
+     "s": "conseil",
+     "note": {
+      "fr": "une consultation par an",
+      "en": "one consultation a year"
+     }
+    }
+   },
+   "plafond": {
+    "suisse": {
+     "fr": "600 000 CHF",
+     "en": "CHF 600,000"
+    },
+    "europe": {
+     "fr": "600 000 CHF",
+     "en": "CHF 600,000"
+    },
+    "monde": {
+     "fr": "150 000 CHF",
+     "en": "CHF 150,000"
+    }
+   },
+   "carence": {
+    "fr": "1 mois ; 6 mois pour le harcèlement ; un an pour la succession, le droit matrimonial et le fiscal",
+    "en": "1 month; 6 months for harassment; one year for inheritance, matrimonial and tax"
+   },
+   "franchise": {
+    "fr": "Non précisé",
+    "en": "Not stated"
+   },
+   "valeurMin": {
+    "fr": "500 CHF pour les autres contrats (en dessous, un renseignement)",
+    "en": "CHF 500 for other contracts (below that, one enquiry)"
+   },
+   "libreChoix": {
+    "fr": "Action judiciaire civile ou administrative, ou conflit d’intérêts (E5)",
+    "en": "Civil or administrative court action, or conflict of interest (E5)"
+   },
+   "exclusions": {
+    "fr": [
+     "Activité indépendante, sauf activité accessoire jusqu’à 18 000 CHF (E2 ch. 11)",
+     "Achat d’immeuble, construction, rénovation (B1 ch. 7)",
+     "Droit des sociétés, titres, spéculation (E2 ch. 16, 17)",
+     "Litiges entre conjoints ou concubins, sauf médiation (E2 ch. 7)",
+     "Défense contre une demande de dommages-intérêts (E2 ch. 3)"
+    ],
+    "en": [
+     "Self-employment, except side activity up to CHF 18,000 (E2 s. 11)",
+     "Buying property, building, renovation (B1 s. 7)",
+     "Company law, securities, speculation (E2 s. 16, 17)",
+     "Disputes between spouses or partners, except mediation (E2 s. 7)",
+     "Defence against a damages claim (E2 s. 3)"
+    ]
+   }
+  },
+  {
+   "id": "orion-circulation",
+   "assureur": "Orion",
+   "porteur": "Orion Assurance de Protection Juridique SA",
+   "produit": "Protection juridique circulation",
+   "couverture": "circulation",
+   "variante": {
+    "fr": "Standard, vendu par Zurich ; Premium : 1 000 000 CHF, 300 000 CHF hors d’Europe",
+    "en": "Standard, sold by Zurich; Premium: CHF 1,000,000, CHF 300,000 outside Europe"
+   },
+   "doc": {
+    "titre": "CGA Protection juridique privée et circulation",
+    "version": "édition 01/2022 (4282)",
+    "url": "https://www.zurich.ch/-/media/zurich-site/content/privatkunden/haftung-recht/dokumente/avb-privat-verkehrsrechtsschutzversicherung/avb-privat-verkehrsrechtschutz-versicherung.pdf?sc_lang=fr",
+    "langue": "fr"
+   },
+   "domaines": {
+    "travail": {
+     "s": "non"
+    },
+    "bail": {
+     "s": "oui",
+     "note": {
+      "fr": "garage ou place de parc",
+      "en": "garage or parking space"
+     }
+    },
+    "contrats": {
+     "s": "oui",
+     "note": {
+      "fr": "contrats sur le véhicule assuré",
+      "en": "contracts on the insured vehicle"
+     }
+    },
+    "assurances": {
+     "s": "oui"
+    },
+    "patients": {
+     "s": "oui",
+     "note": {
+      "fr": "suite d’un accident de la route assuré",
+      "en": "after an insured road accident"
+     }
+    },
+    "dommages": {
+     "s": "oui",
+     "note": {
+      "fr": "pour réclamer, pas pour se défendre",
+      "en": "to claim, not to defend"
+     }
+    },
+    "penal": {
+     "s": "oui",
+     "note": {
+      "fr": "Standard : grands excès de vitesse et récidive d’ivresse exclus",
+      "en": "Standard: major speeding and repeat drink-driving excluded"
+     }
+    },
+    "circulation": {
+     "s": "oui"
+    },
+    "voyage": {
+     "s": "non"
+    },
+    "internet": {
+     "s": "non"
+    },
+    "propriete": {
+     "s": "oui",
+     "note": {
+      "fr": "propriété du véhicule",
+      "en": "ownership of the vehicle"
+     }
+    },
+    "famille": {
+     "s": "non"
+    },
+    "fiscal": {
+     "s": "oui",
+     "note": {
+      "fr": "impôt sur les véhicules, Suisse",
+      "en": "vehicle tax, Switzerland"
+     }
+    },
+    "administratif": {
+     "s": "oui",
+     "note": {
+      "fr": "retrait de permis, Suisse",
+      "en": "licence withdrawal, Switzerland"
+     }
+    }
+   },
+   "plafond": {
+    "suisse": {
+     "fr": "600 000 CHF",
+     "en": "CHF 600,000"
+    },
+    "europe": {
+     "fr": "600 000 CHF",
+     "en": "CHF 600,000"
+    },
+    "monde": {
+     "fr": "150 000 CHF",
+     "en": "CHF 150,000"
+    }
+   },
+   "carence": {
+    "fr": "Aucun",
+    "en": "None"
+   },
+   "franchise": {
+    "fr": "Non précisé",
+    "en": "Not stated"
+   },
+   "valeurMin": {
+    "fr": "Non précisée",
+    "en": "Not stated"
+   },
+   "libreChoix": {
+    "fr": "Action judiciaire civile ou administrative, ou conflit d’intérêts (E5)",
+    "en": "Civil or administrative court action, or conflict of interest (E5)"
+   },
+   "exclusions": {
+    "fr": [
+     "Standard : excès de vitesse de 30 km/h en localité, 40 hors localité, 50 sur autoroute (E2 ch. 21)",
+     "Standard : récidive d’ivresse, refus de prise de sang, drogues (E2 ch. 22)",
+     "Courses et compétitions (E2 ch. 19)",
+     "Véhicules à usage professionnel : taxi, livraison, auto-école (E2 ch. 20)",
+     "Coût de la première décision pénale ou administrative et amendes, sauf Premium (E1 ch. 3)"
+    ],
+    "en": [
+     "Standard: speeding by 30 km/h in town, 40 outside, 50 on motorways (E2 s. 21)",
+     "Standard: repeat drink-driving, refusing a blood test, drugs (E2 s. 22)",
+     "Races and competitions (E2 s. 19)",
+     "Professional-use vehicles: taxi, delivery, driving school (E2 s. 20)",
+     "Cost of the first criminal or administrative decision and fines, except Premium (E1 s. 3)"
+    ]
+   }
+  },
+  {
+   "id": "smile-privee",
+   "assureur": "smile",
+   "porteur": "Coop Protection Juridique SA",
+   "produit": "smile.legal privée",
+   "couverture": "prive",
+   "variante": {
+    "fr": "gold ; silver : 250 000 CHF en Suisse, Europe seulement",
+    "en": "gold; silver: CHF 250,000 in Switzerland, Europe only"
+   },
+   "doc": {
+    "titre": "CGA protection juridique smile.legal",
+    "version": "LEG 1.0, édition 11/2018",
+    "url": "https://www.smile-insurances.com/content/dam/smile/ch/main/fr/service/download-center/CGA_conditions_generales_d_assurance_protection_juridique_2019_smile_direct_assurances.pdf",
+    "langue": "fr"
+   },
+   "domaines": {
+    "travail": {
+     "s": "oui",
+     "note": {
+      "fr": "cadres dirigeants et sportifs professionnels exclus",
+      "en": "senior managers and professional athletes excluded"
+     }
+    },
+    "bail": {
+     "s": "oui"
+    },
+    "contrats": {
+     "s": "oui",
+     "note": {
+      "fr": "travaux avec permis : 3 000 CHF en gold",
+      "en": "works needing a permit: CHF 3,000 in gold"
+     }
+    },
+    "assurances": {
+     "s": "oui",
+     "note": {
+      "fr": "maladie : 3 000 CHF la première année",
+      "en": "illness: CHF 3,000 in the first year"
+     }
+    },
+    "patients": {
+     "s": "nd"
+    },
+    "dommages": {
+     "s": "oui",
+     "note": {
+      "fr": "pour réclamer, pas pour se défendre",
+      "en": "to claim, not to defend"
+     }
+    },
+    "penal": {
+     "s": "oui",
+     "note": {
+      "fr": "intentionnel seulement si acquitté",
+      "en": "intentional only if acquitted"
+     }
+    },
+    "circulation": {
+     "s": "conseil",
+     "note": {
+      "fr": "produit circulation séparé",
+      "en": "separate traffic product"
+     }
+    },
+    "voyage": {
+     "s": "nd"
+    },
+    "internet": {
+     "s": "oui",
+     "note": {
+      "fr": "gold seulement, 3 000 CHF",
+      "en": "gold only, CHF 3,000"
+     }
+    },
+    "propriete": {
+     "s": "oui",
+     "note": {
+      "fr": "gold, 3 000 CHF ; silver : 500 CHF",
+      "en": "gold, CHF 3,000; silver: CHF 500"
+     }
+    },
+    "famille": {
+     "s": "conseil"
+    },
+    "fiscal": {
+     "s": "conseil"
+    },
+    "administratif": {
+     "s": "conseil"
+    }
+   },
+   "plafond": {
+    "suisse": {
+     "fr": "300 000 CHF",
+     "en": "CHF 300,000"
+    },
+    "europe": {
+     "fr": "300 000 CHF",
+     "en": "CHF 300,000"
+    },
+    "monde": {
+     "fr": "30 000 CHF",
+     "en": "CHF 30,000"
+    }
+   },
+   "carence": {
+    "fr": "3 mois",
+    "en": "3 months"
+   },
+   "franchise": {
+    "fr": "Choisie dans la police",
+    "en": "Chosen in the policy"
+   },
+   "valeurMin": {
+    "fr": "300 CHF",
+    "en": "CHF 300"
+   },
+   "libreChoix": {
+    "fr": "Quand un avocat est nécessaire, notamment en procédure ou en conflit d’intérêts (art. 19)",
+    "en": "When a lawyer is needed, notably in proceedings or a conflict of interest (art. 19)"
+   },
+   "exclusions": {
+    "fr": [
+     "Infractions et cas provoqués intentionnellement (art. 17 d)",
+     "Litiges entre personnes assurées par le même contrat (art. 17 a)",
+     "Simple encaissement, créances cédées ou héritées (art. 17 f, g)",
+     "Activité indépendante, titres : conseil seulement (art. 24 a, g)",
+     "Achat, vente ou location d’immeubles : conseil seulement (art. 24 c)"
+    ],
+    "en": [
+     "Intentional offences and intentionally caused cases (art. 17 d)",
+     "Disputes between people insured under the same contract (art. 17 a)",
+     "Simple debt collection, assigned or inherited claims (art. 17 f, g)",
+     "Self-employment, securities: advice only (art. 24 a, g)",
+     "Buying, selling or letting property: advice only (art. 24 c)"
+    ]
+   }
+  },
+  {
+   "id": "smile-circulation",
+   "assureur": "smile",
+   "porteur": "Coop Protection Juridique SA",
+   "produit": "smile.legal circulation",
+   "couverture": "circulation",
+   "variante": {
+    "fr": "gold ; silver : 250 000 CHF en Suisse, Europe seulement",
+    "en": "gold; silver: CHF 250,000 in Switzerland, Europe only"
+   },
+   "doc": {
+    "titre": "CGA protection juridique smile.legal",
+    "version": "LEG 1.0, édition 11/2018",
+    "url": "https://www.smile-insurances.com/content/dam/smile/ch/main/fr/service/download-center/CGA_conditions_generales_d_assurance_protection_juridique_2019_smile_direct_assurances.pdf",
+    "langue": "fr"
+   },
+   "domaines": {
+    "travail": {
+     "s": "non"
+    },
+    "bail": {
+     "s": "non"
+    },
+    "contrats": {
+     "s": "oui",
+     "note": {
+      "fr": "gold seulement, véhicules assurés, 3 000 CHF",
+      "en": "gold only, insured vehicles, CHF 3,000"
+     }
+    },
+    "assurances": {
+     "s": "oui"
+    },
+    "patients": {
+     "s": "nd"
+    },
+    "dommages": {
+     "s": "oui",
+     "note": {
+      "fr": "pour réclamer, pas pour se défendre",
+      "en": "to claim, not to defend"
+     }
+    },
+    "penal": {
+     "s": "oui",
+     "note": {
+      "fr": "intentionnel seulement si acquitté",
+      "en": "intentional only if acquitted"
+     }
+    },
+    "circulation": {
+     "s": "oui"
+    },
+    "voyage": {
+     "s": "non"
+    },
+    "internet": {
+     "s": "non"
+    },
+    "propriete": {
+     "s": "nd"
+    },
+    "famille": {
+     "s": "non"
+    },
+    "fiscal": {
+     "s": "nd"
+    },
+    "administratif": {
+     "s": "oui",
+     "note": {
+      "fr": "procédure administrative ; restitution du permis exclue",
+      "en": "administrative procedure; licence reinstatement excluded"
+     }
+    }
+   },
+   "plafond": {
+    "suisse": {
+     "fr": "300 000 CHF",
+     "en": "CHF 300,000"
+    },
+    "europe": {
+     "fr": "300 000 CHF",
+     "en": "CHF 300,000"
+    },
+    "monde": {
+     "fr": "30 000 CHF",
+     "en": "CHF 30,000"
+    }
+   },
+   "carence": {
+    "fr": "3 mois pour les assurances et les contrats du véhicule",
+    "en": "3 months for insurance and vehicle contracts"
+   },
+   "franchise": {
+    "fr": "Choisie dans la police",
+    "en": "Chosen in the policy"
+   },
+   "valeurMin": {
+    "fr": "300 CHF",
+    "en": "CHF 300"
+   },
+   "libreChoix": {
+    "fr": "Quand un avocat est nécessaire, notamment en procédure ou en conflit d’intérêts (art. 19)",
+    "en": "When a lawyer is needed, notably in proceedings or a conflict of interest (art. 19)"
+   },
+   "exclusions": {
+    "fr": [
+     "Infractions et cas provoqués intentionnellement (art. 17 d)",
+     "Transport professionnel de personnes, auto-école : conseil seulement (art. 22 a)",
+     "Courses et compétitions, entraînement compris (art. 22 b)",
+     "Restitution du permis, examens d’aptitude (art. 23 c)",
+     "Simple encaissement, créances cédées ou héritées (art. 17 f, g)"
+    ],
+    "en": [
+     "Intentional offences and intentionally caused cases (art. 17 d)",
+     "Paid passenger transport, driving school: advice only (art. 22 a)",
+     "Races and competitions, training included (art. 22 b)",
+     "Licence reinstatement, fitness tests (art. 23 c)",
+     "Simple debt collection, assigned or inherited claims (art. 17 f, g)"
+    ]
+   }
+  },
+  {
+   "id": "tcs-privee",
+   "assureur": "TCS",
+   "porteur": "Assista Protection juridique SA",
+   "produit": "TCS Protection juridique privée",
+   "couverture": "prive",
+   "variante": {
+    "fr": "Standard ; Plus : 1 500 000 CHF, 300 000 CHF dans le monde",
+    "en": "Standard; Plus: CHF 1,500,000, CHF 300,000 worldwide"
+   },
+   "doc": {
+    "titre": "CGA TCS Protection juridique privée Standard et Plus",
+    "version": "version 2024, édition 01.2024",
+    "url": "https://tcs.ch/mam/Digital-Media/PDF/Terms-and-Conditions/tcs-protection-juridique-privee-standard-amp-tcs-protection-juridique-privee-plus.pdf",
+    "langue": "fr"
+   },
+   "domaines": {
+    "travail": {
+     "s": "oui",
+     "note": {
+      "fr": "Suisse et Liechtenstein, 200 000 CHF",
+      "en": "Switzerland and Liechtenstein, CHF 200,000"
+     }
+    },
+    "bail": {
+     "s": "oui",
+     "note": {
+      "fr": "logement que vous occupez",
+      "en": "the home you live in"
+     }
+    },
+    "contrats": {
+     "s": "oui",
+     "note": {
+      "fr": "liste fermée de contrats",
+      "en": "closed list of contracts"
+     }
+    },
+    "assurances": {
+     "s": "oui",
+     "note": {
+      "fr": "assureurs établis en Suisse ou au Liechtenstein",
+      "en": "insurers based in Switzerland or Liechtenstein"
+     }
+    },
+    "patients": {
+     "s": "oui"
+    },
+    "dommages": {
+     "s": "oui",
+     "note": {
+      "fr": "pour réclamer, pas pour se défendre",
+      "en": "to claim, not to defend"
+     }
+    },
+    "penal": {
+     "s": "oui",
+     "note": {
+      "fr": "négligence ; intentionnel seulement si acquitté",
+      "en": "negligence; intentional only if acquitted"
+     }
+    },
+    "circulation": {
+     "s": "non",
+     "note": {
+      "fr": "véhicules à moteur exclus ; couvert comme piéton, cycliste ou passager",
+      "en": "motor vehicles excluded; covered as pedestrian, cyclist or passenger"
+     }
+    },
+    "voyage": {
+     "s": "oui",
+     "note": {
+      "fr": "liste fermée de contrats",
+      "en": "closed list of contracts"
+     }
+    },
+    "internet": {
+     "s": "non"
+    },
+    "propriete": {
+     "s": "non"
+    },
+    "famille": {
+     "s": "conseil",
+     "note": {
+      "fr": "500 CHF en Standard, 2 000 CHF en Plus",
+      "en": "CHF 500 in Standard, CHF 2,000 in Plus"
+     }
+    },
+    "fiscal": {
+     "s": "option",
+     "note": {
+      "fr": "variante Plus, 20 000 CHF",
+      "en": "Plus variant, CHF 20,000"
+     }
+    },
+    "administratif": {
+     "s": "conseil",
+     "note": {
+      "fr": "école, protection de l’enfant et de l’adulte",
+      "en": "school, child and adult protection"
+     }
+    }
+   },
+   "plafond": {
+    "suisse": {
+     "fr": "750 000 CHF",
+     "en": "CHF 750,000"
+    },
+    "europe": {
+     "fr": "750 000 CHF",
+     "en": "CHF 750,000"
+    },
+    "monde": {
+     "fr": "200 000 CHF",
+     "en": "CHF 200,000"
+    }
+   },
+   "carence": {
+    "fr": "2 mois pour le travail, le bail, les contrats et le voyage",
+    "en": "2 months for employment, tenancy, contracts and travel"
+   },
+   "franchise": {
+    "fr": "Non précisé",
+    "en": "Not stated"
+   },
+   "valeurMin": {
+    "fr": "Non précisée",
+    "en": "Not stated"
+   },
+   "libreChoix": {
+    "fr": "Avocat du réseau d’Assista ; un autre avec son accord préalable (ch. 16)",
+    "en": "Lawyer from Assista’s network; another with its prior consent (s. 16)"
+   },
+   "exclusions": {
+    "fr": [
+     "Véhicules à moteur, bateaux, aéronefs (ch. 13 c)",
+     "Propriété, achat, vente ou construction d’immeubles (ch. 13 d, f, i)",
+     "Activité indépendante, principale ou accessoire (ch. 13 l)",
+     "Défense contre une demande de dommages-intérêts (ch. 13 o)",
+     "Titres, cryptomonnaies, jeux d’argent (ch. 13 j)"
+    ],
+    "en": [
+     "Motor vehicles, boats, aircraft (s. 13 c)",
+     "Owning, buying, selling or building property (s. 13 d, f, i)",
+     "Self-employment, main or side (s. 13 l)",
+     "Defence against a damages claim (s. 13 o)",
+     "Securities, crypto, gambling (s. 13 j)"
+    ]
+   }
+  },
+  {
+   "id": "tcs-circulation",
+   "assureur": "TCS",
+   "porteur": "Assista Protection juridique SA",
+   "produit": "TCS Protection juridique circulation",
+   "couverture": "circulation",
+   "variante": {
+    "fr": "Standard ; Plus : 2 000 000 CHF, 200 000 CHF dans le monde",
+    "en": "Standard; Plus: CHF 2,000,000, CHF 200,000 worldwide"
+   },
+   "doc": {
+    "titre": "CGA TCS Protection juridique circulation",
+    "version": "version 2018, édition 09.2023",
+    "url": "https://etec2019.tcs.ch/mam/Digital-Media/PDF/Terms-and-Conditions/tcs-protection-juridique-circulation-conditions-generales-d-assuranceversion-du-produit-2018-edition-09-20235026-010-19-004.pdf",
+    "langue": "fr"
+   },
+   "domaines": {
+    "travail": {
+     "s": "non"
+    },
+    "bail": {
+     "s": "oui",
+     "note": {
+      "fr": "garage, place de parc ou d’amarrage",
+      "en": "garage, parking or mooring space"
+     }
+    },
+    "contrats": {
+     "s": "oui",
+     "note": {
+      "fr": "véhicule et mobilité, liste fermée",
+      "en": "vehicle and mobility, closed list"
+     }
+    },
+    "assurances": {
+     "s": "oui",
+     "note": {
+      "fr": "sociales : seulement après un accident de la route",
+      "en": "social insurance: only after a road accident"
+     }
+    },
+    "patients": {
+     "s": "oui",
+     "note": {
+      "fr": "suite d’un accident de la route",
+      "en": "after a road accident"
+     }
+    },
+    "dommages": {
+     "s": "oui",
+     "note": {
+      "fr": "pour réclamer, pas pour se défendre",
+      "en": "to claim, not to defend"
+     }
+    },
+    "penal": {
+     "s": "oui",
+     "note": {
+      "fr": "intentionnel seulement si acquitté",
+      "en": "intentional only if acquitted"
+     }
+    },
+    "circulation": {
+     "s": "oui"
+    },
+    "voyage": {
+     "s": "oui",
+     "note": {
+      "fr": "liste fermée de contrats",
+      "en": "closed list of contracts"
+     }
+    },
+    "internet": {
+     "s": "conseil",
+     "note": {
+      "fr": "données du véhicule, 500 CHF",
+      "en": "vehicle data, CHF 500"
+     }
+    },
+    "propriete": {
+     "s": "oui",
+     "note": {
+      "fr": "droits réels sur le véhicule",
+      "en": "property rights in the vehicle"
+     }
+    },
+    "famille": {
+     "s": "non"
+    },
+    "fiscal": {
+     "s": "oui",
+     "note": {
+      "fr": "impôt sur les véhicules",
+      "en": "vehicle tax"
+     }
+    },
+    "administratif": {
+     "s": "oui",
+     "note": {
+      "fr": "permis, interdiction de conduire, immatriculation",
+      "en": "licence, driving ban, registration"
+     }
+    }
+   },
+   "plafond": {
+    "suisse": {
+     "fr": "1 000 000 CHF",
+     "en": "CHF 1,000,000"
+    },
+    "europe": {
+     "fr": "1 000 000 CHF",
+     "en": "CHF 1,000,000"
+    },
+    "monde": {
+     "fr": "100 000 CHF",
+     "en": "CHF 100,000"
+    }
+   },
+   "carence": {
+    "fr": "2 mois pour les contrats, le voyage et la location de place ; aucun pour le pénal et l’administratif",
+    "en": "2 months for contracts, travel and space rental; none for criminal and administrative"
+   },
+   "franchise": {
+    "fr": "Non précisé",
+    "en": "Not stated"
+   },
+   "valeurMin": {
+    "fr": "2 000 CHF pour les frais externes en droit civil",
+    "en": "CHF 2,000 for external costs in civil disputes"
+   },
+   "libreChoix": {
+    "fr": "Avocat du réseau d’Assista ; un autre avec son accord, au-delà de la valeur minimale (ch. 14)",
+    "en": "Lawyer from Assista’s network; another with its consent, above the minimum value (s. 14)"
+   },
+   "exclusions": {
+    "fr": [
+     "Conduite sans permis valable (ch. 11 g)",
+     "Courses, rallyes et compétitions (ch. 11 j)",
+     "Crimes et infractions intentionnelles (ch. 11 d)",
+     "Activité indépendante et usage commercial du véhicule (ch. 11 i)",
+     "Prises de sang ordonnées et cours d’éducation routière non remboursés (ch. 3.6)"
+    ],
+    "en": [
+     "Driving without a valid licence (s. 11 g)",
+     "Races, rallies and competitions (s. 11 j)",
+     "Intentional crimes and offences (s. 11 d)",
+     "Self-employment and commercial use of the vehicle (s. 11 i)",
+     "Ordered blood tests and road-safety courses not repaid (s. 3.6)"
+    ]
+   }
+  }
+ ]
+}
