@@ -15,6 +15,8 @@
   .page-outil, .page-guide { --wrap-max: 1180px; font-size: 18px; }
 
   .wrap { max-width: var(--wrap-max); margin: 0 auto; padding-inline: var(--s5); }
+  /* En-tête et pied de page : même largeur (1280 px) sur toutes les pages, accueil compris ; seul le contenu des pages outil et guide se resserre à 1180 px. */
+  .tete .wrap, .marge .wrap { max-width: 1280px; }
   .visually-hidden, .sr {
     position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
   }
