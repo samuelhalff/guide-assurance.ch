@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
 import { Breadcrumbs } from "@/components/site/breadcrumbs";
 import { JsonLd } from "@/components/site/json-ld";
+import { BandeConfiance } from "@/components/site/bande-confiance";
 import { PartagerOutil } from "@/components/site/partager-outil";
 import { SimulateurFrontalier } from "@/components/outils/simulateur-frontalier";
 import { FrontalierOption } from "@/components/outils/frontalier-option";
@@ -107,6 +108,7 @@ export default function Page() {
             </svg>
             Le calcul se fait dans votre navigateur. Nous ne recevons ni vos revenus ni la composition de votre foyer.
           </p>
+          <BandeConfiance signaux={["ofsp", "gratuit"]} compacte />
           <PartagerOutil path={PATH} title="Frontalier : LAMal ou assurance française ?" text="Comparer la LAMal et l’assurance maladie française pour un foyer frontalier, avec les chiffres officiels 2027." />
           <SimulateurFrontalier />
           <FrontalierOption locale="fr" />

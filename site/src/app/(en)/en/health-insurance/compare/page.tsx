@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
 import { Breadcrumbs } from "@/components/site/breadcrumbs";
 import { JsonLd } from "@/components/site/json-ld";
+import { BandeConfiance } from "@/components/site/bande-confiance";
 import { PartagerOutil } from "@/components/site/partager-outil";
 import { ComparateurPrimes } from "@/components/outils/comparateur-primes";
 import { TableauReperes } from "@/components/outils/reperes-primes";
@@ -107,6 +108,7 @@ export default function Page() {
             </svg>
             The calculation runs in your browser. We receive neither your postcode nor your age.
           </p>
+          <BandeConfiance locale="en" signaux={["ofsp", "offres", "gratuit"]} compacte />
           <PartagerOutil path={PATH} title="Compare 2027 LAMal premiums" text="The 2027 LAMal premiums for your postcode, age and deductible, sorted from lowest to highest." locale="en" />
           <ComparateurPrimes locale="en" donneesDu={DATE_PRIMES} />
           <TableauReperes locale="en" replie />

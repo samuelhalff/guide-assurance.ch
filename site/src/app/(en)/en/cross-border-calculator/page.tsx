@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
 import { Breadcrumbs } from "@/components/site/breadcrumbs";
 import { JsonLd } from "@/components/site/json-ld";
+import { BandeConfiance } from "@/components/site/bande-confiance";
 import { PartagerOutil } from "@/components/site/partager-outil";
 import { SimulateurFrontalier } from "@/components/outils/simulateur-frontalier";
 import { FrontalierOption } from "@/components/outils/frontalier-option";
@@ -108,6 +109,7 @@ export default function Page() {
             </svg>
             The calculation runs in your browser. We receive neither your income nor the make-up of your household.
           </p>
+          <BandeConfiance locale="en" signaux={["ofsp", "gratuit"]} compacte />
           <PartagerOutil
             locale="en"
             path={PATH}

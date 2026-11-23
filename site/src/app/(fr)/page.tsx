@@ -9,6 +9,7 @@ import { calculerSaison } from "@/components/site/saison";
 import { pageMetadata } from "@/lib/metadata";
 import { jsonLdAccueil } from "@/lib/jsonld-accueil";
 import { ORG_ID, WEBSITE_ID, faqLd } from "@/lib/jsonld";
+import { BandeConfiance } from "@/components/site/bande-confiance";
 import { FaqAccueil } from "@/components/site/faq-accueil";
 import type { QuestionFaq } from "@/components/site/guide-page";
 import { abs } from "@/lib/site";
@@ -164,6 +165,7 @@ export default function Accueil() {
       <SiteHeader />
       <main className="accueil">
         <AccueilFeuille saisonInitiale={calculerSaison(new Date())} cartes={<PaysageAccueil />} />
+        <BandeConfiance />
         <AccueilSituations />
 
         <section className="passage" id="passage" aria-labelledby="passage-titre">

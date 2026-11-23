@@ -6,6 +6,7 @@ import { PartagerOutil } from "@/components/site/partager-outil";
 import { FaqSections, faqOutilLd, type FaqOutil } from "@/components/site/faq-sections";
 import { GarantiesPj } from "@/components/outils/garanties-pj";
 import { CtaOffres } from "@/components/outils/cta-offres";
+import { BandeConfiance } from "@/components/site/bande-confiance";
 import { DEMANDE_PORTE } from "@/lib/demande-porte";
 import { CONTRATS, LU_LE, NB_ASSUREURS, NB_CONTRATS, NB_PORTEURS } from "@/lib/garanties-pj";
 import { pageMetadata } from "@/lib/metadata";
@@ -134,6 +135,7 @@ export function PageGarantiesPj({ locale }: { locale: Locale }) {
           <h1>{t.h1}</h1>
           <p className="intro">{t.intro}</p>
           <CtaOffres locale={locale} href={demande} libelle={t.ctaHaut} />
+          <BandeConfiance locale={locale} signaux={["pj"]} compacte />
           <div className="en-bref">
             <b>{t.enBref}</b>
             <ul>

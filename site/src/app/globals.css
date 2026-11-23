@@ -12,6 +12,7 @@
 @import "./styles/donnees.css";
 @import "./styles/idees.css";
 @import "./styles/actualites.css";
+@import "./styles/confiance.css";
 
 @custom-variant dark (&:is(.dark *));
 

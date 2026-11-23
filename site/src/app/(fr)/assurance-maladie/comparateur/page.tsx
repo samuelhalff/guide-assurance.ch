@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
 import { Breadcrumbs } from "@/components/site/breadcrumbs";
 import { JsonLd } from "@/components/site/json-ld";
+import { BandeConfiance } from "@/components/site/bande-confiance";
 import { PartagerOutil } from "@/components/site/partager-outil";
 import { ComparateurPrimes } from "@/components/outils/comparateur-primes";
 import { TableauReperes } from "@/components/outils/reperes-primes";
@@ -107,6 +108,7 @@ export default function Page() {
             </svg>
             Le calcul se fait dans votre navigateur. Nous ne recevons ni votre NPA ni votre âge.
           </p>
+          <BandeConfiance signaux={["ofsp", "offres", "gratuit"]} compacte />
           <PartagerOutil path={PATH} title="Comparer les primes LAMal 2027" text="Les primes LAMal 2027 pour votre NPA, votre âge et votre franchise, triées de la plus basse à la plus haute." />
           <ComparateurPrimes donneesDu={DATE_PRIMES} />
           <TableauReperes locale="fr" replie />
