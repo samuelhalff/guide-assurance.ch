@@ -12,6 +12,8 @@ import { abs } from "@/lib/site";
 import { DATE_IMPOTS, DATE_PAGE_DONNEES, LICENCE_DONNEES } from "@/lib/donnees";
 import { dateLongue, type Locale } from "@/lib/i18n";
 import { OUTILS, OUTILS_EN, PAGES_DONNEES, PAGES_DONNEES_EN, SLUG_CANTON_3A } from "@/lib/nav";
+import { Alert } from "@/components/ui/alert";
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 /* Économie d'impôt 3a commune par commune (idée 6 du rapport 08) : une page par canton couvert par le moteur
    (GE, VD, VS, FR, NE, JU, Jura bernois), plus une page d'ensemble. Profil type explicite,
@@ -304,9 +306,11 @@ export function PageCanton3a({ canton, locale }: { canton: I.Canton; locale: Loc
             <p>{t.pourquoi}</p>
           </section>
 
-          <p className="lien-outil-3a">
-            <a href={locale === "fr" ? OUTILS.impot3a : OUTILS_EN.impot3a}>{t.lienCalc}</a> {t.lienCalcTexte}
-          </p>
+          <Alert variant="info" className="lien-outil-3a">
+            <p>
+              <a href={locale === "fr" ? OUTILS.impot3a : OUTILS_EN.impot3a}>{t.lienCalc}</a> {t.lienCalcTexte}
+            </p>
+          </Alert>
 
           <nav className="autres-cantons" aria-label={t.autres}>
             <h2>{t.autres}</h2>
@@ -409,32 +413,30 @@ export function PageCommunes3a({ locale }: { locale: Locale }) {
           <section className="reperes-statiques">
             <h2>{t.tableTitre}</h2>
             <p>{t.tableTexte}</p>
-            <div className="defile-table">
-              <table className="assureurs table-donnees">
-                <caption>{t.caption}</caption>
-                <thead>
-                  <tr>
-                    <th scope="col">{t.thCanton}</th>
-                    <th scope="col" className="num">{t.thMin}</th>
-                    <th scope="col" className="num">{t.thMed}</th>
-                    <th scope="col" className="num">{t.thMax}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {ENSEMBLE.map((tab) => (
-                    <tr key={tab.canton}>
-                      <th scope="row">
-                        <a href={cheminCanton(tab.canton, locale)}>{I.NOM_CANTON[locale][tab.canton]}</a>
-                        <small>{`${tab.lignes.length} ${locale === "fr" ? "communes" : "municipalities"}`}</small>
-                      </th>
-                      <td className="num">{nombre(tab.min.economie, locale)}<small>{tab.min.commune}</small></td>
-                      <td className="num"><b>{nombre(tab.mediane, locale)}</b></td>
-                      <td className="num">{nombre(tab.max.economie, locale)}<small>{tab.max.commune}</small></td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <Table variant="chiffres" className="table-donnees">
+              <TableCaption>{t.caption}</TableCaption>
+              <TableHeader>
+                <TableRow>
+                  <TableHead scope="col">{t.thCanton}</TableHead>
+                  <TableHead scope="col">{t.thMin}</TableHead>
+                  <TableHead scope="col">{t.thMed}</TableHead>
+                  <TableHead scope="col">{t.thMax}</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {ENSEMBLE.map((tab) => (
+                  <TableRow key={tab.canton}>
+                    <TableHead scope="row">
+                      <a href={cheminCanton(tab.canton, locale)}>{I.NOM_CANTON[locale][tab.canton]}</a>
+                      <small>{`${tab.lignes.length} ${locale === "fr" ? "communes" : "municipalities"}`}</small>
+                    </TableHead>
+                    <TableCell>{nombre(tab.min.economie, locale)}<small>{tab.min.commune}</small></TableCell>
+                    <TableCell><b>{nombre(tab.mediane, locale)}</b></TableCell>
+                    <TableCell>{nombre(tab.max.economie, locale)}<small>{tab.max.commune}</small></TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
             <Telechargement href={CSV} libelle={t.csv} detail={t.csvDetail} />
           </section>
 
@@ -443,9 +445,11 @@ export function PageCommunes3a({ locale }: { locale: Locale }) {
             <p>{t.jura}</p>
           </section>
 
-          <p className="lien-outil-3a">
-            <a href={locale === "fr" ? OUTILS.impot3a : OUTILS_EN.impot3a}>{t.lienCalc}</a> {t.lienCalcTexte}
-          </p>
+          <Alert variant="info" className="lien-outil-3a">
+            <p>
+              <a href={locale === "fr" ? OUTILS.impot3a : OUTILS_EN.impot3a}>{t.lienCalc}</a> {t.lienCalcTexte}
+            </p>
+          </Alert>
           <AppelRappel locale={locale} sujet="prevoyance" question={t.rappelQ} />
         </div>
         <Faqs faq={faq} maj={t.maj} />

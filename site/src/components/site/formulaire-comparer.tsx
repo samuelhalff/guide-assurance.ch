@@ -4,6 +4,8 @@ import { outils } from "@/lib/nav";
 import { suivre } from "@/lib/analytics";
 import type { Locale } from "@/lib/i18n";
 import * as P from "@/lib/engines/primes";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 /* Formulaire court du comparateur LAMal (NPA ou localité + année de naissance) pour la tête des pages produit santé.
    Même comportement que le formulaire de l'accueil (accueil-feuille.tsx, non modifié ici) : il mène au comparateur avec
@@ -82,8 +84,7 @@ export function FormulaireComparer({ locale = "fr" }: { locale?: Locale }) {
       <div className="comparer-champs">
         <div className="champ">
           <label htmlFor="lp-lieu">{t.lieu}</label>
-          <input
-            className="saisie"
+          <Input
             id="lp-lieu"
             list="lp-lieux"
             autoComplete="off"
@@ -104,9 +105,8 @@ export function FormulaireComparer({ locale = "fr" }: { locale?: Locale }) {
         </div>
         <div className="champ">
           <label htmlFor="lp-annee">{t.annee}</label>
-          <input
+          <Input
             ref={anneeRef}
-            className="saisie"
             id="lp-annee"
             inputMode="numeric"
             autoComplete="bday-year"
@@ -126,12 +126,12 @@ export function FormulaireComparer({ locale = "fr" }: { locale?: Locale }) {
       {erreur ? (
         <p className="comparer-err" id="lp-annee-err" role="alert">{t.anneeErr}</p>
       ) : null}
-      <button className="bouton" type="submit">
+      <Button className="mt-3 w-full" type="submit">
         {t.voir}
         <svg viewBox="0 0 18 18" aria-hidden="true">
           <path d="M3 9h11M10 4.5L14.5 9 10 13.5" fill="none" stroke="currentColor" strokeWidth="2" />
         </svg>
-      </button>
+      </Button>
       <p className="comparer-defaut">{t.defaut}</p>
     </form>
   );

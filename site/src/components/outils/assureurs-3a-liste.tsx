@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState, type ReactNode } from "react";
 import { Depliable } from "@/components/controles";
+import { Card, CardContent } from "@/components/ui/card";
 
 /* Liste des assureurs 3a : un bloc dépliable par assureur, plusieurs ouverts à la fois. Le contenu reste dans le HTML statique
    (hidden="until-found"). Un lien #assureur ouvre le bloc visé, comme le faisait <details id>. */
@@ -24,8 +25,9 @@ export function Assureurs3aListe({ blocs }: { blocs: BlocAssureur[] }) {
   return (
     <div className="assureurs-3a">
       {blocs.map((b) => (
+        <Card key={b.id} size="sm">
+        <CardContent>
         <Depliable
-          key={b.id}
           id={b.id}
           className="assureur-3a"
           open={ouverts.includes(b.id)}
@@ -39,6 +41,8 @@ export function Assureurs3aListe({ blocs }: { blocs: BlocAssureur[] }) {
         >
           {b.contenu}
         </Depliable>
+        </CardContent>
+        </Card>
       ))}
     </div>
   );

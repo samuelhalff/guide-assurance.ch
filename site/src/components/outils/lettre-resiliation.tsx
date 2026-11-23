@@ -9,6 +9,11 @@ import { BoutonAgenda } from "@/components/outils/ajouter-agenda";
 import { evenementLettre } from "@/lib/ics";
 import { Choix } from "@/components/outils/choix";
 import { ChoixBoutons } from "@/components/controles";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Alert } from "@/components/ui/alert";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 /* Lettre de résiliation : interface de mockups/v2/lettre-resiliation.html, délais par src/lib/engines/delais.ts.
    La lettre est rédigée dans le navigateur ; rien n'est envoyé ni gardé. */
@@ -181,6 +186,7 @@ export function LettreResiliation({ aujourdhuiIso, locale = "fr" }: { aujourdhui
   return (
     <div className="ph-sensitive outil" data-ph-mask>
       <form className="form" autoComplete="on" noValidate onSubmit={(e) => e.preventDefault()}>
+        <Card><CardContent>
         <fieldset>
           <legend><span className="n">{isEn ? "1 of 3" : "1 sur 3"}</span>{isEn ? "What do you want to cancel?" : "Que voulez-vous résilier ?"}</legend>
           <ChoixBoutons
@@ -215,12 +221,12 @@ export function LettreResiliation({ aujourdhuiIso, locale = "fr" }: { aujourdhui
           <legend><span className="n">{isEn ? "2 of 3" : "2 sur 3"}</span>{isEn ? "Your contract" : "Votre contrat"}</legend>
           <div className="champ">
             <label htmlFor="debut">{isEn ? "Contract start date" : "Début du contrat"}</label>
-            <input className="saisie" type="date" id="debut" name="debut" placeholder={isEn ? "dd.mm.yyyy" : "jj.mm.aaaa"} value={v.debut} onChange={set("debut")} />
+            <Input type="date" id="debut" name="debut" placeholder={isEn ? "dd.mm.yyyy" : "jj.mm.aaaa"} value={v.debut} onChange={set("debut")} />
             <span className="aide">{isEn ? "The date is on your policy. The law allows cancellation only from the end of the third year, unless your general terms and conditions give you more." : "La date figure sur votre police. La loi ne permet de résilier qu’à partir de la fin de la troisième année, sauf si vos conditions générales prévoient mieux."}</span>
           </div>
           <div className="champ">
             <label htmlFor="echeance">{isEn ? "Annual renewal date" : "Échéance annuelle"}</label>
-            <input className="saisie" type="date" id="echeance" name="echeance" placeholder={isEn ? "dd.mm.yyyy" : "jj.mm.aaaa"} value={v.echeance} onChange={set("echeance")} />
+            <Input type="date" id="echeance" name="echeance" placeholder={isEn ? "dd.mm.yyyy" : "jj.mm.aaaa"} value={v.echeance} onChange={set("echeance")} />
             <span className="aide">{isEn ? "It is often 31 December. If you do not know it, leave the field empty." : "C’est souvent le 31 décembre. Si vous ne la connaissez pas, laissez le champ vide."}</span>
           </div>
           <p id="t-cg" className="sous-q">{isEn ? "Do your general terms and conditions allow you to cancel every year?" : "Vos conditions générales permettent-elles de résilier chaque année ?"}</p>
@@ -246,44 +252,46 @@ export function LettreResiliation({ aujourdhuiIso, locale = "fr" }: { aujourdhui
           </div>
           <div className="champ">
             <label htmlFor="produits">{isEn ? "Supplementary insurance to cancel" : "Complémentaires à résilier"}</label>
-            <input className="saisie" type="text" id="produits" name="produits" value={v.produits} onChange={set("produits")} placeholder={isEn ? "Leave empty for all, or in French, e.g. hospitalisation, dentaire" : "Toutes, ou par exemple : hospitalisation, dentaire"} />
+            <Input type="text" id="produits" name="produits" value={v.produits} onChange={set("produits")} placeholder={isEn ? "Leave empty for all, or in French, e.g. hospitalisation, dentaire" : "Toutes, ou par exemple : hospitalisation, dentaire"} />
           </div>
         </fieldset>
 
-        <div className={`delai alerte${urgent ? " urgent" : ""}`} role="status">
-          {delai}
-        </div>
+        <Alert variant={urgent ? "destructive" : "attention"} className="delai" role="status">
+          <div>{delai}</div>
+        </Alert>
 
         <fieldset className="dernier">
           <legend><span className="n">{isEn ? "3 of 3" : "3 sur 3"}</span>{isEn ? "Your details" : "Vos coordonnées"}</legend>
-          <div className="champ"><label htmlFor="nom">{isEn ? "First name and surname" : "Prénom et nom"}</label><input className="saisie" type="text" id="nom" name="name" autoComplete="name" placeholder="Marie Dupont" value={v.nom} onChange={set("nom")} /></div>
-          <div className="champ"><label htmlFor="rue">{isEn ? "Street and number" : "Rue et numéro"}</label><input className="saisie" type="text" id="rue" name="street-address" autoComplete="street-address" placeholder={isEn ? "12 Rue du Lac" : "Rue du Lac 12"} value={v.rue} onChange={set("rue")} /></div>
+          <div className="champ"><label htmlFor="nom">{isEn ? "First name and surname" : "Prénom et nom"}</label><Input type="text" id="nom" name="name" autoComplete="name" placeholder="Marie Dupont" value={v.nom} onChange={set("nom")} /></div>
+          <div className="champ"><label htmlFor="rue">{isEn ? "Street and number" : "Rue et numéro"}</label><Input type="text" id="rue" name="street-address" autoComplete="street-address" placeholder={isEn ? "12 Rue du Lac" : "Rue du Lac 12"} value={v.rue} onChange={set("rue")} /></div>
           <div className="deux">
-            <div className="champ"><label htmlFor="npa">{isEn ? "Postcode (NPA)" : "NPA"}</label><input className="saisie" type="text" id="npa" name="postal-code" autoComplete="postal-code" placeholder="1201" inputMode="numeric" value={v.npa} onChange={set("npa")} /></div>
-            <div className="champ"><label htmlFor="localite">{isEn ? "Town" : "Localité"}</label><input className="saisie" type="text" id="localite" name="address-level2" autoComplete="address-level2" placeholder={isEn ? "Geneva" : "Genève"} value={v.localite} onChange={set("localite")} /></div>
+            <div className="champ"><label htmlFor="npa">{isEn ? "Postcode (NPA)" : "NPA"}</label><Input type="text" id="npa" name="postal-code" autoComplete="postal-code" placeholder="1201" inputMode="numeric" value={v.npa} onChange={set("npa")} /></div>
+            <div className="champ"><label htmlFor="localite">{isEn ? "Town" : "Localité"}</label><Input type="text" id="localite" name="address-level2" autoComplete="address-level2" placeholder={isEn ? "Geneva" : "Genève"} value={v.localite} onChange={set("localite")} /></div>
           </div>
-          <div className="champ"><label htmlFor="numero">{isEn ? "Insured person or policy number" : "Numéro d’assuré ou de police"}</label><input className="saisie" type="text" id="numero" name="numero" placeholder={isEn ? "Shown on your policy" : "Indiqué sur votre police"} value={v.numero} onChange={set("numero")} /></div>
+          <div className="champ"><label htmlFor="numero">{isEn ? "Insured person or policy number" : "Numéro d’assuré ou de police"}</label><Input type="text" id="numero" name="numero" placeholder={isEn ? "Shown on your policy" : "Indiqué sur votre police"} value={v.numero} onChange={set("numero")} /></div>
           <div className="champ">
             <label htmlFor="personnes">{isEn ? "Other people covered by this contract" : "Autres personnes couvertes par ce contrat"}</label>
-            <textarea className="saisie" id="personnes" name="personnes" placeholder={isEn ? "One per line, with their date of birth" : "Une par ligne, avec sa date de naissance"} value={v.personnes} onChange={set("personnes")} />
+            <Textarea id="personnes" name="personnes" placeholder={isEn ? "One per line, with their date of birth" : "Une par ligne, avec sa date de naissance"} value={v.personnes} onChange={set("personnes")} />
             <span className="aide">{isEn ? "Leave empty if the letter only concerns you." : "Laissez vide si la lettre ne concerne que vous."}</span>
           </div>
           <div className="champ">
             <label htmlFor="assureur">{isEn ? "Your current insurer and its address" : "Votre assureur actuel et son adresse"}</label>
-            <textarea className="saisie" id="assureur" name="assureur" placeholder={isEn ? "Insurer name\nPO box (case postale)\nPostcode and town" : "Nom de l’assureur\nCase postale\nNPA Localité"} value={v.assureur} onChange={set("assureur")} />
+            <Textarea id="assureur" name="assureur" placeholder={isEn ? "Insurer name\nPO box (case postale)\nPostcode and town" : "Nom de l’assureur\nCase postale\nNPA Localité"} value={v.assureur} onChange={set("assureur")} />
             <span className="aide">{isEn ? "The address is on your policy or your latest statement." : "L’adresse se trouve sur votre police ou votre dernier décompte."}</span>
           </div>
           <div className="champ" hidden={type !== "lamal"}>
             <label htmlFor="nouvel">{isEn ? "New insurer (optional)" : "Nouvel assureur (facultatif)"}</label>
-            <input className="saisie" type="text" id="nouvel" name="nouvel" placeholder={isEn ? "Insurer name" : "Nom de l’assureur"} value={v.nouvel} onChange={set("nouvel")} />
+            <Input type="text" id="nouvel" name="nouvel" placeholder={isEn ? "Insurer name" : "Nom de l’assureur"} value={v.nouvel} onChange={set("nouvel")} />
             <span className="aide">{isEn ? "It will confirm your continued cover to the old insurer." : "Il confirmera la suite de votre couverture à l’ancien assureur."}</span>
           </div>
         </fieldset>
+        </CardContent></Card>
       </form>
 
       <section className="apercu" aria-labelledby="t-apercu">
-        <div className="recap" aria-labelledby="t-recap">
-          <h2 id="t-recap">{isEn ? "Summary" : "Récapitulatif"}</h2>
+        <Card className="recap" aria-labelledby="t-recap">
+          <CardHeader><CardTitle><h2 id="t-recap">{isEn ? "Summary" : "Récapitulatif"}</h2></CardTitle></CardHeader>
+          <CardContent>
           <dl>
             <dt>{isEn ? "Contract" : "Contrat"}</dt><dd>{type === "lamal" ? (isEn ? "Basic health insurance (LAMal)" : "Assurance de base (LAMal)") : isEn ? "Supplementary insurance (LCA)" : "Complémentaire (LCA)"}</dd>
             <dt>{isEn ? "Contract ends" : "Fin du contrat"}</dt><dd>{r.fin ? fmtUI(r.fin) : isEn ? "to be confirmed" : "à préciser"}</dd>
@@ -292,11 +300,14 @@ export function LettreResiliation({ aujourdhuiIso, locale = "fr" }: { aujourdhui
             <dt>{isEn ? "Recipient" : "Destinataire"}</dt><dd>{t.assureur ? t.assureur.split("\n")[0] : isEn ? "to be completed" : "à compléter"}</dd>
           </dl>
           {av.length ? (
-            <ul className="a-verifier">
-              {av.map((x) => <li key={x}>{x}</li>)}
-            </ul>
+            <Alert variant="attention" className="a-verifier">
+              <ul>
+                {av.map((x) => <li key={x}>{x}</li>)}
+              </ul>
+            </Alert>
           ) : null}
-        </div>
+          </CardContent>
+        </Card>
         <h2 id="t-apercu">{isEn ? "Preview of your letter" : "Aperçu de votre lettre"}</h2>
         {isEn ? (
           <p className="note-outil" style={{ margin: "0 0 var(--s3)" }}>
@@ -353,8 +364,8 @@ export function LettreResiliation({ aujourdhuiIso, locale = "fr" }: { aujourdhui
           <p className="sign">{ou(t.nom, "Prénom Nom")}<br /><Vide>Signature</Vide></p>
         </article>
         <div className="actions">
-          <button type="button" className="bouton" onClick={() => { suivre("lettre_imprimee"); setFaite(true); window.print(); }}>{isEn ? "Print or save as PDF" : "Imprimer ou enregistrer en PDF"}</button>
-          <button type="button" className="bouton second" onClick={copier}>{isEn ? "Copy the text" : "Copier le texte"}</button>
+          <Button onClick={() => { suivre("lettre_imprimee"); setFaite(true); window.print(); }}>{isEn ? "Print or save as PDF" : "Imprimer ou enregistrer en PDF"}</Button>
+          <Button variant="outline" onClick={copier}>{isEn ? "Copy the text" : "Copier le texte"}</Button>
           <span className="copie-ok" role="status">{copie}</span>
         </div>
         {r.dl && r.fin ? (
@@ -404,8 +415,10 @@ export function LettreResiliation({ aujourdhuiIso, locale = "fr" }: { aujourdhui
           )}
         </div>
         <aside className="conseil" aria-label={isEn ? "After the letter" : "Après la lettre"}>
+          <Card><CardContent>
           <p><b>{isEn ? "What next?" : "Et ensuite ?"}</b>{isEn ? " Before you send your letter, it is worth comparing the 2027 premiums. If you are a cross-border worker, the calculator compares LAMal and French health insurance for your whole household." : " Avant d’envoyer votre lettre, il est utile de comparer les primes 2027. Si vous êtes frontalier, le simulateur compare la LAMal et l’assurance française pour tout votre foyer."}</p>
           <a href={OUTILS.simulateur}>{isEn ? "Open the cross-border calculator" : "Ouvrir le simulateur frontalier"}</a>
+          </CardContent></Card>
         </aside>
       </section>
     </div>

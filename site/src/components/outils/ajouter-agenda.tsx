@@ -3,6 +3,7 @@ import { useState } from "react";
 import { suivre, versGA } from "@/lib/analytics";
 import { calendrierIcs, type EvenementIcs } from "@/lib/ics";
 import type { Locale } from "@/lib/i18n";
+import { Button } from "@/components/ui/button";
 
 /* « Ajouter à mon agenda » : le fichier .ics est créé dans le navigateur et téléchargé ; rien ne part vers un serveur.
    Mesure : ics_telecharge { type } seulement, jamais une date ni un nom saisi. */
@@ -34,7 +35,8 @@ export function BoutonAgenda({
   evenements,
   fichier,
   locale = "fr",
-  className = "bouton second",
+  variant = "outline",
+  className,
   children,
   disabled,
 }: {
@@ -42,6 +44,8 @@ export function BoutonAgenda({
   evenements: () => EvenementIcs[];
   fichier: string;
   locale?: Locale;
+  variant?: "default" | "outline";
+  /* Classes de mise en page seulement (largeur, marges) : le dessin vient de Button. */
   className?: string;
   children: React.ReactNode;
   disabled?: boolean;
@@ -62,10 +66,10 @@ export function BoutonAgenda({
   }
   return (
     <>
-      <button type="button" className={`${className} bouton-agenda`} onClick={ajouter} disabled={disabled}>
+      <Button variant={variant} className={`bouton-agenda${className ? ` ${className}` : ""}`} onClick={ajouter} disabled={disabled}>
         <IconeAgenda size={17} />
         {children}
-      </button>
+      </Button>
       <span className="agenda-ok" role="status">{etat}</span>
     </>
   );

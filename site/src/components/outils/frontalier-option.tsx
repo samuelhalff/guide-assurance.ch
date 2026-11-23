@@ -1,4 +1,5 @@
 import type { Locale } from "@/lib/i18n";
+import { Card, CardContent } from "@/components/ui/card";
 
 /* Sous le simulateur frontalier : le droit d'option (choix en principe irréversible) et ce que le prix ne dit pas.
    Rendu côté serveur, lisible sans JavaScript. Sources officielles citées en lien, vérifiées le 23.11.2026 (research : CLEISS, ge.ch du 10.11.2026, OFSP, OAMal consolidée au 22.10.2026). */
@@ -72,6 +73,7 @@ export function FrontalierOption({ locale }: { locale: Locale }) {
   return (
     <>
       <section className="droit-option" aria-labelledby="droit-option-titre">
+        <Card><CardContent>
         <h2 id="droit-option-titre">{t.titre}</h2>
         <p>{t.chapo}</p>
         <dl>
@@ -87,6 +89,7 @@ export function FrontalierOption({ locale }: { locale: Locale }) {
           ))}
           .
         </p>
+        </CardContent></Card>
       </section>
       <section className="nuances">
         <h2>{t.nuancesTitre}</h2>

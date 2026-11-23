@@ -1,5 +1,6 @@
 import resume from "@/data/primes-2027-resume.json";
 import { Depliable } from "@/components/controles";
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import type { Locale } from "@/lib/i18n";
 import { PAGES_DONNEES, PAGES_DONNEES_EN } from "@/lib/nav";
 
@@ -39,54 +40,54 @@ export function TableauReperes({ locale = "fr", replie = false }: { locale?: Loc
               {NOM[locale][c.canton]}
               {MULTI.includes(c.canton) ? (en ? `, region ${c.region} (${c.commune})` : `, région ${c.region} (${c.commune})`) : c.canton === "BE" ? ` (${c.commune})` : ""}
             </h3>
-            <table className="assureurs profils-reperes">
-              <caption>
+            <Table variant="chiffres" className="profils-reperes">
+              <TableCaption>
                 {en
                   ? `Adult aged 26 or over, 2027, CHF per month: first premium in the list and average of the ${c.nombre} offers.`
                   : `Adulte de 26 ans et plus, 2027, CHF par mois${T}: première prime de la liste et moyenne des ${c.nombre} offres.`}
-              </caption>
-              <thead>
-                <tr>
-                  <th scope="col">{en ? "Deductible, accident" : "Franchise, accident"}</th>
-                  <th scope="col">{en ? "1st premium" : "1re prime"}</th>
-                  <th scope="col">{en ? "Average" : "Moyenne"}</th>
-                </tr>
-              </thead>
-              <tbody>
+              </TableCaption>
+              <TableHeader>
+                <TableRow>
+                  <TableHead scope="col">{en ? "Deductible, accident" : "Franchise, accident"}</TableHead>
+                  <TableHead scope="col">{en ? "1st premium" : "1re prime"}</TableHead>
+                  <TableHead scope="col">{en ? "Average" : "Moyenne"}</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {c.profils.map((p) => (
-                  <tr key={`${p.franchise}${p.accident}`}>
-                    <td>
+                  <TableRow key={`${p.franchise}${p.accident}`}>
+                    <TableCell>
                       {p.franchise}, {p.accident ? (en ? "with" : "avec") : en ? "without" : "sans"}
-                    </td>
-                    <td>{nf(p.premiere)}</td>
-                    <td>{nf(p.moyenne)}</td>
-                  </tr>
+                    </TableCell>
+                    <TableCell>{nf(p.premiere)}</TableCell>
+                    <TableCell>{nf(p.moyenne)}</TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
-            <table className="assureurs">
-              <caption>
+              </TableBody>
+            </Table>
+            <Table variant="chiffres">
+              <TableCaption>
                 {en
                   ? `First 5 of ${c.nombre} offers, adult, CHF 300 deductible, with accident cover, 2027. Average of all offers: ${chf(c.moyenne)} a month.`
                   : `5 premières offres sur ${c.nombre}, adulte, franchise 300${NB}CHF, avec accident, 2027. Moyenne de toutes les offres${T}: ${chf(c.moyenne)} par mois.`}
-              </caption>
-              <thead>
-                <tr>
-                  <th scope="col">{en ? "Insurer and model" : "Assureur et modèle"}</th>
-                  <th scope="col">{en ? "CHF / month" : "CHF / mois"}</th>
-                </tr>
-              </thead>
-              <tbody>
+              </TableCaption>
+              <TableHeader>
+                <TableRow>
+                  <TableHead scope="col">{en ? "Insurer and model" : "Assureur et modèle"}</TableHead>
+                  <TableHead scope="col">{en ? "CHF / month" : "CHF / mois"}</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {c.offres.map((o) => (
-                  <tr key={`${o.assureur}|${o.produit}`}>
-                    <td>
+                  <TableRow key={`${o.assureur}|${o.produit}`}>
+                    <TableCell>
                       {o.assureur}, {o.produit}
-                    </td>
-                    <td>{nf(o.mensuel)}</td>
-                  </tr>
+                    </TableCell>
+                    <TableCell>{nf(o.mensuel)}</TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           </div>
         ))}
       </div>

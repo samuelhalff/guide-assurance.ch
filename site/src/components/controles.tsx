@@ -65,7 +65,7 @@ export function Case({
         className={cn(
           puce
             ? CACHE
-            : "mt-0.5 size-5",
+            : "mt-0.5",
           caseClassName,
         )}
       />
@@ -134,7 +134,7 @@ export function ChoixBoutons<V>({
           <label key={cle(o)} className={cn("option", itemClassName)}>
             <RadioGroupItem
               value={o.value}
-              className="size-5 after:hidden"
+              className="after:hidden"
             />
             <span className="libelle">
               {o.label}

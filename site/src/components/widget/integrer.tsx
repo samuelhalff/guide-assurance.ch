@@ -3,6 +3,8 @@ import { useState } from "react";
 import type { Locale } from "@/lib/i18n";
 import { suivre } from "@/lib/analytics";
 import { Choix } from "@/components/outils/choix";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 
 /* Code d'intégration d'un widget : aperçu (iframe), code à copier, choix de la région pour la prime.
    Aucune mesure ici : la copie du code n'est pas comptée. */
@@ -52,9 +54,9 @@ export function CodeWidget({
       ) : null}
       <iframe className="widget-apercu" src={apercu} title={titre} width="100%" height={h} loading="lazy" />
       <label className="code-label" htmlFor={`code-${id}`}>{en ? "Code to paste into your page" : "Code à coller dans votre page"}</label>
-      <textarea id={`code-${id}`} className="saisie code-widget" readOnly rows={4} value={code} onFocus={(e) => e.currentTarget.select()} />
+      <Textarea id={`code-${id}`} className="code-widget" readOnly rows={4} value={code} onFocus={(e) => e.currentTarget.select()} />
       <div className="actions">
-        <button type="button" className="bouton second" onClick={copier}>{en ? "Copy the code" : "Copier le code"}</button>
+        <Button type="button" variant="outline" onClick={copier}>{en ? "Copy the code" : "Copier le code"}</Button>
         <span className="copie-ok" role="status">{etat}</span>
       </div>
     </div>

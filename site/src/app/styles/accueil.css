@@ -75,9 +75,7 @@
   .comparer-champs { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: var(--s3); align-items: end; }
   .comparer .champ { margin: 0; }
   .comparer .champ label { font-size: 15px; }
-  .comparer .saisie[aria-invalid] { border-color: var(--sentier); }
   .comparer-err { font: 600 15px var(--narrow); color: var(--sentier-fonce); margin: var(--s2) 0 0; }
-  .cartouche .bouton { width: 100%; justify-content: center; margin-top: var(--s3); padding: 16px 22px; }
   .comparer-defaut { font: 14px/1.4 var(--narrow); color: var(--encre-2); margin: var(--s2) 0 0; }
   .garantie {
     display: flex; align-items: flex-start; gap: 10px; margin: var(--s4) 0 0; padding-top: var(--s3);
@@ -157,7 +155,6 @@
   /* Résiliation */
   .passage .grille { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s8); align-items: start; }
   .echeances { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s4); margin-top: var(--s6); }
-  .echeance { padding: var(--s4); }
   .echeance .date { font-weight: 800; font-size: 30px; letter-spacing: -.02em; color: var(--sentier-texte); }
   .echeance .date .an { font-size: 18px; }
   .echeance .quoi { font-family: var(--narrow); font-size: 16px; color: var(--encre-2); }
@@ -234,12 +231,11 @@
   .primes-lien { margin: var(--s5) 0 0; }
   .note-donnees { font: 15px/1.5 var(--narrow); color: var(--encre-2); max-width: 80ch; margin: var(--s5) 0 0; }
 
-  .accueil table { border-collapse: collapse; width: 100%; font-size: 16px; }
-  .accueil caption { text-align: left; font-family: var(--narrow); font-size: 15px; color: var(--encre-2); padding-bottom: var(--s3); }
-  .accueil th, .accueil td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--filet); }
-  .accueil th { font-family: var(--narrow); font-weight: 700; font-size: 15px; color: var(--encre-2); border-bottom: 1.5px solid var(--encre); }
-  .accueil td.num, .accueil th.num { text-align: right; }
-  .accueil tbody th { border-bottom: 1px solid var(--filet); color: var(--encre); font-weight: 600; font-size: 16px; }
+  /* Tableau des guides : reste un <table> natif, car sa mise en liste sur mobile (plus bas) ne tient pas avec les marges du composant Table. */
+  .itineraires table { border-collapse: collapse; width: 100%; font-size: 16px; }
+  .itineraires th, .itineraires td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--filet); }
+  .itineraires th { font-family: var(--narrow); font-weight: 700; font-size: 15px; color: var(--encre-2); border-bottom: 1.5px solid var(--encre); }
+  .itineraires td.num, .itineraires th.num { text-align: right; }
   .primes td .fourchette { display: block; font: 14px var(--narrow); color: var(--encre-2); margin-top: 2px; }
 
   /* Guides */

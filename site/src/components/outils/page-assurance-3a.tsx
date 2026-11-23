@@ -15,6 +15,10 @@ import { dateLongue, type Locale } from "@/lib/i18n";
 import { OUTILS, OUTILS_EN } from "@/lib/nav";
 import * as I from "@/lib/engines/impot3a";
 import D from "@/data/assureurs-3a-3b.json";
+import { Alert } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 /* Page « 3a et 3b auprès d'un assureur » (FR /3e-pilier/assurance-3a-3b/, EN /en/pillar-3a/insurance-3a-3b/).
    Faits relevés le 23.11.2026 dans les documents publics des assureurs (src/data/assureurs-3a-3b.json) et dans le droit
@@ -287,11 +291,16 @@ export function PageAssurance3a({ locale }: { locale: Locale }) {
 
           <section className="bloc-3a">
             <h2>{t.typesTitre}</h2>
-            <dl className="types-3a">
+            <div className="types-3a">
               {t.typesDef.map(([dt, dd]) => (
-                <div key={dt}><dt>{dt}</dt><dd>{dd}</dd></div>
+                <Card key={dt} size="sm">
+                  <CardHeader>
+                    <CardTitle>{dt}</CardTitle>
+                    <CardDescription>{dd}</CardDescription>
+                  </CardHeader>
+                </Card>
               ))}
-            </dl>
+            </div>
             <p className="source-outil">{en ? "Source" : "Source"}{sep}<a href={SRC.cf}>{en ? "Federal Council, report on making pillar 3a more flexible (7.6.2024)" : "Conseil fédéral, rapport sur l’assouplissement du pilier 3a (7.6.2024)"}</a>.</p>
           </section>
 
@@ -299,26 +308,26 @@ export function PageAssurance3a({ locale }: { locale: Locale }) {
             <h2>{t.tableauTitre}</h2>
             <p>{t.tableauTexte}</p>
             <p className="note-outil ordre">{t.ordre}</p>
-            <table className="assureurs table-assureurs-3a">
-              <caption className="visually-hidden">{t.caption}</caption>
-              <thead>
-                <tr><th scope="col">{t.thAssureur}</th><th scope="col">{t.th3a}</th><th scope="col">{t.th3b}</th></tr>
-              </thead>
-              <tbody>
+            <Table className="table-assureurs-3a">
+              <TableCaption className="visually-hidden">{t.caption}</TableCaption>
+              <TableHeader>
+                <TableRow><TableHead scope="col">{t.thAssureur}</TableHead><TableHead scope="col">{t.th3a}</TableHead><TableHead scope="col">{t.th3b}</TableHead></TableRow>
+              </TableHeader>
+              <TableBody>
                 {ASSUREURS_3A.map((a) => (
-                  <tr key={a.id}>
-                    <th scope="row"><a href={`#${a.id}`}>{a.nom}</a></th>
+                  <TableRow key={a.id}>
+                    <TableHead scope="row"><a href={`#${a.id}`}>{a.nom}</a></TableHead>
                     {(["3a", "3b"] as const).map((pl) => (
-                      <td key={pl}>
+                      <TableCell key={pl}>
                         {typesDe(a, pl).length ? (
-                          <ul className="puces-types">{typesDe(a, pl).map((ty) => <li key={ty} data-type={ty}>{t.types[ty]}</li>)}</ul>
+                          <ul className="puces-types">{typesDe(a, pl).map((ty) => <li key={ty} data-type={ty}><Badge variant="outline">{t.types[ty]}</Badge></li>)}</ul>
                         ) : <span className="aucun">{t.aucun}</span>}
-                      </td>
+                      </TableCell>
                     ))}
-                  </tr>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           </section>
 
           <section className="bloc-3a">
@@ -335,7 +344,7 @@ export function PageAssurance3a({ locale }: { locale: Locale }) {
                       {a.produits.map((p) => (
                         <div className="contrat-3a" key={p.nom}>
                           <h3>{p.nom}</h3>
-                          <p className="etiquettes"><span>{t.pilier(p.pilier)}</span><span data-type={p.type || "nc"}>{t.types[(p.type || "nc") as TypeContrat]}</span></p>
+                          <p className="etiquettes"><Badge variant="outline">{t.pilier(p.pilier)}</Badge><Badge variant="outline" data-type={p.type || "nc"}>{t.types[(p.type || "nc") as TypeContrat]}</Badge></p>
                           <dl>
                             <div><dt>{t.primes}</dt><dd>{(en ? p.primes_en : p.primes_fr) || p.primes_fr}</dd></div>
                             <div><dt>{t.liberation}</dt><dd>{p.liberation_primes === true ? t.oui : p.liberation_primes === false ? t.non : t.nc}</dd></div>
@@ -353,31 +362,46 @@ export function PageAssurance3a({ locale }: { locale: Locale }) {
           <section className="bloc-3a">
             <h2>{t.comparTitre}</h2>
             <p>{t.comparTexte}</p>
-            <div className="table-defile">
-              <table className="assureurs table-compar-3a">
-                <caption className="visually-hidden">{t.comparTitre}</caption>
-                <thead>
-                  <tr><th scope="col">{t.thCritere}</th><th scope="col">{t.thAssurance}</th><th scope="col">{t.thBanque}</th></tr>
-                </thead>
-                <tbody>
-                  {t.compar.map(([c, a, b, u]) => (
-                    <tr key={c}>
-                      <th scope="row">{c}<a href={u} rel="noopener" className="src-ligne">{en ? "source" : "source"}</a></th>
-                      <td>{a}</td>
-                      <td>{b}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            {/* Mobile : une carte par critère ; à partir de 720 px : le tableau. */}
+            <div className="cartes-compar-3a min-[720px]:hidden">
+              {t.compar.map(([c, a, b, u]) => (
+                <Card key={c} size="sm">
+                  <CardHeader>
+                    <CardTitle>{c}</CardTitle>
+                    <CardDescription><a href={u} rel="noopener">{en ? "source" : "source"}</a></CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <dl>
+                      <div><dt>{t.thAssurance}</dt><dd>{a}</dd></div>
+                      <div><dt>{t.thBanque}</dt><dd>{b}</dd></div>
+                    </dl>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
+            <Table className="table-compar-3a hidden min-[720px]:table">
+              <TableCaption className="visually-hidden">{t.comparTitre}</TableCaption>
+              <TableHeader>
+                <TableRow><TableHead scope="col">{t.thCritere}</TableHead><TableHead scope="col">{t.thAssurance}</TableHead><TableHead scope="col">{t.thBanque}</TableHead></TableRow>
+              </TableHeader>
+              <TableBody>
+                {t.compar.map(([c, a, b, u]) => (
+                  <TableRow key={c}>
+                    <TableHead scope="row">{c}<a href={u} rel="noopener" className="src-ligne">{en ? "source" : "source"}</a></TableHead>
+                    <TableCell>{a}</TableCell>
+                    <TableCell>{b}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </section>
 
           <div className="cta-bas-3a">
             <CtaDemande locale={locale} porte="prevoyance" emplacement="outil3a" />
           </div>
-          <p className="lien-outil-3a">
-            <a href={en ? OUTILS_EN.taux3a : OUTILS.taux3a}>{t.lienFrais}</a> {t.lienFraisTexte}
-          </p>
+          <Alert variant="info" className="lien-outil-3a">
+            <p><a href={en ? OUTILS_EN.taux3a : OUTILS.taux3a}>{t.lienFrais}</a> {t.lienFraisTexte}</p>
+          </Alert>
         </div>
         <div className="wrap faq">
           <FaqSections faq={t.faq} />

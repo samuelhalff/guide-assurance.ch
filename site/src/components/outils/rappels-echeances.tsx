@@ -5,6 +5,8 @@ import { NOM_CONTRAT, evenementContrat, evenementFixe, prochain, type Contrat, t
 import type { Locale } from "@/lib/i18n";
 import { Choix } from "@/components/outils/choix";
 import { Case } from "@/components/controles";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent } from "@/components/ui/card";
 
 /* Page « Rappels d'échéance » : échéances légales cochées, puis contrats saisis par le visiteur.
    Tout reste dans le navigateur : aucune valeur n'est envoyée, gardée ou mesurée. */
@@ -64,7 +66,8 @@ export function RappelsEcheances({ aujourdhuiIso, locale = "fr" }: { aujourdhuiI
 
   return (
     <div className="ph-sensitive outil outil-rappels" data-ph-mask>
-      <section className="form bloc-rappels" aria-labelledby="t-fixes">
+      <section className="form" aria-labelledby="t-fixes">
+        <Card><CardContent className="bloc-rappels">
         <h2 id="t-fixes">{en ? "Which deadlines come back every year?" : `Quelles échéances reviennent chaque année${N}?`}</h2>
         <p className="aide-bloc">
           {en
@@ -86,7 +89,7 @@ export function RappelsEcheances({ aujourdhuiIso, locale = "fr" }: { aujourdhuiI
           <BoutonAgenda
             locale={locale}
             type="echeances"
-            className="bouton"
+            variant="default"
             fichier={en ? "insurance-deadlines.ics" : "echeances-assurance.ics"}
             disabled={!choisis.length}
             evenements={() => choisis.map((f) => evenementFixe(f.t, today, l))}
@@ -94,9 +97,11 @@ export function RappelsEcheances({ aujourdhuiIso, locale = "fr" }: { aujourdhuiI
             {en ? "Add these dates to my calendar" : "Ajouter ces dates à mon agenda"}
           </BoutonAgenda>
         </div>
+        </CardContent></Card>
       </section>
 
-      <section className="form bloc-rappels" aria-labelledby="t-contrats">
+      <section className="form mt-6" aria-labelledby="t-contrats">
+        <Card><CardContent className="bloc-rappels">
         <h2 id="t-contrats">{en ? "What about your other contracts?" : `Et vos autres contrats${N}?`}</h2>
         <p className="aide-bloc">
           {en
@@ -116,13 +121,13 @@ export function RappelsEcheances({ aujourdhuiIso, locale = "fr" }: { aujourdhuiI
               </div>
               <div className="champ">
                 <label htmlFor={`nom-${x.id}`}>{en ? "Name in your calendar (optional)" : "Nom dans votre agenda (facultatif)"}</label>
-                <input className="saisie" type="text" id={`nom-${x.id}`} maxLength={80} placeholder={en ? "Family car" : "Voiture familiale"} value={x.nom} onChange={maj(x.id, "nom")} />
+                <Input type="text" id={`nom-${x.id}`} maxLength={80} placeholder={en ? "Family car" : "Voiture familiale"} value={x.nom} onChange={maj(x.id, "nom")} />
               </div>
             </div>
             <div className="deux">
               <div className="champ">
                 <label htmlFor={`ech-${x.id}`}>{en ? "Renewal date" : "Échéance du contrat"}</label>
-                <input className="saisie" type="date" id={`ech-${x.id}`} placeholder={en ? "31.12.2027" : "31.12.2027"} value={x.echeance} onChange={maj(x.id, "echeance")} />
+                <Input type="date" id={`ech-${x.id}`} placeholder={en ? "31.12.2027" : "31.12.2027"} value={x.echeance} onChange={maj(x.id, "echeance")} />
               </div>
               <div className="champ">
                 <label htmlFor={`pre-${x.id}`}>{en ? "Notice period" : "Délai de préavis"}</label>
@@ -163,7 +168,7 @@ export function RappelsEcheances({ aujourdhuiIso, locale = "fr" }: { aujourdhuiI
           <BoutonAgenda
             locale={locale}
             type="contrats"
-            className="bouton"
+            variant="default"
             fichier={en ? "contract-reminders.ics" : "rappels-contrats.ics"}
             disabled={!contrats.length}
             evenements={() => contrats.map((c, i) => evenementContrat(c, i, today, l))}
@@ -174,6 +179,7 @@ export function RappelsEcheances({ aujourdhuiIso, locale = "fr" }: { aujourdhuiI
         {!contrats.length ? (
           <p className="note-outil">{en ? "Enter at least one renewal date to create the file." : "Saisissez au moins une échéance pour créer le fichier."}</p>
         ) : null}
+        </CardContent></Card>
       </section>
     </div>
   );

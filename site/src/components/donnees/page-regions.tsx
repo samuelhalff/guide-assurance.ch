@@ -11,6 +11,7 @@ import { abs } from "@/lib/site";
 import { DATE_PRIMES, DATE_PAGE_DONNEES, LICENCE_DONNEES } from "@/lib/donnees";
 import { dateLongue, type Locale } from "@/lib/i18n";
 import { OUTILS, OUTILS_EN, PAGES_DONNEES, PAGES_DONNEES_EN } from "@/lib/nav";
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 /* Primes LAMal 2027 par région de prime (idée 9 du rapport 08). Une seule page, une section ancrée par région :
    dix régions, dont trois se confondent avec leur canton (GE, NE, JU) ; des pages séparées seraient quasi
@@ -279,29 +280,27 @@ export function PageRegions({ locale }: { locale: Locale }) {
           <section className="reperes-statiques" aria-labelledby="resume">
             <h2 id="resume">{t.resumeTitre}</h2>
             <p>{t.resumeTexte}</p>
-            <div className="defile-table">
-              <table className="assureurs table-donnees">
-                <caption>{t.resumeCaption}</caption>
-                <thead>
-                  <tr>
-                    <th scope="col">{t.thRegion}</th>
-                    <th scope="col" className="num">{t.thMediane}</th>
-                    <th scope="col" className="num">{t.thOfsp}</th>
-                    <th scope="col" className="num">{t.thEcart}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {R.REGIONS.map((r) => (
-                    <tr key={r.cle}>
-                      <th scope="row"><a href={`#${r.cle}`}>{nomRegion(r, locale)}</a></th>
-                      <td className="num"><b>{nombre(adulte(r).mediane, locale, 2)}</b></td>
-                      <td className="num">{nombre(r.primeMoyenneOfsp.adulte, locale, 2)}</td>
-                      <td className="num">{pct(adulte(r).ecartPct, locale)}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <Table variant="chiffres" className="table-donnees">
+              <TableCaption>{t.resumeCaption}</TableCaption>
+              <TableHeader>
+                <TableRow>
+                  <TableHead scope="col">{t.thRegion}</TableHead>
+                  <TableHead scope="col">{t.thMediane}</TableHead>
+                  <TableHead scope="col">{t.thOfsp}</TableHead>
+                  <TableHead scope="col">{t.thEcart}</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {R.REGIONS.map((r) => (
+                  <TableRow key={r.cle}>
+                    <TableHead scope="row"><a href={`#${r.cle}`}>{nomRegion(r, locale)}</a></TableHead>
+                    <TableCell><b>{nombre(adulte(r).mediane, locale, 2)}</b></TableCell>
+                    <TableCell>{nombre(r.primeMoyenneOfsp.adulte, locale, 2)}</TableCell>
+                    <TableCell>{pct(adulte(r).ecartPct, locale)}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
             <Telechargement href={CSV} libelle={t.csv} detail={t.csvDetail} />
           </section>
 
@@ -319,31 +318,29 @@ export function PageRegions({ locale }: { locale: Locale }) {
                   {t.regionR(r)}
                   {autre ? ` ${t.voisine(r, autre)}` : ""}
                 </p>
-                <div className="defile-table">
-                  <table className="assureurs table-donnees">
-                    <caption>{t.tableCaption(r)}</caption>
-                    <thead>
-                      <tr>
-                        <th scope="col">{t.thProfil}</th>
-                        <th scope="col" className="num">{t.thQ1}</th>
-                        <th scope="col" className="num">{t.thMediane}</th>
-                        <th scope="col" className="num">{t.thQ3}</th>
-                        <th scope="col" className="num">{t.thPlage}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {r.profils.map((p) => (
-                        <tr key={p.id}>
-                          <th scope="row">{profils[p.id]}</th>
-                          <td className="num">{nombre(p.q1, locale, 2)}</td>
-                          <td className="num"><b>{nombre(p.mediane, locale, 2)}</b></td>
-                          <td className="num">{nombre(p.q3, locale, 2)}</td>
-                          <td className="num">{t.plage(p.min, p.max)}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+                <Table variant="chiffres" className="table-donnees">
+                  <TableCaption>{t.tableCaption(r)}</TableCaption>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead scope="col">{t.thProfil}</TableHead>
+                      <TableHead scope="col">{t.thQ1}</TableHead>
+                      <TableHead scope="col">{t.thMediane}</TableHead>
+                      <TableHead scope="col">{t.thQ3}</TableHead>
+                      <TableHead scope="col">{t.thPlage}</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {r.profils.map((p) => (
+                      <TableRow key={p.id}>
+                        <TableHead scope="row">{profils[p.id]}</TableHead>
+                        <TableCell>{nombre(p.q1, locale, 2)}</TableCell>
+                        <TableCell><b>{nombre(p.mediane, locale, 2)}</b></TableCell>
+                        <TableCell>{nombre(p.q3, locale, 2)}</TableCell>
+                        <TableCell>{t.plage(p.min, p.max)}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
                 <p className="lien-region">
                   <a href={`${comparateur}${R.hashComparateur(r, R.PROFILS[0])}`}>{t.lienComparateur(r)}</a>{" "}
                   <span>{t.lienComparateurTexte}</span>

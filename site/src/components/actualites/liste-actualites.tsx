@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
 import { Breadcrumbs } from "@/components/site/breadcrumbs";
 import { JsonLd } from "@/components/site/json-ld";
+import { Alert } from "@/components/ui/alert";
 import { ORG_ID, WEBSITE_ID, breadcrumbLd, graph } from "@/lib/jsonld";
 import { DICT, dateLongue } from "@/lib/i18n";
 import { SITE_NAME, abs } from "@/lib/site";
@@ -89,7 +90,7 @@ export function ListeActualites({ l, articles, lien = cheminArticle, apercu }: {
       <SiteHeader current="actualites" locale={l} altPath={BASE_ACTUALITES[l === "fr" ? "en" : "fr"]} />
       <main>
         <div className="wrap">
-          {apercu ? <p className="apercu-bandeau" role="note">{apercu}</p> : null}
+          {apercu ? <Alert variant="attention" className="mt-4" role="note">{apercu}</Alert> : null}
           <Breadcrumbs items={miettes} locale={l} />
           <h1>{t.h1}</h1>
           <p className="chapo">{t.chapo}</p>

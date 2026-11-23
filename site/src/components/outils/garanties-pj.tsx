@@ -3,6 +3,9 @@ import { useRef, useState } from "react";
 import { suivre } from "@/lib/analytics";
 import type { Locale } from "@/lib/i18n";
 import { ChoixBoutons, Depliable } from "@/components/controles";
+import { Alert } from "@/components/ui/alert";
+import { Card, CardContent } from "@/components/ui/card";
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { CONTRATS, DOMAINES, NOM_COUVERTURE, NOM_DOMAINE, NOM_STATUT, type Domaine, type Statut } from "@/lib/garanties-pj";
 
 /* Tableau des garanties de protection juridique. Ordre alphabétique fixe ; le filtre par domaine met en évidence la
@@ -113,7 +116,8 @@ export function GarantiesPj({ locale }: { locale: Locale }) {
       {/* Mobile : cartes */}
       <ul className="cartes-pj">
         {CONTRATS.map((c) => (
-          <li key={c.id} className="carte-pj">
+          <li key={c.id}>
+            <Card><CardContent className="carte-pj">
             <h3>
               {c.assureur}
               <span>{c.produit}</span>
@@ -125,10 +129,10 @@ export function GarantiesPj({ locale }: { locale: Locale }) {
               {t.porteur} {c.porteur}
             </p>
             {dom ? (
-              <p className="en-evidence">
+              <Alert variant="info" className="en-evidence">
                 <b>{NOM_DOMAINE[locale][dom]}</b>
                 <Statut s={c.domaines[dom].s} locale={locale} note={c.domaines[dom].note?.[locale]} />
-              </p>
+              </Alert>
             ) : null}
             <dl>
               <dt>{t.plafondCh}</dt>
@@ -166,6 +170,7 @@ export function GarantiesPj({ locale }: { locale: Locale }) {
             <p className="doc">
               {t.document}{locale === "fr" ? "\u202f" : ""}: <a href={c.doc.url}>{c.doc.titre}</a>, {c.doc.version}
             </p>
+            </CardContent></Card>
           </li>
         ))}
       </ul>
@@ -174,7 +179,7 @@ export function GarantiesPj({ locale }: { locale: Locale }) {
       <div className="tables-pj">
         <h3>{t.domainesTitre}</h3>
         <div className="defile defile-domaines" tabIndex={0} role="region" aria-label={t.domainesCap}>
-          <table className="assureurs table-domaines">
+          <table className="table-domaines">
             <caption className="visually-hidden">{t.domainesCap}</caption>
             <thead>
               <tr>
@@ -203,41 +208,39 @@ export function GarantiesPj({ locale }: { locale: Locale }) {
         </div>
 
         <h3>{t.conditions}</h3>
-        <div className="defile">
-          <table className="assureurs table-pj">
-            <caption className="visually-hidden">{t.conditionsCap}</caption>
-            <thead>
-              <tr>
-                <th scope="col">{t.contrat}</th>
-                <th scope="col">{t.plafondCh}</th>
-                <th scope="col">{t.plafondEu}</th>
-                <th scope="col">{t.plafondMonde}</th>
-                <th scope="col">{t.carence}</th>
-                <th scope="col">{t.franchise}</th>
-                <th scope="col">{t.libreChoix}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {CONTRATS.map((c) => (
-                <tr key={c.id}>
-                  <th scope="row">
-                    <b>{c.assureur}</b>
-                    <span className="produit">{c.produit}</span>
-                    <span className="type">{NOM_COUVERTURE[locale][c.couverture]}{c.variante ? `, ${c.variante[locale]}` : ""}</span>
-                    <span className="type">{t.porteur} {c.porteur}</span>
-                    <a className="doc" href={c.doc.url}>{c.doc.version}</a>
-                  </th>
-                  <td>{c.plafond.suisse[locale]}</td>
-                  <td>{c.plafond.europe[locale]}</td>
-                  <td>{c.plafond.monde[locale]}</td>
-                  <td>{c.carence[locale]}</td>
-                  <td>{c.franchise[locale]}</td>
-                  <td>{c.libreChoix[locale]}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <Table className="table-pj">
+          <TableCaption className="visually-hidden">{t.conditionsCap}</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">{t.contrat}</TableHead>
+              <TableHead scope="col">{t.plafondCh}</TableHead>
+              <TableHead scope="col">{t.plafondEu}</TableHead>
+              <TableHead scope="col">{t.plafondMonde}</TableHead>
+              <TableHead scope="col">{t.carence}</TableHead>
+              <TableHead scope="col">{t.franchise}</TableHead>
+              <TableHead scope="col">{t.libreChoix}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {CONTRATS.map((c) => (
+              <TableRow key={c.id}>
+                <TableHead scope="row" className="align-top">
+                  <b>{c.assureur}</b>
+                  <span className="produit">{c.produit}</span>
+                  <span className="type">{NOM_COUVERTURE[locale][c.couverture]}{c.variante ? `, ${c.variante[locale]}` : ""}</span>
+                  <span className="type">{t.porteur} {c.porteur}</span>
+                  <a className="doc" href={c.doc.url}>{c.doc.version}</a>
+                </TableHead>
+                <TableCell className="align-top">{c.plafond.suisse[locale]}</TableCell>
+                <TableCell className="align-top">{c.plafond.europe[locale]}</TableCell>
+                <TableCell className="align-top">{c.plafond.monde[locale]}</TableCell>
+                <TableCell className="align-top">{c.carence[locale]}</TableCell>
+                <TableCell className="align-top">{c.franchise[locale]}</TableCell>
+                <TableCell className="align-top">{c.libreChoix[locale]}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
 
         <h3>{t.exclusions}</h3>
         <dl className="exclusions-pj">

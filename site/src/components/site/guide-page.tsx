@@ -17,6 +17,7 @@ import { jsonLdAccueil } from "@/lib/jsonld-accueil";
 import { TEXTE_LANDING, ZONE_DESSERVIE, type Landing } from "@/lib/landing";
 import { outils } from "@/lib/nav";
 import { TEXTE_CTA, estPorteOffre } from "@/lib/demande";
+import { buttonVariants } from "@/components/ui/button";
 
 export type Source = { label: string; href?: string };
 export type OutilLie = { href: string; titre: string; detail?: string };
@@ -219,7 +220,7 @@ export function GuidePage({
             <CtaDemande locale={locale} porte={porte} />
           ) : landing ? (
             <div className="cta-demande">
-              <LienRappel locale={locale} emplacement="produit" sujet={landing.sujet} className="bouton">
+              <LienRappel locale={locale} emplacement="produit" sujet={landing.sujet} className={buttonVariants({ className: "max-[719px]:justify-between" })}>
                 <IconeTelephone />
                 {tl.rappelBouton}
               </LienRappel>

@@ -10,6 +10,8 @@ import { abs } from "@/lib/site";
 import { DATE_PAGE_DONNEES, LICENCE_DONNEES } from "@/lib/donnees";
 import { dateLongue, type Locale } from "@/lib/i18n";
 import { OUTILS, OUTILS_EN, PAGES_DONNEES, PAGES_DONNEES_EN } from "@/lib/nav";
+import { Alert } from "@/components/ui/alert";
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 /* Historique des taux des comptes 3a (idée 2 du rapport 08) : un relevé chaque lundi depuis le 22.11.2026,
    moyenne et médiane par date, graphique SVG (le tableau reste la source), CSV, notes datées aux décisions de la
@@ -268,31 +270,29 @@ export function PageHistorique3a({ locale }: { locale: Locale }) {
             <h2>{t.evolTitre}</h2>
             <p>{t.evol}</p>
             <Graphique locale={locale} />
-            <div className="defile-table">
-              <table className="assureurs table-donnees">
-                <caption>{t.serieCaption}</caption>
-                <thead>
-                  <tr>
-                    <th scope="col">{t.thDate}</th>
-                    <th scope="col" className="num">{t.thN}</th>
-                    <th scope="col" className="num">{t.thMoy}</th>
-                    <th scope="col" className="num">{t.thMed}</th>
-                    <th scope="col" className="num">{t.thPlage}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {[...H.SERIE].reverse().map((p) => (
-                    <tr key={p.date}>
-                      <th scope="row"><time dateTime={p.date}>{dc(p.date)}</time></th>
-                      <td className="num">{p.n}</td>
-                      <td className="num"><b>{nombre(p.moyenne, locale, 3)}</b></td>
-                      <td className="num"><b>{nombre(p.mediane, locale, 2)}</b></td>
-                      <td className="num">{t.plage(p.min, p.max)}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <Table variant="chiffres" className="table-donnees">
+              <TableCaption>{t.serieCaption}</TableCaption>
+              <TableHeader>
+                <TableRow>
+                  <TableHead scope="col">{t.thDate}</TableHead>
+                  <TableHead scope="col">{t.thN}</TableHead>
+                  <TableHead scope="col">{t.thMoy}</TableHead>
+                  <TableHead scope="col">{t.thMed}</TableHead>
+                  <TableHead scope="col">{t.thPlage}</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {[...H.SERIE].reverse().map((p) => (
+                  <TableRow key={p.date}>
+                    <TableHead scope="row"><time dateTime={p.date}>{dc(p.date)}</time></TableHead>
+                    <TableCell>{p.n}</TableCell>
+                    <TableCell><b>{nombre(p.moyenne, locale, 3)}</b></TableCell>
+                    <TableCell><b>{nombre(p.mediane, locale, 2)}</b></TableCell>
+                    <TableCell>{t.plage(p.min, p.max)}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
             <Telechargement href={CSV} libelle={t.csv} detail={t.csvDetail} />
           </section>
 
@@ -312,34 +312,34 @@ export function PageHistorique3a({ locale }: { locale: Locale }) {
           <section className="reperes-statiques">
             <h2>{t.banquesTitre}</h2>
             <p>{t.banques}</p>
-            <div className="defile-table">
-              <table className="assureurs table-donnees">
-                <caption>{t.banquesCaption}</caption>
-                <thead>
-                  <tr>
-                    <th scope="col">{t.thBanque}</th>
-                    <th scope="col" className="num">{t.thPremier}</th>
-                    <th scope="col" className="num">{t.thDernier}</th>
-                    <th scope="col" className="num">{t.thDepuis}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {COMPTES.map((c) => (
-                    <tr key={c.id}>
-                      <th scope="row">{c.banque}</th>
-                      <td className="num">{PREMIERS.has(c.id) ? nombre(PREMIERS.get(c.id)!, locale, 2) : ""}</td>
-                      <td className="num"><b>{nombre(c.taux, locale, 2)}</b></td>
-                      <td className="num">{c.taux_valable_des ? dc(c.taux_valable_des) : fr ? "non publié" : "not published"}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <Table variant="chiffres" className="table-donnees">
+              <TableCaption>{t.banquesCaption}</TableCaption>
+              <TableHeader>
+                <TableRow>
+                  <TableHead scope="col">{t.thBanque}</TableHead>
+                  <TableHead scope="col">{t.thPremier}</TableHead>
+                  <TableHead scope="col">{t.thDernier}</TableHead>
+                  <TableHead scope="col">{t.thDepuis}</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {COMPTES.map((c) => (
+                  <TableRow key={c.id}>
+                    <TableHead scope="row">{c.banque}</TableHead>
+                    <TableCell>{PREMIERS.has(c.id) ? nombre(PREMIERS.get(c.id)!, locale, 2) : ""}</TableCell>
+                    <TableCell><b>{nombre(c.taux, locale, 2)}</b></TableCell>
+                    <TableCell>{c.taux_valable_des ? dc(c.taux_valable_des) : fr ? "non publié" : "not published"}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </section>
 
-          <p className="lien-outil-3a">
-            <a href={fr ? OUTILS.taux3a : OUTILS_EN.taux3a}>{t.lienTaux}</a> {t.lienTauxTexte}
-          </p>
+          <Alert variant="info" className="lien-outil-3a">
+            <p>
+              <a href={fr ? OUTILS.taux3a : OUTILS_EN.taux3a}>{t.lienTaux}</a> {t.lienTauxTexte}
+            </p>
+          </Alert>
           <AppelRappel locale={locale} sujet="prevoyance" question={t.rappelQ} />
         </div>
         <Faqs faq={t.faq} maj={t.maj} />

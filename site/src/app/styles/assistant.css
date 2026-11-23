@@ -88,18 +88,10 @@
   }
   .assistant-exemples button:hover { border-color: var(--encre); }
 
-  .assistant-rappel {
-    align-self: stretch; display: grid; gap: var(--s3); padding: var(--s4);
-    background: var(--papier); border: 1px solid var(--encre); border-radius: var(--r);
-  }
+  .assistant-rappel { align-self: stretch; flex: 0 0 auto; }
   .assistant-rappel-titre { margin: 0; font: 700 17px/1.25 var(--sans); }
   .assistant-puces { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
-  .assistant-puces li {
-    padding: 5px 10px; border: 1px solid var(--sentier); border-radius: 999px; background: var(--sentier-teinte);
-    font: 600 14px/1.2 var(--narrow); color: var(--encre);
-  }
   .assistant-rappel-texte { margin: 0; font: 14px/1.45 var(--narrow); color: var(--encre-2); }
-  .assistant-rappel .bouton { justify-content: center; width: 100%; }
   /* Bloc de demande en ligne (capture-rappel.tsx) dans le fil : pleine largeur, titre plus court. */
   .assistant-capture { align-self: stretch; flex: 0 0 auto; scroll-margin-top: var(--s3); }
   .assistant-capture .capture-titre { font-size: 17px; }

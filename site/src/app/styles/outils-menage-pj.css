@@ -1,14 +1,10 @@
 /* Calculateur de la somme d'assurance ménage et tableau des garanties de protection juridique. Mobile d'abord (390 px).
-   Reprend les composants communs des outils (.form, .pastille, .champ, table.assureurs, .cta-demande, .barre-demande). */
+   Reprend les composants communs des outils (.form, .pastille, .champ, .cta-demande, .barre-demande). */
 @layer components {
   /* ---------- Appels « Recevoir des offres » ---------- */
   .cta-offres { margin: var(--s4) 0 0; }
   .cta-offres.apres-tableau { margin: var(--s6) 0 var(--s7); }
-  .en-bref {
-    margin: var(--s5) 0 0; padding: var(--s3) var(--s4); max-width: 68ch;
-    background: var(--info-teinte); border: 1px solid var(--lac-trait); border-radius: var(--r); font-size: 16px;
-  }
-  .en-bref b { font-weight: 700; }
+  .en-bref { margin: var(--s5) 0 0; max-width: 68ch; }
   .en-bref ul { margin: var(--s2) 0 0; padding-left: 1.2em; list-style: disc; }
   .en-bref li { margin-bottom: 2px; }
 
@@ -21,24 +17,19 @@
   .outil-menage .pastille small { display: block; font: 13px var(--narrow); color: var(--encre-2); font-weight: 400; }
   .outil-menage .pastille span { flex-direction: column; line-height: 1.15; }
   .resultat-menage { display: grid; gap: var(--s3); align-content: start; }
-  .somme-menage {
-    background: var(--papier); border: 1.5px solid var(--encre); border-radius: var(--r); padding: var(--s4);
-  }
   .page-outil .somme-menage h2 { font: 700 16px var(--narrow); color: var(--encre-2); margin: 0; letter-spacing: 0; }
   .somme-menage .montant { font: 800 40px/1.1 var(--sans); letter-spacing: -.02em; margin: 4px 0 0; font-variant-numeric: tabular-nums; }
   .somme-menage .montant small { font: 600 18px var(--narrow); color: var(--encre-2); letter-spacing: 0; }
   .somme-menage .base { margin: 2px 0 0; font: 15px var(--narrow); color: var(--encre-2); }
   .page-outil .somme-menage .cta-offres { margin: var(--s4) 0 0; }
-  .somme-menage .cta-offres .bouton { width: 100%; justify-content: center; }
-  .valeur-a-part { margin: 0; font-size: 16px; padding: var(--s3) var(--s4); border: 1px solid var(--filet); border-radius: var(--r); background: var(--papier); }
+  /* Barre collante (BarreOffres) : seconde ligne plus petite sous le libellé du bouton. */
 
-  .affiner { background: var(--papier); border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s3) var(--s4); }
   .affiner > .depliable-titre { font: 700 17px var(--sans); color: var(--lac-encre); }
   .affiner .note-outil { margin: var(--s2) 0 var(--s3); }
   .categories { display: grid; gap: var(--s2) var(--s3); grid-template-columns: 1fr 1fr; }
   .categories .champ { margin: 0; }
   .categories label { font-size: 15px; }
-  .categories .saisie { font-variant-numeric: tabular-nums; }
+  .categories [data-slot="input"] { font-variant-numeric: tabular-nums; }
   .categories .champ.large { grid-column: 1 / -1; }
   .total-affine { margin: var(--s3) 0 0; font-size: 16px; }
   .total-affine b { font-variant-numeric: tabular-nums; }
@@ -46,7 +37,7 @@
   .sous-assurance { margin: var(--s6) 0 0; }
   .sous-assurance h2 { margin-bottom: var(--s3); }
   .sous-assurance > p { max-width: 68ch; margin: 0 0 var(--s3); }
-  .verif-police { background: var(--papier); border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s4); max-width: 44rem; }
+  .verif-police { max-width: 44rem; }
   .verif-police .ligne .champ { margin: 0; }
   .verif-police .reponse { margin: var(--s3) 0 0; font-size: 17px; }
   .verif-police .reponse b { font-variant-numeric: tabular-nums; }
@@ -81,11 +72,10 @@
   .statut-non > span, .statut-nd > span { color: var(--encre-2); }
 
   .cartes-pj { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s3); }
-  .carte-pj { background: var(--papier); border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s4); }
   .page-outil .carte-pj h3 { font: 800 20px/1.15 var(--sans); margin: 0; letter-spacing: -.01em; }
   .carte-pj h3 span { display: block; font: 600 16px var(--narrow); color: var(--encre-2); margin-top: 2px; letter-spacing: 0; }
   .carte-pj .couverture { margin: var(--s1) 0 var(--s3); font: 14px var(--narrow); color: var(--encre-2); }
-  .carte-pj .en-evidence { display: grid; gap: 2px; margin: 0 0 var(--s3); padding: var(--s2) var(--s3); background: var(--info-teinte); border-radius: var(--r); font-size: 15px; }
+  .carte-pj .en-evidence { margin: 0 0 var(--s3); }
   .carte-pj dl { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 6px var(--s3); margin: 0; font-size: 15px; }
   .carte-pj dt { font: 14px var(--narrow); color: var(--encre-2); }
   .carte-pj dd { margin: 0; }
@@ -129,7 +119,7 @@
   }
   @media (min-width: 1000px) {
     .outil-menage { grid-template-columns: minmax(320px, .9fr) minmax(0, 1.1fr); align-items: start; }
-    .outil-menage .form { position: sticky; top: calc(var(--tete-h) + var(--s4)); padding: var(--s5); }
+    .outil-menage .form { position: sticky; top: calc(var(--tete-h) + var(--s4)); }
     .cartes-pj { display: none; }
     .tables-pj { display: block; }
   }

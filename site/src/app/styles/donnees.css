@@ -2,12 +2,7 @@
    taux 3a, chiffres clés 2027. Mobile d'abord (390 px) ; tableaux larges défilent dans leur cadre. */
 @layer components {
   .page-donnees .reperes-statiques { margin-bottom: var(--s6); }
-  .defile-table { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 0 var(--s3); border-radius: var(--r); }
-  .defile-table:focus-visible { outline: 2px solid var(--lac-encre); outline-offset: 2px; }
-  table.table-donnees { min-width: 100%; font-variant-numeric: tabular-nums; }
   table.table-donnees th, table.table-donnees td { white-space: nowrap; }
-  table.table-donnees td.num, table.table-donnees th.num { text-align: right; }
-  table.table-donnees tbody th { font-weight: 600; text-align: left; }
   table.table-donnees caption { white-space: normal; position: sticky; left: 0; max-width: calc(100vw - 32px); }
   table.table-donnees small { display: block; font: 13px var(--narrow); color: var(--encre-2); }
   table.table-donnees th button.tri {
@@ -54,8 +49,7 @@
   .sommaire-chiffres li { margin-bottom: var(--s2); }
   .chiffres-groupe { scroll-margin-top: 80px; }
   ol.faits { list-style: none; margin: var(--s4) 0 0; padding: 0; display: grid; gap: var(--s3); }
-  .fait { scroll-margin-top: 80px; background: var(--papier); border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s3) var(--s4); }
-  .fait:target { border-color: var(--lac-encre); box-shadow: 0 0 0 2px var(--lac-encre) inset; }
+  .fait { scroll-margin-top: 80px; }
   .fait-texte { margin: 0; font-size: 17px; }
   .fait .ancre { color: var(--encre-2); text-decoration: none; padding: 0 4px; }
   .fait .ancre:hover, .fait .ancre:focus-visible { color: var(--lac-encre); text-decoration: underline; }

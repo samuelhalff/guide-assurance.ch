@@ -7,6 +7,12 @@ import { suivre } from "@/lib/analytics";
 import { Case, ChoixBoutons, Depliable } from "@/components/controles";
 import { CtaDemande } from "@/components/demande/cta-demande";
 import { TEXTE_CTA, ecrirePreremplissage, lienDemande } from "@/lib/demande";
+import { cn } from "cn";
+import { buttonVariants } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Alert } from "@/components/ui/alert";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 /* Simulateur frontalier : le foyer se décrit personne par personne, comme dans le comparateur de primes
    (comparateur-primes.tsx). Calcul : src/lib/engines/frontaliers.ts (comparerFoyer). Résultat instantané, sans bouton.
@@ -285,7 +291,7 @@ export function SimulateurFrontalier({ locale = "fr" }: { locale?: Locale }) {
   return (
     <>
       <div className="cta-haut-outil">
-        <a className="bouton" href={lienDemande(locale, "frontaliers")} onClick={prerempli}>
+        <a data-slot="button" className={cn(buttonVariants(), "max-[719px]:justify-between")} href={lienDemande(locale, "frontaliers")} onClick={prerempli}>
           {TEXTE_CTA[locale].bouton}
           <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="2" /></svg>
         </a>
@@ -294,6 +300,7 @@ export function SimulateurFrontalier({ locale = "fr" }: { locale?: Locale }) {
 
       <div className="ph-sensitive outil outil-simulateur outil-frontalier" data-ph-mask>
         <form ref={formRef} className="form" onSubmit={(ev) => ev.preventDefault()} noValidate>
+          <Card><CardContent>
           <fieldset>
             <legend>{t.etape}</legend>
             <Pastilles
@@ -325,8 +332,7 @@ export function SimulateurFrontalier({ locale = "fr" }: { locale?: Locale }) {
                   <div className="ligne">
                     <div className="champ">
                       <label htmlFor={`sf-n-${p.id}`}>{t.naissance}</label>
-                      <input
-                        className="saisie"
+                      <Input
                         id={`sf-n-${p.id}`}
                         inputMode="numeric"
                         maxLength={4}
@@ -339,8 +345,7 @@ export function SimulateurFrontalier({ locale = "fr" }: { locale?: Locale }) {
                     {frontalier ? (
                       <div className="champ">
                         <label htmlFor={`sf-r-${p.id}`}>{t.revenu}</label>
-                        <input
-                          className="saisie"
+                        <Input
                           id={`sf-r-${p.id}`}
                           inputMode="numeric"
                           placeholder="55000"
@@ -372,7 +377,7 @@ export function SimulateurFrontalier({ locale = "fr" }: { locale?: Locale }) {
                         choisir={(x) => maj(p.id, { situation: x })}
                         label={(x) => t.situations[x]}
                       />
-                      <p className={p.situation === "autre" ? "provisoire" : "note-outil"}>{t.notes[p.situation]}</p>
+                      {p.situation === "autre" ? <Alert variant="attention" className="provisoire">{t.notes[p.situation]}</Alert> : <p className="note-outil">{t.notes[p.situation]}</p>}
                     </>
                   ) : null}
                   {frontalier ? (
@@ -395,39 +400,48 @@ export function SimulateurFrontalier({ locale = "fr" }: { locale?: Locale }) {
             <Depliable className="taux-change" titre={<>{t.change}{isEn ? ": " : `${T}: `}{tx.replace(".", isEn ? "." : ",")}</>}>
               <div className="champ">
                 <label htmlFor="sf-tx">{t.changeLabel}</label>
-                <input className="saisie" id="sf-tx" inputMode="decimal" value={tx} onChange={(e) => setTx(e.target.value.replace(",", ".").replace(/[^\d.]/g, "").slice(0, 5))} />
+                <Input id="sf-tx" inputMode="decimal" value={tx} onChange={(e) => setTx(e.target.value.replace(",", ".").replace(/[^\d.]/g, "").slice(0, 5))} />
                 <span className="aide">{t.changeAide}</span>
               </div>
             </Depliable>
           </fieldset>
+          </CardContent></Card>
         </form>
 
-        <section className="apercu" aria-live="polite" ref={resultatRef}>
+        <section className="apercu" ref={resultatRef}>
           <h2 className="titre-resultat">{t.resultat}</h2>
-          {!c ? (
-            <p className="attente">{t.attente}</p>
-          ) : (
+          {c ? (
+            <div className="duel duel-serre">
+              <Card size="sm" className="duel-option row-span-3 grid grid-rows-subgrid gap-y-0">
+                <CardContent className="row-span-3 grid grid-rows-subgrid">
+                <h3>{t.france}</h3>
+                <div className="prix"><small className="des">{t.environ}</small> {chf(c.france.chf)} <small>{t.parAn}</small></div>
+                <p>{t.enEuros(eur(c.france.eur), eur(c.france.mensuelEur), t.cotisations(nF))}</p>
+                </CardContent>
+              </Card>
+              <Card size="sm" className="duel-option row-span-3 grid grid-rows-subgrid gap-y-0">
+                <CardContent className="row-span-3 grid grid-rows-subgrid">
+                <h3>{t.lamal}</h3>
+                <div className="prix"><small className="des">{t.des}</small> {chf(Math.round(c.lamal.min * 12))} <small>{t.parAn}</small></div>
+                <p>{t.mediane(chf(Math.round(c.lamal.mediane * 12)), chf(Math.round(c.lamal.max * 12)), c.assuresCH.length)}</p>
+                </CardContent>
+              </Card>
+            </div>
+          ) : null}
+          {c && etape === "fait" ? <Alert variant="attention" className="provisoire">{t.dejaChoisi}</Alert> : null}
+          {/* Seule ligne annoncée aux lecteurs d'écran : la phrase d'attente, puis la synthèse (même nœud, toujours présent). */}
+          <div aria-live="polite">
+            {c ? <Alert variant="info" className="verdict">{verdict}</Alert> : <p className="attente">{t.attente}</p>}
+          </div>
+          {c ? (
             <>
-              <div className="duel duel-serre">
-                <div className="duel-option">
-                  <h3>{t.france}</h3>
-                  <div className="prix"><small className="des">{t.environ}</small> {chf(c.france.chf)} <small>{t.parAn}</small></div>
-                  <p>{t.enEuros(eur(c.france.eur), eur(c.france.mensuelEur), t.cotisations(nF))}</p>
-                </div>
-                <div className="duel-option">
-                  <h3>{t.lamal}</h3>
-                  <div className="prix"><small className="des">{t.des}</small> {chf(Math.round(c.lamal.min * 12))} <small>{t.parAn}</small></div>
-                  <p>{t.mediane(chf(Math.round(c.lamal.mediane * 12)), chf(Math.round(c.lamal.max * 12)), c.assuresCH.length)}</p>
-                </div>
-              </div>
-              {etape === "fait" ? <p className="provisoire">{t.dejaChoisi}</p> : null}
-              <p className="verdict">{verdict}</p>
               <div ref={ctaRef}>
                 <CtaDemande locale={locale} porte="frontaliers" emplacement="frontalier" onClick={prerempli} />
               </div>
 
-              <div className="qui">
-                <h3>{t.qui}</h3>
+              <Card size="sm" className="qui">
+                <CardHeader><CardTitle><h3>{t.qui}</h3></CardTitle></CardHeader>
+                <CardContent>
                 <p>{t.quiLamal}</p>
                 <ul>
                   {c.assuresCH.map((p) => (
@@ -439,27 +453,28 @@ export function SimulateurFrontalier({ locale = "fr" }: { locale?: Locale }) {
                 <p>{t.quiFrance(nF, c.assuresCH.length > nF)}</p>
                 {c.horsChoix.length ? <p>{t.horsChoix(c.horsChoix.map((p) => qui(p.qui)).join(", "))}</p> : null}
                 {c.horsCalcul.length ? <p>{t.horsCalcul(c.horsCalcul.map((p) => qui(p.qui)).join(", "))}</p> : null}
-              </div>
-              {provisoires.length ? <p className="provisoire">{t.provisoire(provisoires.map((x) => (isEn ? PROVISOIRE_EN[x] ?? x : x)).join(isEn ? "; " : `${T}; `))}</p> : null}
+                </CardContent>
+              </Card>
+              {provisoires.length ? <Alert variant="attention" className="provisoire">{t.provisoire(provisoires.map((x) => (isEn ? PROVISOIRE_EN[x] ?? x : x)).join(isEn ? "; " : `${T}; `))}</Alert> : null}
 
-              <table className="assureurs">
-                <caption>{t.caption(c.lamal.liste.length)}</caption>
-                <thead>
-                  <tr><th scope="col">{t.thAssureur}</th><th scope="col">{t.thMois}</th><th scope="col">{t.thAn}</th></tr>
-                </thead>
-                <tbody>
+              <Table variant="chiffres">
+                <TableCaption>{t.caption(c.lamal.liste.length)}</TableCaption>
+                <TableHeader>
+                  <TableRow><TableHead scope="col">{t.thAssureur}</TableHead><TableHead scope="col">{t.thMois}</TableHead><TableHead scope="col">{t.thAn}</TableHead></TableRow>
+                </TableHeader>
+                <TableBody>
                   {c.lamal.liste.map((r) => (
-                    <tr key={r.no}>
-                      <td>{r.nom}<span className="barre" style={{ width: `${Math.round((r.mensuel / mx) * 100)}%` }} /></td>
-                      <td>{nf(r.mensuel, 2)}</td>
-                      <td>{nf(Math.round(r.annuel))}</td>
-                    </tr>
+                    <TableRow key={r.no}>
+                      <TableCell>{r.nom}<span className="barre" style={{ width: `${Math.round((r.mensuel / mx) * 100)}%` }} /></TableCell>
+                      <TableCell>{nf(r.mensuel, 2)}</TableCell>
+                      <TableCell>{nf(Math.round(r.annuel))}</TableCell>
+                    </TableRow>
                   ))}
-                </tbody>
-              </table>
+                </TableBody>
+              </Table>
               <p className="source-outil">{t.source}</p>
             </>
-          )}
+          ) : null}
         </section>
       </div>
 
@@ -468,7 +483,7 @@ export function SimulateurFrontalier({ locale = "fr" }: { locale?: Locale }) {
           <button type="button" className="barre-resume" onClick={() => resultatRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })} aria-label={t.voirResultat}>
             {t.barre(chf(c.france.chf), chf(Math.round(c.lamal.min * 12)))}
           </button>
-          <a className="bouton" href={lienDemande(locale, "frontaliers")} onClick={prerempli}>{TEXTE_CTA[locale].bouton}</a>
+          <a data-slot="button" className={buttonVariants({ size: "barre" })} href={lienDemande(locale, "frontaliers")} onClick={prerempli}>{TEXTE_CTA[locale].bouton}</a>
         </div>
       ) : null}
     </>

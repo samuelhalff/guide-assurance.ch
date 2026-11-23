@@ -1,6 +1,8 @@
 "use client";
 import type { ReactNode } from "react";
 import type { Locale } from "@/lib/i18n";
+import { cn } from "cn";
+import { buttonVariants } from "@/components/ui/button";
 
 /* Appel « Recevoir des offres » des outils ménage et protection juridique : même bouton que CtaDemande, mais vers une
    porte de la demande (adresse construite par DEMANDE_PORTE, src/lib/demande-porte.ts).
@@ -16,11 +18,12 @@ const FLECHE = (
   </svg>
 );
 
-export function CtaOffres({ locale, href, libelle, note, className }: { locale: Locale; href: string; libelle?: string; note?: ReactNode; className?: string }) {
+/* `pleine` : bouton sur toute la largeur, libellé centré (encadré du résultat ménage). */
+export function CtaOffres({ locale, href, libelle, note, className, pleine }: { locale: Locale; href: string; libelle?: string; note?: ReactNode; className?: string; pleine?: boolean }) {
   const t = TEXTE_OFFRES[locale];
   return (
     <div className={`cta-demande cta-offres${className ? ` ${className}` : ""}`}>
-      <a className="bouton" href={href}>
+      <a data-slot="button" className={cn(buttonVariants(), pleine ? "w-full justify-center" : "max-[719px]:justify-between")} href={href}>
         {libelle ?? t.bouton}
         {FLECHE}
       </a>
@@ -33,7 +36,7 @@ export function CtaOffres({ locale, href, libelle, note, className }: { locale: 
 export function BarreOffres({ locale, href, libelle, detail, visible }: { locale: Locale; href: string; libelle?: string; detail?: string; visible: boolean }) {
   return (
     <div className="barre-demande barre-offres" data-visible={visible || undefined} aria-hidden={!visible} inert={!visible}>
-      <a className="bouton" href={href}>
+      <a data-slot="button" className={buttonVariants({ size: "barre" })} href={href}>
         <span>{libelle ?? TEXTE_OFFRES[locale].bouton}</span>
         {detail ? <small>{detail}</small> : null}
       </a>

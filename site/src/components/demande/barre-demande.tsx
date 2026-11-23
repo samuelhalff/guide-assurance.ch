@@ -4,6 +4,7 @@ import { useRappelVu } from "@/components/demande/lien-rappel";
 import type { Porte } from "@shared/demande/portes";
 import { RAPPEL, TEXTE_CTA, TEXTE_RAPPEL, ecrirePreremplissage, lienDemande, lirePreremplissage } from "@/lib/demande";
 import { suivre } from "@/lib/analytics";
+import { buttonVariants } from "@/components/ui/button";
 
 const CLE_MASQUEE = "ga-barre-demande-masquee";
 
@@ -51,13 +52,13 @@ export function BarreDemande({ locale = "fr", porte, rappelSujet }: { locale?: "
   return (
     <div className="barre-demande" data-visible={visible || undefined} aria-hidden={!visible} inert={!visible}>
       {porte ? (
-        <a className="bouton" href={lienDemande(locale, porte)}>
+        <a data-slot="button" className={buttonVariants({ size: "barre" })} href={lienDemande(locale, porte)}>
           {t.bouton}
         </a>
       ) : (
         <a
           ref={lienRappel}
-          className="bouton"
+          className={buttonVariants({ size: "barre" })}
           href={RAPPEL[locale]}
           onClick={() => {
             if (rappelSujet) ecrirePreremplissage({ ...lirePreremplissage(), besoin: [rappelSujet] });

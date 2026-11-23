@@ -6,6 +6,10 @@ import type { Locale } from "@/lib/i18n";
 import { BarreOffres, CtaOffres } from "@/components/outils/cta-offres";
 import { ChoixBoutons, Depliable } from "@/components/controles";
 import { DEMANDE_PORTE } from "@/lib/demande-porte";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent } from "@/components/ui/card";
+import { Alert } from "@/components/ui/alert";
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 /* Calculateur de la somme d'assurance ménage : trois réponses donnent tout de suite une somme, « Affiner » ajoute les
    objets coûteux. Tout se calcule ici ; seule la somme arrondie part dans le lien « Recevoir des offres », si le
@@ -59,6 +63,8 @@ const TXT = {
     couvre: (p: string) => `Votre somme couvre environ ${p}${N}% de la valeur estimée.`,
     ok: "Elle atteint l’estimation : pas de sous-assurance à craindre sur cette base.",
     rembourse: (d: string, r: string) => `Sur un dommage de ${d} CHF, la règle proportionnelle ramènerait l’indemnité à ${r} CHF, avant franchise, si votre contrat ne prévoit pas mieux.`,
+    attente: "Indiquez le nombre de pièces et de personnes pour voir la somme.",
+    attentePolice: "Répondez d’abord aux questions du calculateur, plus haut, pour comparer votre somme.",
   },
   en: {
     pieces: "How many rooms?",
@@ -104,14 +110,17 @@ const TXT = {
     couvre: (p: string) => `Your sum covers about ${p}% of the estimated value.`,
     ok: "It reaches the estimate, so on this basis you are not underinsured.",
     rembourse: (d: string, r: string) => `On a CHF ${d} loss, the proportional rule would cut the payment to CHF ${r}, before the excess, unless your policy says otherwise.`,
+    attente: "Enter the number of rooms and people to see the sum.",
+    attentePolice: "First answer the calculator questions above to compare your sum.",
   },
 };
 
 export function SommeMenage({ locale }: { locale: Locale }) {
   const t = TXT[locale];
   const f = (x: number) => nf[locale].format(x);
-  const [pieces, setPieces] = useState(3.5);
-  const [personnes, setPersonnes] = useState(2);
+  /* Formulaire vide au départ : le résultat attend les deux réponses personnelles ; le standard garde un défaut raisonnable. */
+  const [pieces, setPieces] = useState<number | null>(null);
+  const [personnes, setPersonnes] = useState<number | null>(null);
   const [standard, setStandard] = useState<S.Standard>("moyen");
   const [extras, setExtras] = useState<Record<S.Extra, string>>({ electronique: "", sport: "", loisirs: "", collections: "", divers: "" });
   const [valeurs, setValeurs] = useState("");
@@ -121,12 +130,13 @@ export function SommeMenage({ locale }: { locale: Locale }) {
   const cta = useRef<HTMLDivElement>(null);
 
   const nums = Object.fromEntries(S.EXTRAS.map((e) => [e.id, S.lireMontant(extras[e.id])])) as Record<S.Extra, number>;
-  const e = S.estimer({ pieces, personnes, standard, extras: nums });
+  const e = pieces != null && personnes != null ? S.estimer({ pieces, personnes, standard, extras: nums }) : null;
+  const pret = e != null;
   const ajoutes = S.totalExtras(nums);
   const v = S.lireMontant(valeurs);
   const sommePolice = S.lireMontant(police);
   const DOMMAGE = 10000;
-  const href = DEMANDE_PORTE[locale]("menage-rc", { somme: String(e.somme) });
+  const href = DEMANDE_PORTE[locale]("menage-rc", e ? { somme: String(e.somme) } : undefined);
 
   function toucher() {
     if (!mesure.current.utilise) {
@@ -143,9 +153,9 @@ export function SommeMenage({ locale }: { locale: Locale }) {
     const io = new IntersectionObserver(([x]) => setCtaVisible(x.isIntersecting), { threshold: 0 });
     io.observe(el);
     return () => io.disconnect();
-  }, []);
+  }, [pret]);
 
-  const Pastilles = <T extends string | number>({ nom, valeurs: vs, val, choisir, label, detail, classe }: { nom: string; valeurs: readonly T[]; val: T; choisir: (x: T) => void; label: (x: T) => React.ReactNode; detail?: (x: T) => React.ReactNode; classe: string }) => (
+  const Pastilles = <T extends string | number>({ nom, valeurs: vs, val, choisir, label, detail, classe }: { nom: string; valeurs: readonly T[]; val: T | null; choisir: (x: T) => void; label: (x: T) => React.ReactNode; detail?: (x: T) => React.ReactNode; classe: string }) => (
     <ChoixBoutons
       variante="pastille"
       className={`pastilles ${classe}`}
@@ -160,14 +170,15 @@ export function SommeMenage({ locale }: { locale: Locale }) {
     <>
       <div className="ph-sensitive outil outil-menage" id="outil" data-ph-mask>
         <form className="form" onSubmit={(ev) => ev.preventDefault()}>
+          <Card><CardContent>
           <fieldset>
             <legend>{t.pieces}</legend>
-            {Pastilles({ nom: "m-pieces", valeurs: S.PIECES, val: pieces as (typeof S.PIECES)[number], choisir: setPieces, label: (x) => (x === 6 ? "6 +" : demi(x, locale)), classe: "pastilles-6" })}
+            {Pastilles({ nom: "m-pieces", valeurs: S.PIECES, val: pieces as (typeof S.PIECES)[number] | null, choisir: setPieces, label: (x) => (x === 6 ? "6 +" : demi(x, locale)), classe: "pastilles-6" })}
             <p className="note-outil">{t.piecesAide}</p>
           </fieldset>
           <fieldset>
             <legend>{t.personnes}</legend>
-            {Pastilles({ nom: "m-personnes", valeurs: S.PERSONNES, val: personnes as (typeof S.PERSONNES)[number], choisir: setPersonnes, label: (x) => demi(x, locale), classe: "pastilles-6" })}
+            {Pastilles({ nom: "m-personnes", valeurs: S.PERSONNES, val: personnes as (typeof S.PERSONNES)[number] | null, choisir: setPersonnes, label: (x) => demi(x, locale), classe: "pastilles-6" })}
             <p className="note-outil">{t.personnesAide}</p>
           </fieldset>
           <fieldset className="dernier">
@@ -182,40 +193,52 @@ export function SommeMenage({ locale }: { locale: Locale }) {
               classe: "pastilles-3",
             })}
           </fieldset>
+          </CardContent></Card>
         </form>
 
-        <div className="apercu resultat-menage" aria-live="polite">
-          <div className="somme-menage">
-            <h2>{t.resultat}</h2>
-            <p className="montant">
-              {f(e.somme)} <small>{t.chf}</small>
-            </p>
-            <p className="base">{e.baloise == null ? t.seule(f(e.zurich)) : t.fourchette(f(e.min), f(e.max))}</p>
-            <div ref={cta}>
-              <CtaOffres locale={locale} href={href} libelle={t.cta(f(e.somme))} />
-            </div>
-          </div>
+        <div className="apercu resultat-menage">
+          <Card className="somme-menage">
+            <CardContent>
+              <h2>{t.resultat}</h2>
+              {/* Seule ligne annoncée aux lecteurs d'écran : la somme, ou la phrase d'attente. */}
+              <div aria-live="polite">
+                {e ? <p className="montant">{f(e.somme)} <small>{t.chf}</small></p> : <p className="base">{t.attente}</p>}
+              </div>
+              {e ? (
+                <>
+                  <p className="base">{e.baloise == null ? t.seule(f(e.zurich)) : t.fourchette(f(e.min), f(e.max))}</p>
+                  <div ref={cta}>
+                    <CtaOffres locale={locale} href={href} libelle={t.cta(f(e.somme))} pleine />
+                  </div>
+                </>
+              ) : null}
+            </CardContent>
+          </Card>
 
-          <table className="assureurs detail-3a">
-            <caption className="visually-hidden">{t.detailCap}</caption>
-            <thead>
-              <tr>
-                <th scope="col">{t.methode}</th>
-                <th scope="col">{t.montant}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">{t.baloise}</th>
-                <td>{e.baloise == null ? t.horsGrille : f(e.baloise)}</td>
-              </tr>
-              <tr>
-                <th scope="row">{t.zurich}</th>
-                <td>{f(e.zurich)}</td>
-              </tr>
-            </tbody>
-          </table>
+          {e ? (
+            <Table variant="chiffres" className="detail-3a">
+              <TableCaption className="visually-hidden">{t.detailCap}</TableCaption>
+              <TableHeader>
+                <TableRow>
+                  <TableHead scope="col">{t.methode}</TableHead>
+                  <TableHead scope="col">{t.montant}</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableHead scope="row">{t.baloise}</TableHead>
+                  <TableCell>{e.baloise == null ? t.horsGrille : f(e.baloise)}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableHead scope="row">{t.zurich}</TableHead>
+                  <TableCell>{f(e.zurich)}</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          ) : null}
 
+          <Card size="sm">
+          <CardContent>
           <Depliable
             className="affiner"
             titre={t.affiner}
@@ -231,8 +254,7 @@ export function SommeMenage({ locale }: { locale: Locale }) {
               {S.EXTRAS.map((x) => (
                 <div className="champ" key={x.id}>
                   <label htmlFor={`m-${x.id}`}>{t.extras[x.id]}</label>
-                  <input
-                    className="saisie"
+                  <Input
                     id={`m-${x.id}`}
                     inputMode="numeric"
                     placeholder="0"
@@ -243,14 +265,16 @@ export function SommeMenage({ locale }: { locale: Locale }) {
               ))}
               <div className="champ">
                 <label htmlFor="m-valeurs">{t.valeurs}</label>
-                <input className="saisie" id="m-valeurs" inputMode="numeric" placeholder="0" value={valeurs} onChange={(ev) => { setValeurs(ev.target.value); toucher(); }} />
+                <Input id="m-valeurs" inputMode="numeric" placeholder="0" value={valeurs} onChange={(ev) => { setValeurs(ev.target.value); toucher(); }} />
                 <span className="aide">{t.valeursAide}</span>
               </div>
             </div>
             {ajoutes > 0 ? <p className="total-affine">{t.totalExtras(f(ajoutes))}</p> : null}
           </Depliable>
+          </CardContent>
+          </Card>
 
-          {v > 0 ? <p className="valeur-a-part">{t.aPart(f(v))}</p> : null}
+          {v > 0 ? <Alert className="valeur-a-part">{t.aPart(f(v))}</Alert> : null}
 
           <div className="integrite">
             <p>{t.limites}</p>
@@ -261,14 +285,16 @@ export function SommeMenage({ locale }: { locale: Locale }) {
       <section className="sous-assurance" id="sous-assurance">
         <h2>{t.verifTitre}</h2>
         <p>{t.verifTexte}</p>
-        <div className="verif-police ph-sensitive" data-ph-mask>
+        <Card className="verif-police ph-sensitive" data-ph-mask>
+          <CardContent>
           <div className="champ champ-court">
             <label htmlFor="m-police">{t.sommePolice}</label>
-            <input className="saisie" id="m-police" inputMode="numeric" placeholder="60000" value={police} onChange={(ev) => setPolice(ev.target.value)} />
+            <Input id="m-police" inputMode="numeric" placeholder="60000" value={police} onChange={(ev) => setPolice(ev.target.value)} />
           </div>
-          {sommePolice > 0 ? (
-            <div className="reponse" aria-live="polite">
-              <p style={{ margin: 0 }}>
+          {sommePolice > 0 && !e ? <p className="note-outil reponse">{t.attentePolice}</p> : null}
+          {sommePolice > 0 && e ? (
+            <div className="reponse">
+              <p style={{ margin: 0 }} aria-live="polite">
                 <b>{t.couvre(f(Math.round(S.tauxCouverture(sommePolice, e.somme) * 100)))}</b>
               </p>
               <span className="jauge" aria-hidden="true">
@@ -279,10 +305,11 @@ export function SommeMenage({ locale }: { locale: Locale }) {
               </p>
             </div>
           ) : null}
-        </div>
+          </CardContent>
+        </Card>
       </section>
 
-      <BarreOffres locale={locale} href={href} detail={t.ctaSomme(f(e.somme))} visible={!ctaVisible} />
+      {e ? <BarreOffres locale={locale} href={href} detail={t.ctaSomme(f(e.somme))} visible={!ctaVisible} /> : null}
     </>
   );
 }

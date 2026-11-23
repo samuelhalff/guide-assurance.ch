@@ -16,6 +16,9 @@ import { abs } from "@/lib/site";
 import { DATE_PAGE } from "@/lib/donnees";
 import { COMPTES_3A, RELEVE_LE, TAUX_MAX, TAUX_MIN, dateCh, tauxEn } from "@/lib/taux3a";
 import { OUTILS_EN } from "@/lib/nav";
+import { Alert } from "@/components/ui/alert";
+import { buttonVariants } from "@/components/ui/button";
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 /* English home: the French home (src/app/(fr)/page.tsx) in English, same figures, links to the English pages. */
 const TITRE = "Compare 2027 Swiss health insurance premiums";
@@ -179,14 +182,14 @@ export default function Home() {
                 Our <a href={OUTILS_EN.lettre}>cancellation letter tool</a> works out the deadline for your contract, and your data stays on your device.
               </p>
               <div className="echeances">
-                <div className="echeance alerte">
+                <Alert variant="attention" className="echeance">
                   <div className="date">30.11<span className="an">.2026</span></div>
                   <div className="quoi">Basic health insurance (LAMal): letter received by this date at the latest</div>
-                </div>
-                <div className="echeance alerte">
+                </Alert>
+                <Alert variant="attention" className="echeance">
                   <div className="date">30.09<span className="an">.2027</span></div>
                   <div className="quoi">Supplementary insurance (LCA): common deadline, check it in your contract</div>
-                </div>
+                </Alert>
               </div>
             </div>
             <figure className="extrait document">
@@ -277,38 +280,38 @@ export default function Home() {
                   </figcaption>
                 </figure>
               <p className="primes-lien">
-                <a className="bouton second" href={OUTILS_EN.comparateur}>
+                <a className={buttonVariants({ variant: "outline" })} href={OUTILS_EN.comparateur}>
                   See the premiums for your municipality
                   <Fleche />
                 </a>
               </p>
               </div>
-              <table>
-                <caption>Monthly basic health insurance premiums, adult, in CHF (FOPH, 2027 premiums)</caption>
-                <thead>
-                  <tr>
-                    <th scope="col">Canton</th>
-                    <th scope="col" className="num">Average 2027</th>
-                    <th scope="col" className="num">Increase</th>
-                    <th scope="col" className="num">Standard, CHF 300 deductible</th>
-                  </tr>
-                </thead>
-                <tbody>
+              <Table variant="chiffres">
+                <TableCaption>Monthly basic health insurance premiums, adult, in CHF (FOPH, 2027 premiums)</TableCaption>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead scope="col">Canton</TableHead>
+                    <TableHead scope="col">Average 2027</TableHead>
+                    <TableHead scope="col">Increase</TableHead>
+                    <TableHead scope="col">Standard, CHF 300 deductible</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
                   {PRIMES.map((p) => (
-                    <tr key={p.canton}>
-                      <th scope="row">{p.canton}</th>
-                      <td className="num">{p.moy}</td>
-                      <td className="num">{p.hausse}</td>
-                      <td className="num">
+                    <TableRow key={p.canton}>
+                      <TableHead scope="row">{p.canton}</TableHead>
+                      <TableCell>{p.moy}</TableCell>
+                      <TableCell>{p.hausse}</TableCell>
+                      <TableCell>
                         {p.std}
                         <span className="fourchette">
                           {p.min} to {p.max}
                         </span>
-                      </td>
-                    </tr>
+                      </TableCell>
+                    </TableRow>
                   ))}
-                </tbody>
-              </table>
+                </TableBody>
+              </Table>
             </div>
             <p className="note-donnees">
               The average includes all deductibles and all models, which is why it is lower; it is an FOPH estimate. The “Standard” column gives the median of the insurers in the canton (standard model, with accident cover), then the lowest and the highest; Guide Assurance calculated it from the FOPH premium tables of 22.10.2026, rounded to 10 centimes. Premiums for each insurer are in our comparison tool and on priminfo.admin.ch.

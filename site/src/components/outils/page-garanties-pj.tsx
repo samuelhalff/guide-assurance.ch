@@ -15,6 +15,7 @@ import { abs } from "@/lib/site";
 import { DATE_PAGE } from "@/lib/donnees";
 import { dateLongue, type Locale } from "@/lib/i18n";
 import { OUTILS, OUTILS_EN } from "@/lib/nav";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { FAQ_PJ, OS_167, OS_URL } from "@/components/outils/faq-garanties-pj";
 
 /* « Protection juridique : ce que couvrent les contrats » (/protection-juridique/comparatif-garanties/ et version
@@ -136,14 +137,16 @@ export function PageGarantiesPj({ locale }: { locale: Locale }) {
           <p className="intro">{t.intro}</p>
           <CtaOffres locale={locale} href={demande} libelle={t.ctaHaut} />
           <BandeConfiance locale={locale} signaux={["pj"]} compacte />
-          <div className="en-bref">
-            <b>{t.enBref}</b>
-            <ul>
-              {t.enBrefListe.map((x) => (
-                <li key={x}>{x}</li>
-              ))}
-            </ul>
-          </div>
+          <Alert variant="info" className="en-bref">
+            <AlertTitle>{t.enBref}</AlertTitle>
+            <AlertDescription>
+              <ul>
+                {t.enBrefListe.map((x) => (
+                  <li key={x}>{x}</li>
+                ))}
+              </ul>
+            </AlertDescription>
+          </Alert>
           <PartagerOutil path={t.path} title={t.appli} text={t.partage} locale={locale} />
 
           <section className="reperes-statiques">

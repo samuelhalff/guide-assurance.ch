@@ -147,17 +147,6 @@
   .fil li + li::before { content: "/"; padding: 0 .3em; }
 
   /* ===== Boutons ===== */
-  .bouton {
-    display: inline-flex; align-items: center; gap: 10px; background: var(--sentier); color: var(--sur-sentier);
-    border: 0; border-radius: var(--r); font: 700 17px/1 var(--sans); padding: 16px 20px; min-height: 52px;
-    cursor: pointer; text-decoration: none; transition: background-color .15s;
-  }
-  .bouton:hover { background: var(--bouton-survol); color: var(--sur-sentier); }
-  .bouton svg { width: 18px; height: 18px; display: block; }
-  .bouton.second { background: var(--papier); color: var(--encre); border: 1px solid var(--encre); }
-  .bouton.second:hover { background: var(--carte); color: var(--encre); }
-  .bouton:focus-visible { outline: 3px solid var(--lac-encre); outline-offset: 3px; }
-  @media (prefers-reduced-motion: reduce) { .bouton { transition: none; } }
 
   /* ===== Choix (radio) : papier + filet, 56 px, un repère rond à gauche ===== */
   .option {
@@ -174,19 +163,8 @@
   .champ { display: grid; gap: 4px; align-content: start; margin-bottom: var(--s3); }
   .champ label { font: 600 16px var(--narrow); }
   .champ .aide { font: 15px var(--narrow); color: var(--encre-2); }
-  .saisie {
-    font: 17px var(--sans); color: var(--encre); background: var(--champ); border: 1px solid var(--input);
-    border-radius: var(--r); padding: 11px 12px; min-height: 48px; width: 100%;
-  }
-  textarea.saisie { min-height: 84px; resize: vertical; line-height: 1.4; }
-  .saisie:focus { border-color: var(--lac-encre); outline: 2px solid var(--lac-encre); outline-offset: 0; }
-  .saisie::placeholder { color: var(--encre-2); opacity: .85; }
 
   /* ===== Encadrés ===== */
-  .alerte {
-    border-left: 3px solid var(--sentier); background: var(--sentier-teinte); border-radius: 0 var(--r) var(--r) 0;
-  }
-  .alerte strong { color: var(--sentier-fonce); }
   .document { background: var(--papier); border: 1px solid var(--filet); border-radius: var(--r); }
 }
 

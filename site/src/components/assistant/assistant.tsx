@@ -4,6 +4,9 @@ import { Dialog as DialogPrimitive } from "@base-ui/react/dialog";
 import { LogoSilhouette } from "@/components/site/logo";
 import { Turnstile } from "@/components/demande/turnstile";
 import { CaptureRappel } from "@/components/demande/capture-rappel";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { suivre } from "@/lib/analytics";
 import { DEMANDE, RAPPEL, ecrirePreremplissage, lienDemande } from "@/lib/demande";
 import { PORTE_RAPPEL, RAPPEL_SUJET_DEFAUT } from "@shared/demande/portes";
@@ -274,25 +277,29 @@ export function Assistant({ locale = "fr" }: { locale?: "fr" | "en" }) {
                   ) : m.capture === "envoyee" ? (
                     <p className="assistant-mention assistant-capture-faite">{t.captureEnvoyee}</p>
                   ) : m.offre && (
-                    <div className="assistant-rappel">
-                      <p className="assistant-rappel-titre">{t.rappelTitre}</p>
-                      <ul className="assistant-puces">
-                        {pucesOffre(m.offre, locale).map((p) => (
-                          <li key={p}>{p}</li>
-                        ))}
-                      </ul>
-                      <p className="assistant-rappel-texte">{t.rappelTexte}</p>
-                      <button type="button" className="bouton" onClick={() => versDemande(m.offre!, "rappel")}>
-                        {t.rappelBouton}
-                        <svg viewBox="0 0 20 20" aria-hidden="true">
-                          <path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                      </button>
-                      <p className="assistant-rappel-texte">
-                        <a href={lienDemande(locale, m.offre.porte)} onClick={(e) => { e.preventDefault(); versDemande(m.offre!, "complet"); }}>{t.rappelComplet}</a>
-                        {t.rappelCompletSuite}
-                      </p>
-                    </div>
+                    <Card className="assistant-rappel">
+                      <CardContent className="grid gap-3">
+                        <p className="assistant-rappel-titre">{t.rappelTitre}</p>
+                        <ul className="assistant-puces">
+                          {pucesOffre(m.offre, locale).map((p) => (
+                            <li key={p}>
+                              <Badge variant="outline">{p}</Badge>
+                            </li>
+                          ))}
+                        </ul>
+                        <p className="assistant-rappel-texte">{t.rappelTexte}</p>
+                        <Button type="button" className="w-full" onClick={() => versDemande(m.offre!, "rappel")}>
+                          {t.rappelBouton}
+                          <svg viewBox="0 0 20 20" aria-hidden="true">
+                            <path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        </Button>
+                        <p className="assistant-rappel-texte">
+                          <a href={lienDemande(locale, m.offre.porte)} onClick={(e) => { e.preventDefault(); versDemande(m.offre!, "complet"); }}>{t.rappelComplet}</a>
+                          {t.rappelCompletSuite}
+                        </p>
+                      </CardContent>
+                    </Card>
                   )}
                 </Fragment>
               ),

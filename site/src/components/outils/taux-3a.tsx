@@ -2,6 +2,8 @@ import { COMPTES_3A, RELEVE_LE, dateCh, tauxEn, tauxFr } from "@/lib/taux3a";
 import { FRAIS_COMPTES, FRAIS_VERIFIE_LE, TITRES_3A, fourchette, partActions, resumeFraisCompte } from "@/lib/frais3a";
 import { IconeTelephone, LienRappel } from "@/components/demande/lien-rappel";
 import type { Locale } from "@/lib/i18n";
+import { Card, CardContent } from "@/components/ui/card";
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 /* Tableau des taux 3a, rendu côté serveur (lisible sans JavaScript). Mobile : une carte par compte ; ordinateur :
    tableau. Ordre : taux décroissant, puis banque. Aucune ligne payée, aucun « meilleur ». */
@@ -65,7 +67,8 @@ export function Taux3a({ locale = "fr" }: { locale?: Locale }) {
 
       <ol className="cartes-taux">
         {COMPTES_3A.map((c, i) => (
-          <li key={c.id} className="carte-taux">
+          <li key={c.id}>
+            <Card size="sm"><CardContent className="carte-taux">
             <span className="rang">{i + 1}</span>
             <div className="qui">
               <b>{c.banque}</b>
@@ -87,48 +90,49 @@ export function Taux3a({ locale = "fr" }: { locale?: Locale }) {
               {c.taux_valable_des ? `, ${t.depuis(dateCh(c.taux_valable_des))}` : ""}.{" "}
               <a href={c.url} rel="nofollow noopener" target="_blank">{t.source}</a>
             </p>
+            </CardContent></Card>
           </li>
         ))}
       </ol>
 
-      <table className="assureurs table-taux">
-        <caption>{t.caption(dateCh(RELEVE_LE))}</caption>
-        <thead>
-          <tr>
-            <th scope="col">{t.thBanque}</th>
-            <th scope="col">{t.thTaux}</th>
-            <th scope="col">{t.thConditions}</th>
-            <th scope="col">{t.thFrais}</th>
-            <th scope="col">{t.thReleve}</th>
-          </tr>
-        </thead>
-        <tbody>
+      <Table className="table-taux">
+        <TableCaption>{t.caption(dateCh(RELEVE_LE))}</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead scope="col">{t.thBanque}</TableHead>
+            <TableHead scope="col" className="text-right">{t.thTaux}</TableHead>
+            <TableHead scope="col">{t.thConditions}</TableHead>
+            <TableHead scope="col">{t.thFrais}</TableHead>
+            <TableHead scope="col">{t.thReleve}</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
           {COMPTES_3A.map((c, i) => (
-            <tr key={c.id}>
-              <td>
+            <TableRow key={c.id}>
+              <TableCell className="pl-9 align-top">
                 <span className="rang">{i + 1}</span>
                 <b>{c.banque}</b>
                 <span className="produit">{c.produit}</span>
-              </td>
-              <td className="taux">{taux(c.taux)}</td>
-              <td className="cond">{cond(c)}</td>
-              <td className="frais">
+              </TableCell>
+              <TableCell className="taux align-top">{taux(c.taux)}</TableCell>
+              <TableCell className="cond align-top">{cond(c)}</TableCell>
+              <TableCell className="frais align-top">
                 {frais(c.id) ? (
                   <>
                     <b>{frais(c.id)!.resume}</b> {frais(c.id)!.note}
                     <a href={frais(c.id)!.url} rel="nofollow noopener" target="_blank">{t.fraisSource(frais(c.id)!.lu)}</a>
                   </>
                 ) : null}
-              </td>
-              <td className="releve">
+              </TableCell>
+              <TableCell className="releve align-top">
                 {dateCh(c.lu_le)}
                 {c.taux_valable_des ? <small>{t.depuis(dateCh(c.taux_valable_des))}</small> : null}
                 <a href={c.url} rel="nofollow noopener" target="_blank">{t.source}</a>
-              </td>
-            </tr>
+              </TableCell>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
 
       <p className="rappel-liste">
         {t.rappelQ}{" "}
@@ -201,7 +205,8 @@ export function Titres3a({ locale = "fr" }: { locale?: Locale }) {
       <p className="note-outil ordre">{t.ordre}</p>
       <ol className="cartes-taux">
         {TITRES_3A.map((x, i) => (
-          <li key={x.id} className="carte-taux">
+          <li key={x.id}>
+            <Card size="sm"><CardContent className="carte-taux">
             <span className="rang">{i + 1}</span>
             <div className="qui">
               <b>{x.fournisseur}</b>
@@ -214,32 +219,33 @@ export function Titres3a({ locale = "fr" }: { locale?: Locale }) {
             <p className="cond">{en ? x.cout_en : x.cout_fr}</p>
             <p className="cond">{t.actions}{en ? ": " : "\u202F: "}{partActions(x, en) ?? t.nonPublie}. {details(x)}</p>
             <p className="releve"><a href={x.url} rel="nofollow noopener" target="_blank">{t.source(dateCh(x.lu_le))}</a></p>
+            </CardContent></Card>
           </li>
         ))}
       </ol>
-      <table className="assureurs table-taux">
-        <caption>{t.caption(dateCh(FRAIS_VERIFIE_LE))}</caption>
-        <thead>
-          <tr>
-            <th scope="col">{t.thOffre}</th>
-            <th scope="col">{t.thCout}</th>
-            <th scope="col">{t.thCouvre}</th>
-            <th scope="col">{t.thActions}</th>
-            <th scope="col">{t.thAutres}</th>
-          </tr>
-        </thead>
-        <tbody>
+      <Table className="table-taux">
+        <TableCaption>{t.caption(dateCh(FRAIS_VERIFIE_LE))}</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead scope="col">{t.thOffre}</TableHead>
+            <TableHead scope="col" className="text-right">{t.thCout}</TableHead>
+            <TableHead scope="col">{t.thCouvre}</TableHead>
+            <TableHead scope="col">{t.thActions}</TableHead>
+            <TableHead scope="col">{t.thAutres}</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
           {TITRES_3A.map((x, i) => (
-            <tr key={x.id}>
-              <td><span className="rang">{i + 1}</span><b>{x.fournisseur}</b><span className="produit">{x.produit}</span></td>
-              <td className="taux">{cout(x)}{x.cout_complet ? null : <small>{t.incomplet}</small>}</td>
-              <td className="cond">{en ? x.cout_en : x.cout_fr}</td>
-              <td className="actions">{partActions(x, en) ?? t.nonPublie}</td>
-              <td className="releve">{details(x)}<a href={x.url} rel="nofollow noopener" target="_blank">{t.source(dateCh(x.lu_le))}</a></td>
-            </tr>
+            <TableRow key={x.id}>
+              <TableCell className="pl-9 align-top"><span className="rang">{i + 1}</span><b>{x.fournisseur}</b><span className="produit">{x.produit}</span></TableCell>
+              <TableCell className="taux align-top">{cout(x)}{x.cout_complet ? null : <small>{t.incomplet}</small>}</TableCell>
+              <TableCell className="cond align-top">{en ? x.cout_en : x.cout_fr}</TableCell>
+              <TableCell className="actions align-top">{partActions(x, en) ?? t.nonPublie}</TableCell>
+              <TableCell className="releve align-top">{details(x)}<a href={x.url} rel="nofollow noopener" target="_blank">{t.source(dateCh(x.lu_le))}</a></TableCell>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
       <div className="integrite"><p>{t.avertissement}</p></div>
     </section>
   );

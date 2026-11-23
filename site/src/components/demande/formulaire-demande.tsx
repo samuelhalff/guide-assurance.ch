@@ -28,6 +28,10 @@ import { suivre, marquerLead } from "@/lib/analytics";
 import { DEMANDE_ENVOYEE, TEXTE_CTA, effacerPreremplissage, estPorte, lirePreremplissage } from "@/lib/demande";
 import { Turnstile } from "@/components/demande/turnstile";
 import { Case, ChoixBoutons, Depliable, Interrupteur } from "@/components/controles";
+import { Alert } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 
 type Locale = "fr" | "en";
 type Ecran = 1 | 2 | 3 | "hors-suisse";
@@ -504,9 +508,9 @@ export function FormulaireDemande({ locale, porte: porteAdresse }: { locale: Loc
               </fieldset>
             ) : null}
             <div className="actions-demande">
-              <button type="button" className="bouton" onClick={() => suivant(1)}>
+              <Button type="button" className="flex-auto" onClick={() => suivant(1)}>
                 {t.continuer}
-              </button>
+              </Button>
             </div>
           </section>
         ) : null}
@@ -522,14 +526,14 @@ export function FormulaireDemande({ locale, porte: porteAdresse }: { locale: Loc
               <>
                 <div className="champ">
                   <label htmlFor="npa">{t.npa}</label>
-                  <input id="npa" className="saisie saisie-courte" inputMode="numeric" placeholder="1201" autoComplete="postal-code" maxLength={4} pattern="[0-9]{4}" value={npa} onChange={(e) => setNpa(e.target.value.replace(/\D/g, "").slice(0, 4))} {...invalide("npa")} />
+                  <Input id="npa" className="saisie-courte" inputMode="numeric" placeholder="1201" autoComplete="postal-code" maxLength={4} pattern="[0-9]{4}" value={npa} onChange={(e) => setNpa(e.target.value.replace(/\D/g, "").slice(0, 4))} {...invalide("npa")} />
                   {canton ? <p className="aide">{t.canton(canton)}</p> : npa.length === 4 ? <p className="aide">{t.npaInconnu}</p> : null}
                   <Erreur id="err-npa" msg={erreurs.npa} />
                 </div>
                 {profil.annee ? (
                 <div className="champ">
                   <label htmlFor="annee">{t.annee}</label>
-                  <input id="annee" className="saisie saisie-courte" inputMode="numeric" autoComplete="bday-year" maxLength={4} pattern="[0-9]{4}" placeholder="1990" value={annee} onChange={(e) => setAnnee(e.target.value.replace(/\D/g, "").slice(0, 4))} {...invalide("annee")} />
+                  <Input id="annee" className="saisie-courte" inputMode="numeric" autoComplete="bday-year" maxLength={4} pattern="[0-9]{4}" placeholder="1990" value={annee} onChange={(e) => setAnnee(e.target.value.replace(/\D/g, "").slice(0, 4))} {...invalide("annee")} />
                   <Erreur id="err-annee" msg={erreurs.annee} />
                 </div>
                 ) : null}
@@ -551,12 +555,12 @@ export function FormulaireDemande({ locale, porte: porteAdresse }: { locale: Loc
               </>
             ) : null}
             <div className="actions-demande">
-              <button type="button" className="bouton second" onClick={() => setEcran(1)}>
+              <Button type="button" variant="outline" className="flex-none" onClick={() => setEcran(1)}>
                 {t.retour}
-              </button>
-              <button type="button" className="bouton" onClick={() => suivant(2)}>
+              </Button>
+              <Button type="button" className="flex-auto" onClick={() => suivant(2)}>
                 {t.continuer}
-              </button>
+              </Button>
             </div>
           </section>
         ) : null}
@@ -570,9 +574,9 @@ export function FormulaireDemande({ locale, porte: porteAdresse }: { locale: Loc
               <li><a href={LIENS_HORS[locale].simu}>{t.horsSimu}</a></li>
             </ul>
             <div className="actions-demande">
-              <button type="button" className="bouton second" onClick={() => setEcran(2)}>
+              <Button type="button" variant="outline" className="flex-none" onClick={() => setEcran(2)}>
                 {t.horsRetour}
-              </button>
+              </Button>
             </div>
           </section>
         ) : null}
@@ -582,7 +586,7 @@ export function FormulaireDemande({ locale, porte: porteAdresse }: { locale: Loc
             <h1 id="titre-ecran" ref={titre} tabIndex={-1}>{ETAPES[locale][2]}</h1>
             <div className="champ">
               <label htmlFor="nom">{t.nom}</label>
-              <input id="nom" className="saisie" autoComplete="name" placeholder="Marie Dupont" autoCapitalize="words" maxLength={120} value={nom} onChange={(e) => setNom(e.target.value)} {...invalide("nom")} />
+              <Input id="nom" autoComplete="name" placeholder="Marie Dupont" autoCapitalize="words" maxLength={120} value={nom} onChange={(e) => setNom(e.target.value)} {...invalide("nom")} />
               <Erreur id="err-nom" msg={erreurs.nom} />
             </div>
             <ChampTelephone locale={locale} value={tel} onChange={setTel} erreur={erreurs.tel} />
@@ -590,7 +594,7 @@ export function FormulaireDemande({ locale, porte: porteAdresse }: { locale: Loc
               <label htmlFor="email">
                 {t.email} <span className="facultatif">({t.facultatif})</span>
               </label>
-              <input id="email" className="saisie" type="email" placeholder={locale === "en" ? "first.last@example.ch" : "prenom.nom@exemple.ch"} inputMode="email" autoComplete="email" autoCapitalize="none" spellCheck={false} maxLength={200} value={email} onChange={(e) => setEmail(e.target.value)} {...invalide("email")} />
+              <Input id="email" type="email" placeholder={locale === "en" ? "first.last@example.ch" : "prenom.nom@exemple.ch"} inputMode="email" autoComplete="email" autoCapitalize="none" spellCheck={false} maxLength={200} value={email} onChange={(e) => setEmail(e.target.value)} {...invalide("email")} />
               <Erreur id="err-email" msg={erreurs.email} />
             </div>
             <fieldset>
@@ -620,17 +624,17 @@ export function FormulaireDemande({ locale, porte: porteAdresse }: { locale: Loc
             ) : null}
 
             {echec ? (
-              <p className="echec" role="alert">
+              <Alert variant="destructive" role="alert">
                 {echec}
-              </p>
+              </Alert>
             ) : null}
             <div className="actions-demande">
-              <button type="button" className="bouton second" onClick={() => setEcran(2)} disabled={envoi}>
+              <Button type="button" variant="outline" className="flex-none" onClick={() => setEcran(2)} disabled={envoi}>
                 {t.retour}
-              </button>
-              <button type="submit" className="bouton" disabled={envoi} aria-busy={envoi || undefined}>
+              </Button>
+              <Button type="submit" className="flex-auto" disabled={envoi} aria-busy={envoi || undefined}>
                 {envoi ? t.envoi : SUBMIT_LABEL[locale]}
-              </button>
+              </Button>
             </div>
             <p className="rassurance">{TEXTE_CTA[locale].rassurance}</p>
           </section>
@@ -698,7 +702,7 @@ function ChampPorte({
         {c.type === "quand" && valeur === "date" ? (
           <div className="champ champ-date">
             <label htmlFor={`${id}-date`}>{t.dateLabel}</label>
-            <input id={`${id}-date`} className="saisie saisie-moyenne" type="date" min={min} max={max} value={date} onChange={(e) => onDate(e.target.value)} aria-invalid={erreur ? true : undefined} />
+            <Input id={`${id}-date`} className="saisie-moyenne" type="date" min={min} max={max} value={date} onChange={(e) => onDate(e.target.value)} aria-invalid={erreur ? true : undefined} />
           </div>
         ) : null}
         <Erreur id={errId} msg={erreur} />
@@ -712,9 +716,9 @@ function ChampPorte({
       {aide}
       <div className={c.type === "nombre" && c.unite ? "saisie-unite" : undefined}>
         {c.type === "nombre" && c.unite?.[locale] === "CHF" ? <span aria-hidden="true">CHF</span> : null}
-        <input
+        <Input
           id={id}
-          className={c.type === "nombre" ? (c.max >= 10000 ? "saisie saisie-moyenne" : "saisie saisie-courte") : "saisie"}
+          className={c.type === "nombre" ? (c.max >= 10000 ? "saisie-moyenne" : "saisie-courte") : undefined}
           inputMode={c.type === "nombre" ? "numeric" : "text"}
           autoComplete="off"
           placeholder={c.type === "nombre" ? (c.placeholder && c.max >= 10000 ? milliers(Number(c.placeholder), locale) : c.placeholder) : c.type === "texte" ? c.placeholder?.[locale] : undefined}
@@ -757,23 +761,25 @@ export function Consentements({
   const ps = paragraphes(renderConsent(sante, porte));
   const info = pc.slice(0, -1);
   return (
-    <div className="consent">
-      {info.map((p, i) => (
-        <p key={i}>{enLigne(p)}</p>
-      ))}
-      <Case className="case-demande" caseClassName="size-[22px]" checked={accord} onChange={setAccord} invalid={!!erreurs.consent} describedBy={erreurs.consent ? "err-consent" : undefined}>
-        {enLigne(pc[pc.length - 1])}
-      </Case>
-      <Erreur id="err-consent" msg={erreurs.consent} />
-      {avecSante ? (
-        <>
-          <Case className="case-demande" caseClassName="size-[22px]" checked={accordSante} onChange={setAccordSante} invalid={!!erreurs.sante} describedBy={erreurs.sante ? "err-sante" : undefined}>
-            {enLigne(ps[ps.length - 1])}
-          </Case>
-          <Erreur id="err-sante" msg={erreurs.sante} />
-        </>
-      ) : null}
-    </div>
+    <Card className="consent">
+      <CardContent className="grid gap-3">
+        {info.map((p, i) => (
+          <p key={i}>{enLigne(p)}</p>
+        ))}
+        <Case className="case-demande" caseClassName="size-[22px]" checked={accord} onChange={setAccord} invalid={!!erreurs.consent} describedBy={erreurs.consent ? "err-consent" : undefined}>
+          {enLigne(pc[pc.length - 1])}
+        </Case>
+        <Erreur id="err-consent" msg={erreurs.consent} />
+        {avecSante ? (
+          <>
+            <Case className="case-demande" caseClassName="size-[22px]" checked={accordSante} onChange={setAccordSante} invalid={!!erreurs.sante} describedBy={erreurs.sante ? "err-sante" : undefined}>
+              {enLigne(ps[ps.length - 1])}
+            </Case>
+            <Erreur id="err-sante" msg={erreurs.sante} />
+          </>
+        ) : null}
+      </CardContent>
+    </Card>
   );
 }
 

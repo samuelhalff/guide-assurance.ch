@@ -4,6 +4,7 @@ import { SiteFooter } from "@/components/site/site-footer";
 import { Breadcrumbs } from "@/components/site/breadcrumbs";
 import { JsonLd } from "@/components/site/json-ld";
 import { AppelRappel, Faqs, N, type Faq } from "@/components/donnees/commun";
+import { Card, CardContent } from "@/components/ui/card";
 import { groupes, toutesLesSources } from "@/lib/chiffres-cles";
 import { pageMetadata } from "@/lib/metadata";
 import { ORG_ID, WEBSITE_ID, breadcrumbLd, faqLd, graph, type Miette } from "@/lib/jsonld";
@@ -156,24 +157,28 @@ export function PageChiffresCles({ locale }: { locale: Locale }) {
               <ol className="faits">
                 {g.faits.map((f) => (
                   <li key={f.id} id={f.id} className="fait">
-                    <p className="fait-texte">
-                      {f.texte}{" "}
-                      <a className="ancre" href={`#${f.id}`} aria-label={t.lien}>#</a>
-                    </p>
-                    <p className="fait-meta">
-                      <span>{t.validite}{fr ? `${N}:` : ":"} {f.validite}</span>{" "}
-                      <span>
-                        {t.source}{fr ? `${N}:` : ":"}{" "}
-                        {f.sources.map((s, i) => (
-                          <span key={s.url}>
-                            {i > 0 ? ", " : ""}
-                            <a href={s.url} rel={s.url.startsWith("http") && !s.url.includes("guide-assurance.ch") ? "noopener" : undefined}>{s.label}</a>
-                          </span>
-                        ))}
-                        .
-                      </span>{" "}
-                      <span>{t.methode}{fr ? `${N}:` : ":"} {f.methode}</span>
-                    </p>
+                    <Card>
+                      <CardContent>
+                        <p className="fait-texte">
+                          {f.texte}{" "}
+                          <a className="ancre" href={`#${f.id}`} aria-label={t.lien}>#</a>
+                        </p>
+                        <p className="fait-meta">
+                          <span>{t.validite}{fr ? `${N}:` : ":"} {f.validite}</span>{" "}
+                          <span>
+                            {t.source}{fr ? `${N}:` : ":"}{" "}
+                            {f.sources.map((s, i) => (
+                              <span key={s.url}>
+                                {i > 0 ? ", " : ""}
+                                <a href={s.url} rel={s.url.startsWith("http") && !s.url.includes("guide-assurance.ch") ? "noopener" : undefined}>{s.label}</a>
+                              </span>
+                            ))}
+                            .
+                          </span>{" "}
+                          <span>{t.methode}{fr ? `${N}:` : ":"} {f.methode}</span>
+                        </p>
+                      </CardContent>
+                    </Card>
                   </li>
                 ))}
               </ol>

@@ -1,5 +1,6 @@
 "use client";
 import { useMemo, useState } from "react";
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 /* Tableau HTML triable : rendu complet côté serveur (lisible sans JavaScript, indexable), tri au clic sur l'en-tête
    (bouton dans le <th>, aria-sort). Le tri ne touche que l'ordre d'affichage ; aucune valeur n'est envoyée. */
@@ -12,7 +13,7 @@ export function TableTriable({
   caption,
   triInitial,
   locale = "fr",
-  className = "assureurs table-donnees",
+  className = "table-donnees",
 }: {
   colonnes: Colonne[];
   lignes: LigneTable[];
@@ -36,47 +37,48 @@ export function TableTriable({
   const changer = (cle: string, num?: boolean) =>
     setTri((t) => (t.cle === cle ? { cle, sens: t.sens === "asc" ? "desc" : "asc" } : { cle, sens: num ? "desc" : "asc" }));
   const aide = locale === "fr" ? "Trier par" : "Sort by";
+  /* Toutes les colonnes après la première sont des nombres : variante « chiffres » (alignées à droite). */
+  const chiffres = colonnes.slice(1).every((c) => c.num);
+  const droite = (c: Colonne) => (!chiffres && c.num ? "text-right" : undefined);
   return (
-    <div className="defile-table">
-      <table className={className}>
-        <caption>{caption}</caption>
-        <thead>
-          <tr>
-            {colonnes.map((c) => (
-              <th
-                key={c.cle}
-                scope="col"
-                className={c.num ? "num" : undefined}
-                aria-sort={tri.cle === c.cle ? (tri.sens === "asc" ? "ascending" : "descending") : undefined}
-              >
-                {c.triable === false ? (
-                  c.titre
-                ) : (
-                  <button type="button" className="tri" onClick={() => changer(c.cle, c.num)} aria-label={`${aide}${locale === "fr" ? " " : ""}: ${c.titre}`}>
-                    {c.titre}
-                    <span className="fleche" aria-hidden="true">{tri.cle === c.cle ? (tri.sens === "asc" ? "▲" : "▼") : "↕"}</span>
-                  </button>
-                )}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {triees.map((l) => (
-            <tr key={l.id}>
-              {colonnes.map((c, i) => {
-                const cell = l.cellules[c.cle];
-                const contenu = cell.gras ? <b>{cell.texte}</b> : cell.texte;
-                return i === 0 ? (
-                  <th key={c.cle} scope="row">{contenu}</th>
-                ) : (
-                  <td key={c.cle} className={c.num ? "num" : undefined}>{contenu}</td>
-                );
-              })}
-            </tr>
+    <Table variant={chiffres ? "chiffres" : "default"} className={className}>
+      <TableCaption>{caption}</TableCaption>
+      <TableHeader>
+        <TableRow>
+          {colonnes.map((c) => (
+            <TableHead
+              key={c.cle}
+              scope="col"
+              className={droite(c)}
+              aria-sort={tri.cle === c.cle ? (tri.sens === "asc" ? "ascending" : "descending") : undefined}
+            >
+              {c.triable === false ? (
+                c.titre
+              ) : (
+                <button type="button" className="tri" onClick={() => changer(c.cle, c.num)} aria-label={`${aide}${locale === "fr" ? " " : ""}: ${c.titre}`}>
+                  {c.titre}
+                  <span className="fleche" aria-hidden="true">{tri.cle === c.cle ? (tri.sens === "asc" ? "▲" : "▼") : "↕"}</span>
+                </button>
+              )}
+            </TableHead>
           ))}
-        </tbody>
-      </table>
-    </div>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {triees.map((l) => (
+          <TableRow key={l.id}>
+            {colonnes.map((c, i) => {
+              const cell = l.cellules[c.cle];
+              const contenu = cell.gras ? <b>{cell.texte}</b> : cell.texte;
+              return i === 0 ? (
+                <TableHead key={c.cle} scope="row">{contenu}</TableHead>
+              ) : (
+                <TableCell key={c.cle} className={droite(c)}>{contenu}</TableCell>
+              );
+            })}
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
   );
 }

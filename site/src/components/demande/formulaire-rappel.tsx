@@ -10,6 +10,9 @@ import { DEMANDE, DEMANDE_ENVOYEE, TEXTE_CTA, lirePreremplissage } from "@/lib/d
 import { Turnstile } from "@/components/demande/turnstile";
 import { ChoixBoutons } from "@/components/controles";
 import { Consentements, Erreur, Puce, origine, typo } from "@/components/demande/formulaire-demande";
+import { Alert } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 type Locale = "fr" | "en";
 const NB = " ";
@@ -184,7 +187,7 @@ export function FormulaireRappel({ locale }: { locale: Locale }) {
 
           <div className="champ">
             <label htmlFor="nom">{t.nom}</label>
-            <input id="nom" className="saisie" autoComplete="name" placeholder="Marie Dupont" autoCapitalize="words" maxLength={120} value={nom} onChange={(e) => setNom(e.target.value)} {...invalide("nom")} />
+            <Input id="nom" autoComplete="name" placeholder="Marie Dupont" autoCapitalize="words" maxLength={120} value={nom} onChange={(e) => setNom(e.target.value)} {...invalide("nom")} />
             <Erreur id="err-nom" msg={erreurs.nom} />
           </div>
           <ChampTelephone locale={locale} value={tel} onChange={setTel} erreur={erreurs.tel} />
@@ -220,7 +223,7 @@ export function FormulaireRappel({ locale }: { locale: Locale }) {
             <label htmlFor="npa">
               {t.npa} <span className="facultatif">({t.facultatif})</span>
             </label>
-            <input id="npa" className="saisie saisie-courte" inputMode="numeric" placeholder="1201" autoComplete="postal-code" maxLength={4} pattern="[0-9]{4}" value={npa} onChange={(e) => setNpa(e.target.value.replace(/\D/g, "").slice(0, 4))} {...invalide("npa")} />
+            <Input id="npa" className="saisie-courte" inputMode="numeric" placeholder="1201" autoComplete="postal-code" maxLength={4} pattern="[0-9]{4}" value={npa} onChange={(e) => setNpa(e.target.value.replace(/\D/g, "").slice(0, 4))} {...invalide("npa")} />
             {canton ? <p className="aide">{t.canton(canton)}</p> : npa.length === 4 ? <p className="aide">{t.npaInconnu}</p> : null}
             <Erreur id="err-npa" msg={erreurs.npa} />
           </div>
@@ -232,14 +235,14 @@ export function FormulaireRappel({ locale }: { locale: Locale }) {
           ) : null}
 
           {echec ? (
-            <p className="echec" role="alert">
+            <Alert variant="destructive" role="alert">
               {echec}
-            </p>
+            </Alert>
           ) : null}
           <div className="actions-demande">
-            <button type="submit" className="bouton" disabled={envoi} aria-busy={envoi || undefined}>
+            <Button type="submit" className="flex-auto" disabled={envoi} aria-busy={envoi || undefined}>
               {envoi ? t.envoi : t.envoyer}
-            </button>
+            </Button>
           </div>
           <p className="rassurance">{TEXTE_CTA[locale].rassurance}</p>
           <p className="vers-complet">

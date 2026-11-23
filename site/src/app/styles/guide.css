@@ -95,11 +95,7 @@
   }
   .landing-action-titre { margin: 0; font: 800 21px/1.2 var(--sans); letter-spacing: -.01em; text-wrap: balance; }
   .landing-action-texte { margin: var(--s2) 0 0; font: 15px/1.45 var(--narrow); color: var(--encre-2); }
-  .landing-action > .bouton { width: 100%; justify-content: center; margin-top: var(--s4); padding: 16px 20px; }
-  .landing-action > .bouton + .landing-action-texte { margin-top: var(--s2); }
   .landing-action .comparer { margin: var(--s4) 0 0; }
-  .landing-action .comparer .bouton { width: 100%; justify-content: center; margin-top: var(--s3); }
-  .landing-action .saisie { background: var(--papier); }
   .landing-second { display: flex; gap: 8px; align-items: flex-start; margin: var(--s4) 0 0; font: 15px/1.45 var(--narrow); color: var(--encre); }
   .landing-second svg { flex: 0 0 auto; margin-top: 3px; color: var(--encre-2); }
   .landing-second a, .landing-integrite a { color: var(--lac-encre); }

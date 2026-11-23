@@ -45,6 +45,11 @@
   --color-bande-focus: var(--bande-focus);
   --color-sentier-carte: var(--sentier-carte);
   --color-pastille: var(--pastille);
+  --color-champ: var(--champ);
+  --color-bouton-survol: var(--bouton-survol);
+  --color-info-teinte: var(--info-teinte);
+  --color-attention: var(--attention);
+  --color-attention-teinte: var(--attention-teinte);
   --font-narrow: var(--font-archivo-narrow);
   --color-background: var(--background);
   --color-foreground: var(--foreground);

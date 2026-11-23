@@ -10,6 +10,12 @@ import { dateCh } from "@/lib/taux3a";
 import { OffreComparateur, type OffreComparateurHandle } from "@/components/outils/offre-comparateur";
 import { Choix } from "@/components/outils/choix";
 import { Case, ChoixBoutons, Depliable } from "@/components/controles";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Alert } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 /* Comparateur de primes LAMal 2027. Les données du canton sont chargées à la demande (public/data/primes-2027) ;
    le calcul se fait dans le navigateur, rien de ce qui est saisi n'est envoyé ni mis dans l'adresse.
@@ -117,6 +123,7 @@ const TXT = {
     vsPremiere: "par rapport à la 1re offre",
     vsMoyenne: "par rapport à la moyenne",
     vsActuelle: "par rapport à votre caisse",
+    votreCaisse: "Votre caisse actuelle",
     actuelle: "Votre caisse actuelle",
     premiere: "1re offre de la liste",
     apresRedis: "après redistribution",
@@ -229,6 +236,7 @@ const TXT = {
     vsPremiere: "compared with the 1st offer",
     vsMoyenne: "compared with the average",
     vsActuelle: "compared with your insurer",
+    votreCaisse: "Your current insurer",
     actuelle: "Your current insurer",
     premiere: "1st offer in the list",
     apresRedis: "after redistribution",
@@ -472,11 +480,12 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
           resultatRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
         }}
       >
+        <Card><CardContent>
         <div className="champ">
           <label htmlFor="cp-lieu">{t.lieu}</label>
           <div className="avec-coche">
-            <input
-              className="saisie"
+            <Input
+              className="pr-10"
               id="cp-lieu"
               list="cp-lieux"
               autoComplete="off"
@@ -509,7 +518,7 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
         ) : lieu ? (
           <p className="lieu-trouve" id="cp-lieu-aide" role="status">{lieu.npa} {lieu.communes}{lieu.communes === t.region(lieu.canton, lieu.region) ? "" : ` · ${t.region(lieu.canton, lieu.region)}`}</p>
         ) : index && saisieLieu.trim().length >= 4 && !sugg.length ? (
-          <p className="note-outil provisoire" id="cp-lieu-aide" role="status">{t.inconnu}</p>
+          <Alert variant="attention" className="provisoire" id="cp-lieu-aide" role="status">{t.inconnu}</Alert>
         ) : (
           <p className="note-outil" id="cp-lieu-aide">{t.lieuAide}</p>
         )}
@@ -528,8 +537,8 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
               <div className="champ">
                 <label htmlFor={`cp-n-${p.id}`}>{t.naissance}</label>
                 <div className="avec-coche">
-                  <input
-                    className="saisie"
+                  <Input
+                    className="pr-10"
                     id={`cp-n-${p.id}`}
                     inputMode="numeric"
                     maxLength={4}
@@ -562,29 +571,37 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
             + {t.ajouter}
           </button>
         ) : null}
-        <button type="submit" className="bouton voir-primes">{t.voir}</button>
+        <Button type="submit" className="w-full">{t.voir}</Button>
+        </CardContent></Card>
       </form>
 
-      <section className="apercu" aria-live="polite" ref={resultatRef}>
+      <section className="apercu" ref={resultatRef}>
         <h2 className={lieu && tousValides && r ? "titre-resultat" : "visually-hidden"}>{lieu && tousValides && r ? t.titre(`${lieu.npa} ${lieu.communes}`) : t.resultat}</h2>
-        {!lieu || !tousValides ? (
-          <p className="attente">{t.attente}</p>
-        ) : etat === "erreur" ? (
-          <p className="provisoire">{t.erreur}</p>
-        ) : !d || !r ? (
-          <p className="attente">{t.chargement}</p>
-        ) : (
-          <>
+        {/* Seule ligne annoncée aux lecteurs d'écran : attente, erreur, chargement, puis le résumé de la liste (même nœud, toujours présent). */}
+        <div aria-live="polite">
+          {!lieu || !tousValides ? (
+            <p className="attente">{t.attente}</p>
+          ) : etat === "erreur" ? (
+            <Alert variant="attention" className="provisoire">{t.erreur}</Alert>
+          ) : !d || !r ? (
+            <p className="attente">{t.chargement}</p>
+          ) : (
             <p className="resume-liste">
               {seul ? t.resume(r.total, lieu.communes, t.classeCourt[seul.classe], seul.franchise, seul.accident) : t.resumeFoyer(r.total, lieu.communes, pers.length)}{" "}
               <b>{t.triCourt[tri]}</b>
             </p>
+          )}
+        </div>
+        {lieu && tousValides && etat !== "erreur" && d && r ? (
+          <>
             {r.total ? <p className="fourchette">{t.fourchette(chf(prix(r.min - redis), parAn ? 0 : 2), chf(prix(r.max - redis), parAn ? 0 : 2), chf(prix(r.moyenne - redis), parAn ? 0 : 2), parAn ? t.an : t.mois)}</p> : null}
             {!seul ? <p className="note-outil">{t.foyerNote}</p> : null}
             {r.total ? (
-              <p className="plus-basse">
-                {t.plusBasse} <b>{r.offres[0].assureur}, {r.offres[0].produit}</b> · {chf(prix(r.offres[0].mensuel - redis), parAn ? 0 : 2)} {parAn ? t.an : t.mois}
-              </p>
+              <Card size="sm" className="plus-basse">
+                <CardContent>
+                  {t.plusBasse} <b>{r.offres[0].assureur}, {r.offres[0].produit}</b> · {chf(prix(r.offres[0].mensuel - redis), parAn ? 0 : 2)} {parAn ? t.an : t.mois}
+                </CardContent>
+              </Card>
             ) : null}
 
             {r.total ? (
@@ -634,10 +651,10 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
             ) : null}
 
             {!r.total ? (
-              <p className="provisoire">{t.aucune}</p>
+              <Alert variant="attention" className="provisoire">{t.aucune}</Alert>
             ) : (
               <div ref={listeRef}>
-                <p className="verdict">{t.memes}</p>
+                <Alert variant="info" className="verdict">{t.memes}</Alert>
 
                 {/* Mobile : une carte par offre */}
                 <ol className="cartes-primes">
@@ -646,10 +663,12 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
                     const vsAct = actuelle ? o.annuel - actuelle.annuel : null;
                     const estAct = actuelle && o.assureur === actuelle.assureur && o.produit === actuelle.produit;
                     return (
-                      <li key={`${o.assureur}|${o.produit}`} className={estAct ? "est-actuelle" : undefined}>
-                        <div className="carte-prime">
+                      <li key={`${o.assureur}|${o.produit}`}>
+                        <Card size="sm">
+                        <CardContent className="carte-prime">
                           <span className="rang">{ip + 1}</span>
                           <div className="offre-qui">
+                            {estAct ? <Badge variant="secondary">{t.votreCaisse}</Badge> : null}
                             <b>{o.assureur}</b>
                             <span className="produit">{o.produit}</span>
                             <span className="type">{t.types[o.type]}</span>
@@ -678,7 +697,8 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
                             </ul>
                           </Depliable>
                           <a className="rappel-offre" href={RAPPEL[locale]} onClick={versRappel}>{t.rappelOffre}</a>
-                        </div>
+                        </CardContent>
+                        </Card>
                         {i === RAPPEL_APRES - 1 ? <p className="rappel-liste" ref={rappelListe}>{t.rappelQ} {lienRappel()}</p> : null}
                       </li>
                     );
@@ -686,43 +706,44 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
                 </ol>
 
                 {/* Ordinateur : tableau */}
-                <table className="assureurs primes-liste">
-                  <caption>{t.caption}</caption>
-                  <thead>
-                    <tr>
-                      <th scope="col">{t.thOffre}</th>
-                      <th scope="col">{t.thPrime}</th>
-                      <th scope="col">{t.thRedis}</th>
-                      <th scope="col">{t.thTotal}</th>
-                      <th scope="col">{t.thEcart}<small>{t.vsPremiere}</small></th>
-                      <th scope="col">{t.thEcart}<small>{t.vsMoyenne}</small></th>
-                      {actuelle ? <th scope="col">{t.thEcart}<small>{t.vsActuelle}</small></th> : null}
-                    </tr>
-                  </thead>
-                  <tbody>
+                <Table variant="chiffres" className="primes-liste">
+                  <TableCaption>{t.caption}</TableCaption>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead scope="col">{t.thOffre}</TableHead>
+                      <TableHead scope="col">{t.thPrime}</TableHead>
+                      <TableHead scope="col">{t.thRedis}</TableHead>
+                      <TableHead scope="col">{t.thTotal}</TableHead>
+                      <TableHead scope="col">{t.thEcart}<small>{t.vsPremiere}</small></TableHead>
+                      <TableHead scope="col">{t.thEcart}<small>{t.vsMoyenne}</small></TableHead>
+                      {actuelle ? <TableHead scope="col">{t.thEcart}<small>{t.vsActuelle}</small></TableHead> : null}
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
                     {visibles.map((o) => {
                       const i = rangPrix.get(o) ?? 0;
                       const estAct = actuelle && o.assureur === actuelle.assureur && o.produit === actuelle.produit;
                       return (
-                        <tr key={`${o.assureur}|${o.produit}`} className={estAct ? "est-actuelle" : undefined}>
-                          <td>
+                        <TableRow key={`${o.assureur}|${o.produit}`} data-state={estAct ? "selected" : undefined}>
+                          <TableCell className="pl-9 align-top">
                             <span className="rang">{i + 1}</span>
+                            {estAct ? <Badge variant="secondary">{t.votreCaisse}</Badge> : null}
                             <b>{o.assureur}</b>
                             <span className="produit">{o.produit}</span>
                             <span className="type">{t.typesCourts[o.type]}</span>
                             {!seul ? <span className="type">{o.details.map((x) => nf(prix(x), parAn ? 0 : 2)).join(" + ")}</span> : null}
-                          </td>
-                          <td className="mois">{nf(prix(o.mensuel), parAn ? 0 : 2)}</td>
-                          <td>−{nf(prix(redis), 2)}</td>
-                          <td>{nf(prix(o.mensuel - redis), parAn ? 0 : 2)}</td>
-                          <td>{i === 0 ? "0" : signe(o.ecartMin)}</td>
-                          <td>{signe(o.ecartMoyenne)}</td>
-                          {actuelle ? <td>{signe(o.annuel - actuelle.annuel)}</td> : null}
-                        </tr>
+                          </TableCell>
+                          <TableCell className="mois align-top">{nf(prix(o.mensuel), parAn ? 0 : 2)}</TableCell>
+                          <TableCell className="align-top">−{nf(prix(redis), 2)}</TableCell>
+                          <TableCell className="align-top">{nf(prix(o.mensuel - redis), parAn ? 0 : 2)}</TableCell>
+                          <TableCell className="align-top">{i === 0 ? "0" : signe(o.ecartMin)}</TableCell>
+                          <TableCell className="align-top">{signe(o.ecartMoyenne)}</TableCell>
+                          {actuelle ? <TableCell className="align-top">{signe(o.annuel - actuelle.annuel)}</TableCell> : null}
+                        </TableRow>
                       );
                     })}
-                  </tbody>
-                </table>
+                  </TableBody>
+                </Table>
 
                 {r.total > nb ? (
                   <button type="button" className="commande plus" onClick={() => setNb((v) => v + PAR_PAGE)}>
@@ -747,25 +768,29 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
             {r.total && seul ? (
               <Depliable className="franchises" titre={t.franchisesTitre}>
                 <p>{t.franchisesTexte(chf(P.QUOTE_PART_MAX[seul.classe]))}</p>
-                <table className="assureurs">
-                  <caption className="visually-hidden">{t.franchisesTitre}</caption>
-                  <thead>
-                    <tr>
-                      <th scope="col">{t.thFranchise}</th>
-                      <th scope="col">{t.thPremiere}</th>
-                      <th scope="col">{t.thMax}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+                <Table variant="chiffres">
+                  <TableCaption className="visually-hidden">{t.franchisesTitre}</TableCaption>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead scope="col">{t.thFranchise}</TableHead>
+                      <TableHead scope="col">{t.thPremiere}</TableHead>
+                      <TableHead scope="col">{t.thMax}</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
                     {lignesFr.filter((l) => l.nombre).map((l) => (
-                      <tr key={l.franchise} aria-current={l.franchise === seul.franchise ? "true" : undefined}>
-                        <td>{chf(l.franchise)}</td>
-                        <td>{nf(l.premiere)}</td>
-                        <td>{nf(l.maxACharge)}</td>
-                      </tr>
+                      <TableRow
+                        key={l.franchise}
+                        aria-current={l.franchise === seul.franchise ? "true" : undefined}
+                        data-state={l.franchise === seul.franchise ? "selected" : undefined}
+                      >
+                        <TableCell>{chf(l.franchise)}</TableCell>
+                        <TableCell>{nf(l.premiere)}</TableCell>
+                        <TableCell>{nf(l.maxACharge)}</TableCell>
+                      </TableRow>
                     ))}
-                  </tbody>
-                </table>
+                  </TableBody>
+                </Table>
               </Depliable>
             ) : null}
 
@@ -792,7 +817,7 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
               </div>
             ) : null}
           </>
-        )}
+        ) : null}
       </section>
     </div>
   );

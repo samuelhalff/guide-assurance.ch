@@ -5,6 +5,7 @@ import { outils } from "@/lib/nav";
 import type { Locale } from "@/lib/i18n";
 import type { Porte } from "@shared/demande/portes";
 import { lienDemande } from "@/lib/demande";
+import { buttonVariants } from "@/components/ui/button";
 
 const FLECHE = (
   <svg viewBox="0 0 20 20" aria-hidden="true">
@@ -53,7 +54,7 @@ export function LandingTete({ h1, landing, locale = "fr", porte }: { h1: string;
                 <p className="landing-action-texte">{t.simulateurTexte}</p>
               </>
             ) : null}
-            <a className="bouton" href={action === "simulateur" ? o.simulateur : o.lettre}>
+            <a className={buttonVariants({ className: "mt-4 w-full" })} href={action === "simulateur" ? o.simulateur : o.lettre}>
               {action === "simulateur" ? t.simulateurBouton : t.lettreBouton}
               {FLECHE}
             </a>
@@ -62,7 +63,7 @@ export function LandingTete({ h1, landing, locale = "fr", porte }: { h1: string;
         ) : porte ? (
           <>
             <p className="landing-action-titre">{ty(t.offresTitre(landing.objet))}</p>
-            <a className="bouton" href={lienDemande(locale, porte)}>
+            <a className={buttonVariants({ className: "mt-4 w-full" })} href={lienDemande(locale, porte)}>
               {t.offresBouton}
               {FLECHE}
             </a>
@@ -72,7 +73,7 @@ export function LandingTete({ h1, landing, locale = "fr", porte }: { h1: string;
         ) : (
           <>
             <p className="landing-action-titre">{ty(t.rappelTitre(landing.objet))}</p>
-            <LienRappel locale={locale} emplacement="produit" sujet={sujet} className="bouton">
+            <LienRappel locale={locale} emplacement="produit" sujet={sujet} className={buttonVariants({ className: "mt-4 w-full" })}>
               <IconeTelephone />
               {t.rappelBouton}
             </LienRappel>

@@ -7,6 +7,8 @@ import type { Locale } from "@/lib/i18n";
 import { TEXTE_RAPPEL } from "@/lib/demande";
 import * as P from "@/lib/engines/primes";
 import { IconeTelephone, LienRappel } from "@/components/demande/lien-rappel";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 const N = " "; // espace fine insécable avant ; : ? ! »
 
@@ -123,8 +125,7 @@ function FormComparer({ locale }: { locale: Locale }) {
       <div className="comparer-champs">
         <div className="champ">
           <label htmlFor="ac-lieu">{t.lieu}</label>
-          <input
-            className="saisie"
+          <Input
             id="ac-lieu"
             list="ac-lieux"
             autoComplete="off"
@@ -145,9 +146,8 @@ function FormComparer({ locale }: { locale: Locale }) {
         </div>
         <div className="champ">
           <label htmlFor="ac-annee">{t.annee}</label>
-          <input
+          <Input
             ref={anneeRef}
-            className="saisie"
             id="ac-annee"
             inputMode="numeric"
             autoComplete="bday-year"
@@ -167,12 +167,12 @@ function FormComparer({ locale }: { locale: Locale }) {
       {erreur ? (
         <p className="comparer-err" id="ac-annee-err" role="alert">{t.anneeErr}</p>
       ) : null}
-      <button className="bouton" type="submit">
+      <Button className="mt-3 w-full" type="submit">
         {t.voir}
         <svg viewBox="0 0 18 18" aria-hidden="true">
           <path d="M3 9h11M10 4.5L14.5 9 10 13.5" fill="none" stroke="currentColor" strokeWidth="2" />
         </svg>
-      </button>
+      </Button>
       <p className="comparer-defaut">{t.defaut}</p>
     </form>
   );

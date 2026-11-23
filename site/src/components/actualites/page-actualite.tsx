@@ -4,6 +4,9 @@ import { SiteFooter } from "@/components/site/site-footer";
 import { Breadcrumbs } from "@/components/site/breadcrumbs";
 import { JsonLd } from "@/components/site/json-ld";
 import { IconeTelephone, LienRappel } from "@/components/demande/lien-rappel";
+import { Alert } from "@/components/ui/alert";
+import { buttonVariants } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { ORG_ID, WEBSITE_ID, breadcrumbLd, faqLd, graph } from "@/lib/jsonld";
 import { jsonLdAccueil } from "@/lib/jsonld-accueil";
 import { DICT, dateLongue } from "@/lib/i18n";
@@ -116,7 +119,7 @@ export function PageActualite({ a, apercu = false }: { a: Article; apercu?: bool
       <SiteHeader current="actualites" locale={l} altPath={autre ? cheminArticle(autre) : BASE_ACTUALITES[l === "fr" ? "en" : "fr"]} />
       <main>
         <div className="wrap">
-          {apercu ? <p className="apercu-bandeau" role="note">{t.apercu}</p> : null}
+          {apercu ? <Alert variant="attention" className="mt-4" role="note">{t.apercu}</Alert> : null}
           <Breadcrumbs items={miettes} locale={l} />
           <p className="actu-rubrique">{t.rubrique}</p>
           <h1>{a.title}</h1>
@@ -153,14 +156,16 @@ export function PageActualite({ a, apercu = false }: { a: Article; apercu?: bool
               </aside>
             ) : null}
           </div>
-          <div className="cta-demande actu-rappel">
-            <p className="actu-rappel-q">{t.rappelQ}</p>
-            <LienRappel locale={l} emplacement="actualite" className="bouton">
-              <IconeTelephone />
-              {t.rappelLien}
-            </LienRappel>
-            <p>{t.rappelSuite}</p>
-          </div>
+          <Card className="actu-rappel mb-12 max-w-[68ch]">
+            <CardContent className="cta-demande mb-0">
+              <p className="actu-rappel-q">{t.rappelQ}</p>
+              <LienRappel locale={l} emplacement="actualite" className={buttonVariants({ className: "max-[719px]:justify-between" })}>
+                <IconeTelephone />
+                {t.rappelLien}
+              </LienRappel>
+              <p>{t.rappelSuite}</p>
+            </CardContent>
+          </Card>
         </div>
         {a.faq.length ? (
           <section className="wrap guide-faq" aria-labelledby="faq-titre">

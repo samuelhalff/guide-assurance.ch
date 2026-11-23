@@ -12,6 +12,7 @@ import { abs } from "@/lib/site";
 import { DATE_PAGE } from "@/lib/donnees";
 import { dateLongue, type Locale } from "@/lib/i18n";
 import { OUTILS, OUTILS_EN } from "@/lib/nav";
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 /* « Calculateur de la somme d'assurance ménage » (/assurance-menage-rc/calculateur-somme/ et version anglaise). Les
    fichiers de route ne font qu'appeler ces fonctions. Méthodes et sources : src/lib/engines/somme-menage.ts. */
@@ -274,27 +275,27 @@ export function PageSommeMenage({ locale }: { locale: Locale }) {
           <section className="reperes-statiques reperes-menage">
             <h2>{t.exTitre}</h2>
             <p>{t.exTexte}</p>
-            <table className="assureurs">
-              <caption className="visually-hidden">{t.exCap}</caption>
-              <thead>
-                <tr>
-                  <th scope="col">{t.thMenage}</th>
-                  <th scope="col">{t.thBaloise}</th>
-                  <th scope="col">{t.thZurich}</th>
-                  <th scope="col">{t.thSomme}</th>
-                </tr>
-              </thead>
-              <tbody>
+            <Table variant="chiffres">
+              <TableCaption className="visually-hidden">{t.exCap}</TableCaption>
+              <TableHeader>
+                <TableRow>
+                  <TableHead scope="col">{t.thMenage}</TableHead>
+                  <TableHead scope="col">{t.thBaloise}</TableHead>
+                  <TableHead scope="col">{t.thZurich}</TableHead>
+                  <TableHead scope="col">{t.thSomme}</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {EX.map(({ p, e }) => (
-                  <tr key={t.menage(p)}>
-                    <th scope="row">{t.menage(p)}</th>
-                    <td>{e.baloise == null ? "–" : nf.format(e.baloise)}</td>
-                    <td>{nf.format(e.zurich)}</td>
-                    <td><b>{nf.format(e.somme)}</b></td>
-                  </tr>
+                  <TableRow key={t.menage(p)}>
+                    <TableHead scope="row">{t.menage(p)}</TableHead>
+                    <TableCell>{e.baloise == null ? "–" : nf.format(e.baloise)}</TableCell>
+                    <TableCell>{nf.format(e.zurich)}</TableCell>
+                    <TableCell><b>{nf.format(e.somme)}</b></TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
             <p className="source-outil">{t.exNote}</p>
             <PartagerOutil path={t.path} title={t.appli} text={t.partage} locale={locale} />
           </section>

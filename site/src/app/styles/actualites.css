@@ -17,7 +17,6 @@
   .actu-flux { margin: 0 0 var(--s7); font: 15px var(--narrow); }
   .actu-flux a { display: inline-flex; align-items: center; gap: var(--s2); min-height: 44px; color: var(--lac-encre); }
 
-  .actu-rappel { padding: var(--s5); border: 1px solid var(--filet); border-radius: var(--r); background: var(--carte); }
   .actu-rappel .actu-rappel-q { margin: 0; font: 700 18px var(--sans); color: var(--encre); }
 
   .actu-sources { padding-block: var(--s6) var(--s7); border-top: 1px solid var(--filet); }
@@ -26,10 +25,6 @@
   .actu-sources li { margin-bottom: var(--s2); overflow-wrap: anywhere; }
   .actu-sources a { color: var(--lac-encre); }
 
-  .apercu-bandeau {
-    margin: var(--s4) 0 0; padding: var(--s3) var(--s4); border-left: 3px solid var(--sentier); background: var(--sentier-teinte);
-    border-radius: 0 var(--r) var(--r) 0; font: 15px var(--narrow); color: var(--encre);
-  }
   @media (min-width: 900px) {
     .page-actualite h1 { font-size: 40px; }
     .liste-actualites h2 { font-size: 25px; }

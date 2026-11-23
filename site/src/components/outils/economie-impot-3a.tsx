@@ -6,12 +6,23 @@ import { IconeTelephone, LienRappel } from "@/components/demande/lien-rappel";
 import type { Locale } from "@/lib/i18n";
 import { Choix } from "@/components/outils/choix";
 import { ChoixBoutons, Depliable } from "@/components/controles";
+import { Input } from "@/components/ui/input";
+import { Alert } from "@/components/ui/alert";
+import { Card, CardContent } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 /* Calculateur « Économie d'impôt 3a » : tout se calcule ici, rien n'est envoyé. Le profil peut être partagé
    après le # (jamais transmis au serveur), lu une fois puis retiré de l'adresse. */
 const N = " ";
-const nfFr = new Intl.NumberFormat("fr-CH", { maximumFractionDigits: 0 });
-const nfEn = new Intl.NumberFormat("en-GB", { maximumFractionDigits: 0 });
+/* Nombres formatés sans Intl : l'ICU du build et celle du navigateur diffèrent pour fr-CH (apostrophe ou espace fine),
+   ce qui casse l'hydratation (erreur React 418). FR : espace fine ; EN : virgule. */
+const grouper = (x: number, mille: string) => {
+  const v = Number.isFinite(x) ? Math.round(x) : 0;
+  const s = String(Math.abs(v)).replace(/\B(?=(\d{3})+(?!\d))/g, mille);
+  return v < 0 ? `-${s}` : s;
+};
+const nfFr = { format: (x: number) => grouper(x, "\u202f") };
+const nfEn = { format: (x: number) => grouper(x, ",") };
 
 const TXT = {
   fr: {
@@ -55,7 +66,7 @@ const TXT = {
       BE: "Dans le Jura bernois, les membres d’une Église reconnue paient en plus un impôt paroissial, qui n’est pas compris ici.",
     } as Record<I.Canton, string>,
     plafondDepasse: (p: string) => `Le versement dépasse le plafond (${p} CHF par personne). Seul le montant autorisé est déductible.`,
-    vide: "Indiquez votre revenu imposable pour voir l’économie.",
+    vide: "Indiquez votre revenu imposable et le montant versé pour voir l’économie.",
     retraitTitre: `Et au moment du retrait${N}?`,
     retraitTexte:
       "Le capital 3a est imposé à part, une seule fois, à un taux réduit. Indiquez le capital que vous pensez retirer pour une estimation avec les barèmes 2026.",
@@ -110,7 +121,7 @@ const TXT = {
       BE: "In the Bernese Jura, members of a recognised church also pay a parish tax, which is not included here.",
     } as Record<I.Canton, string>,
     plafondDepasse: (p: string) => `The payment is above the cap (CHF ${p} per person). Only the allowed amount is deductible.`,
-    vide: "Enter your taxable income to see the saving.",
+    vide: "Enter your taxable income and the amount you pay in to see the saving.",
     retraitTitre: "And when you withdraw?",
     retraitTexte:
       "3a capital is taxed separately, once, at a reduced rate. Enter the capital you expect to withdraw for an estimate with the 2026 tax scales.",
@@ -146,7 +157,8 @@ export function EconomieImpot3a({ locale = "fr" }: { locale?: Locale }) {
   const [revenu, setRevenu] = useState("");
   const [revenuIfd, setRevenuIfd] = useState("");
   const [lpp, setLpp] = useState(true);
-  const [versement, setVersement] = useState(String(P26.avecLPP));
+  /* Vide au départ, comme le revenu : le plafond sert d'exemple (placeholder) et le résultat attend la saisie. */
+  const [versement, setVersement] = useState("");
   const [capital, setCapital] = useState("");
   const [copie, setCopie] = useState(false);
   const mesure = useRef(false);
@@ -217,6 +229,7 @@ export function EconomieImpot3a({ locale = "fr" }: { locale?: Locale }) {
   return (
     <div className="ph-sensitive outil outil-impot3a" id="outil" data-ph-mask>
       <form className="form" onSubmit={(e) => e.preventDefault()}>
+        <Card><CardContent>
         <fieldset>
           <legend>{t.canton}</legend>
           <ChoixBoutons
@@ -232,8 +245,7 @@ export function EconomieImpot3a({ locale = "fr" }: { locale?: Locale }) {
 
         <div className="champ">
           <label htmlFor="i3-commune">{t.commune}</label>
-          <input
-            className="saisie"
+          <Input
             id="i3-commune"
             list="i3-communes"
             placeholder={I.COMMUNE_DEFAUT[canton]}
@@ -266,13 +278,13 @@ export function EconomieImpot3a({ locale = "fr" }: { locale?: Locale }) {
 
         <div className="champ">
           <label htmlFor="i3-revenu">{t.revenu}</label>
-          <input className="saisie" id="i3-revenu" inputMode="numeric" placeholder="85000" value={revenu} onChange={(e) => setRevenu(e.target.value)} />
+          <Input id="i3-revenu" inputMode="numeric" placeholder="85000" value={revenu} onChange={(e) => setRevenu(e.target.value)} />
           <span className="aide">{t.revenuAide}</span>
         </div>
         <Depliable className="aide-revenus" titre={t.ifd}>
           <div className="champ">
             <label htmlFor="i3-ifd" className="visually-hidden">{t.ifd}</label>
-            <input className="saisie" id="i3-ifd" inputMode="numeric" placeholder="87000" value={revenuIfd} onChange={(e) => setRevenuIfd(e.target.value)} />
+            <Input id="i3-ifd" inputMode="numeric" placeholder="87000" value={revenuIfd} onChange={(e) => setRevenuIfd(e.target.value)} />
             <span className="aide">{t.ifdAide}</span>
           </div>
         </Depliable>
@@ -285,7 +297,7 @@ export function EconomieImpot3a({ locale = "fr" }: { locale?: Locale }) {
             name="i3-lpp"
             value={lpp ? "avec" : "sans"}
             onChange={(v) => {
-              if (v === "avec") { setLpp(true); setVersement(String(P26.avecLPP * (couple ? 2 : 1))); }
+              if (v === "avec") { setLpp(true); if (versement.trim()) setVersement(String(P26.avecLPP * (couple ? 2 : 1))); }
               else setLpp(false);
             }}
             options={[
@@ -297,50 +309,58 @@ export function EconomieImpot3a({ locale = "fr" }: { locale?: Locale }) {
 
         <div className="champ dernier">
           <label htmlFor="i3-versement">{t.versement}</label>
-          <input className="saisie" id="i3-versement" inputMode="numeric" placeholder={String(plafond)} value={versement} onChange={(e) => setVersement(e.target.value)} />
+          <Input id="i3-versement" inputMode="numeric" placeholder={String(plafond)} value={versement} onChange={(e) => setVersement(e.target.value)} />
           <span className="aide">{lpp ? t.versementAide(nf.format(P26.avecLPP), couple) : t.sansLppAide(nf.format(P26.sansLPP))}</span>
         </div>
+        </CardContent></Card>
       </form>
 
-      <div className="apercu resultat-3a" aria-live="polite">
-        {!res ? (
-          <p className="attente">{t.vide}</p>
-        ) : (
+      <div className="apercu resultat-3a">
+        {/* Seule ligne annoncée aux lecteurs d'écran : la phrase d'attente, puis le montant de l'économie (même nœud, toujours présent). */}
+        <div aria-live="polite">
+          {res ? (
+            <Card className="economie">
+              <CardContent>
+                <h2>{t.economie}</h2>
+                <p className="montant">
+                  {nf.format(res.economie.total)} <small>{t.chf}</small>
+                </p>
+                <p className="soit">{t.soit(pct(res.part))}</p>
+                {Number.isFinite(v) && v > plafond ? <Alert variant="attention" className="provisoire">{t.plafondDepasse(nf.format(plafondPers))}</Alert> : null}
+              </CardContent>
+            </Card>
+          ) : (
+            <p className="attente">{t.vide}</p>
+          )}
+        </div>
+        {res ? (
           <>
-            <div className="economie">
-              <h2>{t.economie}</h2>
-              <p className="montant">
-                {nf.format(res.economie.total)} <small>{t.chf}</small>
-              </p>
-              <p className="soit">{t.soit(pct(res.part))}</p>
-              {Number.isFinite(v) && v > plafond ? <p className="provisoire">{t.plafondDepasse(nf.format(plafondPers))}</p> : null}
-            </div>
-            <table className="assureurs detail-3a">
-              <thead>
-                <tr>
-                  <th scope="col"><span className="visually-hidden">{t.economie}</span></th>
-                  <th scope="col">{t.avant}</th>
-                  <th scope="col">{t.apres}</th>
-                  <th scope="col">{locale === "fr" ? "Économie" : "Saving"}</th>
-                </tr>
-              </thead>
-              <tbody>
+            <Table variant="chiffres" className="detail-3a">
+              <TableHeader>
+                <TableRow>
+                  <TableHead scope="col"><span className="visually-hidden">{t.economie}</span></TableHead>
+                  <TableHead scope="col">{t.avant}</TableHead>
+                  <TableHead scope="col">{t.apres}</TableHead>
+                  <TableHead scope="col">{locale === "fr" ? "Économie" : "Saving"}</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {([["ifd", t.ifdL], ["cantonal", t.cantonL], ["communal", t.communeL]] as const).map(([key, label]) => (
-                  <tr key={key}>
-                    <th scope="row">{label}</th>
-                    <td>{nf.format(res.avant[key])}</td>
-                    <td>{nf.format(res.apres[key])}</td>
-                    <td><b>{nf.format(res.economie[key])}</b></td>
-                  </tr>
+                  <TableRow key={key}>
+                    <TableHead scope="row">{label}</TableHead>
+                    <TableCell>{nf.format(res.avant[key])}</TableCell>
+                    <TableCell>{nf.format(res.apres[key])}</TableCell>
+                    <TableCell><b>{nf.format(res.economie[key])}</b></TableCell>
+                  </TableRow>
                 ))}
-                <tr className="total">
-                  <th scope="row">Total</th>
-                  <td>{nf.format(res.avant.total)}</td>
-                  <td>{nf.format(res.apres.total)}</td>
-                  <td><b>{nf.format(res.economie.total)}</b></td>
-                </tr>
-              </tbody>
-            </table>
+                <TableRow className="total">
+                  <TableHead scope="row">Total</TableHead>
+                  <TableCell>{nf.format(res.avant.total)}</TableCell>
+                  <TableCell>{nf.format(res.apres.total)}</TableCell>
+                  <TableCell><b>{nf.format(res.economie.total)}</b></TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
             <p className="note-outil">{t.sansEglise[canton]}</p>
 
             <p className="rappel-liste">
@@ -351,18 +371,22 @@ export function EconomieImpot3a({ locale = "fr" }: { locale?: Locale }) {
               </LienRappel>
             </p>
           </>
-        )}
+        ) : null}
 
+        <Card size="sm">
+        <CardContent>
         <Depliable className="retrait-3a" titre={t.retraitTitre}>
           <p className="note-outil">{t.retraitTexte}</p>
           <div className="champ champ-court">
             <label htmlFor="i3-capital">{t.capital}</label>
-            <input className="saisie" id="i3-capital" inputMode="numeric" placeholder="100000" value={capital} onChange={(e) => setCapital(e.target.value)} />
+            <Input id="i3-capital" inputMode="numeric" placeholder="100000" value={capital} onChange={(e) => setCapital(e.target.value)} />
           </div>
           {retrait ? <p className="retrait-res"><b>{t.retraitRes(nf.format(retrait.total), pct(retrait.taux))}</b></p> : null}
           <p className="note-outil">{t.retraitNote}</p>
           {canton === "VS" ? <p className="note-outil">{t.retraitVS}</p> : null}
         </Depliable>
+        </CardContent>
+        </Card>
 
         <div className="integrite">
           <p>{t.limites}</p>

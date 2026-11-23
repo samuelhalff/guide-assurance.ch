@@ -18,6 +18,8 @@ import { DATE_IMPOTS, DATE_PAGE } from "@/lib/donnees";
 import { dateLongue } from "@/lib/i18n";
 import { OUTILS, OUTILS_EN, PAGES_DONNEES, PAGES_DONNEES_EN } from "@/lib/nav";
 import type { Locale } from "@/lib/i18n";
+import { Alert } from "@/components/ui/alert";
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 /* Pages « Taux des comptes 3a » et « Économie d'impôt 3a », en français et en anglais. Les fichiers de route
    (src/app/(fr)/3e-pilier/..., src/app/(en)/en/pillar-3a/...) ne font qu'appeler ces fonctions. */
@@ -233,16 +235,22 @@ export function PageTaux3a({ locale }: { locale: Locale }) {
           <div className="cta-bas-3a">
             <CtaDemande locale={locale} porte="prevoyance" emplacement="outil3a" />
           </div>
-          <p className="lien-outil-3a">
-            <a href={locale === "fr" ? OUTILS_3A_ASSURANCE.fr : OUTILS_3A_ASSURANCE.en}>{t.lienAssurance}</a> {t.lienAssuranceTexte}
-          </p>
-          <p className="lien-outil-3a">
-            <a href={locale === "fr" ? OUTILS.impot3a : OUTILS_EN.impot3a}>{t.lienImpot}</a> {t.lienImpotTexte}
-          </p>
-          <p className="lien-outil-3a">
-            <a href={locale === "fr" ? PAGES_DONNEES.historique3a : PAGES_DONNEES_EN.historique3a}>{locale === "fr" ? "Historique des taux 3a" : "Pillar 3a rate history"}</a>{" "}
-            {locale === "fr" ? "Chaque relevé hebdomadaire depuis le 22.11.2026, avec la moyenne, la médiane et le fichier CSV." : "Every weekly survey since 22.11.2026, with the mean, the median and the CSV file."}
-          </p>
+          <Alert variant="info" className="lien-outil-3a">
+            <p>
+              <a href={locale === "fr" ? OUTILS_3A_ASSURANCE.fr : OUTILS_3A_ASSURANCE.en}>{t.lienAssurance}</a> {t.lienAssuranceTexte}
+            </p>
+          </Alert>
+          <Alert variant="info" className="lien-outil-3a">
+            <p>
+              <a href={locale === "fr" ? OUTILS.impot3a : OUTILS_EN.impot3a}>{t.lienImpot}</a> {t.lienImpotTexte}
+            </p>
+          </Alert>
+          <Alert variant="info" className="lien-outil-3a">
+            <p>
+              <a href={locale === "fr" ? PAGES_DONNEES.historique3a : PAGES_DONNEES_EN.historique3a}>{locale === "fr" ? "Historique des taux 3a" : "Pillar 3a rate history"}</a>{" "}
+              {locale === "fr" ? "Chaque relevé hebdomadaire depuis le 22.11.2026, avec la moyenne, la médiane et le fichier CSV." : "Every weekly survey since 22.11.2026, with the mean, the median and the CSV file."}
+            </p>
+          </Alert>
         </div>
         <Faqs faq={t.faq} maj={t.maj} />
       </main>
@@ -473,83 +481,87 @@ export function PageImpot3a({ locale }: { locale: Locale }) {
           <section className="reperes-statiques exemples-3a">
             <h2>{t.exTitre}</h2>
             <p>{t.exTexte}</p>
-            <table className="assureurs">
-              <caption className="visually-hidden">{t.exCaption}</caption>
-              <thead>
-                <tr>
-                  <th scope="col">{t.thProfil}</th>
-                  <th scope="col">{t.thVersement}</th>
-                  <th scope="col">{locale === "fr" ? "Genève" : "Geneva"}</th>
-                  <th scope="col">Lausanne</th>
-                </tr>
-              </thead>
-              <tbody>
+            <Table variant="chiffres">
+              <TableCaption className="visually-hidden">{t.exCaption}</TableCaption>
+              <TableHeader>
+                <TableRow>
+                  <TableHead scope="col">{t.thProfil}</TableHead>
+                  <TableHead scope="col">{t.thVersement}</TableHead>
+                  <TableHead scope="col">{locale === "fr" ? "Genève" : "Geneva"}</TableHead>
+                  <TableHead scope="col">Lausanne</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {EXEMPLES.map((e, i) => (
-                  <tr key={i}>
-                    <td>{t.profil(e)}</td>
-                    <td>{nf.format(e.versement)}</td>
-                    <td><b>{nf.format(EX_GE[i].economie.total)}</b></td>
-                    <td><b>{nf.format(EX_VD[i].economie.total)}</b></td>
-                  </tr>
+                  <TableRow key={i}>
+                    <TableCell>{t.profil(e)}</TableCell>
+                    <TableCell>{nf.format(e.versement)}</TableCell>
+                    <TableCell><b>{nf.format(EX_GE[i].economie.total)}</b></TableCell>
+                    <TableCell><b>{nf.format(EX_VD[i].economie.total)}</b></TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
 
             <h2>{t.autresTitre}</h2>
             <p>{t.autresTexte}</p>
-            <table className="assureurs">
-              <caption className="visually-hidden">{t.autresCaption}</caption>
-              <thead>
-                <tr>
-                  <th scope="col">{t.thLieu}</th>
-                  <th scope="col">{t.thEco}</th>
-                  <th scope="col">{t.thRetrait}</th>
-                </tr>
-              </thead>
-              <tbody>
+            <Table variant="chiffres">
+              <TableCaption className="visually-hidden">{t.autresCaption}</TableCaption>
+              <TableHeader>
+                <TableRow>
+                  <TableHead scope="col">{t.thLieu}</TableHead>
+                  <TableHead scope="col">{t.thEco}</TableHead>
+                  <TableHead scope="col">{t.thRetrait}</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {EX_AUTRES.map((e) => (
-                  <tr key={e.canton}>
-                    <td>{e.commune} ({I.NOM_CANTON[locale][e.canton]})</td>
-                    <td><b>{nf.format(e.economie)}</b></td>
-                    <td>{nf.format(e.retrait)}</td>
-                  </tr>
+                  <TableRow key={e.canton}>
+                    <TableCell>{e.commune} ({I.NOM_CANTON[locale][e.canton]})</TableCell>
+                    <TableCell><b>{nf.format(e.economie)}</b></TableCell>
+                    <TableCell>{nf.format(e.retrait)}</TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
 
             <h2>{t.plafondsTitre}</h2>
-            <table className="assureurs">
-              <caption>{t.plafondsCaption}</caption>
-              <thead>
-                <tr>
-                  <th scope="col">{t.thSituation}</th>
-                  <th scope="col">2026</th>
-                  <th scope="col">2027</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>{t.avec}</td>
-                  <td>{nf.format(P26.avecLPP)}</td>
-                  <td><b>{nf.format(P27.avecLPP)}</b></td>
-                </tr>
-                <tr>
-                  <td>{t.sans}</td>
-                  <td>{t.sansMontant(P26.sansLPP)}</td>
-                  <td><b>{t.sansMontant(P27.sansLPP)}</b></td>
-                </tr>
-              </tbody>
-            </table>
+            <Table variant="chiffres">
+              <TableCaption>{t.plafondsCaption}</TableCaption>
+              <TableHeader>
+                <TableRow>
+                  <TableHead scope="col">{t.thSituation}</TableHead>
+                  <TableHead scope="col">2026</TableHead>
+                  <TableHead scope="col">2027</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableCell>{t.avec}</TableCell>
+                  <TableCell>{nf.format(P26.avecLPP)}</TableCell>
+                  <TableCell><b>{nf.format(P27.avecLPP)}</b></TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>{t.sans}</TableCell>
+                  <TableCell>{t.sansMontant(P26.sansLPP)}</TableCell>
+                  <TableCell><b>{t.sansMontant(P27.sansLPP)}</b></TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
             <p className="source-outil">{t.plafondsSource}</p>
           </section>
 
-          <p className="lien-outil-3a">
-            <a href={locale === "fr" ? OUTILS.taux3a : OUTILS_EN.taux3a}>{t.lienTaux}</a> {t.lienTauxTexte}
-          </p>
-          <p className="lien-outil-3a">
-            <a href={locale === "fr" ? PAGES_DONNEES.communes3a : PAGES_DONNEES_EN.communes3a}>{locale === "fr" ? "L’économie commune par commune" : "Savings municipality by municipality"}</a>{" "}
-            {locale === "fr" ? "Le même calcul pour un profil type, dans toutes les communes des cantons couverts, avec un tableau à trier." : "The same calculation for a standard profile, in every municipality of the cantons covered, in a sortable table."}
-          </p>
+          <Alert variant="info" className="lien-outil-3a">
+            <p>
+              <a href={locale === "fr" ? OUTILS.taux3a : OUTILS_EN.taux3a}>{t.lienTaux}</a> {t.lienTauxTexte}
+            </p>
+          </Alert>
+          <Alert variant="info" className="lien-outil-3a">
+            <p>
+              <a href={locale === "fr" ? PAGES_DONNEES.communes3a : PAGES_DONNEES_EN.communes3a}>{locale === "fr" ? "L’économie commune par commune" : "Savings municipality by municipality"}</a>{" "}
+              {locale === "fr" ? "Le même calcul pour un profil type, dans toutes les communes des cantons couverts, avec un tableau à trier." : "The same calculation for a standard profile, in every municipality of the cantons covered, in a sortable table."}
+            </p>
+          </Alert>
         </div>
         <Faqs faq={t.faq} maj={t.maj} />
       </main>

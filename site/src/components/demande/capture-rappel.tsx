@@ -8,6 +8,9 @@ import { CURRENT_CONSENT_VERSION } from "@shared/demande/consent-public";
 import type { Demande } from "@shared/demande/schema";
 import { marquerLead, mesurerLead, suivre, type Evenement } from "@/lib/analytics";
 import { TEXTE_CTA } from "@/lib/demande";
+import { Alert } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 /* Bloc de demande en ligne (nom, téléphone, créneau, accord), sans changer de page : sous le résultat du comparateur
    de primes et dans l'assistant. Même envoi que le formulaire court (POST /api/demande, Turnstile, pot de miel, délai
@@ -260,7 +263,7 @@ export const CaptureRappel = forwardRef<
         <div className="capture-champs">
           <div className="champ">
             <label htmlFor={id("nom")}>{t.nom}</label>
-            <input ref={nomRef} id={id("nom")} className="saisie" autoComplete="name" placeholder="Marie Dupont" autoCapitalize="words" maxLength={120} value={nom} onChange={(e) => setNom(e.target.value)} {...invalide("nom")} />
+            <Input ref={nomRef} id={id("nom")} autoComplete="name" placeholder="Marie Dupont" autoCapitalize="words" maxLength={120} value={nom} onChange={(e) => setNom(e.target.value)} {...invalide("nom")} />
             <Erreur id={id("err-nom")} msg={erreurs.nom} />
           </div>
           <ChampTelephone id={id("tel")} locale={locale} value={tel} onChange={setTel} erreur={erreurs.tel} />
@@ -288,13 +291,13 @@ export const CaptureRappel = forwardRef<
         ) : null}
 
         {echec ? (
-          <p className="echec" role="alert">
+          <Alert variant="destructive" role="alert">
             {echec}
-          </p>
+          </Alert>
         ) : null}
-        <button type="submit" className="bouton capture-bouton" disabled={envoi} aria-busy={envoi || undefined}>
+        <Button type="submit" className="capture-bouton" disabled={envoi} aria-busy={envoi || undefined}>
           {envoi ? t.envoi : bouton}
-        </button>
+        </Button>
         <p className="capture-rassurance">{TEXTE_CTA[locale].rassurance}</p>
         {complet ? (
           <p className="capture-complet">

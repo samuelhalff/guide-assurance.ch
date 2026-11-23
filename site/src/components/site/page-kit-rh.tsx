@@ -11,6 +11,7 @@ import { abs } from "@/lib/site";
 import { dateLongue, type Locale } from "@/lib/i18n";
 import { MAJ_IDEES, ROUTES_IDEES } from "@/lib/pages-idees";
 import { OUTILS, OUTILS_EN } from "@/lib/nav";
+import { buttonVariants } from "@/components/ui/button";
 
 /* Page du kit RH (idée 8) : deux PDF d'une page, FR et EN, produits par scripts/kit-rh.mjs dans public/kit-rh/. */
 const T = " ";
@@ -171,8 +172,8 @@ export function PageKitRh({ l }: { l: Locale }) {
               <img src={`/kit-rh/apercu-${l}.jpg`} width={794} height={1123} alt={t.apercu} loading="lazy" />
             </a>
             <div className="kit-actions">
-              <a className="bouton" href={PDF_KIT[fr ? "fr" : "en"]} download>{fr ? t.pdfFr : t.pdfEn}</a>
-              <a className="bouton second" href={PDF_KIT[fr ? "en" : "fr"]} download>{fr ? t.pdfEn : t.pdfFr}</a>
+              <a className={buttonVariants()} href={PDF_KIT[fr ? "fr" : "en"]} download>{fr ? t.pdfFr : t.pdfEn}</a>
+              <a className={buttonVariants({ variant: "outline" })} href={PDF_KIT[fr ? "en" : "fr"]} download>{fr ? t.pdfEn : t.pdfFr}</a>
               <h2>{t.h2Contenu}</h2>
               <ul className="kit-contenu">
                 {t.contenu.map((x) => <li key={x}>{x}</li>)}

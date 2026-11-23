@@ -16,6 +16,9 @@ import { abs } from "@/lib/site";
 import { DATE_PAGE } from "@/lib/donnees";
 import { COMPTES_3A, RELEVE_LE, TAUX_MAX, TAUX_MIN, dateCh, tauxFr } from "@/lib/taux3a";
 import { OUTILS } from "@/lib/nav";
+import { Alert } from "@/components/ui/alert";
+import { buttonVariants } from "@/components/ui/button";
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 const TITRE = "Comparer les primes maladie 2027 en Suisse romande";
 const DESCRIPTION =
@@ -182,14 +185,14 @@ export default function Accueil() {
                 Notre <a href={OUTILS.lettre}>modèle de lettre de résiliation</a> calcule la date limite applicable à votre contrat, sans que vos données quittent votre appareil.
               </p>
               <div className="echeances">
-                <div className="echeance alerte">
+                <Alert variant="attention" className="echeance">
                   <div className="date">30.11<span className="an">.2026</span></div>
                   <div className="quoi">Assurance de base (LAMal){N}: lettre reçue ce jour-là au plus tard</div>
-                </div>
-                <div className="echeance alerte">
+                </Alert>
+                <Alert variant="attention" className="echeance">
                   <div className="date">30.09<span className="an">.2027</span></div>
                   <div className="quoi">Complémentaires (LCA){N}: échéance fréquente, à vérifier dans votre contrat</div>
-                </div>
+                </Alert>
               </div>
             </div>
             <figure className="extrait document">
@@ -280,38 +283,38 @@ export default function Accueil() {
                   </figcaption>
                 </figure>
               <p className="primes-lien">
-                <a className="bouton second" href={OUTILS.comparateur}>
+                <a className={buttonVariants({ variant: "outline" })} href={OUTILS.comparateur}>
                   Voir les primes de votre commune
                   <Fleche />
                 </a>
               </p>
               </div>
-              <table>
-                <caption>Primes mensuelles de l’assurance de base, adulte, en francs (OFSP, primes 2027)</caption>
-                <thead>
-                  <tr>
-                    <th scope="col">Canton</th>
-                    <th scope="col" className="num">Moyenne 2027</th>
-                    <th scope="col" className="num">Hausse</th>
-                    <th scope="col" className="num">Standard, franchise 300</th>
-                  </tr>
-                </thead>
-                <tbody>
+              <Table variant="chiffres">
+                <TableCaption>Primes mensuelles de l’assurance de base, adulte, en francs (OFSP, primes 2027)</TableCaption>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead scope="col">Canton</TableHead>
+                    <TableHead scope="col">Moyenne 2027</TableHead>
+                    <TableHead scope="col">Hausse</TableHead>
+                    <TableHead scope="col">Standard, franchise 300</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
                   {PRIMES.map((p) => (
-                    <tr key={p.canton}>
-                      <th scope="row">{p.canton}</th>
-                      <td className="num">{p.moy}</td>
-                      <td className="num">{p.hausse}</td>
-                      <td className="num">
+                    <TableRow key={p.canton}>
+                      <TableHead scope="row">{p.canton}</TableHead>
+                      <TableCell>{p.moy}</TableCell>
+                      <TableCell>{p.hausse}</TableCell>
+                      <TableCell>
                         {p.std}
                         <span className="fourchette">
                           {p.min} à {p.max}
                         </span>
-                      </td>
-                    </tr>
+                      </TableCell>
+                    </TableRow>
                   ))}
-                </tbody>
-              </table>
+                </TableBody>
+              </Table>
             </div>
             <p className="note-donnees">
               La moyenne inclut toutes les franchises et tous les modèles, d’où son niveau plus bas ; c’est une estimation de l’OFSP. La colonne «{N}Standard{N}» donne la médiane des assureurs du canton (modèle standard, avec accident), puis la plus basse et la plus haute ; Guide Assurance l’a calculée sur les tableaux de primes de l’OFSP du 22.10.2026, arrondis à 10 centimes. Le détail par assureur figure dans notre outil de comparaison et sur priminfo.admin.ch.

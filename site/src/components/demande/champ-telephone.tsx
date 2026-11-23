@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { TELEPHONE_ERREURS, chiffresSaisis, formaterTelephone, normaliserTelephone } from "@shared/demande/telephone";
+import { Input } from "@/components/ui/input";
 
 type Locale = "fr" | "en";
 const NB = " ";
@@ -30,9 +31,8 @@ export function ChampTelephone({ locale, value, onChange, erreur, id: base = "te
   return (
     <div className="champ">
       <label htmlFor={base}>{t.tel}</label>
-      <input
+      <Input
         id={base}
-        className="saisie"
         type="tel"
         inputMode="tel"
         autoComplete="tel"

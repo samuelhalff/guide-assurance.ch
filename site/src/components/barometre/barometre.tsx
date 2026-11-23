@@ -22,6 +22,8 @@ import {
 import { dateLongue, type Locale } from "@/lib/i18n";
 import { OUTILS, OUTILS_EN } from "@/lib/nav";
 import { ROUTES_IDEES, cheminBarometre } from "@/lib/pages-idees";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 /* Baromètre des primes : page d'ensemble et page par canton, FR et EN. Rendu côté serveur, lisible sans JavaScript.
    Aucun assureur n'est nommé ; les tableaux donnent des valeurs de distribution (plus basse, quartiles, médiane, plus haute). */
@@ -36,35 +38,35 @@ const titreRegion = (r: RegionB, multi: boolean, l: Locale) =>
 function TableRegion({ r, multi, l }: { r: RegionB; multi: boolean; l: Locale }) {
   const fr = l === "fr";
   return (
-    <table className="assureurs table-barometre">
-      <caption>
+    <Table variant="chiffres" className="table-barometre">
+      <TableCaption>
         {fr
           ? `${titreRegion(r, multi, l)}, primes ${A} en CHF par mois, modèle standard (libre choix du médecin), accident inclus, ${r.assureurs} assureurs. Source${T}: OFSP, primes approuvées, relevées le ${dateLongue(DATE_RELEVE, l)}.`
           : `${titreRegion(r, multi, l)}, ${A} premiums in CHF per month, standard model (free choice of doctor), accident cover included, ${r.assureurs} insurers. Source: FOPH, approved premiums, retrieved on ${dateLongue(DATE_RELEVE, l)}.`}
-      </caption>
-      <thead>
-        <tr>
-          <th scope="col">{fr ? "Profil" : "Profile"}</th>
-          <th scope="col">{fr ? "Plus basse" : "Lowest"}</th>
-          <th scope="col" className="q">{fr ? "1er quartile" : "1st quartile"}</th>
-          <th scope="col">{fr ? "Médiane" : "Median"}</th>
-          <th scope="col" className="q">{fr ? "3e quartile" : "3rd quartile"}</th>
-          <th scope="col">{fr ? "Plus haute" : "Highest"}</th>
-        </tr>
-      </thead>
-      <tbody>
+      </TableCaption>
+      <TableHeader>
+        <TableRow>
+          <TableHead scope="col">{fr ? "Profil" : "Profile"}</TableHead>
+          <TableHead scope="col">{fr ? "Plus basse" : "Lowest"}</TableHead>
+          <TableHead scope="col" className="hidden min-[600px]:table-cell">{fr ? "1er quartile" : "1st quartile"}</TableHead>
+          <TableHead scope="col">{fr ? "Médiane" : "Median"}</TableHead>
+          <TableHead scope="col" className="hidden min-[600px]:table-cell">{fr ? "3e quartile" : "3rd quartile"}</TableHead>
+          <TableHead scope="col">{fr ? "Plus haute" : "Highest"}</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
         {r.profils.map((p) => (
-          <tr key={p.cle}>
-            <th scope="row">{LIBELLE_PROFIL[p.cle][l]}</th>
-            <td>{chf(p.standard.min, l).replace(/ ?CHF ?/, "")}</td>
-            <td className="q">{chf(p.standard.q1, l).replace(/ ?CHF ?/, "")}</td>
-            <td><b>{chf(p.standard.med, l).replace(/ ?CHF ?/, "")}</b></td>
-            <td className="q">{chf(p.standard.q3, l).replace(/ ?CHF ?/, "")}</td>
-            <td>{chf(p.standard.max, l).replace(/ ?CHF ?/, "")}</td>
-          </tr>
+          <TableRow key={p.cle}>
+            <TableHead scope="row">{LIBELLE_PROFIL[p.cle][l]}</TableHead>
+            <TableCell>{chf(p.standard.min, l).replace(/ ?CHF ?/, "")}</TableCell>
+            <TableCell className="hidden min-[600px]:table-cell">{chf(p.standard.q1, l).replace(/ ?CHF ?/, "")}</TableCell>
+            <TableCell><b>{chf(p.standard.med, l).replace(/ ?CHF ?/, "")}</b></TableCell>
+            <TableCell className="hidden min-[600px]:table-cell">{chf(p.standard.q3, l).replace(/ ?CHF ?/, "")}</TableCell>
+            <TableCell>{chf(p.standard.max, l).replace(/ ?CHF ?/, "")}</TableCell>
+          </TableRow>
         ))}
-      </tbody>
-    </table>
+      </TableBody>
+    </Table>
   );
 }
 
@@ -204,37 +206,41 @@ export function BarometreCanton({ code, l }: { code: string; l: Locale }) {
     <>
       <p className="intro lead-barometre">{leadCanton(code, l)}</p>
       <aside className="faits-barometre" aria-labelledby="t-faits">
-        <p id="t-faits" className="titre-faits">{fr ? "L’essentiel" : "Key facts"}</p>
-        <ul>
-          <li>
-            <b>{chf(o.adulte, l)}</b>
-            {fr ? ` par mois, prime moyenne d’un adulte en ${A} (${chf(o.adulte_prec, l)} en ${P}). OFSP, ${dateLongue(DATE_OFSP, l)}.` : ` a month, average adult premium in ${A} (${chf(o.adulte_prec, l)} in ${P}). FOPH, ${dateLongue(DATE_OFSP, l)}.`}
-          </li>
-          <li>
-            <b>{pct(o.variation_pct, l)}</b>
-            {fr ? `, hausse de la prime moyenne, contre ${pct(n.variation_pct, l)} en Suisse (${rangHausse(code) === 1 ? "la plus forte" : rangHausse(code) === DONNEES.cantons.length ? "la plus faible" : `${rangHausse(code)}e`} des six cantons romands). OFSP.` : `, change in the average premium, against ${pct(n.variation_pct, l)} for Switzerland. FOPH.`}
-          </li>
-          {o.jeune && o.enfant ? (
-            <li>
-              <b>{chf(o.jeune, l)}</b>
-              {fr ? ` pour un jeune adulte et ` : ` for a young adult and `}
-              <b>{chf(o.enfant, l)}</b>
-              {fr ? ` pour un enfant, primes moyennes ${A}. OFSP.` : ` for a child, ${A} average premiums. FOPH.`}
-            </li>
-          ) : null}
-          <li>
-            <b>{chf(ecartMensuel(p0.standard), l)}</b>
-            {fr
-              ? ` par mois d’écart entre l’offre la plus basse et la plus haute, adulte, franchise 300, modèle standard${multi ? `, région de ${r0.commune}` : ""}. Primes approuvées, ${dateLongue(DATE_RELEVE, l)}.`
-              : ` a month between the lowest and highest offer, adult, CHF 300 deductible, standard model${multi ? `, ${r0.commune} region` : ""}. Approved premiums, ${dateLongue(DATE_RELEVE, l)}.`}
-          </li>
-          <li>
-            <b>{c.regions.length}</b>
-            {fr
-              ? ` région${multi ? "s" : ""} de prime et ${r0.assureurs} assureurs${multi ? " dans la région principale" : ""}. OFSP, régions de primes ${A}.`
-              : ` premium region${multi ? "s" : ""} and ${r0.assureurs} insurers${multi ? " in the main region" : ""}. FOPH, ${A} premium regions.`}
-          </li>
-        </ul>
+        <Alert>
+          <AlertTitle id="t-faits">{fr ? "L’essentiel" : "Key facts"}</AlertTitle>
+          <AlertDescription>
+            <ul>
+              <li>
+                <b>{chf(o.adulte, l)}</b>
+                {fr ? ` par mois, prime moyenne d’un adulte en ${A} (${chf(o.adulte_prec, l)} en ${P}). OFSP, ${dateLongue(DATE_OFSP, l)}.` : ` a month, average adult premium in ${A} (${chf(o.adulte_prec, l)} in ${P}). FOPH, ${dateLongue(DATE_OFSP, l)}.`}
+              </li>
+              <li>
+                <b>{pct(o.variation_pct, l)}</b>
+                {fr ? `, hausse de la prime moyenne, contre ${pct(n.variation_pct, l)} en Suisse (${rangHausse(code) === 1 ? "la plus forte" : rangHausse(code) === DONNEES.cantons.length ? "la plus faible" : `${rangHausse(code)}e`} des six cantons romands). OFSP.` : `, change in the average premium, against ${pct(n.variation_pct, l)} for Switzerland. FOPH.`}
+              </li>
+              {o.jeune && o.enfant ? (
+                <li>
+                  <b>{chf(o.jeune, l)}</b>
+                  {fr ? ` pour un jeune adulte et ` : ` for a young adult and `}
+                  <b>{chf(o.enfant, l)}</b>
+                  {fr ? ` pour un enfant, primes moyennes ${A}. OFSP.` : ` for a child, ${A} average premiums. FOPH.`}
+                </li>
+              ) : null}
+              <li>
+                <b>{chf(ecartMensuel(p0.standard), l)}</b>
+                {fr
+                  ? ` par mois d’écart entre l’offre la plus basse et la plus haute, adulte, franchise 300, modèle standard${multi ? `, région de ${r0.commune}` : ""}. Primes approuvées, ${dateLongue(DATE_RELEVE, l)}.`
+                  : ` a month between the lowest and highest offer, adult, CHF 300 deductible, standard model${multi ? `, ${r0.commune} region` : ""}. Approved premiums, ${dateLongue(DATE_RELEVE, l)}.`}
+              </li>
+              <li>
+                <b>{c.regions.length}</b>
+                {fr
+                  ? ` région${multi ? "s" : ""} de prime et ${r0.assureurs} assureurs${multi ? " dans la région principale" : ""}. OFSP, régions de primes ${A}.`
+                  : ` premium region${multi ? "s" : ""} and ${r0.assureurs} insurers${multi ? " in the main region" : ""}. FOPH, ${A} premium regions.`}
+              </li>
+            </ul>
+          </AlertDescription>
+        </Alert>
       </aside>
 
       <section className="section-barometre">
@@ -268,9 +274,7 @@ export function BarometreCanton({ code, l }: { code: string; l: Locale }) {
         {c.regions.map((r) => (
           <div key={r.region} className="region-barometre" id={`region-${r.region}`}>
             {multi ? <h3>{titreRegion(r, multi, l)}</h3> : null}
-            <div className="defile">
-              <TableRegion r={r} multi={multi} l={l} />
-            </div>
+            <TableRegion r={r} multi={multi} l={l} />
           </div>
         ))}
       </section>
@@ -337,42 +341,42 @@ export function BarometreHub({ l }: { l: Locale }) {
       </p>
       <section className="section-barometre">
         <h2>{fr ? `Combien coûte l’assurance de base dans chaque canton romand${T}?` : "How much does basic insurance cost in each French-speaking canton?"}</h2>
-        <div className="defile">
-          <table className="assureurs table-barometre table-cantons">
-            <caption>
-              {fr
-                ? `Prime moyenne d’un adulte (OFSP, ${dateLongue(DATE_OFSP, l)}) et écart entre l’offre la plus basse et la plus haute pour un adulte, franchise 300, modèle standard, accident inclus, région principale (primes approuvées, ${dateLongue(DATE_RELEVE, l)}). CHF par mois.`
-                : `Average adult premium (FOPH, ${dateLongue(DATE_OFSP, l)}) and gap between the lowest and highest offer for an adult, CHF 300 deductible, standard model, accident cover, main region (approved premiums, ${dateLongue(DATE_RELEVE, l)}). CHF per month.`}
-            </caption>
-            <thead>
-              <tr>
-                <th scope="col">Canton</th>
-                <th scope="col">{fr ? `Moyenne ${A}` : `${A} average`}</th>
-                <th scope="col" className="q">{fr ? `Moyenne ${P}` : `${P} average`}</th>
-                <th scope="col">{fr ? "Variation" : "Change"}</th>
-                <th scope="col">{fr ? "Écart entre offres" : "Gap between offers"}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cs.map((c) => (
-                <tr key={c.code}>
-                  <th scope="row"><a href={cheminBarometre(c.code, l)}>{nomCanton(c.code, l)}</a></th>
-                  <td><b>{num(c.officiel.adulte, l)}</b></td>
-                  <td className="q">{num(c.officiel.adulte_prec, l)}</td>
-                  <td>{pct(c.officiel.variation_pct, l)}</td>
-                  <td>{num(ecartMensuel(regionPrincipale(c).profils.find((p) => p.cle === "adulte_300")!.standard), l)}</td>
-                </tr>
-              ))}
-              <tr className="ligne-suisse">
-                <th scope="row">{fr ? "Suisse" : "Switzerland"}</th>
-                <td><b>{num(n.adulte, l)}</b></td>
-                <td className="q">{num(n.adulte_prec, l)}</td>
-                <td>{pct(n.variation_pct, l)}</td>
-                <td>{fr ? "non calculé" : "not calculated"}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <Table variant="chiffres" className="table-barometre">
+          <TableCaption>
+            {fr
+              ? `Prime moyenne d’un adulte (OFSP, ${dateLongue(DATE_OFSP, l)}) et écart entre l’offre la plus basse et la plus haute pour un adulte, franchise 300, modèle standard, accident inclus, région principale (primes approuvées, ${dateLongue(DATE_RELEVE, l)}). CHF par mois.`
+              : `Average adult premium (FOPH, ${dateLongue(DATE_OFSP, l)}) and gap between the lowest and highest offer for an adult, CHF 300 deductible, standard model, accident cover, main region (approved premiums, ${dateLongue(DATE_RELEVE, l)}). CHF per month.`}
+          </TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Canton</TableHead>
+              <TableHead scope="col">{fr ? `Moyenne ${A}` : `${A} average`}</TableHead>
+              <TableHead scope="col" className="hidden min-[600px]:table-cell">{fr ? `Moyenne ${P}` : `${P} average`}</TableHead>
+              <TableHead scope="col">{fr ? "Variation" : "Change"}</TableHead>
+              <TableHead scope="col">{fr ? "Écart entre offres" : "Gap between offers"}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {cs.map((c) => (
+              <TableRow key={c.code}>
+                <TableHead scope="row"><a href={cheminBarometre(c.code, l)}>{nomCanton(c.code, l)}</a></TableHead>
+                <TableCell><b>{num(c.officiel.adulte, l)}</b></TableCell>
+                <TableCell className="hidden min-[600px]:table-cell">{num(c.officiel.adulte_prec, l)}</TableCell>
+                <TableCell>{pct(c.officiel.variation_pct, l)}</TableCell>
+                <TableCell>{num(ecartMensuel(regionPrincipale(c).profils.find((p) => p.cle === "adulte_300")!.standard), l)}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+          <TableFooter>
+            <TableRow>
+              <TableHead scope="row">{fr ? "Suisse" : "Switzerland"}</TableHead>
+              <TableCell><b>{num(n.adulte, l)}</b></TableCell>
+              <TableCell className="hidden min-[600px]:table-cell">{num(n.adulte_prec, l)}</TableCell>
+              <TableCell>{pct(n.variation_pct, l)}</TableCell>
+              <TableCell>{fr ? "non calculé" : "not calculated"}</TableCell>
+            </TableRow>
+          </TableFooter>
+        </Table>
       </section>
       <section className="section-barometre">
         <h2>{fr ? `Où trouver le détail par canton et par région${T}?` : "Where are the details by canton and region?"}</h2>
