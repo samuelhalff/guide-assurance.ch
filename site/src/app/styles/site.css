@@ -24,7 +24,7 @@
   /* Barre du haut toujours visible ; les ancres et les blocs collants se placent dessous. */
   html { scroll-padding-top: 72px; }
   .tete { background: var(--papier); border-bottom: 1px solid var(--filet); position: sticky; top: 0; z-index: 30; }
-  .tete .wrap { display: flex; align-items: center; gap: var(--s6); min-height: 62px; flex-wrap: wrap; }
+  .tete .wrap { display: flex; align-items: center; gap: var(--s6); min-height: 68px; flex-wrap: wrap; }
   .marque { display: flex; align-items: center; gap: 6px; color: var(--encre); text-decoration: none; }
   .marque:hover { color: var(--encre); }
   .marque svg { flex: 0 0 auto; width: 38px; height: 38px; display: block; }
@@ -37,15 +37,14 @@
   .mot span + span { font-weight: 800; color: var(--encre); margin-top: 3px; }
 
   .nav { display: flex; gap: var(--s5); flex: 1 1 auto; flex-wrap: wrap; font-family: var(--narrow); font-size: 17px; }
-  .nav a { position: relative; color: var(--encre); text-decoration: none; padding: 20px 0; font-size: 16.5px; }
+  .nav a { position: relative; color: var(--encre); text-decoration: none; padding: 23px 0; font-size: 16.5px; }
   .nav a:hover { color: var(--encre); }
   .nav a::after {
     content: ""; position: absolute; left: 0; right: 0; bottom: 13px; height: 2px; background: var(--sentier);
     transform: scaleX(0); transform-origin: left; transition: transform .18s ease-out;
   }
   .nav a:hover::after, .nav a[aria-current]::after { transform: scaleX(1); }
-  .page-outil .tete .wrap, .page-guide .tete .wrap { min-height: 68px; }
-  .page-outil .nav a, .page-guide .nav a { padding: 23px 0; }
+  /* Même hauteur d’en-tête sur toutes les pages, accueil compris (68 px). */
   .page-outil .nav a::after, .page-guide .nav a::after { bottom: 15px; }
 
   .tete-droite { display: flex; gap: 2px; align-items: center; font-family: var(--narrow); font-size: 16px; }
