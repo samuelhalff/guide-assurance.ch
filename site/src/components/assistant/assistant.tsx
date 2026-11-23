@@ -3,16 +3,20 @@ import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog";
 import { LogoSilhouette } from "@/components/site/logo";
 import { Turnstile } from "@/components/demande/turnstile";
+import { CaptureRappel } from "@/components/demande/capture-rappel";
 import { suivre } from "@/lib/analytics";
-import { RAPPEL, ecrirePreremplissage, lienDemande } from "@/lib/demande";
+import { DEMANDE, RAPPEL, ecrirePreremplissage, lienDemande } from "@/lib/demande";
+import { PORTE_RAPPEL, RAPPEL_SUJET_DEFAUT } from "@shared/demande/portes";
 import {
   TEXTE_ASSISTANT,
   ErreurAssistant,
   blocs,
+  captureAOuvrir,
   demander,
   ecrireFil,
   lireFil,
   pucesOffre,
+  sujetRappel,
   type Inline,
   type Message,
   type Offre,
@@ -39,6 +43,8 @@ export function Assistant({ locale = "fr" }: { locale?: "fr" | "en" }) {
   const fil = useRef<HTMLDivElement>(null);
   const champ = useRef<HTMLTextAreaElement>(null);
   const charge = useRef(false);
+  /* Blocs envoyés depuis l'ouverture du panneau : ils gardent leur message de succès (sinon, une ligne courte). */
+  const [envoyesIci, setEnvoyesIci] = useState<number[]>([]);
 
   /* Conversation de l'onglet (retour d'une page de guide). */
   useEffect(() => {
@@ -154,12 +160,26 @@ export function Assistant({ locale = "fr" }: { locale?: "fr" | "en" }) {
     };
     await essai(false);
     setEnCours(false);
+    /* Bloc de demande en ligne, une fois par conversation (2e réponse utile, ou offre de rappel de l'assistant).
+       Sujet : code déterministe (porte de l'offre ou des pages citées) ; rien de la conversation ne part avec la demande. */
+    setMessages((ms) => {
+      if (!captureAOuvrir(ms)) return ms;
+      const copie = ms.slice();
+      copie[copie.length - 1] = { ...copie[copie.length - 1], capture: "ouverte", captureSujet: sujetRappel(ms, window.location.pathname) };
+      return copie;
+    });
     suivre("assistant_message", { n: historique.filter((m) => m.role === "user").length });
     /* Sur téléphone, pas de retour au champ : le clavier cacherait la réponse. */
     if (window.matchMedia("(pointer: fine)").matches) requestAnimationFrame(() => champ.current?.focus({ preventScroll: true }));
   };
 
+  const finCapture = (i: number, envoyee: boolean) => {
+    if (envoyee) setEnvoyesIci((x) => [...x, i]);
+    setMessages((ms) => ms.map((m, k) => (k === i ? { ...m, capture: envoyee ? "envoyee" : "fermee" } : m)));
+  };
+
   const nouvelle = () => {
+    setEnvoyesIci([]);
     setMessages([]);
     setSession(undefined);
     ecrireFil({ messages: [] });
@@ -237,7 +257,23 @@ export function Assistant({ locale = "fr" }: { locale?: "fr" | "en" }) {
                     {m.content ? <Rendu md={m.content} /> : <p className="assistant-ecrit">{t.reflexion}</p>}
                     {m.notice && <p className="assistant-mention">{m.notice}</p>}
                   </div>
-                  {m.offre && (
+                  {m.capture === "ouverte" || (m.capture === "envoyee" && envoyesIci.includes(i)) ? (
+                    <CaptureRappel
+                      locale={locale}
+                      idBase={`assistant-capture-${i}`}
+                      className="capture-etroit assistant-capture"
+                      titre={t.captureTitre}
+                      intro={<p>{t.captureTexte}</p>}
+                      bouton={t.captureBouton}
+                      demande={() => ({ porte: PORTE_RAPPEL, besoin: [m.captureSujet ?? RAPPEL_SUJET_DEFAUT] })}
+                      evenements={{ vue: "assistant_offre_vue", envoyee: "assistant_offre_envoyee" }}
+                      complet={{ question: t.captureComplet, texte: t.captureCompletLien, href: m.offre ? lienDemande(locale, m.offre.porte) : DEMANDE[locale], onClick: m.offre ? () => ecrirePreremplissage({ porte: m.offre!.porte, besoin: m.offre!.besoin, npa: m.offre!.npa, birthYear: m.offre!.birthYear, householdSize: m.offre!.householdSize }) : undefined }}
+                      masquable
+                      onFin={(envoyee) => finCapture(i, envoyee)}
+                    />
+                  ) : m.capture === "envoyee" ? (
+                    <p className="assistant-mention assistant-capture-faite">{t.captureEnvoyee}</p>
+                  ) : m.offre && (
                     <div className="assistant-rappel">
                       <p className="assistant-rappel-titre">{t.rappelTitre}</p>
                       <ul className="assistant-puces">

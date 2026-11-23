@@ -18,7 +18,7 @@ import { OffreComparateur, type OffreComparateurHandle } from "@/components/outi
 const T = " "; // espace fine insécable avant ; : ? ! »
 const NB = " ";
 const nfFr = (x: number, d = 0) =>
-  new Intl.NumberFormat("fr-CH", { minimumFractionDigits: d, maximumFractionDigits: d }).format(x).replace(/\s/g, T);
+  new Intl.NumberFormat("fr-CH", { minimumFractionDigits: d, maximumFractionDigits: d }).format(x).replace(/[\s'’]/g, T); // ICU du build (apostrophe) et du navigateur (espace) diffèrent : même séparateur partout, sinon erreur d’hydratation 418
 const nfEn = (x: number, d = 0) => new Intl.NumberFormat("en-GB", { minimumFractionDigits: d, maximumFractionDigits: d }).format(x);
 
 const PAR_PAGE = 20;

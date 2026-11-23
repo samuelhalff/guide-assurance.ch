@@ -99,6 +99,11 @@
   }
   .assistant-rappel-texte { margin: 0; font: 14px/1.45 var(--narrow); color: var(--encre-2); }
   .assistant-rappel .bouton { justify-content: center; width: 100%; }
+  /* Bloc de demande en ligne (capture-rappel.tsx) dans le fil : pleine largeur, titre plus court. */
+  .assistant-capture { align-self: stretch; flex: 0 0 auto; scroll-margin-top: var(--s3); }
+  .assistant-capture .capture-titre { font-size: 17px; }
+  .assistant-capture .consent p { font-size: 14px; }
+  .assistant-capture-faite { margin: 0; align-self: flex-start; }
 
   .assistant-panneau .turnstile:not(:empty) { padding: 0 var(--s4) var(--s2); }
   .assistant-saisie {

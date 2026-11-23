@@ -20,18 +20,18 @@ const T = {
 
 /* Champ téléphone des deux formulaires. Pendant la frappe : erreur en ligne dès que le numéro est assez long ou que le
    champ a été quitté, et confirmation du numéro reconnu ; rien ne bloque avant l'envoi. `erreur` : message de l'envoi refusé. */
-export function ChampTelephone({ locale, value, onChange, erreur }: { locale: Locale; value: string; onChange: (v: string) => void; erreur?: string }) {
+export function ChampTelephone({ locale, value, onChange, erreur, id: base = "tel" }: { locale: Locale; value: string; onChange: (v: string) => void; erreur?: string; /** Identifiant du champ (deux formulaires sur une page). */ id?: string }) {
   const t = T[locale];
   const [quitte, setQuitte] = useState(false);
   const r = normaliserTelephone(value);
   const enCours = !r.ok && r.raison !== "vide" && (quitte || chiffresSaisis(value) >= 10 || r.raison === "caracteres" || r.raison === "long");
   const message = erreur ?? (enCours && !r.ok ? TELEPHONE_ERREURS[r.raison][locale] : undefined);
-  const id = message ? "err-tel" : r.ok ? "ok-tel" : "aide-tel";
+  const id = message ? `err-${base}` : r.ok ? `ok-${base}` : `aide-${base}`;
   return (
     <div className="champ">
-      <label htmlFor="tel">{t.tel}</label>
+      <label htmlFor={base}>{t.tel}</label>
       <input
-        id="tel"
+        id={base}
         className="saisie"
         type="tel"
         inputMode="tel"
@@ -46,9 +46,9 @@ export function ChampTelephone({ locale, value, onChange, erreur }: { locale: Lo
       />
       <div aria-live="polite">
         {message ? (
-          <p className="erreur-champ" id="err-tel">{message}</p>
+          <p className="erreur-champ" id={`err-${base}`}>{message}</p>
         ) : r.ok ? (
-          <p className="aide tel-ok" id="ok-tel">
+          <p className="aide tel-ok" id={`ok-${base}`}>
             <svg viewBox="0 0 20 20" aria-hidden="true">
               <path d="M4.5 10.5l3.5 3.5 7.5-8" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -57,7 +57,7 @@ export function ChampTelephone({ locale, value, onChange, erreur }: { locale: Lo
             <span className="tel-num">{formaterTelephone(r.e164)}</span>
           </p>
         ) : (
-          <p className="aide" id="aide-tel">{t.aide}</p>
+          <p className="aide" id={`aide-${base}`}>{t.aide}</p>
         )}
       </div>
     </div>

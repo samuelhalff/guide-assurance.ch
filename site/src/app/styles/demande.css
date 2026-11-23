@@ -174,3 +174,43 @@
   details.precis .aide { margin: calc(-1 * var(--s2)) 0 0; }
   @media (prefers-reduced-motion: reduce) { details.precis > summary::after { transition: none; } }
 }
+
+/* Bloc de demande en ligne (comparateur de primes, assistant) : components/demande/capture-rappel.tsx.
+   Teinte sentier pour le distinguer des repères (lac) ; créneau et accord n'apparaissent qu'au premier focus. */
+@layer components {
+  .capture-rappel {
+    padding: var(--s4); border: 1px solid var(--sentier); border-radius: var(--r);
+    background: var(--sentier-teinte); scroll-margin-top: calc(var(--tete-h, 64px) + var(--s3));
+  }
+  .capture-tete { display: flex; align-items: start; justify-content: space-between; gap: var(--s2); }
+  .capture-rappel .capture-titre { margin: 0 0 var(--s2); font-size: 20px; font-weight: 800; letter-spacing: -.015em; line-height: 1.2; text-wrap: balance; }
+  .capture-masquer { flex: 0 0 auto; display: grid; place-items: center; width: 40px; height: 40px; margin: -8px -8px 0 0; border: 0; border-radius: var(--r); background: none; color: var(--encre-2); cursor: pointer; }
+  .capture-masquer:hover { background: var(--papier); color: var(--encre); }
+  .capture-masquer:focus-visible { outline: 3px solid var(--lac-encre); outline-offset: 0; }
+  .capture-intro p { margin: 0 0 var(--s2); font-size: 16px; line-height: 1.45; color: var(--encre-2); max-width: 62ch; }
+  .capture-intro p:last-child { margin-bottom: var(--s4); }
+  .capture-intro .capture-promesse { font: 600 16px/1.4 var(--narrow); color: var(--encre); }
+  .capture-form { display: grid; gap: var(--s4); }
+  .capture-champs { display: grid; gap: var(--s3); }
+  .capture-rappel .champ { margin: 0; }
+  .capture-rappel .champ label { display: block; font: 600 16px var(--narrow); margin: 0 0 var(--s1); }
+  .capture-rappel .aide { font: 15px var(--narrow); color: var(--encre-2); margin: var(--s1) 0 0; }
+  .capture-rappel .erreur-champ { margin-top: var(--s1); }
+  .capture-creneau { border: 0; margin: 0; padding: 0; min-width: 0; }
+  .capture-creneau legend { padding: 0; margin: 0 0 var(--s2); }
+  .capture-creneau .puce { font-size: 16px; min-height: 44px; padding: 8px 12px; }
+  .capture-rappel .consent { background: var(--papier); }
+  .capture-bouton { width: 100%; justify-content: center; }
+  .capture-rassurance, .capture-complet { margin: 0; font: 15px/1.4 var(--narrow); color: var(--encre-2); }
+  .capture-rassurance { margin-top: calc(-1 * var(--s2)); }
+  .capture-complet a { font-weight: 600; color: var(--lac-encre); }
+  .capture-envoyee { display: grid; grid-template-columns: 28px 1fr; gap: var(--s3); align-items: start; border-color: var(--lac-trait); background: var(--papier); }
+  .capture-envoyee .capture-coche { width: 28px; height: 28px; color: var(--lac-encre); }
+  .capture-envoyee p { margin: 0; font-size: 16px; line-height: 1.45; }
+  .capture-envoyee p:focus { outline: none; }
+  @media (min-width: 600px) {
+    .capture-rappel:not(.capture-etroit) { padding: var(--s5); }
+    .capture-rappel:not(.capture-etroit) .capture-champs { grid-template-columns: 1fr 1fr; align-items: start; }
+    .capture-rappel:not(.capture-etroit) .capture-bouton { width: auto; justify-self: start; }
+  }
+}

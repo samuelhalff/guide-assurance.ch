@@ -230,41 +230,10 @@
   .reperes-statiques h3 { font-size: 19px; margin: var(--s5) 0 var(--s2); }
   .reperes-grille { display: grid; gap: var(--s4); }
 
-  /* Comparateur : bloc « Recevoir des offres pour ce profil », sous le résumé. Teinte sentier pour le distinguer
-     du repère « montant le plus bas » (lac) ; le reste du formulaire n'apparaît qu'au premier focus. */
-  .offre-comparateur {
-    margin: 0 0 var(--s5); padding: var(--s4); border: 1px solid var(--sentier); border-radius: var(--r);
-    background: var(--sentier-teinte); scroll-margin-top: calc(var(--tete-h) + var(--s3));
-  }
-  .offre-comparateur .offre-titre { margin: 0 0 var(--s2); font-size: 20px; font-weight: 800; letter-spacing: -.015em; line-height: 1.2; text-wrap: balance; }
-  .offre-comparateur .offre-titre:focus { outline: none; }
-  .offre-ecart { margin: 0 0 var(--s2); font: 600 16px/1.4 var(--narrow); color: var(--encre); }
-  .offre-suite { margin: 0 0 var(--s4); font-size: 16px; line-height: 1.45; color: var(--encre-2); max-width: 62ch; }
-  .offre-form { display: grid; gap: var(--s4); }
-  .offre-champs { display: grid; gap: var(--s3); }
-  .offre-comparateur .champ { margin: 0; }
-  .offre-comparateur .champ label { display: block; font: 600 16px var(--narrow); margin: 0 0 var(--s1); }
-  .offre-comparateur .aide { font: 15px var(--narrow); color: var(--encre-2); margin: var(--s1) 0 0; }
-  .offre-comparateur .erreur-champ { margin-top: var(--s1); }
-  .offre-creneau { border: 0; margin: 0; padding: 0; min-width: 0; }
-  .offre-creneau legend { padding: 0; margin: 0 0 var(--s2); }
-  .offre-creneau .puce { font-size: 16px; min-height: 44px; padding: 8px 12px; }
-  .offre-comparateur .consent { background: var(--papier); }
-  .offre-bouton { width: 100%; justify-content: center; }
-  .offre-rassurance, .offre-complet { margin: 0; font: 15px/1.4 var(--narrow); color: var(--encre-2); }
-  .offre-rassurance { margin-top: calc(-1 * var(--s2)); }
-  .offre-complet a { font-weight: 600; color: var(--lac-encre); }
-  .offre-envoyee { display: grid; grid-template-columns: 28px 1fr; gap: var(--s3); align-items: start; border-color: var(--lac-trait); background: var(--papier); }
-  .offre-envoyee .offre-coche { width: 28px; height: 28px; color: var(--lac-encre); }
-  .offre-envoyee p { margin: 0; font-size: 16px; line-height: 1.45; }
-  .offre-envoyee p:focus { outline: none; }
+  /* Comparateur : bloc « Recevoir des offres pour ce profil » sous le résumé (styles communs : .capture-rappel, demande.css). */
+  .offre-comparateur { margin: 0 0 var(--s5); }
   .barre-collante.avec-offre { grid-template-columns: auto auto 1fr; }
   .barre-collante .offre-collante { background: var(--sentier); color: var(--sur-sentier); border-color: var(--sentier); font-weight: 700; }
-  @media (min-width: 600px) {
-    .offre-comparateur { padding: var(--s5); }
-    .offre-champs { grid-template-columns: 1fr 1fr; align-items: start; }
-    .offre-bouton { width: auto; justify-self: start; }
-  }
   @media (min-width: 720px) {
     .pastilles { grid-template-columns: repeat(6, 1fr); }
     .pastilles-2 { grid-template-columns: repeat(2, minmax(0, 14em)); }

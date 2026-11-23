@@ -147,7 +147,7 @@ export function attributionLue(brut: string | null): Record<string, string> {
 }
 
 /* Événements de conversion qui portent l'attribution au premier contact. */
-export const CONVERSIONS = ["demande_ouverte", "demande_etape", "demande_envoyee", "rappel_ouvert", "assistant_vers_demande", "generate_lead", "offre_comparateur_envoyee"] as const;
+export const CONVERSIONS = ["demande_ouverte", "demande_etape", "demande_envoyee", "rappel_ouvert", "assistant_vers_demande", "generate_lead", "offre_comparateur_envoyee", "assistant_offre_envoyee"] as const;
 /* Propriétés d'un événement de conversion : attribution d'abord, propriétés propres à l'événement ensuite (elles l'emportent). */
 export function proprietesConversion<P extends Record<string, string | number | boolean>>(evenement: string, props: P | undefined, attribution: Record<string, string>): P | Record<string, string | number | boolean> | undefined {
   if (!(CONVERSIONS as readonly string[]).includes(evenement) || !attribution.canal) return props;

@@ -54,6 +54,9 @@ export type Evenement =
   | "assistant_ouvert"
   | "assistant_message"
   | "assistant_vers_demande"
+  /* Bloc de demande en ligne dans l'assistant : vu, demande envoyée ({ porte: "rappel" }). PostHog seulement, aucune valeur ni contenu. */
+  | "assistant_offre_vue"
+  | "assistant_offre_envoyee"
   /* Nom recommandé par GA4 pour une demande envoyée ({ porte, utm_* de la session }), sur la page de remerciement seulement : voir mesurerLead. */
   | "generate_lead"
   /* GA4 seulement (versGA), noms standard : profondeur de lecture { percent_scrolled: 25 | 50 | 75 | 90 } ;

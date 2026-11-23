@@ -26,6 +26,12 @@ export const TEXTE_ASSISTANT = {
     pied: "Guide Assurance n’enregistre pas cette conversation. Merci de ne pas y indiquer d’informations de santé.",
     piedLien: "Confidentialité",
     piedHref: "/confidentialite/#assistant",
+    captureTitre: "Un courtier peut vous rappeler pour vous faire des offres sur ce point",
+    captureTexte: "Votre nom et votre numéro suffisent. Rien de cette conversation ne lui est transmis.",
+    captureBouton: "Être rappelé",
+    captureComplet: `Vous préférez décrire votre situation${N}?`,
+    captureCompletLien: "Remplir la demande complète",
+    captureEnvoyee: "Demande de rappel envoyée.",
     rappelTitre: "Être rappelé par un conseiller",
     rappelTexte: "C’est gratuit et sans engagement. Le formulaire court tient sur un écran : votre nom et votre numéro suffisent.",
     rappelBouton: "Être rappelé",
@@ -65,6 +71,12 @@ export const TEXTE_ASSISTANT = {
     pied: "Guide Assurance does not record this conversation. Please don’t share health information.",
     piedLien: "Privacy",
     piedHref: "/en/privacy/#assistant",
+    captureTitre: "A broker can call you back with offers on this",
+    captureTexte: "Your name and number are enough. Nothing from this conversation is passed on.",
+    captureBouton: "Call me back",
+    captureComplet: "Would you rather describe your situation?",
+    captureCompletLien: "Fill in the full request",
+    captureEnvoyee: "Call-back request sent.",
     rappelTitre: "Get a call back from an adviser",
     rappelTexte: "It is free and without commitment. The short form fits on one screen: your name and number are enough.",
     rappelBouton: "Call me back",
@@ -86,7 +98,19 @@ export const TEXTE_ASSISTANT = {
 } as const;
 
 export type Offre = { porte: Porte; besoin?: string[]; npa?: string; birthYear?: number; householdSize?: number };
-export type Message = { role: "user" | "assistant"; content: string; notice?: string; offre?: Offre | null; erreur?: boolean };
+/* capture : bloc de demande en ligne affiché sous cette réponse (une fois par conversation) ; captureSujet : code de
+   sujet de la porte « rappel », tiré de façon déterministe de la porte de l'offre ou des pages citées. */
+export type Message = {
+  role: "user" | "assistant";
+  content: string;
+  notice?: string;
+  offre?: Offre | null;
+  erreur?: boolean;
+  capture?: "ouverte" | "fermee" | "envoyee";
+  captureSujet?: string;
+};
+
+export { captureAOuvrir, estOffreRappel, estReponseUtile, porteDeChemin, sujetRappel } from "./assistant-capture.ts";
 
 /* Puces lisibles des critères repris dans le formulaire. */
 export function pucesOffre(o: Offre, locale: "fr" | "en"): string[] {
