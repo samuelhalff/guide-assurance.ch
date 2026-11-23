@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { parsePhoneNumberFromString } from "libphonenumber-js/max";
 import {
   CRENEAUX,
   CRENEAU_LABELS,
@@ -10,16 +9,20 @@ import {
   PERSONNES_LABELS,
   PORTES_DEF,
   PORTES_FORMULAIRE,
+  QUAND_CHOIX,
   RESIDENCE,
   SANTE_CHOIX,
   SANTE_LABELS,
   SUBMIT_LABEL,
+  type ChampDetail,
   type Creneau,
   type Porte,
   type SanteChoix,
 } from "@shared/demande/portes";
 import { CURRENT_CONSENT_VERSION, findConsent, renderConsent } from "@shared/demande/consent-public";
 import { cantonFromNpa } from "@shared/demande/npa";
+import { bornesQuand, champsDetails, erreursDetails, type Details } from "@shared/demande/details";
+import { ChampTelephone, verifierTelephone } from "@/components/demande/champ-telephone";
 import type { Demande } from "@shared/demande/schema";
 import { suivre, marquerLead } from "@/lib/analytics";
 import { DEMANDE_ENVOYEE, TEXTE_CTA, effacerPreremplissage, estPorte, lirePreremplissage } from "@/lib/demande";
@@ -53,9 +56,11 @@ const T = {
     horsSimu: "Ouvrir le simulateur frontalier",
     horsRetour: "Modifier ma réponse",
     nom: "Nom complet",
-    tel: "Téléphone",
-    telAide: "Un numéro suisse ou français.",
     email: "E-mail",
+    unSeul: "Un seul choix.",
+    precisTitre: `Pour une offre plus précise${NB}? (facultatif)`,
+    precisAide: "Ces réponses aident le conseiller à préparer une offre juste. Vous pouvez aussi les lui donner au téléphone.",
+    dateLabel: "Date de début",
     facultatif: "facultatif",
     creneauQ: `Quand préférez-vous être appelé${NB}?`,
     envoi: "Envoi…",
@@ -66,7 +71,11 @@ const T = {
       annee: `Entrez une année entre 1900 et ${ANNEE}.`,
       personnes: "Choisissez le nombre de personnes.",
       nom: "Entrez votre nom et votre prénom.",
-      tel: "Ce numéro ne semble pas valide. Vérifiez l’indicatif (+41, +33).",
+      choix: "Choisissez une des réponses.",
+      quand: "Dites-nous à partir de quand vous voulez être couvert.",
+      date: "Choisissez une date dans les deux prochaines années.",
+      nombre: (min: string, max: string) => `Entrez un nombre entre ${min} et ${max}.`,
+      vehicule: "Indiquez la marque et le modèle, par exemple VW Golf.",
       email: "Cette adresse e-mail ne semble pas valide.",
       consent: "Cochez cette case pour que votre demande puisse être transmise.",
       sante: "Cochez cette case, ou retirez les couvertures santé choisies à l’étape 1.",
@@ -94,9 +103,11 @@ const T = {
     horsSimu: "Open the cross-border calculator",
     horsRetour: "Change my answer",
     nom: "Full name",
-    tel: "Phone",
-    telAide: "A Swiss or French number.",
     email: "Email",
+    unSeul: "Choose one.",
+    precisTitre: "Want a more accurate offer? (optional)",
+    precisAide: "These answers help the adviser prepare an accurate offer. You can also give them on the phone.",
+    dateLabel: "Start date",
     facultatif: "optional",
     creneauQ: "When would you prefer us to call?",
     envoi: "Sending…",
@@ -107,7 +118,11 @@ const T = {
       annee: `Enter a year between 1900 and ${ANNEE}.`,
       personnes: "Choose the number of people.",
       nom: "Enter your first and last name.",
-      tel: "This number does not look valid. Check the country code (+41, +33).",
+      choix: "Choose one of the answers.",
+      quand: "Tell us when you want the cover to start.",
+      date: "Choose a date within the next two years.",
+      nombre: (min: string, max: string) => `Enter a number between ${min} and ${max}.`,
+      vehicule: "Enter the make and model, for example VW Golf.",
       email: "This email address does not look valid.",
       consent: "Tick this box so that your request can be passed on.",
       sante: "Tick this box, or remove the health covers chosen in step 1.",
@@ -123,7 +138,27 @@ const LIENS_HORS = {
   en: { guide: "/en/cross-border-workers/", simu: "/en/cross-border-calculator/" },
 };
 
-type Erreurs = Partial<Record<"porte" | "besoin" | "npa" | "annee" | "personnes" | "nom" | "tel" | "email" | "consent" | "sante", string>>;
+/* Clés : champs fixes, ou « d:<code> » pour une question propre à la porte. */
+type Erreurs = Partial<Record<string, string>>;
+type Reponses = Record<string, string | string[]>;
+
+const milliers = (n: number, locale: Locale) => n.toLocaleString(locale === "fr" ? "fr-CH" : "en-GB");
+
+/* Réponses saisies → payload `details` (nombres convertis, vides retirés). */
+function versDetails(porte: Porte, r: Reponses, date: string): Details | undefined {
+  const out: Details = {};
+  for (const c of champsDetails(porte)) {
+    const v = r[c.code];
+    if (v === undefined || v === "" || (Array.isArray(v) && !v.length)) continue;
+    if (c.type === "nombre") {
+      const n = Number(String(v).replace(/[\s'’]/g, ""));
+      out[c.code] = Number.isFinite(n) ? n : NaN;
+    } else if (c.type === "texte") out[c.code] = String(v).trim();
+    else if (c.type === "quand") out[c.code] = v === "date" ? date : String(v);
+    else out[c.code] = v;
+  }
+  return Object.keys(out).length ? out : undefined;
+}
 
 /* Consentement : Markdown limité (gras, liens internes). Paragraphes séparés par une ligne vide ;
    le dernier est l'accord lui-même (libellé de la case). */
@@ -162,7 +197,8 @@ export function Erreur({ id, msg }: { id: string; msg?: string }) {
   ) : null;
 }
 
-export function FormulaireDemande({ locale }: { locale: Locale }) {
+/* `porte` : fixée par l'adresse (/demande/<porte>/), sinon ?porte=, préremplissage ou choix à l'écran 1. */
+export function FormulaireDemande({ locale, porte: porteAdresse }: { locale: Locale; porte?: Porte }) {
   const t = T[locale];
   const [pret, setPret] = useState(false);
   const [ecran, setEcran] = useState<Ecran>(1);
@@ -178,6 +214,9 @@ export function FormulaireDemande({ locale }: { locale: Locale }) {
   const [tel, setTel] = useState("");
   const [email, setEmail] = useState("");
   const [creneau, setCreneau] = useState<Creneau | null>(null);
+  const [reponses, setReponses] = useState<Reponses>({});
+  const [quandDate, setQuandDate] = useState("");
+  const [precisOuvert, setPrecisOuvert] = useState(false);
   const [accord, setAccord] = useState(false);
   const [accordSante, setAccordSante] = useState(false);
   const [website, setWebsite] = useState("");
@@ -194,20 +233,30 @@ export function FormulaireDemande({ locale }: { locale: Locale }) {
   useEffect(() => {
     ouvertA.current = Date.now();
     const pre = lirePreremplissage();
-    const q = new URLSearchParams(window.location.search).get("porte");
-    const p = estPorte(q) ? q : (pre.porte ?? null);
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get("porte");
+    const p = porteAdresse ?? (estPorte(q) ? q : (pre.porte ?? null));
     if (p) {
       setPorte(p);
       setPorteFixee(true);
-      const codes = PORTES_DEF[p].besoin.choix.map((c) => c.code);
-      if (pre.besoin) setBesoin(pre.besoin.filter((c) => codes.includes(c)));
+      const def = PORTES_DEF[p];
+      const codes = def.besoin.choix.map((c) => c.code);
+      const avant = (pre.porte === p || !pre.porte ? (pre.besoin ?? []) : []).filter((c) => codes.includes(c));
+      setBesoin(avant.length ? (def.besoinUnique ? avant.slice(0, 1) : avant) : (def.besoinDefaut ?? []));
+      // Somme d'assurance venue du calculateur (?somme=), arrondie et bornée par la question elle-même.
+      const somme = Number((params.get("somme") ?? "").replace(/\D/g, ""));
+      const champSomme = champsDetails(p).find((c) => c.code === "somme");
+      if (champSomme?.type === "nombre" && somme >= champSomme.min && somme <= champSomme.max) {
+        setReponses({ somme: String(Math.round(somme / 1000) * 1000) });
+        setPrecisOuvert(true);
+      }
     }
     if (pre.npa) setNpa(pre.npa);
     if (pre.birthYear) setAnnee(String(pre.birthYear));
     if (pre.householdSize) setPersonnes(pre.householdSize);
     setPret(true);
     suivre(FUNNEL_EVENTS.ouverte, { porte: p ?? "aucune" });
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   /* Changement d'écran : titre au focus, haut de page, événement d'étape. */
   useEffect(() => {
@@ -224,11 +273,33 @@ export function FormulaireDemande({ locale }: { locale: Locale }) {
   const def = porte ? PORTES_DEF[porte] : null;
   const canton = /^\d{4}$/.test(npa) ? cantonFromNpa(npa) : null;
   const avecSante = porte === "sante" && sante.length > 0;
+  const profil = def?.profil ?? { annee: true, personnes: true };
+  const repondre = (code: string, v: string | string[]) => setReponses((r) => ({ ...r, [code]: v }));
+
+  /* Erreurs des questions propres à la porte sur un écran (les facultatives seulement si mal remplies). */
+  function erreursPorte(n: 1 | 2 | 3): Erreurs {
+    if (!porte) return {};
+    const e: Erreurs = {};
+    const d = versDetails(porte, reponses, quandDate);
+    for (const code of erreursDetails(porte, d, new Date(), n)) {
+      const c = champsDetails(porte, n).find((x) => x.code === code)!;
+      e[`d:${code}`] =
+        c.type === "nombre"
+          ? t.err.nombre(milliers(c.min, locale), milliers(c.max, locale))
+          : c.type === "quand"
+            ? reponses[code] === "date" ? t.err.date : t.err.quand
+            : c.type === "texte"
+              ? t.err.vehicule
+              : t.err.choix;
+    }
+    return e;
+  }
 
   function choisirPorte(p: Porte) {
     if (p === porte) return;
     setPorte(p);
-    setBesoin([]);
+    setBesoin(PORTES_DEF[p].besoinDefaut ?? []);
+    setReponses({});
     setSante([]);
     setAccordSante(false);
   }
@@ -237,17 +308,21 @@ export function FormulaireDemande({ locale }: { locale: Locale }) {
     const e: Erreurs = {};
     if (n === 1) {
       if (!porte) e.porte = t.err.porte;
-      else if (!besoin.length) e.besoin = t.err.besoin;
+      else if (!besoin.length) e.besoin = def?.besoinUnique ? t.err.choix : t.err.besoin;
+      Object.assign(e, erreursPorte(1));
     }
     if (n === 2 && enSuisse) {
       if (!/^\d{4}$/.test(npa)) e.npa = t.err.npa;
       const a = Number(annee);
-      if (!/^\d{4}$/.test(annee) || a < 1900 || a > ANNEE) e.annee = t.err.annee;
-      if (!personnes) e.personnes = t.err.personnes;
+      if (profil.annee && (!/^\d{4}$/.test(annee) || a < 1900 || a > ANNEE)) e.annee = t.err.annee;
+      if (profil.personnes && !personnes) e.personnes = t.err.personnes;
+      Object.assign(e, erreursPorte(2));
     }
     if (n === 3) {
       if (nom.trim().length < 2 || /[<>\p{Cc}]/u.test(nom)) e.nom = t.err.nom;
-      if (!parsePhoneNumberFromString(tel, "CH")?.isValid()) e.tel = t.err.tel;
+      const tl = verifierTelephone(tel, locale);
+      if (tl.erreur) e.tel = tl.erreur;
+      Object.assign(e, erreursPorte(3));
       if (email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim())) e.email = t.err.email;
       if (!accord) e.consent = t.err.consent;
       if (avecSante && !accordSante) e.sante = t.err.sante;
@@ -261,7 +336,7 @@ export function FormulaireDemande({ locale }: { locale: Locale }) {
     const e = valider(ecran);
     const restantes = Object.fromEntries(Object.entries(erreurs).filter(([k]) => k in e).map(([k]) => [k, e[k as keyof Erreurs]])) as Erreurs;
     if (Object.keys(restantes).length !== Object.keys(erreurs).length) setErreurs(restantes);
-  }, [porte, besoin, npa, annee, personnes, enSuisse, nom, tel, email, accord, accordSante, sante]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [porte, besoin, npa, annee, personnes, enSuisse, nom, tel, email, accord, accordSante, sante, reponses, quandDate]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function suivant(n: 1 | 2) {
     const e = valider(n);
@@ -295,14 +370,21 @@ export function FormulaireDemande({ locale }: { locale: Locale }) {
       setEchec(t.err.robot);
       return;
     }
-    const phone = parsePhoneNumberFromString(tel, "CH")!.number;
+    const phone = verifierTelephone(tel, locale).e164!;
+    const details = versDetails(porte, reponses, quandDate);
     const corps: Demande = {
       porte,
       locale,
       source: "form",
       ...origine(),
       besoin,
-      residence: { livesInSwitzerland: true, npa, birthYear: Number(annee), householdSize: personnes! },
+      residence: {
+        livesInSwitzerland: true,
+        npa,
+        ...(profil.annee ? { birthYear: Number(annee) } : {}),
+        ...(profil.personnes ? { householdSize: personnes! } : {}),
+      },
+      ...(details ? { details } : {}),
       ...(avecSante ? { health: { products: sante }, healthConsent: true, healthConsentVersion: CURRENT_CONSENT_VERSION.health } : {}),
       contact: {
         fullName: nom.trim(),
@@ -386,17 +468,24 @@ export function FormulaireDemande({ locale }: { locale: Locale }) {
                     <h2>{typo(def.besoin.question[locale], locale)}</h2>
                   )}
                 </legend>
-                <p className="aide" id="aide-besoin">{t.plusieurs}</p>
-                <div className="puces">
-                  {def.besoin.choix.map((c) => (
-                    <Puce key={c.code} type="checkbox" name="besoin" checked={besoin.includes(c.code)} onChange={() => setBesoin((b) => basculer(b, c.code))}>
-                      {c.label[locale]}
-                    </Puce>
-                  ))}
+                <p className="aide" id="aide-besoin">{def.besoinUnique ? t.unSeul : t.plusieurs}</p>
+                <div className={def.besoinUnique ? "puces puces-pile" : "puces"}>
+                  {def.besoin.choix.map((c) =>
+                    def.besoinUnique ? (
+                      <Puce key={c.code} type="radio" name="besoin" checked={besoin[0] === c.code} onChange={() => setBesoin([c.code])}>
+                        {c.label[locale]}
+                      </Puce>
+                    ) : (
+                      <Puce key={c.code} type="checkbox" name="besoin" checked={besoin.includes(c.code)} onChange={() => setBesoin((b) => basculer(b, c.code))}>
+                        {c.label[locale]}
+                      </Puce>
+                    ),
+                  )}
                 </div>
                 <Erreur id="err-besoin" msg={erreurs.besoin} />
               </fieldset>
             ) : null}
+            {porte ? champsDetails(porte, 1).map((c) => <ChampPorte key={c.code} c={c} locale={locale} valeur={reponses[c.code]} onChange={(v) => repondre(c.code, v)} date={quandDate} onDate={setQuandDate} erreur={erreurs[`d:${c.code}`]} />) : null}
             {def?.etapeSante ? (
               <fieldset>
                 <legend>
@@ -437,11 +526,14 @@ export function FormulaireDemande({ locale }: { locale: Locale }) {
                   {canton ? <p className="aide">{t.canton(canton)}</p> : npa.length === 4 ? <p className="aide">{t.npaInconnu}</p> : null}
                   <Erreur id="err-npa" msg={erreurs.npa} />
                 </div>
+                {profil.annee ? (
                 <div className="champ">
                   <label htmlFor="annee">{t.annee}</label>
                   <input id="annee" className="saisie saisie-courte" inputMode="numeric" autoComplete="bday-year" maxLength={4} pattern="[0-9]{4}" placeholder="1990" value={annee} onChange={(e) => setAnnee(e.target.value.replace(/\D/g, "").slice(0, 4))} {...invalide("annee")} />
                   <Erreur id="err-annee" msg={erreurs.annee} />
                 </div>
+                ) : null}
+                {profil.personnes ? (
                 <fieldset className={erreurs.personnes ? "groupe-invalide" : undefined} aria-describedby={erreurs.personnes ? "err-personnes" : undefined}>
                   <legend className="legende-champ">{t.personnes}</legend>
                   <div className="puces puces-ligne">
@@ -453,6 +545,8 @@ export function FormulaireDemande({ locale }: { locale: Locale }) {
                   </div>
                   <Erreur id="err-personnes" msg={erreurs.personnes} />
                 </fieldset>
+                ) : null}
+                {porte ? champsDetails(porte, 2).map((c) => <ChampPorte key={c.code} c={c} locale={locale} valeur={reponses[c.code]} onChange={(v) => repondre(c.code, v)} date={quandDate} onDate={setQuandDate} erreur={erreurs[`d:${c.code}`]} />) : null}
               </>
             ) : null}
             <div className="actions-demande">
@@ -490,11 +584,7 @@ export function FormulaireDemande({ locale }: { locale: Locale }) {
               <input id="nom" className="saisie" autoComplete="name" placeholder="Marie Dupont" autoCapitalize="words" maxLength={120} value={nom} onChange={(e) => setNom(e.target.value)} {...invalide("nom")} />
               <Erreur id="err-nom" msg={erreurs.nom} />
             </div>
-            <div className="champ">
-              <label htmlFor="tel">{t.tel}</label>
-              <input id="tel" className="saisie" type="tel" inputMode="tel" autoComplete="tel" placeholder="079 123 45 67" maxLength={24} value={tel} onChange={(e) => setTel(e.target.value)} aria-describedby={erreurs.tel ? "err-tel" : "aide-tel"} aria-invalid={erreurs.tel ? true : undefined} />
-              {erreurs.tel ? <Erreur id="err-tel" msg={erreurs.tel} /> : <p className="aide" id="aide-tel">{t.telAide}</p>}
-            </div>
+            <ChampTelephone locale={locale} value={tel} onChange={setTel} erreur={erreurs.tel} />
             <div className="champ">
               <label htmlFor="email">
                 {t.email} <span className="facultatif">({t.facultatif})</span>
@@ -514,6 +604,14 @@ export function FormulaireDemande({ locale }: { locale: Locale }) {
                 ))}
               </div>
             </fieldset>
+
+            {champsDetails(porte, 3).length ? (
+              <details className="precis" open={precisOuvert || champsDetails(porte, 3).some((c) => erreurs[`d:${c.code}`])} onToggle={(e) => setPrecisOuvert(e.currentTarget.open)}>
+                <summary>{typo(t.precisTitre, locale)}</summary>
+                <p className="aide">{t.precisAide}</p>
+                {champsDetails(porte, 3).map((c) => <ChampPorte key={c.code} c={c} locale={locale} valeur={reponses[c.code]} onChange={(v) => repondre(c.code, v)} date={quandDate} onDate={setQuandDate} erreur={erreurs[`d:${c.code}`]} />)}
+              </details>
+            ) : null}
 
             <Consentements locale={locale} porte={porte} avecSante={avecSante} accord={accord} setAccord={setAccord} accordSante={accordSante} setAccordSante={setAccordSante} erreurs={erreurs} />
 
@@ -538,6 +636,92 @@ export function FormulaireDemande({ locale }: { locale: Locale }) {
           </section>
         ) : null}
       </form>
+    </div>
+  );
+}
+
+/* Question propre à une porte : boutons (choix), saisie courte (nombre, texte) ou moment de début (boutons + date). */
+function ChampPorte({
+  c,
+  locale,
+  valeur,
+  onChange,
+  date,
+  onDate,
+  erreur,
+}: {
+  c: ChampDetail;
+  locale: Locale;
+  valeur: string | string[] | undefined;
+  onChange: (v: string | string[]) => void;
+  date: string;
+  onDate: (v: string) => void;
+  erreur?: string;
+}) {
+  const t = T[locale];
+  const id = `d-${c.code}`;
+  const errId = `err-d-${c.code}`;
+  const libelle = (
+    <>
+      {typo(c.label[locale], locale)}
+      {c.optionnel && c.ecran !== 3 ? <span className="facultatif"> ({t.facultatif})</span> : null}
+    </>
+  );
+  const aide = c.aide ? <p className="aide" id={`aide-${id}`}>{c.aide[locale]}</p> : null;
+  if (c.type === "choix" || c.type === "choix-multiple" || c.type === "quand") {
+    const choix = c.type === "quand" ? QUAND_CHOIX : c.choix;
+    const multiple = c.type === "choix-multiple";
+    const liste = Array.isArray(valeur) ? valeur : [];
+    const { min, max } = bornesQuand();
+    return (
+      <fieldset className={erreur ? "groupe-invalide" : undefined} aria-describedby={erreur ? errId : c.aide ? `aide-${id}` : undefined}>
+        <legend className="legende-champ">{libelle}</legend>
+        {aide}
+        <div className={choix.length <= 2 || c.code === "pieces" ? "puces puces-grille" : "puces"}>
+          {choix.map((x) => (
+            <Puce
+              key={x.code}
+              type={multiple ? "checkbox" : "radio"}
+              name={id}
+              checked={multiple ? liste.includes(x.code) : valeur === x.code}
+              onChange={() => onChange(multiple ? (liste.includes(x.code) ? liste.filter((y) => y !== x.code) : [...liste, x.code]) : x.code)}
+            >
+              {x.label[locale]}
+            </Puce>
+          ))}
+        </div>
+        {c.type === "quand" && valeur === "date" ? (
+          <div className="champ champ-date">
+            <label htmlFor={`${id}-date`}>{t.dateLabel}</label>
+            <input id={`${id}-date`} className="saisie saisie-moyenne" type="date" min={min} max={max} value={date} onChange={(e) => onDate(e.target.value)} aria-invalid={erreur ? true : undefined} />
+          </div>
+        ) : null}
+        <Erreur id={errId} msg={erreur} />
+      </fieldset>
+    );
+  }
+  const brut = typeof valeur === "string" ? valeur : "";
+  return (
+    <div className="champ">
+      <label htmlFor={id}>{libelle}</label>
+      {aide}
+      <div className={c.type === "nombre" && c.unite ? "saisie-unite" : undefined}>
+        {c.type === "nombre" && c.unite?.[locale] === "CHF" ? <span aria-hidden="true">CHF</span> : null}
+        <input
+          id={id}
+          className={c.type === "nombre" ? (c.max >= 10000 ? "saisie saisie-moyenne" : "saisie saisie-courte") : "saisie"}
+          inputMode={c.type === "nombre" ? "numeric" : "text"}
+          autoComplete="off"
+          placeholder={c.type === "nombre" ? (c.placeholder && c.max >= 10000 ? milliers(Number(c.placeholder), locale) : c.placeholder) : c.placeholder?.[locale]}
+          maxLength={c.type === "texte" ? c.max : 9}
+          value={c.type === "nombre" && c.max >= 10000 && brut ? milliers(Number(brut), locale) : brut}
+          onChange={(e) => onChange(c.type === "nombre" ? e.target.value.replace(/\D/g, "").slice(0, 7) : e.target.value)}
+          aria-invalid={erreur ? true : undefined}
+          aria-describedby={erreur ? errId : c.aide ? `aide-${id}` : undefined}
+        />
+        {c.type === "nombre" && c.unite && c.unite[locale] !== "CHF" ? <span aria-hidden="true">{c.unite[locale]}</span> : null}
+      </div>
+      <Erreur id={errId} msg={erreur} />
     </div>
   );
 }

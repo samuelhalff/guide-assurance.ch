@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { parsePhoneNumberFromString } from "libphonenumber-js/max";
+import { ChampTelephone, verifierTelephone } from "@/components/demande/champ-telephone";
 import { CRENEAUX, CRENEAU_LABELS, FUNNEL_EVENTS, PORTE_RAPPEL, PORTES_DEF, RAPPEL_SUJET_DEFAUT, type Creneau } from "@shared/demande/portes";
 import { CURRENT_CONSENT_VERSION } from "@shared/demande/consent-public";
 import { cantonFromNpa } from "@shared/demande/npa";
@@ -20,8 +20,6 @@ const T = {
     h1: "On vous rappelle",
     chapo: "Laissez votre nom et votre numéro. Un conseiller d’un courtier partenaire vous appellera pour faire le point sur votre situation.",
     nom: "Prénom et nom",
-    tel: "Téléphone",
-    telAide: "Un numéro suisse ou français.",
     sujetQ: `C’est à quel sujet${NB}?`,
     creneauQ: `Quand préférez-vous être appelé${NB}?`,
     npa: "NPA de votre domicile",
@@ -34,7 +32,6 @@ const T = {
     completLien: "Remplir la demande complète",
     err: {
       nom: "Entrez votre prénom et votre nom.",
-      tel: "Ce numéro ne semble pas valide. Vérifiez l’indicatif (+41, +33).",
       npa: "Entrez un NPA à 4 chiffres, ou laissez le champ vide.",
       consent: "Cochez cette case pour que votre demande puisse être transmise.",
       robot: "La vérification anti-robot n’est pas terminée. Réessayez dans un instant.",
@@ -46,8 +43,6 @@ const T = {
     h1: "We’ll call you back",
     chapo: "Leave your name and number. An adviser from a partner broker will call you to go through your situation with you.",
     nom: "First and last name",
-    tel: "Phone",
-    telAide: "A Swiss or French number.",
     sujetQ: "What is it about?",
     creneauQ: "When would you prefer us to call?",
     npa: "Home postcode",
@@ -60,7 +55,6 @@ const T = {
     completLien: "Fill in the full request",
     err: {
       nom: "Enter your first and last name.",
-      tel: "This number does not look valid. Check the country code (+41, +33).",
       npa: "Enter a 4-digit postcode, or leave the field empty.",
       consent: "Tick this box so that your request can be passed on.",
       robot: "The anti-robot check has not finished yet. Try again in a moment.",
@@ -105,7 +99,8 @@ export function FormulaireRappel({ locale }: { locale: Locale }) {
   function valider(): Erreurs {
     const e: Erreurs = {};
     if (nom.trim().length < 2 || /[<>\p{Cc}]/u.test(nom)) e.nom = t.err.nom;
-    if (!parsePhoneNumberFromString(tel, "CH")?.isValid()) e.tel = t.err.tel;
+    const tl = verifierTelephone(tel, locale);
+    if (tl.erreur) e.tel = tl.erreur;
     if (npa && !/^\d{4}$/.test(npa)) e.npa = t.err.npa;
     if (!accord) e.consent = t.err.consent;
     return e;
@@ -142,7 +137,7 @@ export function FormulaireRappel({ locale }: { locale: Locale }) {
       ...(npa ? { residence: { livesInSwitzerland: true as const, npa } } : {}),
       contact: {
         fullName: nom.trim(),
-        phone: parsePhoneNumberFromString(tel, "CH")!.number,
+        phone: verifierTelephone(tel, locale).e164!,
         ...(creneau ? { callbackSlot: creneau } : {}),
       },
       consent: true,
@@ -191,11 +186,7 @@ export function FormulaireRappel({ locale }: { locale: Locale }) {
             <input id="nom" className="saisie" autoComplete="name" placeholder="Marie Dupont" autoCapitalize="words" maxLength={120} value={nom} onChange={(e) => setNom(e.target.value)} {...invalide("nom")} />
             <Erreur id="err-nom" msg={erreurs.nom} />
           </div>
-          <div className="champ">
-            <label htmlFor="tel">{t.tel}</label>
-            <input id="tel" className="saisie" type="tel" inputMode="tel" autoComplete="tel" placeholder="079 123 45 67" maxLength={24} value={tel} onChange={(e) => setTel(e.target.value)} aria-describedby={erreurs.tel ? "err-tel" : "aide-tel"} aria-invalid={erreurs.tel ? true : undefined} />
-            {erreurs.tel ? <Erreur id="err-tel" msg={erreurs.tel} /> : <p className="aide" id="aide-tel">{t.telAide}</p>}
-          </div>
+          <ChampTelephone locale={locale} value={tel} onChange={setTel} erreur={erreurs.tel} />
 
           <fieldset>
             <legend className="legende-champ">

@@ -6,8 +6,8 @@ import type { Rubrique } from "@/lib/nav";
 export type ActionLanding = "comparateur" | "simulateur" | "lettre" | "rappel";
 
 /* Sujets du formulaire court « Être rappelé » (shared/demande/portes.ts, porte rappel). Aucun nouveau code ici :
-   le schéma de leads n'accepte que ceux-là. Les branches sans sujet propre (auto, ménage, RC…) passent par « autre ». */
-export const SUJETS_RAPPEL = ["sante", "frontaliers", "nouveaux-arrivants", "entreprises", "autre"] as const;
+   le schéma de leads n'accepte que ceux-là. Les branches sans sujet propre passent par « autre ». */
+export const SUJETS_RAPPEL = ["sante", "frontaliers", "nouveaux-arrivants", "entreprises", "menage-rc", "auto", "protection-juridique", "autre"] as const;
 export type SujetRappel = (typeof SUJETS_RAPPEL)[number];
 
 export type Landing = {
@@ -96,6 +96,9 @@ export const TEXTE_LANDING = {
   fr: {
     rappelTitre: (objet: string) => `Un conseiller vous rappelle au sujet de ${objet}`,
     rappelBouton: "Être rappelé",
+    offresTitre: (objet: string) => `Recevez des offres pour ${objet}`,
+    offresBouton: "Demander des offres",
+    offresDetail: "Quelques questions sur votre situation, puis un seul conseiller vous rappelle. C’est gratuit et sans engagement.",
     rappelDetail: "Il suffit de votre nom et de votre numéro. L’appel est gratuit et ne vous engage à rien.",
     rappelSecond: `Une question avant de vous lancer${N}?`,
     rappelSecondLien: "Être rappelé par un conseiller",
@@ -115,6 +118,9 @@ export const TEXTE_LANDING = {
   en: {
     rappelTitre: (objet: string) => `An adviser calls you back about ${objet}`,
     rappelBouton: "Call me back",
+    offresTitre: (objet: string) => `Get quotes for ${objet}`,
+    offresBouton: "Request quotes",
+    offresDetail: "A few questions about your situation, then a single adviser calls you back. It is free and without commitment.",
     rappelDetail: "We only need your name and number. The call is free and commits you to nothing.",
     rappelSecond: "A question before you start?",
     rappelSecondLien: "Ask an adviser to call you back",

@@ -7,7 +7,13 @@ export const DEMANDE_ENVOYEE = { fr: "/demande-envoyee/", en: "/en/request-sent/
 /* Formulaire court « Être rappelé » : sous /demande/ pour garder la mise en page et la politique de sécurité du formulaire. */
 export const RAPPEL = { fr: "/demande/rappel/", en: "/en/request/call-back/" } as const;
 
-export const lienDemande = (locale: "fr" | "en", porte: Porte) => `${DEMANDE[locale]}?porte=${porte}`;
+/* Formulaire ouvert sur une porte : /demande/<porte>/ (l'ancienne forme ?porte= reste lue par le formulaire). */
+export const lienDemande = (locale: "fr" | "en", porte: Porte) => `${DEMANDE[locale]}${porte}/`;
+
+/* Portes d'offre directe (ménage et RC, protection juridique, auto) : leurs guides mènent au formulaire de la porte
+   en haut de page, après l'introduction et en fin de page, avec la barre collante sur mobile. */
+export const PORTES_OFFRE = ["menage-rc", "protection-juridique", "auto"] as const satisfies readonly Porte[];
+export const estPorteOffre = (p: Porte | undefined): p is (typeof PORTES_OFFRE)[number] => (PORTES_OFFRE as readonly string[]).includes(p ?? "");
 
 /* Portes du formulaire en trois écrans (la porte « rappel » a son propre formulaire). */
 export const estPorte = (v: unknown): v is Porte => typeof v === "string" && (PORTES_FORMULAIRE as readonly string[]).includes(v);
@@ -21,6 +27,9 @@ export function porteDePage(slugFr: string | undefined): Porte | undefined {
   if (slugFr === "/nouveaux-arrivants/") return "nouveaux-arrivants";
   if (slugFr === "/3e-pilier/") return "prevoyance";
   if (slugFr === "/entreprises/" || slugFr.startsWith("/entreprises/")) return "entreprises";
+  if (slugFr === "/assurance-menage-rc/") return "menage-rc";
+  if (slugFr === "/protection-juridique/") return "protection-juridique";
+  if (slugFr === "/assurance-auto/") return "auto";
   return undefined;
 }
 

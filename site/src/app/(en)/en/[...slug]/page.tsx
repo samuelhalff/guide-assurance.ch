@@ -5,6 +5,7 @@ import { pageMetadata } from "@/lib/metadata";
 import { OUTILS_EN } from "@/lib/nav";
 import { autreLangue, equivalent, pageParSlug, toutesLesPages } from "@/lib/content/pages";
 import { porteDePage } from "@/lib/demande";
+import { CorpsAvecAppel } from "@/components/demande/corps-avec-appel";
 import { PRODUITS_LIES, rubriqueDePage } from "@/lib/landing";
 
 /* Guides in English (content/en/*.md), served under /en/. Each file names its French page (`fr`). */
@@ -63,7 +64,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         .map((x) => ({ href: x.slug, titre: x.landing?.service ?? x.title }))}
       noteFooter={p.rubrique === "legal" ? undefined : `General information, ${RUBRIQUES[p.rubrique]}. Your contract and the law prevail.`}
     >
-      <div dangerouslySetInnerHTML={{ __html: p.html }} />
+      <CorpsAvecAppel html={p.html} porte={porteDePage(p.fr)} locale="en" />
     </GuidePage>
   );
 }

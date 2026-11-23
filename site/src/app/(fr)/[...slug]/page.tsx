@@ -5,6 +5,7 @@ import { pageMetadata } from "@/lib/metadata";
 import { OUTILS } from "@/lib/nav";
 import { autreLangue, pageParSlug, toutesLesPages } from "@/lib/content/pages";
 import { porteDePage } from "@/lib/demande";
+import { CorpsAvecAppel } from "@/components/demande/corps-avec-appel";
 import { PRODUITS_LIES, rubriqueDePage } from "@/lib/landing";
 
 const RUBRIQUES = { particuliers: "Particuliers", entreprises: "Entreprises", situations: "Situations", legal: "Informations" } as const;
@@ -59,7 +60,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       altPath={autreLangue(p.slug, "fr")}
       noteFooter={p.rubrique === "legal" ? undefined : `Information générale, ${RUBRIQUES[p.rubrique].toLowerCase()}. Votre contrat et la loi font foi.`}
     >
-      <div dangerouslySetInnerHTML={{ __html: p.html }} />
+      <CorpsAvecAppel html={p.html} porte={porteDePage(p.slug)} locale="fr" />
     </GuidePage>
   );
 }

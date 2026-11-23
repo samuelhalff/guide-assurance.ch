@@ -141,3 +141,36 @@
   .chapo-rappel { margin: calc(-1 * var(--s2)) 0 0; font-size: 18px; line-height: 1.45; color: var(--encre-2); }
   .vers-complet { margin: 0; font: 15px var(--narrow); color: var(--encre-2); text-align: center; }
 }
+
+/* Portes d'offre directe (ménage et RC, protection juridique, auto) : choix en boutons, saisies courtes, facultatifs
+   repliés après les coordonnées, téléphone confirmé pendant la frappe. */
+@layer components {
+  .puces-pile { display: grid; grid-template-columns: 1fr; }
+  .puces-pile .puce { min-height: 56px; }
+  .puces-grille { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .puces-grille .puce { justify-content: flex-start; }
+  @media (min-width: 560px) { .puces-grille:has(> :nth-child(5)) { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .saisie-moyenne { max-width: 12em; }
+  .saisie-unite { display: flex; align-items: center; gap: var(--s2); }
+  .saisie-unite > span { font: 600 17px var(--narrow); color: var(--encre-2); }
+  .champ-date { margin-top: var(--s3); }
+  .tel-ok { display: flex; align-items: center; gap: 6px; color: var(--encre); }
+  .tel-ok svg { width: 18px; height: 18px; flex: 0 0 18px; color: var(--foret); }
+  .tel-num { font-weight: 700; font-variant-numeric: tabular-nums; }
+  details.precis { border: 1px solid var(--filet); border-radius: var(--r); background: var(--papier); padding: 0 var(--s4); }
+  details.precis > summary {
+    display: flex; align-items: center; justify-content: space-between; gap: var(--s3); min-height: 56px;
+    font: 700 17px var(--narrow); color: var(--encre); cursor: pointer; list-style: none;
+  }
+  details.precis > summary::-webkit-details-marker { display: none; }
+  details.precis > summary::after {
+    content: ""; width: 10px; height: 10px; flex: 0 0 10px; margin-right: 4px;
+    border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg) translateY(-3px);
+    transition: transform .2s ease-out;
+  }
+  details.precis[open] > summary::after { transform: rotate(-135deg) translateY(-3px); }
+  details.precis > summary:focus-visible { outline: 3px solid var(--lac-encre); outline-offset: 2px; border-radius: 4px; }
+  details.precis[open] { display: grid; gap: var(--s4); padding-bottom: var(--s4); }
+  details.precis .aide { margin: calc(-1 * var(--s2)) 0 0; }
+  @media (prefers-reduced-motion: reduce) { details.precis > summary::after { transition: none; } }
+}

@@ -1,7 +1,9 @@
 // Payload d'intake POST /api/demande (zod). Partagé par le site (formulaire) et leads (validation serveur).
 import { z } from "zod";
 import { isKnownConsentVersion } from "./consent";
+import { erreursDetails } from "./details";
 import { codesBesoin, CRENEAUX, LOCALES, PERSONNES, PORTE_RAPPEL, PORTES, PORTES_DEF, SANTE_CHOIX } from "./portes";
+import { estTelephoneE164Valide } from "./telephone";
 
 const txt = (max: number) => z.string().trim().min(1).max(max);
 // Pas de caractères de contrôle dans les champs libres courts (noms).
@@ -45,6 +47,10 @@ export const demandeSchema = z
       })
       .strict()
       .optional(),
+    /** Questions propres à la porte (PORTES_DEF[porte].details), vérifiées champ par champ dans superRefine. */
+    details: z
+      .record(z.string().max(40), z.union([z.string().max(120), z.number(), z.array(z.string().max(40)).max(10)]))
+      .optional(),
     /** Puces santé de l'écran 1 (porte santé, facultatives) : intérêt seulement. */
     health: z
       .object({ products: z.array(z.enum(SANTE_CHOIX)).min(1).max(SANTE_CHOIX.length) })
@@ -54,8 +60,8 @@ export const demandeSchema = z
       .object({
         /** Nom complet (un seul champ). */
         fullName: nom,
-        /** E.164, normalisé par libphonenumber-js côté navigateur, revérifié côté serveur. */
-        phone: z.string().regex(/^\+[1-9]\d{6,14}$/),
+        /** E.164, normalisé par normaliserTelephone (telephone.ts) côté navigateur, revérifié ici côté serveur. */
+        phone: z.string().regex(/^\+[1-9]\d{7,14}$/).refine(estTelephoneE164Valide, "numéro non plausible"),
         email: z.email().max(200).optional(),
         callbackSlot: z.enum(CRENEAUX).optional(),
       })
@@ -83,9 +89,20 @@ export const demandeSchema = z
       if (d.residence && (d.residence.birthYear !== undefined || d.residence.householdSize !== undefined)) {
         ctx.addIssue({ code: "custom", path: ["residence"], message: "profil hors formulaire court" });
       }
-    } else if (!d.residence || d.residence.birthYear === undefined || d.residence.householdSize === undefined) {
-      ctx.addIssue({ code: "custom", path: ["residence"], message: "profil requis" });
+    } else {
+      const def = PORTES_DEF[d.porte];
+      const profil = def.profil ?? { annee: true, personnes: true };
+      const r = d.residence;
+      if (!r || (profil.annee && r.birthYear === undefined) || (profil.personnes && r.householdSize === undefined)) {
+        ctx.addIssue({ code: "custom", path: ["residence"], message: "profil requis" });
+      } else if ((!profil.annee && r.birthYear !== undefined) || (!profil.personnes && r.householdSize !== undefined)) {
+        ctx.addIssue({ code: "custom", path: ["residence"], message: "profil non demandé pour cette porte" });
+      }
+      if (def.besoinUnique && d.besoin.length !== 1) ctx.addIssue({ code: "custom", path: ["besoin"], message: "un seul choix" });
     }
+    const champs = d.porte === PORTE_RAPPEL ? [] : erreursDetails(d.porte, d.details);
+    if (d.porte === PORTE_RAPPEL && d.details) ctx.addIssue({ code: "custom", path: ["details"], message: "pas de détails" });
+    for (const k of champs) ctx.addIssue({ code: "custom", path: ["details", k], message: "réponse manquante ou invalide" });
     if (!isKnownConsentVersion("contact", d.consentVersion)) {
       ctx.addIssue({ code: "custom", path: ["consentVersion"], message: "version inconnue" });
     }

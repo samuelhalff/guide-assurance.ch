@@ -15,7 +15,7 @@ import { LandingTete } from "@/components/site/landing-tete";
 import { jsonLdAccueil } from "@/lib/jsonld-accueil";
 import { TEXTE_LANDING, ZONE_DESSERVIE, type Landing } from "@/lib/landing";
 import { outils } from "@/lib/nav";
-import { TEXTE_CTA } from "@/lib/demande";
+import { TEXTE_CTA, estPorteOffre } from "@/lib/demande";
 
 export type Source = { label: string; href?: string };
 export type OutilLie = { href: string; titre: string; detail?: string };
@@ -149,7 +149,7 @@ export function GuidePage({
         <div className="wrap">
           <Breadcrumbs items={miettes} locale={locale} />
           {landing ? (
-            <LandingTete h1={h1} landing={landing} locale={locale} />
+            <LandingTete h1={h1} landing={estPorteOffre(porte) ? { ...landing, sujet: porte } : landing} locale={locale} porte={estPorteOffre(porte) ? porte : undefined} />
           ) : (
             <>
               <h1>{h1}</h1>

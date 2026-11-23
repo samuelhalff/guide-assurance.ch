@@ -3,6 +3,8 @@ import { IconeTelephone, LienRappel } from "@/components/demande/lien-rappel";
 import { TEXTE_LANDING, typoFr, type Landing } from "@/lib/landing";
 import { outils } from "@/lib/nav";
 import type { Locale } from "@/lib/i18n";
+import type { Porte } from "@shared/demande/portes";
+import { lienDemande } from "@/lib/demande";
 
 const FLECHE = (
   <svg viewBox="0 0 20 20" aria-hidden="true">
@@ -12,7 +14,8 @@ const FLECHE = (
 
 /* Tête des pages produit en landing : H1 (intention), réponse en une ligne, action principale (outil public ou rappel),
    ligne d'intégrité, puis ce qu'on vous demandera et ce qui fait varier la prime. Le guide suit, inchangé. */
-export function LandingTete({ h1, landing, locale = "fr" }: { h1: string; landing: Landing; locale?: Locale }) {
+/* `porte` : page d'une porte d'offre directe (ménage et RC, protection juridique, auto) ; l'action principale ouvre son formulaire. */
+export function LandingTete({ h1, landing, locale = "fr", porte }: { h1: string; landing: Landing; locale?: Locale; porte?: Porte }) {
   const t = TEXTE_LANDING[locale];
   const ty = (s: string) => (locale === "fr" ? typoFr(s) : s);
   const o = outils(locale);
@@ -54,6 +57,16 @@ export function LandingTete({ h1, landing, locale = "fr" }: { h1: string; landin
               {action === "simulateur" ? t.simulateurBouton : t.lettreBouton}
               {FLECHE}
             </a>
+            {rappelSecond}
+          </>
+        ) : porte ? (
+          <>
+            <p className="landing-action-titre">{ty(t.offresTitre(landing.objet))}</p>
+            <a className="bouton" href={lienDemande(locale, porte)}>
+              {t.offresBouton}
+              {FLECHE}
+            </a>
+            <p className="landing-action-texte">{t.offresDetail}</p>
             {rappelSecond}
           </>
         ) : (
