@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
@@ -232,6 +233,9 @@ export default function Home() {
                 <b>Which deductible should you choose?</b> A tool in preparation will show the level of costs above which the low deductible pays off.
               </li>
             </ol>
+            <p className="texte reperes">
+              For this year’s figures, see the <Link href="/en/key-figures-2027/">key figures for 2027</Link>, the <Link href="/en/health-insurance/premium-barometer/">premium barometer</Link> by canton and <Link href="/en/health-insurance/premiums/regions/">premiums by region</Link>. For pillar 3a, the <Link href="/en/pillar-3a/interest-rates/history/">3a rate history</Link> follows every Monday survey and the <Link href="/en/pillar-3a/tax-savings/municipalities/">tax saving by municipality</Link> compares every municipality in French-speaking Switzerland. <Link href="/en/renewal-reminders/">Renewal reminders</Link> put the deadlines in your calendar.
+            </p>
           </div>
         </section>
 

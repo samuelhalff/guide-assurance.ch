@@ -141,7 +141,7 @@ export function PageIntegrer({ l }: { l: Locale }) {
   return (
     <div className="page-outil page-integrer">
       <JsonLd data={LD} />
-      <SiteHeader locale={l} altPath={autre} />
+      <SiteHeader current="outils" locale={l} altPath={autre} />
       <main>
         <div className="wrap">
           <Breadcrumbs items={t.miettes} locale={l} />

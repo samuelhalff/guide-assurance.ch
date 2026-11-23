@@ -1,0 +1,39 @@
+name: "Actualités : brouillon en pull request"
+
+# infra/refresh/actualites.py : cherche un déclencheur (primes OFSP, taux 3a, décision BNS, rendez-vous mensuel),
+# fait rédiger FR + EN par le LLM, vérifie (site/scripts/verifier-actualite.mts) et ouvre une pull request
+# (status: published dans la branche, aperçu et sources dans la description). E-mail à sh@houle.ai avec le lien.
+# Fusionner = publier (le push sur main déploie). Sans clé de LLM : alerte « clé manquante » et passage en échec.
+#
+# Planification préparée mais pas active (comme dans l'ancien crontab, en attente de l'accord de Sam) :
+# décommenter le bloc schedule pour 07:30 et 10:15 à Zurich, et ajouter at: 10 pour la seconde ligne si besoin.
+on:
+  # schedule:
+  #   - cron: "30 5 * * *"
+  #   - cron: "30 6 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "--dry-run : rien d'écrit, pas de pull request, pas d'e-mail"
+        type: boolean
+        default: true
+      only:
+        description: "forcer un déclencheur (essai)"
+        type: choice
+        options: [aucun, primes, taux3a, bns, mensuel]
+        default: aucun
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+jobs:
+  actualites:
+    uses: ./.github/workflows/_refresh.yml
+    with:
+      dataset: actualites
+      at: 7
+      dry_run: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+      args: ${{ (inputs.only && inputs.only != 'aucun') && format('--only {0}', inputs.only) || '' }}
+    secrets: inherit

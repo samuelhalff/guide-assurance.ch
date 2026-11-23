@@ -43,6 +43,7 @@ export default function Guides() {
   const pages = toutesLesPages("en");
   return (
     <GuidePage
+      rubrique="guides"
       locale="en"
       path={PATH}
       altPath="/guides/"

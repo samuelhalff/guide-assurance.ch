@@ -17,8 +17,9 @@
   .assistant-bouton svg { flex: 0 0 auto; display: block; }
   .assistant-bouton svg path:last-child { stroke: var(--ocre); }
   .assistant-bouton-lib { display: none; font: 700 16px/1 var(--sans); white-space: nowrap; }
-  /* Le bandeau cookies passe d'abord ; la barre « Comparer avec un conseiller » garde sa place. */
-  body:has(.consentement) .assistant-bouton { display: none; }
+  /* Écran étroit : le bandeau cookies passe d'abord. Dès 1100 px, le bandeau (560 px, centré) laisse la place au bouton,
+     visible dès l'arrivée (Sam, 23.11.2026). La barre « Comparer avec un conseiller » garde sa place. */
+  @media (max-width: 1099px) { body:has(.consentement) .assistant-bouton { display: none; } }
   @media (max-width: 820px) {
     body:has(.barre-demande[data-visible]) .assistant-bouton { bottom: calc(84px + env(safe-area-inset-bottom)); }
   }

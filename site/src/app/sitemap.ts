@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { abs } from "@/lib/site";
-import { DATE_PAGE, DATE_PAGE_DONNEES } from "@/lib/donnees";
-import { OUTILS, PAGES_DONNEES, SLUG_CANTON_3A } from "@/lib/nav";
+import { DATE_PAGE, DATE_PAGE_DONNEES, DATE_PAGE_OUTILS } from "@/lib/donnees";
+import { HUB_OUTILS, OUTILS, PAGES_DONNEES, SLUG_CANTON_3A } from "@/lib/nav";
 import { PAGES_FR_EN } from "@/lib/i18n";
 import { autreLangue, dateIndexGuides, toutesLesPages } from "@/lib/content/pages";
 import { pagesIdees } from "@/lib/pages-idees";
@@ -21,6 +21,7 @@ const PAGES: { path: string; lastmod: string; lastmodEn?: string }[] = [
   { path: OUTILS.comparateur, lastmod: DATE_PAGE.comparateur },
   { path: OUTILS.taux3a, lastmod: DATE_PAGE.taux3a },
   { path: OUTILS.impot3a, lastmod: DATE_PAGE.impot3a },
+  { path: HUB_OUTILS.fr, lastmod: DATE_PAGE_OUTILS },
   { path: "/guides/", lastmod: dateIndexGuides("fr"), lastmodEn: dateIndexGuides("en") },
   { path: PAGES_DONNEES.chiffres, lastmod: DATE_PAGE_DONNEES.chiffres },
   { path: PAGES_DONNEES.regions, lastmod: DATE_PAGE_DONNEES.regions },

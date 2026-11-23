@@ -213,7 +213,7 @@ export function EconomieImpot3a({ locale = "fr" }: { locale?: Locale }) {
   }
 
   return (
-    <div className="outil outil-impot3a" id="outil">
+    <div className="ph-sensitive outil outil-impot3a" id="outil" data-ph-mask>
       <form className="form" onSubmit={(e) => e.preventDefault()}>
         <fieldset>
           <legend>{t.canton}</legend>

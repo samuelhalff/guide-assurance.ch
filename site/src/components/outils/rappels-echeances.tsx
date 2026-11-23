@@ -60,7 +60,7 @@ export function RappelsEcheances({ aujourdhuiIso, locale = "fr" }: { aujourdhuiI
   const apercu = contrats.map((c, i) => evenementContrat(c, i, today, l));
 
   return (
-    <div className="outil outil-rappels">
+    <div className="ph-sensitive outil outil-rappels" data-ph-mask>
       <section className="form bloc-rappels" aria-labelledby="t-fixes">
         <h2 id="t-fixes">{en ? "Which deadlines come back every year?" : `Quelles échéances reviennent chaque année${N}?`}</h2>
         <p className="aide-bloc">

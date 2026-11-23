@@ -51,6 +51,7 @@ export function rubriqueDePage(slugFr: string | undefined): Rubrique | undefined
   if (slugFr === "/frontaliers/") return "frontaliers";
   if (slugFr === "/nouveaux-arrivants/") return "arrivee";
   if (slugFr.startsWith("/entreprises/")) return "entreprises";
+  if (slugFr.startsWith("/3e-pilier/")) return "prevoyance";
   return undefined;
 }
 

@@ -113,7 +113,7 @@ export function PageActualite({ a, apercu = false }: { a: Article; apercu?: bool
   return (
     <div className="page-guide page-actualite">
       <JsonLd data={ld} />
-      <SiteHeader locale={l} altPath={autre ? cheminArticle(autre) : BASE_ACTUALITES[l === "fr" ? "en" : "fr"]} />
+      <SiteHeader current="actualites" locale={l} altPath={autre ? cheminArticle(autre) : BASE_ACTUALITES[l === "fr" ? "en" : "fr"]} />
       <main>
         <div className="wrap">
           {apercu ? <p className="apercu-bandeau" role="note">{t.apercu}</p> : null}

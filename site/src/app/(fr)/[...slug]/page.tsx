@@ -49,7 +49,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       outilsLies={p.outils.map((o) => OUTILS_LIES[o]).filter(Boolean)}
       faq={p.faq}
       type={p.rubrique === "legal" ? "WebPage" : "Article"}
-      rubrique={p.landing ? rubriqueDePage(p.slug) : undefined}
+      rubrique={p.rubrique === "legal" ? undefined : rubriqueDePage(p.slug) ?? "guides"}
       porte={porteDePage(p.slug)}
       landing={p.landing}
       produitsLies={(p.landing ? (PRODUITS_LIES[p.slug] ?? []) : [])

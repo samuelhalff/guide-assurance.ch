@@ -1,0 +1,22 @@
+name: Accès SSH de déploiement
+description: Clé de déploiement restreinte (rrsync, utilisateur ga-deploy) et empreinte épinglée de l'hôte.
+inputs:
+  key:
+    required: true
+  known_hosts:
+    required: true
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      env:
+        KEY: ${{ inputs.key }}
+        KNOWN_HOSTS: ${{ inputs.known_hosts }}
+      run: |
+        set -euo pipefail
+        test -n "$KEY" || { echo "DEPLOY_SSH_KEY absent" >&2; exit 1; }
+        test -n "$KNOWN_HOSTS" || { echo "DEPLOY_SSH_KNOWN_HOSTS absent" >&2; exit 1; }
+        install -d -m 700 "$HOME/.ssh"
+        umask 077
+        printf '%s\n' "$KEY" > "$HOME/.ssh/ga_deploy"
+        printf '%s\n' "$KNOWN_HOSTS" > "$HOME/.ssh/known_hosts_deploy"

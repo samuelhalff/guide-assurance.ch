@@ -52,11 +52,13 @@ export function Assistant({ locale = "fr" }: { locale?: "fr" | "en" }) {
     if (charge.current && !enCours) ecrireFil({ messages, session });
   }, [messages, session, enCours]);
 
-  /* Le bouton apparaît après 60 % du premier écran, ou tout de suite sur une page courte. */
+  /* Ordinateur (900 px et plus) : le bouton est visible dès l'arrivée, Sam le veut sans défilement (23.11.2026).
+     Mobile : il apparaît après 60 % du premier écran, ou tout de suite sur une page courte, pour ne pas couvrir le haut de page. */
   useEffect(() => {
     const placer = () => {
+      const large = window.matchMedia("(min-width: 900px)").matches;
       const court = document.documentElement.scrollHeight <= window.innerHeight * 1.4;
-      setBoutonVisible(court || window.scrollY > window.innerHeight * 0.6);
+      setBoutonVisible(large || court || window.scrollY > window.innerHeight * 0.6);
     };
     placer();
     window.addEventListener("scroll", placer, { passive: true });
@@ -187,7 +189,7 @@ export function Assistant({ locale = "fr" }: { locale?: "fr" | "en" }) {
       </DialogPrimitive.Trigger>
       <DialogPrimitive.Portal>
         <DialogPrimitive.Backdrop className="assistant-fond" />
-        <DialogPrimitive.Popup className="assistant-panneau">
+        <DialogPrimitive.Popup className="assistant-panneau ph-no-capture" data-ph-mask>
           <header className="assistant-tete">
             <span className="assistant-tuile" aria-hidden="true">
               <LogoSilhouette />

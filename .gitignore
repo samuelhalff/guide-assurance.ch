@@ -3,3 +3,8 @@ node_modules/
 out/
 *.tsbuildinfo
 .env*
+__pycache__/
+# Relevés de données : état (branche refresh-state) et journaux (artefacts GitHub Actions)
+infra/refresh/state/
+infra/refresh/logs/
+.lighthouseci/
