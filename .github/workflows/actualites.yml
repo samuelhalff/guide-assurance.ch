@@ -22,7 +22,7 @@ on:
       only:
         description: "forcer un déclencheur (essai)"
         type: choice
-        options: [aucun, primes, taux3a, bns, mensuel]
+        options: [aucun, primes, taux3a, bns, mensuel, seo]
         default: aucun
 
 permissions:

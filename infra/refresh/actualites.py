@@ -5,7 +5,8 @@ Chaque passage (cron quotidien, 07:30 Zurich) :
   1. relève les accords donnés dans l'admin des demandes (lien signé envoyé par e-mail) et publie les
      articles approuvés dont le texte n'a pas changé depuis l'e-mail ;
   2. cherche un déclencheur : nouvelles primes OFSP, variation des taux 3a au-delà du seuil, nouvelle
-     décision de politique monétaire de la BNS (flux RSS officiel), rendez-vous mensuel ;
+     décision de politique monétaire de la BNS (flux RSS officiel), rendez-vous mensuel, recherche Google sans page
+     adaptée (data/seo-sujets.json, alimenté par le SEO mensuel scripts/seo/seo_mensuel.py ; une par semaine au plus) ;
   3. pour un déclencheur au plus par passage : rassemble les données du site et les pages officielles,
      fait rédiger FR + EN par le LLM, vérifie (site/scripts/verifier-actualite.mts : mots interdits, chiffres
      présents dans les sources, sources, longueur, typographie), jette le brouillon s'il échoue (alerte) ;
@@ -68,13 +69,17 @@ SOURCES = {
     "mensuel": [
         "https://www.fedlex.admin.ch/eli/cc/1995/1328_1328_1328/fr",
     ],
+    "seo": [],  # les sources des pages du site les plus proches de la requête sont ajoutées (dossier())
 }
 DONNEES = {
     "primes": ["site/src/data/barometre.json", "site/src/data/primes-2027-resume.json"],
     "taux3a": ["site/src/data/taux-3a.json", "site/src/data/taux-3a-historique.json"],
     "bns": ["site/src/data/taux-3a.json", "site/src/data/taux-3a-historique.json"],
     "mensuel": ["site/src/data/barometre.json", "site/src/data/taux-3a.json"],
+    "seo": [],
 }
+SEO_SUJETS = C.ROOT / "data" / "seo-sujets.json"  # écrit par scripts/seo/seo_mensuel.py (SEO mensuel)
+SEO_INTERVALLE_JOURS = 7  # un article tiré des recherches Google par semaine au plus
 MENSUEL = {  # sujet du rendez-vous mensuel, selon le mois
     1: "les nouveautés de l'assurance de base au 1er janvier et le versement 3a de la nouvelle année",
     2: "la franchise : comment elle se combine avec la quote-part sur une année",
@@ -271,10 +276,48 @@ def declencheurs(log: C.Log, st: dict, a) -> tuple[list[dict], dict]:
         out.append({"sujet": "mensuel", "raison": "rendez-vous mensuel", "theme": MENSUEL[C.now_zh().month]})
     if st.get("mensuel") != mois:
         maj["mensuel"] = mois
+    s = sujet_seo(st, force=a.only == "seo")
+    if s and not premier:
+        out.append({"sujet": "seo", "raison": f"recherche Google sans page adaptée : « {s['requete']} »",
+                    "theme": s.get("angle") or s["requete"], "requete": s["requete"]})
+    if a.only == "seo":
+        return [d for d in out if d["sujet"] == "seo"], maj
     if a.only:
         out = [d for d in out if d["sujet"] == a.only] or [{"sujet": a.only, "raison": "forcé (--only)",
                                                                "theme": MENSUEL[C.now_zh().month]}]
     return out, maj
+
+
+def sujet_seo(st: dict, force: bool = False) -> dict | None:
+    """Prochaine requête de data/seo-sujets.json pas encore essayée, au plus une par semaine."""
+    if not SEO_SUJETS.exists():
+        return None
+    der = st.get("seo_dernier")
+    if der and not force and (C.now_zh().date() - dt.date.fromisoformat(der)).days < SEO_INTERVALLE_JOURS:
+        return None
+    essayes = set(st.get("seo_essayes", []))
+    for s in json.loads(SEO_SUJETS.read_text(encoding="utf-8")).get("sujets", []):
+        if s.get("statut", "en attente") == "en attente" and s["requete"] not in essayes:
+            return s
+    return None
+
+
+def pages_proches(requete: str, n: int = 2) -> list[Path]:
+    """Pages du guide (site/content/fr) dont le titre, la description et les intertitres recoupent le plus la requête."""
+    def jetons(t: str) -> set[str]:
+        import unicodedata
+        t = unicodedata.normalize("NFKD", t.lower()).encode("ascii", "ignore").decode()
+        return {w[:6] for w in re.findall(r"[a-z0-9]+", t) if len(w) > 2}
+    q = jetons(requete)
+    notes = []
+    for f in (C.SITE / "content" / "fr").glob("*.md"):
+        if f.stem in ("confidentialite", "mentions-legales", "independance"):
+            continue
+        t = f.read_text(encoding="utf-8")
+        tete = "\n".join(ln for ln in t.splitlines() if re.match(r"(title|description|h1):|#{2,3} ", ln))
+        notes.append((len(q & jetons(tete)) * 3 + len(q & jetons(t)), f))
+    notes.sort(key=lambda x: -x[0])
+    return [f for sc, f in notes[:n] if sc > 0]
 
 
 # ------------------------------------------------------------------ sources
@@ -325,11 +368,17 @@ def faits_derives(sujet: str) -> str:
 def dossier(log: C.Log, d: dict) -> tuple[str, list[dict]]:
     """Texte des sources (données du site + pages officielles) et liste des pages effectivement lues."""
     parts, lues = [], []
+    sources_seo = []
+    if d["sujet"] == "seo":
+        for f in pages_proches(d["requete"]):
+            t = f.read_text(encoding="utf-8")
+            parts.append(f"### Page du site : {f.relative_to(C.ROOT)}\n{t[:30000]}")
+            sources_seo += re.findall(r'url:\s*"(https://[^"]+)"', t)
     for p in DONNEES[d["sujet"]]:
         f = C.ROOT / p
         if f.exists():
             parts.append(f"### Données du site : {p}\n{f.read_text(encoding='utf-8')[:40000]}")
-    urls = list(SOURCES[d["sujet"]]) + ([d["lien"]] if d.get("lien") else [])
+    urls = list(SOURCES[d["sujet"]]) + ([d["lien"]] if d.get("lien") else []) + list(dict.fromkeys(sources_seo))[:5]
     for u in urls:
         try:
             t = texte_page(u)
@@ -619,6 +668,12 @@ def publier_direct(log: C.Log, a, d: dict, art: dict, jour: str, slug_fr: str, s
     """GitHub Actions : l'article vérifié est écrit en status: published, puis testé, construit, committé sur main,
     déployé et vérifié en ligne (common.publish). Échec : articles retirés, alerte."""
     dest_fr, dest_en = CONTENT["fr"] / f"{slug_fr}.md", CONTENT["en"] / f"{slug_en}.md"
+    if d["sujet"] == "seo" and SEO_SUJETS.exists():  # committé avec l'article (common.commit_push ajoute data/)
+        js = json.loads(SEO_SUJETS.read_text(encoding="utf-8"))
+        for s in js.get("sujets", []):
+            if s["requete"] == d["requete"]:
+                s.update(statut="publie", article=f"{BASE['fr']}{slug_fr}/")
+        SEO_SUJETS.write_text(json.dumps(js, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     for p, texte in ((dest_fr, ecrire_article(art["fr"], "fr", jour, None, "published")),
                      (dest_en, ecrire_article(art["en"], "en", jour, slug_fr, "published"))):
         p.parent.mkdir(parents=True, exist_ok=True)
@@ -671,6 +726,9 @@ def run(log: C.Log, a) -> int:
         C.record_run(DS, "ok", "brouillons en attente", success=True)
         return 0
     d = trig[0]  # un brouillon au plus par passage
+    if d["sujet"] == "seo" and not a.dry_run:  # une requête n'est essayée qu'une fois, publiée ou non
+        C.save_state(DS, seo_dernier=C.now_zh().date().isoformat(),
+                     seo_essayes=(st.get("seo_essayes", []) + [d["requete"]])[-500:])
     log(f"déclencheur : {d['raison']}" + (f" (autres : {', '.join(x['sujet'] for x in trig[1:])})" if trig[1:] else ""))
     if not (env.get("ANTHROPIC_API_KEY") or env.get("AZURE_OPENAI_API_KEY")) and not a.fake_llm:
         C.alert(log, DS, "clé manquante", [f"Déclencheur « {html.escape(d['raison'])} », mais aucune clé de LLM n'est configurée "
@@ -682,6 +740,6 @@ def run(log: C.Log, a) -> int:
 if __name__ == "__main__":
     ap = C.base_args(__doc__)
     ap.add_argument("--approve", metavar="SLUG_FR", help="publie ce brouillon (FR et sa version EN) : accord donné par Sam en session")
-    ap.add_argument("--only", choices=["primes", "taux3a", "bns", "mensuel"], help="force ce déclencheur (essai)")
+    ap.add_argument("--only", choices=["primes", "taux3a", "bns", "mensuel", "seo"], help="force ce déclencheur (essai)")
     ap.add_argument("--fake-llm", metavar="FICHIER_JSON", help="réponse LLM lue dans ce fichier (essai sans appel d'API)")
     sys.exit(C.run_main(DS, run, ap.parse_args()))
