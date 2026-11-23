@@ -47,6 +47,9 @@ export type Evenement =
   | "rappel_ouvert"
   /* Appel « Être rappelé » vu à l'écran ({ emplacement }), une fois par emplacement et par page, sans aucune valeur saisie. */
   | "rappel_vu"
+  /* Bloc « Recevoir des offres pour ce profil » du comparateur : vu (une fois par page) ; demande envoyée ({ porte }). Aucune valeur saisie. */
+  | "offre_comparateur_vue"
+  | "offre_comparateur_envoyee"
   /* Assistant (PostHog seulement, jamais de contenu de la conversation ni de dataLayer). */
   | "assistant_ouvert"
   | "assistant_message"

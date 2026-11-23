@@ -7,6 +7,7 @@ import { outils } from "@/lib/nav";
 import { RAPPEL, ecrirePreremplissage, lienDemande } from "@/lib/demande";
 import { IconeTelephone, useRappelVu } from "@/components/demande/lien-rappel";
 import { dateCh } from "@/lib/taux3a";
+import { OffreComparateur, type OffreComparateurHandle } from "@/components/outils/offre-comparateur";
 
 /* Comparateur de primes LAMal 2027. Les données du canton sont chargées à la demande (public/data/primes-2027) ;
    le calcul se fait dans le navigateur, rien de ce qui est saisi n'est envoyé ni mis dans l'adresse.
@@ -81,6 +82,9 @@ const TXT = {
     plus: (n: number, total: number) => `Afficher plus (${n} sur ${total})`,
     modifier: "Modifier le profil",
     trierFiltrer: "Trier / filtrer",
+    profilCourt: "Profil",
+    trierCourt: "Trier",
+    offresCourt: "Recevoir des offres",
     rappelOffre: `Une question sur cette offre${T}? Être rappelé`,
     franchiseDe: (f: number) => `franchise ${nfFr(f)}${NB}CHF`,
     accOui: "avec accident",
@@ -190,6 +194,9 @@ const TXT = {
     plus: (n: number, total: number) => `Show more (${n} of ${total})`,
     modifier: "Edit profile",
     trierFiltrer: "Sort / filter",
+    profilCourt: "Profile",
+    trierCourt: "Sort",
+    offresCourt: "Get offers",
     rappelOffre: "A question about this offer? Call me back",
     franchiseDe: (f: number) => `deductible CHF${NB}${nfEn(f)}`,
     accOui: "with accident cover",
@@ -316,6 +323,8 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
   const rappelListe = useRef<HTMLParagraphElement>(null);
   const rappelApres = useRef<HTMLParagraphElement>(null);
   const resultatRef = useRef<HTMLElement>(null);
+  const offreRef = useRef<OffreComparateurHandle>(null);
+  const [offreEnvoyee, setOffreEnvoyee] = useState(false);
 
   /* Lieu : NPA en tête de saisie ; si la saisie reprend une suggestion exacte, sa région est retenue. */
   const npa = saisieLieu.trim().match(/^(\d{4})\b/)?.[1] ?? "";
@@ -580,6 +589,16 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
               </p>
             ) : null}
 
+            {r.total ? (
+              <OffreComparateur
+                ref={offreRef}
+                locale={locale}
+                profil={{ npa: lieu.npa, personnes: lues.map((p) => ({ annee: p.annee, franchise: p.fr, accident: p.accident })) }}
+                ecartAn={r.total > 1 ? chf(r.offres[r.offres.length - 1].annuel - r.offres[0].annuel) : null}
+                onEnvoyee={() => setOffreEnvoyee(true)}
+              />
+            ) : null}
+
             <div className="reglages" ref={reglagesRef}>
               <div className="champ">
                 <label htmlFor="cp-tri">{t.trier}</label>
@@ -782,9 +801,12 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
             </div>
 
             {aListe && barre ? (
-              <div className="barre-collante">
-                <button type="button" className="commande" onClick={() => formRef.current?.scrollIntoView({ behavior: "smooth" })}>{t.modifier}</button>
-                <button type="button" className="commande" onClick={() => reglagesRef.current?.scrollIntoView({ behavior: "smooth", block: "center" })}>{t.trierFiltrer}</button>
+              <div className={offreEnvoyee ? "barre-collante" : "barre-collante avec-offre"}>
+                <button type="button" className="commande" onClick={() => formRef.current?.scrollIntoView({ behavior: "smooth" })}>{offreEnvoyee ? t.modifier : t.profilCourt}</button>
+                <button type="button" className="commande" onClick={() => reglagesRef.current?.scrollIntoView({ behavior: "smooth", block: "center" })}>{offreEnvoyee ? t.trierFiltrer : t.trierCourt}</button>
+                {offreEnvoyee ? null : (
+                  <button type="button" className="commande offre-collante" onClick={() => offreRef.current?.ouvrir()}>{t.offresCourt}</button>
+                )}
               </div>
             ) : null}
           </>

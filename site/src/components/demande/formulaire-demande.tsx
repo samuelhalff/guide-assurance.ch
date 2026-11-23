@@ -712,7 +712,7 @@ function ChampPorte({
           className={c.type === "nombre" ? (c.max >= 10000 ? "saisie saisie-moyenne" : "saisie saisie-courte") : "saisie"}
           inputMode={c.type === "nombre" ? "numeric" : "text"}
           autoComplete="off"
-          placeholder={c.type === "nombre" ? (c.placeholder && c.max >= 10000 ? milliers(Number(c.placeholder), locale) : c.placeholder) : c.placeholder?.[locale]}
+          placeholder={c.type === "nombre" ? (c.placeholder && c.max >= 10000 ? milliers(Number(c.placeholder), locale) : c.placeholder) : c.type === "texte" ? c.placeholder?.[locale] : undefined}
           maxLength={c.type === "texte" ? c.max : 9}
           value={c.type === "nombre" && c.max >= 10000 && brut ? milliers(Number(brut), locale) : brut}
           onChange={(e) => onChange(c.type === "nombre" ? e.target.value.replace(/\D/g, "").slice(0, 7) : e.target.value)}

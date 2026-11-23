@@ -52,15 +52,23 @@ export interface PorteDef {
   details?: ChampDetail[];
 }
 
-/** Question propre à une porte. Écran 1 (besoin), 2 (profil) ou 3 (après les coordonnées, toujours facultative). */
-export type ChampDetail = { code: string; label: L; /** Libellé de la fiche et de l'e-mail, si la question ne s'y prête pas. */ court?: L; ecran: 1 | 2 | 3; optionnel?: boolean; aide?: L } & (
+/** Question propre à une porte. Écran 1 (besoin), 2 (profil) ou 3 (après les coordonnées, toujours facultative).
+ *  Écran 0 : jamais posée par le formulaire, remplie par un outil du site (comparateur de primes), toujours facultative. */
+export type ChampDetail = { code: string; label: L; /** Libellé de la fiche et de l'e-mail, si la question ne s'y prête pas. */ court?: L; ecran: 0 | 1 | 2 | 3; optionnel?: boolean; aide?: L } & (
   | { type: "choix"; choix: Choix[] }
   | { type: "choix-multiple"; choix: Choix[] }
   | { type: "nombre"; min: number; max: number; placeholder?: string; unite?: L }
   | { type: "texte"; max: number; placeholder?: L }
   /** Date souhaitée : « dès que possible », « dans le mois », « d'ici trois mois », ou une date (AAAA-MM-JJ). */
   | { type: "quand" }
+  /** Personnes saisies dans le comparateur de primes : « AAAA.F.A » (année, franchise en CHF, accident 1/0), une par personne. */
+  | { type: "profils-primes" }
 );
+
+/** Franchises LAMal admises (enfant : 0 à 600 ; dès 19 ans : 300 à 2500). */
+export const FRANCHISES_LAMAL = [0, 100, 200, 300, 400, 500, 600, 1000, 1500, 2000, 2500] as const;
+/** Personnes au plus dans un profil du comparateur. */
+export const PROFILS_PRIMES_MAX = 6;
 
 export const QUAND_CHOIX: Choix[] = [
   { code: "asap", label: { fr: "Dès que possible", en: "As soon as possible" } },
@@ -87,6 +95,16 @@ export const PORTES_DEF: Record<Porte, PorteDef> = {
       ],
     },
     etapeSante: true,
+    details: [
+      {
+        code: "comparateur",
+        type: "profils-primes",
+        ecran: 0,
+        optionnel: true,
+        label: { fr: "Personnes saisies dans le comparateur de primes", en: "People entered in the premium comparator" },
+        court: { fr: "Profil du comparateur", en: "Comparator profile" },
+      },
+    ],
   },
   "nouveaux-arrivants": {
     code: "nouveaux-arrivants",
