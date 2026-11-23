@@ -45,7 +45,7 @@ jobs:
       - name: Mentions interdites (dépôt)
         env:
           FORBIDDEN_PATTERNS: ${{ secrets.FORBIDDEN_PATTERNS }}
-        run: scripts/check-forbidden.sh
+        run: bash scripts/check-forbidden.sh
 
       - name: Secrets (gitleaks, tout l'historique)
         run: docker run --rm -v "$PWD":/repo:ro zricethezav/gitleaks:v8.21.2 detect --source /repo --no-banner --redact
@@ -86,7 +86,7 @@ jobs:
       - name: Mentions interdites (site généré)
         env:
           FORBIDDEN_PATTERNS: ${{ secrets.FORBIDDEN_PATTERNS }}
-        run: scripts/check-forbidden.sh site/out
+        run: bash scripts/check-forbidden.sh site/out
 
       - name: Liens internes
         run: node scripts/check-links.mjs site/out
@@ -104,4 +104,4 @@ jobs:
           DEPLOY_SSH_HOST: ${{ secrets.DEPLOY_SSH_HOST }}
           INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
           DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
-        run: scripts/deploy-site.sh
+        run: bash scripts/deploy-site.sh
