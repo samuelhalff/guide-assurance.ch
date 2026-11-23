@@ -295,3 +295,6 @@
   .reperes-details > summary { cursor: pointer; font-weight: 700; color: var(--bande-titre, var(--encre)); text-decoration: underline; text-underline-offset: 3px; padding: var(--s3) 0; }
   .reperes-details[open] > summary { margin-bottom: var(--s4); }
 }
+@layer components {
+  .outil-comparateur .aide-champ { display: block; margin-top: var(--s1); font-size: 14px; line-height: 1.4; color: var(--encre-douce, var(--encre)); opacity: .8; }
+}

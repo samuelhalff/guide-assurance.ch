@@ -536,6 +536,7 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
                 <select className="saisie" id={`cp-f-${p.id}`} value={p.fr} disabled={!p.ok} onChange={(e) => maj(p.id, { franchise: +e.target.value })}>
                   {p.choix.map((f) => <option key={f} value={f}>{nf(f)}</option>)}
                 </select>
+                {k === 0 ? <small className="aide-champ">{t.franchiseAide}</small> : null}
               </div>
             </div>
             <p className="note-outil classe" id={`cp-cl-${p.id}`} role="status">{p.cl ? t.classe[p.cl] : p.naissance.length === 4 ? t.verifier : NB}</p>
@@ -554,7 +555,6 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
             + {t.ajouter}
           </button>
         ) : null}
-        <p className="note-outil franchise-aide">{t.franchiseAide}</p>
         <button type="submit" className="bouton voir-primes">{t.voir}</button>
       </form>
 
