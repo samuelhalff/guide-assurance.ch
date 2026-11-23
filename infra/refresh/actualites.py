@@ -352,10 +352,11 @@ Règles absolues :
 - Ton neutre et factuel, pas d'injonction (pas de « il faut », « vous devez »).
 - Structure : une réponse directe en 2 à 4 phrases avant le premier intertitre ; 4 à 7 intertitres H2 (« ## ») formulés comme des questions ; pas de H1 ; phrases complètes, pas de style télégraphique « Étiquette : valeur ».
 - Français de Suisse : espace fine insécable U+202F avant ; : ! ? et à l'intérieur des guillemets « » ; pas de tiret long ni demi-cadratin ; pas de tournure « pas X mais Y ».
-- Longueur : 750 à 1100 mots en français ; l'anglais est une adaptation (pas une traduction mot à mot) de 600 à 1000 mots, sans espace fine.
+- Longueur du champ markdown (impératif, contrôlé automatiquement, en dessous l'article est jeté) : 750 à 900 mots en français ; l'anglais est une adaptation (pas une traduction mot à mot) de 650 à 800 mots. Pour y arriver : 5 ou 6 intertitres, 2 ou 3 paragraphes de 50 à 80 mots sous chacun. Compte les mots avant de répondre.
+- Anglais : aucune espace fine ni insécable, ponctuation anglaise collée au mot (« word: », jamais « word : »), guillemets droits ou “ ”.
 - FAQ : 4 questions, réponses de 40 à 110 mots, cohérentes avec le corps.
 - Sources : 3 à 6, chacune une URL https exacte tirée du DOSSIER (pages officielles), au moins 2 officielles (admin.ch, fedlex, finma.ch, snb.ch, sites cantonaux).
-- title ≤ 60 caractères, description de 130 à 155 caractères.
+- title : 60 caractères au plus, espaces compris (contrôlé ; viser 45 à 55) ; description de 130 à 155 caractères.
 - outils : choisis parmi comparateur, lettre, rappels, barometre, chiffres, regions, taux3a, historique3a, impot3a, simulateur.
 Réponds uniquement par un objet JSON : {"fr": ART, "en": ART} avec ART = {"slug": "mots-en-minuscules-avec-tirets", "title": "...", "description": "...", "outils": [...], "sources": [{"label": "...", "url": "https://..."}], "faq": [{"q": "...", "a": "..."}], "markdown": "..."}."""
 
@@ -512,16 +513,62 @@ def rediger(log: C.Log, a, d: dict, env: dict) -> int:
     consigne = (f"Sujet : {d['raison']}." + (f" Thème : {d['theme']}." if d.get("theme") else "")
                 + (f" Détail : {json.dumps(d.get('detail'), ensure_ascii=False)}." if d.get("detail") else "")
                 + f" Date du jour : {C.now_zh().date().isoformat()}.\n\nDOSSIER :\n{corpus}")
-    if a.fake_llm:
-        brut = Path(a.fake_llm).read_text(encoding="utf-8")
-    else:
-        brut = appel_llm(env, REGLES, consigne, log)
-    art = extraire_json(brut)
     jour = C.now_zh().date().isoformat()
+    echecs: list[str] = []
+    for essai in (1, 2):  # un second essai, avec la liste des contrôles échoués, si le premier ne passe pas
+        if a.fake_llm:
+            brut = Path(a.fake_llm).read_text(encoding="utf-8")
+        elif essai == 1:
+            brut = appel_llm(env, REGLES, consigne, log)
+        else:
+            brut = appel_llm(env, REGLES, consigne + "\n\nTA RÉPONSE PRÉCÉDENTE :\n" + json.dumps(art, ensure_ascii=False)
+                             + "\n\nELLE A ÉCHOUÉ AUX CONTRÔLES AUTOMATIQUES SUIVANTS :\n- " + "\n- ".join(echecs)
+                             + "\n\nCorrige tous ces points (allonge ou raccourcis le texte, raccourcis le titre, etc.) "
+                             "sans enfreindre les autres règles, et renvoie l'objet JSON complet.", log)
+        art = nettoyer_en(extraire_json(brut))
+        r = verifier_brouillon(log, d, art, jour, corpus)
+        if isinstance(r, int):
+            return r
+        echecs = r
+        if not echecs:
+            break
+        log(f"essai {essai} rejeté : " + " | ".join(echecs))
+    if echecs:
+        C.record_run(DS, "invalide", "; ".join(echecs)[:300], success=False)
+        C.alert(log, DS, "brouillon rejeté",
+                [f"Déclencheur : {html.escape(d['raison'])}. Le brouillon « {html.escape(art['fr'].get('title', ''))} » "
+                 "a échoué deux fois aux contrôles automatiques et a été jeté :", "<br>".join(html.escape(e) for e in echecs[:25]),
+                 "Rien n'a été enregistré ni publié."], a.dry_run)
+        return 1
+    return suite_brouillon(log, a, d, art, jour, corpus, lues, env)
+
+
+def slugs(art: dict, jour: str) -> tuple[str, str]:
     slug_fr = re.sub(r"[^a-z0-9-]", "", art["fr"]["slug"].lower())[:80].strip("-")
     slug_en = re.sub(r"[^a-z0-9-]", "", art["en"]["slug"].lower())[:80].strip("-")
     if not slug_fr or not slug_en or (CONTENT["fr"] / f"{slug_fr}.md").exists() or (CONTENT["en"] / f"{slug_en}.md").exists():
         slug_fr, slug_en = f"{slug_fr or 'actualite'}-{jour}", f"{slug_en or 'news'}-{jour}"
+    return slug_fr, slug_en
+
+
+def nettoyer_en(art: dict) -> dict:
+    """Anglais : pas d'espace fine (U+202F) ni insécable ; ponctuation collée au mot."""
+    def n(x):
+        if isinstance(x, str):
+            x = re.sub(r"[\u202f\u00a0]+([;:!?])", r"\1", x)
+            return x.replace("\u202f", " ").replace("\u00a0", " ")
+        if isinstance(x, list):
+            return [n(i) for i in x]
+        if isinstance(x, dict):
+            return {k: n(v) for k, v in x.items()}
+        return x
+    if isinstance(art.get("en"), dict):
+        art["en"] = n(art["en"])
+    return art
+
+
+def verifier_brouillon(log: C.Log, d: dict, art: dict, jour: str, corpus: str) -> list[str] | int:
+    slug_fr, slug_en = slugs(art, jour)
     with tempfile.TemporaryDirectory() as tmp:
         t = Path(tmp)
         (t / "fr").mkdir()
@@ -531,16 +578,19 @@ def rediger(log: C.Log, a, d: dict, env: dict) -> int:
         f_en.write_text(ecrire_article(art["en"], "en", jour, slug_fr), encoding="utf-8")
         (t / "corpus.txt").write_text(corpus, encoding="utf-8")
         (t / "noms.json").write_text(json.dumps(noms_interdits(), ensure_ascii=False), encoding="utf-8")
-        echecs = [f"FR, {e}" for e in verifier(f_fr, "fr", t / "corpus.txt", t / "noms.json")] + \
-                 [f"EN, {e}" for e in verifier(f_en, "en", t / "corpus.txt", t / "noms.json")]
-        if echecs:
-            log("brouillon rejeté : " + " | ".join(echecs))
-            C.record_run(DS, "invalide", "; ".join(echecs)[:300], success=False)
-            C.alert(log, DS, "brouillon rejeté",
-                    [f"Déclencheur : {html.escape(d['raison'])}. Le brouillon « {html.escape(art['fr'].get('title', ''))} » "
-                     "a échoué aux contrôles automatiques et a été jeté :", "<br>".join(html.escape(e) for e in echecs[:25]),
-                     "Rien n'a été enregistré ni publié."], a.dry_run)
-            return 1
+        return [f"FR, {e}" for e in verifier(f_fr, "fr", t / "corpus.txt", t / "noms.json")] + \
+               [f"EN, {e}" for e in verifier(f_en, "en", t / "corpus.txt", t / "noms.json")]
+
+
+def suite_brouillon(log: C.Log, a, d: dict, art: dict, jour: str, corpus: str, lues, env: dict) -> int:
+    slug_fr, slug_en = slugs(art, jour)
+    with tempfile.TemporaryDirectory() as tmp:
+        t = Path(tmp)
+        (t / "fr").mkdir()
+        (t / "en").mkdir()
+        f_fr, f_en = t / "fr" / f"{slug_fr}.md", t / "en" / f"{slug_en}.md"
+        f_fr.write_text(ecrire_article(art["fr"], "fr", jour, None), encoding="utf-8")
+        f_en.write_text(ecrire_article(art["en"], "en", jour, slug_fr), encoding="utf-8")
         if a.dry_run:
             log(f"[dry-run] brouillon valide : {slug_fr} / {slug_en} (non enregistré)")
             return 0
