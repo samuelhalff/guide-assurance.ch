@@ -1,7 +1,8 @@
 // Numéro de téléphone du formulaire : normalisation en E.164 et refus des saisies manifestement fausses.
 // Même fonction côté navigateur (site) et côté serveur (leads). Aucune dépendance.
 //   Suisse : +41 ou 0 suivi de 9 chiffres, mobile 074 à 079, fixe selon les indicatifs régionaux.
-//   France : +33 suivi de 9 chiffres, fixe 01 à 05 et 09, mobile 06 et 07. Sans +33, un numéro qui commence par 0 est lu comme suisse.
+//   France : +33 suivi de 9 chiffres, fixe 01 à 05 et 09, mobile 06 et 07. Sans +33, un numéro qui commence par 0 est lu
+//   comme suisse s'il en a l'indicatif (061, 079…), sinon comme français (06 52…, 01…, 070…), sauf 09.
 //   Autres pays : + puis 8 à 15 chiffres (E.164).
 
 export type PaysTelephone = "CH" | "FR" | "INTL";
@@ -31,7 +32,12 @@ export function normaliserTelephone(brut: string): ResultatTelephone {
 
   let international: string;
   if (s.startsWith("+")) international = s.slice(1);
-  else if (s.startsWith("0")) international = `41${s.slice(1)}`;
+  else if (s.startsWith("0")) {
+    const nsn = s.slice(1);
+    const suisse = CH_MOBILE.test(nsn) || CH_FIXE.test(nsn);
+    // 09 exclu du repli : un 0900 suisse (surtaxé) doit rester refusé.
+    international = !suisse && nsn.length === 9 && /^[1-7]/.test(nsn) ? `33${nsn}` : `41${nsn}`;
+  }
   else return s.length < 9 ? { ok: false, raison: "court" } : { ok: false, raison: "prefixe-ch" };
 
   if (!/^[1-9]\d*$/.test(international)) return { ok: false, raison: international.startsWith("0") ? "caracteres" : "court" };

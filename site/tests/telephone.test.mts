@@ -17,7 +17,7 @@ eq('CH type mobile', n('078 123 45 67'), { ok: true, e164: '+41781234567', pays:
 eq('CH type fixe', n('027 345 67 89'), { ok: true, e164: '+41273456789', pays: 'CH', type: 'fixe' });
 eq('CH 0900 refusé', e164('0900 123 456'), 'prefixe-ch');
 eq('CH 0800 refusé', e164('0800 123 456'), 'prefixe-ch');
-eq('CH 070 refusé', e164('070 123 45 67'), 'prefixe-ch');
+eq('070 sans indicatif suisse : français', e164('070 123 45 67'), '+33701234567');
 eq('CH trop court', e164('079 123 45'), 'court');
 eq('CH trop long', e164('079 123 45 678'), 'long');
 eq('CH répétitif', e164('079 999 99 99'), 'repetitif');
@@ -29,6 +29,9 @@ eq('FR fixe', e164('+33 4 50 12 34 56'), '+33450123456');
 eq('FR 0 après +33', e164('+33 06 12 34 56 78'), '+33612345678');
 eq('FR 0033', e164('0033 6 12 34 56 78'), '+33612345678');
 eq('FR 08 refusé', e164('+33 8 00 12 34 56'), 'prefixe-fr');
+eq('FR national hors indicatif suisse', n('06 52 34 56 78'), { ok: true, e164: '+33652345678', pays: 'FR', type: 'mobile' });
+eq('FR fixe national', e164('01 42 34 56 78'), '+33142345678');
+eq('06 1… reste suisse (Bâle 061)', e164('061 234 56 78'), '+41612345678');
 eq('FR trop court', e164('+33 6 12 34'), 'court');
 // Autres pays
 eq('DE', e164('+49 151 23456789'), '+4915123456789');
