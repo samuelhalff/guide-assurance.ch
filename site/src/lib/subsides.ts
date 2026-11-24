@@ -34,8 +34,8 @@ export const REVENU: Record<Canton, { nom: T2; aide: T2 }> = {
   VD: {
     nom: { fr: "Revenu déterminant unifié (RDU), avant déduction pour enfants", en: "Unified determining income (RDU), before the child deduction" },
     aide: {
-      fr: "À Vaud, le RDU ne figure pas sur la décision de taxation : l’OVAM le calcule à partir de celle-ci (revenu net, rachats du 2e pilier au-delà de 20 000 francs, versements 3a, déduction forfaitaire pour les primes, plus un quinzième de la fortune au-delà de 60 000 francs, ou 120 000 francs pour un couple). Si vous touchez déjà un subside, il est sur la décision de l’OVAM ; sinon, l’évaluation en ligne de l’État de Vaud le calcule avec votre taxation. L’outil retire lui-même la déduction pour enfants.",
-      en: "In Vaud the RDU is not printed on the tax assessment: the OVAM works it out from it (net income, second-pillar buy-ins above CHF 20,000, pillar 3a payments, a flat deduction for premiums, plus one fifteenth of wealth above CHF 60,000, or CHF 120,000 for a couple). If you already receive a subsidy it is on the OVAM decision; otherwise the canton’s online assessment works it out from your tax assessment. The tool subtracts the child deduction itself.",
+      fr: "Si vous touchez déjà un subside, le RDU est sur la décision de l’OVAM. Sinon, l’OVAM le calcule à partir de votre décision de taxation (revenu net, rachats du 2e pilier au-delà de 20 000 francs, versements 3a, déduction forfaitaire pour les primes, plus un quinzième de la fortune au-delà de 60 000 francs, ou 120 000 pour un couple) : choisissez alors « Avec ma décision de taxation ». L’outil retire lui-même la déduction pour enfants.",
+      en: "If you already receive a subsidy, the RDU is on the OVAM decision. Otherwise the OVAM works it out from your tax assessment (net income, second-pillar buy-ins above CHF 20,000, pillar 3a payments, a flat deduction for premiums, plus one fifteenth of wealth above CHF 60,000, or CHF 120,000 for a couple): in that case choose “With my tax assessment”. The tool subtracts the child deduction itself.",
     },
   },
   FR: {
@@ -102,6 +102,6 @@ export const LIMITES_OUTIL: Record<Canton, T2> = {
 
 /* Vaud : ce que l'estimation applique et ce qui n'a pas pu être comparé (dite une fois par endroit où l'estimation paraît). */
 export const TRANSPARENCE_VD: T2 = {
-  fr: "Cette estimation applique les formules du règlement cantonal (art. 21 RLVLAMal) avec les paramètres 2027 de l’arrêté du 7 octobre 2026. Elle reproduit les exemples de la notice officielle 2027. L’estimateur en ligne du canton affichait encore l’année 2026 le 24 novembre 2026 : nous n’avons donc pas pu y comparer les montants intermédiaires.",
-  en: "This estimate applies the formulas of the cantonal regulation (art. 21 RLVLAMal) with the 2027 parameters of the order of 7 October 2026. It reproduces the examples in the official 2027 notice. The canton’s online estimator still showed 2026 on 24 November 2026, so we could not compare intermediate amounts with it.",
+  fr: "Cette estimation applique les formules du règlement cantonal (art. 21 RLVLAMal) avec les paramètres 2027 de l’arrêté du 7 octobre 2026. Elle reproduit les exemples de la notice officielle 2027 et donne les mêmes montants que l’estimateur en ligne du canton (version 2026, dont les paramètres pour les adultes sont les mêmes) sur les cas que nous avons vérifiés le 24 novembre 2026.",
+  en: "This estimate applies the formulas of the cantonal regulation (art. 21 RLVLAMal) with the 2027 parameters of the order of 7 October 2026. It reproduces the examples in the official 2027 notice and gives the same amounts as the canton’s online estimator (2026 version, whose adult parameters are the same) on the cases we checked on 24 November 2026.",
 };

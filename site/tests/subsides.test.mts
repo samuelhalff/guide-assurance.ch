@@ -359,6 +359,56 @@ assert.equal(JU.fortune_max, 150000);
 // un canton sans barème 2027 ne renvoie aucun montant, quelle que soit l'entrée
 assert.equal("subsideMensuel" in S.calculer({ canton: "VS", menage: m(2, 2), rdu: 0, primes: gros }), false);
 
+/* ------------------------------------------------------------ Vaud : RDU reconstitué depuis la décision de taxation
+   Composantes : notice 2027 de l'OVAM, point 1 (codes 650, 320, 310, 300 ; forfaits 2 200 / 4 400 / 1 300 ; franchise 20 000). */
+{
+  const base = { revenuNet: 40000, primesDeduites: 0, adultes: 1 as 1 | 2, enfants: 0 };
+  assert.equal(S.rduVD(base).rdu, 37800, "seul : revenu net moins 2 200");
+  assert.equal(S.rduVD({ ...base, adultes: 2 }).rdu, 35600, "couple : moins 4 400");
+  assert.equal(S.rduVD({ ...base, adultes: 2, enfants: 2 }).rdu, 33000, "couple, 2 enfants : moins 4 400 et 2 x 1 300");
+  assert.equal(S.rduVD({ ...base, primesDeduites: 3000 }).rdu, 40800, "code 300 ajouté");
+  for (const [r, att] of [[0, 0], [19999, 0], [20000, 0], [20001, 1], [30000, 10000]] as const)
+    assert.equal(S.rduVD({ ...base, rachatsLpp: r }).rachatsRetenus, att, `rachats ${r}`);
+  assert.equal(S.rduVD({ ...base, rachatsLpp: 25000 }).rdu, 37800 + 5000);
+  assert.equal(S.rduVD({ ...base, versements3a: 7258 }).rdu, 37800 + 7258);
+  assert.equal(S.rduVD({ ...base, revenuNet: 1000 }).rdu, 0);
+  assert.equal(S.rduVD({ ...base, revenuNet: 2200 }).rdu, 0);
+  assert.equal(S.rduVD({ ...base, revenuNet: 2201 }).rdu, 1);
+  const d = S.rduVD({ revenuNet: 50000, primesDeduites: 2000, rachatsLpp: 22000, versements3a: 3000, adultes: 2, enfants: 1 });
+  assert.equal(d.rdu, 50000 + 2000 + 2000 + 3000 - 4400 - 1300);
+  assert.equal(d.deductionForfaitaire, 5700);
+  // égalité : parcours « décision de taxation » = parcours « je connais mon RDU » avec le RDU obtenu
+  for (const e of [base, { ...base, adultes: 2 as 1 | 2, enfants: 3, primesDeduites: 4000 }, { ...base, rachatsLpp: 30000, versements3a: 5000 }]) {
+    const rdu = S.rduVD(e).rdu;
+    const via = S.calculer({ canton: "VD", menage: m(e.adultes, e.enfants), rdu, primes: gros, region: "1" });
+    const direct = calc("VD", m(e.adultes, e.enfants), rdu);
+    assert.deepEqual(via, direct);
+  }
+}
+
+/* estimateur officiel de l'État de Vaud, version 2026, relevé le 24.11.2026 ; paramètres adultes identiques en 2027.
+   Personne seule née en 1985, 1000 Lausanne 25 (région 1), prime 500 CHF par mois, aucune fortune. */
+{
+  const prime500 = { adulte: 500, jeuneAdulte: 500, enfant: 0 };
+  // revenu total (revenu net + code 300, répartition inconnue), RDU après forfait de 2 200, subside mensuel officiel, ordinaire, spécifique
+  const cas: [number, number, number, number, number][] = [
+    [20000, 17800, 352, 331, 21],
+    [25000, 22800, 0, 0, 0],
+    [28000, 25800, 285, 233, 52],
+    [35000, 32800, 227, 92, 135],
+  ];
+  for (const [total, rdu, officiel, ord, spec] of cas) {
+    for (const primes of [0, 4000]) {
+      assert.equal(S.rduVD({ revenuNet: total - primes, primesDeduites: primes, adultes: 1, enfants: 0 }).rdu, rdu, `RDU pour un total de ${total}`);
+    }
+    if (!officiel) continue; // le cas 25 000 n'a été relevé que pour le RDU
+    const r = calc("VD", m(1), rdu, { primes: prime500 });
+    assert.equal(Math.round(r.subsideMensuel), officiel, `subside officiel pour un RDU de ${rdu}`);
+    assert.equal(Math.round(r.vd!.ordinaire), ord);
+    assert.equal(Math.round(r.vd!.specifique), spec);
+  }
+}
+
 /* ------------------------------------------------------------ saisie */
 assert.equal(S.lireRevenu("52 000"), 52000);
 assert.equal(S.lireRevenu("52'000"), 52000);
@@ -370,3 +420,43 @@ assert.equal(S.lireRevenu("abc"), null);
 assert.equal(S.lireRevenu("12,5"), null);
 
 console.log("subsides : tous les tests passent");
+
+/* Estimateur officiel de l'État de Vaud, version 2026, relevé le 24.11.2026 ; paramètres adultes identiques en 2027.
+   Couple (nés en 1985 et 1987) avec deux enfants (2015, 2018), 1000 Lausanne, primes de 500 CHF par adulte et de 120 CHF
+   par enfant, revenus nets 60 000 : déduction forfaitaire 7 000 (2 × 2 200 + 2 × 1 300), RDU 53 000, 799 CHF par mois.
+   Ce cas fixe l'arrondi du subside spécifique : une fois, sur le total du ménage. */
+{
+  const r = S.calculer({ canton: "VD", menage: { adultes: 2, jeunesAdultes: 0, enfants: 2 }, rdu: 53000, region: "1", primes: { adulte: 500, jeuneAdulte: 0, enfant: 120 } });
+  assert.ok(r.calcule);
+  if (r.calcule) {
+    assert.equal(r.subsideMensuel, 799, "VD officiel : couple, deux enfants, RDU 53 000");
+    assert.equal(r.vd?.ordinaire, 554);
+    assert.equal(r.vd?.specifique, 245);
+  }
+}
+console.log("subsides : cas officiel vaudois du couple avec deux enfants OK");
+
+/* Estimateur officiel de l'État de Vaud, version 2026, relevé le 24.11.2026 : parent seul (né en 1985, 1000 Lausanne)
+   avec deux enfants, revenus nets 35 000, déduction forfaitaire 4 800 (2 200 + 2 × 1 300), RDU 30 200, 539 CHF par mois.
+   Le subside spécifique est nul ; 539 = 311 pour l'adulte + 2 × 114 pour les enfants. Le montant de l'enfant était de
+   114 CHF en 2026 et passe à 118 CHF en 2027 : seule la part de l'adulte (paramètres identiques) est comparable. */
+{
+  assert.equal(S.rduVD({ revenuNet: 35000, primesDeduites: 0, rachatsLpp: 0, versements3a: 0, adultes: 1, enfants: 2 }).rdu, 30200, "VD officiel : RDU du parent seul avec deux enfants");
+  const r = S.calculer({ canton: "VD", menage: { adultes: 1, jeunesAdultes: 0, enfants: 2 }, rdu: 30200, region: "1", primes: { adulte: 500, jeuneAdulte: 0, enfant: 120 } });
+  assert.ok(r.calcule);
+  if (r.calcule) {
+    assert.equal(r.vd?.specifique, 0);
+    assert.equal(r.lignes.find((l) => l.categorie === "adulte")?.subside, 311, "VD officiel : part de l'adulte, parent seul, RDU 30 200");
+    assert.equal(r.subsideMensuel, 311 + 2 * 118);
+  }
+}
+console.log("subsides : cas officiel vaudois du parent seul OK");
+
+/* Estimateur officiel de l'État de Vaud, version 2026, relevé le 24.11.2026 ; paramètres adultes identiques en 2027.
+   Adulte seul, 1000 Lausanne, prime de 500 CHF, total 25 000 − 2 200 : RDU 22 800, 310 CHF par mois. */
+{
+  const r = S.calculer({ canton: "VD", menage: { adultes: 1, jeunesAdultes: 0, enfants: 0 }, rdu: 22800, region: "1", primes: { adulte: 500, jeuneAdulte: 0, enfant: 0 } });
+  assert.ok(r.calcule);
+  if (r.calcule) { assert.equal(r.subsideMensuel, 310); assert.equal(r.vd?.ordinaire, 286); assert.equal(r.vd?.specifique, 24); }
+}
+console.log("subsides : cas officiel vaudois de l'adulte seul à 22 800 OK");

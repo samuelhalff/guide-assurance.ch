@@ -356,6 +356,11 @@
      du résultat est à côté du formulaire. */
   .outil-subsides .s-ligne { margin-top: var(--s3); display: grid; gap: var(--s2); }
   .outil-subsides .s-ligne p { margin: 0; font-weight: 600; }
+  .outil-subsides .s-taxation { display: grid; gap: var(--s4); }
+  .outil-subsides .s-taxation .champ { min-width: 0; display: grid; gap: var(--s2); }
+  .outil-subsides .s-taxation .note-outil { margin: 0; }
+  .outil-subsides .s-rdu { margin: 0; font-weight: 600; }
+  .subsides-resultat table th[scope="row"] { text-align: left; overflow-wrap: anywhere; }
   /* Tableaux larges : sur téléphone, chaque ligne devient un bloc de lignes « libellé, valeur » (une colonne, deux dès 340 px
      pour les tableaux marqués -2) ; dès 720 px, tableau ordinaire. Tout le texte reste dans le HTML. */
   @media (max-width: 719px) {

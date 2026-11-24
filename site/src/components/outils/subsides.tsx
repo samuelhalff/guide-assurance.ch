@@ -143,6 +143,73 @@ const TXT = {
   },
 } as const;
 
+/* Vaud : saisie à partir de la décision de taxation (RDU reconstitué, voir rduVD dans le moteur). */
+const ESTIMATEUR_VD = "https://prestations.vd.ch/pub/samoa/001489";
+const TXT_VD = {
+  fr: {
+    mode: "Votre revenu déterminant",
+    taxation: "Avec ma décision de taxation",
+    rdu: "Je connais mon RDU",
+    net: "Revenu net (code 650)",
+    netAide: "Dans le tableau « Détail de la taxation cantonale » de votre décision de taxation, à la ligne du code 650. Pour un couple, indiquez le total des deux conjoints.",
+    primes: "Primes d’assurance-maladie déduites (code 300)",
+    primesAide: "Même tableau, ligne du code 300 : c’est la déduction fiscale pour vos primes d’assurance-maladie. Sans ligne 300, saisissez 0.",
+    rare: "J’ai racheté des années de 2e pilier ou versé au 3e pilier",
+    lpp: "Rachats d’années du 2e pilier (code 320)",
+    lppAide: "Seule la part au-delà de 20 000 francs entre dans le calcul.",
+    p3a: "Versements au 3e pilier A (code 310)",
+    p3aAide: "Le montant est retenu en entier.",
+    fortune: (c: boolean) => `Possédez-vous un bien immobilier ou une entreprise, ou une fortune de plus de ${nombre(c ? 120000 : 60000, 0, "fr")} francs (comptes, titres, autres avoirs, sans déduire vos dettes) ?`,
+    non: "Non",
+    oui: "Oui",
+    horsCalcul: "Dans ce cas, l’outil ne peut pas estimer votre RDU : la fortune, les biens immobiliers et la fortune commerciale entrent dans le calcul avec des règles qu’il ne reprend pas. Saisissez le RDU de votre décision de l’OVAM (« Je connais mon RDU ») ou utilisez l’évaluation de l’État de Vaud.",
+    estimateur: "Évaluation de l’État de Vaud",
+    rduLigne: (v: string) => `Votre RDU estimé est de ${v} francs.`,
+    manque: "Saisissez le revenu net et les primes déduites, puis répondez à la question sur la fortune pour voir le subside.",
+    detailRdu: "Voir le calcul du RDU",
+    ligne: "Ligne de la décision",
+    montant: "Francs",
+    l650: "Revenu net (code 650)",
+    l320: "Rachats du 2e pilier au-delà de 20 000 francs (code 320)",
+    l310: "Versements au 3e pilier A (code 310)",
+    l300: "Primes d’assurance-maladie déduites (code 300)",
+    lForfait: (a: number, e: number) => `Moins la déduction forfaitaire pour les primes (${a > 1 ? "2 adultes" : "1 adulte"}${e ? `, ${e} enfant${e > 1 ? "s" : ""}` : ""})`,
+    lRdu: "RDU, avant déduction pour enfants",
+    hyp: "Sans fortune au-delà des franchises ni bien immobilier. L’OVAM retient la décision de taxation définitive la plus récente.",
+  },
+  en: {
+    mode: "Your determining income",
+    taxation: "With my tax assessment",
+    rdu: "I know my RDU",
+    net: "Net income (code 650)",
+    netAide: "In the “Détail de la taxation cantonale” table of your tax assessment, on the line with code 650. For a couple, enter the total of both spouses.",
+    primes: "Health insurance premiums deducted (code 300)",
+    primesAide: "Same table, line with code 300: it is the tax deduction for your health insurance premiums. If there is no line 300, enter 0.",
+    rare: "I bought back second-pillar years or paid into pillar 3",
+    lpp: "Second-pillar buy-ins (code 320)",
+    lppAide: "Only the part above CHF 20,000 counts.",
+    p3a: "Pillar 3a payments (code 310)",
+    p3aAide: "The full amount counts.",
+    fortune: (c: boolean) => `Do you own property or a business, or have wealth above CHF ${nombre(c ? 120000 : 60000, 0, "en")} (accounts, securities, other assets, before deducting debts)?`,
+    non: "No",
+    oui: "Yes",
+    horsCalcul: "In that case the tool cannot estimate your RDU: wealth, property and business wealth enter the calculation under rules it does not cover. Enter the RDU from your OVAM decision (“I know my RDU”) or use the canton of Vaud’s own assessment.",
+    estimateur: "Canton of Vaud assessment",
+    rduLigne: (v: string) => `Your estimated RDU is CHF ${v}.`,
+    manque: "Enter net income and deducted premiums, then answer the wealth question to see the subsidy.",
+    detailRdu: "See how the RDU is worked out",
+    ligne: "Line of the assessment",
+    montant: "CHF",
+    l650: "Net income (code 650)",
+    l320: "Second-pillar buy-ins above CHF 20,000 (code 320)",
+    l310: "Pillar 3a payments (code 310)",
+    l300: "Health insurance premiums deducted (code 300)",
+    lForfait: (a: number, e: number) => `Less the flat deduction for premiums (${a > 1 ? "2 adults" : "1 adult"}${e ? `, ${e} child${e > 1 ? "ren" : ""}` : ""})`,
+    lRdu: "RDU, before the child deduction",
+    hyp: "Assumes no wealth above the allowances and no property. The OVAM uses the most recent final tax assessment.",
+  },
+} as const;
+
 const MAX_ENFANTS: Record<S.Canton, number> = { GE: 4, VD: 6, FR: 6, VS: 0, NE: 3, JU: 6 };
 const JEUNES: Record<S.Canton, boolean> = { GE: true, VD: false, FR: true, VS: false, NE: false, JU: true };
 
@@ -159,6 +226,16 @@ function Compteur({ id, label, valeur, max, onChange }: { id: string; label: str
   );
 }
 
+function Nombre({ id, label, aide, placeholder, value, onChange }: { id: string; label: string; aide: string; placeholder: string; value: string; onChange: (v: string) => void }) {
+  return (
+    <div className="champ">
+      <label htmlFor={id} className="font-semibold">{label}</label>
+      <Input id={id} inputMode="numeric" autoComplete="off" placeholder={placeholder} value={value} onChange={(ev) => onChange(ev.target.value)} aria-describedby={`${id}-aide`} />
+      <p className="note-outil" id={`${id}-aide`}>{aide}</p>
+    </div>
+  );
+}
+
 export function Subsides({ locale }: { locale: Locale }) {
   const t = TXT[locale];
   const [canton, setCanton] = useState<S.Canton>("GE");
@@ -171,6 +248,12 @@ export function Subsides({ locale }: { locale: Locale }) {
   const [pAdulte, setPAdulte] = useState("");
   const [pJeune, setPJeune] = useState("");
   const [pEnfant, setPEnfant] = useState("");
+  const [vdMode, setVdMode] = useState<"taxation" | "rdu">("taxation");
+  const [vNet, setVNet] = useState("");
+  const [vPrimes, setVPrimes] = useState("");
+  const [vLpp, setVLpp] = useState("");
+  const [v3a, setV3a] = useState("");
+  const [vFortune, setVFortune] = useState<"" | "non" | "oui">("");
   const [ctaVisible, setCtaVisible] = useState(true);
   const utilise = useRef(false);
   const f = (x: number, d = 0) => nombre(x, d, locale);
@@ -193,7 +276,15 @@ export function Subsides({ locale }: { locale: Locale }) {
   };
   const primes: S.Primes = { adulte: lu(pAdulte, ofsp.adulte), jeuneAdulte: lu(pJeune, ofsp.jeuneAdulte), enfant: lu(pEnfant, ofsp.enfant) };
   const saisie = [pAdulte, pJeune, pEnfant].some((x) => S.lireRevenu(x));
-  const rdu = S.lireRevenu(revenu);
+  const vdTaxation = canton === "VD" && vdMode === "taxation";
+  const tv = TXT_VD[locale];
+  const vNetN = S.lireRevenu(vNet);
+  const vPrimesN = S.lireRevenu(vPrimes);
+  const detailRdu =
+    vdTaxation && vFortune === "non" && vNetN != null && vPrimesN != null
+      ? S.rduVD({ revenuNet: vNetN, primesDeduites: vPrimesN, rachatsLpp: S.lireRevenu(vLpp) ?? 0, versements3a: S.lireRevenu(v3a) ?? 0, adultes: menage.adultes, enfants: nEnfants })
+      : null;
+  const rdu = vdTaxation ? (detailRdu ? detailRdu.rdu : null) : S.lireRevenu(revenu);
   const avecRegion = canton === "VD" || canton === "FR";
   const r = calculable && rdu != null ? S.calculer({ canton, menage, rdu, region: avecRegion ? region : undefined, activite, primes }) : null;
   const limite = calculable ? S.limiteMaximale(canton, menage) : null;
@@ -219,6 +310,13 @@ export function Subsides({ locale }: { locale: Locale }) {
     els.forEach((e) => io.observe(e));
     return () => io.disconnect();
   }, [ctaPresent]);
+
+  const ligne = r ? (
+    <div className="s-ligne">
+      <p>{!r.calcule ? t.horsPerimetre[r.raison] : r.droit ? t.ligneSubside(f(r.subsideMensuel)) : t.aucun}</p>
+      <a data-slot="button" className={cn(buttonVariants({ variant: "outline" }), "justify-center")} href="#s-resultat">{t.detail}</a>
+    </div>
+  ) : null;
 
   const cantons = S.CANTONS.map((c) => ({ value: c, label: NOMS[c][locale] }));
   const regions = (t.regions[canton] ?? []).map(([value, label]) => ({ value: value as S.Region, label }));
@@ -266,17 +364,62 @@ export function Subsides({ locale }: { locale: Locale }) {
                       <Interrupteur checked={activite} onChange={(v) => { setActivite(v); toucher(); }} labelledBy="s-activite-l" />
                     </fieldset>
                   ) : null}
+                  {vd ? (
+                    <fieldset>
+                      <legend>{tv.mode}</legend>
+                      <ToggleGroup
+                        variant="outline"
+                        size="champ"
+                        spacing={0}
+                        className="w-full"
+                        aria-label={tv.mode}
+                        value={[vdMode]}
+                        onValueChange={(v) => { if (v[0]) { setVdMode(v[0] as "taxation" | "rdu"); toucher(); } }}
+                      >
+                        <ToggleGroupItem value="taxation" className="h-auto min-h-12 flex-1 self-stretch whitespace-normal px-2 py-2 text-center">{tv.taxation}</ToggleGroupItem>
+                        <ToggleGroupItem value="rdu" className="h-auto min-h-12 flex-1 self-stretch whitespace-normal px-2 py-2 text-center">{tv.rdu}</ToggleGroupItem>
+                      </ToggleGroup>
+                    </fieldset>
+                  ) : null}
+                  {vdTaxation ? (
+                    <fieldset className="dernier s-taxation">
+                      <Nombre id="s-v-net" label={tv.net} aide={tv.netAide} placeholder="60 000" value={vNet} onChange={(x) => { setVNet(x); toucher(); }} />
+                      <Nombre id="s-v-primes" label={tv.primes} aide={tv.primesAide} placeholder="3 000" value={vPrimes} onChange={(x) => { setVPrimes(x); toucher(); }} />
+                      <Depliable className="affiner" titre={tv.rare}>
+                        <Nombre id="s-v-lpp" label={tv.lpp} aide={tv.lppAide} placeholder="0" value={vLpp} onChange={(x) => { setVLpp(x); toucher(); }} />
+                        <Nombre id="s-v-3a" label={tv.p3a} aide={tv.p3aAide} placeholder="0" value={v3a} onChange={(x) => { setV3a(x); toucher(); }} />
+                      </Depliable>
+                      <div className="champ">
+                        <span id="s-v-fortune-l" className="font-semibold">{tv.fortune(couple === "couple")}</span>
+                        <ToggleGroup
+                          variant="outline"
+                          size="champ"
+                          spacing={0}
+                          className="mt-1 w-full"
+                          aria-labelledby="s-v-fortune-l"
+                          value={vFortune ? [vFortune] : []}
+                          onValueChange={(v) => { setVFortune((v[0] ?? "") as "" | "non" | "oui"); toucher(); }}
+                        >
+                          <ToggleGroupItem value="non" className="flex-1">{tv.non}</ToggleGroupItem>
+                          <ToggleGroupItem value="oui" className="flex-1">{tv.oui}</ToggleGroupItem>
+                        </ToggleGroup>
+                      </div>
+                      {vFortune === "oui" ? (
+                        <p className="note-outil" role="status">
+                          {tv.horsCalcul} <a className="lien-tap" href={ESTIMATEUR_VD} rel="noopener">{tv.estimateur}</a>
+                        </p>
+                      ) : null}
+                      {detailRdu ? <p className="s-rdu" aria-live="polite">{tv.rduLigne(f(detailRdu.rdu))}</p> : null}
+                      {ligne}
+                    </fieldset>
+                  ) : (
                   <fieldset className="dernier">
                     <legend><label htmlFor="s-revenu">{REVENU[canton].nom[locale]}</label></legend>
                     <Input id="s-revenu" inputMode="numeric" autoComplete="off" placeholder="45 000" value={revenu} onChange={(ev) => { setRevenu(ev.target.value); toucher(); }} aria-describedby="s-revenu-aide" />
                     <p className="note-outil" id="s-revenu-aide">{t.revenuNote} {REVENU[canton].aide[locale]}</p>
-                    {r ? (
-                      <div className="s-ligne">
-                        <p>{!r.calcule ? t.horsPerimetre[r.raison] : r.droit ? t.ligneSubside(f(r.subsideMensuel)) : t.aucun}</p>
-                        <a data-slot="button" className={cn(buttonVariants({ variant: "outline" }), "justify-center")} href="#s-resultat">{t.detail}</a>
-                      </div>
-                    ) : null}
+                    {ligne}
                   </fieldset>
+                  )}
                   <Depliable className="affiner" titre={t.primes}>
                     <p className="note-outil">{t.primesTexte}</p>
                     <div className="categories">
@@ -313,7 +456,7 @@ export function Subsides({ locale }: { locale: Locale }) {
               <h2>{t.resultat} {t.lieu[canton]}</h2>
               <div aria-live="polite">
                 {!r ? (
-                  <p className="base">{t.attente}</p>
+                  <p className="base">{vdTaxation ? tv.manque : t.attente}</p>
                 ) : !r.calcule ? (
                   <p className="base">{t.horsPerimetre[r.raison]}</p>
                 ) : r.droit ? (
@@ -354,6 +497,28 @@ export function Subsides({ locale }: { locale: Locale }) {
                   {r.droit && r.groupe ? <p className="base">{t.groupe(r.groupe)}</p> : null}
                   {r.droit && r.vd && r.vd.specifique > 0 ? <p className="base">{t.vd(f(r.vd.ordinaire), f(r.vd.specifique))}</p> : null}
                   <p className="base">{t.base(saisie ? t.baseSaisie : t.baseOfsp)}</p>
+                  {detailRdu ? (
+                    <Depliable className="affiner" titre={tv.detailRdu}>
+                      <Table variant="chiffres">
+                        <TableCaption className="visually-hidden">{tv.detailRdu}</TableCaption>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead scope="col">{tv.ligne}</TableHead>
+                            <TableHead scope="col" className="text-right">{tv.montant}</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          <TableRow><TableHead scope="row">{tv.l650}</TableHead><TableCell className="text-right">{f(detailRdu.revenuNet)}</TableCell></TableRow>
+                          <TableRow><TableHead scope="row">{tv.l320}</TableHead><TableCell className="text-right">{f(detailRdu.rachatsRetenus)}</TableCell></TableRow>
+                          <TableRow><TableHead scope="row">{tv.l310}</TableHead><TableCell className="text-right">{f(detailRdu.versements3a)}</TableCell></TableRow>
+                          <TableRow><TableHead scope="row">{tv.l300}</TableHead><TableCell className="text-right">{f(detailRdu.primesDeduites)}</TableCell></TableRow>
+                          <TableRow><TableHead scope="row">{tv.lForfait(menage.adultes, nEnfants)}</TableHead><TableCell className="text-right">{f(-detailRdu.deductionForfaitaire)}</TableCell></TableRow>
+                          <TableRow><TableHead scope="row">{tv.lRdu}</TableHead><TableCell className="text-right">{f(detailRdu.rdu)}</TableCell></TableRow>
+                        </TableBody>
+                      </Table>
+                      <p className="base">{tv.hyp}</p>
+                    </Depliable>
+                  ) : null}
                   {vd ? <p className="base">{TRANSPARENCE_VD[locale]}</p> : null}
                 </>
               ) : null}

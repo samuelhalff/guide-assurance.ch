@@ -280,15 +280,15 @@ function vd(e: Entree): Resultat {
   const retTotal = retA * m.adultes + retE * m.enfants;
   let spec = Math.max(0, retTotal - ordTotal - (T.taux_effort * rdu) / 12);
   if (spec > 0 && spec < T.subside_specifique_minimum) spec = ordTotal === 0 ? T.subside_specifique_minimum : Math.max(spec, 1);
-  spec = Math.min(spec, retTotal - ordTotal);
+  // Le subside spécifique s'arrondit une seule fois, au franc supérieur, sur le total du ménage : l'estimateur officiel
+  // de l'État de Vaud (version 2026, relevé le 24.11.2026) donne 799 CHF pour un couple avec deux enfants là où un
+  // arrondi par personne donnait 800. Les parts par personne ne sont donc pas arrondies.
+  spec = Math.min(arrondiFranc(spec), retTotal - ordTotal);
   // Répartition : les enfants d'abord, puis les adultes, à parts égales dans la limite de la prime retenue de chacun.
   const placeE = retE - ordEc;
   const placeA = retA - ordAc;
-  const partE = m.enfants > 0 ? Math.min(spec / m.enfants, placeE) : 0;
-  const reste = spec - partE * m.enfants;
-  const partA = Math.min(reste / m.adultes, placeA);
-  const specE = m.enfants > 0 ? Math.min(arrondiFranc(partE), placeE) : 0;
-  const specA = Math.min(arrondiFranc(partA), placeA);
+  const specE = m.enfants > 0 ? Math.min(spec / m.enfants, placeE) : 0;
+  const specA = Math.min((spec - specE * m.enfants) / m.adultes, placeA);
   const sub: Record<Categorie, number> = { adulte: ordAc + specA, jeuneAdulte: 0, enfant: ordEc + specE };
   const ls = lignes(e, sub);
   return total(e, ls, {
@@ -346,4 +346,50 @@ export function limiteMaximale(canton: Canton, menage: Menage): number | null {
     case "VS":
       return null;
   }
+}
+
+/* ------------------------------------------------------------ Vaud : RDU reconstitué depuis la décision de taxation
+   Base légale : art. 6 LHPS (BLV 850.03) et art. 4 RLHPS (BLV 850.03.1). Montants 2027 : notice explicative 2027 de l'OVAM,
+   point 1, liste ① à ⑥ (revenu net code 650, rachats 2e pilier code 320 après franchise de 20 000, 3e pilier A code 310,
+   primes d'assurance-maladie déduites code 300, déduction forfaitaire pour les primes : 2 200 pour un adulte, 4 400 pour deux
+   adultes, 1 300 par enfant). Hors calcul, faute de règle sans interprétation : fortune (majoration d'un quinzième au-delà
+   de 60 000 / 120 000), frais d'entretien d'immeuble au-delà du forfait (code 540), fortune immobilière et commerciale. */
+export const RDU_VD = {
+  franchiseRachats: 20000,
+  forfaitPrimes: { adulte: 2200, couple: 4400, enfant: 1300 },
+  franchiseFortune: { seul: 60000, couple: 120000 },
+} as const;
+
+export type EntreeRduVD = {
+  revenuNet: number; // code 650
+  primesDeduites: number; // code 300
+  rachatsLpp?: number; // code 320
+  versements3a?: number; // code 310
+  adultes: 1 | 2;
+  enfants: number; // mineurs et majeurs dépendants du ménage
+};
+export type DetailRduVD = {
+  revenuNet: number;
+  rachatsRetenus: number;
+  versements3a: number;
+  primesDeduites: number;
+  deductionForfaitaire: number;
+  rdu: number;
+};
+
+/* RDU (lettre A de la notice) pour un ménage sans fortune au-delà des franchises, sans bien immobilier ni fortune commerciale. */
+export function rduVD(e: EntreeRduVD): DetailRduVD {
+  const pos = (x: number | undefined) => Math.max(0, x ?? 0);
+  const rachatsRetenus = Math.max(0, pos(e.rachatsLpp) - RDU_VD.franchiseRachats);
+  const f = RDU_VD.forfaitPrimes;
+  const deductionForfaitaire = (e.adultes === 2 ? f.couple : f.adulte) + f.enfant * Math.max(0, e.enfants);
+  const total = e.revenuNet + rachatsRetenus + pos(e.versements3a) + pos(e.primesDeduites) - deductionForfaitaire;
+  return {
+    revenuNet: e.revenuNet,
+    rachatsRetenus,
+    versements3a: pos(e.versements3a),
+    primesDeduites: pos(e.primesDeduites),
+    deductionForfaitaire,
+    rdu: Math.max(0, total),
+  };
 }
