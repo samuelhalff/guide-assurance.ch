@@ -6,7 +6,7 @@ import { JsonLd } from "@/components/site/json-ld";
 import { BandeConfiance } from "@/components/site/bande-confiance";
 import { PartagerOutil } from "@/components/site/partager-outil";
 import { ComparateurPrimes } from "@/components/outils/comparateur-primes";
-import { TableauReperes } from "@/components/outils/reperes-primes";
+import { TableauReperes, reperesListeLd } from "@/components/outils/reperes-primes";
 import { pageMetadata } from "@/lib/metadata";
 import { ORG_ID, WEBSITE_ID, breadcrumbLd, datasetPrimesLd, faqLd, graph, type Miette } from "@/lib/jsonld";
 import { abs } from "@/lib/site";
@@ -87,6 +87,7 @@ const LD = graph(
   breadcrumbLd(MIETTES, `${URL_}#breadcrumb`),
   { ...faqLd(FAQ), "@id": `${URL_}#faq` },
   datasetPrimesLd("en", `${URL_}#donnees`, DATE_PRIMES),
+  reperesListeLd("en", `${URL_}#liste`),
 );
 
 export default function Page() {

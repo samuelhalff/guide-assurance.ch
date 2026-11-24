@@ -30,6 +30,29 @@ export function faqLd(faq: { q: string; a: string }[]) {
   };
 }
 
+/* Liste ordonnée telle qu'elle apparaît dans un tableau statique de la page. Chaque ligne est un produit financier nommé ;
+   le montant (prime ou taux) est dans `description`, jamais une offre ni un prix que le visiteur pourrait acheter ici. */
+export type LigneListe = { name: string; description: string; interestRate?: number };
+export function itemListLd(opts: { id: string; name: string; order: "Ascending" | "Descending" | "Unordered"; items: LigneListe[] }) {
+  return {
+    "@type": "ItemList",
+    "@id": opts.id,
+    name: opts.name,
+    itemListOrder: `https://schema.org/ItemList${opts.order}`,
+    numberOfItems: opts.items.length,
+    itemListElement: opts.items.map((x, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "FinancialProduct",
+        name: x.name,
+        description: x.description,
+        ...(x.interestRate !== undefined ? { interestRate: x.interestRate } : {}),
+      },
+    })),
+  };
+}
+
 export function graph(...nodes: object[]) {
   return { "@context": "https://schema.org", "@graph": nodes };
 }

@@ -10,13 +10,15 @@ import { BarreOffres, CtaOffres } from "@/components/outils/cta-offres";
 import { Choix } from "@/components/outils/choix";
 import { buttonVariants } from "@/components/ui/button";
 import { Case } from "@/components/controles";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 /* Primes LAMal 2027 des assurés qui résident dans l'UE, l'AELE ou au Royaume-Uni : pays, classe d'âge, accident, mois ou an.
    Le calcul se fait dans le navigateur ; rien de ce qui est choisi n'est envoyé ni mis dans l'adresse.
-   Cadre : des faits triés selon le critère du visiteur, aucun classement, aucune mise en avant. */
+   Cadre : des faits triés selon le critère du visiteur. Triée par prime croissante, la liste est numérotée et le badge
+   « Prime la plus basse » va à tout assureur dont la prime est la plus basse (égalités comprises). */
 
 const TXT = {
   fr: {
@@ -32,6 +34,7 @@ const TXT = {
     mois: "Mois",
     an: "An",
     trier: "Trier",
+    plusBasse: "Prime la plus basse",
     tris: { prix: "Prime croissante", prixDesc: "Prime décroissante", nom: "Assureur de A à Z" } as Record<Tri, string>,
     ordre: { prix: "Les assureurs sont triés de la prime la plus basse à la plus haute.", prixDesc: "Les assureurs sont triés de la prime la plus haute à la plus basse.", nom: "Les assureurs sont triés par ordre alphabétique." } as Record<Tri, string>,
     resumeDe: (n: number, pays: string, classe: string, acc: boolean, min: string, max: string, u: string) =>
@@ -66,6 +69,7 @@ const TXT = {
     mois: "Month",
     an: "Year",
     trier: "Sort",
+    plusBasse: "Lowest premium",
     tris: { prix: "Premium ascending", prixDesc: "Premium descending", nom: "Insurer A to Z" } as Record<Tri, string>,
     ordre: { prix: "Insurers are sorted from the lowest premium to the highest.", prixDesc: "Insurers are sorted from the highest premium to the lowest.", nom: "Insurers are sorted alphabetically." } as Record<Tri, string>,
     resumeDe: (n: number, pays: string, classe: string, acc: boolean, min: string, max: string, u: string) =>
@@ -148,12 +152,22 @@ export function PrimesUe({ locale = "fr" }: { locale?: Locale }) {
     return e === 0 ? null : t.ecartLigne(mc(e), unite);
   };
 
-  const carte = (o: OffreUe) => (
+  const numerote = tri === "prix";
+  const plusBasse = (o: OffreUe) => numerote && s !== null && o.mensuel === s.min;
+  const badge = (o: OffreUe) => (plusBasse(o) ? <Badge variant="outline" className="badge-rang h-auto text-base">{t.plusBasse}</Badge> : null);
+
+  const carte = (o: OffreUe, i: number) => (
     <li key={o.no}>
       <Card size="sm">
         <CardContent className="grid gap-1">
           <div className="flex items-baseline justify-between gap-3">
-            <b className="text-base">{o.nom}</b>
+            <div className="flex min-w-0 items-baseline gap-2">
+              {numerote ? <span className="rang">{i + 1}</span> : null}
+              <div className="grid min-w-0 justify-items-start gap-1">
+                {badge(o)}
+                <b className="text-base">{o.nom}</b>
+              </div>
+            </div>
             <span className="text-right text-lg font-semibold tabular-nums">
               {mc(prix(o.mensuel))}
             </span>
@@ -242,11 +256,13 @@ export function PrimesUe({ locale = "fr" }: { locale?: Locale }) {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {triees.map((o) => {
+                    {triees.map((o, i) => {
                       const e = prix(ecartMin(liste, o));
                       return (
                         <TableRow key={o.no}>
-                          <TableCell>
+                          <TableCell className={numerote ? "rang-cellule relative pl-9" : undefined}>
+                            {numerote ? <span className="rang">{i + 1}</span> : null}
+                            {badge(o)}
                             {o.nom}
                             {o.troisiemeEnfant !== null ? <small className="block text-muted-foreground">{t.troisieme(mc(o.troisiemeEnfant))}</small> : null}
                           </TableCell>

@@ -10,6 +10,11 @@
   .lp-carte { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px var(--s3); align-items: start; }
   .lp-carte .qui b { display: block; font-weight: 700; font-size: 17px; }
   .lp-carte .produit, .lp-table .produit { display: block; font: 16px var(--narrow); color: var(--encre-2); overflow-wrap: anywhere; }
+  .lp-carte.numerote { grid-template-columns: 24px minmax(0, 1fr) auto; }
+  .lp-carte.numerote .interet, .lp-carte.numerote .cond, .lp-carte.numerote .releve, .lp-carte.numerote .source-lp { grid-column: 2 / -1; }
+  .lp-carte .rang { font: 600 16px var(--narrow); color: var(--encre-2); padding-top: 1px; font-variant-numeric: tabular-nums; }
+  .lp-carte .badge-rang, .lp-table .badge-rang { margin: 0 0 var(--s1); }
+  table.lp-table .rang-col { width: 4em; text-align: right; font: 600 16px var(--narrow); color: var(--encre-2); font-variant-numeric: tabular-nums; }
   .lp-carte .combien { text-align: right; }
   .lp-carte .montant { display: block; font: 800 22px/1.1 var(--sans); letter-spacing: -.01em; font-variant-numeric: tabular-nums; white-space: nowrap; }
   .lp-carte .unite { display: block; font: 16px var(--narrow); color: var(--encre-2); }

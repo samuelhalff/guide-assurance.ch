@@ -8,6 +8,7 @@ import { COMPTES_LP, RELEVE_LE, dateCh, interetAnnuel, lireSolde, tauxEn, tauxFr
 import { IconeTelephone, LienRappel } from "@/components/demande/lien-rappel";
 import { BarreDemande } from "@/components/demande/barre-demande";
 import { buttonVariants } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -15,12 +16,15 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 /* Liste des taux des comptes de libre passage. Le HTML statique contient déjà toute la liste, triée par taux puis par
    nom ; le visiteur peut trier par nom et saisir un avoir pour voir l'intérêt d'une année. Mobile : une carte par
-   institution ; ordinateur : tableau. Ni rang, ni ligne mise en avant, ni badge. */
+   institution ; ordinateur : tableau. Triée par taux, la liste est numérotée et le badge « Taux le plus élevé » va à toute
+   institution qui partage le taux maximal (égalités comprises). Triée par nom : ni numéro, ni badge. */
 const TXT = {
   fr: {
     tri: "Tri de la liste",
     triTaux: "Par taux",
     triNom: "Par nom",
+    haut: "Taux le plus élevé",
+    thRang: "Rang",
     ordreTaux: "Trié du taux le plus élevé au plus bas, puis par nom d’institution.",
     ordreNom: "Trié par nom d’institution, de A à Z.",
     soldeLabel: "Votre avoir de libre passage, en CHF (facultatif)",
@@ -50,6 +54,8 @@ const TXT = {
     tri: "List order",
     triTaux: "By rate",
     triNom: "By name",
+    haut: "Highest rate",
+    thRang: "Rank",
     ordreTaux: "Sorted from the highest rate to the lowest, then by institution name.",
     ordreNom: "Sorted by institution name, A to Z.",
     soldeLabel: "Your vested benefits balance, in CHF (optional)",
@@ -109,6 +115,9 @@ export function TauxLibrePassage({ locale = "fr" }: { locale?: Locale }) {
   };
 
   const liste = trier(COMPTES_LP, tri);
+  const numerote = tri === "taux";
+  const tauxMax = Math.max(...COMPTES_LP.map((c) => c.taux));
+  const plusHaut = (c: CompteLp) => numerote && c.taux === tauxMax;
   const solde = lireSolde(soldeTexte);
   const avecSolde = Number.isFinite(solde) && solde > 0;
   const interet = (c: CompteLp) => chf(interetAnnuel(solde, c.taux), locale, 2);
@@ -165,10 +174,12 @@ export function TauxLibrePassage({ locale = "fr" }: { locale?: Locale }) {
       {avecSolde ? <p className="note-outil ordre">{t.illustration(chf(solde, locale, 0))}</p> : null}
 
       <ul className="cartes-taux lp-cartes">
-        {liste.map((c) => (
+        {liste.map((c, i) => (
           <li key={c.id}>
-            <Card size="sm"><CardContent className="lp-carte">
+            <Card size="sm"><CardContent className={numerote ? "lp-carte numerote" : "lp-carte"}>
+              {numerote ? <span className="rang">{i + 1}</span> : null}
               <div className="qui">
+                {plusHaut(c) ? <Badge variant="outline" className="badge-rang h-auto text-base">{t.haut}</Badge> : null}
                 <b>{c.banque}</b>
                 {c.fondation ? <span className="produit">{c.fondation}</span> : null}
               </div>
@@ -192,6 +203,7 @@ export function TauxLibrePassage({ locale = "fr" }: { locale?: Locale }) {
         <TableCaption>{t.caption(dateCh(RELEVE_LE))}</TableCaption>
         <TableHeader>
           <TableRow>
+            {numerote ? <TableHead scope="col" className="text-right rang-col">{t.thRang}</TableHead> : null}
             <TableHead scope="col">{t.thInstitution}</TableHead>
             <TableHead scope="col" className="text-right">{t.thTaux}</TableHead>
             {avecSolde ? <TableHead scope="col" className="text-right interet">{t.thInteret}</TableHead> : null}
@@ -199,9 +211,11 @@ export function TauxLibrePassage({ locale = "fr" }: { locale?: Locale }) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {liste.map((c) => (
+          {liste.map((c, i) => (
             <TableRow key={c.id}>
+              {numerote ? <TableCell className="rang-col align-top">{i + 1}</TableCell> : null}
               <TableCell className="align-top">
+                {plusHaut(c) ? <Badge variant="outline" className="badge-rang h-auto text-base">{t.haut}</Badge> : null}
                 <b>{c.banque}</b>
                 {c.fondation ? <span className="produit">{c.fondation}</span> : null}
                 {note(c) ? <span className="produit">{note(c)}</span> : null}

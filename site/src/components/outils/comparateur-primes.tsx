@@ -64,11 +64,12 @@ const TXT = {
     voirN: (n: number) => (n > 1 ? `Voir les ${n} offres` : "Voir l’offre"),
     enDirect: "Les primes se mettent à jour à chaque changement.",
     caisseTitre: (a: string, p: string) => `Vous êtes chez ${a}, avec le modèle ${p}`,
-    caisseRang: (m: string, an: string, k: number) =>
-      `Vous payez ${m} par mois, soit ${an} par an.${k === 0 ? "" : k === 1 ? " Une offre de la liste a une prime plus basse." : ` ${k} offres de la liste ont une prime plus basse.`}`,
+    caisseRang: (m: string, an: string, rang: number, n: number) => {
+      const k = rang - 1;
+      return `Votre offre actuelle est au rang ${rang} sur ${n} par la prime. Vous payez ${m} par mois, soit ${an} par an${k === 0 ? ", et aucune offre de la liste n’a une prime plus basse." : k === 1 ? ", et une offre de la liste a une prime plus basse." : `, et ${k} offres de la liste ont une prime plus basse.`}`;
+    },
     caisseHors: (m: string, an: string) => `Vous payez ${m} par mois, soit ${an} par an. Ce modèle n’est pas dans la liste filtrée.`,
     caisseGain: (x: string) => ` La prime la plus basse de la liste représente ${x} de moins par an.`,
-    caisseMeilleure: " Aucune offre de la liste n’a une prime plus basse.",
     ecartCaisse: "Afficher l’écart avec ma caisse actuelle",
     resumeFoyer: (n: number, lieu: string, nb: number) => `${n} offre${n > 1 ? "s" : ""} pour ${nb} personnes à ${lieu}, total du foyer.`,
     foyerNote: "Le total du foyer suppose que chaque personne est assurée chez le même assureur, dans le même modèle.",
@@ -139,6 +140,7 @@ const TXT = {
     vsMoyenne: "par rapport à la moyenne",
     vsActuelle: "par rapport à votre caisse",
     votreCaisse: "Votre caisse actuelle",
+    plusBasse: "Prime la plus basse",
     faceCaisse: "face à votre caisse",
     facePremiere: "face à la 1re offre",
     faceMoyenne: "face à la moyenne",
@@ -191,11 +193,12 @@ const TXT = {
     voirN: (n: number) => (n > 1 ? `See the ${n} offers` : "See the offer"),
     enDirect: "Premiums update as soon as you change an answer.",
     caisseTitre: (a: string, p: string) => `You are with ${a}, on the ${p} model`,
-    caisseRang: (m: string, an: string, k: number) =>
-      `You pay ${m} a month, or ${an} a year.${k === 0 ? "" : k === 1 ? " One offer in the list has a lower premium." : ` ${k} offers in the list have a lower premium.`}`,
+    caisseRang: (m: string, an: string, rang: number, n: number) => {
+      const k = rang - 1;
+      return `Your current offer ranks ${rang} out of ${n} by premium. You pay ${m} a month, or ${an} a year${k === 0 ? ", and no offer in the list has a lower premium." : k === 1 ? ", and one offer in the list has a lower premium." : `, and ${k} offers in the list have a lower premium.`}`;
+    },
     caisseHors: (m: string, an: string) => `You pay ${m} a month, or ${an} a year. This model is not in the filtered list.`,
     caisseGain: (x: string) => ` The lowest premium in the list is ${x} less a year.`,
-    caisseMeilleure: " No offer in the list has a lower premium.",
     ecartCaisse: "Show the difference with my current insurer",
     resumeFoyer: (n: number, lieu: string, nb: number) => `${n} offer${n > 1 ? "s" : ""} for ${nb} people in ${lieu}, household total.`,
     foyerNote: "The household total assumes that each person is insured with the same insurer, in the same model.",
@@ -266,6 +269,7 @@ const TXT = {
     vsMoyenne: "compared with the average",
     vsActuelle: "compared with your insurer",
     votreCaisse: "Your current insurer",
+    plusBasse: "Lowest premium",
     faceCaisse: "against your insurer",
     facePremiere: "against the 1st offer",
     faceMoyenne: "against the average",
@@ -534,6 +538,9 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
     : [];
   const visibles = triees.slice(0, nb);
   const rangPrix = new Map(r ? r.offres.map((o, i) => [o, i]) : []);
+  /* Badge « Prime la plus basse » : seulement sous le tri par prime croissante, pour toute offre à la prime minimale (égalités comprises). */
+  const minAnnuel = r && r.offres.length ? r.offres[0].annuel : null;
+  const plusBasse = (o: P.OffreFoyer) => tri === "prix" && minAnnuel !== null && o.annuel === minAnnuel;
   const redis = r ? r.redistribution : 0;
   const lienRappel = (cls?: string, texte?: string) => (
     <a className={cls} href={RAPPEL[locale]} onClick={versRappel}>
@@ -551,10 +558,11 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
         <CardContent className="carte-prime">
           <span className="rang">{ip + 1}</span>
           <div className="offre-qui">
-            {estAct ? <Badge variant="secondary">{t.votreCaisse}</Badge> : null}
+            {estAct ? <Badge variant="secondary" className="h-auto text-base">{t.votreCaisse}</Badge> : null}
+            {plusBasse(o) ? <Badge variant="outline" className="badge-rang h-auto text-base">{t.plusBasse}</Badge> : null}
             <b>{o.assureur}</b>
             <span className="produit">{o.produit}</span>
-            <Badge variant="outline" className="type-badge">{t.typesCourts[o.type]}</Badge>
+            <Badge variant="outline" className="type-badge h-auto text-base">{t.typesCourts[o.type]}</Badge>
           </div>
           <div className="combien">
             <span className="montant">{nf(prix(o.mensuel), parAn ? 0 : 2)}</span>
@@ -619,7 +627,8 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
             <TableRow key={`${o.assureur}|${o.produit}`} data-state={estAct ? "selected" : undefined}>
               <TableCell className="pl-9 align-top">
                 <span className="rang">{i + 1}</span>
-                {estAct ? <Badge variant="secondary">{t.votreCaisse}</Badge> : null}
+                {estAct ? <Badge variant="secondary" className="h-auto text-base">{t.votreCaisse}</Badge> : null}
+                {plusBasse(o) ? <Badge variant="outline" className="badge-rang h-auto whitespace-normal rounded-lg text-left text-base">{t.plusBasse}</Badge> : null}
                 <b>{o.assureur}</b>
                 <span className="produit">{o.produit}</span>
                 <span className="type">{t.typesCourts[o.type]}</span>
@@ -823,15 +832,16 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
               </div>
             ) : null}
             {actuelle && r && r.total ? (() => {
-              const rang = r.offres.findIndex((o) => o.assureur === actuelle.assureur && o.produit === actuelle.produit);
-              const moinsChere = r.offres[0];
-              const gain = actuelle.annuel - moinsChere.annuel;
+              const dansListe = r.offres.some((o) => o.assureur === actuelle.assureur && o.produit === actuelle.produit);
+              /* Rang par la prime, quel que soit le tri choisi : 1 + nombre d'offres à prime strictement plus basse. */
+              const rang = 1 + r.offres.filter((o) => o.annuel < actuelle.annuel).length;
+              const gain = actuelle.annuel - r.offres[0].annuel;
               return (
                 <Alert variant="info" className="synthese-caisse">
                   <AlertTitle>{t.caisseTitre(actuelle.assureur, actuelle.produit)}</AlertTitle>
                   <AlertDescription>
-                    {rang >= 0 ? t.caisseRang(chf(actuelle.mensuel, 2), chf(actuelle.annuel), rang) : t.caisseHors(chf(actuelle.mensuel, 2), chf(actuelle.annuel))}
-                    {Math.round(gain) > 0 ? t.caisseGain(chf(gain)) : rang === 0 ? t.caisseMeilleure : null}
+                    {dansListe ? t.caisseRang(chf(actuelle.mensuel, 2), chf(actuelle.annuel), rang, r.offres.length) : t.caisseHors(chf(actuelle.mensuel, 2), chf(actuelle.annuel))}
+                    {Math.round(gain) > 0 ? t.caisseGain(chf(gain)) : null}
                   </AlertDescription>
                 </Alert>
               );

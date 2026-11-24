@@ -6,9 +6,9 @@ import { PartagerOutil } from "@/components/site/partager-outil";
 import { BarreRappelLp, TauxLibrePassage } from "@/components/outils/taux-libre-passage";
 import { IconeTelephone, LienRappel } from "@/components/demande/lien-rappel";
 import { buttonVariants } from "@/components/ui/button";
-import { COMPTES_LP, NB_INSTITUTIONS, RELEVE_LE, TAUX_MAX, TAUX_MEDIAN, TAUX_MIN, dateCh, tauxEn, tauxFr } from "@/lib/tauxlp";
+import { COMPTES_LP, NB_INSTITUTIONS, RELEVE_LE, TAUX_MAX, TAUX_MEDIAN, TAUX_MIN, dateCh, tauxEn, tauxFr, trier } from "@/lib/tauxlp";
 import { pageMetadata } from "@/lib/metadata";
-import { ORG_ID, WEBSITE_ID, breadcrumbLd, faqLd, graph, type Miette } from "@/lib/jsonld";
+import { ORG_ID, WEBSITE_ID, breadcrumbLd, faqLd, graph, itemListLd, type Miette } from "@/lib/jsonld";
 import { abs } from "@/lib/site";
 import { DATE_PAGE } from "@/lib/donnees";
 import { dateLongue } from "@/lib/i18n";
@@ -22,6 +22,8 @@ export const PATH_LP = { fr: "/libre-passage/taux/", en: "/en/vested-benefits/in
 
 const RELEVE = dateCh(RELEVE_LE);
 const NB = NB_INSTITUTIONS;
+const PLUS_HAUT = COMPTES_LP.filter((c) => c.taux === TAUX_MAX).map((c) => c.banque);
+const noms = (et: string) => PLUS_HAUT.join(` ${et} `);
 const ECART_100K = (100000 * (TAUX_MAX - TAUX_MIN)) / 100;
 const FEDLEX_LFLP = "https://www.fedlex.admin.ch/eli/cc/1994/2386_2386_2386/fr";
 const FEDLEX_OLP = "https://www.fedlex.admin.ch/eli/cc/1994/2399_2399_2399/fr";
@@ -45,7 +47,7 @@ const LP = {
     miettes: [{ name: "Accueil", href: "/" }, { name: "Prévoyance", href: "/3e-pilier/" }, { name: "Taux des comptes de libre passage" }] as Miette[],
     appli: "Taux des comptes de libre passage",
     partage: `Les taux des comptes de libre passage de ${NB} institutions suisses, relevés sur leurs pages.`,
-    chiffres: `Au ${RELEVE}, le taux le plus élevé relevé est de ${tauxFr(TAUX_MAX)} et le plus bas de ${tauxFr(TAUX_MIN)}, pour une médiane de ${tauxFr(TAUX_MEDIAN)} sur ${NB} institutions. Sur 100${N}000${N}CHF, l’écart entre ces deux taux représente ${chf(ECART_100K, "fr", 0)} d’intérêts par an.`,
+    chiffres: `Au ${RELEVE}, le taux le plus élevé relevé est de ${tauxFr(TAUX_MAX)} et le plus bas de ${tauxFr(TAUX_MIN)}, pour une médiane de ${tauxFr(TAUX_MEDIAN)} sur ${NB} institutions. Sur 100${N}000${N}CHF, l’écart entre ces deux taux représente ${chf(ECART_100K, "fr", 0)} d’intérêts par an. Le taux le plus élevé est proposé par ${noms("et")}.`,
     sections: [
       {
         id: "definition",
@@ -150,7 +152,7 @@ const LP = {
     miettes: [{ name: "Home", href: "/en/" }, { name: "Pensions", href: "/en/pillar-3a/" }, { name: "Vested benefits account rates" }] as Miette[],
     appli: "Vested benefits account rates",
     partage: `Interest rates on vested benefits accounts at ${NB} Swiss institutions, read on their own pages.`,
-    chiffres: `On ${RELEVE}, the highest rate read is ${tauxEn(TAUX_MAX)} and the lowest ${tauxEn(TAUX_MIN)}, with a median of ${tauxEn(TAUX_MEDIAN)} across ${NB} institutions. On CHF 100,000, the gap between those two rates is ${chf(ECART_100K, "en", 0)} of interest a year.`,
+    chiffres: `On ${RELEVE}, the highest rate read is ${tauxEn(TAUX_MAX)} and the lowest ${tauxEn(TAUX_MIN)}, with a median of ${tauxEn(TAUX_MEDIAN)} across ${NB} institutions. On CHF 100,000, the gap between those two rates is ${chf(ECART_100K, "en", 0)} of interest a year. The highest rate is offered by ${noms("and")}.`,
     sections: [
       {
         id: "definition",
@@ -294,6 +296,18 @@ export function PageLibrePassage({ locale }: { locale: Locale }) {
       creator: { "@id": ORG_ID },
       variableMeasured: fr ? ["Taux d’intérêt annuel du compte de libre passage (%)"] : ["Annual interest rate of the vested benefits account (%)"],
     },
+    itemListLd({
+      id: `${url}#liste`,
+      name: fr ? "Taux des comptes de libre passage, du plus élevé au plus bas" : "Vested benefits account rates, from the highest to the lowest",
+      order: "Descending",
+      items: trier(COMPTES_LP, "taux").map((c) => ({
+        name: c.banque,
+        interestRate: c.taux,
+        description: fr
+          ? `Taux de ${tauxFr(c.taux)} par an sur le compte de libre passage, relevé le ${dateCh(c.lu_le)}.`
+          : `Rate of ${tauxEn(c.taux)} a year on the vested benefits account, read on ${dateCh(c.lu_le)}.`,
+      })),
+    }),
     breadcrumbLd(t.miettes, `${url}#breadcrumb`),
     { ...faqLd(t.faq), "@id": `${url}#faq` },
   );

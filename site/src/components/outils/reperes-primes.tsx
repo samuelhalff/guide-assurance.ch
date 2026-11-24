@@ -2,6 +2,7 @@ import resume from "@/data/primes-2027-resume.json";
 import { Depliable } from "@/components/controles";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import type { Locale } from "@/lib/i18n";
+import { itemListLd } from "@/lib/jsonld";
 import { PAGES_DONNEES, PAGES_DONNEES_EN } from "@/lib/nav";
 import { chf as chfBase, nombre as formaterNombre, ESPACE_FINE as T, INSECABLE as NB } from "@/lib/nombres";
 
@@ -20,6 +21,31 @@ const NOM = {
 } as Record<Locale, Record<string, string>>;
 const MULTI = ["VD", "VS", "FR"];
 
+const titreCanton = (c: CantonResume, locale: Locale) =>
+  `${NOM[locale][c.canton]}${MULTI.includes(c.canton) ? (locale === "en" ? `, region ${c.region} (${c.commune})` : `, région ${c.region} (${c.commune})`) : c.canton === "BE" ? ` (${c.commune})` : ""}`;
+
+/* Offre(s) à la prime la plus basse du profil de référence (franchise 300, avec accident), égalités comprises. */
+const plusBasses = (c: CantonResume) => c.offres.filter((o) => o.mensuel === c.offres[0].mensuel);
+const modele = (os: Offre[], locale: Locale) =>
+  os.map((o) => (locale === "en" ? `${o.assureur}, ${o.produit} model` : `${o.assureur}, modèle ${o.produit}`)).join(locale === "en" ? " and " : " et ");
+
+/* Liste JSON-LD : la prime la plus basse de chaque canton, dans l'ordre des blocs affichés (sans ordre de classement entre cantons). */
+export function reperesListeLd(locale: Locale, id: string) {
+  const en = locale === "en";
+  return itemListLd({
+    id,
+    name: en ? "Lowest 2027 premium in each canton, adult, CHF 300 deductible, with accident cover" : "Prime 2027 la plus basse de chaque canton, adulte, franchise 300 CHF, avec accident",
+    order: "Unordered",
+    items: R.cantons.map((c) => {
+      const m = formaterNombre(c.offres[0].mensuel / 100, 2, locale);
+      return {
+        name: `${titreCanton(c, locale)}, ${modele(plusBasses(c), locale)}`,
+        description: en ? `Lowest monthly premium in 2027 for this profile: CHF ${m}.` : `Prime mensuelle 2027 la plus basse pour ce profil : ${m} CHF.`,
+      };
+    }),
+  });
+}
+
 export function TableauReperes({ locale = "fr", replie = false }: { locale?: Locale; replie?: boolean }) {
   const en = locale === "en";
   const nf = (c: number) => formaterNombre(c / 100, 2, locale);
@@ -36,6 +62,11 @@ export function TableauReperes({ locale = "fr", replie = false }: { locale?: Loc
               {NOM[locale][c.canton]}
               {MULTI.includes(c.canton) ? (en ? `, region ${c.region} (${c.commune})` : `, région ${c.region} (${c.commune})`) : c.canton === "BE" ? ` (${c.commune})` : ""}
             </h3>
+            <p>
+              {en
+                ? `For ${titreCanton(c, locale)}, the lowest monthly premium in 2027 for an adult aged 26 or over, with a CHF 300 deductible and accident cover, is offered by ${modele(plusBasses(c), locale)}, at ${chf(c.offres[0].mensuel)}.`
+                : `Pour ${titreCanton(c, locale)}, la prime mensuelle 2027 la plus basse d’un adulte de 26 ans et plus, avec une franchise de 300${NB}CHF et la couverture accident, est proposée par ${modele(plusBasses(c), locale)}, à ${chf(c.offres[0].mensuel)}.`}
+            </p>
             <Table variant="chiffres" className="profils-reperes">
               <TableCaption>
                 {en
@@ -69,13 +100,15 @@ export function TableauReperes({ locale = "fr", replie = false }: { locale?: Loc
               </TableCaption>
               <TableHeader>
                 <TableRow>
+                  <TableHead scope="col">{en ? "Rank" : "Rang"}</TableHead>
                   <TableHead scope="col">{en ? "Insurer and model" : "Assureur et modèle"}</TableHead>
                   <TableHead scope="col">{en ? "CHF / month" : "CHF / mois"}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {c.offres.map((o) => (
+                {c.offres.map((o, i) => (
                   <TableRow key={`${o.assureur}|${o.produit}`}>
+                    <TableCell>{i + 1}</TableCell>
                     <TableCell>
                       {o.assureur}, {o.produit}
                     </TableCell>

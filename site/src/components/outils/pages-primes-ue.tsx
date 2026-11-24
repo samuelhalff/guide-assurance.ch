@@ -6,11 +6,12 @@ import { BandeConfiance } from "@/components/site/bande-confiance";
 import { PartagerOutil } from "@/components/site/partager-outil";
 import { PrimesUe } from "@/components/outils/primes-ue";
 import { buttonVariants } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { DONNEES_UE, PAYS_UE, VOISINS } from "@/lib/primes-ue";
 import { offres, stats, trier } from "@/lib/engines/primes-ue";
 import { pageMetadata } from "@/lib/metadata";
-import { ORG_ID, WEBSITE_ID, breadcrumbLd, faqLd, graph, type Miette } from "@/lib/jsonld";
+import { ORG_ID, WEBSITE_ID, breadcrumbLd, faqLd, graph, itemListLd, type Miette } from "@/lib/jsonld";
 import { abs } from "@/lib/site";
 import { DATE_PAGE } from "@/lib/donnees";
 import { dateLongue, type Locale } from "@/lib/i18n";
@@ -30,6 +31,13 @@ const fr2 = (x: number) => nombre(x, 2, "fr");
 const en2 = (x: number) => nombre(x, 2, "en");
 const FR = adulteAvec("FR"), DE = adulteAvec("DE"), IT = adulteAvec("IT"), AT = adulteAvec("AT");
 const FRs = adulteSans("FR");
+/* Assureur(s) à la prime la plus basse (adulte, avec accident), égalités comprises, pour les quatre pays voisins. */
+const basPays = (c: string, et: string) => {
+  const l = trier(offres(D, c, "adulte", true), "prix");
+  return { noms: l.filter((o) => o.mensuel === l[0].mensuel).map((o) => o.nom).join(` ${et} `), prime: l[0].mensuel };
+};
+const BAS = { FR: basPays("FR", "{et}"), DE: basPays("DE", "{et}"), IT: basPays("IT", "{et}"), AT: basPays("AT", "{et}") };
+const bas = (c: keyof typeof BAS, et: string) => ({ noms: BAS[c].noms.replaceAll("{et}", et) });
 
 const T = {
   fr: {
@@ -47,6 +55,7 @@ const T = {
     reperes: [
       `${NB_ASSUREURS} assureurs suisses proposent l’assurance de base 2027 à des personnes qui vivent dans l’UE, en Islande, en Norvège ou au Royaume-Uni, dans ${NB_PAYS} pays au total. Tous ne la proposent pas dans chaque pays.`,
       `Pour un adulte avec couverture accident, la prime mensuelle va de ${fr2(FR.min)}${N}CHF à ${fr2(FR.max)}${N}CHF en France, de ${fr2(DE.min)}${N}CHF à ${fr2(DE.max)}${N}CHF en Allemagne, de ${fr2(IT.min)}${N}CHF à ${fr2(IT.max)}${N}CHF en Italie et de ${fr2(AT.min)}${N}CHF à ${fr2(AT.max)}${N}CHF en Autriche.`,
+      `Pour un adulte avec couverture accident, la prime mensuelle la plus basse en 2027 est proposée par ${bas("FR", "et").noms} en France (${fr2(BAS.FR.prime)}${N}CHF), par ${bas("DE", "et").noms} en Allemagne (${fr2(BAS.DE.prime)}${N}CHF), par ${bas("IT", "et").noms} en Italie (${fr2(BAS.IT.prime)}${N}CHF) et par ${bas("AT", "et").noms} en Autriche (${fr2(BAS.AT.prime)}${N}CHF).`,
       "La franchise est unique : 300 francs pour les adultes et les jeunes adultes, aucune pour les enfants. Les modèles avec médecin de famille ou télémédecine ne sont pas ouverts à ces assurés.",
       "La prime dépend du pays de résidence. Le canton de travail ou un ancien domicile en Suisse n’y change rien.",
     ],
@@ -66,6 +75,7 @@ const T = {
     ordreFrance: "Les assureurs sont triés de la prime la plus basse à la plus haute (avec couverture accident).",
     thAssureur: "Assureur",
     thNo: "N° OFSP",
+    thRang: "Rang",
     thAvec: "Avec accident",
     thSans: "Sans accident",
     hQui: "Qui doit s’assurer en Suisse quand il vit dans l’UE",
@@ -134,6 +144,7 @@ const T = {
     reperes: [
       `${NB_ASSUREURS} Swiss insurers offer 2027 basic insurance to people living in the EU, Iceland, Norway or the United Kingdom, across ${NB_PAYS} countries in all. Not every insurer offers it in every country.`,
       `For an adult with accident cover, the monthly premium ranges from CHF ${en2(FR.min)} to CHF ${en2(FR.max)} in France, from CHF ${en2(DE.min)} to CHF ${en2(DE.max)} in Germany, from CHF ${en2(IT.min)} to CHF ${en2(IT.max)} in Italy and from CHF ${en2(AT.min)} to CHF ${en2(AT.max)} in Austria.`,
+      `For an adult with accident cover, the lowest monthly premium in 2027 is offered by ${bas("FR", "and").noms} in France (CHF ${en2(BAS.FR.prime)}), by ${bas("DE", "and").noms} in Germany (CHF ${en2(BAS.DE.prime)}), by ${bas("IT", "and").noms} in Italy (CHF ${en2(BAS.IT.prime)}) and by ${bas("AT", "and").noms} in Austria (CHF ${en2(BAS.AT.prime)}).`,
       "There is a single deductible: CHF 300 for adults and young adults, none for children. Family-doctor and telemedicine models are not open to these insured people.",
       "The premium depends on the country of residence. The canton of work or a former address in Switzerland makes no difference.",
     ],
@@ -153,6 +164,7 @@ const T = {
     ordreFrance: "Insurers are sorted from the lowest premium to the highest (with accident cover).",
     thAssureur: "Insurer",
     thNo: "FOPH no.",
+    thRang: "Rank",
     thAvec: "With accident",
     thSans: "Without accident",
     hQui: "Who has to be insured in Switzerland while living in the EU",
@@ -261,15 +273,18 @@ function TableauFrance({ locale }: { locale: Locale }) {
         <TableCaption>{t.captionFrance}</TableCaption>
         <TableHeader>
           <TableRow>
+            <TableHead scope="col" className="w-10 px-2 text-right">{t.thRang}</TableHead>
             <TableHead scope="col">{t.thAssureur}</TableHead>
             <TableHead scope="col" className="text-right">{t.thAvec}</TableHead>
             <TableHead scope="col" className="text-right">{t.thSans}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {avec.map((o) => (
+          {avec.map((o, i) => (
             <TableRow key={o.no}>
+              <TableCell className="w-10 px-2 text-right tabular-nums">{i + 1}</TableCell>
               <TableCell>
+                {o.mensuel === avec[0].mensuel ? <Badge variant="outline" className="badge-rang h-auto whitespace-normal rounded-lg text-left text-base">{t.thMin}</Badge> : null}
                 {o.nom}
                 <small className="block text-base text-muted-foreground">{t.thNo} {String(o.no).padStart(4, "0")}</small>
               </TableCell>
@@ -338,6 +353,17 @@ export function PagePrimesUe({ locale }: { locale: Locale }) {
       ],
       variableMeasured: fr ? "Prime mensuelle de l’assurance obligatoire des soins (CHF)" : "Monthly compulsory health insurance premium (CHF)",
     },
+    itemListLd({
+      id: `${url}#liste-france`,
+      name: t.captionFrance,
+      order: "Ascending",
+      items: trier(offres(D, "FR", "adulte", true), "prix").map((o) => ({
+        name: o.nom,
+        description: fr
+          ? `Prime mensuelle 2027 de ${fr2(o.mensuel)} CHF pour un adulte de 26 ans et plus résidant en France, avec couverture accident.`
+          : `2027 monthly premium of CHF ${en2(o.mensuel)} for an adult aged 26 and over living in France, with accident cover.`,
+      })),
+    }),
     breadcrumbLd(t.miettes, `${url}#breadcrumb`),
     { ...faqLd(t.faq), "@id": `${url}#faq` },
   );
