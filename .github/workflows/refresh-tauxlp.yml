@@ -1,0 +1,35 @@
+name: "Relevé : taux de libre passage (lundi 06:40)"
+
+# Même modèle que refresh-taux3a.yml, dix minutes plus tard. Lignes en UTC : hiver puis été ; le modèle ne garde que celle
+# qui tombe à 6 h à Zurich.
+on:
+  schedule:
+    - cron: "40 4 * * 1"
+    - cron: "40 5 * * 1"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "--dry-run : relève et compare, n'écrit rien, ne publie rien, n'envoie rien"
+        type: boolean
+        default: true
+      args:
+        description: "options (--simulate-change, --simulate-parser-failure)"
+        type: string
+        default: ""
+
+# Concurrence : dans _refresh.yml (job run, groupe guide-assurance-prod partagé avec le déploiement).
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+jobs:
+  releve:
+    uses: ./.github/workflows/_refresh.yml
+    with:
+      dataset: tauxlp
+      at: 6
+      dry_run: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+      args: ${{ inputs.args || '' }}
+    secrets: inherit

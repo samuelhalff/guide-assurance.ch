@@ -1,0 +1,56 @@
+URL: https://www.bcge.ch/documents/395713/396740/BCGE_brochure_taux_comptes.pdf/1284c47e-0573-3d1c-f519-85fc84db35c4?t=1793376331105
+Page de départ: https://www.bcge.ch/fr/taux-des-comptes
+Relevé: 2026-11-24T12:43:10+00:00
+Méthode: pdf (http)
+Extrait retenu: Libre Passage (2 e pilier) 0.01 %
+Validité: en vigueur 01.11.2026
+Lignes 1-48 sur 48 (texte normalisé)
+------------------------------------------------------------------------
+Taux 1 en vigueur 01.11.2026
+Type de compte Taux d'intérêt Limite de rémunération
+1. Comptes privés
+BCGE Privé CHF 3 0.00 % illimitée
+BCGE Privé EUR 2 0.00 % illimitée
+BCGE Privé USD 2 0.00 % illimitée
+BCGE Privé 12-25 (CHF) 3 2.00 % 10 illimitée
+BCGE Privé 12-25 (EUR) 2 0.25 % 8 illimitée
+BCGE Privé 12-25 (USD) 2 0.25 % 8 illimitée
+2. Comptes d'épargne
+BCGE Epargne 3 0.01 % Boostez votre épargne avec notre programme de fidélité 4 illimitée
+Epargne Classic EUR 2 0.75 % 150'000
+Epargne Classic USD 2 0.50 % 150'000
+Epargne Classic CNY 2 0.50 % 1'200'000
+Epargne Classic GBP 2 0.50 % 150'000
+Epargne Jeunesse CHF 3 2.00 % 7 30'000
+Epargne Jeunesse EUR 2 1.00 % 9 100'000
+Epargne Jeunesse USD 2 0.75 % 9 100'000
+Start'Ep CHF 3 2.00 % 7 30'000
+Start'Ep EUR 2 1.00 % 9 100'000
+Start'Ep USD 2 0.75 % 9 100'000
+BCGE Garantie loyer 0.01 % illimitée
+3. Comptes de prévoyance
+Epargne 3 (3 e pilier) 0.25 % pas d'impôt anticipé illimitée
+Libre Passage (2 e pilier) 0.01 % pas d'impôt anticipé illimitée
+4. Comptes courants pour sociétés
+BCGE Entreprises CHF 0.00 % 5/6 illimitée
+BCGE Entreprises EUR 0.00 % 5/6 illimitée
+BCGE Entreprises USD 0.00 % 5/6 illimitée
+0 – 2 mios 2 mios – 5 mios Au-delà
+BCGE Corporate CHF 0.00 % 5/6 0.00 % 5/6 0.00 % 5/6 5'000'000
+BCGE Corporate EUR 0.00 % 5/6 1.70 % 5/6 0.00 % 5/6 5'000'000
+BCGE Corporate USD 0.00 % 5/6 2.85 % 5/6 0.00 % 5/6 5'000'000
+5. Comptes d'épargne pour sociétés
+BCGE Horizon Entreprises 1 mois CHF 0.00 % 3 500'000
+BCGE Horizon Entreprises 1 mois EUR 1.25 % 2 500'000
+BCGE Horizon Entreprises 1 mois USD 1.50 % 2 500'000
+BCGE Horizon Entreprises 3 mois CHF 0.00 % 3 500'000
+BCGE Horizon Entreprises 3 mois EUR 1.45 % 2 500'000
+BCGE Horizon Entreprises 3 mois USD 1.75 % 2 500'000
+BCGE Horizon Entreprises 6 mois CHF 0.00 % 3 500'000
+BCGE Horizon Entreprises 6 mois EUR 1.55 % 2 500'000
+BCGE Horizon Entreprises 6 mois USD 1.85 % 2 500'000
+1 Pour les taux des autres comptes, se renseigner auprès de votre conseiller 6 Taux de dépassement en cas de limite Dynamique: taux contractuel additionné de 5%
+2 Taux découvert et/ou dépassement: en fonction des taux des marchés monétaires disponibles auprès de votre conseiller 7 Jusqu'à CHF 1'000. 0.30% jusqu'à CHF 30'000 Au-delà : 0.00%.
+3 Taux découvert: 11.5% 8 Jusqu'à CHF/EUR/USD 30'000. Au-delà: taux BCGE Privé (CHF/EUR/USD)
+4 Voir conditions sur bcge.ch/fr/boost (limite de rémunération maximale CHF 500'000) 9 Jusqu'à USD/EUR 30'000. Au-delà : 0.25% jusqu'à 100'000 (USD/EUR)
+5 Taux découvert: 11.5%, taux dépassement: 9.5% + 0.25% commission trimestrielle 10 Jusqu'à CHF 1'000. Au-delà : 0.00%

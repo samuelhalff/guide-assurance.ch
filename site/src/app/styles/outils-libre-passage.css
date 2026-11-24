@@ -1,0 +1,50 @@
+/* Taux des comptes de libre passage : réglages, cartes (mobile), tableau (ordinateur). Mobile d'abord (390 px). */
+@layer components {
+  .taux-lp .lp-reglages { display: grid; gap: var(--s3); margin: 0 0 var(--s3); }
+  .taux-lp .lp-reglages .champ { margin: 0; display: grid; gap: var(--s1); }
+  .taux-lp .champ-solde { max-width: 24em; }
+  .taux-lp .champ-solde [data-slot="input"] { font-variant-numeric: tabular-nums; }
+  .taux-lp .ordre { margin: 0 0 var(--s3); }
+
+  .lp-cartes { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s2); }
+  .lp-carte { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px var(--s3); align-items: start; }
+  .lp-carte .qui b { display: block; font-weight: 700; font-size: 17px; }
+  .lp-carte .produit, .lp-table .produit { display: block; font: 15px var(--narrow); color: var(--encre-2); overflow-wrap: anywhere; }
+  .lp-carte .combien { text-align: right; }
+  .lp-carte .montant { display: block; font: 800 22px/1.1 var(--sans); letter-spacing: -.01em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .lp-carte .unite { display: block; font: 16px var(--narrow); color: var(--encre-2); }
+  .lp-carte .interet, .lp-carte .cond, .lp-carte .releve { grid-column: 1 / -1; margin: var(--s1) 0 0; font: 15px/1.4 var(--narrow); }
+  .lp-carte .interet { font-weight: 600; color: var(--encre); background: var(--info-teinte); border-radius: var(--r); padding: var(--s1) var(--s2); font-variant-numeric: tabular-nums; }
+  .lp-carte .releve { color: var(--encre-2); font-size: 16px; }
+  .lp-carte .releve a, .lp-table .releve a { color: var(--lac-encre); }
+
+  table.lp-table { display: none; width: 100%; margin: var(--s2) 0 var(--s5); }
+  table.lp-table th, table.lp-table td { vertical-align: top; text-align: left; }
+  table.lp-table thead th.text-right { text-align: right; }
+  table.lp-table td:first-child { min-width: 14em; }
+  table.lp-table td:first-child b { display: block; }
+  table.lp-table td.taux { font-weight: 800; font-size: 18px; white-space: nowrap; text-align: right; font-variant-numeric: tabular-nums; }
+  table.lp-table th.interet, table.lp-table td.interet { background: var(--info-teinte); }
+  table.lp-table td.releve { font: 14px var(--narrow); white-space: nowrap; color: var(--encre-2); }
+  table.lp-table td.releve small, table.lp-table td.releve a { display: block; font-size: 16px; }
+
+  .taux-lp .lp-cartes { margin-bottom: var(--s4); }
+  .outil-lp { margin: var(--s5) 0; }
+
+  @media (min-width: 720px) {
+    .taux-lp .lp-reglages { grid-template-columns: minmax(0, 20em) minmax(0, 24em); align-items: start; }
+  }
+  @media (min-width: 1000px) {
+    .lp-cartes { display: none; }
+    table.lp-table { display: table; }
+  }
+
+  /* Prose de la page (sections juridiques) */
+  .page-lp h2.titre-section-lp { margin: var(--s7) 0 var(--s2); scroll-margin-top: 80px; }
+  .page-lp .prose-lp { max-width: 68ch; }
+  .page-lp .prose-lp p { margin: 0 0 var(--s3); }
+  .page-lp .cta-haut-lp .cta-demande, .page-lp .cta-bas-lp .cta-demande { margin: var(--s3) 0 var(--s5); }
+  .page-lp .liens-lp { margin: var(--s5) 0 var(--s7); display: grid; gap: var(--s3); }
+  .page-lp .liens-lp a { font-weight: 700; }
+  .page-lp .chiffres-lp { max-width: 68ch; margin: 0 0 var(--s4); }
+}
