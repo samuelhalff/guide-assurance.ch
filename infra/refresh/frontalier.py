@@ -100,6 +100,7 @@ def run(log: C.Log, a) -> int:
         code, _ = C.http_get("https://opendata.bagnet.ch/?r=/download&path=L1ByYWVtaWVuL1Byw6RtaWVuX0VVLmNzdg%3D%3D", timeout=60, retries=0)
         alerts.append(f"L'OFSP a modifié le fichier des primes UE/AELE (Prämien_EU) le {ofsp[8:10]}.{ofsp[5:7]}.{ofsp[:4]} ; "
                       f"les primes frontaliers du site datent du {site_date:%d.%m.%Y}. "
+                      f"La page « Primes UE/AELE » (site/src/data/primes-eu-2027.json, data/scripts/build_primes_eu.py) est à régénérer aussi. "
                       + ("Le fichier se télécharge à nouveau." if code == 200 else f"Le téléchargement répond encore HTTP {code}."))
     else:
         notes.append(f"primes UE : fichier OFSP du {ofsp[:10]}, identique aux données du site")

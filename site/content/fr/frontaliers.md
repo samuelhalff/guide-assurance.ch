@@ -32,7 +32,7 @@ sources:
   - { label: "Priminfo, primes LAMal des résidents de l’UE (OFSP)", url: "https://www.priminfo.admin.ch" }
   - { label: "Art. 3 LAMal (Fedlex)", url: "https://www.fedlex.admin.ch/eli/cc/1995/1328_1328_1328/fr#art_3" }
   - { label: "Art. 2 OAMal (Fedlex)", url: "https://www.fedlex.admin.ch/eli/cc/1995/3867_3867_3867/fr#art_2" }
-outils: [simulateur-frontalier]
+outils: [simulateur-frontalier, primes-ue]
 faq:
   - q: "Combien de temps avez-vous pour choisir entre LAMal et assurance française ?"
     a: "Vous avez 3 mois dès le début de l’activité en Suisse (CLEISS). À Genève, la personne qui n’a pas renvoyé le formulaire dans ce délai est affiliée d’office à la LAMal."

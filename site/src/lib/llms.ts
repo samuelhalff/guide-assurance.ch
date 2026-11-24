@@ -3,17 +3,22 @@
    Règle (Sam, 22.11.2026) : l'éditeur n'est jamais nommé dans ces fichiers ; le build échoue s'il apparaît. */
 import { abs } from "@/lib/site";
 import { HUB_OUTILS, OUTILS, OUTILS_EN, PAGES_DONNEES, PAGES_DONNEES_EN } from "@/lib/nav";
+import { META as CAISSES_META, chiffresCles } from "@/lib/caisses-lamal";
 import { chiffresClesMarkdown } from "@/lib/chiffres-cles";
 import { ANNEE_BAROMETRE, DATE_BAROMETRE, barometreMarkdown } from "@/lib/barometre";
 import { ROUTES_IDEES, cheminBarometre } from "@/lib/pages-idees";
 import { toutesLesPages, type PageContenu, type Rubrique } from "@/lib/content/pages";
 import { DATE_ASSUREURS_3A, DATE_FRAIS_3A, DATE_IMPOTS, DATE_PRIMES, DATE_TAUX_3A } from "@/lib/donnees";
+import { COMPTES_LP, RELEVE_LE as RELEVE_LP, TAUX_MAX as LP_MAX, TAUX_MIN as LP_MIN, tauxEn as lpEn, tauxFr as lpFr } from "@/lib/tauxlp";
 import { TITRES_3A } from "@/lib/frais3a";
 import ASS3A from "@/data/assureurs-3a-3b.json";
 import { COMPTES_3A, dateCh } from "@/lib/taux3a";
 import { dateLongue, type Locale } from "@/lib/i18n";
 import IMPOTS from "@/data/impots-2026.json";
 import EU from "@/data/primes-eu-fr-2027.json";
+import EU_TOUS from "@/data/primes-eu-2027.json";
+const NB_PAYS_EU = Object.keys(EU_TOUS.pays).length;
+const NB_ASSUREURS_EU_TOUS = new Set(Object.values(EU_TOUS.pays).flat().map((a) => a.no)).size;
 import { lignesLlms, textesLlms, tousLesArticles } from "@/lib/actualites";
 import { CONTRATS as CONTRATS_PJ, LU_LE as LU_LE_PJ, garantiesPjMarkdown } from "@/lib/garanties-pj";
 import * as SM from "@/lib/engines/somme-menage";
@@ -50,16 +55,22 @@ const NEUTRE: Record<string, string> = {
 };
 const resumePage = (p: PageContenu) => NEUTRE[p.slug] ?? p.landing?.reponse ?? p.description;
 
+const CAISSES = chiffresCles();
+
 function outilsFr(): string[] {
   return [
+    lienFr("Subsides d'assurance maladie 2027 par canton romand", OUTILS.subsides, "barèmes officiels 2027 de Genève, Vaud, Fribourg, Neuchâtel et du Jura (revenu déterminant, montants mensuels, limites), estimation du subside et de la prime après subside; le Valais n'a pas publié son barème 2027 au 24.11.2026. Sources : textes des offices cantonaux, relevés le 24.11.2026. Calcul dans le navigateur."),
     lienFr("Comparer les primes LAMal 2027", OUTILS.comparateur, `primes 2027 approuvées par l'OFSP pour un NPA, une année de naissance et une franchise en Suisse romande, relevées le ${dateCh(DATE_PRIMES)}, triées de la plus basse à la plus haute${N}; calcul dans le navigateur.`),
+    lienFr("Primes LAMal 2027 pour les résidents de l'UE, de l'AELE et du Royaume-Uni", OUTILS.primesUe, `primes mensuelles 2027 de l'assurance de base de ${NB_ASSUREURS_EU_TOUS} assureurs dans ${NB_PAYS_EU} pays, par classe d'âge et avec ou sans couverture accident, triées de la plus basse à la plus haute, d'après l'OFSP (fichier Prämien_EU) lu le 24.11.2026`),
     lienFr("Taux des comptes 3a", OUTILS.taux3a, `taux d'intérêt des comptes 3a de ${NB_BANQUES} banques suisses, relevés le ${dateCh(DATE_TAUX_3A)} sur leurs propres pages, triés du plus élevé au plus bas, avec les frais de chaque compte${N}; puis frais annuels publiés et part en actions de ${TITRES_3A.length} solutions 3a en titres, lus le ${dateCh(DATE_FRAIS_3A)} sur les grilles tarifaires, triés par coût publié, sans rendement${N}; aucun fournisseur ne paie.`),
+    lienFr("Taux des comptes de libre passage", OUTILS.tauxLibrePassage, `taux d'intérêt des comptes de libre passage de ${COMPTES_LP.length} institutions suisses (banques et institution supplétive LPP), entre ${lpFr(LP_MIN)} et ${lpFr(LP_MAX)} par an, relevés le ${dateCh(RELEVE_LP)} sur leurs propres pages, triés du plus élevé au plus bas ou par nom, avec l'intérêt d'une année sur l'avoir saisi${N}; règles de la LFLP et de l'OLP (deux institutions au plus, départ de Suisse, privilège en cas de faillite, retrait)${N}; aucune institution ne paie.`),
     lienFr("3a et 3b auprès d'un assureur", OUTILS.assurance3a, `${ASS3A.assureurs.length} assureurs vie et leurs contrats 3a et 3b (risque pur, épargne garantie, liés à des fonds, hybrides), primes, libération du paiement des primes et rachat d'après leurs documents publics lus le ${dateCh(DATE_ASSUREURS_3A)}${N}; différences factuelles avec un 3a bancaire (OPP 3, LCA, circulaire FINMA 2024/2). Ordre alphabétique, sans classement.`),
     lienFr("Économie d'impôt 3a en Suisse romande", OUTILS.impot3a, `impôt fédéral, cantonal et communal économisé par un versement 3a pour ${cantonsImpot("fr")} (toutes les communes), et impôt sur un retrait en capital, barèmes ${IMPOTS.annee} vérifiés le ${dateCh(DATE_IMPOTS)} sur les calculettes officielles, calcul dans le navigateur.`),
     lienFr(`Simulateur frontalier${N}: LAMal ou assurance maladie française${N}?`, OUTILS.simulateur, `compare la cotisation Urssaf et les primes LAMal 2027 des ${NB_ASSUREURS_EU} assureurs pour un foyer qui vit en France et travaille à Genève ou dans le canton de Vaud.`),
     lienFr("Lettre de résiliation d'assurance maladie", OUTILS.lettre, "calcule la date limite de réception (art. 7 LAMal, art. 35a LCA) et rédige la lettre de résiliation de l'assurance de base ou d'une complémentaire."),
     lienFr("Calculateur de la somme d'assurance ménage", OUTILS.sommeMenage, `valeur à neuf du mobilier selon les pièces, les personnes et le standard d'équipement, avec la grille Baloise (formulaire 140.1173, 2023) et la formule de la feuille d'inventaire Zurich (05.2024), réserve de 10${N}%${N}; pour un 3,5 pièces à deux, standard moyen${N}: ${SM.estimer({ pieces: 3.5, personnes: 2, standard: "moyen" }).somme} CHF. Règle proportionnelle de l'art. 51a LCA. Calcul dans le navigateur.`),
     lienFr(`Protection juridique${N}: ce que couvrent les contrats`, OUTILS.garantiesPj, `${CONTRATS_PJ.length} contrats de protection juridique privée et circulation, lus dans leurs CGA le ${dateCh(LU_LE_PJ)}${N}: domaines couverts, plafond par cas, délai de carence, franchise, libre choix de l'avocat (art. 167 OS). Ordre alphabétique, sans prime ni classement.`),
+    lienFr("Les caisses maladie en chiffres", OUTILS.caissesChiffres, `${CAISSES.nb} assureurs LAMal avec leurs assurés par canton, leurs frais administratifs par assuré, leurs réserves et leur taux de solvabilité, d'après la Statistique de l'assurance-maladie obligatoire ${CAISSES_META.edition} de l'OFSP, relevée le 24.11.2026 (ordre alphabétique par défaut, aucun classement)`),
     lienFr("Rappels d'échéance dans l'agenda", ROUTES_IDEES.rappels.fr, `fichier d'agenda .ics créé dans le navigateur, sans e-mail${N}: 30 novembre (résiliation LAMal, art. 7 LAMal), 31 décembre (versement 3a), 31 mars (franchise 300) et échéances des contrats saisis, avec une alerte avant chacune.`),
     lienFr(`Baromètre des primes maladie ${ANNEE_BAROMETRE}`, ROUTES_IDEES.barometre.fr, `prime moyenne ${ANNEE_BAROMETRE} et hausse par canton romand (OFSP), écart entre offres par région de prime et profil type, sans assureur nommé${N}; une page par canton, mise à jour le ${dateCh(DATE_BAROMETRE)}.`),
     lienFr("Widgets à intégrer", ROUTES_IDEES.integrer.fr, `encadrés sans cookie pour d'autres sites${N}: compte à rebours de résiliation LAMal, prime médiane d'une région, taux 3a.`),
@@ -69,14 +80,18 @@ function outilsFr(): string[] {
 
 function outilsEn(): string[] {
   return [
+    lienEn("Health insurance subsidies 2027 by canton", OUTILS_EN.subsides, "official 2027 scales for Geneva, Vaud, Fribourg, Neuchâtel and Jura (determining income, monthly amounts, limits), estimate of the subsidy and of the premium after subsidy; Valais had not published its 2027 scale on 24.11.2026. Sources: texts of the cantonal offices, read on 24.11.2026. Runs in the browser."),
     lienEn("Compare 2027 LAMal premiums", OUTILS_EN.comparateur, `2027 FOPH-approved premiums for a postcode, year of birth and deductible in French-speaking Switzerland, retrieved on ${dateCh(DATE_PRIMES)}, sorted from lowest to highest; calculated in the browser.`),
     lienEn("Pillar 3a interest rates", OUTILS_EN.taux3a, `pillar 3a account rates at ${NB_BANQUES} Swiss banks, read on ${dateCh(DATE_TAUX_3A)} on the banks' own pages, sorted from highest to lowest, with each account's fees; then published annual costs and equity share of ${TITRES_3A.length} pillar 3a securities solutions, read on ${dateCh(DATE_FRAIS_3A)} on their price lists, sorted by published cost, no returns; no paid listings.`),
+    lienEn("2027 premiums for residents of the EU, EFTA and the UK", OUTILS_EN.primesUe, `2027 monthly basic insurance premiums of ${NB_ASSUREURS_EU_TOUS} insurers in ${NB_PAYS_EU} countries, by age group and with or without accident cover, sorted lowest to highest, from the FOPH (Prämien_EU file) read on 24.11.2026`),
+    lienEn("Vested benefits account rates", OUTILS_EN.tauxLibrePassage, `interest rates on vested benefits accounts at ${COMPTES_LP.length} Swiss institutions (banks and the Substitute Occupational Benefit Institution), between ${lpEn(LP_MIN)} and ${lpEn(LP_MAX)} a year, read on ${dateCh(RELEVE_LP)} on their own pages, sorted from highest to lowest or by name, with one year of interest on the balance entered; rules of the LFLP and OLP (two institutions at most, leaving Switzerland, bank-failure privilege, withdrawal); no paid listings.`),
     lienEn("Pillar 3a and 3b with an insurer", OUTILS_EN.assurance3a, `${ASS3A.assureurs.length} life insurers and their 3a and 3b policies (pure risk, guaranteed savings, unit-linked, hybrid), premiums, premium waiver and surrender terms from their public documents read on ${dateCh(DATE_ASSUREURS_3A)}; factual differences from a bank 3a (OPP 3, LCA, FINMA circular 2024/2). Alphabetical order, no ranking.`),
     lienEn("Pillar 3a tax savings in French-speaking Switzerland", OUTILS_EN.impot3a, `federal, cantonal and municipal tax saved by a 3a payment in ${cantonsImpot("en")} (every municipality), plus tax on a capital withdrawal; ${IMPOTS.annee} scales checked on ${dateCh(DATE_IMPOTS)} against the official calculators; runs in the browser.`),
     lienEn("Cross-border calculator: LAMal or French health insurance?", OUTILS_EN.simulateur, `compares the Urssaf contribution with the 2027 LAMal premiums of the ${NB_ASSUREURS_EU} insurers for a household living in France and working in Geneva or Vaud.`),
     lienEn("Health insurance cancellation letter", OUTILS_EN.lettre, "calculates the date by which the insurer must receive the letter (art. 7 LAMal, art. 35a LCA) and drafts the letter in French for basic or supplementary insurance."),
     lienEn("Household contents sum insured calculator", OUTILS_EN.sommeMenage, `replacement value of household contents from rooms, people and furnishing standard, using the Baloise grid (form 140.1173, 2023) and the Zurich inventory-sheet formula (05.2024), plus a 10% reserve; for a 3.5-room flat shared by two, medium standard: CHF ${SM.estimer({ pieces: 3.5, personnes: 2, standard: "moyen" }).somme}. Proportional rule of art. 51a LCA. Runs in the browser.`),
     lienEn("Legal protection insurance: what the policies cover", OUTILS_EN.garantiesPj, `${CONTRATS_PJ.length} private and traffic legal protection policies, read in their general terms on ${dateCh(LU_LE_PJ)}: areas covered, limit per case, waiting period, excess, free choice of lawyer (art. 167 OS). Alphabetical order, no premiums or ranking.`),
+    lienEn("Swiss health insurers in figures", OUTILS_EN.caissesChiffres, `${CAISSES.nb} LAMal insurers with their insured by canton, administrative costs per insured, reserves and solvency ratio, from the FOPH compulsory health insurance statistics ${CAISSES_META.edition}, read on 24.11.2026 (alphabetical by default, no ranking)`),
     lienEn("Renewal reminders in your calendar", ROUTES_IDEES.rappels.en, "an .ics calendar file created in the browser, no e-mail: 30 November (LAMal cancellation, art. 7 LAMal), 31 December (pillar 3a payment), 31 March (CHF 300 deductible) and the renewal dates of contracts entered, with alerts before each."),
     lienEn(`${ANNEE_BAROMETRE} health premium barometer`, ROUTES_IDEES.barometre.en, `${ANNEE_BAROMETRE} average premium and increase by French-speaking canton (FOPH), gap between offers by premium region and standard profile, no insurer named; one page per canton, updated on ${dateCh(DATE_BAROMETRE)}.`),
     lienEn("Embeddable widgets", ROUTES_IDEES.integrer.en, "cookie-free boxes for other sites: LAMal cancellation countdown, median premium of a region, pillar 3a rates."),

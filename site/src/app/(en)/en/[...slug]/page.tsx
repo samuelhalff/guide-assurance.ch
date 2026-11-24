@@ -12,11 +12,15 @@ import { PRODUITS_LIES, rubriqueDePage } from "@/lib/landing";
 const RUBRIQUES = { particuliers: "personal insurance", entreprises: "business insurance", situations: "situations", legal: "information" } as const;
 const OUTILS_LIES: Record<string, { href: string; titre: string; detail: string }> = {
   "simulateur-frontalier": { href: OUTILS_EN.simulateur, titre: "Cross-border worker: LAMal or French health insurance?", detail: "Calculator, 2027 premiums" },
+  "primes-ue": { href: OUTILS_EN.primesUe, titre: "2027 Swiss premiums for EU residents", detail: "By country and insurer, FOPH data" },
+  subsides: { href: OUTILS_EN.subsides, titre: "2027 health insurance subsidies", detail: "Official scales for six cantons, estimate" },
   "comparateur-primes": { href: OUTILS_EN.comparateur, titre: "Compare 2027 LAMal premiums", detail: "Approved premiums, lowest to highest" },
   "lettre-resiliation": { href: OUTILS_EN.lettre, titre: "Cancellation letter", detail: "Deadline and a letter ready to print" },
   "taux-3a": { href: OUTILS_EN.taux3a, titre: "Pillar 3a accounts: interest rates", detail: "17 banks, rates read on their own pages" },
+  "taux-libre-passage": { href: OUTILS_EN.tauxLibrePassage, titre: "Vested benefits accounts: interest rates", detail: "23 institutions, rates read on their own pages" },
   "economie-impot-3a": { href: OUTILS_EN.impot3a, titre: "Pillar 3a tax savings", detail: "French-speaking Switzerland, 2026 tax scales" },
   "somme-menage": { href: OUTILS_EN.sommeMenage, titre: "Work out your household sum insured", detail: "Three questions, Baloise and Zurich methods" },
+  "caisses-chiffres": { href: OUTILS_EN.caissesChiffres, titre: "Swiss health insurers in figures", detail: "Insured, administrative costs and solvency, FOPH 2024" },
   "garanties-pj": { href: OUTILS_EN.garantiesPj, titre: "Legal protection: what the policies cover", detail: "12 policies read in their terms, no ranking" },
 };
 

@@ -1,0 +1,6003 @@
+{
+ "source": "OFSP, Aperçu des primes 2027, assurance de base UE/AELE/UK (fichier Prämien_EU, opendata.swiss), publié sur priminfo.admin.ch, lu le 24.11.2026",
+ "annee": 2027,
+ "franchise": "300 CHF (adultes et jeunes adultes), 0 CHF (enfants) : seule franchise possible, art. 101a et 103 OAMal",
+ "pays": {
+  "AT": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 440.8,
+     "avec": 464.0
+    },
+    "jeune": {
+     "sans": 436.1,
+     "avec": 459.0
+    },
+    "enfant": {
+     "sans": 153.9,
+     "avec": 162.0
+    }
+   },
+   {
+    "nom": "Aquilana",
+    "no": 32,
+    "adulte": {
+     "sans": 618.7,
+     "avec": 665.2
+    },
+    "jeune": {
+     "sans": 457.9,
+     "avec": 492.3
+    },
+    "enfant": {
+     "sans": 142.3,
+     "avec": 153.0
+    },
+    "enfant3": {
+     "sans": 71.15,
+     "avec": 76.5
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 447.4,
+     "avec": 481.0
+    },
+    "jeune": {
+     "sans": 434.0,
+     "avec": 466.6
+    },
+    "enfant": {
+     "sans": 146.7,
+     "avec": 157.7
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 536.4,
+     "avec": 565.2
+    },
+    "jeune": {
+     "sans": 429.2,
+     "avec": 452.2
+    },
+    "enfant": {
+     "sans": 134.1,
+     "avec": 141.3
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 771.9,
+     "avec": 830.0
+    },
+    "jeune": {
+     "sans": 578.9,
+     "avec": 622.5
+    },
+    "enfant": {
+     "sans": 169.8,
+     "avec": 182.6
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 432.5,
+     "avec": 465.0
+    },
+    "jeune": {
+     "sans": 389.3,
+     "avec": 418.5
+    },
+    "enfant": {
+     "sans": 99.5,
+     "avec": 106.9
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 437.1,
+     "avec": 470.0
+    },
+    "jeune": {
+     "sans": 403.6,
+     "avec": 434.0
+    },
+    "enfant": {
+     "sans": 131.1,
+     "avec": 141.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 327.3,
+     "avec": 351.9
+    },
+    "jeune": {
+     "sans": 262.0,
+     "avec": 281.7
+    },
+    "enfant": {
+     "sans": 125.6,
+     "avec": 135.0
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 465.5,
+     "avec": 500.0
+    },
+    "jeune": {
+     "sans": 395.7,
+     "avec": 425.0
+    },
+    "enfant": {
+     "sans": 139.7,
+     "avec": 150.0
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 374.7,
+     "avec": 402.8
+    },
+    "jeune": {
+     "sans": 281.0,
+     "avec": 302.1
+    },
+    "enfant": {
+     "sans": 93.7,
+     "avec": 100.7
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 822.0,
+     "avec": 863.1
+    },
+    "jeune": {
+     "sans": 575.5,
+     "avec": 604.3
+    },
+    "enfant": {
+     "sans": 230.5,
+     "avec": 242.0
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 422.3,
+     "avec": 454.0
+    },
+    "jeune": {
+     "sans": 304.1,
+     "avec": 326.9
+    },
+    "enfant": {
+     "sans": 211.2,
+     "avec": 227.0
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 488.3,
+     "avec": 525.0
+    },
+    "jeune": {
+     "sans": 439.5,
+     "avec": 472.5
+    },
+    "enfant": {
+     "sans": 122.2,
+     "avec": 131.3
+    }
+   }
+  ],
+  "BE": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 503.5,
+     "avec": 530.0
+    },
+    "jeune": {
+     "sans": 498.8,
+     "avec": 525.0
+    },
+    "enfant": {
+     "sans": 176.7,
+     "avec": 186.0
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 510.6,
+     "avec": 549.0
+    },
+    "jeune": {
+     "sans": 495.3,
+     "avec": 532.5
+    },
+    "enfant": {
+     "sans": 164.4,
+     "avec": 176.7
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 563.5,
+     "avec": 593.7
+    },
+    "jeune": {
+     "sans": 450.8,
+     "avec": 475.0
+    },
+    "enfant": {
+     "sans": 141.0,
+     "avec": 148.5
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 492.9,
+     "avec": 530.0
+    },
+    "jeune": {
+     "sans": 369.7,
+     "avec": 397.5
+    },
+    "enfant": {
+     "sans": 108.4,
+     "avec": 116.6
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 365.5,
+     "avec": 393.0
+    },
+    "jeune": {
+     "sans": 329.0,
+     "avec": 353.7
+    },
+    "enfant": {
+     "sans": 84.0,
+     "avec": 90.3
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 239.9,
+     "avec": 258.0
+    },
+    "jeune": {
+     "sans": 221.3,
+     "avec": 238.0
+    },
+    "enfant": {
+     "sans": 71.6,
+     "avec": 77.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 327.3,
+     "avec": 351.9
+    },
+    "jeune": {
+     "sans": 262.0,
+     "avec": 281.7
+    },
+    "enfant": {
+     "sans": 125.6,
+     "avec": 135.0
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 530.7,
+     "avec": 570.0
+    },
+    "jeune": {
+     "sans": 451.1,
+     "avec": 484.5
+    },
+    "enfant": {
+     "sans": 159.3,
+     "avec": 171.0
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 446.4,
+     "avec": 479.9
+    },
+    "jeune": {
+     "sans": 334.8,
+     "avec": 360.0
+    },
+    "enfant": {
+     "sans": 111.6,
+     "avec": 120.0
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 705.5,
+     "avec": 740.8
+    },
+    "jeune": {
+     "sans": 494.0,
+     "avec": 518.7
+    },
+    "enfant": {
+     "sans": 197.8,
+     "avec": 207.7
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 561.8,
+     "avec": 604.0
+    },
+    "jeune": {
+     "sans": 404.5,
+     "avec": 434.9
+    },
+    "enfant": {
+     "sans": 280.9,
+     "avec": 302.0
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 547.8,
+     "avec": 589.0
+    },
+    "jeune": {
+     "sans": 493.0,
+     "avec": 530.1
+    },
+    "enfant": {
+     "sans": 137.0,
+     "avec": 147.3
+    }
+   }
+  ],
+  "BG": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 175.8,
+     "avec": 185.0
+    },
+    "jeune": {
+     "sans": 171.0,
+     "avec": 180.0
+    },
+    "enfant": {
+     "sans": 61.8,
+     "avec": 65.0
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 155.4,
+     "avec": 167.0
+    },
+    "jeune": {
+     "sans": 150.7,
+     "avec": 162.0
+    },
+    "enfant": {
+     "sans": 54.5,
+     "avec": 58.5
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 239.2,
+     "avec": 252.0
+    },
+    "jeune": {
+     "sans": 191.4,
+     "avec": 201.6
+    },
+    "enfant": {
+     "sans": 59.8,
+     "avec": 63.0
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 251.1,
+     "avec": 270.0
+    },
+    "jeune": {
+     "sans": 188.3,
+     "avec": 202.5
+    },
+    "enfant": {
+     "sans": 55.2,
+     "avec": 59.4
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 210.2,
+     "avec": 226.0
+    },
+    "jeune": {
+     "sans": 189.2,
+     "avec": 203.4
+    },
+    "enfant": {
+     "sans": 48.3,
+     "avec": 51.9
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 181.4,
+     "avec": 195.0
+    },
+    "jeune": {
+     "sans": 167.4,
+     "avec": 180.0
+    },
+    "enfant": {
+     "sans": 53.9,
+     "avec": 58.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 327.3,
+     "avec": 351.9
+    },
+    "jeune": {
+     "sans": 262.0,
+     "avec": 281.7
+    },
+    "enfant": {
+     "sans": 125.6,
+     "avec": 135.0
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 251.4,
+     "avec": 270.0
+    },
+    "jeune": {
+     "sans": 213.7,
+     "avec": 229.5
+    },
+    "enfant": {
+     "sans": 75.5,
+     "avec": 81.0
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 256.7,
+     "avec": 276.0
+    },
+    "jeune": {
+     "sans": 192.6,
+     "avec": 207.0
+    },
+    "enfant": {
+     "sans": 64.2,
+     "avec": 69.0
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 463.0,
+     "avec": 486.1
+    },
+    "jeune": {
+     "sans": 324.2,
+     "avec": 340.4
+    },
+    "enfant": {
+     "sans": 129.9,
+     "avec": 136.4
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 227.9,
+     "avec": 245.0
+    },
+    "jeune": {
+     "sans": 164.1,
+     "avec": 176.4
+    },
+    "enfant": {
+     "sans": 114.0,
+     "avec": 122.5
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 205.6,
+     "avec": 221.0
+    },
+    "jeune": {
+     "sans": 185.0,
+     "avec": 198.9
+    },
+    "enfant": {
+     "sans": 51.5,
+     "avec": 55.3
+    }
+   }
+  ],
+  "CY": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 175.8,
+     "avec": 185.0
+    },
+    "jeune": {
+     "sans": 171.0,
+     "avec": 180.0
+    },
+    "enfant": {
+     "sans": 61.8,
+     "avec": 65.0
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 155.4,
+     "avec": 167.0
+    },
+    "jeune": {
+     "sans": 150.7,
+     "avec": 162.0
+    },
+    "enfant": {
+     "sans": 54.5,
+     "avec": 58.5
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 239.2,
+     "avec": 252.0
+    },
+    "jeune": {
+     "sans": 191.4,
+     "avec": 201.6
+    },
+    "enfant": {
+     "sans": 59.8,
+     "avec": 63.0
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 158.1,
+     "avec": 170.0
+    },
+    "jeune": {
+     "sans": 118.6,
+     "avec": 127.5
+    },
+    "enfant": {
+     "sans": 34.8,
+     "avec": 37.4
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 210.2,
+     "avec": 226.0
+    },
+    "jeune": {
+     "sans": 189.2,
+     "avec": 203.4
+    },
+    "enfant": {
+     "sans": 48.3,
+     "avec": 51.9
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 241.8,
+     "avec": 260.0
+    },
+    "jeune": {
+     "sans": 223.2,
+     "avec": 240.0
+    },
+    "enfant": {
+     "sans": 72.5,
+     "avec": 78.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 327.3,
+     "avec": 351.9
+    },
+    "jeune": {
+     "sans": 262.0,
+     "avec": 281.7
+    },
+    "enfant": {
+     "sans": 125.6,
+     "avec": 135.0
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 251.4,
+     "avec": 270.0
+    },
+    "jeune": {
+     "sans": 213.7,
+     "avec": 229.5
+    },
+    "enfant": {
+     "sans": 75.5,
+     "avec": 81.0
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 383.1,
+     "avec": 411.9
+    },
+    "jeune": {
+     "sans": 287.4,
+     "avec": 309.0
+    },
+    "enfant": {
+     "sans": 95.8,
+     "avec": 103.0
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 422.3,
+     "avec": 443.4
+    },
+    "jeune": {
+     "sans": 295.7,
+     "avec": 310.5
+    },
+    "enfant": {
+     "sans": 118.5,
+     "avec": 124.4
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 227.9,
+     "avec": 245.0
+    },
+    "jeune": {
+     "sans": 164.1,
+     "avec": 176.4
+    },
+    "enfant": {
+     "sans": 114.0,
+     "avec": 122.5
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 227.9,
+     "avec": 245.0
+    },
+    "jeune": {
+     "sans": 205.1,
+     "avec": 220.5
+    },
+    "enfant": {
+     "sans": 57.1,
+     "avec": 61.3
+    }
+   }
+  ],
+  "CZ": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 202.4,
+     "avec": 213.0
+    },
+    "jeune": {
+     "sans": 197.6,
+     "avec": 208.0
+    },
+    "enfant": {
+     "sans": 71.3,
+     "avec": 75.0
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 155.4,
+     "avec": 167.0
+    },
+    "jeune": {
+     "sans": 150.7,
+     "avec": 162.0
+    },
+    "enfant": {
+     "sans": 54.5,
+     "avec": 58.5
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 239.2,
+     "avec": 252.0
+    },
+    "jeune": {
+     "sans": 191.4,
+     "avec": 201.6
+    },
+    "enfant": {
+     "sans": 59.8,
+     "avec": 63.0
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 167.4,
+     "avec": 180.0
+    },
+    "jeune": {
+     "sans": 125.6,
+     "avec": 135.0
+    },
+    "enfant": {
+     "sans": 36.8,
+     "avec": 39.6
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 210.2,
+     "avec": 226.0
+    },
+    "jeune": {
+     "sans": 189.2,
+     "avec": 203.4
+    },
+    "enfant": {
+     "sans": 48.3,
+     "avec": 51.9
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 181.4,
+     "avec": 195.0
+    },
+    "jeune": {
+     "sans": 167.4,
+     "avec": 180.0
+    },
+    "enfant": {
+     "sans": 53.9,
+     "avec": 58.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 327.3,
+     "avec": 351.9
+    },
+    "jeune": {
+     "sans": 262.0,
+     "avec": 281.7
+    },
+    "enfant": {
+     "sans": 125.6,
+     "avec": 135.0
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 251.4,
+     "avec": 270.0
+    },
+    "jeune": {
+     "sans": 213.7,
+     "avec": 229.5
+    },
+    "enfant": {
+     "sans": 75.5,
+     "avec": 81.0
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 283.6,
+     "avec": 304.9
+    },
+    "jeune": {
+     "sans": 212.7,
+     "avec": 228.7
+    },
+    "enfant": {
+     "sans": 71.0,
+     "avec": 76.3
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 467.7,
+     "avec": 491.1
+    },
+    "jeune": {
+     "sans": 327.5,
+     "avec": 343.9
+    },
+    "enfant": {
+     "sans": 131.3,
+     "avec": 137.8
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 227.9,
+     "avec": 245.0
+    },
+    "jeune": {
+     "sans": 164.1,
+     "avec": 176.4
+    },
+    "enfant": {
+     "sans": 114.0,
+     "avec": 122.5
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 205.6,
+     "avec": 221.0
+    },
+    "jeune": {
+     "sans": 185.0,
+     "avec": 198.9
+    },
+    "enfant": {
+     "sans": 51.5,
+     "avec": 55.3
+    }
+   }
+  ],
+  "DE": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 528.2,
+     "avec": 556.0
+    },
+    "jeune": {
+     "sans": 523.5,
+     "avec": 551.0
+    },
+    "enfant": {
+     "sans": 185.3,
+     "avec": 195.0
+    }
+   },
+   {
+    "nom": "Aquilana",
+    "no": 32,
+    "adulte": {
+     "sans": 503.1,
+     "avec": 540.9
+    },
+    "jeune": {
+     "sans": 372.3,
+     "avec": 400.3
+    },
+    "enfant": {
+     "sans": 115.8,
+     "avec": 124.5
+    },
+    "enfant3": {
+     "sans": 57.9,
+     "avec": 62.25
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 484.6,
+     "avec": 521.0
+    },
+    "jeune": {
+     "sans": 470.1,
+     "avec": 505.4
+    },
+    "enfant": {
+     "sans": 168.9,
+     "avec": 181.6
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 500.1,
+     "avec": 526.9
+    },
+    "jeune": {
+     "sans": 400.1,
+     "avec": 421.6
+    },
+    "enfant": {
+     "sans": 125.1,
+     "avec": 131.8
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 697.5,
+     "avec": 750.0
+    },
+    "jeune": {
+     "sans": 523.1,
+     "avec": 562.5
+    },
+    "enfant": {
+     "sans": 153.5,
+     "avec": 165.0
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 358.1,
+     "avec": 385.0
+    },
+    "jeune": {
+     "sans": 322.3,
+     "avec": 346.5
+    },
+    "enfant": {
+     "sans": 82.4,
+     "avec": 88.5
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 348.8,
+     "avec": 375.0
+    },
+    "jeune": {
+     "sans": 321.8,
+     "avec": 346.0
+    },
+    "enfant": {
+     "sans": 104.2,
+     "avec": 112.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 327.3,
+     "avec": 351.9
+    },
+    "jeune": {
+     "sans": 262.0,
+     "avec": 281.7
+    },
+    "enfant": {
+     "sans": 125.6,
+     "avec": 135.0
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 661.1,
+     "avec": 710.0
+    },
+    "jeune": {
+     "sans": 561.9,
+     "avec": 603.5
+    },
+    "enfant": {
+     "sans": 198.4,
+     "avec": 213.0
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 252.0,
+     "avec": 270.9
+    },
+    "jeune": {
+     "sans": 189.0,
+     "avec": 203.2
+    },
+    "enfant": {
+     "sans": 63.1,
+     "avec": 67.8
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 1165.7,
+     "avec": 1224.0
+    },
+    "jeune": {
+     "sans": 816.1,
+     "avec": 856.9
+    },
+    "enfant": {
+     "sans": 326.7,
+     "avec": 343.0
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 243.7,
+     "avec": 262.0
+    },
+    "jeune": {
+     "sans": 175.5,
+     "avec": 188.7
+    },
+    "enfant": {
+     "sans": 121.9,
+     "avec": 131.0
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 565.5,
+     "avec": 608.0
+    },
+    "jeune": {
+     "sans": 508.9,
+     "avec": 547.2
+    },
+    "enfant": {
+     "sans": 141.4,
+     "avec": 152.0
+    }
+   }
+  ],
+  "DK": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 439.9,
+     "avec": 463.0
+    },
+    "jeune": {
+     "sans": 435.1,
+     "avec": 458.0
+    },
+    "enfant": {
+     "sans": 153.9,
+     "avec": 162.0
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 386.0,
+     "avec": 415.0
+    },
+    "jeune": {
+     "sans": 374.5,
+     "avec": 402.6
+    },
+    "enfant": {
+     "sans": 130.1,
+     "avec": 139.8
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 563.5,
+     "avec": 593.7
+    },
+    "jeune": {
+     "sans": 450.8,
+     "avec": 475.0
+    },
+    "enfant": {
+     "sans": 141.0,
+     "avec": 148.5
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 446.4,
+     "avec": 480.0
+    },
+    "jeune": {
+     "sans": 334.8,
+     "avec": 360.0
+    },
+    "enfant": {
+     "sans": 98.2,
+     "avec": 105.6
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 334.8,
+     "avec": 360.0
+    },
+    "jeune": {
+     "sans": 301.4,
+     "avec": 324.0
+    },
+    "enfant": {
+     "sans": 77.1,
+     "avec": 82.8
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 267.8,
+     "avec": 288.0
+    },
+    "jeune": {
+     "sans": 247.4,
+     "avec": 266.0
+    },
+    "enfant": {
+     "sans": 80.0,
+     "avec": 86.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 327.3,
+     "avec": 351.9
+    },
+    "jeune": {
+     "sans": 262.0,
+     "avec": 281.7
+    },
+    "enfant": {
+     "sans": 125.6,
+     "avec": 135.0
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 465.5,
+     "avec": 500.0
+    },
+    "jeune": {
+     "sans": 395.7,
+     "avec": 425.0
+    },
+    "enfant": {
+     "sans": 139.7,
+     "avec": 150.0
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 353.4,
+     "avec": 379.9
+    },
+    "jeune": {
+     "sans": 265.1,
+     "avec": 285.0
+    },
+    "enfant": {
+     "sans": 88.4,
+     "avec": 95.0
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 545.3,
+     "avec": 572.5
+    },
+    "jeune": {
+     "sans": 381.8,
+     "avec": 400.9
+    },
+    "enfant": {
+     "sans": 153.0,
+     "avec": 160.6
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 486.4,
+     "avec": 523.0
+    },
+    "jeune": {
+     "sans": 350.3,
+     "avec": 376.6
+    },
+    "enfant": {
+     "sans": 243.2,
+     "avec": 261.5
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 466.9,
+     "avec": 502.0
+    },
+    "jeune": {
+     "sans": 420.2,
+     "avec": 451.8
+    },
+    "enfant": {
+     "sans": 116.8,
+     "avec": 125.5
+    }
+   }
+  ],
+  "EE": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 175.8,
+     "avec": 185.0
+    },
+    "jeune": {
+     "sans": 171.0,
+     "avec": 180.0
+    },
+    "enfant": {
+     "sans": 61.8,
+     "avec": 65.0
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 141.4,
+     "avec": 152.0
+    },
+    "jeune": {
+     "sans": 137.1,
+     "avec": 147.4
+    },
+    "enfant": {
+     "sans": 49.5,
+     "avec": 53.2
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 239.2,
+     "avec": 252.0
+    },
+    "jeune": {
+     "sans": 191.4,
+     "avec": 201.6
+    },
+    "enfant": {
+     "sans": 59.8,
+     "avec": 63.0
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 279.0,
+     "avec": 300.0
+    },
+    "jeune": {
+     "sans": 209.3,
+     "avec": 225.0
+    },
+    "enfant": {
+     "sans": 61.4,
+     "avec": 66.0
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 210.2,
+     "avec": 226.0
+    },
+    "jeune": {
+     "sans": 189.2,
+     "avec": 203.4
+    },
+    "enfant": {
+     "sans": 48.3,
+     "avec": 51.9
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 181.4,
+     "avec": 195.0
+    },
+    "jeune": {
+     "sans": 167.4,
+     "avec": 180.0
+    },
+    "enfant": {
+     "sans": 53.9,
+     "avec": 58.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 327.3,
+     "avec": 351.9
+    },
+    "jeune": {
+     "sans": 262.0,
+     "avec": 281.7
+    },
+    "enfant": {
+     "sans": 125.6,
+     "avec": 135.0
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 251.4,
+     "avec": 270.0
+    },
+    "jeune": {
+     "sans": 213.7,
+     "avec": 229.5
+    },
+    "enfant": {
+     "sans": 75.5,
+     "avec": 81.0
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 164.8,
+     "avec": 177.1
+    },
+    "jeune": {
+     "sans": 123.6,
+     "avec": 132.9
+    },
+    "enfant": {
+     "sans": 41.2,
+     "avec": 44.3
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 422.3,
+     "avec": 443.4
+    },
+    "jeune": {
+     "sans": 295.7,
+     "avec": 310.5
+    },
+    "enfant": {
+     "sans": 118.5,
+     "avec": 124.4
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 227.9,
+     "avec": 245.0
+    },
+    "jeune": {
+     "sans": 164.1,
+     "avec": 176.4
+    },
+    "enfant": {
+     "sans": 114.0,
+     "avec": 122.5
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 205.6,
+     "avec": 221.0
+    },
+    "jeune": {
+     "sans": 185.0,
+     "avec": 198.9
+    },
+    "enfant": {
+     "sans": 51.5,
+     "avec": 55.3
+    }
+   }
+  ],
+  "ES": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 336.3,
+     "avec": 354.0
+    },
+    "jeune": {
+     "sans": 331.6,
+     "avec": 349.0
+    },
+    "enfant": {
+     "sans": 117.8,
+     "avec": 124.0
+    }
+   },
+   {
+    "nom": "Aquilana",
+    "no": 32,
+    "adulte": {
+     "sans": 454.7,
+     "avec": 488.9
+    },
+    "jeune": {
+     "sans": 336.5,
+     "avec": 361.8
+    },
+    "enfant": {
+     "sans": 104.7,
+     "avec": 112.5
+    },
+    "enfant3": {
+     "sans": 52.35,
+     "avec": 56.25
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 361.8,
+     "avec": 389.0
+    },
+    "jeune": {
+     "sans": 350.9,
+     "avec": 377.3
+    },
+    "enfant": {
+     "sans": 126.3,
+     "avec": 135.7
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 529.5,
+     "avec": 557.9
+    },
+    "jeune": {
+     "sans": 423.7,
+     "avec": 446.4
+    },
+    "enfant": {
+     "sans": 132.4,
+     "avec": 139.5
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 446.4,
+     "avec": 480.0
+    },
+    "jeune": {
+     "sans": 334.8,
+     "avec": 360.0
+    },
+    "enfant": {
+     "sans": 98.2,
+     "avec": 105.6
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 330.2,
+     "avec": 355.0
+    },
+    "jeune": {
+     "sans": 297.2,
+     "avec": 319.5
+    },
+    "enfant": {
+     "sans": 75.9,
+     "avec": 81.6
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 325.5,
+     "avec": 350.0
+    },
+    "jeune": {
+     "sans": 300.4,
+     "avec": 323.0
+    },
+    "enfant": {
+     "sans": 97.7,
+     "avec": 105.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 327.3,
+     "avec": 351.9
+    },
+    "jeune": {
+     "sans": 262.0,
+     "avec": 281.7
+    },
+    "enfant": {
+     "sans": 125.6,
+     "avec": 135.0
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 465.5,
+     "avec": 500.0
+    },
+    "jeune": {
+     "sans": 395.7,
+     "avec": 425.0
+    },
+    "enfant": {
+     "sans": 139.7,
+     "avec": 150.0
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 391.7,
+     "avec": 421.1
+    },
+    "jeune": {
+     "sans": 293.8,
+     "avec": 315.9
+    },
+    "enfant": {
+     "sans": 98.0,
+     "avec": 105.3
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 463.2,
+     "avec": 486.3
+    },
+    "jeune": {
+     "sans": 324.3,
+     "avec": 340.5
+    },
+    "enfant": {
+     "sans": 130.0,
+     "avec": 136.5
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 419.5,
+     "avec": 451.0
+    },
+    "jeune": {
+     "sans": 302.1,
+     "avec": 324.8
+    },
+    "enfant": {
+     "sans": 209.8,
+     "avec": 225.5
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 387.9,
+     "avec": 417.0
+    },
+    "jeune": {
+     "sans": 349.1,
+     "avec": 375.3
+    },
+    "enfant": {
+     "sans": 97.0,
+     "avec": 104.3
+    }
+   }
+  ],
+  "FI": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 481.7,
+     "avec": 507.0
+    },
+    "jeune": {
+     "sans": 476.9,
+     "avec": 502.0
+    },
+    "enfant": {
+     "sans": 168.2,
+     "avec": 177.0
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 386.0,
+     "avec": 415.0
+    },
+    "jeune": {
+     "sans": 374.5,
+     "avec": 402.6
+    },
+    "enfant": {
+     "sans": 133.1,
+     "avec": 143.1
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 563.5,
+     "avec": 593.7
+    },
+    "jeune": {
+     "sans": 450.8,
+     "avec": 475.0
+    },
+    "enfant": {
+     "sans": 141.0,
+     "avec": 148.5
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 353.4,
+     "avec": 380.0
+    },
+    "jeune": {
+     "sans": 265.1,
+     "avec": 285.0
+    },
+    "enfant": {
+     "sans": 77.7,
+     "avec": 83.6
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 334.8,
+     "avec": 360.0
+    },
+    "jeune": {
+     "sans": 301.4,
+     "avec": 324.0
+    },
+    "enfant": {
+     "sans": 77.1,
+     "avec": 82.8
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 314.3,
+     "avec": 338.0
+    },
+    "jeune": {
+     "sans": 290.2,
+     "avec": 312.0
+    },
+    "enfant": {
+     "sans": 93.9,
+     "avec": 101.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 327.3,
+     "avec": 351.9
+    },
+    "jeune": {
+     "sans": 262.0,
+     "avec": 281.7
+    },
+    "enfant": {
+     "sans": 125.6,
+     "avec": 135.0
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 465.5,
+     "avec": 500.0
+    },
+    "jeune": {
+     "sans": 395.7,
+     "avec": 425.0
+    },
+    "enfant": {
+     "sans": 139.7,
+     "avec": 150.0
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 410.1,
+     "avec": 440.9
+    },
+    "jeune": {
+     "sans": 307.6,
+     "avec": 330.7
+    },
+    "enfant": {
+     "sans": 102.6,
+     "avec": 110.3
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 565.1,
+     "avec": 593.3
+    },
+    "jeune": {
+     "sans": 395.6,
+     "avec": 415.4
+    },
+    "enfant": {
+     "sans": 158.5,
+     "avec": 166.4
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 486.4,
+     "avec": 523.0
+    },
+    "jeune": {
+     "sans": 350.3,
+     "avec": 376.6
+    },
+    "enfant": {
+     "sans": 243.2,
+     "avec": 261.5
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 466.9,
+     "avec": 502.0
+    },
+    "jeune": {
+     "sans": 420.2,
+     "avec": 451.8
+    },
+    "enfant": {
+     "sans": 116.8,
+     "avec": 125.5
+    }
+   }
+  ],
+  "FR": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 489.3,
+     "avec": 515.0
+    },
+    "jeune": {
+     "sans": 484.5,
+     "avec": 510.0
+    },
+    "enfant": {
+     "sans": 171.0,
+     "avec": 180.0
+    }
+   },
+   {
+    "nom": "Aquilana",
+    "no": 32,
+    "adulte": {
+     "sans": 724.1,
+     "avec": 778.6
+    },
+    "jeune": {
+     "sans": 535.9,
+     "avec": 576.2
+    },
+    "enfant": {
+     "sans": 166.6,
+     "avec": 179.1
+    },
+    "enfant3": {
+     "sans": 83.3,
+     "avec": 89.55
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 439.9,
+     "avec": 473.0
+    },
+    "jeune": {
+     "sans": 426.7,
+     "avec": 458.8
+    },
+    "enfant": {
+     "sans": 139.8,
+     "avec": 150.3
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 652.1,
+     "avec": 687.1
+    },
+    "jeune": {
+     "sans": 521.7,
+     "avec": 549.7
+    },
+    "enfant": {
+     "sans": 163.1,
+     "avec": 171.8
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 697.5,
+     "avec": 750.0
+    },
+    "jeune": {
+     "sans": 523.1,
+     "avec": 562.5
+    },
+    "enfant": {
+     "sans": 153.5,
+     "avec": 165.0
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 209.3,
+     "avec": 225.0
+    },
+    "jeune": {
+     "sans": 188.4,
+     "avec": 202.5
+    },
+    "enfant": {
+     "sans": 48.1,
+     "avec": 51.7
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 823.1,
+     "avec": 885.0
+    },
+    "jeune": {
+     "sans": 760.7,
+     "avec": 818.0
+    },
+    "enfant": {
+     "sans": 246.5,
+     "avec": 265.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 345.4,
+     "avec": 371.3
+    },
+    "jeune": {
+     "sans": 276.4,
+     "avec": 297.1
+    },
+    "enfant": {
+     "sans": 115.2,
+     "avec": 123.8
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 474.9,
+     "avec": 510.0
+    },
+    "jeune": {
+     "sans": 403.6,
+     "avec": 433.5
+    },
+    "enfant": {
+     "sans": 142.5,
+     "avec": 153.0
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 237.8,
+     "avec": 255.6
+    },
+    "jeune": {
+     "sans": 178.3,
+     "avec": 191.7
+    },
+    "enfant": {
+     "sans": 59.5,
+     "avec": 63.9
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 755.4,
+     "avec": 793.1
+    },
+    "jeune": {
+     "sans": 528.9,
+     "avec": 555.3
+    },
+    "enfant": {
+     "sans": 211.8,
+     "avec": 222.4
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 461.3,
+     "avec": 496.0
+    },
+    "jeune": {
+     "sans": 332.2,
+     "avec": 357.2
+    },
+    "enfant": {
+     "sans": 230.7,
+     "avec": 248.0
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 597.1,
+     "avec": 642.0
+    },
+    "jeune": {
+     "sans": 537.4,
+     "avec": 577.8
+    },
+    "enfant": {
+     "sans": 149.3,
+     "avec": 160.5
+    }
+   }
+  ],
+  "GR": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 257.5,
+     "avec": 271.0
+    },
+    "jeune": {
+     "sans": 252.7,
+     "avec": 266.0
+    },
+    "enfant": {
+     "sans": 90.3,
+     "avec": 95.0
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 239.1,
+     "avec": 257.0
+    },
+    "jeune": {
+     "sans": 231.9,
+     "avec": 249.3
+    },
+    "enfant": {
+     "sans": 83.6,
+     "avec": 89.8
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 357.7,
+     "avec": 376.9
+    },
+    "jeune": {
+     "sans": 286.3,
+     "avec": 301.6
+    },
+    "enfant": {
+     "sans": 89.5,
+     "avec": 94.3
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 251.1,
+     "avec": 270.0
+    },
+    "jeune": {
+     "sans": 188.3,
+     "avec": 202.5
+    },
+    "enfant": {
+     "sans": 55.2,
+     "avec": 59.4
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 230.7,
+     "avec": 248.0
+    },
+    "jeune": {
+     "sans": 207.6,
+     "avec": 223.2
+    },
+    "enfant": {
+     "sans": 53.1,
+     "avec": 57.0
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 162.8,
+     "avec": 175.0
+    },
+    "jeune": {
+     "sans": 149.7,
+     "avec": 161.0
+    },
+    "enfant": {
+     "sans": 48.4,
+     "avec": 52.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 327.3,
+     "avec": 351.9
+    },
+    "jeune": {
+     "sans": 262.0,
+     "avec": 281.7
+    },
+    "enfant": {
+     "sans": 125.6,
+     "avec": 135.0
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 325.9,
+     "avec": 350.0
+    },
+    "jeune": {
+     "sans": 277.0,
+     "avec": 297.5
+    },
+    "enfant": {
+     "sans": 97.8,
+     "avec": 105.0
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 292.9,
+     "avec": 314.9
+    },
+    "jeune": {
+     "sans": 219.7,
+     "avec": 236.2
+    },
+    "enfant": {
+     "sans": 73.3,
+     "avec": 78.8
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 463.0,
+     "avec": 486.1
+    },
+    "jeune": {
+     "sans": 324.2,
+     "avec": 340.4
+    },
+    "enfant": {
+     "sans": 129.9,
+     "avec": 136.4
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 279.0,
+     "avec": 300.0
+    },
+    "jeune": {
+     "sans": 200.9,
+     "avec": 216.0
+    },
+    "enfant": {
+     "sans": 139.5,
+     "avec": 150.0
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 290.2,
+     "avec": 312.0
+    },
+    "jeune": {
+     "sans": 261.2,
+     "avec": 280.8
+    },
+    "enfant": {
+     "sans": 72.6,
+     "avec": 78.0
+    }
+   }
+  ],
+  "HR": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 375.3,
+     "avec": 395.0
+    },
+    "jeune": {
+     "sans": 370.5,
+     "avec": 390.0
+    },
+    "enfant": {
+     "sans": 131.1,
+     "avec": 138.0
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 186.0,
+     "avec": 200.0
+    },
+    "jeune": {
+     "sans": 180.5,
+     "avec": 194.0
+    },
+    "enfant": {
+     "sans": 65.2,
+     "avec": 70.1
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 239.2,
+     "avec": 252.0
+    },
+    "jeune": {
+     "sans": 191.4,
+     "avec": 201.6
+    },
+    "enfant": {
+     "sans": 59.8,
+     "avec": 63.0
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 195.3,
+     "avec": 210.0
+    },
+    "jeune": {
+     "sans": 146.5,
+     "avec": 157.5
+    },
+    "enfant": {
+     "sans": 43.0,
+     "avec": 46.2
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 210.2,
+     "avec": 226.0
+    },
+    "jeune": {
+     "sans": 189.2,
+     "avec": 203.4
+    },
+    "enfant": {
+     "sans": 48.3,
+     "avec": 51.9
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 213.9,
+     "avec": 230.0
+    },
+    "jeune": {
+     "sans": 197.2,
+     "avec": 212.0
+    },
+    "enfant": {
+     "sans": 64.2,
+     "avec": 69.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 327.3,
+     "avec": 351.9
+    },
+    "jeune": {
+     "sans": 262.0,
+     "avec": 281.7
+    },
+    "enfant": {
+     "sans": 125.6,
+     "avec": 135.0
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 251.4,
+     "avec": 270.0
+    },
+    "jeune": {
+     "sans": 213.7,
+     "avec": 229.5
+    },
+    "enfant": {
+     "sans": 75.5,
+     "avec": 81.0
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 261.2,
+     "avec": 280.8
+    },
+    "jeune": {
+     "sans": 195.9,
+     "avec": 210.6
+    },
+    "enfant": {
+     "sans": 65.3,
+     "avec": 70.2
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 492.4,
+     "avec": 517.0
+    },
+    "jeune": {
+     "sans": 344.8,
+     "avec": 362.0
+    },
+    "enfant": {
+     "sans": 138.1,
+     "avec": 145.0
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 227.9,
+     "avec": 245.0
+    },
+    "jeune": {
+     "sans": 164.1,
+     "avec": 176.4
+    },
+    "enfant": {
+     "sans": 114.0,
+     "avec": 122.5
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 205.6,
+     "avec": 221.0
+    },
+    "jeune": {
+     "sans": 185.0,
+     "avec": 198.9
+    },
+    "enfant": {
+     "sans": 51.5,
+     "avec": 55.3
+    }
+   }
+  ],
+  "HU": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 209.0,
+     "avec": 220.0
+    },
+    "jeune": {
+     "sans": 204.3,
+     "avec": 215.0
+    },
+    "enfant": {
+     "sans": 73.2,
+     "avec": 77.0
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 213.9,
+     "avec": 230.0
+    },
+    "jeune": {
+     "sans": 207.5,
+     "avec": 223.1
+    },
+    "enfant": {
+     "sans": 74.9,
+     "avec": 80.5
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 256.2,
+     "avec": 269.9
+    },
+    "jeune": {
+     "sans": 205.0,
+     "avec": 216.0
+    },
+    "enfant": {
+     "sans": 64.1,
+     "avec": 67.5
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 390.6,
+     "avec": 420.0
+    },
+    "jeune": {
+     "sans": 293.0,
+     "avec": 315.0
+    },
+    "enfant": {
+     "sans": 85.9,
+     "avec": 92.4
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 210.2,
+     "avec": 226.0
+    },
+    "jeune": {
+     "sans": 189.2,
+     "avec": 203.4
+    },
+    "enfant": {
+     "sans": 48.3,
+     "avec": 51.9
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 204.6,
+     "avec": 220.0
+    },
+    "jeune": {
+     "sans": 188.8,
+     "avec": 203.0
+    },
+    "enfant": {
+     "sans": 61.4,
+     "avec": 66.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 327.3,
+     "avec": 351.9
+    },
+    "jeune": {
+     "sans": 262.0,
+     "avec": 281.7
+    },
+    "enfant": {
+     "sans": 125.6,
+     "avec": 135.0
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 251.4,
+     "avec": 270.0
+    },
+    "jeune": {
+     "sans": 213.7,
+     "avec": 229.5
+    },
+    "enfant": {
+     "sans": 75.5,
+     "avec": 81.0
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 332.9,
+     "avec": 357.9
+    },
+    "jeune": {
+     "sans": 249.8,
+     "avec": 268.5
+    },
+    "enfant": {
+     "sans": 83.3,
+     "avec": 89.5
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 283.1,
+     "avec": 297.2
+    },
+    "jeune": {
+     "sans": 198.3,
+     "avec": 208.2
+    },
+    "enfant": {
+     "sans": 79.5,
+     "avec": 83.5
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 227.9,
+     "avec": 245.0
+    },
+    "jeune": {
+     "sans": 164.1,
+     "avec": 176.4
+    },
+    "enfant": {
+     "sans": 114.0,
+     "avec": 122.5
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 205.6,
+     "avec": 221.0
+    },
+    "jeune": {
+     "sans": 185.0,
+     "avec": 198.9
+    },
+    "enfant": {
+     "sans": 51.5,
+     "avec": 55.3
+    }
+   }
+  ],
+  "IE": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 484.5,
+     "avec": 510.0
+    },
+    "jeune": {
+     "sans": 479.8,
+     "avec": 505.0
+    },
+    "enfant": {
+     "sans": 170.1,
+     "avec": 179.0
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 404.6,
+     "avec": 435.0
+    },
+    "jeune": {
+     "sans": 392.5,
+     "avec": 422.0
+    },
+    "enfant": {
+     "sans": 130.2,
+     "avec": 140.0
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 563.5,
+     "avec": 593.7
+    },
+    "jeune": {
+     "sans": 450.8,
+     "avec": 475.0
+    },
+    "enfant": {
+     "sans": 141.0,
+     "avec": 148.5
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 539.4,
+     "avec": 580.0
+    },
+    "jeune": {
+     "sans": 404.6,
+     "avec": 435.0
+    },
+    "enfant": {
+     "sans": 118.7,
+     "avec": 127.6
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 365.5,
+     "avec": 393.0
+    },
+    "jeune": {
+     "sans": 329.0,
+     "avec": 353.7
+    },
+    "enfant": {
+     "sans": 84.0,
+     "avec": 90.3
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 502.2,
+     "avec": 540.0
+    },
+    "jeune": {
+     "sans": 464.1,
+     "avec": 499.0
+    },
+    "enfant": {
+     "sans": 150.7,
+     "avec": 162.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 327.3,
+     "avec": 351.9
+    },
+    "jeune": {
+     "sans": 262.0,
+     "avec": 281.7
+    },
+    "enfant": {
+     "sans": 125.6,
+     "avec": 135.0
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 465.5,
+     "avec": 500.0
+    },
+    "jeune": {
+     "sans": 395.7,
+     "avec": 425.0
+    },
+    "enfant": {
+     "sans": 139.7,
+     "avec": 150.0
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 334.8,
+     "avec": 359.9
+    },
+    "jeune": {
+     "sans": 251.1,
+     "avec": 270.0
+    },
+    "enfant": {
+     "sans": 83.7,
+     "avec": 90.0
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 570.6,
+     "avec": 599.1
+    },
+    "jeune": {
+     "sans": 399.5,
+     "avec": 419.5
+    },
+    "enfant": {
+     "sans": 160.0,
+     "avec": 168.0
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 507.8,
+     "avec": 546.0
+    },
+    "jeune": {
+     "sans": 365.7,
+     "avec": 393.2
+    },
+    "enfant": {
+     "sans": 253.9,
+     "avec": 273.0
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 486.4,
+     "avec": 523.0
+    },
+    "jeune": {
+     "sans": 437.8,
+     "avec": 470.7
+    },
+    "enfant": {
+     "sans": 121.7,
+     "avec": 130.8
+    }
+   }
+  ],
+  "IS": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 439.9,
+     "avec": 463.0
+    },
+    "jeune": {
+     "sans": 435.1,
+     "avec": 458.0
+    },
+    "enfant": {
+     "sans": 153.9,
+     "avec": 162.0
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 386.0,
+     "avec": 415.0
+    },
+    "jeune": {
+     "sans": 374.5,
+     "avec": 402.6
+    },
+    "enfant": {
+     "sans": 135.2,
+     "avec": 145.3
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 563.5,
+     "avec": 593.7
+    },
+    "jeune": {
+     "sans": 450.8,
+     "avec": 475.0
+    },
+    "enfant": {
+     "sans": 141.0,
+     "avec": 148.5
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 399.9,
+     "avec": 430.0
+    },
+    "jeune": {
+     "sans": 299.9,
+     "avec": 322.5
+    },
+    "enfant": {
+     "sans": 88.0,
+     "avec": 94.6
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 334.8,
+     "avec": 360.0
+    },
+    "jeune": {
+     "sans": 301.4,
+     "avec": 324.0
+    },
+    "enfant": {
+     "sans": 77.1,
+     "avec": 82.8
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 314.3,
+     "avec": 338.0
+    },
+    "jeune": {
+     "sans": 290.2,
+     "avec": 312.0
+    },
+    "enfant": {
+     "sans": 93.9,
+     "avec": 101.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 327.3,
+     "avec": 351.9
+    },
+    "jeune": {
+     "sans": 262.0,
+     "avec": 281.7
+    },
+    "enfant": {
+     "sans": 125.6,
+     "avec": 135.0
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 465.5,
+     "avec": 500.0
+    },
+    "jeune": {
+     "sans": 395.7,
+     "avec": 425.0
+    },
+    "enfant": {
+     "sans": 139.7,
+     "avec": 150.0
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 371.4,
+     "avec": 399.3
+    },
+    "jeune": {
+     "sans": 278.6,
+     "avec": 299.5
+    },
+    "enfant": {
+     "sans": 93.0,
+     "avec": 99.9
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 497.5,
+     "avec": 522.4
+    },
+    "jeune": {
+     "sans": 348.4,
+     "avec": 365.8
+    },
+    "enfant": {
+     "sans": 139.6,
+     "avec": 146.6
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 486.4,
+     "avec": 523.0
+    },
+    "jeune": {
+     "sans": 350.3,
+     "avec": 376.6
+    },
+    "enfant": {
+     "sans": 243.2,
+     "avec": 261.5
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 466.9,
+     "avec": 502.0
+    },
+    "jeune": {
+     "sans": 420.2,
+     "avec": 451.8
+    },
+    "enfant": {
+     "sans": 116.8,
+     "avec": 125.5
+    }
+   }
+  ],
+  "IT": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 390.5,
+     "avec": 411.0
+    },
+    "jeune": {
+     "sans": 385.7,
+     "avec": 406.0
+    },
+    "enfant": {
+     "sans": 136.8,
+     "avec": 144.0
+    }
+   },
+   {
+    "nom": "Aquilana",
+    "no": 32,
+    "adulte": {
+     "sans": 428.5,
+     "avec": 460.7
+    },
+    "jeune": {
+     "sans": 317.2,
+     "avec": 341.0
+    },
+    "enfant": {
+     "sans": 98.6,
+     "avec": 106.0
+    },
+    "enfant3": {
+     "sans": 49.3,
+     "avec": 53.0
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 475.3,
+     "avec": 511.0
+    },
+    "jeune": {
+     "sans": 461.1,
+     "avec": 495.7
+    },
+    "enfant": {
+     "sans": 153.2,
+     "avec": 164.7
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 487.2,
+     "avec": 513.3
+    },
+    "jeune": {
+     "sans": 389.8,
+     "avec": 410.7
+    },
+    "enfant": {
+     "sans": 121.9,
+     "avec": 128.4
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 455.7,
+     "avec": 490.0
+    },
+    "jeune": {
+     "sans": 341.8,
+     "avec": 367.5
+    },
+    "enfant": {
+     "sans": 100.3,
+     "avec": 107.8
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 306.9,
+     "avec": 330.0
+    },
+    "jeune": {
+     "sans": 276.3,
+     "avec": 297.0
+    },
+    "enfant": {
+     "sans": 70.6,
+     "avec": 75.9
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 362.7,
+     "avec": 390.0
+    },
+    "jeune": {
+     "sans": 334.8,
+     "avec": 360.0
+    },
+    "enfant": {
+     "sans": 108.8,
+     "avec": 117.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 327.3,
+     "avec": 351.9
+    },
+    "jeune": {
+     "sans": 262.0,
+     "avec": 281.7
+    },
+    "enfant": {
+     "sans": 125.6,
+     "avec": 135.0
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 465.5,
+     "avec": 500.0
+    },
+    "jeune": {
+     "sans": 395.7,
+     "avec": 425.0
+    },
+    "enfant": {
+     "sans": 139.7,
+     "avec": 150.0
+    }
+   },
+   {
+    "nom": "Sodalis",
+    "no": 941,
+    "adulte": {
+     "sans": 470.0,
+     "avec": 499.95
+    },
+    "jeune": {
+     "sans": 361.9,
+     "avec": 385.0
+    },
+    "enfant": {
+     "sans": 104.6,
+     "avec": 111.2
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 365.4,
+     "avec": 392.9
+    },
+    "jeune": {
+     "sans": 274.1,
+     "avec": 294.7
+    },
+    "enfant": {
+     "sans": 91.5,
+     "avec": 98.3
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 509.4,
+     "avec": 534.8
+    },
+    "jeune": {
+     "sans": 356.7,
+     "avec": 374.5
+    },
+    "enfant": {
+     "sans": 142.9,
+     "avec": 150.0
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 407.4,
+     "avec": 438.0
+    },
+    "jeune": {
+     "sans": 293.4,
+     "avec": 315.4
+    },
+    "enfant": {
+     "sans": 203.7,
+     "avec": 219.0
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 439.9,
+     "avec": 473.0
+    },
+    "jeune": {
+     "sans": 396.0,
+     "avec": 425.7
+    },
+    "enfant": {
+     "sans": 110.1,
+     "avec": 118.3
+    }
+   }
+  ],
+  "LT": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 175.8,
+     "avec": 185.0
+    },
+    "jeune": {
+     "sans": 171.0,
+     "avec": 180.0
+    },
+    "enfant": {
+     "sans": 61.8,
+     "avec": 65.0
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 141.4,
+     "avec": 152.0
+    },
+    "jeune": {
+     "sans": 137.1,
+     "avec": 147.4
+    },
+    "enfant": {
+     "sans": 49.5,
+     "avec": 53.2
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 239.2,
+     "avec": 252.0
+    },
+    "jeune": {
+     "sans": 191.4,
+     "avec": 201.6
+    },
+    "enfant": {
+     "sans": 59.8,
+     "avec": 63.0
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 93.0,
+     "avec": 100.0
+    },
+    "jeune": {
+     "sans": 69.8,
+     "avec": 75.0
+    },
+    "enfant": {
+     "sans": 20.5,
+     "avec": 22.0
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 210.2,
+     "avec": 226.0
+    },
+    "jeune": {
+     "sans": 189.2,
+     "avec": 203.4
+    },
+    "enfant": {
+     "sans": 48.3,
+     "avec": 51.9
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 181.4,
+     "avec": 195.0
+    },
+    "jeune": {
+     "sans": 167.4,
+     "avec": 180.0
+    },
+    "enfant": {
+     "sans": 53.9,
+     "avec": 58.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 327.3,
+     "avec": 351.9
+    },
+    "jeune": {
+     "sans": 262.0,
+     "avec": 281.7
+    },
+    "enfant": {
+     "sans": 125.6,
+     "avec": 135.0
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 251.4,
+     "avec": 270.0
+    },
+    "jeune": {
+     "sans": 213.7,
+     "avec": 229.5
+    },
+    "enfant": {
+     "sans": 75.5,
+     "avec": 81.0
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 157.6,
+     "avec": 169.4
+    },
+    "jeune": {
+     "sans": 118.3,
+     "avec": 127.1
+    },
+    "enfant": {
+     "sans": 39.5,
+     "avec": 42.4
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 422.3,
+     "avec": 443.4
+    },
+    "jeune": {
+     "sans": 295.7,
+     "avec": 310.5
+    },
+    "enfant": {
+     "sans": 118.5,
+     "avec": 124.4
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 227.9,
+     "avec": 245.0
+    },
+    "jeune": {
+     "sans": 164.1,
+     "avec": 176.4
+    },
+    "enfant": {
+     "sans": 114.0,
+     "avec": 122.5
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 205.6,
+     "avec": 221.0
+    },
+    "jeune": {
+     "sans": 185.0,
+     "avec": 198.9
+    },
+    "enfant": {
+     "sans": 51.5,
+     "avec": 55.3
+    }
+   }
+  ],
+  "LU": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 513.0,
+     "avec": 540.0
+    },
+    "jeune": {
+     "sans": 508.3,
+     "avec": 535.0
+    },
+    "enfant": {
+     "sans": 179.6,
+     "avec": 189.0
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 472.5,
+     "avec": 508.0
+    },
+    "jeune": {
+     "sans": 458.4,
+     "avec": 492.8
+    },
+    "enfant": {
+     "sans": 150.2,
+     "avec": 161.4
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 563.5,
+     "avec": 593.7
+    },
+    "jeune": {
+     "sans": 450.8,
+     "avec": 475.0
+    },
+    "enfant": {
+     "sans": 141.0,
+     "avec": 148.5
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 492.9,
+     "avec": 530.0
+    },
+    "jeune": {
+     "sans": 369.7,
+     "avec": 397.5
+    },
+    "enfant": {
+     "sans": 108.4,
+     "avec": 116.6
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 365.5,
+     "avec": 393.0
+    },
+    "jeune": {
+     "sans": 329.0,
+     "avec": 353.7
+    },
+    "enfant": {
+     "sans": 84.0,
+     "avec": 90.3
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 427.8,
+     "avec": 460.0
+    },
+    "jeune": {
+     "sans": 395.3,
+     "avec": 425.0
+    },
+    "enfant": {
+     "sans": 128.3,
+     "avec": 138.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 327.3,
+     "avec": 351.9
+    },
+    "jeune": {
+     "sans": 262.0,
+     "avec": 281.7
+    },
+    "enfant": {
+     "sans": 125.6,
+     "avec": 135.0
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 530.7,
+     "avec": 570.0
+    },
+    "jeune": {
+     "sans": 451.1,
+     "avec": 484.5
+    },
+    "enfant": {
+     "sans": 159.3,
+     "avec": 171.0
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 353.4,
+     "avec": 379.9
+    },
+    "jeune": {
+     "sans": 265.1,
+     "avec": 285.0
+    },
+    "enfant": {
+     "sans": 88.4,
+     "avec": 95.0
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 683.6,
+     "avec": 717.8
+    },
+    "jeune": {
+     "sans": 478.7,
+     "avec": 502.6
+    },
+    "enfant": {
+     "sans": 191.7,
+     "avec": 201.3
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 534.8,
+     "avec": 575.0
+    },
+    "jeune": {
+     "sans": 385.1,
+     "avec": 414.0
+    },
+    "enfant": {
+     "sans": 267.4,
+     "avec": 287.5
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 511.5,
+     "avec": 550.0
+    },
+    "jeune": {
+     "sans": 460.4,
+     "avec": 495.0
+    },
+    "enfant": {
+     "sans": 127.9,
+     "avec": 137.5
+    }
+   }
+  ],
+  "LV": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 175.8,
+     "avec": 185.0
+    },
+    "jeune": {
+     "sans": 171.0,
+     "avec": 180.0
+    },
+    "enfant": {
+     "sans": 61.8,
+     "avec": 65.0
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 141.4,
+     "avec": 152.0
+    },
+    "jeune": {
+     "sans": 137.1,
+     "avec": 147.4
+    },
+    "enfant": {
+     "sans": 49.5,
+     "avec": 53.2
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 239.2,
+     "avec": 252.0
+    },
+    "jeune": {
+     "sans": 191.4,
+     "avec": 201.6
+    },
+    "enfant": {
+     "sans": 59.8,
+     "avec": 63.0
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 186.0,
+     "avec": 200.0
+    },
+    "jeune": {
+     "sans": 139.5,
+     "avec": 150.0
+    },
+    "enfant": {
+     "sans": 40.9,
+     "avec": 44.0
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 210.2,
+     "avec": 226.0
+    },
+    "jeune": {
+     "sans": 189.2,
+     "avec": 203.4
+    },
+    "enfant": {
+     "sans": 48.3,
+     "avec": 51.9
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 181.4,
+     "avec": 195.0
+    },
+    "jeune": {
+     "sans": 167.4,
+     "avec": 180.0
+    },
+    "enfant": {
+     "sans": 53.9,
+     "avec": 58.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 327.3,
+     "avec": 351.9
+    },
+    "jeune": {
+     "sans": 262.0,
+     "avec": 281.7
+    },
+    "enfant": {
+     "sans": 125.6,
+     "avec": 135.0
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 251.4,
+     "avec": 270.0
+    },
+    "jeune": {
+     "sans": 213.7,
+     "avec": 229.5
+    },
+    "enfant": {
+     "sans": 75.5,
+     "avec": 81.0
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 143.3,
+     "avec": 154.0
+    },
+    "jeune": {
+     "sans": 107.5,
+     "avec": 115.5
+    },
+    "enfant": {
+     "sans": 35.9,
+     "avec": 38.5
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 422.3,
+     "avec": 443.4
+    },
+    "jeune": {
+     "sans": 295.7,
+     "avec": 310.5
+    },
+    "enfant": {
+     "sans": 118.5,
+     "avec": 124.4
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 227.9,
+     "avec": 245.0
+    },
+    "jeune": {
+     "sans": 164.1,
+     "avec": 176.4
+    },
+    "enfant": {
+     "sans": 114.0,
+     "avec": 122.5
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 205.6,
+     "avec": 221.0
+    },
+    "jeune": {
+     "sans": 185.0,
+     "avec": 198.9
+    },
+    "enfant": {
+     "sans": 51.5,
+     "avec": 55.3
+    }
+   }
+  ],
+  "MT": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 193.8,
+     "avec": 204.0
+    },
+    "jeune": {
+     "sans": 189.1,
+     "avec": 199.0
+    },
+    "enfant": {
+     "sans": 67.5,
+     "avec": 71.0
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 141.4,
+     "avec": 152.0
+    },
+    "jeune": {
+     "sans": 137.1,
+     "avec": 147.4
+    },
+    "enfant": {
+     "sans": 49.5,
+     "avec": 53.2
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 239.2,
+     "avec": 252.0
+    },
+    "jeune": {
+     "sans": 191.4,
+     "avec": 201.6
+    },
+    "enfant": {
+     "sans": 59.8,
+     "avec": 63.0
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 279.0,
+     "avec": 300.0
+    },
+    "jeune": {
+     "sans": 209.3,
+     "avec": 225.0
+    },
+    "enfant": {
+     "sans": 61.4,
+     "avec": 66.0
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 210.2,
+     "avec": 226.0
+    },
+    "jeune": {
+     "sans": 189.2,
+     "avec": 203.4
+    },
+    "enfant": {
+     "sans": 48.3,
+     "avec": 51.9
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 223.2,
+     "avec": 240.0
+    },
+    "jeune": {
+     "sans": 206.5,
+     "avec": 222.0
+    },
+    "enfant": {
+     "sans": 67.0,
+     "avec": 72.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 327.3,
+     "avec": 351.9
+    },
+    "jeune": {
+     "sans": 262.0,
+     "avec": 281.7
+    },
+    "enfant": {
+     "sans": 125.6,
+     "avec": 135.0
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 251.4,
+     "avec": 270.0
+    },
+    "jeune": {
+     "sans": 213.7,
+     "avec": 229.5
+    },
+    "enfant": {
+     "sans": 75.5,
+     "avec": 81.0
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 310.6,
+     "avec": 333.9
+    },
+    "jeune": {
+     "sans": 233.0,
+     "avec": 250.5
+    },
+    "enfant": {
+     "sans": 77.7,
+     "avec": 83.5
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 595.6,
+     "avec": 625.4
+    },
+    "jeune": {
+     "sans": 417.1,
+     "avec": 437.9
+    },
+    "enfant": {
+     "sans": 167.1,
+     "avec": 175.4
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 227.9,
+     "avec": 245.0
+    },
+    "jeune": {
+     "sans": 164.1,
+     "avec": 176.4
+    },
+    "enfant": {
+     "sans": 114.0,
+     "avec": 122.5
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 227.9,
+     "avec": 245.0
+    },
+    "jeune": {
+     "sans": 205.1,
+     "avec": 220.5
+    },
+    "enfant": {
+     "sans": 57.1,
+     "avec": 61.3
+    }
+   }
+  ],
+  "NL": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 660.3,
+     "avec": 695.0
+    },
+    "jeune": {
+     "sans": 655.5,
+     "avec": 690.0
+    },
+    "enfant": {
+     "sans": 230.9,
+     "avec": 243.0
+    }
+   },
+   {
+    "nom": "Aquilana",
+    "no": 32,
+    "adulte": {
+     "sans": 449.1,
+     "avec": 482.8
+    },
+    "jeune": {
+     "sans": 332.3,
+     "avec": 357.3
+    },
+    "enfant": {
+     "sans": 103.4,
+     "avec": 111.1
+    },
+    "enfant3": {
+     "sans": 51.7,
+     "avec": 55.55
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 575.7,
+     "avec": 619.0
+    },
+    "jeune": {
+     "sans": 558.4,
+     "avec": 600.4
+    },
+    "enfant": {
+     "sans": 175.8,
+     "avec": 189.0
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 563.5,
+     "avec": 593.7
+    },
+    "jeune": {
+     "sans": 450.8,
+     "avec": 475.0
+    },
+    "enfant": {
+     "sans": 141.0,
+     "avec": 148.5
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 688.2,
+     "avec": 740.0
+    },
+    "jeune": {
+     "sans": 516.2,
+     "avec": 555.0
+    },
+    "enfant": {
+     "sans": 151.4,
+     "avec": 162.8
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 365.5,
+     "avec": 393.0
+    },
+    "jeune": {
+     "sans": 329.0,
+     "avec": 353.7
+    },
+    "enfant": {
+     "sans": 84.0,
+     "avec": 90.3
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 293.0,
+     "avec": 315.0
+    },
+    "jeune": {
+     "sans": 270.6,
+     "avec": 291.0
+    },
+    "enfant": {
+     "sans": 87.4,
+     "avec": 94.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 327.3,
+     "avec": 351.9
+    },
+    "jeune": {
+     "sans": 262.0,
+     "avec": 281.7
+    },
+    "enfant": {
+     "sans": 125.6,
+     "avec": 135.0
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 577.3,
+     "avec": 620.0
+    },
+    "jeune": {
+     "sans": 490.7,
+     "avec": 527.0
+    },
+    "enfant": {
+     "sans": 173.2,
+     "avec": 186.0
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 432.9,
+     "avec": 465.4
+    },
+    "jeune": {
+     "sans": 324.7,
+     "avec": 349.1
+    },
+    "enfant": {
+     "sans": 108.3,
+     "avec": 116.4
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 965.4,
+     "avec": 1013.7
+    },
+    "jeune": {
+     "sans": 675.9,
+     "avec": 709.7
+    },
+    "enfant": {
+     "sans": 270.6,
+     "avec": 284.1
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 627.8,
+     "avec": 675.0
+    },
+    "jeune": {
+     "sans": 452.0,
+     "avec": 486.0
+    },
+    "enfant": {
+     "sans": 313.9,
+     "avec": 337.5
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 645.5,
+     "avec": 694.0
+    },
+    "jeune": {
+     "sans": 580.9,
+     "avec": 624.6
+    },
+    "enfant": {
+     "sans": 161.4,
+     "avec": 173.5
+    }
+   }
+  ],
+  "NO": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 460.8,
+     "avec": 485.0
+    },
+    "jeune": {
+     "sans": 456.0,
+     "avec": 480.0
+    },
+    "enfant": {
+     "sans": 161.5,
+     "avec": 170.0
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 425.1,
+     "avec": 457.0
+    },
+    "jeune": {
+     "sans": 412.3,
+     "avec": 443.3
+    },
+    "enfant": {
+     "sans": 148.8,
+     "avec": 160.0
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 563.5,
+     "avec": 593.7
+    },
+    "jeune": {
+     "sans": 450.8,
+     "avec": 475.0
+    },
+    "enfant": {
+     "sans": 141.0,
+     "avec": 148.5
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 446.4,
+     "avec": 480.0
+    },
+    "jeune": {
+     "sans": 334.8,
+     "avec": 360.0
+    },
+    "enfant": {
+     "sans": 98.2,
+     "avec": 105.6
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 334.8,
+     "avec": 360.0
+    },
+    "jeune": {
+     "sans": 301.4,
+     "avec": 324.0
+    },
+    "enfant": {
+     "sans": 77.1,
+     "avec": 82.8
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 267.8,
+     "avec": 288.0
+    },
+    "jeune": {
+     "sans": 247.4,
+     "avec": 266.0
+    },
+    "enfant": {
+     "sans": 80.0,
+     "avec": 86.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 327.3,
+     "avec": 351.9
+    },
+    "jeune": {
+     "sans": 262.0,
+     "avec": 281.7
+    },
+    "enfant": {
+     "sans": 125.6,
+     "avec": 135.0
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 465.5,
+     "avec": 500.0
+    },
+    "jeune": {
+     "sans": 395.7,
+     "avec": 425.0
+    },
+    "enfant": {
+     "sans": 139.7,
+     "avec": 150.0
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 372.0,
+     "avec": 399.9
+    },
+    "jeune": {
+     "sans": 279.0,
+     "avec": 300.0
+    },
+    "enfant": {
+     "sans": 93.0,
+     "avec": 100.0
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 497.5,
+     "avec": 522.4
+    },
+    "jeune": {
+     "sans": 348.4,
+     "avec": 365.8
+    },
+    "enfant": {
+     "sans": 139.6,
+     "avec": 146.6
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 486.4,
+     "avec": 523.0
+    },
+    "jeune": {
+     "sans": 350.3,
+     "avec": 376.6
+    },
+    "enfant": {
+     "sans": 243.2,
+     "avec": 261.5
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 466.9,
+     "avec": 502.0
+    },
+    "jeune": {
+     "sans": 420.2,
+     "avec": 451.8
+    },
+    "enfant": {
+     "sans": 116.8,
+     "avec": 125.5
+    }
+   }
+  ],
+  "PL": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 161.5,
+     "avec": 170.0
+    },
+    "jeune": {
+     "sans": 156.8,
+     "avec": 165.0
+    },
+    "enfant": {
+     "sans": 57.0,
+     "avec": 60.0
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 139.5,
+     "avec": 150.0
+    },
+    "jeune": {
+     "sans": 135.4,
+     "avec": 145.5
+    },
+    "enfant": {
+     "sans": 48.9,
+     "avec": 52.5
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 239.2,
+     "avec": 252.0
+    },
+    "jeune": {
+     "sans": 191.4,
+     "avec": 201.6
+    },
+    "enfant": {
+     "sans": 59.8,
+     "avec": 63.0
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 93.0,
+     "avec": 100.0
+    },
+    "jeune": {
+     "sans": 69.8,
+     "avec": 75.0
+    },
+    "enfant": {
+     "sans": 20.5,
+     "avec": 22.0
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 210.2,
+     "avec": 226.0
+    },
+    "jeune": {
+     "sans": 189.2,
+     "avec": 203.4
+    },
+    "enfant": {
+     "sans": 48.3,
+     "avec": 51.9
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 181.4,
+     "avec": 195.0
+    },
+    "jeune": {
+     "sans": 167.4,
+     "avec": 180.0
+    },
+    "enfant": {
+     "sans": 53.9,
+     "avec": 58.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 327.3,
+     "avec": 351.9
+    },
+    "jeune": {
+     "sans": 262.0,
+     "avec": 281.7
+    },
+    "enfant": {
+     "sans": 125.6,
+     "avec": 135.0
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 251.4,
+     "avec": 270.0
+    },
+    "jeune": {
+     "sans": 213.7,
+     "avec": 229.5
+    },
+    "enfant": {
+     "sans": 75.5,
+     "avec": 81.0
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 148.8,
+     "avec": 159.9
+    },
+    "jeune": {
+     "sans": 111.6,
+     "avec": 120.0
+    },
+    "enfant": {
+     "sans": 37.2,
+     "avec": 40.0
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 473.8,
+     "avec": 497.5
+    },
+    "jeune": {
+     "sans": 331.8,
+     "avec": 348.4
+    },
+    "enfant": {
+     "sans": 133.0,
+     "avec": 139.6
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 227.9,
+     "avec": 245.0
+    },
+    "jeune": {
+     "sans": 164.1,
+     "avec": 176.4
+    },
+    "enfant": {
+     "sans": 114.0,
+     "avec": 122.5
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 205.6,
+     "avec": 221.0
+    },
+    "jeune": {
+     "sans": 185.0,
+     "avec": 198.9
+    },
+    "enfant": {
+     "sans": 51.5,
+     "avec": 55.3
+    }
+   }
+  ],
+  "PT": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 270.8,
+     "avec": 285.0
+    },
+    "jeune": {
+     "sans": 266.0,
+     "avec": 280.0
+    },
+    "enfant": {
+     "sans": 95.0,
+     "avec": 100.0
+    }
+   },
+   {
+    "nom": "Aquilana",
+    "no": 32,
+    "adulte": {
+     "sans": 415.2,
+     "avec": 446.4
+    },
+    "jeune": {
+     "sans": 307.3,
+     "avec": 330.4
+    },
+    "enfant": {
+     "sans": 95.6,
+     "avec": 102.7
+    },
+    "enfant3": {
+     "sans": 47.8,
+     "avec": 51.35
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 350.7,
+     "avec": 377.0
+    },
+    "jeune": {
+     "sans": 340.2,
+     "avec": 365.7
+    },
+    "enfant": {
+     "sans": 121.6,
+     "avec": 130.7
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 421.6,
+     "avec": 444.2
+    },
+    "jeune": {
+     "sans": 337.3,
+     "avec": 355.4
+    },
+    "enfant": {
+     "sans": 105.5,
+     "avec": 111.1
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 409.2,
+     "avec": 440.0
+    },
+    "jeune": {
+     "sans": 306.9,
+     "avec": 330.0
+    },
+    "enfant": {
+     "sans": 90.0,
+     "avec": 96.8
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 248.4,
+     "avec": 267.0
+    },
+    "jeune": {
+     "sans": 223.5,
+     "avec": 240.3
+    },
+    "enfant": {
+     "sans": 57.2,
+     "avec": 61.4
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 288.3,
+     "avec": 310.0
+    },
+    "jeune": {
+     "sans": 266.0,
+     "avec": 286.0
+    },
+    "enfant": {
+     "sans": 86.5,
+     "avec": 93.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 327.3,
+     "avec": 351.9
+    },
+    "jeune": {
+     "sans": 262.0,
+     "avec": 281.7
+    },
+    "enfant": {
+     "sans": 125.6,
+     "avec": 135.0
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 325.9,
+     "avec": 350.0
+    },
+    "jeune": {
+     "sans": 277.0,
+     "avec": 297.5
+    },
+    "enfant": {
+     "sans": 97.8,
+     "avec": 105.0
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 347.8,
+     "avec": 373.9
+    },
+    "jeune": {
+     "sans": 260.9,
+     "avec": 280.5
+    },
+    "enfant": {
+     "sans": 87.0,
+     "avec": 93.5
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 646.8,
+     "avec": 679.1
+    },
+    "jeune": {
+     "sans": 452.9,
+     "avec": 475.5
+    },
+    "enfant": {
+     "sans": 181.4,
+     "avec": 190.4
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 299.5,
+     "avec": 322.0
+    },
+    "jeune": {
+     "sans": 215.7,
+     "avec": 231.9
+    },
+    "enfant": {
+     "sans": 149.8,
+     "avec": 161.0
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 307.9,
+     "avec": 331.0
+    },
+    "jeune": {
+     "sans": 277.1,
+     "avec": 297.9
+    },
+    "enfant": {
+     "sans": 77.1,
+     "avec": 82.8
+    }
+   }
+  ],
+  "RO": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 171.0,
+     "avec": 180.0
+    },
+    "jeune": {
+     "sans": 166.3,
+     "avec": 175.0
+    },
+    "enfant": {
+     "sans": 59.9,
+     "avec": 63.0
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 155.4,
+     "avec": 167.0
+    },
+    "jeune": {
+     "sans": 150.7,
+     "avec": 162.0
+    },
+    "enfant": {
+     "sans": 54.5,
+     "avec": 58.5
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 239.2,
+     "avec": 252.0
+    },
+    "jeune": {
+     "sans": 191.4,
+     "avec": 201.6
+    },
+    "enfant": {
+     "sans": 59.8,
+     "avec": 63.0
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 111.6,
+     "avec": 120.0
+    },
+    "jeune": {
+     "sans": 83.7,
+     "avec": 90.0
+    },
+    "enfant": {
+     "sans": 24.6,
+     "avec": 26.4
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 210.2,
+     "avec": 226.0
+    },
+    "jeune": {
+     "sans": 189.2,
+     "avec": 203.4
+    },
+    "enfant": {
+     "sans": 48.3,
+     "avec": 51.9
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 147.9,
+     "avec": 159.0
+    },
+    "jeune": {
+     "sans": 136.7,
+     "avec": 147.0
+    },
+    "enfant": {
+     "sans": 43.7,
+     "avec": 47.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 327.3,
+     "avec": 351.9
+    },
+    "jeune": {
+     "sans": 262.0,
+     "avec": 281.7
+    },
+    "enfant": {
+     "sans": 125.6,
+     "avec": 135.0
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 251.4,
+     "avec": 270.0
+    },
+    "jeune": {
+     "sans": 213.7,
+     "avec": 229.5
+    },
+    "enfant": {
+     "sans": 75.5,
+     "avec": 81.0
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 151.5,
+     "avec": 162.9
+    },
+    "jeune": {
+     "sans": 113.7,
+     "avec": 122.2
+    },
+    "enfant": {
+     "sans": 38.0,
+     "avec": 40.8
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 465.1,
+     "avec": 488.3
+    },
+    "jeune": {
+     "sans": 325.6,
+     "avec": 341.9
+    },
+    "enfant": {
+     "sans": 130.5,
+     "avec": 137.0
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 227.9,
+     "avec": 245.0
+    },
+    "jeune": {
+     "sans": 164.1,
+     "avec": 176.4
+    },
+    "enfant": {
+     "sans": 114.0,
+     "avec": 122.5
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 205.6,
+     "avec": 221.0
+    },
+    "jeune": {
+     "sans": 185.0,
+     "avec": 198.9
+    },
+    "enfant": {
+     "sans": 51.5,
+     "avec": 55.3
+    }
+   }
+  ],
+  "SE": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 470.3,
+     "avec": 495.0
+    },
+    "jeune": {
+     "sans": 465.5,
+     "avec": 490.0
+    },
+    "enfant": {
+     "sans": 164.4,
+     "avec": 173.0
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 386.0,
+     "avec": 415.0
+    },
+    "jeune": {
+     "sans": 374.5,
+     "avec": 402.6
+    },
+    "enfant": {
+     "sans": 135.2,
+     "avec": 145.3
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 563.5,
+     "avec": 593.7
+    },
+    "jeune": {
+     "sans": 450.8,
+     "avec": 475.0
+    },
+    "enfant": {
+     "sans": 141.0,
+     "avec": 148.5
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 362.7,
+     "avec": 390.0
+    },
+    "jeune": {
+     "sans": 272.0,
+     "avec": 292.5
+    },
+    "enfant": {
+     "sans": 79.8,
+     "avec": 85.8
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 334.8,
+     "avec": 360.0
+    },
+    "jeune": {
+     "sans": 301.4,
+     "avec": 324.0
+    },
+    "enfant": {
+     "sans": 77.1,
+     "avec": 82.8
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 314.3,
+     "avec": 338.0
+    },
+    "jeune": {
+     "sans": 290.2,
+     "avec": 312.0
+    },
+    "enfant": {
+     "sans": 93.9,
+     "avec": 101.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 327.3,
+     "avec": 351.9
+    },
+    "jeune": {
+     "sans": 262.0,
+     "avec": 281.7
+    },
+    "enfant": {
+     "sans": 125.6,
+     "avec": 135.0
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 465.5,
+     "avec": 500.0
+    },
+    "jeune": {
+     "sans": 395.7,
+     "avec": 425.0
+    },
+    "enfant": {
+     "sans": 139.7,
+     "avec": 150.0
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 372.0,
+     "avec": 399.9
+    },
+    "jeune": {
+     "sans": 279.0,
+     "avec": 300.0
+    },
+    "enfant": {
+     "sans": 93.0,
+     "avec": 100.0
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 550.4,
+     "avec": 577.9
+    },
+    "jeune": {
+     "sans": 385.4,
+     "avec": 404.7
+    },
+    "enfant": {
+     "sans": 154.4,
+     "avec": 162.1
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 486.4,
+     "avec": 523.0
+    },
+    "jeune": {
+     "sans": 350.3,
+     "avec": 376.6
+    },
+    "enfant": {
+     "sans": 243.2,
+     "avec": 261.5
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 466.9,
+     "avec": 502.0
+    },
+    "jeune": {
+     "sans": 420.2,
+     "avec": 451.8
+    },
+    "enfant": {
+     "sans": 116.8,
+     "avec": 125.5
+    }
+   }
+  ],
+  "SI": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 193.8,
+     "avec": 204.0
+    },
+    "jeune": {
+     "sans": 189.1,
+     "avec": 199.0
+    },
+    "enfant": {
+     "sans": 67.5,
+     "avec": 71.0
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 141.4,
+     "avec": 152.0
+    },
+    "jeune": {
+     "sans": 137.1,
+     "avec": 147.4
+    },
+    "enfant": {
+     "sans": 49.5,
+     "avec": 53.2
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 239.2,
+     "avec": 252.0
+    },
+    "jeune": {
+     "sans": 191.4,
+     "avec": 201.6
+    },
+    "enfant": {
+     "sans": 59.8,
+     "avec": 63.0
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 139.5,
+     "avec": 150.0
+    },
+    "jeune": {
+     "sans": 104.6,
+     "avec": 112.5
+    },
+    "enfant": {
+     "sans": 30.7,
+     "avec": 33.0
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 210.2,
+     "avec": 226.0
+    },
+    "jeune": {
+     "sans": 189.2,
+     "avec": 203.4
+    },
+    "enfant": {
+     "sans": 48.3,
+     "avec": 51.9
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 181.4,
+     "avec": 195.0
+    },
+    "jeune": {
+     "sans": 167.4,
+     "avec": 180.0
+    },
+    "enfant": {
+     "sans": 53.9,
+     "avec": 58.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 327.3,
+     "avec": 351.9
+    },
+    "jeune": {
+     "sans": 262.0,
+     "avec": 281.7
+    },
+    "enfant": {
+     "sans": 125.6,
+     "avec": 135.0
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 251.4,
+     "avec": 270.0
+    },
+    "jeune": {
+     "sans": 213.7,
+     "avec": 229.5
+    },
+    "enfant": {
+     "sans": 75.5,
+     "avec": 81.0
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 481.7,
+     "avec": 517.9
+    },
+    "jeune": {
+     "sans": 361.4,
+     "avec": 388.5
+    },
+    "enfant": {
+     "sans": 120.5,
+     "avec": 129.5
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 473.8,
+     "avec": 497.5
+    },
+    "jeune": {
+     "sans": 331.8,
+     "avec": 348.4
+    },
+    "enfant": {
+     "sans": 133.0,
+     "avec": 139.6
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 227.9,
+     "avec": 245.0
+    },
+    "jeune": {
+     "sans": 164.1,
+     "avec": 176.4
+    },
+    "enfant": {
+     "sans": 114.0,
+     "avec": 122.5
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 205.6,
+     "avec": 221.0
+    },
+    "jeune": {
+     "sans": 185.0,
+     "avec": 198.9
+    },
+    "enfant": {
+     "sans": 51.5,
+     "avec": 55.3
+    }
+   }
+  ],
+  "SK": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 176.7,
+     "avec": 186.0
+    },
+    "jeune": {
+     "sans": 172.0,
+     "avec": 181.0
+    },
+    "enfant": {
+     "sans": 61.8,
+     "avec": 65.0
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 169.3,
+     "avec": 182.0
+    },
+    "jeune": {
+     "sans": 164.2,
+     "avec": 176.5
+    },
+    "enfant": {
+     "sans": 59.3,
+     "avec": 63.7
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 239.2,
+     "avec": 252.0
+    },
+    "jeune": {
+     "sans": 191.4,
+     "avec": 201.6
+    },
+    "enfant": {
+     "sans": 59.8,
+     "avec": 63.0
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 111.6,
+     "avec": 120.0
+    },
+    "jeune": {
+     "sans": 83.7,
+     "avec": 90.0
+    },
+    "enfant": {
+     "sans": 24.6,
+     "avec": 26.4
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 210.2,
+     "avec": 226.0
+    },
+    "jeune": {
+     "sans": 189.2,
+     "avec": 203.4
+    },
+    "enfant": {
+     "sans": 48.3,
+     "avec": 51.9
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 213.9,
+     "avec": 230.0
+    },
+    "jeune": {
+     "sans": 197.2,
+     "avec": 212.0
+    },
+    "enfant": {
+     "sans": 64.2,
+     "avec": 69.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 327.3,
+     "avec": 351.9
+    },
+    "jeune": {
+     "sans": 262.0,
+     "avec": 281.7
+    },
+    "enfant": {
+     "sans": 125.6,
+     "avec": 135.0
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 251.4,
+     "avec": 270.0
+    },
+    "jeune": {
+     "sans": 213.7,
+     "avec": 229.5
+    },
+    "enfant": {
+     "sans": 75.5,
+     "avec": 81.0
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 222.2,
+     "avec": 238.9
+    },
+    "jeune": {
+     "sans": 166.7,
+     "avec": 179.2
+    },
+    "enfant": {
+     "sans": 55.7,
+     "avec": 59.8
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 615.9,
+     "avec": 646.7
+    },
+    "jeune": {
+     "sans": 431.3,
+     "avec": 452.8
+    },
+    "enfant": {
+     "sans": 172.8,
+     "avec": 181.4
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 227.9,
+     "avec": 245.0
+    },
+    "jeune": {
+     "sans": 164.1,
+     "avec": 176.4
+    },
+    "enfant": {
+     "sans": 114.0,
+     "avec": 122.5
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 205.6,
+     "avec": 221.0
+    },
+    "jeune": {
+     "sans": 185.0,
+     "avec": 198.9
+    },
+    "enfant": {
+     "sans": 51.5,
+     "avec": 55.3
+    }
+   }
+  ],
+  "UK": [
+   {
+    "nom": "Agrisano",
+    "no": 1560,
+    "adulte": {
+     "sans": 502.6,
+     "avec": 529.0
+    },
+    "jeune": {
+     "sans": 497.8,
+     "avec": 524.0
+    },
+    "enfant": {
+     "sans": 175.8,
+     "avec": 185.0
+    }
+   },
+   {
+    "nom": "Aquilana",
+    "no": 32,
+    "adulte": {
+     "sans": 481.1,
+     "avec": 517.3
+    },
+    "jeune": {
+     "sans": 356.1,
+     "avec": 382.9
+    },
+    "enfant": {
+     "sans": 110.7,
+     "avec": 119.0
+    },
+    "enfant3": {
+     "sans": 55.35,
+     "avec": 59.5
+    }
+   },
+   {
+    "nom": "Assura",
+    "no": 1542,
+    "adulte": {
+     "sans": 398.1,
+     "avec": 428.0
+    },
+    "jeune": {
+     "sans": 386.2,
+     "avec": 415.2
+    },
+    "enfant": {
+     "sans": 119.4,
+     "avec": 128.3
+    }
+   },
+   {
+    "nom": "Concordia",
+    "no": 290,
+    "adulte": {
+     "sans": 563.5,
+     "avec": 593.7
+    },
+    "jeune": {
+     "sans": 450.8,
+     "avec": 475.0
+    },
+    "enfant": {
+     "sans": 141.0,
+     "avec": 148.5
+    }
+   },
+   {
+    "nom": "CSS",
+    "no": 8,
+    "adulte": {
+     "sans": 390.6,
+     "avec": 420.0
+    },
+    "jeune": {
+     "sans": 293.0,
+     "avec": 315.0
+    },
+    "enfant": {
+     "sans": 85.9,
+     "avec": 92.4
+    }
+   },
+   {
+    "nom": "Helsana",
+    "no": 1562,
+    "adulte": {
+     "sans": 365.5,
+     "avec": 393.0
+    },
+    "jeune": {
+     "sans": 329.0,
+     "avec": 353.7
+    },
+    "enfant": {
+     "sans": 84.0,
+     "avec": 90.3
+    }
+   },
+   {
+    "nom": "KPT",
+    "no": 376,
+    "adulte": {
+     "sans": 265.1,
+     "avec": 285.0
+    },
+    "jeune": {
+     "sans": 244.6,
+     "avec": 263.0
+    },
+    "enfant": {
+     "sans": 79.1,
+     "avec": 85.0
+    }
+   },
+   {
+    "nom": "Mutuel",
+    "no": 1479,
+    "adulte": {
+     "sans": 327.3,
+     "avec": 351.9
+    },
+    "jeune": {
+     "sans": 262.0,
+     "avec": 281.7
+    },
+    "enfant": {
+     "sans": 125.6,
+     "avec": 135.0
+    }
+   },
+   {
+    "nom": "Sanitas",
+    "no": 1509,
+    "adulte": {
+     "sans": 474.9,
+     "avec": 510.0
+    },
+    "jeune": {
+     "sans": 403.6,
+     "avec": 433.5
+    },
+    "enfant": {
+     "sans": 142.5,
+     "avec": 153.0
+    }
+   },
+   {
+    "nom": "Swica",
+    "no": 1384,
+    "adulte": {
+     "sans": 413.8,
+     "avec": 444.9
+    },
+    "jeune": {
+     "sans": 310.4,
+     "avec": 333.7
+    },
+    "enfant": {
+     "sans": 103.6,
+     "avec": 111.3
+    }
+   },
+   {
+    "nom": "Visana",
+    "no": 1555,
+    "adulte": {
+     "sans": 764.8,
+     "avec": 803.0
+    },
+    "jeune": {
+     "sans": 535.4,
+     "avec": 562.2
+    },
+    "enfant": {
+     "sans": 214.4,
+     "avec": 225.1
+    }
+   },
+   {
+    "nom": "Vivao Sympany",
+    "no": 509,
+    "adulte": {
+     "sans": 551.5,
+     "avec": 593.0
+    },
+    "jeune": {
+     "sans": 397.2,
+     "avec": 427.0
+    },
+    "enfant": {
+     "sans": 275.8,
+     "avec": 296.5
+    }
+   },
+   {
+    "nom": "ÖKK",
+    "no": 455,
+    "adulte": {
+     "sans": 524.6,
+     "avec": 564.0
+    },
+    "jeune": {
+     "sans": 472.1,
+     "avec": 507.6
+    },
+    "enfant": {
+     "sans": 131.2,
+     "avec": 141.0
+    }
+   }
+  ]
+ }
+}

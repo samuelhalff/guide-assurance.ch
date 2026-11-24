@@ -29,7 +29,7 @@ sources:
   - { label: "FOPH, 2027 premium advice (PDF)", url: "https://www.bag.admin.ch/dam/fr/sd-web/ZUZ4kwDN4gnu/Primes-conseil%202027.pdf" }
   - { label: "Art. 7 LAMal (Fedlex)", url: "https://www.fedlex.admin.ch/eli/cc/1995/1328_1328_1328/fr#art_7" }
   - { label: "Art. 62 LAMal (Fedlex)", url: "https://www.fedlex.admin.ch/eli/cc/1995/1328_1328_1328/fr#art_62" }
-outils: [comparateur-primes, lettre-resiliation, simulateur-frontalier]
+outils: [comparateur-primes, subsides, caisses-chiffres, lettre-resiliation, simulateur-frontalier, primes-ue]
 faq:
   - q: "What is the average LAMal premium in 2027?"
     a: "The average 2027 premium is CHF 412.00 a month for all insured persons combined, up 5.0%. For an adult it is CHF 487.60; for a young adult, CHF 338.80; for a child, CHF 128.10 (FOPH, 29.09.2026)."

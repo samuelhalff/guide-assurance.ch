@@ -27,12 +27,20 @@ export type Evenement =
   | "comparateur_utilise"
   /* Calculateur « Économie d'impôt 3a » : une fois, au premier résultat, sans aucune valeur saisie. */
   | "impot3a_utilise"
+  /* Liste « Taux des comptes de libre passage » : premier changement de tri ou premier avoir saisi (une fois par page), sans aucune valeur. */
+  | "taux_libre_passage_utilise"
   /* Formulaire de l'accueil (NPA + année) envoyé vers le comparateur, sans aucune valeur saisie. */
   /* Calculateur de la somme d'assurance ménage : une fois, au premier changement de réponse ; « Affiner » ouvert. Aucune valeur saisie. */
   | "somme_menage_utilise"
+  /* Primes UE/AELE/UK : une fois, au premier changement de choix. Aucune valeur choisie n'est envoyée. */
+  | "primes_ue_utilise"
+  /* Subsides d'assurance maladie : une fois, au premier changement de réponse. Aucune valeur saisie n'est envoyée. */
+  | "subsides_utilise"
   | "somme_menage_affiner"
   /* Tableau des garanties de protection juridique : un domaine choisi dans le filtre (une fois par page), sans autre donnée. */
   | "garanties_pj_filtre"
+  /* Tableau « Caisses maladie en chiffres » : premier changement de canton ou de tri (une fois par page), sans autre donnée. */
+  | "caisses_chiffres_utilise"
   | "comparateur_accueil"
   /* Même formulaire en tête d'une page produit (assurance maladie, primes, nouveaux arrivants), sans aucune valeur saisie. */
   | "comparateur_produit"
@@ -43,7 +51,7 @@ export type Evenement =
   | "demande_ouverte"
   | "demande_etape"
   | "demande_envoyee"
-  /* Clic sur un appel « Être rappelé » ({ emplacement: tete | accueil | guide | comparateur | produit | outil3a | lettre | frontalier | rappels | barometre | kit_rh | donnees | actualite | outils }), avant le formulaire court. */
+  /* Clic sur un appel « Être rappelé » ({ emplacement: tete | accueil | guide | comparateur | produit | outil3a | libre_passage | lettre | frontalier | rappels | barometre | kit_rh | donnees | actualite | outils }), avant le formulaire court. */
   | "rappel_ouvert"
   /* Appel « Être rappelé » vu à l'écran ({ emplacement }), une fois par emplacement et par page, sans aucune valeur saisie. */
   | "rappel_vu"
@@ -95,7 +103,7 @@ const file: [Evenement, Props | undefined][] = [];
 let versDataLayer = true;
 
 /* Événements d'outil : chacun part aussi vers GA4 sous le nom standard select_content { content_type, content_id }. */
-const OUTILS: readonly Evenement[] = ["situation_choisie", "simulateur_utilise", "lettre_copiee", "lettre_imprimee", "comparateur_utilise", "impot3a_utilise", "somme_menage_utilise", "somme_menage_affiner", "garanties_pj_filtre", "comparateur_accueil", "comparateur_produit", "outil_partage", "ics_telecharge"];
+const OUTILS: readonly Evenement[] = ["situation_choisie", "simulateur_utilise", "lettre_copiee", "lettre_imprimee", "comparateur_utilise", "impot3a_utilise", "taux_libre_passage_utilise", "somme_menage_utilise", "primes_ue_utilise", "subsides_utilise", "somme_menage_affiner", "garanties_pj_filtre", "caisses_chiffres_utilise", "comparateur_accueil", "comparateur_produit", "outil_partage", "ics_telecharge"];
 
 export function suivre(e: Evenement, p0?: Props, avantDepart = false) {
   if (!MESURE_ACTIVE || typeof window === "undefined") return;

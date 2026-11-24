@@ -49,6 +49,7 @@ UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
 # Fichiers écrits par les scripts de mise à jour : ignorés par le contrôle « modifications non publiées ».
 DATA_OUTPUTS = [
     "site/src/data/taux-3a.json",
+    "site/src/data/taux-libre-passage.json",
     "site/src/data/taux-3a-historique.json",
     "site/src/data/primes-2027-resume.json",
     "site/public/data/primes-2027",
@@ -56,10 +57,13 @@ DATA_OUTPUTS = [
 
 NAMES = {
     "taux3a": "taux 3a",
+    "tauxlp": "taux de libre passage",
     "frais3a": "frais 3a",
+    "subsides": "subsides d'assurance maladie",
     "lamal": "primes LAMal",
     "frontalier": "frontaliers",
     "impots": "barèmes d'impôt",
+    "kvstat": "statistique OFSP des caisses",
     "digest": "point mensuel",
     "actualites": "actualités",
     "chiffres": "chiffres des actualités",

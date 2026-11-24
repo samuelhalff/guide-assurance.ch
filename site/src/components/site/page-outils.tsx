@@ -11,7 +11,9 @@ import { DATE_PAGE_DONNEES, DATE_PAGE_OUTILS, DATE_PRIMES } from "@/lib/donnees"
 import { DICT, dateLongue, type Locale } from "@/lib/i18n";
 import { HUB_OUTILS, outils, PAGES_DONNEES, PAGES_DONNEES_EN } from "@/lib/nav";
 import { ROUTES_IDEES, cheminBarometre } from "@/lib/pages-idees";
+import { META as CAISSES_META, chiffresCles } from "@/lib/caisses-lamal";
 import { COMPTES_3A, RELEVE_LE, TAUX_MAX, TAUX_MIN, dateCh } from "@/lib/taux3a";
+import { COMPTES_LP, RELEVE_LE as RELEVE_LP, TAUX_MAX as LP_MAX, TAUX_MIN as LP_MIN } from "@/lib/tauxlp";
 import { CANTONS_BAROMETRE, DATE_OFSP, DONNEES as BAROMETRE } from "@/lib/barometre";
 import { groupes } from "@/lib/chiffres-cles";
 import * as R from "@/lib/engines/regions-primes";
@@ -19,6 +21,8 @@ import * as I from "@/lib/engines/impot3a";
 import * as C from "@/lib/engines/communes-3a";
 import * as H from "@/lib/engines/historique-3a";
 import EU from "@/data/primes-eu-fr-2027.json";
+import { DONNEES_UE } from "@/lib/primes-ue";
+const NB_PAYS_UE = Object.keys(DONNEES_UE.pays).length;
 import * as SM from "@/lib/engines/somme-menage";
 import { LU_LE as LU_LE_PJ, NB_CONTRATS as NB_CONTRATS_PJ } from "@/lib/garanties-pj";
 
@@ -44,6 +48,8 @@ function chiffres() {
     menage: SM.estimer({ pieces: 3.5, personnes: 2, standard: "moyen" }),
   };
 }
+
+const CAISSES = chiffresCles();
 
 function lignes(l: Locale) {
   const fr = l === "fr";
@@ -80,6 +86,22 @@ function lignes(l: Locale) {
           cta: "Simuler mon foyer",
         },
         {
+          href: o.subsides,
+          titre: "Subsides d’assurance maladie 2027",
+          chiffre: "6 cantons",
+          legende: "romands : barèmes officiels 2027 de Genève, Vaud, Fribourg, Neuchâtel et du Jura, et la situation du Valais, qui n’a pas encore publié le sien.",
+          texte: "Vous indiquez votre revenu déterminant et votre ménage : l’outil estime le subside par mois et la prime qui reste à votre charge.",
+          cta: "Estimer mon subside",
+        },
+        {
+          href: o.primesUe,
+          titre: "Primes LAMal pour les résidents de l’UE",
+          chiffre: `${NB_PAYS_UE} pays`,
+          legende: "où l’assurance de base suisse 2027 est proposée aux personnes qui vivent dans l’UE, l’AELE ou au Royaume-Uni, d’après l’OFSP.",
+          texte: "Pour chaque pays, la liste donne la prime mensuelle de chaque assureur selon la classe d’âge et la couverture accident, de la plus basse à la plus haute.",
+          cta: "Voir les primes",
+        },
+        {
           href: ROUTES_IDEES.rappels.fr,
           titre: "Rappels d’échéance",
           chiffre: "3 dates",
@@ -93,6 +115,14 @@ function lignes(l: Locale) {
           chiffre: `${nb(TAUX_MIN, 2)} à ${pct(TAUX_MAX, l, 2)}`,
           legende: `d’intérêt sur un compte 3a, selon la banque. ${COMPTES_3A.length} banques comparées, taux relevés le ${dateCh(RELEVE_LE)}.`,
           texte: "Chaque taux est relevé sur la page de la banque, avec ses conditions, et la liste va du plus élevé au plus bas.",
+          cta: "Voir les taux",
+        },
+        {
+          href: o.tauxLibrePassage,
+          titre: "Taux des comptes de libre passage",
+          chiffre: `${nb(LP_MIN, 2)} à ${pct(LP_MAX, l, 2)}`,
+          legende: `d’intérêt sur un compte de libre passage, selon l’institution. ${COMPTES_LP.length} institutions relevées le ${dateCh(RELEVE_LP)}.`,
+          texte: "Chaque taux est lu sur la page de l’institution. Vous pouvez saisir votre avoir pour voir l’intérêt d’une année.",
           cta: "Voir les taux",
         },
         {
@@ -118,6 +148,14 @@ function lignes(l: Locale) {
           legende: `de protection juridique comparés garantie par garantie, d’après leurs conditions générales lues le ${dateCh(LU_LE_PJ)}. Ils sont présentés par ordre alphabétique.`,
           texte: "Domaines couverts, plafond par cas, délai de carence et choix de l’avocat, contrat par contrat, sans prime ni classement.",
           cta: "Voir les garanties",
+        },
+        {
+          href: o.caissesChiffres,
+          titre: "Les caisses maladie en chiffres",
+          chiffre: `${CAISSES.nb} caisses`,
+          legende: `avec des assurés en Suisse, d’après la Statistique de l’assurance-maladie obligatoire ${CAISSES_META.edition} de l’OFSP. Elles sont présentées par ordre alphabétique.`,
+          texte: "Assurés et part de marché par canton, frais administratifs, réserves et taux de solvabilité de chaque caisse, sans classement.",
+          cta: "Voir les chiffres",
         },
       ]
     : [
@@ -146,6 +184,22 @@ function lignes(l: Locale) {
           cta: "Run my numbers",
         },
         {
+          href: o.subsides,
+          titre: "2027 health insurance subsidies",
+          chiffre: "6 cantons",
+          legende: "in French-speaking Switzerland: the official 2027 scales of Geneva, Vaud, Fribourg, Neuchâtel and Jura, and the position of Valais, which has not yet published its own.",
+          texte: "Enter your determining income and household: the tool estimates the monthly subsidy and the premium left to pay.",
+          cta: "Estimate my subsidy",
+        },
+        {
+          href: o.primesUe,
+          titre: "Swiss premiums for EU residents",
+          chiffre: `${NB_PAYS_UE} countries`,
+          legende: "where 2027 Swiss basic insurance is offered to people living in the EU, EFTA or the UK, according to the FOPH.",
+          texte: "For each country, the list gives each insurer’s monthly premium by age group and accident cover, from the lowest to the highest.",
+          cta: "See premiums",
+        },
+        {
           href: ROUTES_IDEES.rappels.en,
           titre: "Renewal reminders",
           chiffre: "3 dates",
@@ -159,6 +213,14 @@ function lignes(l: Locale) {
           chiffre: `${nb(TAUX_MIN, 2)} to ${pct(TAUX_MAX, l, 2)}`,
           legende: `interest on a pillar 3a account, depending on the bank. ${COMPTES_3A.length} banks compared, rates read on ${dateCh(RELEVE_LE)}.`,
           texte: "Each rate is read on the bank’s own page, with its conditions, and the list runs from highest to lowest.",
+          cta: "See rates",
+        },
+        {
+          href: o.tauxLibrePassage,
+          titre: "Vested benefits account rates",
+          chiffre: `${nb(LP_MIN, 2)} to ${pct(LP_MAX, l, 2)}`,
+          legende: `interest on a vested benefits account, depending on the institution. ${COMPTES_LP.length} institutions read on ${dateCh(RELEVE_LP)}.`,
+          texte: "Each rate is read on the institution’s own page. You can enter your balance to see a year of interest.",
           cta: "See rates",
         },
         {
@@ -184,6 +246,14 @@ function lignes(l: Locale) {
           legende: `of legal protection compared clause by clause, from their general terms read on ${dateCh(LU_LE_PJ)}. They are listed in alphabetical order.`,
           texte: "Areas covered, limit per case, waiting period and choice of lawyer, policy by policy, with no premiums or ranking.",
           cta: "See the cover",
+        },
+        {
+          href: o.caissesChiffres,
+          titre: "Swiss health insurers in figures",
+          chiffre: `${CAISSES.nb} insurers`,
+          legende: `with insured people in Switzerland, from the FOPH compulsory health insurance statistics ${CAISSES_META.edition}. They are listed in alphabetical order.`,
+          texte: "Insured and market share by canton, administrative costs, reserves and solvency ratio of each insurer, with no ranking.",
+          cta: "See the figures",
         },
       ];
 

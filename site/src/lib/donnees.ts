@@ -4,6 +4,7 @@
 import { DATE_PRIMES } from "@/lib/date-primes";
 import IMPOTS from "@/data/impots-2026.json";
 import { RELEVE_LE } from "@/lib/taux3a";
+import { RELEVE_LE as RELEVE_LE_LP } from "@/lib/tauxlp";
 import FRAIS3A from "@/data/frais-3a.json";
 import ASSUREURS3A from "@/data/assureurs-3a-3b.json";
 export const DATE_FRAIS_3A: string = FRAIS3A.verifie_le;
@@ -24,14 +25,18 @@ export const DATE_IMPOTS = IMPOTS.lu_le;
 export const DATE_TEXTE = {
   accueil: "2026-11-23", // questions fréquentes ajoutées
   comparateur: "2026-11-22",
+  subsides: "2026-11-24", // page des subsides d'assurance maladie 2027 créée (barèmes officiels lus le 24.11.2026)
+  primesUe: "2026-11-24", // page des primes UE/AELE/UK créée (OFSP, Prämien_EU)
   simulateur: "2026-11-23",
   lettre: "2026-11-22",
   taux3a: "2026-11-23", // frais des comptes 3a et solutions 3a en titres
+  tauxLibrePassage: "2026-11-24", // page des taux des comptes de libre passage créée
   assurance3a: "2026-11-23", // page 3a et 3b auprès d'un assureur créée
   impot3a: "2026-11-23", // canton du Jura ajouté
   outils: "2026-11-23", // page « Outils et chiffres » créée ; calculateur ménage et garanties PJ ajoutés
   sommeMenage: "2026-11-23", // calculateur de la somme d'assurance ménage créé
   garantiesPj: "2026-11-23", // tableau des garanties de protection juridique créé (CGA lues le 23.11.2026)
+  caissesChiffres: "2026-11-24", // tableau des caisses maladie en chiffres créé (OFSP, statistique 2024)
   guides: "2026-11-23", // questions fréquentes ajoutées ; la liste suit aussi la date des guides (lib/content/pages.ts)
 } as const;
 
@@ -39,12 +44,16 @@ export const DATE_TEXTE = {
 export const DATE_PAGE = {
   comparateur: maxIso(DATE_TEXTE.comparateur, DATE_PRIMES),
   taux3a: maxIso(DATE_TEXTE.taux3a, DATE_TAUX_3A, DATE_FRAIS_3A),
+  tauxLibrePassage: maxIso(DATE_TEXTE.tauxLibrePassage, RELEVE_LE_LP),
   assurance3a: maxIso(DATE_TEXTE.assurance3a, DATE_ASSUREURS_3A),
   impot3a: maxIso(DATE_TEXTE.impot3a, DATE_IMPOTS),
+  primesUe: DATE_TEXTE.primesUe,
+  subsides: DATE_TEXTE.subsides,
   simulateur: DATE_TEXTE.simulateur,
   lettre: DATE_TEXTE.lettre,
   sommeMenage: DATE_TEXTE.sommeMenage,
   garantiesPj: DATE_TEXTE.garantiesPj,
+  caissesChiffres: DATE_TEXTE.caissesChiffres,
   /* L'accueil affiche les primes moyennes et les taux 3a. */
   accueil: maxIso(DATE_TEXTE.accueil, DATE_PRIMES, DATE_TAUX_3A),
 } as const;

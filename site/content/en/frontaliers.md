@@ -33,7 +33,7 @@ sources:
   - { label: "Priminfo, LAMal premiums for EU residents (FOPH)", url: "https://www.priminfo.admin.ch" }
   - { label: "Art. 3 LAMal (Fedlex)", url: "https://www.fedlex.admin.ch/eli/cc/1995/1328_1328_1328/fr#art_3" }
   - { label: "Art. 2 OAMal (Fedlex)", url: "https://www.fedlex.admin.ch/eli/cc/1995/3867_3867_3867/fr#art_2" }
-outils: [simulateur-frontalier]
+outils: [simulateur-frontalier, primes-ue]
 faq:
   - q: "How long do you have to choose between LAMal and French insurance?"
     a: "You have 3 months from the start of work in Switzerland (CLEISS, the French centre for European and international social security liaison). In Geneva, if no form is returned within this period, the person is enrolled in LAMal (compulsory basic health insurance) automatically."

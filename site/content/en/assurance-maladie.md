@@ -32,7 +32,7 @@ sources:
   - { label: "FOPH, 2027 premiums (press release of 29.09.2026)", url: "https://www.bag.admin.ch/fr/newnsb/BfuGvedj0OOX" }
   - { label: "FOPH, models with a limited choice of providers", url: "https://www.bag.admin.ch/fr/assurance-maladie-assurances-impliquant-un-choix-limite-des-fournisseurs-de-prestations" }
   - { label: "Priminfo, frequently asked questions (FOPH)", url: "https://www.priminfo.admin.ch/fr/faq" }
-outils: [comparateur-primes, lettre-resiliation]
+outils: [comparateur-primes, subsides, caisses-chiffres, lettre-resiliation]
 faq:
   - q: "What is the deadline to cancel your health insurer for 2027?"
     a: "The insurer must receive your cancellation by Monday 30 November 2026 at the latest, the last working day of November, for a change on 1 January 2027 (art. 7 para. 2 LAMal, the law on compulsory basic health insurance). The postmark does not count."

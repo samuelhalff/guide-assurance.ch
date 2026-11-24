@@ -34,11 +34,15 @@ export const OUTILS = {
   simulateur: "/simulateur-frontalier/",
   lettre: "/lettre-resiliation/",
   comparateur: "/assurance-maladie/comparateur/",
+  subsides: "/assurance-maladie/subsides/",
   taux3a: "/3e-pilier/taux-3a/",
+  tauxLibrePassage: "/libre-passage/taux/",
+  primesUe: "/assurance-maladie/primes-ue-aele/",
   impot3a: "/3e-pilier/economie-impot/",
   assurance3a: "/3e-pilier/assurance-3a-3b/",
   sommeMenage: "/assurance-menage-rc/calculateur-somme/",
   garantiesPj: "/protection-juridique/comparatif-garanties/",
+  caissesChiffres: "/assurance-maladie/caisses-maladie-chiffres/",
 } as const;
 
 /* Version anglaise (sous /en/). */
@@ -67,11 +71,15 @@ export const OUTILS_EN = {
   simulateur: "/en/cross-border-calculator/",
   lettre: "/en/cancellation-letter/",
   comparateur: "/en/health-insurance/compare/",
+  subsides: "/en/health-insurance/premium-subsidies/",
   taux3a: "/en/pillar-3a/interest-rates/",
+  tauxLibrePassage: "/en/vested-benefits/interest-rates/",
+  primesUe: "/en/health-insurance/eu-efta-premiums/",
   impot3a: "/en/pillar-3a/tax-savings/",
   assurance3a: "/en/pillar-3a/insurance-3a-3b/",
   sommeMenage: "/en/household-and-liability-insurance/sum-insured-calculator/",
   garantiesPj: "/en/legal-protection-insurance/cover-compared/",
+  caissesChiffres: "/en/health-insurance/insurers-key-figures/",
 } as const;
 
 /* Page « 3a et 3b auprès d'un assureur ». */
