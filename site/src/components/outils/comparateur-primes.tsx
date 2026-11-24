@@ -16,6 +16,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { chf as chfBase, nombre as formaterNombre, ESPACE_FINE as T, INSECABLE as NB } from "@/lib/nombres";
 
 /* Comparateur de primes LAMal 2027. Les données du canton sont chargées à la demande (public/data/primes-2027) ;
@@ -106,7 +107,8 @@ const TXT = {
     franchiseDe: (f: number) => `franchise ${nfFr(f)}${NB}CHF`,
     accOui: "avec accident",
     accNon: "sans accident",
-    affichage: "Afficher",
+    affichage: "Afficher les primes par mois ou par an",
+    periodeCourt: { mois: "Mois", an: "An" },
     mois: "par mois",
     an: "par an",
     caisseAide: "L’écart entre chaque offre et la prime 2027 de votre caisse actuelle s’affiche dans la liste. Ce choix n’est envoyé nulle part.",
@@ -226,7 +228,8 @@ const TXT = {
     franchiseDe: (f: number) => `deductible CHF${NB}${nfEn(f)}`,
     accOui: "with accident cover",
     accNon: "without accident cover",
-    affichage: "Show",
+    affichage: "Show premiums per month or per year",
+    periodeCourt: { mois: "Month", an: "Year" },
     mois: "per month",
     an: "per year",
     caisseAide: "The list then shows the difference between each offer and your current insurer’s 2027 premium. This choice is not sent anywhere.",
@@ -765,15 +768,18 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
                 <label htmlFor="cp-modele">{t.modele}</label>
                 <Choix id="cp-modele" value={filtre} onChange={setFiltre} options={(["tous", ...typesPresents] as P.Filtre[]).map((f) => ({ value: f, label: t.filtres[f] }))} />
               </div>
-              <ChoixBoutons
-                name="cp-periode"
-                variante="pastille"
+              <ToggleGroup
                 className="periode"
-                label={t.affichage}
-                value={parAn}
-                onChange={setParAn}
-                options={[{ value: false, label: t.mois }, { value: true, label: t.an }]}
-              />
+                variant="outline"
+                size="champ"
+                spacing={0}
+                aria-label={t.affichage}
+                value={[parAn ? "an" : "mois"]}
+                onValueChange={(v) => { if (v[0]) setParAn(v[0] === "an"); }}
+              >
+                <ToggleGroupItem value="mois">{t.periodeCourt.mois}</ToggleGroupItem>
+                <ToggleGroupItem value="an">{t.periodeCourt.an}</ToggleGroupItem>
+              </ToggleGroup>
             </div>
             <Case className="case caisse-case" checked={avecCaisse} onChange={setAvecCaisse}>
               {t.ecartCaisse}<small>{t.caisseAide}</small>

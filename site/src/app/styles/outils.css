@@ -121,8 +121,6 @@
   .fourchette { font: 600 16px var(--narrow); margin: 0 0 var(--s4); }
   .reglages { display: grid; gap: var(--s3); align-items: end; }
   .reglages .champ { margin: 0; }
-  .periode { display: grid; grid-template-columns: auto auto; gap: 4px; }
-  .periode .pastille span { min-height: 48px; padding: 6px 10px; font-size: 15px; }
 
   .cartes-primes { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s2); }
   .carte-prime { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 2px var(--s2); align-items: start; }
@@ -148,8 +146,11 @@
     background: var(--background); border-top: 1px solid var(--filet); box-shadow: 0 -4px 16px rgb(0 0 0 / .08);
   }
   .page-outil .apercu > h2.titre-resultat, .page-outil h2.titre-resultat { font-size: 23px; margin: 0 0 var(--s2); }
-  .reglages { grid-template-columns: 1fr; }
-  .reglages .periode { justify-self: start; }
+  /* Mobile : tri et mois/an sur une ligne, modèle dessous. minmax(0, …) : un libellé long se tronque sans élargir la grille. */
+  .reglages { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "tri periode" "modele modele"; }
+  .reglages > .champ:first-child { grid-area: tri; }
+  .reglages > .champ:nth-child(2) { grid-area: modele; }
+  .reglages .periode { grid-area: periode; }
   .caisse-case { margin-top: var(--s3); }
   .caisse-actuelle { margin-bottom: var(--s3); }
   .caisse-actuelle > p { grid-column: 1 / -1; margin: 0; }
@@ -223,8 +224,7 @@
     table.primes-liste { display: table; }
     .rappel-bureau { display: block; }
     .barre-collante { display: none; }
-    .reglages { grid-template-columns: 1fr 1fr auto; }
-    .reglages .periode { grid-column: auto; }
+    .reglages { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; grid-template-areas: "tri modele periode"; }
   }
 
   /* FAQ en bas de page */
