@@ -1,7 +1,6 @@
-import Image from "next/image";
 import { pied } from "@/lib/nav";
 import { DICT, type Locale } from "@/lib/i18n";
-import { RouvrirMesure } from "@/components/site/mesure";
+import { RouvrirMesure } from "@/components/site/rouvrir-mesure";
 
 /* Pied de page : seul endroit où l'éditeur (West Bay SA) apparaît. Bande sombre dans les deux thèmes.
    `note` ajoute la mention propre à la page (source des primes, portée de l'outil).
@@ -29,8 +28,10 @@ export function SiteFooter({ note, locale = "fr", altPath }: { note?: string; lo
         <p className="credit">
           {t.credit}{" "}
           <a href="https://houle.ai/">
-            {/* SVG de quelques Ko, déjà à la bonne taille : servi tel quel (unoptimized). */}
-            <Image src="/credits/houle-ai.svg" alt="houle.ai" width={64} height={15} unoptimized />
+            {/* SVG de quelques Ko, déjà à la bonne taille : servi tel quel (unoptimized), en img ordinaire (aucun code next/image côté client). */}
+            <picture>
+              <img src="/credits/houle-ai.svg" alt="houle.ai" width={64} height={15} loading="lazy" decoding="async" />
+            </picture>
           </a>
         </p>
       </div>

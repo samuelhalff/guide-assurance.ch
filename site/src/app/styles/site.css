@@ -12,6 +12,7 @@
 @layer components {
   html {
     --sans: var(--font-archivo), "Archivo", sans-serif;
+    --logo: var(--font-archivo-logo), var(--font-archivo), "Archivo", sans-serif;
     --narrow: var(--font-archivo-narrow), var(--font-archivo), sans-serif;
     --r: 8px;
     --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px; --s8: 72px; --s9: 112px;
@@ -38,7 +39,7 @@
   .marque svg { flex: 0 0 auto; width: 38px; height: 38px; display: block; }
   .mot {
     display: flex; flex-direction: column; justify-content: center;
-    font-family: var(--sans); font-stretch: 122%; font-size: 13.5px; letter-spacing: .05em; line-height: 1;
+    font-family: var(--logo); font-size: 13.5px; letter-spacing: .05em; line-height: 1;
     color: var(--encre);
   }
   .mot span:first-child { font-weight: 500; color: var(--sentier-texte); }

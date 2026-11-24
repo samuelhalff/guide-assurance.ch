@@ -1,51 +1,46 @@
 "use client";
-import { useState } from "react";
+import { useCallback, useEffect, useState, type ComponentType } from "react";
 import { buttonVariants } from "@/components/ui/button";
-import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { ThemeToggle } from "@/components/site/theme-toggle";
-import { nav, type Rubrique } from "@/lib/nav";
+import { apresChargement } from "@/lib/charge-differee";
 import { DICT, type Locale } from "@/lib/i18n";
+import type { Rubrique } from "@/lib/nav";
 
-/* Menu mobile (≤ 820 px) : panneau latéral de 340 px au plus. Base UI Dialog piège le focus, Échap ferme
-   et rend le focus au bouton Menu. */
+type Panneau = ComponentType<{ current?: Rubrique; locale?: Locale; ouvert: boolean; onOuvert: (o: boolean) => void }>;
+
+/* Menu mobile (≤ 820 px). Le bouton est dans le HTML initial et réagit tout de suite ; le panneau (Base UI Dialog,
+   piège à focus, positionnement : une vingtaine de Ko compressés) se charge une fois la page affichée, ou dès que
+   le doigt ou le pointeur approche du bouton. Un appui avant la fin du chargement ouvre le panneau dès son arrivée. */
 export function SiteMenu({ current, locale = "fr" }: { current?: Rubrique; locale?: Locale }) {
   const [ouvert, setOuvert] = useState(false);
+  const [Panneau, setPanneau] = useState<Panneau | null>(null);
   const t = DICT[locale];
+  const charger = useCallback(() => {
+    void import("@/components/site/site-menu-panneau").then((m) => setPanneau(() => m.SiteMenuPanneau));
+  }, []);
+  useEffect(() => apresChargement(charger), [charger]);
   return (
-    <Sheet open={ouvert} onOpenChange={setOuvert}>
+    <>
       <span className="menu-btn">
-        <SheetTrigger className={buttonVariants({ variant: "commande", size: "commande", className: "max-[479px]:gap-0" })}>
+        <button
+          type="button"
+          data-slot="sheet-trigger"
+          aria-haspopup="dialog"
+          aria-expanded={ouvert}
+          className={buttonVariants({ variant: "commande", size: "commande", className: "max-[479px]:gap-0" })}
+          onPointerEnter={charger}
+          onFocus={charger}
+          onClick={() => {
+            charger();
+            setOuvert(true);
+          }}
+        >
           <svg className="size-[22px] h-3" width="22" height="12" viewBox="0 0 22 12" aria-hidden="true">
             <path d="M1 2h20M8 10h13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
           </svg>
           <span className="menu-mot">{t.menu}</span>
-        </SheetTrigger>
+        </button>
       </span>
-      <SheetContent
-        side="right"
-        showCloseButton={false}
-        className="menu-panneau w-full gap-0 border-l border-filet bg-papier px-4 pt-2 pb-4 text-encre data-[side=right]:w-full data-[side=right]:max-w-[340px] data-[side=right]:sm:max-w-[340px]"
-      >
-        <div className="flex min-h-[58px] items-center justify-between">
-          <SheetTitle className="font-narrow text-base font-semibold text-encre-2">{t.menu}</SheetTitle>
-          <SheetClose className={buttonVariants({ variant: "commande", size: "commande" })} aria-label={t.fermerMenu}>
-            <svg className="size-[18px]" width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
-              <path d="M3 3l12 12M15 3L3 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-            </svg>
-          </SheetClose>
-        </div>
-        <nav aria-label={t.navPrincipale}>
-          {nav(locale).map((l) => (
-            <a key={l.id} href={l.href} aria-current={current === l.id ? "page" : undefined} onClick={() => setOuvert(false)}>
-              {l.label}
-            </a>
-          ))}
-        </nav>
-        <div className="menu-pied">
-          {t.theme}
-          <ThemeToggle lang={locale} />
-        </div>
-      </SheetContent>
-    </Sheet>
+      {Panneau ? <Panneau current={current} locale={locale} ouvert={ouvert} onOuvert={setOuvert} /> : null}
+    </>
   );
 }

@@ -7,7 +7,9 @@ import { outils } from "@/lib/nav";
 import { RAPPEL, ecrirePreremplissage, lienDemande } from "@/lib/demande";
 import { IconeTelephone, useRappelVu } from "@/components/demande/lien-rappel";
 import { dateCh } from "@/lib/taux3a";
-import { OffreComparateur, type OffreComparateurHandle } from "@/components/outils/offre-comparateur";
+import dynamic from "next/dynamic";
+import type { OffreComparateurHandle } from "@/components/outils/offre-comparateur";
+import { chargerApresAffichage } from "@/lib/charge-differee";
 import { Choix } from "@/components/outils/choix";
 import { Case, ChoixBoutons, Depliable } from "@/components/controles";
 import { Button } from "@/components/ui/button";
@@ -322,6 +324,12 @@ type PersonneUI = { id: number; naissance: string; franchise: number | null; acc
 const MAX_PERSONNES = 6;
 
 /* donneesDu : date du relevé des primes (ISO), lue au build dans les données (lib/date-primes.ts). */
+/* Le bloc « Recevoir des offres » (formulaire de rappel : téléphone, consentements, Turnstile) n'existe qu'une fois
+   les résultats calculés : il n'est pas dans le HTML initial. Son code se charge après l'affichage de la page
+   (chargerApresAffichage dans le composant), bien avant qu'un profil complet soit saisi. */
+const importerOffre = () => import("@/components/outils/offre-comparateur").then((m) => m.OffreComparateur);
+const OffreComparateur = dynamic(importerOffre, { ssr: false });
+
 export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Locale; donneesDu: string }) {
   const isEn = locale === "en";
   const t = TXT[locale];
@@ -351,6 +359,7 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
 
   /* Profil partagé par lien : après le #, jamais envoyé au serveur. Lu une fois, puis retiré de l'adresse
      pour que la mesure d'audience ne le voie pas. Format : #npa=1201&p=1985.300.1,2015.0.1 */
+  useEffect(() => chargerApresAffichage(() => void importerOffre(), { interaction: true }), []);
   useEffect(() => {
     const h = new URLSearchParams(window.location.hash.slice(1));
     const n = h.get("npa");

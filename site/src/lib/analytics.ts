@@ -4,6 +4,8 @@
    balises Google ; il se charge d'office et respecte l'état de consentement. PostHog (EU) : persistant et avec
    enregistrement de session sauf refus ; en mémoire, sans enregistrement, après un refus.
    Jamais de valeur saisie, jamais de contenu de l'assistant, jamais d'enregistrement sur le formulaire de demande. */
+import { apresChargement, chargerApresAffichage } from "@/lib/charge-differee";
+export { apresChargement };
 import { ACCORDE, CLE_INTERNE, REFUSE, attributionDepuis, attributionLue, persistantParDefaut, proprietesConversion, replayAutorise, scriptAmorce, type Choix } from "@/lib/mesure-regles";
 export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID ?? "";
 export const POSTHOG_TOKEN = process.env.NEXT_PUBLIC_POSTHOG_TOKEN ?? "";
@@ -99,6 +101,34 @@ type W = { dataLayer?: unknown[]; gtag?: (...a: unknown[]) => void };
 
 let ph: PH | null = null;
 const file: [Evenement, Props | undefined][] = [];
+/* Événements encore dans la file quand la page est quittée (PostHog, chargé après l'affichage, n'était pas prêt : appui
+   sur un bouton d'appel dans la première seconde, par exemple) : gardés dans sessionStorage et envoyés par PostHog
+   dès qu'il démarre sur la page suivante. Jamais après un refus ; aucune valeur saisie dans ces événements. */
+const CLE_FILE = "ga-file-attente";
+let gardeFile = false;
+function garderFile() {
+  if (gardeFile || typeof window === "undefined") return;
+  gardeFile = true;
+  window.addEventListener("pagehide", () => {
+    if (!file.length || lireChoix() === "non") return;
+    try {
+      sessionStorage.setItem(CLE_FILE, JSON.stringify(file.slice(-20)));
+    } catch {
+      /* stockage refusé : ces événements sont perdus */
+    }
+  });
+}
+function reprendreFile() {
+  try {
+    const brut = sessionStorage.getItem(CLE_FILE);
+    if (!brut) return;
+    sessionStorage.removeItem(CLE_FILE);
+    const v = JSON.parse(brut) as unknown;
+    if (Array.isArray(v)) for (const x of v.slice(-20)) if (Array.isArray(x) && typeof x[0] === "string") file.unshift([x[0] as Evenement, x[1] && typeof x[1] === "object" ? (x[1] as Props) : undefined]);
+  } catch {
+    /* contenu illisible : ignoré */
+  }
+}
 /* Faux sur le formulaire de demande (mise en page (demande), sans GTM) : rien ne part vers le dataLayer. */
 let versDataLayer = true;
 
@@ -111,7 +141,10 @@ export function suivre(e: Evenement, p0?: Props, avantDepart = false) {
   if (avantDepart) memoriserIdentite();
   /* avantDepart : la page va changer, l'événement part tout de suite par sendBeacon. */
   if (ph) ph.capture(e, p, avantDepart ? { transport: "sendBeacon", send_instantly: true } : undefined);
-  else if (POSTHOG_TOKEN) file.push([e, p]);
+  else if (POSTHOG_TOKEN) {
+    file.push([e, p]);
+    garderFile();
+  }
   if (!e.startsWith("assistant_")) {
     versGA(e, p);
     if (OUTILS.includes(e)) versGA("select_content", { content_type: "outil", content_id: e });
@@ -271,15 +304,6 @@ export function ecrireChoix(c: "oui" | "non") {
   } else memoriserAttribution();
 }
 
-/* Après l'affichage : fin du chargement de la page, puis un moment libre (3 s au plus). Les événements attendent dans `file`. */
-export function apresChargement(f: () => void) {
-  if (typeof window === "undefined") return;
-  const w = window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number };
-  const plusTard = () => (w.requestIdleCallback ? w.requestIdleCallback(f, { timeout: 3000 }) : setTimeout(f, 1));
-  if (document.readyState === "complete") plusTard();
-  else window.addEventListener("load", plusTard, { once: true });
-}
-
 let modeSite = true;
 let persistanceVoulue: boolean | null = null;
 let persistanceAppliquee: boolean | null = null;
@@ -326,7 +350,6 @@ async function initPostHog(persistant: boolean) {
     import("posthog-js"),
     /* Extensions groupées dans le bundle du site (disable_external_dependency_loading : aucun script tiers chargé). */
     ...(site ? [import("posthog-js/dist/web-vitals"), import("posthog-js/dist/dead-clicks-autocapture")] : []),
-    ...(site && replayVoulu(persistant) ? [import("posthog-js/dist/lazy-recorder")] : []),
   ]);
   persistanceAppliquee = persistant;
   const identite = site ? {} : lireIdentite();
@@ -382,6 +405,23 @@ async function initPostHog(persistant: boolean) {
   /* Canal et source IA sur tous les événements de la session (pages vues comprises), pour les tunnels par canal. */
   const a = lireAttribution();
   if (a.canal) ph.register_for_session({ canal: a.canal, ...(a.ai_source ? { ai_source: a.ai_source } : {}) });
-  if (replayVoulu(persistant)) ph.startSessionRecording(true);
+  /* L'enregistreur de session (rrweb, environ 160 Ko, une tâche d'une cinquantaine de ms sur un téléphone) ne démarre
+     qu'au premier geste du visiteur (appui, touche, défilement) ou après 20 s : un visiteur qui n'agit pas n'a rien
+     à rejouer, et la page n'est pas bloquée pendant son démarrage. L'instantané complet de la page est pris à ce moment. */
+  if (replayVoulu(persistant)) planifierEnregistrement();
+  if (lireChoix() !== "non") reprendreFile();
   for (const [e, p] of file.splice(0)) ph.capture(e, p);
+}
+
+let enregistrementPlanifie = false;
+function planifierEnregistrement() {
+  if (enregistrementPlanifie) return;
+  enregistrementPlanifie = true;
+  const demarrer = async () => {
+    /* Le choix du visiteur a pu changer entre-temps : appliquer() gère alors lui-même l'enregistreur. */
+    if (!ph || persistanceVoulue === null || !replayVoulu(persistanceVoulue)) return;
+    await import("posthog-js/dist/lazy-recorder");
+    if (ph && persistanceVoulue !== null && replayVoulu(persistanceVoulue)) ph.startSessionRecording(true);
+  };
+  chargerApresAffichage(() => void demarrer(), { interaction: true, delaiMax: 20000 });
 }

@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { archivo, archivoNarrow } from "@/components/site/fonts";
-import { Mesure } from "@/components/site/mesure";
+import { archivo, archivoLogo, archivoNarrow } from "@/components/site/fonts";
+import { MesureDiffere } from "@/components/site/mesure-differee";
 import { ThemeProvider } from "@/components/site/theme-provider";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
@@ -36,7 +36,7 @@ const LIENS: { href: string; titre: string; detail: string }[] = [
 export default function GlobalNotFound() {
   const gtm = amorceGTM();
   return (
-    <html lang="fr" className={`${archivo.variable} ${archivoNarrow.variable}`} suppressHydrationWarning>
+    <html lang="fr" className={`${archivo.variable} ${archivoLogo.variable} ${archivoNarrow.variable}`} suppressHydrationWarning>
       <head>{gtm ? <script dangerouslySetInnerHTML={{ __html: gtm }} /> : null}</head>
       <body className="antialiased">
         <ThemeProvider>
@@ -78,7 +78,7 @@ export default function GlobalNotFound() {
             <SiteFooter />
           </div>
         </ThemeProvider>
-        <Mesure locale="fr" />
+        <MesureDiffere locale="fr" />
       </body>
     </html>
   );

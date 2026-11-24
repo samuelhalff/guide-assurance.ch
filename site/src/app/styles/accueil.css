@@ -111,6 +111,7 @@
     position: absolute; inset: 0; overflow: hidden;
     background: linear-gradient(to bottom, #d1c2bc 0%, #d5c6bd 10%, #daccc3 20%, #e1d3ca 30%, #e4d5cc 40%, #e6d7cf 50%, #e8dad0 60%, #ecddd5 70%, #e3d4cb 80%, #e1d1c8 90%, #e1d1c8 100%) 0 0 / 100% var(--h) no-repeat, #e1d1c8;
   }
+  .paysage picture { display: contents; }
   .paysage img {
     position: absolute; top: 0; right: min(0px, calc((100vw - 1440px) * .4)); height: var(--h); width: auto; max-width: none;
     -webkit-mask-image: linear-gradient(to right, transparent 0, #000 24%), linear-gradient(to top, transparent 0, #000 16%);

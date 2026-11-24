@@ -28,8 +28,9 @@ const TXT = {
 
 /* Démarre PostHog et affiche le bandeau tant qu'aucun choix n'est enregistré. Les états Google par défaut
    (par région) et GTM sont posés par le script du <head> (amorceGTM). Les deux boutons ont le même poids. */
-export function Mesure({ locale = "fr" }: { locale?: "fr" | "en" }) {
-  const [visible, setVisible] = useState(false);
+export function Mesure({ locale = "fr", rouvrir: rouvertAuMontage = false }: { locale?: "fr" | "en"; rouvrir?: boolean }) {
+  /* rouvrir : le visiteur a appuyé sur « Cookies » avant l'arrivée de ce code. */
+  const [visible, setVisible] = useState(rouvertAuMontage);
   useEffect(() => {
     if (!MESURE_ACTIVE) return;
     /* Attribution au premier contact (sessionStorage, sauf refus), avant tout événement. */
@@ -144,14 +145,4 @@ function useMesureGA() {
       document.removeEventListener("copy", copie, true);
     };
   }, []);
-}
-
-/* Lien « Cookies » du pied de page pour revoir son choix. */
-export function RouvrirMesure() {
-  if (!CONSENTEMENT_REQUIS) return null;
-  return (
-    <Button type="button" variant="pied" size="herite" onClick={() => window.dispatchEvent(new Event("mesure:rouvrir"))}>
-      Cookies
-    </Button>
-  );
 }

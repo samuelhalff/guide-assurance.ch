@@ -16,3 +16,21 @@ export default function chargeurImages({ src, width }: { src: string; width: num
   const url = largeur ? chemin.replace(/\.webp$/, `-${largeur}.webp`) : chemin;
   return requete ? `${url}?${requete}` : url;
 }
+
+/* Propriétés d'une balise img ordinaire (rendue côté serveur) pour une image de public/ : srcset construit avec le
+   chargeur ci-dessus aux largeurs de images.deviceSizes (next.config.ts). Remplace le composant Image de next/image,
+   dont le code client (une dizaine de Ko) serait sinon téléchargé et hydraté sur chaque page. */
+const LARGEURS = [720, 1080, 1448] as const;
+export function proprietesImage(src: string, o: { width: number; height: number; sizes: string; alt: string; priority?: boolean }) {
+  return {
+    src: chargeurImages({ src, width: LARGEURS[LARGEURS.length - 1] }),
+    srcSet: LARGEURS.map((w) => `${chargeurImages({ src, width: w })} ${w}w`).join(", "),
+    sizes: o.sizes,
+    width: o.width,
+    height: o.height,
+    alt: o.alt,
+    loading: o.priority ? ("eager" as const) : ("lazy" as const),
+    decoding: "async" as const,
+    ...(o.priority ? { fetchPriority: "high" as const } : {}),
+  };
+}

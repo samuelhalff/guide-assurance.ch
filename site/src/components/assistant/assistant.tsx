@@ -1,4 +1,5 @@
 "use client";
+import "@/app/styles/assistant.css";
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog";
 import { LogoSilhouette } from "@/components/site/logo";

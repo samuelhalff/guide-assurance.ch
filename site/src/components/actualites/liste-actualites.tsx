@@ -1,3 +1,4 @@
+import "@/app/styles/actualites.css";
 import type { Metadata } from "next";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
