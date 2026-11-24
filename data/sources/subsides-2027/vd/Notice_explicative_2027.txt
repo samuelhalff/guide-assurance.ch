@@ -1,0 +1,545 @@
+NOTICE EXPLICATIVE : 
+LES SUBSIDES 2027
+(OFFICE VAUDOIS DE 
+L’ASSURANCE-MALADIE)
+
+Cette notice est valable dès le 1er janvier 2027. 
+Si vous avez déposé une demande de subside et reçu 
+une décision de l’Office vaudois de l’assurance-maladie 
+(OVAM), cette notice vous permet de mieux comprendre 
+cette décision.
+Si vous n’avez pas encore déposé une demande 
+de subside, cette notice vous permet de comprendre 
+les conditions pour obtenir un subside et comment celui-ci 
+est calculé. Pour évaluer votre droit potentiel à un subside, 
+veuillez remplir le questionnaire en ligne (www.vd.ch/ovam) 
+ou vous faire conseiller gratuitement par les spécialistes 
+de l’agence d’assurances sociales de votre région 
+de domicile (www.vd.ch/aas).
+Comment éviter de payer trop cher vos primes ?
+Sur notre site Internet www.vd.ch/primes, vous trouvez 
+plusieurs astuces pour payer moins cher vos primes 
+d’assurance-maladie. Ces conseils vous concernent aussi si 
+vous touchez déjà un subside. En effet, comme la différence 
+entre le subside accordé et la prime facturée par l’assureur est 
+à votre charge, nous vous encourageons à adapter votre police 
+d’assurance afin de réduire votre prime 2027. La demande 
+de changement doit parvenir au plus tard le 30 novembre 2026 
+à votre assureur.
+Si vous n’avez pas accès à Internet ou si vous souhaitez 
+recevoir un soutien personnel dans ces démarches, veuillez 
+vous adresser à l’agence d’assurances sociales de votre région 
+de domicile. Ses professionnels vous renseignent gratuitement. 
+1
+
+1.	Le revenu déterminant 
+pour le droit au subside
+L’aide financière pour payer les primes d’assurance-maladie est appelée 
+subside. En fonction de la situation financière du ménage, le subside peut 
+être composé d’une partie appelée subside ordinaire et d’une partie appelée 
+subside spécifique.
+Le montant du revenu déterminant de votre ménage définit si un subside 
+ordinaire (point 2 de cette notice) vous est alloué ou pas. Si en tenant 
+compte de l’éventuel subside ordinaire le montant total des primes 
+d’assurance-maladie dépasse encore les 10 % du revenu déterminant unifié, 
+un subside spécifique est octroyé (point 3 de cette notice).
+Les bénéficiaires du revenu d’insertion 
+ou des prestations complémentaires AVS/AI 
+ne sont pas concernés par le subside spécifique.
+Changements au 1er janvier 2027
+Plusieurs changements entrent en vigueur au 1er janvier 2027 dans 
+la définition de la condition économique modeste qui permet d’obtenir 
+un subside. En particulier, au-delà d’une limite pour la fortune mobilière 
+(notamment les comptes bancaires ou postaux) le droit au subside est refusé :
+–	 130’000 francs pour une personne seule ou une famille monoparentale,
+–	 260’000 francs pour les couples avec ou sans enfant(s).
+2
+
+Fortune
+Revenus 
+et déductions
+①	Revenu net
+Fr.
+②	Rachats d’années au titre du 2e pilier 
+	
+(après déduction de la franchise)
++	 Fr.
+③	Versements au titre du 3e pilier A
++	 Fr.
+④	Frais d’entretien d’immeuble dépassant 
+les déductions forfaitaires
++	 Fr.
+⑤	Primes d’assurance-maladie déduites fiscalement
++	 Fr.
+⑥	Déduction forfaitaire 
+pour les primes d’assurance-maladie
+-	 Fr.
+⑦	Fortune immobilière servant à son propre 
+logement après déduction de la franchise
+	
+Fr.
+⑦	Autre fortune immobilière sans déduction 
+des dettes hypothécaires
++	 Fr.
+⑧	Fortune commerciale après déduction de la franchise
++	 Fr.
+Fortune mobilière sans déduction des dettes privées
++	 Fr.
+⑨	Franchise sur la fortune (60’000 fr. ou 120’000 fr.) 
+-	 Fr.
+Total déterminant pour la fortune 	
+	
+Fr.
+Majoration du revenu correspondant à 6.7 % 
+du total déterminant pour la fortune
++	 Fr.
+A :	 Revenu déterminant unifié (RDU)
+	
+Fr.
+10	 Déduction pour enfant(s) à charge
+-	 Fr.
+B :	 Revenu déterminant OVAM pour le droit 
+aux subsides ordinaires
+	
+Fr.
+Le revenu déterminant est calculé 
+de la manière suivante :
+bis
+3
+
+Le revenu déterminant se compose : 
+①	du revenu net, au sens de la décision de taxation (DT) définitive la plus récente entrée 
+en force au moment du traitement de votre demande de subside, sauf dans les cas où 
+il y a un changement important de votre situation financière ;
+②	auquel on ajoute les rachats d’années au titre de la prévoyance professionnelle (2e pilier) 
+selon code 320 de la DT, après déduction d’une franchise de 20’000 fr. ;
+③	auquel on ajoute les versements au titre de la prévoyance individuelle liée 
+(3e pilier A) selon code 310 de la DT ;
+④	auquel on ajoute le montant dépassant les déductions forfaitaires 
+(au maximum 20 % du revenu net de l’immeuble) pour frais d’entretien d’immeubles 
+et investissements destinés à économiser l’énergie (code 540 de la DT) ;
+⑤	auquel on ajoute la déduction fiscale au titre des primes d’assurance-maladie 
+(code 300 de la DT) ;
+⑥	d’une déduction forfaitaire pour les primes d’assurance-maladie selon la LHPS 
+(loi cantonale sur l’harmonisation des prestations sociales) : 
+	
+–	 pour un ménage composé d’un adulte : 2’200 fr.
+–	 pour un ménage composé de deux adultes : 4’400 fr.
+–	 pour chaque enfant mineur ou majeur financièrement dépendant, 
+	
+ajout d’une déduction de : 1’300 fr. ;
+⑨	d’une majoration de 1/15 (= 6.7 %) de la fortune qui excède 60’000 fr. pour une personne 
+seule ou une famille monoparentale, 120’000 fr. pour un couple avec ou sans enfant(s). 
+Le résultat ne peut pas être inférieur à 0 fr. ;
+ 10	d’une déduction en fonction du nombre d’enfants à charge de l’ayant droit :
+	
+–	 pour un enfant à charge : 6’000 fr.
+–	 pour deux enfants à charge : 13’000 fr.
+–	 pour chaque enfant supplémentaire, ajout d’une déduction de : 7’000 fr.
+Remarques
+⑦	Lorsqu’un bien immobilier sert de logement permanent au requérant, une franchise 
+de 300’000 fr. ne pouvant pas dépasser la valeur fiscale du bien est appliquée. Les dettes 
+privées ou hypothécaires ne sont pas prises en compte.
+⑦	Les résidences secondaires et les biens immobiliers ne servant pas à son propre logement 
+doivent être déclarés. Aucune déduction de franchise n’est possible.
+⑧	Une franchise de 100’000 fr. est appliquée sur la valeur fiscale de la fortune commerciale 
+totale qui comprend les codes 450 (animaux et matériel d’exploitation), 465 (autres 
+actifs d’exploitation) et 510 (immeubles commerciaux) de la décision de taxation. En cas 
+de fortune commerciale inférieure à ce montant, la franchise est plafonnée au montant 
+effectif de la fortune commerciale. Les dettes commerciales ne sont pas prises en compte.
+bis
+4
+
+2.	Subside ordinaire
+Si le revenu déterminant OVAM (lettre B dans le tableau sous point 1 
+de cette notice) est inférieur ou égal aux limites de revenus applicables 
+en 2027 selon le tableau ci-dessous, vous pouvez prétendre à un subside 
+ordinaire, sous réserve de votre situation économique réelle à la suite 
+d’une modification importante de votre situation financière et/ou familiale.
+Tableau des subsides ordinaires mensuels en 2027 
+(les montants sont en fr.)
+ 
+Une seule personne*
+Région 
+de primes**
+19-25 ans 
+en formation 
+19-25 ans
+26 ans et +
+Si revenu déterminant OVAM est compris entre  
+0.- 
+et 16’000.-
+0.- 
+et 16’000.-
+0.- 
+et 17’000.-
+Subside
+1 et 2
+255.-
+255.-
+331.-
+16’001.- 
+et 40’000.-
+16’001.- 
+et 34’000.-
+17’001.- 
+et 40’000.-
+Subside
+1 et 2
+255.- à 192.-
+255.- à 20.-
+331.- à 30.-
+ 
+ 
+40’001.- 
+et 45’000.-
+34’001.- 
+et 39’000.-
+40’001.- 
+et 50’000.-
+Subside
+1 et 2
+192.- à 20.-
+20.- 
+30.- 
+ 
+ 
+Si bénéficiaires du Revenu d’insertion (RI) 
+ou des Prestations complémentaires AVS/AI (PC AVS/AI)
+Bénéficiaires (RI)****
+1
+378.-
+378.-
+570.-
+ 
+2
+345.-
+345.-
+535.-
+Bénéficiaires PC AVS/AI****
+1
+522.-
+522.-
+719.-
+ 
+2
+496.-
+496.-
+675.-
+5
+
+Plusieurs personnes* (ménage ou famille)
+0 - 18 ans
+19-25 ans en 
+formation***
+19-25 ans
+26 ans et + 
+avec enfant(s)
+26 ans et +
+sans enfant
+Si revenu déterminant OVAM est compris entre 
+0.- 
+et 26’000.-
+0.- 
+et 20’000.-
+0.- 
+et 20’000.-
+0.- et 24’200.-
+118.-
+220.-
+255.- à 240.-
+336.- à 300.-
+336.- à 300.-
+26’001.- 
+et 63’000.-
+20’001.- 
+et 58’000.-
+20’001.- 
+et 55’000.-
+24’201.- et 
+55’000.-
+24’201.- 
+et 70’000.-
+118.-
+220.- à 192.-
+240.- à 20.-
+300.- à 20.-
+300.- à 20.-
+63’001.- 
+et 76’000.- 
+58’001.- 
+et 76’000.-
+55’001.- 
+et 69’000.-
+55’001.- 
+et 69’000.-
+70’001.- 
+et 72’500.-
+118.-
+192.-
+20.-
+20.-
+20.-
+Si bénéficiaires du revenu d’insertion (RI) ou des prestations complémentaires AVS/AI (PC AVS/AI)
+165.-
+378.-
+378.-
+570.-
+570.-
+153.-
+345.-
+345.-
+535.-
+535.-
+174.-
+522.-
+522.-
+719.-
+719.-
+164.-
+496.-
+496.-
+675.-
+675.-
+*	
+Correspond à l’unité économique de référence (UER) comprenant l’ensemble 
+des personnes dont les revenus et fortunes sont pris en considération pour calculer 
+le droit au subside
+**	 Région 1 : Lausanne, l’Ouest lausannois, Nyon, La Côte, Lavaux, la Riviera
+	
+Région 2 : le Chablais, le Pays d’Enhaut, Oron, Cossonay, la Broye, le Vully, 
+le Gros-de-Vaud, le Jura, le Nord Vaudois
+***	 Prise en compte d’une partie du revenu déterminant unifié (lettre A dans le tableau 
+sous point 1 de cette notice) des parents assumant l’obligation d’entretien
+****	Les personnes bénéficiaires du revenu d’insertion ou des prestations complémentaires 
+AVS/AI sont subsidiées jusqu’à concurrence des montants indiqués ci-dessous
+6
+
+3.	Subside spécifique
+Après l’examen de votre droit à un subside ordinaire, un 2e calcul est 
+effectué pour déterminer si vous avez droit au subside spécifique. Celui-ci 
+vous est octroyé si le total de vos primes d’assurance-maladie dépasse 
+les 10 % du revenu déterminant unifié (lettre A dans le tableau sous point 1 
+de cette notice) en tenant compte d’un éventuel subside ordinaire alloué. 
+Le montant des primes de l’assurance-maladie obligatoire pris en compte pour 
+le calcul du subside spécifique est limité à une prime de référence (tableau 
+à droite). Le calcul ne prend donc pas en considération les primes facturées 
+par l’assureur, à moins qu’elles soient inférieures aux primes de référence. 
+L’objectif est d’encourager les personnes subsidiées à choisir des assureurs 
+proposant des primes inférieures à la moyenne cantonale. 
+Le subside spécifique est réparti entre les membres de la famille en allouant 
+l’aide d’abord aux enfants, puis aux jeunes adultes et enfin aux adultes. 
+Si plusieurs personnes sont concernées au sein d’une même catégorie, 
+le subside est réparti à parts égales entre elles dans les limites de la prime 
+facturée de chacun ou de la prime de référence correspondante si la prime 
+facturée lui est supérieure.
+La famille (4 personnes) vit à Lausanne, soit dans 
+la région 1 (pour savoir dans quelle région vous 
+habitez : voir explications du tableau sous point 2).
+Son revenu déterminant unifié s’élève à 76’000.- 
+(pour connaître le calcul du revenu déterminant 
+unifié : voir lettre A dans le tableau sous point 1).
+Les parents et leurs deux enfants paient 
+18’600.- de primes annuelles. Leurs primes sont 
+supérieures aux primes de référence (voir tableau 
+à droite). Ainsi, le calcul pour le subside prend 
+en considération les primes de référence, 
+soit 17’400.-. Si leurs primes facturées 
+étaient inférieures aux primes de référence, 
+le calcul pour le subside prendrait en compte 
+les primes facturées.
+Le subside ordinaire annuel octroyé à la famille 
+est de 3’312.- (voir tableau sous point 2). 
+Pour savoir si la famille a aussi droit à un subside 
+spécifique, le montant total des primes annuelles 
+retenues doit dépasser les 10 % de son revenu 
+déterminant en tenant compte d’un éventuel 
+subside ordinaire attribué.
+(17’400 – 3’312) / 76’000 = 18,5 % > 10 % 
+La famille a droit à un subside spécifique 
+annuel de 6’488.- 
+(17’400 – 3’312) - (76’000 x 10 %) = 6’488
+Exemple de calcul d’un subside ordinaire et spécifique
+7
+
+Tableau des primes de référence mensuelles
+*	
+Correspond à l’unité économique de référence (UER) comprenant l’ensemble 
+des personnes dont les revenus et fortunes sont pris en considération pour calculer 
+le droit au subside
+**	 Revenu déterminant unifié (RDU) avant une éventuelle déduction pour enfant(s) à charge 
+(lettre A dans le tableau sous point 1 de cette notice)
+***	 Région 1 :	Lausanne, l’Ouest lausannois, Nyon, La Côte, Lavaux, la Riviera 
+	
+Région 2 :	le Chablais, le Pays d’Enhaut, Oron, Cossonay, la Broye, le Vully, 	 	
+	
+	
+	
+le Gros-de-Vaud, le Jura, le Nord vaudois
+Une seule personne*
+Plusieurs personnes* 
+(ménage ou famille)
+Jeunes adultes
+(19 à 25 ans)
+Adultes
+(26 ans et plus)
+Enfants
+(0 à 18 ans)
+Jeunes adultes
+(19 à 25 ans)
+Adultes
+(26 ans et plus)
+RDU** 
+de 0.- 
+à 62’500.-
+RDU** 
+de 0.- 
+à 62’500.-
+RDU** 
+de 0.- 
+à 86’300.-
+RDU** 
+de 0.- 
+à 86’300.-
+RDU** 
+de 0.- 
+à 86’300.-
+Région 1***
+400.-
+580.-
+165.-
+400.-
+580.-
+Région 2***
+379.-
+543.-
+156.-
+379.-
+543.-
+RDU** 
+de 62’501.- 
+à 70’000.-
+RDU** 
+de 62’501.- 
+à 70’000.-
+RDU** 
+de 86’301.- 
+à 96’600.-
+RDU** 
+de 86’301.- 
+à 96’600.-
+RDU** 
+de 86’301.- 
+à 96’600.-
+Région 1***
+376.-
+555.-
+165.-
+376.-
+555.-
+Région 2***
+354.-
+518.-
+156.-
+354.-
+518.-
+RDU** 
+de 70’001.- 
+et plus
+RDU** 
+de 70’001.- 
+et plus
+RDU** 
+de 96’601.- 
+et plus
+RDU** 
+de 96’601.- 
+et plus
+RDU** 
+de 96’601.- 
+et plus
+Région 1***
+328.-
+505.-
+165.-
+328.-
+505.-
+Région 2***
+306.-
+468.-
+156.-
+306.-
+468.-
+8
+
+4.	Informations importantes
+Part de la prime à charge de l’ayant droit
+La différence entre le subside accordé et la prime facturée par l’assureur 
+est entièrement à la charge de l’assuré.
+Les bénéficiaires du revenu d’insertion ou des prestations complémentaires 
+AVS/AI, affiliés auprès d’un assureur dont la prime 2027 pour l’assurance 
+obligatoire des soins est supérieure au subside de référence (tableau sous 
+point 2), doivent également payer la différence chaque mois. Il est conseillé 
+de choisir une prime moins chère lors du prochain terme de résiliation 
+de l’assurance-maladie. Pour savoir comment procéder, vous trouvez plus 
+d’informations ici : www.vd.ch/primes
+Début du droit au subside
+Le droit au subside prend naissance le premier jour du deuxième mois qui 
+suit le dépôt de la demande auprès de l’agence d’assurances sociales 
+de la région de domicile du subsidié ou la confirmation de sa transmission 
+réussie via Internet. Pour les bénéficiaires du revenu d’insertion ou 
+des prestations complémentaires, le droit au subside prend naissance 
+le mois où débutent ces prestations.
+Départ dans un autre canton
+Lorsqu’une personne assurée transfère son domicile dans un autre canton, 
+une nouvelle demande de subside doit être déposée dans le canton 
+de destination, car il n’existe pas de transfert du droit au subside d’un canton 
+à l’autre.
+Devoir d’information
+Toute modification des revenus et fortune, de la composition du ménage, ainsi 
+que toute détention de biens mobiliers ou immobiliers dans un autre canton 
+ou à l’étranger doit être signalée sans retard à l’agence d’assurances sociales 
+ou via le formulaire de contact en ligne (www.vd.ch/ovam). Cela permettra 
+de réviser le droit aux subsides à partir du premier jour du mois qui suit 
+la modification de la situation. Le non-respect de cette obligation donnera lieu 
+à une demande de restitution des subsides indûment perçus et pourra faire 
+l’objet d’une dénonciation aux autorités fiscales.
+9
+
+Situation économique réelle
+Si la situation économique d’un bénéficiaire de subsides change, 
+l’Office vaudois de l’assurance-maladie (OVAM) révisera le droit au subside 
+pour autant que la nouvelle situation financière s’écarte de 20 % ou plus 
+en négatif ou en positif. L’OVAM se base sur la déclaration du requérant 
+et des pièces justificatives ou sur la dernière décision de taxation pour 
+calculer le revenu déterminant et statuer à nouveau sur le droit au subside.
+Condition économique modeste
+Avant de calculer le subside, l’OVAM vérifie si le requérant remplit les critères de 
+la condition économique modeste. Lorsque ce n’est pas le cas, le subside est 
+refusé à tous les membres du ménage. Cela arrive notamment si le requérant :
+–	 dispose d’une fortune mobilière importante (p. ex. 130’000 fr. 
+pour une personne seule) ;
+–	 ne met pas toute sa capacité de gain à contribution par choix personnel, 
+en travaillant à un taux d’activité inférieur aux taux minimaux fixés 
+(80 % pour une personne seule, 160 % pour un couple sans enfant 
+ou avec enfant(s) de 15 ans et plus) ;
+–	 a contracté des dettes ou cédé ses biens sans contrepartie ;
+–	 renonce volontairement à d’autres prestations sociales.
+Les taux d’activité minimaux et les autres règles sont consultables 
+sur www.vd.ch/ovam
+Lois appliquées
+LVLAMal 
+RLVLAMal
+LHPS
+RLHPS
+Arrêté concernant les subsides aux primes 
+de l’assurance-maladie obligatoire en 2027
+Plus d’informations : 
+https://prestations.vd.ch/pub/blv-publication/accueil
+10
+
+Office vaudois de l’assurance-maladie (OVAM)
+Bâtiment administratif de la Pontaise
+Route des Plaines-du-Loup 1 – 1014 Lausanne
+www.vd.ch/ovam
+Blaise Magnenat

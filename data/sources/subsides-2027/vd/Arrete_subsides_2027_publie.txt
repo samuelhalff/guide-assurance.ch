@@ -1,0 +1,486 @@
+1
+Entrée en vigueur dès le 01.01.2027 (Future)
+Document généré le : 13.10.2026
+ARRÊTÉ 
+832.00.071026.1 
+concernant les subsides aux primes de l'assurance-maladie 
+obligatoire en 2027 
+du 7 octobre 2026 
+LE CONSEIL D'ÉTAT DU CANTON DE VAUD
+vu l'art. 65 al. 1bis de la loi fédérale sur l'assurance-maladie (LAMal),
+vu les art. 11, 12a, 17, 17a, 17b, 17c, 18 et 18a de la loi du 25 juin 1996 d'application vaudoise 
+de la loi fédérale sur l'assurance-maladie (LVLAMal)
+vu l'art. 21 du règlement du 18 septembre 1996 concernant la loi du 25 juin 1996 d'application 
+vaudoise de la loi fédérale sur l'assurance-maladie (RLVLAMal)
+vu les art. 6, 7, 7a, 8, 9 et 10 de la loi du 9 novembre 2010 sur l'harmonisation et la coordination 
+de l'octroi des prestations sociales et d'aide à la formation et au logement cantonales 
+vaudoises (LHPS)
+vu les art. 5 et 6 du règlement d'application de la loi du 9 novembre 2010 sur l'harmonisation et 
+la coordination de l'octroi des prestations sociales et d'aide à la formation et au logement 
+cantonales vaudoises (RLHPS)
+vu le préavis du Département de la santé et de l'action sociale
+arrête
+Art. 1
+But
+1 Le présent arrêté fixe les paramètres de calcul du subside, les primes de référence et les déductions 
+prévues par la loi et le règlement.
+Art. 2
+Valeur des paramètres du subside ordinaire
+1 Conformément à l'art. 21 RLVLAMal, les valeurs des paramètres applicables aux formules de calcul 
+des subsides sont fixées comme suit :
+a.
+Paramètres applicables aux adultes âgés de 26 ans et plus vivant seuls (unité économique de 
+référence (ci-après : « UER ») composée d'une seule personne) :
+1.
+E1. Le subside minimum est fixé à 30 fr.
+2.
+F1. Le subside maximum est fixé à 331 fr.
+
+2
+3.
+C1. La première limite intermédiaire de revenu déterminant, au-dessous de laquelle le subside 
+est maximum, est fixée à 17'000 fr.
+4.
+A1. La seconde limite intermédiaire de revenu déterminant, à partir de laquelle l'assuré 
+bénéficie du subside minimum, est fixée à 40'000 fr.
+5.
+P1. Le coefficient qui détermine la progressivité de la courbe lorsque le revenu déterminant est 
+supérieur à C1 et inférieur ou égal à A1 est fixé à 2.5.
+6.
+B1. La limite supérieure de revenu déterminant, à partir de laquelle l'assuré ne bénéficie plus de 
+subside, est fixée à 50'000 fr.
+7.
+Revenu déterminant = revenu déterminant applicable au requérant.
+b.
+Paramètres applicables aux adultes âgés de 26 ans et plus vivant en famille avec enfant à charge ou 
+vivant seuls avec enfant à charge (UER composée de plusieurs personnes) :
+1.
+E2. Le subside minimum est fixé à 20 fr.
+2.
+F2. Le subside est fixé à 300 fr. lorsque le revenu déterminant est égal à C2.
+3.
+D2. Le subside maximum est fixé à 336 fr.
+4.
+C2. La première limite intermédiaire de revenu déterminant est fixée à 24'200 fr.
+5.
+A2. La seconde limite intermédiaire de revenu déterminant, à partir de laquelle l'assuré 
+bénéficie du subside minimum, est fixée à 55'000 fr.
+6.
+R2. Le coefficient de progressivité de la courbe est fixé à 1 lorsque le revenu déterminant est 
+inférieur ou égal à C2.
+7.
+P2. Le coefficient de progressivité de la courbe est fixé à 2.3 lorsque le revenu déterminant est 
+supérieur à C2 et inférieur ou égal à A2.
+8.
+B2. La limite supérieure de revenu déterminant, à partir de laquelle l'assuré ne bénéficie plus de 
+subside, est fixée à 69'000 fr.
+9.
+Revenu déterminant = revenu déterminant applicable à l'UER à laquelle appartient le requérant.
+c.
+Paramètres applicables aux enfants (0 à 18 ans) :
+1.
+E3. Le subside est fixé à 118 fr. lorsque le revenu déterminant est égal à A3.
+2.
+F3. Le subside maximum est fixé à 118 fr.
+3.
+C3. La première limite intermédiaire de revenu déterminant, au-dessous de laquelle le subside 
+est maximum, est fixée à 26'000 fr.
+4.
+A3. La seconde limite intermédiaire de revenu déterminant est fixée à 63'000 fr.
+5.
+P3. Le coefficient qui détermine la progressivité de la courbe lorsque le revenu déterminant est 
+supérieur à C3 et inférieur ou égal à A3 est fixé à 2.3.
+6.
+G3. Le subside minimum est fixé à 118 fr.
+
+3
+7.
+B3. La limite supérieure du revenu déterminant, à partir de laquelle l'assuré ne bénéficie plus de 
+subside, est fixée à 76'000 fr.
+8.
+Q3. Le coefficient de progressivité de la courbe, pour la formule qui s'applique lorsque le 
+revenu déterminant est supérieur à A3, est fixé à 0.25.
+9.
+Revenu déterminant = revenu déterminant applicable à l'UER à laquelle appartient le requérant.
+d.
+Paramètres applicables aux jeunes adultes âgés de 19 à 25 ans vivant seuls (UER composée d'une 
+seule personne) :
+1.
+E4. Le subside minimum est fixé à 20 fr.
+2.
+F4. Le subside maximum est fixé à 255 fr.
+3.
+C4. La première limite intermédiaire de revenu déterminant, au-dessous de laquelle le subside 
+est maximum, est fixée à 16'000 fr.
+4.
+A4. La seconde limite intermédiaire de revenu déterminant, à partir de laquelle l'assuré 
+bénéficie du subside minimum, est fixée à 34'000 fr.
+5.
+P4. Le coefficient qui détermine la progressivité de la courbe lorsque le revenu déterminant est 
+supérieur à C4 et inférieur ou égal à A4, est fixé à 2.3.
+6.
+B4. La limite supérieure de revenu déterminant, à partir de laquelle l'assuré ne bénéficie plus de 
+subside, est fixée à 39'000 fr.
+7.
+Revenu déterminant = revenu déterminant applicable au requérant.
+e.
+Paramètres applicables aux jeunes adultes âgés de 19 à 25 ans vivant en famille (couples avec ou 
+sans enfant à charge) ou vivant seuls avec enfant à charge (UER composée de plusieurs 
+personnes) :
+1.
+E5. Le subside minimum est fixé à 20 fr.
+2.
+F5. Le subside est fixé à 240 fr. lorsque le revenu déterminant est égal à C5.
+3.
+D5. Le subside maximum est fixé à 255 fr.
+4.
+C5. La première limite intermédiaire de revenu déterminant est fixée à 20'000 fr.
+5.
+A5. La seconde limite intermédiaire de revenu déterminant, à partir de laquelle l'assuré 
+bénéficie du subside minimum, est fixée à 55'000 fr.
+6.
+R5. Le coefficient de progressivité de la courbe est fixé à 1 lorsque le revenu déterminant est 
+inférieur ou égal à C5.
+7.
+P5. Le coefficient de progressivité de la courbe est fixé à 2.3 lorsque le revenu déterminant est 
+supérieur à C5 et inférieur ou égal à A5.
+8.
+B5. La limite supérieure de revenu déterminant, à partir de laquelle l'assuré ne bénéficie plus de 
+subside, est fixée à 69'000 fr.
+9.
+Revenu déterminant = revenu déterminant applicable à l'UER à laquelle appartient le requérant.
+
+4
+f.
+Paramètres applicables aux jeunes adultes en formation âgés de 19 à 25 ans vivant seuls et étant 
+financièrement indépendants de leurs parents (UER composée d'une seule personne) :
+1.
+E6. Le subside est fixé à 192 fr. lorsque le revenu déterminant est égal à A6.
+2.
+F6. Le subside maximum est fixé à 255 fr.
+3.
+C6. La première limite intermédiaire de revenu déterminant, au-dessous de laquelle le subside 
+est maximum, est fixée à 16'000 fr.
+4.
+A6. La seconde limite intermédiaire de revenu déterminant est fixée à 40'000 fr.
+5.
+P6. Le coefficient qui détermine la progressivité de la courbe lorsque le revenu déterminant est 
+supérieur à C6 et inférieur ou égal à A6 est fixé à 2.3.
+6.
+G6. Le subside minimum est fixé à 20 fr.
+7.
+B6. La limite supérieure de revenu déterminant, à partir de laquelle l'assuré ne bénéficie plus de 
+subside, est fixée à 45'000 fr.
+8.
+Q6. Le coefficient de progressivité de la courbe, pour la formule qui s'applique lorsque le 
+revenu déterminant est supérieur à A6 est fixé à 0.8.
+9.
+Revenu déterminant = revenu déterminant applicable au requérant.
+g.
+Paramètres applicables aux jeunes adultes en formation âgés de 19 à 25 ans vivant en famille ou 
+vivant seuls mais étant financièrement dépendants de leurs parents (UER composée de plusieurs 
+personnes) :
+1.
+E7. Le subside est fixé à 192 fr. lorsque le revenu déterminant est égal à A7.
+2.
+F7. Le subside maximum est fixé à 220 fr.
+3.
+C7. La première limite intermédiaire de revenu déterminant, au-dessous de laquelle le subside 
+est maximum, est fixée à 20'000 fr.
+4.
+A7. La seconde limite intermédiaire de revenu déterminant est fixée à 58'000 fr.
+5.
+P7. Le coefficient qui détermine la progressivité de la courbe lorsque le revenu déterminant est 
+supérieur à C7 et est inférieur ou égal à A7, est fixé à 2.3.
+6.
+G7. Le subside minimum est fixé à 192 fr.
+7.
+B7. La limite supérieure du revenu déterminant, à partir de laquelle l'assuré ne bénéficie plus de 
+subside, est fixée à 76'000 fr.
+8.
+Q7. Le coefficient de progressivité de la courbe, pour la formule qui s'applique lorsque le 
+revenu déterminant est supérieur à A7 est fixé à 0.5.
+9.
+Revenu déterminant = revenu déterminant applicable à l'UER à laquelle appartient le requérant.
+h.
+Paramètres applicables aux adultes âgés de 26 ans et plus vivant en famille sans enfant à charge 
+(couples sans enfant) (UER composée de plusieurs personnes) :
+
+5
+1.
+E8. Le subside minimum est fixé à 20 fr.
+2.
+F8. Le subside est fixé à 300 fr. lorsque le revenu déterminant est égal à C8.
+3.
+D8. Le subside maximum est fixé à 336 fr.
+4.
+C8. La première limite intermédiaire de revenu déterminant est fixée à 24'200 fr.
+5.
+A8. La seconde limite intermédiaire du revenu déterminant, à partir de laquelle l'assuré 
+bénéficie du subside minimum, est fixée à 70'000 fr.
+6.
+R8. Le coefficient de progressivité de la courbe est fixé à 1 lorsque le revenu déterminant est 
+inférieur ou égal à C8.
+7.
+P8. Le coefficient de progressivité de la courbe est fixé à 3.0 lorsque le revenu déterminant est 
+supérieur à C8 et inférieur ou égal à A8.
+8.
+B8. La limite supérieure du revenu déterminant, à partir de laquelle l'assuré ne bénéficie plus de 
+subside, est fixée à 72'500 fr.
+9.
+Revenu déterminant = revenu déterminant applicable à l'UER à laquelle appartient le requérant.
+Art. 3
+Prime pour les catégories particulières de subside
+1 Conformément à l'art. 18a al. 1 LVLAMal, le montant de la prime maximum est fixé comme suit :
+a.
+Adultes (26 ans et plus)
+1.
+région 1 : 570 fr.
+2.
+région 2 : 535 fr.
+b.
+Jeunes adultes (19 à 25 ans)
+1.
+région 1 : 378 fr.
+2.
+région 2 : 345 fr.
+c.
+Enfants (0 à 18 ans)
+1.
+région 1 : 165 fr.
+2.
+région 2 : 153 fr.
+Art. 4
+Déductions opérées par l'OVAM
+1 Conformément à l'art. 11 al. 2 LVLAMal, le montant porté en diminution du revenu déterminant 
+applicable au requérant pour chaque enfant à charge complète de ce dernier est fixé à 6'000 fr. pour le 
+premier enfant et 7'000 fr. de plus par enfant supplémentaire.
+
+6
+2 En cas de garde partagée en vertu d'une convention ou d'un jugement sur la prise en charge et 
+l'entretien de l'enfant, le montant calculé conformément à l'al. 1 est réparti entre les parents selon le 
+taux de garde attribué puis porté en diminution du revenu déterminant applicable à chaque parent 
+requérant. En l'absence d'indication du taux de garde, le montant calculé conformément à l'al. 1 est 
+divisé par deux puis porté en diminution du revenu déterminant applicable à chaque parent requérant.
+3 En cas de séjour en établissement médico-social au sens de l'art. 3a al. 1 let. b LPFES, l'OVAM déduit 
+du revenu déterminant le tarif, annualisé, facturé au résident. Pour ce faire, l'OVAM se base sur les 
+tarifs socio-hôteliers (SOHO) en vigueur pour l'année déterminante.  
+Art. 5
+Réduction minimale des primes pour enfants et jeunes adultes en formation
+1 Les réductions minimales prévues à l'art. 65 al. 1bis LAMal sont calculées sur la base de la prime 
+moyenne. Par prime moyenne, on entend la prime mensuelle cantonale calculée par l'OFSP en tenant 
+compte pour chaque classe d'âge de la répartition des assurés en fonction des différentes franchises 
+et modèles d'assurance. Elle correspond donc à la charge moyenne que représentent les primes pour 
+chaque personne.
+Art. 6
+Enfants majeurs économiquement dépendants
+1 Le subside pour cette catégorie de personnes est calculé sur la base d'un revenu déterminant tenant 
+compte d'un pourcentage du revenu déterminant de son parent, de ses parents, ou du ménage commun 
+formé par l'un des parents (=revenu déterminant parental).
+2 Le revenu déterminant parental tient compte de la déduction pour personne à charge opérée au titre 
+de l'art 4, al. 1 et 2.
+3 Le montant du revenu déterminant parental pris en compte pour le calcul du subside est le suivant :
+a.
+Quand le revenu déterminant parental est inférieur ou égal à 70'000 fr. :
+ 
+ Nombre de personnes à charge dans l'UER
+(art. 11, al. 2 LVLAMal) 
+1
+2
+3 et plus
+Pourcentage appliqué
+25% 20% 15%
+b.
+Quand revenu déterminant parental est supérieur 70'000 fr. et inférieur ou égal à 120'000 fr. :
+ 
+ Nombre de personnes à charge dans l'UER
+(art. 11, al. 2 LVLAMal)
+1
+2
+3 et 
+plus
+Pourcentage appliqué
+30% 25% 20%
+c.
+Quand le revenu déterminant parental est supérieur à 120'000 fr. :          
+Aucun droit au subside n'est alloué aux enfants majeurs économiquement dépendants.
+Art. 7
+Période fiscale de référence
+1 Si l'OVAM dispose d'une décision de taxation définitive plus récente que celle précédemment retenue 
+afin de calculer le subside, l'OVAM peut, en tout temps, rendre une nouvelle décision sur cette base.
+
+7
+2 Si le subside a été déterminé en application de l'art. 12a LVLAMal, l'OVAM peut se baser sur la 
+décision de taxation la plus récente disponible si la période fiscale de référence est postérieure à 
+l'année du calcul de la situation économique réelle.  
+3 Lors du renouvellement annuel du droit aux subsides, la période fiscale prise en compte dans le calcul 
+du revenu déterminant est la plus récente ayant fait l'objet d'une décision de taxation définitive entrée 
+en force au 22 octobre 2026. Si, lors de l'établissement de la décision de renouvellement, un calcul de 
+la situation économique réelle au sens de l'art. 12a LVLAMal est intervenu pour une période fiscale plus 
+récente que celui de la dernière décision de taxation disponible, ce calcul fondera le droit au subside, 
+même si l'écart sensible de l'art. 12a al. 6 et 7 LVLAMal n'est pas réalisé.
+4 En présence d'une situation particulière de taxation au sens de l'art. 5 al. 1 RLHPS, l'OVAM procède au 
+renouvellement annuel du droit aux subsides en 2027 sur la base des dernières données financières 
+utilisées pour le calcul du droit au subside en 2026. L'application de l'art. 5 al. 3 RLHPS est réservée.
+Art. 8
+Calcul de la prime de référence pour le calcul du taux d'effort et du subside 
+spécifique
+1 Pour les adultes et les jeunes adultes, la prime de référence équivaut à la moyenne cantonale des 
+primes sans le risque accident, par catégorie d'âge et par région de prime. Cette dernière tient compte 
+du rabais maximal autorisé lié à la franchise à option de 1'000 fr. au minimum et de la possibilité de 
+choisir un modèle alternatif d'assurance-maladie de base au sens de l'art. 62 al. 1 LAMal. Pour les 
+enfants, la prime de référence équivaut à la moyenne des primes avec le risque accident, par région de 
+prime, sans franchise, avec la possibilité de choisir un modèle alternatif d'assurance-maladie de base 
+au sens de l'art. 62 al. 1 LAMal.
+2 Pour les adultes, la moyenne cantonale des primes par région est calculée, pour l'année d'attribution 
+des subsides (année N), avec les primes standards approuvées par l'OFSP pour l'année N, dont sont 
+déduits les éléments suivants : un pourcentage de 7% correspondant à la non-prise en compte du 
+risque accident, un pourcentage de 7,5% afin de tenir compte de la possibilité de choisir un modèle 
+alternatif et le rabais maximal autorisé lié à la franchise à option.
+3 Pour les jeunes adultes, la moyenne cantonale des primes par région est calculée, pour l'année 
+d'attribution des subsides (année N), avec les primes standards approuvées par l'OFSP pour l'année N, 
+dont sont déduits les éléments suivants : un pourcentage de 7% correspondant à la non-prise en 
+compte du risque accident, un pourcentage de 10% afin de tenir compte de la possibilité de choisir un 
+modèle alternatif et le rabais maximal autorisé lié à la franchise à option.
+4 Pour les enfants, la moyenne cantonale des primes par région est calculée, pour l'année d'attribution 
+des subsides (année N), avec les primes standards approuvées par l'OFSP pour l'année N, dont est 
+déduit l'élément suivant : un pourcentage de 5.5% afin de tenir compte de la possibilité de choisir un 
+modèle alternatif. 5 La moyenne cantonale des primes par région et catégorie d'âge correspond à la 
+moyenne arithmétique des primes selon les al. 2 à 4, pondérée par l'effectif vaudois d'assurés par 
+région de primes et par catégorie d'âge de chaque assureur, à l'année N-2.
+Art. 9
+Calcul de la limite de revenu à partir de laquelle les primes de référence avec une 
+franchise de 1'500 fr. ou respectivement de 2'500 fr. sont applicables
+1 Le revenu déterminant pris en compte pour le calcul de la limite de revenu au sens du présent article 
+correspond au RDU tel que défini à l'art. 21a al. 1 et 2 RLVLAMal.
+
+8
+2 Pour les UER composées d'une seule personne, le revenu déterminant à partir duquel la prime de 
+référence avec une franchise de 1'500 fr. est utilisée pour le calcul du taux d'effort est défini en 
+majorant de 25% la limite supérieure de revenu déterminant fixée à l'art. 2 (B1), à partir de laquelle les 
+adultes de 26 ans et plus vivant seuls n'ont plus droit au subside octroyé selon les art. 11 et 12a 
+LVLAMal.
+3 Pour les UER composées de plus d'une personne, le revenu déterminant à partir duquel la prime de 
+référence avec une franchise de 1'500 fr. est utilisée pour le calcul du taux d'effort est défini en 
+majorant de 25% la limite supérieure de revenu déterminant fixée à l'art. 2 (B2), à partir de laquelle les 
+adultes de 26 ans et plus vivant en famille avec enfant à charge au sens de l'art. 11 al. 2 LVLAMal n'ont 
+plus droit à un subside octroyé selon les art. 11 et 12a LVLAMal.
+4 Pour les UER composées d'une seule personne, le revenu déterminant à partir duquel la prime de 
+référence avec une franchise de 2'500 fr. est utilisée pour le calcul du taux d'effort est défini en 
+majorant de 40% la limite supérieure de revenu déterminant fixée à l'art. 2 (B1), à partir de laquelle les 
+adultes de 26 ans et plus vivant seuls n'ont plus droit au subside octroyé selon les art. 11 et 12a 
+LVLAMal.
+5 Pour les UER composées de plus d'une personne, le revenu déterminant à partir duquel la prime de 
+référence avec une franchise de 2'500 fr. est utilisée pour le calcul du taux d'effort est défini en 
+majorant de 40% la limite supérieure de revenu déterminant fixée à l'art. 2 (B2), à partir de laquelle les 
+adultes de 26 ans et plus vivant en famille avec enfant à charge au sens de l'art. 11 al. 2 LVLAMal n'ont 
+plus droit au subside octroyé selon les art. 11 et 12a LVLAMal.
+Art. 10
+Primes de référence mensuelles
+1 Pour les UER composées d'une seule personne, le taux d'effort et le subside spécifique sont calculés 
+en se fondant sur les primes de référence mensuelles suivantes :
+a.
+Quand le RDU de l'UER au sens de l'art. 6 LHPS est inférieur ou égal à 62'500 fr. :
+ 
+Adultes
+Région 1 : 580.-
+Région 2 : 543.-
+Jeunes
+Région 1 : 400.-
+Région 2 : 379.-
+b.
+ Quand le RDU est supérieur à 62'500 fr. et inférieur ou égal à 70'000 fr. :  
+ 
+Adultes
+Région 1 : 555.-
+Région 2 : 518.-
+Jeunes
+Région 1 : 376.-
+Région 2 : 354.-
+c.
+Quand le RDU est supérieur à 70'000 fr. :  
+ 
+Adultes 
+Région 1 : 505.-
+Région 2 : 468.-
+Jeunes
+Région 1 : 328.-
+Région 2 : 306.-
+2 Pour les UER composées de plusieurs personnes, le taux d'effort et le subside spécifique sont 
+calculés en se fondant sur les primes de référence mensuelles suivantes :
+
+9
+a.
+Quand le RDU de l'UER au sens de l'art. 6 LHPS est inférieur ou égal à 86'300 fr. :
+ 
+Adultes
+Région 1 : 580.-
+Région 2 : 543.-
+Jeunes
+Région 1 : 400.-
+Région 2 : 379.-
+Enfants
+Région 1 : 165.-
+Région 2 : 156.-
+b.
+Quand le RDU est supérieur à 86'300 fr. et inférieur ou égal à 96'600 fr. :  
+ 
+Adultes
+Région 1 : 555.-
+Région 2 : 518.-
+Jeunes
+Région 1 : 376.-
+Région 2 : 354.-
+Enfants
+Région 1 : 165.-
+Région 2 : 156.-
+c.
+Quand le RDU est supérieur à 96'600 fr. :  
+ 
+Adultes
+Région 1 : 505.-
+Région 2 : 468.-
+Jeunes
+Région 1 : 328.-
+Région 2 : 306.-
+Enfants 
+Région 1 : 165.-
+Région 2 : 156.-
+Art. 11
+Situation financière prise en considération pour le premier octroi du subside 
+spécifique
+1 Le calcul du subside spécifique se fait sur la base de la situation financière de l'UER du requérant 
+prise en compte pour le calcul du subside au sens des art. 11 et 12a LVLAMal.
+Art. 12
+Seuils de fortune mobilière
+1 Ne peuvent être considérées comme étant de condition économique modeste au sens de l'art. 9 
+LVLAMal les personnes comprises dans l'UER dont le patrimoine comprend une fortune mobilière 
+conséquente.
+2 Sont considérés comme fortune mobilière les éléments figurant dans les décisions de taxation 
+d'impôt aux chiffres suivants :
+a.
+Chiffre 410 : Fortune titres et autres placements            
+b.
+Chiffre 420 : Numéraire, billets de banques et autres métaux précieux
+c.
+Chiffre 430 : Autos, motos, chevaux de selle, collections, bijoux, bateaux, tableaux, etc.   
+d.
+Chiffre 445 : Autres fortunes
+3 Les seuils de fortune mobilière au-delà desquels aucun droit au subside n'est accordé sont les 
+suivants :
+
+10
+a.
+UER composées d'une seule personne adulte : 130'000 fr.
+b.
+UER composées de plusieurs personnes adultes : 260'000 fr.
+4 Les jeunes adultes en formation au sens de l'art. 13 RLHPS ne sont pas considérés comme personnes 
+adultes au sens de l'al. 3.
+Art. 13
+Abrogation
+1 L'arrêté du 17 décembre 2025 concernant les subsides aux primes de l'assurance-maladie obligatoire 
+en 2026 est abrogé.
+Art. 14
+Entrée en vigueur
+1 Le Département de la santé et de l'action sociale est chargé de l'exécution du présent arrêté qui entre 
+en vigueur le 1er janvier 2027.

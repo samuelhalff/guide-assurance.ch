@@ -1,0 +1,1528 @@
+{
+ "annee": 2027,
+ "releve_le": "2026-11-24",
+ "empreintes_sources": {
+  "ge": {
+   "BAREME_2027_Internet.pdf": "b4edd01fb907a94c53c0768f5c553bdc83815ccf59760443aa42379483547da5",
+   "rsg_j3_05.htm": "92d421356e1810320642d9cd7ac7ffdf3cf5f8c1bd7ad8d34128a714d9850ae1",
+   "rsg_j3_05p01.htm": "8d2d5a9580b00664eefbd7a9964b941b6e028d897306daa1582a74bf901e6aab",
+   "baremes-2027.html": "db71ffcc68d2c8f27a64e9d7a97ad2ea85ea9c0a4e44007ea8fabac85b591fb7",
+   "ge-node-45178.html": "5d82cf0dc8b9c9d7b2ff8df6862485abc88156064fb0c4bae93b45bfead5333c",
+   "informations-generales-subside-assurance-maladie_faq-subsides.html": "ab282b6313a5846af9fe5fd56f8438392a8d106a0a12584c113d8ac264b462f4"
+  },
+  "vd": {
+   "Arrete_subsides_2027_publie.pdf": "583b46832b2cc867a35c208d168c451d9df2cec3bbd71b5743b5385ad1e35584",
+   "Notice_explicative_2027.pdf": "33a005028ae9d37b4c0a8938d9d9a9ff4e89234e3478b66d6a5e49d561e5df4a",
+   "rlvlamal-2027-future.html": "c0921919759dbf651b43e3a2334ec99272565b087afc8f768406430de28967ae",
+   "vd-subside-page.html": "5ad1e35d5f0f511c547f6ec241d31a2c5deebe877dc551dad2bddea965c0cccb",
+   "vd-faq.html": "86b35e30ececf0e4b1eb8c79714b8659ba1bcb90cda97ead01062951b0ce61c5"
+  },
+  "fr": {
+   "memento_rpi_f_2027.pdf": "f104b71917b17bab174a63387dbae012c40a09b3fa1022aba08936c20308be98",
+   "grille_lissage_des_taux_paliers_f.pdf": "42c1fe9821639f6c290462515c381626b786f3e1cb016f49d5eb2fe8f101a7da",
+   "orp-842.1.13.txt": "7fd971767c2e8fc38d6fd2ced640a6065b3359d4e046bd94682806516eb3a3f5",
+   "ecas-reduction-primes.html": "852cc36ff6d4f5f564016801c6f1f0404cb74ac5e54a75f80dd0e3bf3f44f18e"
+  },
+  "vs": {
+   "avsvalais-rip.html": "5f243da32a5e55942b9fd19b23bd84af04cb1e62904277710baec017a76ee055",
+   "Echelle-definitive-RIP-2026-FR.pdf": "b24f4bc8d5143657851b974983bbfc4c1707846cc9b5e0f55d1ad2a9ddd4de48"
+  },
+  "ne": {
+   "ne-subsides-2027.html": "76a94c0f86d2c94c3b8d08729b76d6fcdba89c4ca9922a89801b95210f35fe53",
+   "ACE_Subsides_2027.pdf": "533773dfae3cde886bc775d99e31831b5713cf20e7cdecbaa958b8e8a25a2d04"
+  },
+  "ju": {
+   "Arrete-2027-avec-annexes.pdf": "3cd68dc1876bc92f977c3f8add2cf1ad8246564f4d78191f4163c00eb4644d3e",
+   "ju-communique-subsides-2027.html": "236ef67827e155dc4620b8a9e509a3315c95d5bc768129d843f3240639411146",
+   "ecasjura-primes-2027.html": "a1e12df78af994f3e7003767f6125af7f8994ab477f0f426f56bd323a7df3339",
+   "ecasjura-seuil-fortune-2026.html": "a0b6ef94a4fe4930243816cca883c2e3a4ea6ae15d82a546d48e0432872589d2"
+  }
+ },
+ "cantons": {
+  "GE": {
+   "nom": "Genève",
+   "calcul": true,
+   "annee_bareme": 2027,
+   "publie_le": "2026-10-26",
+   "autorite": {
+    "nom": "Service de l’assurance-maladie (SAM)",
+    "url": "https://www.ge.ch/informations-generales-subside-assurance-maladie"
+   },
+   "demande_url": "https://www.ge.ch/demander-subside-assurance-maladie-2027",
+   "sources": [
+    {
+     "titre": "Barèmes et catégories 2027 pour les subsides d’assurance-maladie (SAM, 26 octobre 2026)",
+     "url": "https://www.ge.ch/document/baremes-categories-2027-subsides-assurance-maladie",
+     "lu": "2026-11-24",
+     "fichier": "ge/BAREME_2027_Internet.pdf"
+    },
+    {
+     "titre": "Loi d’application de la LAMal (J 3 05), art. 19 à 23",
+     "url": "https://silgeneve.ch/legis/program/books/rsg/htm/rsg_j3_05.htm",
+     "lu": "2026-11-24",
+     "fichier": "ge/rsg_j3_05.htm"
+    },
+    {
+     "titre": "Règlement d’exécution (J 3 05.01), art. 9 à 10A",
+     "url": "https://silgeneve.ch/legis/program/books/rsg/htm/rsg_j3_05p01.htm",
+     "lu": "2026-11-24",
+     "fichier": "ge/rsg_j3_05p01.htm"
+    },
+    {
+     "titre": "Demander un subside d’assurance-maladie 2027 (ge.ch)",
+     "url": "https://www.ge.ch/demander-subside-assurance-maladie-2027",
+     "lu": "2026-11-24",
+     "fichier": "ge/demander-subside-assurance-maladie-2027.html"
+    },
+    {
+     "titre": "FAQ subsides (ge.ch)",
+     "url": "https://www.ge.ch/informations-generales-subside-assurance-maladie/faq-subsides",
+     "lu": "2026-11-24",
+     "fichier": "ge/informations-generales-subside-assurance-maladie_faq-subsides.html"
+    }
+   ],
+   "tables": {
+    "montants": {
+     "adulte": [
+      363,
+      306,
+      250,
+      204,
+      170,
+      125,
+      91,
+      57,
+      null
+     ],
+     "jeuneAdulte": [
+      242,
+      242,
+      242,
+      242,
+      242,
+      242,
+      242,
+      242,
+      111
+     ],
+     "enfant": [
+      137,
+      137,
+      137,
+      137,
+      137,
+      137,
+      137,
+      137,
+      69
+     ]
+    },
+    "limites": {
+     "seul": {
+      "0": [
+       30000,
+       35000,
+       37500,
+       40000,
+       42500,
+       45000,
+       47500,
+       50000,
+       null
+      ],
+      "1": [
+       51000,
+       61000,
+       71000,
+       81000,
+       91000,
+       101000,
+       111000,
+       121000,
+       151000
+      ],
+      "2": [
+       57000,
+       67000,
+       77000,
+       87000,
+       97000,
+       107000,
+       117000,
+       127000,
+       157000
+      ],
+      "3": [
+       63000,
+       73000,
+       83000,
+       93000,
+       103000,
+       113000,
+       123000,
+       133000,
+       163000
+      ],
+      "4": [
+       69000,
+       79000,
+       89000,
+       99000,
+       109000,
+       119000,
+       129000,
+       139000,
+       169000
+      ]
+     },
+     "couple": {
+      "0": [
+       45000,
+       55000,
+       65000,
+       75000,
+       85000,
+       95000,
+       105000,
+       115000,
+       null
+      ],
+      "1": [
+       51000,
+       61000,
+       71000,
+       81000,
+       91000,
+       101000,
+       111000,
+       121000,
+       151000
+      ],
+      "2": [
+       57000,
+       67000,
+       77000,
+       87000,
+       97000,
+       107000,
+       117000,
+       127000,
+       157000
+      ],
+      "3": [
+       63000,
+       73000,
+       83000,
+       93000,
+       103000,
+       113000,
+       123000,
+       133000,
+       163000
+      ],
+      "4": [
+       69000,
+       79000,
+       89000,
+       99000,
+       109000,
+       119000,
+       129000,
+       139000,
+       169000
+      ]
+     }
+    },
+    "charges_max": 4
+   }
+  },
+  "VD": {
+   "nom": "Vaud",
+   "calcul": true,
+   "annee_bareme": 2027,
+   "publie_le": "2026-10-13",
+   "autorite": {
+    "nom": "Office vaudois de l’assurance-maladie (OVAM)",
+    "url": "https://www.vd.ch/sante-soins-et-handicap/assurance-maladie/subside-a-lassurance-maladie"
+   },
+   "demande_url": "https://www.vd.ch/sante-soins-et-handicap/assurance-maladie/subside-a-lassurance-maladie",
+   "sources": [
+    {
+     "titre": "Arrêté du 7 octobre 2026 concernant les subsides aux primes de l’assurance-maladie obligatoire en 2027",
+     "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/Prestations__assurance_et_soutien/Assurance_maladie/Subside/Arr%C3%AAt%C3%A9_subsides_2027_-_publi%C3%A9.pdf",
+     "lu": "2026-11-24",
+     "fichier": "vd/Arrete_subsides_2027_publie.pdf"
+    },
+    {
+     "titre": "Notice explicative : les subsides 2027 (OVAM)",
+     "url": "https://www.vd.ch/fileadmin/user_upload/themes/social/Prestations__assurance_et_soutien/Assurance_maladie/Subside/Notice_explicative_2027.pdf",
+     "lu": "2026-11-24",
+     "fichier": "vd/Notice_explicative_2027.pdf"
+    },
+    {
+     "titre": "Règlement RLVLAMal (BLV 832.01.1), art. 21 à 22, version au 1er janvier 2027",
+     "url": "https://prestations.vd.ch/pub/blv-publication/actes/consolide/832.01.1",
+     "lu": "2026-11-24",
+     "fichier": "vd/rlvlamal-2027-future.html"
+    },
+    {
+     "titre": "Subside à l’assurance-maladie (vd.ch)",
+     "url": "https://www.vd.ch/sante-soins-et-handicap/assurance-maladie/subside-a-lassurance-maladie",
+     "lu": "2026-11-24",
+     "fichier": "vd/vd-subside-page.html"
+    }
+   ],
+   "tables": {
+    "params": {
+     "seul26": {
+      "E": 30,
+      "F": 331,
+      "C": 17000,
+      "A": 40000,
+      "P": 2.5,
+      "B": 50000
+     },
+     "famille26": {
+      "E": 20,
+      "F": 300,
+      "D": 336,
+      "C": 24200,
+      "A": 55000,
+      "R": 1,
+      "P": 2.3,
+      "B": 69000
+     },
+     "couple26": {
+      "E": 20,
+      "F": 300,
+      "D": 336,
+      "C": 24200,
+      "A": 70000,
+      "R": 1,
+      "P": 3.0,
+      "B": 72500
+     },
+     "enfant": {
+      "E": 118,
+      "F": 118,
+      "C": 26000,
+      "A": 63000,
+      "P": 2.3,
+      "G": 118,
+      "B": 76000,
+      "Q": 0.25
+     }
+    },
+    "deduction_enfant": {
+     "premier": 6000,
+     "supplementaire": 7000
+    },
+    "primes_reference": {
+     "seul": {
+      "seuils": [
+       62500,
+       70000
+      ],
+      "adulte": {
+       "1": [
+        580,
+        555,
+        505
+       ],
+       "2": [
+        543,
+        518,
+        468
+       ]
+      }
+     },
+     "famille": {
+      "seuils": [
+       86300,
+       96600
+      ],
+      "adulte": {
+       "1": [
+        580,
+        555,
+        505
+       ],
+       "2": [
+        543,
+        518,
+        468
+       ]
+      },
+      "enfant": {
+       "1": [
+        165,
+        165,
+        165
+       ],
+       "2": [
+        156,
+        156,
+        156
+       ]
+      }
+     }
+    },
+    "taux_effort": 0.1,
+    "subside_specifique_minimum": 20,
+    "regions": {
+     "1": "Lausanne, Ouest lausannois, Nyon, La Côte, Lavaux, Riviera",
+     "2": "Chablais, Pays-d’Enhaut, Oron, Cossonay, Broye, Vully, Gros-de-Vaud, Jura, Nord vaudois"
+    }
+   }
+  },
+  "FR": {
+   "nom": "Fribourg",
+   "calcul": true,
+   "annee_bareme": 2027,
+   "publie_le": "2026-11-24",
+   "autorite": {
+    "nom": "Caisse cantonale de compensation AVS (ECAS Fribourg)",
+    "url": "https://www.ecasfr.ch/fr/Assurances/Reduction-des-primes-d-assurance-maladie/Reduction-des-primes-d-assurance-maladie.html"
+   },
+   "demande_url": "https://www.ecasfr.ch/fr/Assurances/Reduction-des-primes-d-assurance-maladie/Reduction-des-primes-d-assurance-maladie.html",
+   "sources": [
+    {
+     "titre": "Mémento concernant la réduction des primes d’assurance-maladie 2027 (Caisse de compensation)",
+     "url": "https://assets.caisseavsfr.ch/Htdocs/Files/v/4f6bfbf50f1010b816ac65b074846a93413131691801f20d6a7859c42570fc87.pdf/memento_rpi_f_2027.pdf",
+     "lu": "2026-11-24",
+     "fichier": "fr/memento_rpi_f_2027.pdf"
+    },
+    {
+     "titre": "Ordonnance concernant la réduction des primes d’assurance-maladie (RSF 842.1.13)",
+     "url": "https://bdlf.fr.ch/app/fr/texts_of_law/842.1.13",
+     "lu": "2026-11-24",
+     "fichier": "fr/orp-842.1.13.txt"
+    },
+    {
+     "titre": "Réduction des primes d’assurance-maladie (ecasfr.ch)",
+     "url": "https://www.ecasfr.ch/fr/Assurances/Reduction-des-primes-d-assurance-maladie/Reduction-des-primes-d-assurance-maladie.html",
+     "lu": "2026-11-24",
+     "fichier": "fr/ecas-reduction-primes.html"
+    }
+   ],
+   "tables": {
+    "limites": {
+     "seul_sans_enfant": 37000,
+     "seul_avec_enfant": 43400,
+     "couple": 65000,
+     "par_enfant": 14000,
+     "enfants_max": 6
+    },
+    "prime_moyenne": {
+     "1": {
+      "adulte": 596,
+      "jeuneAdulte": 436,
+      "enfant": 142
+     },
+     "2": {
+      "adulte": 547,
+      "jeuneAdulte": 403,
+      "enfant": 130
+     }
+    },
+    "paliers": [
+     {
+      "de": 0.01,
+      "jusqua": 1.02,
+      "taux": 1.0
+     },
+     {
+      "de": 1.03,
+      "jusqua": 2.03,
+      "taux": 2.08
+     },
+     {
+      "de": 2.04,
+      "jusqua": 3.05,
+      "taux": 3.17
+     },
+     {
+      "de": 3.06,
+      "jusqua": 4.07,
+      "taux": 4.25
+     },
+     {
+      "de": 4.08,
+      "jusqua": 5.08,
+      "taux": 5.34
+     },
+     {
+      "de": 5.09,
+      "jusqua": 6.1,
+      "taux": 6.42
+     },
+     {
+      "de": 6.11,
+      "jusqua": 7.12,
+      "taux": 7.51
+     },
+     {
+      "de": 7.13,
+      "jusqua": 8.14,
+      "taux": 8.59
+     },
+     {
+      "de": 8.15,
+      "jusqua": 9.15,
+      "taux": 9.68
+     },
+     {
+      "de": 9.16,
+      "jusqua": 10.17,
+      "taux": 10.76
+     },
+     {
+      "de": 10.18,
+      "jusqua": 11.19,
+      "taux": 11.85
+     },
+     {
+      "de": 11.2,
+      "jusqua": 12.2,
+      "taux": 12.93
+     },
+     {
+      "de": 12.21,
+      "jusqua": 13.22,
+      "taux": 14.02
+     },
+     {
+      "de": 13.23,
+      "jusqua": 14.24,
+      "taux": 15.1
+     },
+     {
+      "de": 14.25,
+      "jusqua": 15.25,
+      "taux": 16.19
+     },
+     {
+      "de": 15.26,
+      "jusqua": 16.27,
+      "taux": 17.27
+     },
+     {
+      "de": 16.28,
+      "jusqua": 17.29,
+      "taux": 18.36
+     },
+     {
+      "de": 17.3,
+      "jusqua": 18.31,
+      "taux": 19.44
+     },
+     {
+      "de": 18.32,
+      "jusqua": 19.32,
+      "taux": 20.53
+     },
+     {
+      "de": 19.33,
+      "jusqua": 20.34,
+      "taux": 21.61
+     },
+     {
+      "de": 20.35,
+      "jusqua": 21.36,
+      "taux": 22.69
+     },
+     {
+      "de": 21.37,
+      "jusqua": 22.37,
+      "taux": 23.78
+     },
+     {
+      "de": 22.38,
+      "jusqua": 23.39,
+      "taux": 24.86
+     },
+     {
+      "de": 23.4,
+      "jusqua": 24.41,
+      "taux": 25.95
+     },
+     {
+      "de": 24.42,
+      "jusqua": 25.42,
+      "taux": 27.03
+     },
+     {
+      "de": 25.43,
+      "jusqua": 26.44,
+      "taux": 28.12
+     },
+     {
+      "de": 26.45,
+      "jusqua": 27.46,
+      "taux": 29.2
+     },
+     {
+      "de": 27.47,
+      "jusqua": 28.47,
+      "taux": 30.29
+     },
+     {
+      "de": 28.48,
+      "jusqua": 29.49,
+      "taux": 31.37
+     },
+     {
+      "de": 29.5,
+      "jusqua": 30.51,
+      "taux": 32.46
+     },
+     {
+      "de": 30.52,
+      "jusqua": 31.53,
+      "taux": 33.54
+     },
+     {
+      "de": 31.54,
+      "jusqua": 32.54,
+      "taux": 34.63
+     },
+     {
+      "de": 32.55,
+      "jusqua": 33.56,
+      "taux": 35.71
+     },
+     {
+      "de": 33.57,
+      "jusqua": 34.58,
+      "taux": 36.8
+     },
+     {
+      "de": 34.59,
+      "jusqua": 35.59,
+      "taux": 37.88
+     },
+     {
+      "de": 35.6,
+      "jusqua": 36.61,
+      "taux": 38.97
+     },
+     {
+      "de": 36.62,
+      "jusqua": 37.63,
+      "taux": 40.05
+     },
+     {
+      "de": 37.64,
+      "jusqua": 38.64,
+      "taux": 41.14
+     },
+     {
+      "de": 38.65,
+      "jusqua": 39.66,
+      "taux": 42.22
+     },
+     {
+      "de": 39.67,
+      "jusqua": 40.68,
+      "taux": 43.31
+     },
+     {
+      "de": 40.69,
+      "jusqua": 41.69,
+      "taux": 44.39
+     },
+     {
+      "de": 41.7,
+      "jusqua": 42.71,
+      "taux": 45.47
+     },
+     {
+      "de": 42.72,
+      "jusqua": 43.73,
+      "taux": 46.56
+     },
+     {
+      "de": 43.74,
+      "jusqua": 44.75,
+      "taux": 47.64
+     },
+     {
+      "de": 44.76,
+      "jusqua": 45.76,
+      "taux": 48.73
+     },
+     {
+      "de": 45.77,
+      "jusqua": 46.78,
+      "taux": 49.81
+     },
+     {
+      "de": 46.79,
+      "jusqua": 47.8,
+      "taux": 50.9
+     },
+     {
+      "de": 47.81,
+      "jusqua": 48.81,
+      "taux": 51.98
+     },
+     {
+      "de": 48.82,
+      "jusqua": 49.83,
+      "taux": 53.07
+     },
+     {
+      "de": 49.84,
+      "jusqua": 50.85,
+      "taux": 54.15
+     },
+     {
+      "de": 50.86,
+      "jusqua": 51.86,
+      "taux": 55.24
+     },
+     {
+      "de": 51.87,
+      "jusqua": 52.88,
+      "taux": 56.32
+     },
+     {
+      "de": 52.89,
+      "jusqua": 53.9,
+      "taux": 57.41
+     },
+     {
+      "de": 53.91,
+      "jusqua": 54.92,
+      "taux": 58.49
+     },
+     {
+      "de": 54.93,
+      "jusqua": 55.93,
+      "taux": 59.58
+     },
+     {
+      "de": 55.94,
+      "jusqua": 56.95,
+      "taux": 60.66
+     },
+     {
+      "de": 56.96,
+      "jusqua": 57.97,
+      "taux": 61.75
+     },
+     {
+      "de": 57.98,
+      "jusqua": 58.98,
+      "taux": 62.83
+     },
+     {
+      "de": 58.99,
+      "jusqua": 60.0,
+      "taux": 63.92
+     },
+     {
+      "de": 60.01,
+      "jusqua": null,
+      "taux": 65.0
+     }
+    ],
+    "taux_max": 65.0,
+    "taux_min_enfant": 80.0,
+    "taux_min_jeune_adulte": 50.0,
+    "regions": {
+     "1": "district de la Sarine",
+     "2": "districts de la Broye, de la Glâne, de la Gruyère, du Lac, de la Singine et de la Veveyse"
+    }
+   }
+  },
+  "VS": {
+   "nom": "Valais",
+   "calcul": false,
+   "annee_bareme": 2026,
+   "publie_le": null,
+   "autorite": {
+    "nom": "Caisse de compensation du canton du Valais",
+    "url": "https://www.avsvalais.ch/fr/Assurances/RIP-Reduction-individuelle-des-primes-caisse-maladie.html"
+   },
+   "demande_url": "https://www.avsvalais.ch/fr/Assurances/RIP-Reduction-individuelle-des-primes-caisse-maladie.html",
+   "sources": [
+    {
+     "titre": "Réduction des primes caisse-maladie (Caisse de compensation du Valais, page lue le 24.11.2026, barème 2026 seul publié)",
+     "url": "https://www.avsvalais.ch/fr/Assurances/RIP-Reduction-individuelle-des-primes-caisse-maladie.html",
+     "lu": "2026-11-24",
+     "fichier": "vs/avsvalais-rip.html"
+    },
+    {
+     "titre": "Échelle des revenus pour les subsides d’assurance-maladie 2026",
+     "url": "https://www.ahvwallis.ch/Htdocs/Files/v/be84f27c4ed4ed4d4d836927c6e293b9ec3f426bb211cb07267277b137c0aea6.pdf/Echelle-definitive-RIP-2026---FR.pdf",
+     "lu": "2026-11-24",
+     "fichier": "vs/Echelle-definitive-RIP-2026-FR.pdf"
+    }
+   ],
+   "tables": {
+    "echelle_2026": {
+     "taux": [
+      70,
+      50,
+      40,
+      30,
+      20,
+      10,
+      5
+     ],
+     "seul_sans_enfant": [
+      21000,
+      23917,
+      26833,
+      29750,
+      32667,
+      35583,
+      38500
+     ],
+     "couple_sans_enfant": [
+      36750,
+      41854,
+      46958,
+      52063,
+      57167,
+      62271,
+      67375
+     ]
+    },
+    "fortune_max": 1000000
+   }
+  },
+  "NE": {
+   "nom": "Neuchâtel",
+   "calcul": true,
+   "annee_bareme": 2027,
+   "publie_le": "2026-11",
+   "autorite": {
+    "nom": "Service de l’action sociale (guichets sociaux régionaux)",
+    "url": "https://www.ne.ch/themes/social/assurance-maladie/subsides-assurance-maladie-lamal"
+   },
+   "demande_url": "https://www.ne.ch/themes/social/assurance-maladie/subsides-assurance-maladie-lamal",
+   "sources": [
+    {
+     "titre": "Subsides assurance-maladie (LAMal) 2027 : classifications et montants selon le revenu déterminant (ne.ch)",
+     "url": "https://www.ne.ch/themes/social/assurance-maladie/subsides-assurance-maladie-lamal-2027-classifications-et-montants-selon-le-revenu-determinant",
+     "lu": "2026-11-24",
+     "fichier": "ne/ne-subsides-2027.html"
+    },
+    {
+     "titre": "Arrêté fixant les normes de classification et le montant des subsides en matière d’assurance-maladie obligatoire des soins pour l’année 2027",
+     "url": "https://www.ne.ch/sites/default/files/2026-11/ACE_Subsides_2027.pdf",
+     "lu": "2026-11-24",
+     "fichier": "ne/ACE_Subsides_2027.pdf"
+    }
+   ],
+   "tables": {
+    "seul": [
+     [
+      [
+       0,
+       22800
+      ],
+      [
+       0,
+       33000
+      ],
+      [
+       0,
+       40800
+      ],
+      [
+       0,
+       46800
+      ]
+     ],
+     [
+      [
+       22801,
+       23940
+      ],
+      [
+       33001,
+       34140
+      ],
+      [
+       40801,
+       41940
+      ],
+      [
+       46801,
+       47940
+      ]
+     ],
+     [
+      [
+       23941,
+       25080
+      ],
+      [
+       34141,
+       35280
+      ],
+      [
+       41941,
+       43080
+      ],
+      [
+       47941,
+       49080
+      ]
+     ],
+     [
+      [
+       25081,
+       26220
+      ],
+      [
+       35281,
+       36420
+      ],
+      [
+       43081,
+       44220
+      ],
+      [
+       49081,
+       50220
+      ]
+     ],
+     [
+      [
+       26221,
+       27360
+      ],
+      [
+       36421,
+       37560
+      ],
+      [
+       44221,
+       45360
+      ],
+      [
+       50221,
+       51360
+      ]
+     ],
+     [
+      [
+       27361,
+       28500
+      ],
+      [
+       37561,
+       38700
+      ],
+      [
+       45361,
+       46500
+      ],
+      [
+       51361,
+       52500
+      ]
+     ],
+     [
+      [
+       28501,
+       29640
+      ],
+      [
+       38701,
+       39840
+      ],
+      [
+       46501,
+       47640
+      ],
+      [
+       52501,
+       53640
+      ]
+     ],
+     [
+      [
+       29641,
+       30780
+      ],
+      [
+       39841,
+       40980
+      ],
+      [
+       47641,
+       48780
+      ],
+      [
+       53641,
+       54780
+      ]
+     ],
+     [
+      [
+       30781,
+       31920
+      ],
+      [
+       40981,
+       42120
+      ],
+      [
+       48781,
+       49920
+      ],
+      [
+       54781,
+       55920
+      ]
+     ],
+     [
+      [
+       31921,
+       50600
+      ],
+      [
+       42121,
+       44400
+      ],
+      [
+       49921,
+       52200
+      ],
+      [
+       55921,
+       58200
+      ]
+     ],
+     [
+      null,
+      [
+       44401,
+       45540
+      ],
+      [
+       52201,
+       53340
+      ],
+      [
+       58201,
+       59340
+      ]
+     ],
+     [
+      null,
+      [
+       45541,
+       56148
+      ],
+      [
+       53341,
+       60156
+      ],
+      [
+       59341,
+       64164
+      ]
+     ],
+     [
+      null,
+      [
+       56149,
+       57156
+      ],
+      [
+       60157,
+       62172
+      ],
+      [
+       64165,
+       67188
+      ]
+     ],
+     [
+      null,
+      [
+       57157,
+       58164
+      ],
+      [
+       62173,
+       64188
+      ],
+      [
+       67189,
+       70212
+      ]
+     ],
+     [
+      null,
+      [
+       58165,
+       65089
+      ],
+      [
+       64189,
+       72824
+      ],
+      [
+       70213,
+       80560
+      ]
+     ]
+    ],
+    "couple": [
+     [
+      [
+       0,
+       30000
+      ],
+      [
+       0,
+       37500
+      ],
+      [
+       0,
+       44400
+      ],
+      [
+       0,
+       50400
+      ]
+     ],
+     [
+      [
+       30001,
+       32280
+      ],
+      [
+       37501,
+       39780
+      ],
+      [
+       44401,
+       46680
+      ],
+      [
+       50401,
+       52680
+      ]
+     ],
+     [
+      [
+       32281,
+       34560
+      ],
+      [
+       39781,
+       42060
+      ],
+      [
+       46681,
+       48960
+      ],
+      [
+       52681,
+       54960
+      ]
+     ],
+     [
+      [
+       34561,
+       36840
+      ],
+      [
+       42061,
+       44340
+      ],
+      [
+       48961,
+       51240
+      ],
+      [
+       54961,
+       57240
+      ]
+     ],
+     [
+      [
+       36841,
+       39120
+      ],
+      [
+       44341,
+       46620
+      ],
+      [
+       51241,
+       53520
+      ],
+      [
+       57241,
+       59520
+      ]
+     ],
+     [
+      [
+       39121,
+       41400
+      ],
+      [
+       46621,
+       48900
+      ],
+      [
+       53521,
+       55800
+      ],
+      [
+       59521,
+       61800
+      ]
+     ],
+     [
+      [
+       41401,
+       43680
+      ],
+      [
+       48901,
+       51180
+      ],
+      [
+       55801,
+       58080
+      ],
+      [
+       61801,
+       64080
+      ]
+     ],
+     [
+      [
+       43681,
+       45960
+      ],
+      [
+       51181,
+       53460
+      ],
+      [
+       58081,
+       60360
+      ],
+      [
+       64081,
+       66360
+      ]
+     ],
+     [
+      [
+       45961,
+       48240
+      ],
+      [
+       53461,
+       55740
+      ],
+      [
+       60361,
+       62640
+      ],
+      [
+       66361,
+       68640
+      ]
+     ],
+     [
+      [
+       48241,
+       67551
+      ],
+      [
+       55741,
+       60300
+      ],
+      [
+       62641,
+       67200
+      ],
+      [
+       68641,
+       73200
+      ]
+     ],
+     [
+      null,
+      [
+       60301,
+       62580
+      ],
+      [
+       67201,
+       69480
+      ],
+      [
+       73201,
+       75480
+      ]
+     ],
+     [
+      null,
+      [
+       62581,
+       80340
+      ],
+      [
+       69481,
+       83160
+      ],
+      [
+       75481,
+       86160
+      ]
+     ],
+     [
+      null,
+      [
+       80341,
+       81348
+      ],
+      [
+       83161,
+       85176
+      ],
+      [
+       86161,
+       89184
+      ]
+     ],
+     [
+      null,
+      [
+       81349,
+       82356
+      ],
+      [
+       85177,
+       87192
+      ],
+      [
+       89185,
+       92208
+      ]
+     ],
+     [
+      null,
+      [
+       82357,
+       100939
+      ],
+      [
+       87193,
+       104317
+      ],
+      [
+       92209,
+       104755
+      ]
+     ]
+    ],
+    "montants": [
+     {
+      "enfant": 166,
+      "adulte": 639
+     },
+     {
+      "enfant": 166,
+      "adulte": 607
+     },
+     {
+      "enfant": 166,
+      "adulte": 542
+     },
+     {
+      "enfant": 166,
+      "adulte": 478
+     },
+     {
+      "enfant": 166,
+      "adulte": 413
+     },
+     {
+      "enfant": 166,
+      "adulte": 349
+     },
+     {
+      "enfant": 166,
+      "adulte": 291
+     },
+     {
+      "enfant": 166,
+      "adulte": 233
+     },
+     {
+      "enfant": 166,
+      "adulte": 182
+     },
+     {
+      "enfant": 166,
+      "adulte": 125
+     },
+     {
+      "enfant": 166,
+      "adulte": 105
+     },
+     {
+      "enfant": 166,
+      "adulte": 92
+     },
+     {
+      "enfant": 166,
+      "adulte": 79
+     },
+     {
+      "enfant": 166,
+      "adulte": 67
+     },
+     {
+      "enfant": 166,
+      "adulte": 54
+     }
+    ],
+    "enfants_max": 3
+   }
+  },
+  "JU": {
+   "nom": "Jura",
+   "calcul": true,
+   "annee_bareme": 2027,
+   "publie_le": "2026-10-23",
+   "autorite": {
+    "nom": "Établissement cantonal des assurances sociales (ECAS Jura)",
+    "url": "https://www.ecasjura.ch/fr/Assurances/Assurance-maladie/Primes-et-reduction-des-primes-2027/Primes-et-reduction-des-primes-2027.html"
+   },
+   "demande_url": "https://www.ecasjura.ch/fr/Assurances/Assurance-maladie/Primes-et-reduction-des-primes-2027/Primes-et-reduction-des-primes-2027.html",
+   "sources": [
+    {
+     "titre": "Arrêté du 20 octobre 2026 concernant la réduction des primes dans l’assurance-maladie pour l’année 2027 (avec annexes)",
+     "url": "https://www.ecasjura.ch/Htdocs/Files/v/541cd94ec24dffb7fc02171685bae264d91cd58fd7914cfc04fa4371e612e6cb.pdf/Arrete-2027-avec-annexes.pdf",
+     "lu": "2026-11-24",
+     "fichier": "ju/Arrete-2027-avec-annexes.pdf"
+    },
+    {
+     "titre": "Subsides des primes de l’assurance-maladie dans le canton du Jura pour 2027 (communiqué du 23 octobre 2026)",
+     "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Subsides-des-primes-de-l-assurance-maladie-dans-le-canton-du-Jura-pour-2027.html",
+     "lu": "2026-11-24",
+     "fichier": "ju/ju-communique-subsides-2027.html"
+    },
+    {
+     "titre": "Primes et réduction des primes 2027 (ECAS Jura)",
+     "url": "https://www.ecasjura.ch/fr/Assurances/Assurance-maladie/Primes-et-reduction-des-primes-2027/Primes-et-reduction-des-primes-2027.html",
+     "lu": "2026-11-24",
+     "fichier": "ju/ecasjura-primes-2027.html"
+    },
+    {
+     "titre": "RPI 2026 : premier critère d’éligibilité, seuil de fortune (ECAS Jura, conditions 2027 identiques selon l’ECAS)",
+     "url": "https://www.ecasjura.ch/fr/Assurances/Assurance-maladie/RPI-2026-Premier-critere-d-eligibilite-seuil-de-fortune-subsides-partiels/RPI-2026-Premier-critere-d-eligibilite-seuil-de-fortune-subsides-partiels.html",
+     "lu": "2026-11-24",
+     "fichier": "ju/ecasjura-seuil-fortune-2026.html"
+    }
+   ],
+   "tables": {
+    "pas": 1000,
+    "limite_adulte": 26999,
+    "limite_enfant": 52999,
+    "adulte": [
+     225,
+     225,
+     215,
+     205,
+     195,
+     185,
+     175,
+     165,
+     155,
+     145,
+     125,
+     110,
+     100,
+     95,
+     90,
+     85,
+     75,
+     70,
+     65,
+     60,
+     55,
+     45,
+     40,
+     35,
+     30,
+     25,
+     20,
+     15
+    ],
+    "jeuneAdulte": [
+     160,
+     160,
+     155,
+     150,
+     145,
+     140,
+     135,
+     130,
+     125,
+     120,
+     110,
+     100,
+     90,
+     85,
+     80,
+     75,
+     70,
+     65,
+     60,
+     55,
+     50,
+     45,
+     40,
+     35,
+     30,
+     25,
+     20,
+     15
+    ],
+    "jeune_adulte_formation": 204,
+    "enfant": 108,
+    "supplement": [
+     330,
+     330,
+     330,
+     330,
+     315,
+     295,
+     275,
+     250,
+     225,
+     200,
+     185,
+     165,
+     140,
+     110,
+     90,
+     70,
+     55,
+     35,
+     15
+    ],
+    "supplement_limite": 17999,
+    "fortune_max": 150000
+   }
+  }
+ }
+}
