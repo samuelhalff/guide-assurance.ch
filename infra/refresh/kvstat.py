@@ -89,7 +89,10 @@ def run(log: C.Log, a) -> int:
         C.save_state(DS, derniere_alerte=sig)
     C.record_run(DS, "alerte", f"édition {y} {etat}", success=True)
     C.alert(log, DS, "données à vérifier", paragraphs, a.dry_run, dedupe_days=30)
-    return 1
+    # Une nouvelle édition est une information, pas une panne : l'alerte part une fois par état (année + complète ou
+    # non, mémorisé dans state/kvstat.json sur la branche refresh-state) et le passage reste vert. Seule une page
+    # illisible fait échouer le passage.
+    return 0
 
 
 if __name__ == "__main__":
