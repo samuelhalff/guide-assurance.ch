@@ -176,7 +176,8 @@
 .consentement a{color:var(--sentier-lien, var(--encre))}
 .consentement-actions{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3)}
 /* Mobile : bandeau ramassé, pour laisser voir le formulaire de l'accueil au-dessus. */
-@media (max-width:767px){.consentement{left:var(--s3);right:var(--s3);bottom:calc(var(--s3) + env(safe-area-inset-bottom));padding:var(--s3);gap:var(--s2)}}
+@media (max-width:767px){.consentement{left:var(--s2);right:var(--s2);bottom:calc(var(--s2) + env(safe-area-inset-bottom));padding:var(--s3);gap:var(--s2);font-size:14px;line-height:1.4}
+  .consentement-actions{gap:var(--s2)}}
 .lien-pied{background:none;border:0;padding:0;font:inherit;color:var(--bande-texte);cursor:pointer;text-decoration:underline}
 .lien-pied:hover{color:var(--bande-titre)}
 

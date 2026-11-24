@@ -27,14 +27,19 @@ eq('01.04.2027 std : manqué 30.06', L('01.04.2027', true), ['31.12.2027', '30.1
 eq('15.07.2027 std', L('15.07.2027', true), ['31.12.2027', '30.11.2027', null]);
 eq('31.12.2026 autre : manqué', L('31.12.2026', false), ['31.12.2027', '30.11.2027', '31.12.2026']);
 eq('01.01.2027 autre', L('01.01.2027', false), ['31.12.2027', '30.11.2027', null]);
+// Échéance un week-end : réception avancée au vendredi, date du texte gardée dans dlLegal
+eq('30.11.2025 dimanche → vendredi 28.11', L('20.11.2025', false), ['31.12.2025', '28.11.2025', null]);
+eq('dlLegal du dimanche', f(D.lamal(p('20.11.2025'), false).dlLegal), '30.11.2025');
+eq('dlLegal absent en semaine', D.lamal(p('22.11.2026'), false).dlLegal, null);
+eq('le samedi 29.11.2025, échéance déjà manquée', L('29.11.2025', false), ['31.12.2026', '30.11.2026', '31.12.2025']);
 eq('poster 7 j avant', f(D.lamal(p('22.11.2026'), false).poster), '23.11.2026');
 
 // LCA
 const C = (t, o) => { const r = D.lca(p(t), o); return [f(r.fin), f(r.dl), r.manque ? f(r.manque.fin) : null, r.incertain]; };
 const o = (e, d, x={}) => Object.assign({ echeance: e ? p(e) : null, debut: d ? p(d) : null, preavis: 3, annuel: false }, x);
 eq('contrat ancien, échéance 31.12, délai passé', C('22.11.2026', o('31.12.2026', '01.01.2015')), ['31.12.2027', '30.09.2027', '31.12.2026', []]);
-eq('début 01.01.2026 : pas avant 31.12.2028', C('22.11.2026', o('31.12.2026', '01.01.2026')), ['31.12.2028', '30.09.2028', null, []]);
-eq('début 01.07.2025, échéance 31.12 : pas avant 30.06.2028 → 31.12.2028', C('22.11.2026', o('31.12.2026', '01.07.2025')), ['31.12.2028', '30.09.2028', null, []]);
+eq('début 01.01.2026 : pas avant 31.12.2028', C('22.11.2026', o('31.12.2026', '01.01.2026')), ['31.12.2028', '29.09.2028', null, []]); // 30.09.2028 est un samedi
+eq('début 01.07.2025, échéance 31.12 : pas avant 30.06.2028 → 31.12.2028', C('22.11.2026', o('31.12.2026', '01.07.2025')), ['31.12.2028', '29.09.2028', null, []]);
 eq('début 01.01.2024 : 3e année finit 31.12.2026, délai manqué', C('22.11.2026', o('31.12.2026', '01.01.2024')), ['31.12.2027', '30.09.2027', '31.12.2026', []]);
 eq('début 01.01.2024, testé le 15.09.2026', C('15.09.2026', o('31.12.2026', '01.01.2024')), ['31.12.2026', '30.09.2026', null, []]);
 eq('début inconnu : incertain', C('22.11.2026', o('31.12.2026', null)), ['31.12.2027', '30.09.2027', '31.12.2026', ['debut']]);

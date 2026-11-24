@@ -55,8 +55,8 @@ export function Mesure({ locale = "fr" }: { locale?: "fr" | "en" }) {
         {t.texte} <a href={t.href}>{t.lien}</a>
       </p>
       <div className="consentement-actions">
-        <Button variant="outline" size="barre" onClick={() => choisir("non")}>{t.non}</Button>
-        <Button variant="outline" size="barre" onClick={() => choisir("oui")}>{t.oui}</Button>
+        <Button variant="outline" size="bandeau" onClick={() => choisir("non")}>{t.non}</Button>
+        <Button variant="outline" size="bandeau" onClick={() => choisir("oui")}>{t.oui}</Button>
       </div>
     </div>
   );

@@ -123,9 +123,10 @@ export function LettreResiliation({ aujourdhuiIso, locale = "fr" }: { aujourdhui
         {isEn ? (
           <>
             Your letter must be <b>received</b> by <strong>{fmtUI(r.dl)}</strong> at the latest, for the contract to end on {fmtUI(r.fin)}.
+            {r.dlLegal ? ` ${fmtUI(r.dlLegal)} falls on a weekend, when insurers receive no mail, so the date is brought forward to the Friday before.` : ""}
             {j === 0 ? " Today is the last day." : j <= 14 ? ` ${j} day${j > 1 ? "s" : ""} left.` : ""}
             {j <= 1 ? (
-              <> <b>The post will no longer arrive in time.</b> Hand the letter in at one of the insurer’s branches against an acknowledgement of receipt, or use its online cancellation form if it has one.</>
+              <> <b>The post will no longer arrive in time.</b> Hand the letter in at one of the insurer’s branches against an acknowledgement of receipt, or use its online cancellation form if it has one.{type === "lca" ? " For supplementary insurance, an e-mail also counts if you can prove it was received (art. 35a para. 1 LCA): ask for a confirmation." : ""}</>
             ) : jp < 0 ? (
               <> <b>Post it today by registered mail</b>, or hand it to the insurer against an acknowledgement of receipt.</>
             ) : jp === 0 ? (
@@ -141,9 +142,10 @@ export function LettreResiliation({ aujourdhuiIso, locale = "fr" }: { aujourdhui
         ) : (
           <>
             Votre lettre doit être <b>reçue</b> au plus tard le <strong>{fmt(r.dl)}</strong>, pour une fin de contrat le {fmt(r.fin)}.
+            {r.dlLegal ? ` Le ${fmt(r.dlLegal)} tombe un week-end, quand les assureurs ne reçoivent pas de courrier${NB}: la date est avancée au vendredi qui précède.` : ""}
             {j === 0 ? " C’est le dernier jour." : j <= 14 ? ` Encore ${j} jour${j > 1 ? "s" : ""}.` : ""}
             {j <= 1 ? (
-              <> <b>La poste n’arrivera plus à temps.</b> Remettez la lettre à une agence de l’assureur contre accusé de réception, ou utilisez son formulaire de résiliation en ligne s’il en propose un.</>
+              <> <b>La poste n’arrivera plus à temps.</b> Remettez la lettre à une agence de l’assureur contre accusé de réception, ou utilisez son formulaire de résiliation en ligne s’il en propose un.{type === "lca" ? ` Pour une complémentaire, un e-mail compte aussi si vous pouvez prouver sa réception (art. 35a, al. 1, LCA)${NB}: demandez une confirmation.` : ""}</>
             ) : jp < 0 ? (
               <> <b>Postez-la aujourd’hui en recommandé</b>, ou remettez-la à l’assureur contre accusé de réception.</>
             ) : jp === 0 ? (
@@ -423,7 +425,7 @@ export function LettreResiliation({ aujourdhuiIso, locale = "fr" }: { aujourdhui
               <li>{tropTard
                 ? isEn ? "Sign the letter and hand it in against an acknowledgement of receipt. Keep the acknowledgement." : "Signez la lettre et remettez-la contre accusé de réception. Gardez l’accusé."
                 : isEn ? "Sign the letter and send it by registered mail. Keep the receipt." : "Signez la lettre et envoyez-la en recommandé. Gardez le récépissé."}</li>
-              <li>{isEn ? "Track the letter on the Swiss Post website until it is delivered." : "Suivez l’envoi sur le site de La Poste jusqu’à la distribution."}</li>
+              {tropTard ? null : <li>{isEn ? "Track the letter on the Swiss Post website until it is delivered." : "Suivez l’envoi sur le site de La Poste jusqu’à la distribution."}</li>}
               <li>{isEn ? "Check the written confirmation from the old insurer. You stay covered without interruption until the change." : "Contrôlez la confirmation écrite de l’ancien assureur. Vous restez couvert sans interruption jusqu’au changement."}</li>
             </ol>
           ) : (
@@ -432,7 +434,7 @@ export function LettreResiliation({ aujourdhuiIso, locale = "fr" }: { aujourdhui
               <li>{tropTard
                 ? isEn ? "Sign the letter and hand it in against an acknowledgement of receipt. Keep the acknowledgement." : "Signez la lettre et remettez-la contre accusé de réception. Gardez l’accusé."
                 : isEn ? "Sign the letter and send it by registered mail. Keep the receipt." : "Signez la lettre et envoyez-la en recommandé. Gardez le récépissé."}</li>
-              <li>{isEn ? "Track the letter until it is delivered." : "Suivez l’envoi jusqu’à la distribution."}</li>
+              {tropTard ? null : <li>{isEn ? "Track the letter until it is delivered." : "Suivez l’envoi jusqu’à la distribution."}</li>}
               <li>{isEn ? "Check the written confirmation. Your basic health insurance is not affected." : "Contrôlez la confirmation écrite. Votre assurance de base n’est pas touchée."}</li>
             </ol>
           )}

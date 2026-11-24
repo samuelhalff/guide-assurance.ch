@@ -173,13 +173,25 @@
   .coche-ok { position: absolute; right: 12px; top: 50%; width: 18px; height: 18px; margin-top: -9px; color: #2E7D4F; }
   :root.dark .coche-ok { color: #6FCF97; }
   table.primes-liste { display: none; }
-  table.primes-liste td:first-child { position: relative; min-width: 15em; }
+  /* Deux parties de tableau autour du bloc « Recevoir des offres » : largeurs fixes par colonne pour qu'elles s'alignent. */
+  /* Sans colonne « Redistribution » (même montant sur chaque ligne, rappelé dans l'en-tête « Total ») : le tableau tient dans sa colonne. */
+  table.primes-liste { table-layout: fixed; min-width: 34em; }
+  table.primes-liste.avec-actuelle { min-width: 40em; }
+  table.primes-liste col.c-prime, table.primes-liste col.c-total { width: 5em; }
+  table.primes-liste col.c-ecart { width: 6em; }
+  @media (max-width: 1199px) {
+    table.primes-liste { min-width: 30em; }
+    table.primes-liste.avec-actuelle { min-width: 35em; }
+    table.primes-liste col.c-prime, table.primes-liste col.c-total { width: 4.5em; }
+    table.primes-liste col.c-ecart { width: 5em; }
+  }
+  table.primes-liste td:first-child { position: relative; }
   table.primes-liste .rang { position: absolute; left: 8px; top: 10px; font: 600 14px var(--narrow); color: var(--encre-2); }
   table.primes-liste b { display: block; font-weight: 700; }
   table.primes-liste td.mois { font-weight: 700; }
   table.primes-liste thead th { white-space: nowrap; vertical-align: bottom; }
   table.primes-liste thead small { display: block; font: 12px var(--narrow); white-space: normal; max-width: 9em; margin-left: auto; }
-  table.primes-liste tbody tr:first-child td { background: var(--info-teinte); }
+  table.primes-liste:not(.primes-suite) tbody tr:first-child td { background: var(--info-teinte); }
   .commande.plus { margin: var(--s2) 0 0; padding: 0; color: var(--lac-encre); font-family: var(--narrow); font-size: 16px; text-decoration: underline; text-underline-offset: 3px; }
   .integrite { margin-top: var(--s4); padding: var(--s3) var(--s4); border: 1px solid var(--filet); border-radius: var(--r); font: 14px var(--narrow); color: var(--encre-2); }
   .integrite p { margin: 0 0 6px; }

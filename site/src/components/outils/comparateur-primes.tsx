@@ -119,9 +119,9 @@ const TXT = {
     fourchette: (a: string, b: string, m: string, u: string) => `Après redistribution des taxes environnementales, vous payez de ${a} à ${b} ${u}, pour une moyenne de ${m}.`,
     memes: "La loi (LAMal) fixe les prestations de l’assurance de base, qui sont donc identiques d’un assureur à l’autre. Les offres diffèrent par la prime, les règles du modèle et le service.",
     caption: "Primes 2027 de chaque offre, triées de la plus basse à la plus haute, avec l’écart annuel par rapport à la première offre et à la moyenne de la liste.",
+    captionSuite: (a: number, b: number) => `Suite de la liste, offres ${a} à ${b}`,
     thOffre: "Assureur et modèle",
     thPrime: "Prime",
-    thRedis: "Redistribution",
     thTotal: "Total",
     thEcart: "Écart par an",
     vsPremiere: "par rapport à la 1re offre",
@@ -233,9 +233,9 @@ const TXT = {
     fourchette: (a: string, b: string, m: string, u: string) => `After the environmental levy redistribution, you pay from ${a} to ${b} ${u}, with an average of ${m}.`,
     memes: "The law (LAMal) sets the benefits of basic insurance, so they are identical from one insurer to the next. Offers differ in the premium, the rules of the model and the service.",
     caption: "2027 premiums of each offer, sorted from the lowest to the highest, with the yearly difference from the first offer and from the average of the list.",
+    captionSuite: (a: number, b: number) => `List continued, offers ${a} to ${b}`,
     thOffre: "Insurer and model",
     thPrime: "Premium",
-    thRedis: "Redistribution",
     thTotal: "Total",
     thEcart: "Difference per year",
     vsPremiere: "compared with the 1st offer",
@@ -455,6 +455,19 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
     return () => obs.disconnect();
   }, [aListe]);
 
+  /* Tableau en deux parties (ordinateur) : si les colonnes débordent, les deux parties défilent ensemble à l'horizontale. */
+  const deuxParties = aListe && Math.min(nb, r?.total ?? 0) > OFFRES_AVANT_BLOC;
+  useEffect(() => {
+    const boites = [...(listeRef.current?.querySelectorAll<HTMLElement>("[data-slot=table-container]") ?? [])];
+    if (boites.length < 2) return;
+    const suivreDefil = (ev: Event) => {
+      const x = (ev.currentTarget as HTMLElement).scrollLeft;
+      for (const b of boites) if (b !== ev.currentTarget && b.scrollLeft !== x) b.scrollLeft = x;
+    };
+    for (const b of boites) b.addEventListener("scroll", suivreDefil, { passive: true });
+    return () => { for (const b of boites) b.removeEventListener("scroll", suivreDefil); };
+  }, [deuxParties]);
+
   /* rappel_vu : appel de fin de parcours (un seul événement « comparateur » par page). */
   useRappelVu(rappelApres, "comparateur", Boolean(aListe));
 
@@ -538,6 +551,54 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
       </li>
     );
   };
+  /* Tableau (ordinateur) : deux parties autour du bloc « Recevoir des offres », colonnes identiques (colgroup + table-layout fixe en CSS).
+     La seconde répète l'en-tête et porte une légende masquée, pour rester compréhensible seule. */
+  const tableau = (lignes: P.OffreFoyer[], legende: string, suite = false) => (
+    <Table variant="chiffres" className={`primes-liste${suite ? " primes-suite" : ""}${actuelle ? " avec-actuelle" : ""}`}>
+      <TableCaption className={suite ? "visually-hidden" : undefined}>{legende}</TableCaption>
+      <colgroup>
+        <col className="c-offre" />
+        <col className="c-prime" />
+        <col className="c-total" />
+        <col className="c-ecart" />
+        <col className="c-ecart" />
+        {actuelle ? <col className="c-ecart" /> : null}
+      </colgroup>
+      <TableHeader>
+        <TableRow>
+          <TableHead scope="col">{t.thOffre}</TableHead>
+          <TableHead scope="col">{t.thPrime}<small>{t.avantRedis}</small></TableHead>
+          <TableHead scope="col">{t.thTotal}<small>{`${t.apresRedis} (−${nf(prix(redis), 2)})`}</small></TableHead>
+          <TableHead scope="col">{t.thEcart}<small>{t.vsPremiere}</small></TableHead>
+          <TableHead scope="col">{t.thEcart}<small>{t.vsMoyenne}</small></TableHead>
+          {actuelle ? <TableHead scope="col">{t.thEcart}<small>{t.vsActuelle}</small></TableHead> : null}
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {lignes.map((o) => {
+          const i = rangPrix.get(o) ?? 0;
+          const estAct = actuelle && o.assureur === actuelle.assureur && o.produit === actuelle.produit;
+          return (
+            <TableRow key={`${o.assureur}|${o.produit}`} data-state={estAct ? "selected" : undefined}>
+              <TableCell className="pl-9 align-top">
+                <span className="rang">{i + 1}</span>
+                {estAct ? <Badge variant="secondary">{t.votreCaisse}</Badge> : null}
+                <b>{o.assureur}</b>
+                <span className="produit">{o.produit}</span>
+                <span className="type">{t.typesCourts[o.type]}</span>
+                {!seul ? <span className="type">{o.details.map((x) => nf(prix(x), parAn ? 0 : 2)).join(" + ")}</span> : null}
+              </TableCell>
+              <TableCell className="mois align-top">{nf(prix(o.mensuel), parAn ? 0 : 2)}</TableCell>
+              <TableCell className="align-top">{nf(prix(o.mensuel - redis), parAn ? 0 : 2)}</TableCell>
+              <TableCell className="align-top">{i === 0 ? "0" : signe(o.ecartMin)}</TableCell>
+              <TableCell className="align-top">{signe(o.ecartMoyenne)}</TableCell>
+              {actuelle ? <TableCell className="align-top">{signe(o.annuel - actuelle.annuel)}</TableCell> : null}
+            </TableRow>
+          );
+        })}
+      </TableBody>
+    </Table>
+  );
   const Coche = ({ ok }: { ok: boolean }) =>
     ok ? (
       <svg className="coche-ok" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" strokeWidth="2.4" /></svg>
@@ -724,9 +785,11 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
               <div ref={listeRef}>
                 <Alert variant="info" className="verdict">{t.memes}</Alert>
 
-                {/* Mobile : une carte par offre. Le bloc « Recevoir des offres » vient après les trois premières
-                    (sur ordinateur, les cartes sont masquées et il précède le tableau). */}
+                {/* Le bloc « Recevoir des offres » est rendu une seule fois, après les trois premières offres.
+                    Mobile : cartes (les tableaux sont masqués). Ordinateur : tableau coupé en deux autour du bloc
+                    (les cartes sont masquées), mêmes colonnes et largeurs fixes pour que les deux parties s'alignent. */}
                 <ol className="cartes-primes">{visibles.slice(0, OFFRES_AVANT_BLOC).map(carte)}</ol>
+                {tableau(visibles.slice(0, OFFRES_AVANT_BLOC), t.caption)}
                 <OffreComparateur
                   ref={offreRef}
                   locale={locale}
@@ -735,48 +798,12 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
                   onEnvoyee={() => setOffreEnvoyee(true)}
                 />
                 {visibles.length > OFFRES_AVANT_BLOC ? (
-                  <ol className="cartes-primes" start={OFFRES_AVANT_BLOC + 1}>{visibles.slice(OFFRES_AVANT_BLOC).map((o, i) => carte(o, i + OFFRES_AVANT_BLOC))}</ol>
+                  <>
+                    <ol className="cartes-primes" start={OFFRES_AVANT_BLOC + 1}>{visibles.slice(OFFRES_AVANT_BLOC).map((o, i) => carte(o, i + OFFRES_AVANT_BLOC))}</ol>
+                    {tableau(visibles.slice(OFFRES_AVANT_BLOC), t.captionSuite(OFFRES_AVANT_BLOC + 1, visibles.length), true)}
+                  </>
                 ) : null}
 
-                {/* Ordinateur : tableau */}
-                <Table variant="chiffres" className="primes-liste">
-                  <TableCaption>{t.caption}</TableCaption>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead scope="col">{t.thOffre}</TableHead>
-                      <TableHead scope="col">{t.thPrime}</TableHead>
-                      <TableHead scope="col">{t.thRedis}</TableHead>
-                      <TableHead scope="col">{t.thTotal}</TableHead>
-                      <TableHead scope="col">{t.thEcart}<small>{t.vsPremiere}</small></TableHead>
-                      <TableHead scope="col">{t.thEcart}<small>{t.vsMoyenne}</small></TableHead>
-                      {actuelle ? <TableHead scope="col">{t.thEcart}<small>{t.vsActuelle}</small></TableHead> : null}
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {visibles.map((o) => {
-                      const i = rangPrix.get(o) ?? 0;
-                      const estAct = actuelle && o.assureur === actuelle.assureur && o.produit === actuelle.produit;
-                      return (
-                        <TableRow key={`${o.assureur}|${o.produit}`} data-state={estAct ? "selected" : undefined}>
-                          <TableCell className="pl-9 align-top">
-                            <span className="rang">{i + 1}</span>
-                            {estAct ? <Badge variant="secondary">{t.votreCaisse}</Badge> : null}
-                            <b>{o.assureur}</b>
-                            <span className="produit">{o.produit}</span>
-                            <span className="type">{t.typesCourts[o.type]}</span>
-                            {!seul ? <span className="type">{o.details.map((x) => nf(prix(x), parAn ? 0 : 2)).join(" + ")}</span> : null}
-                          </TableCell>
-                          <TableCell className="mois align-top">{nf(prix(o.mensuel), parAn ? 0 : 2)}</TableCell>
-                          <TableCell className="align-top">−{nf(prix(redis), 2)}</TableCell>
-                          <TableCell className="align-top">{nf(prix(o.mensuel - redis), parAn ? 0 : 2)}</TableCell>
-                          <TableCell className="align-top">{i === 0 ? "0" : signe(o.ecartMin)}</TableCell>
-                          <TableCell className="align-top">{signe(o.ecartMoyenne)}</TableCell>
-                          {actuelle ? <TableCell className="align-top">{signe(o.annuel - actuelle.annuel)}</TableCell> : null}
-                        </TableRow>
-                      );
-                    })}
-                  </TableBody>
-                </Table>
 
                 {r.total > nb ? (
                   <button type="button" className="commande plus" onClick={() => setNb((v) => v + PAR_PAGE)}>

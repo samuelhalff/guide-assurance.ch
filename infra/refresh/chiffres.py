@@ -136,16 +136,21 @@ def ligne_maj(jour: dt.date, locale: str) -> str:
 # ------------------------------------------------------------------ comparaison
 SENS = re.compile(
     r"\b(hausses?|baisses?|augment\w*|diminu\w*|recul\w*|progress\w*|grimp\w*|chut\w*|repli\w*|renchér\w*|"
-    r"plus cher|moins cher|rises?|rose|risen|fall|falls|fell|increas\w*|decreas\w*|drop\w*|climb\w*|"
-    r"higher|lower|cheaper|more expensive|up by|down by)\b", re.I)
+    r"abaiss\w*|relèv\w*|relev\w*|réduit\w*|réduction\w*|passe de|passent de|plus élevée?s?|moins élevée?s?|"
+    r"plus cher|moins cher|rise[sn]?|rising|rose|raise[sd]?|raising|fall|falls|falling|fallen|fell|increas\w*|decreas\w*|"
+    r"drop\w*|climb\w*|cuts?|cutting|"
+    r"higher|lower|cheaper|more expensive|up by|down by|goes up|go up|went up|goes down|go down|went down)\b", re.I)
+# Fin de phrase : ponctuation suivie d'une majuscule ou de la fin du texte, ou saut de ligne. Un point décimal
+# (« 4.2 % ») ou d'abréviation (« art. 7 ») ne coupe pas la phrase.
+FIN = re.compile(r"[.!?](?=\s+[A-ZÀ-ÝÉÈ«\"*]|\s*$)|\n")
 
 
 def phrase(texte: str, extrait: str) -> str:
     """La phrase de l'article qui contient l'extrait (bornes : . ! ? ou fin de ligne)."""
     i = texte.find(extrait)
-    debut = max(texte.rfind(c, 0, i) for c in ".!?\n") + 1
-    fins = [j for j in (texte.find(c, i + len(extrait)) for c in ".!?\n") if j >= 0]
-    return texte[debut:min(fins) if fins else len(texte)]
+    debut = max((m.end() for m in FIN.finditer(texte, 0, i)), default=0)
+    m = FIN.search(texte, i + len(extrait))
+    return texte[debut:m.start() if m else len(texte)]
 
 
 def comparer(log: C.Log, man: dict, forcer: bool) -> tuple[list[dict], list[str]]:

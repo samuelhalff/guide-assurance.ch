@@ -217,16 +217,16 @@ export type Situation = "frontaliers" | "arrivee" | "prevoyance" | "entreprises"
 type Option = { value: Situation; label: string; detail: string; href: string };
 const SITUATIONS: Record<Locale, Option[]> = {
   fr: [
-    { value: "frontaliers", label: "Je vis en France, je travaille en Suisse", detail: "Vous avez trois mois pour choisir entre la LAMal et l’assurance maladie française, et ce choix engage tout le foyer.", href: "/frontaliers/" },
+    { value: "frontaliers", label: "Je vis en France, je travaille en Suisse", detail: "Vous avez trois mois pour choisir entre la LAMal et l’assurance maladie française. Ce choix est en principe définitif et engage tout le foyer.", href: "/frontaliers/" },
     { value: "arrivee", label: "Je viens d’arriver en Suisse", detail: "Vous avez trois mois pour vous affilier à une caisse maladie, et la couverture remonte au jour de votre arrivée.", href: "/nouveaux-arrivants/" },
     { value: "prevoyance", label: "Je prépare mon 3e pilier", detail: "En 2027, vous pouvez verser jusqu’à 7\u202f373 francs sur votre 3a si vous avez une caisse de pension.", href: "/3e-pilier/" },
-    { value: "entreprises", label: "J’assure mon entreprise", detail: "Dès que vous employez du personnel, la LPP et l’assurance accidents (LAA) deviennent obligatoires.", href: "/entreprises/" },
+    { value: "entreprises", label: "J’assure mon entreprise", detail: "L’assurance accidents (LAA) est obligatoire pour tout le personnel, la LPP dès 23\u00a0040\u00a0francs de salaire annuel.", href: "/entreprises/" },
   ],
   en: [
-    { value: "frontaliers", label: "I live in France, I work in Switzerland", detail: "You have three months to choose between LAMal and French health insurance, and the choice is in principle final.", href: "/en/cross-border-workers/" },
+    { value: "frontaliers", label: "I live in France, I work in Switzerland", detail: "You have three months to choose between LAMal and French health insurance. The choice is in principle final and binds the whole household.", href: "/en/cross-border-workers/" },
     { value: "arrivee", label: "I’ve just arrived in Switzerland", detail: "You have three months to join a health insurer, and your cover goes back to the day you arrived.", href: "/en/moving-to-switzerland/" },
     { value: "prevoyance", label: "I’m planning my pillar 3a", detail: "In 2027 you can pay up to CHF 7,373 into pillar 3a if you have a pension fund.", href: "/en/pillar-3a/" },
-    { value: "entreprises", label: "I’m insuring my business", detail: "Once you employ staff, LPP pension and LAA accident cover are compulsory.", href: "/en/business/" },
+    { value: "entreprises", label: "I’m insuring my business", detail: "LAA accident cover is compulsory for all staff, and LPP pension from an annual salary of CHF\u00a023,040.", href: "/en/business/" },
   ],
 };
 

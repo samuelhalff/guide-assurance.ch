@@ -244,6 +244,7 @@ def rss_bns(log: C.Log) -> list[dict]:
 
 
 SUJETS_AUTO = {"primes", "taux3a", "bns"}
+CLES_ETAT = {"primes_sha": "primes", "taux3a_ref": "taux3a", "bns_vus": "bns", "mensuel": "mensuel"}  # clé d'état → sujet
 
 
 def declencheurs(log: C.Log, st: dict, a) -> tuple[list[dict], dict]:
@@ -723,18 +724,23 @@ def run(log: C.Log, a) -> int:
         log(f"relevé des accords impossible : {e}")
     st = C.load_state(DS)
     trig, maj = declencheurs(log, st, a)
-    if not a.dry_run:
+    # L'état n'avance que pour le déclencheur traité : un second déclencheur du même passage (taux 3a et BNS le même
+    # jour) reste dû au passage suivant. Un essai --only n'écrit jamais l'état.
+    attente = len(brouillons()) >= 3 and not a.only and bool(trig)
+    reportes = {d["sujet"] for d in (trig if attente else trig[1:])}
+    maj = {k: v for k, v in maj.items() if CLES_ETAT.get(k) not in reportes}
+    if not a.dry_run and not a.only:
         C.save_state(DS, **maj)
     if not trig:
         C.record_run(DS, "ok", "aucun déclencheur", success=True)
         log("aucun déclencheur")
         return 0
-    if len(brouillons()) >= 3 and not a.only:
+    if attente:
         log(f"{len(brouillons())} brouillons attendent déjà un accord : pas de nouveau brouillon")
         C.record_run(DS, "ok", "brouillons en attente", success=True)
         return 0
     d = trig[0]  # un brouillon au plus par passage
-    if d["sujet"] == "seo" and not a.dry_run:  # une requête n'est essayée qu'une fois, publiée ou non
+    if d["sujet"] == "seo" and not a.dry_run and not a.only:  # une requête n'est essayée qu'une fois, publiée ou non
         C.save_state(DS, seo_dernier=C.now_zh().date().isoformat(),
                      seo_essayes=(st.get("seo_essayes", []) + [d["requete"]])[-500:])
     log(f"déclencheur : {d['raison']}" + (f" (autres : {', '.join(x['sujet'] for x in trig[1:])})" if trig[1:] else ""))

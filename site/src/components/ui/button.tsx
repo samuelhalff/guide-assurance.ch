@@ -35,6 +35,9 @@ const buttonVariants = cva(
         /* Barre collante mobile : 16 px, padding serré ; un <small> passe en seconde ligne. */
         barre:
           "min-h-13 flex-auto gap-0.5 px-3 py-2 text-base leading-tight whitespace-nowrap has-[small]:flex-col [&_small]:font-narrow [&_small]:text-[13px] [&_small]:font-semibold [&_small]:opacity-90",
+        /* Bandeau cookies : 44 px sur téléphone (cible tactile minimale), 52 px dès 768 px. */
+        bandeau:
+          "min-h-11 px-3 py-2 text-[15px] leading-tight whitespace-nowrap md:min-h-13 md:text-base",
       },
     },
     defaultVariants: {

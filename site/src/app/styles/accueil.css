@@ -309,6 +309,18 @@
     .paysage { aspect-ratio: auto; height: 140px; }
     .paysage img { object-fit: contain; object-position: 100% 0%; }
   }
+  @media (max-width: 767px) and (max-height: 700px) {
+    /* Petit téléphone (iPhone SE, 360 × 640) : bande d'image réduite et marges resserrées, pour que les deux
+       champs et le bouton restent visibles au-dessus du bandeau cookies à la première visite. */
+    .paysage { height: 80px; }
+    .cartouche { padding-top: var(--s4); }
+    .cartouche .intro { margin-top: var(--s3); font-size: 16px; line-height: 1.45; }
+    .comparer { margin-top: var(--s4); }
+  }
+  /* Très petit écran (360 × 640 et moins) : la bande décorative cède la place ; le bouquetin reste dans le logo. */
+  @media (max-width: 767px) and (max-height: 660px) {
+    .paysage { display: none; }
+  }
   @media (max-width: 600px) {
     /* Primes : la moyenne et la hausse sont déjà dans le graphique */
     .primes table th:nth-child(2), .primes table td:nth-child(2),
