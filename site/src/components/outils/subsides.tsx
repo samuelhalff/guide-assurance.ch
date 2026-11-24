@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import * as S from "@/lib/engines/subsides";
 import { DEMARCHE, LIMITES_OUTIL, NOMS, REVENU, TRANSPARENCE_VD, primesOfsp } from "@/lib/subsides";
 import { suivre } from "@/lib/analytics";
@@ -159,13 +159,15 @@ const TXT_VD = {
     lppAide: "Seule la part au-delà de 20 000 francs entre dans le calcul.",
     p3a: "Versements au 3e pilier A (code 310)",
     p3aAide: "Le montant est retenu en entier.",
-    fortune: (c: boolean) => `Possédez-vous un bien immobilier ou une entreprise, ou une fortune de plus de ${nombre(c ? 120000 : 60000, 0, "fr")} francs (comptes, titres, autres avoirs, sans déduire vos dettes) ?`,
+    mob: "Fortune mobilière (codes 410 à 465 de la décision de taxation), sans déduire vos dettes",
+    mobAide: (c: boolean) => `Comptes, titres et autres avoirs. Seule la part au-delà de ${nombre(c ? 120000 : 60000, 0, "fr")} francs compte, à 6,7${N}%. Laissez vide si vous n’en avez pas.`,
+    immo: "Possédez-vous un bien immobilier ou une entreprise ?",
     non: "Non",
     oui: "Oui",
-    horsCalcul: "Dans ce cas, l’outil ne peut pas estimer votre RDU : la fortune, les biens immobiliers et la fortune commerciale entrent dans le calcul avec des règles qu’il ne reprend pas. Saisissez le RDU de votre décision de l’OVAM (« Je connais mon RDU ») ou utilisez l’évaluation de l’État de Vaud.",
+    horsCalcul: "Dans ce cas, l’outil ne peut pas estimer votre RDU : les biens immobiliers et la fortune commerciale entrent dans le calcul avec des règles qu’il ne reprend pas. Saisissez le RDU de votre décision de l’OVAM (« Je connais mon RDU ») ou utilisez l’évaluation de l’État de Vaud.",
     estimateur: "Évaluation de l’État de Vaud",
     rduLigne: (v: string) => `Votre RDU estimé est de ${v} francs.`,
-    manque: "Saisissez le revenu net et les primes déduites, puis répondez à la question sur la fortune pour voir le subside.",
+    manque: "Saisissez le revenu net et les primes déduites, puis répondez à la question sur le bien immobilier ou l’entreprise pour voir le subside.",
     detailRdu: "Voir le calcul du RDU",
     ligne: "Ligne de la décision",
     montant: "Francs",
@@ -175,7 +177,8 @@ const TXT_VD = {
     l300: "Primes d’assurance-maladie déduites (code 300)",
     lForfait: (a: number, e: number) => `Moins la déduction forfaitaire pour les primes (${a > 1 ? "2 adultes" : "1 adulte"}${e ? `, ${e} enfant${e > 1 ? "s" : ""}` : ""})`,
     lRdu: "RDU, avant déduction pour enfants",
-    hyp: "Sans fortune au-delà des franchises ni bien immobilier. L’OVAM retient la décision de taxation définitive la plus récente.",
+    lMaj: (fr: number) => `Majoration de 6,7${N}% sur la fortune mobilière au-delà de ${nombre(fr, 0, "fr")} francs`,
+    hyp: "Sans bien immobilier ni entreprise. L’OVAM retient la décision de taxation définitive la plus récente.",
   },
   en: {
     mode: "Your determining income",
@@ -190,13 +193,15 @@ const TXT_VD = {
     lppAide: "Only the part above CHF 20,000 counts.",
     p3a: "Pillar 3a payments (code 310)",
     p3aAide: "The full amount counts.",
-    fortune: (c: boolean) => `Do you own property or a business, or have wealth above CHF ${nombre(c ? 120000 : 60000, 0, "en")} (accounts, securities, other assets, before deducting debts)?`,
+    mob: "Movable wealth (codes 410 to 465 of the tax assessment), before deducting your debts",
+    mobAide: (c: boolean) => `Accounts, securities and other assets. Only the part above CHF ${nombre(c ? 120000 : 60000, 0, "en")} counts, at 6.7%. Leave empty if you have none.`,
+    immo: "Do you own property or a business?",
     non: "No",
     oui: "Yes",
-    horsCalcul: "In that case the tool cannot estimate your RDU: wealth, property and business wealth enter the calculation under rules it does not cover. Enter the RDU from your OVAM decision (“I know my RDU”) or use the canton of Vaud’s own assessment.",
+    horsCalcul: "In that case the tool cannot estimate your RDU: property and business wealth enter the calculation under rules it does not cover. Enter the RDU from your OVAM decision (“I know my RDU”) or use the canton of Vaud’s own assessment.",
     estimateur: "Canton of Vaud assessment",
     rduLigne: (v: string) => `Your estimated RDU is CHF ${v}.`,
-    manque: "Enter net income and deducted premiums, then answer the wealth question to see the subsidy.",
+    manque: "Enter net income and deducted premiums, then answer the question on property or a business to see the subsidy.",
     detailRdu: "See how the RDU is worked out",
     ligne: "Line of the assessment",
     montant: "CHF",
@@ -206,7 +211,8 @@ const TXT_VD = {
     l300: "Health insurance premiums deducted (code 300)",
     lForfait: (a: number, e: number) => `Less the flat deduction for premiums (${a > 1 ? "2 adults" : "1 adult"}${e ? `, ${e} child${e > 1 ? "ren" : ""}` : ""})`,
     lRdu: "RDU, before the child deduction",
-    hyp: "Assumes no wealth above the allowances and no property. The OVAM uses the most recent final tax assessment.",
+    lMaj: (fr: number) => `6.7% surcharge on movable wealth above CHF ${nombre(fr, 0, "en")}`,
+    hyp: "Assumes no property or business. The OVAM uses the most recent final tax assessment.",
   },
 } as const;
 
@@ -226,11 +232,43 @@ function Compteur({ id, label, valeur, max, onChange }: { id: string; label: str
   );
 }
 
-function Nombre({ id, label, aide, placeholder, value, onChange }: { id: string; label: string; aide: string; placeholder: string; value: string; onChange: (v: string) => void }) {
+function Nombre({ id, label, aide, placeholder, value, locale, onChange }: { id: string; label: string; aide: string; placeholder: string; value: string; locale: Locale; onChange: (v: string) => void }) {
+  const champ = useRef<HTMLInputElement>(null);
+  const avantCurseur = useRef<number | null>(null);
+  const affiche = value ? nombre(Number(value), 0, locale) : "";
+  /* Après chaque mise en forme, le curseur revient après le même nombre de chiffres que dans la saisie. */
+  useLayoutEffect(() => {
+    const el = champ.current;
+    const n = avantCurseur.current;
+    if (!el || n === null || document.activeElement !== el) return;
+    avantCurseur.current = null;
+    let vus = 0;
+    let pos = 0;
+    while (pos < el.value.length && vus < n) {
+      if (/\d/.test(el.value[pos])) vus++;
+      pos++;
+    }
+    el.setSelectionRange(pos, pos);
+  }, [affiche]);
   return (
     <div className="champ">
       <label htmlFor={id} className="font-semibold">{label}</label>
-      <Input id={id} inputMode="numeric" autoComplete="off" placeholder={placeholder} value={value} onChange={(ev) => onChange(ev.target.value)} aria-describedby={`${id}-aide`} />
+      <Input
+        id={id}
+        ref={champ}
+        inputMode="numeric"
+        autoComplete="off"
+        placeholder={placeholder}
+        value={affiche}
+        aria-describedby={`${id}-aide`}
+        onChange={(ev) => {
+          const brut = ev.target.value;
+          const apres = brut.slice(0, ev.target.selectionStart ?? brut.length).replace(/\D/g, "").length;
+          const c = brut.replace(/\D/g, "").replace(/^0+(?=\d)/, "").slice(0, 9);
+          avantCurseur.current = Math.min(apres, c.length);
+          onChange(c);
+        }}
+      />
       <p className="note-outil" id={`${id}-aide`}>{aide}</p>
     </div>
   );
@@ -253,6 +291,7 @@ export function Subsides({ locale }: { locale: Locale }) {
   const [vPrimes, setVPrimes] = useState("");
   const [vLpp, setVLpp] = useState("");
   const [v3a, setV3a] = useState("");
+  const [vMob, setVMob] = useState("");
   const [vFortune, setVFortune] = useState<"" | "non" | "oui">("");
   const [ctaVisible, setCtaVisible] = useState(true);
   const utilise = useRef(false);
@@ -282,7 +321,7 @@ export function Subsides({ locale }: { locale: Locale }) {
   const vPrimesN = S.lireRevenu(vPrimes);
   const detailRdu =
     vdTaxation && vFortune === "non" && vNetN != null && vPrimesN != null
-      ? S.rduVD({ revenuNet: vNetN, primesDeduites: vPrimesN, rachatsLpp: S.lireRevenu(vLpp) ?? 0, versements3a: S.lireRevenu(v3a) ?? 0, adultes: menage.adultes, enfants: nEnfants })
+      ? S.rduVD({ revenuNet: vNetN, primesDeduites: vPrimesN, rachatsLpp: S.lireRevenu(vLpp) ?? 0, versements3a: S.lireRevenu(v3a) ?? 0, fortuneMobiliere: S.lireRevenu(vMob) ?? 0, adultes: menage.adultes, enfants: nEnfants })
       : null;
   const rdu = vdTaxation ? (detailRdu ? detailRdu.rdu : null) : S.lireRevenu(revenu);
   const avecRegion = canton === "VD" || canton === "FR";
@@ -383,14 +422,15 @@ export function Subsides({ locale }: { locale: Locale }) {
                   ) : null}
                   {vdTaxation ? (
                     <fieldset className="dernier s-taxation">
-                      <Nombre id="s-v-net" label={tv.net} aide={tv.netAide} placeholder="60 000" value={vNet} onChange={(x) => { setVNet(x); toucher(); }} />
-                      <Nombre id="s-v-primes" label={tv.primes} aide={tv.primesAide} placeholder="3 000" value={vPrimes} onChange={(x) => { setVPrimes(x); toucher(); }} />
+                      <Nombre id="s-v-net" label={tv.net} aide={tv.netAide} placeholder="60 000" value={vNet} locale={locale} onChange={(x) => { setVNet(x); toucher(); }} />
+                      <Nombre id="s-v-primes" label={tv.primes} aide={tv.primesAide} placeholder="3 000" value={vPrimes} locale={locale} onChange={(x) => { setVPrimes(x); toucher(); }} />
+                      <Nombre id="s-v-mob" label={tv.mob} aide={tv.mobAide(couple === "couple")} placeholder="0" value={vMob} locale={locale} onChange={(x) => { setVMob(x); toucher(); }} />
                       <Depliable className="affiner" titre={tv.rare}>
-                        <Nombre id="s-v-lpp" label={tv.lpp} aide={tv.lppAide} placeholder="0" value={vLpp} onChange={(x) => { setVLpp(x); toucher(); }} />
-                        <Nombre id="s-v-3a" label={tv.p3a} aide={tv.p3aAide} placeholder="0" value={v3a} onChange={(x) => { setV3a(x); toucher(); }} />
+                        <Nombre id="s-v-lpp" label={tv.lpp} aide={tv.lppAide} placeholder="0" value={vLpp} locale={locale} onChange={(x) => { setVLpp(x); toucher(); }} />
+                        <Nombre id="s-v-3a" label={tv.p3a} aide={tv.p3aAide} placeholder="0" value={v3a} locale={locale} onChange={(x) => { setV3a(x); toucher(); }} />
                       </Depliable>
                       <div className="champ">
-                        <span id="s-v-fortune-l" className="font-semibold">{tv.fortune(couple === "couple")}</span>
+                        <span id="s-v-fortune-l" className="font-semibold">{tv.immo}</span>
                         <ToggleGroup
                           variant="outline"
                           size="champ"
@@ -512,6 +552,7 @@ export function Subsides({ locale }: { locale: Locale }) {
                           <TableRow><TableHead scope="row">{tv.l320}</TableHead><TableCell className="text-right">{f(detailRdu.rachatsRetenus)}</TableCell></TableRow>
                           <TableRow><TableHead scope="row">{tv.l310}</TableHead><TableCell className="text-right">{f(detailRdu.versements3a)}</TableCell></TableRow>
                           <TableRow><TableHead scope="row">{tv.l300}</TableHead><TableCell className="text-right">{f(detailRdu.primesDeduites)}</TableCell></TableRow>
+                          {detailRdu.fortuneMobiliere > 0 ? <TableRow><TableHead scope="row">{tv.lMaj(detailRdu.franchiseFortune)}</TableHead><TableCell className="text-right">{f(detailRdu.majorationFortune)}</TableCell></TableRow> : null}
                           <TableRow><TableHead scope="row">{tv.lForfait(menage.adultes, nEnfants)}</TableHead><TableCell className="text-right">{f(-detailRdu.deductionForfaitaire)}</TableCell></TableRow>
                           <TableRow><TableHead scope="row">{tv.lRdu}</TableHead><TableCell className="text-right">{f(detailRdu.rdu)}</TableCell></TableRow>
                         </TableBody>

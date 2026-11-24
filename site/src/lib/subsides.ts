@@ -34,8 +34,8 @@ export const REVENU: Record<Canton, { nom: T2; aide: T2 }> = {
   VD: {
     nom: { fr: "Revenu déterminant unifié (RDU), avant déduction pour enfants", en: "Unified determining income (RDU), before the child deduction" },
     aide: {
-      fr: "Si vous touchez déjà un subside, le RDU est sur la décision de l’OVAM. Sinon, l’OVAM le calcule à partir de votre décision de taxation (revenu net, rachats du 2e pilier au-delà de 20 000 francs, versements 3a, déduction forfaitaire pour les primes, plus un quinzième de la fortune au-delà de 60 000 francs, ou 120 000 pour un couple) : choisissez alors « Avec ma décision de taxation ». L’outil retire lui-même la déduction pour enfants.",
-      en: "If you already receive a subsidy, the RDU is on the OVAM decision. Otherwise the OVAM works it out from your tax assessment (net income, second-pillar buy-ins above CHF 20,000, pillar 3a payments, a flat deduction for premiums, plus one fifteenth of wealth above CHF 60,000, or CHF 120,000 for a couple): in that case choose “With my tax assessment”. The tool subtracts the child deduction itself.",
+      fr: "Si vous touchez déjà un subside, le RDU est sur la décision de l’OVAM. Sinon, l’OVAM le calcule à partir de votre décision de taxation (revenu net, rachats du 2e pilier au-delà de 20 000 francs, versements 3a, déduction forfaitaire pour les primes, plus 6,7 % de la fortune au-delà de 60 000 francs, ou 120 000 pour un couple, dettes non déduites) : choisissez alors « Avec ma décision de taxation ». L’outil retire lui-même la déduction pour enfants.",
+      en: "If you already receive a subsidy, the RDU is on the OVAM decision. Otherwise the OVAM works it out from your tax assessment (net income, second-pillar buy-ins above CHF 20,000, pillar 3a payments, a flat deduction for premiums, plus 6.7% of wealth above CHF 60,000, or CHF 120,000 for a couple, debts not deducted): in that case choose “With my tax assessment”. The tool subtracts the child deduction itself.",
     },
   },
   FR: {

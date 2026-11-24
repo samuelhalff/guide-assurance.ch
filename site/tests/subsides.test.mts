@@ -459,4 +459,33 @@ console.log("subsides : cas officiel vaudois du parent seul OK");
   assert.ok(r.calcule);
   if (r.calcule) { assert.equal(r.subsideMensuel, 310); assert.equal(r.vd?.ordinaire, 286); assert.equal(r.vd?.specifique, 24); }
 }
+/* ------------------------------------------------------------ Vaud : fortune mobilière (art. 4 RLHPS, notice 2027 point ⑨) */
+{
+  const seul = { revenuNet: 25000, primesDeduites: 0, adultes: 1 as 1 | 2, enfants: 0 };
+  const maj = (fortuneMobiliere: number | undefined, adultes: 1 | 2 = 1) => S.rduVD({ ...seul, adultes, fortuneMobiliere }).majorationFortune;
+  // franchise 2027 : 60 000 (une personne, avec ou sans enfant), 120 000 (couple) ; taux 6,7 % de la part au-delà
+  assert.equal(maj(undefined), 0, "champ vide = 0");
+  assert.equal(maj(0), 0);
+  assert.equal(maj(60000), 0);
+  assert.equal(maj(60001), 0, "60 001 : 0,067 arrondi au franc le plus proche (arrondi non attesté officiellement)");
+  assert.equal(maj(60100), 7, "60 100 : 6,7 arrondi à 7");
+  assert.equal(S.rduVD({ ...seul, enfants: 2, fortuneMobiliere: 60000 }).majorationFortune, 0, "famille monoparentale : 60 000");
+  assert.equal(maj(100000), 2680);
+  assert.equal(maj(120000, 2), 0, "couple : 120 000");
+  assert.equal(maj(150000, 2), 2010);
+  const d = S.rduVD({ ...seul, fortuneMobiliere: 100000 });
+  assert.deepEqual([d.fortuneMobiliere, d.franchiseFortune, d.fortuneRetenue, d.majorationFortune, d.rdu], [100000, 60000, 40000, 2680, 25480]);
+  assert.equal(S.rduVD({ ...seul, adultes: 2, fortuneMobiliere: 150000 }).rdu, 25000 - 4400 + 2010);
+  // estimateur officiel de l'État de Vaud, version 2026, relevé le 24.11.2026 : personne seule, revenu net 25 000, fortune mobilière
+  // 100 000, franchise générale appliquée 59 000 (valeur 2026) : fortune retenue 41 000, majoration 2 747, RDU 25 547, subside 288
+  const retenue2026 = 100000 - 59000;
+  assert.equal(retenue2026, 41000);
+  assert.equal(Math.round(retenue2026 * S.RDU_VD.tauxFortune), 2747, "6,7 % et non un quinzième (2 733)");
+  assert.equal(25000 - 2200 + 2747, 25547);
+  const r = calc("VD", m(1), 25547, { primes: { adulte: 500, jeuneAdulte: 500, enfant: 0 } });
+  assert.equal(Math.round(r.subsideMensuel), 288);
+  assert.equal(Math.round(r.vd!.ordinaire), 238);
+  assert.equal(Math.round(r.vd!.specifique), 50);
+}
+
 console.log("subsides : cas officiel vaudois de l'adulte seul à 22 800 OK");
