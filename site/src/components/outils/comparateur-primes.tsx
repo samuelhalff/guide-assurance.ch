@@ -133,6 +133,8 @@ const TXT = {
     thPrime: "Prime",
     thTotal: "Total",
     thEcart: "Écart par an",
+    thCaisse: "Votre caisse",
+    ecartAnCourt: "écart par an",
     vsPremiere: "par rapport à la 1re offre",
     vsMoyenne: "par rapport à la moyenne",
     vsActuelle: "par rapport à votre caisse",
@@ -258,6 +260,8 @@ const TXT = {
     thPrime: "Premium",
     thTotal: "Total",
     thEcart: "Difference per year",
+    thCaisse: "Your insurer",
+    ecartAnCourt: "difference per year",
     vsPremiere: "compared with the 1st offer",
     vsMoyenne: "compared with the average",
     vsActuelle: "compared with your insurer",
@@ -557,7 +561,7 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
             <span className="unite">CHF {parAn ? t.an : t.mois}</span>
           </div>
           {/* Un seul écart visible : face à la caisse actuelle si elle est indiquée, sinon face à la 1re offre (la 1re : face à la moyenne). */}
-          <p className="ecart-carte">
+          <p className={vsAct !== null ? "ecart-carte face-caisse" : "ecart-carte"}>
             {vsAct !== null
               ? <><b>{signe(vsAct)}</b> {t.parAn} {t.faceCaisse}</>
               : ip > 0
@@ -601,7 +605,9 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
           <TableHead scope="col">{t.thOffre}</TableHead>
           <TableHead scope="col">{t.thPrime}<small>{t.avantRedis}</small></TableHead>
           <TableHead scope="col">{t.thTotal}<small>{`${t.apresRedis} (−${nf(prix(redis), 2)})`}</small></TableHead>
-          <TableHead scope="col">{t.thEcart}<small>{actuelle ? t.vsActuelle : t.vsPremiere}</small></TableHead>
+          {actuelle
+            ? <TableHead scope="col" className="col-caisse">{t.thCaisse}<small>{t.ecartAnCourt}</small></TableHead>
+            : <TableHead scope="col">{t.thEcart}<small>{t.vsPremiere}</small></TableHead>}
           <TableHead scope="col">{t.thEcart}<small>{t.vsMoyenne}</small></TableHead>
         </TableRow>
       </TableHeader>
@@ -621,7 +627,9 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
               </TableCell>
               <TableCell className="mois align-top">{nf(prix(o.mensuel), parAn ? 0 : 2)}</TableCell>
               <TableCell className="align-top">{nf(prix(o.mensuel - redis), parAn ? 0 : 2)}</TableCell>
-              <TableCell className="align-top">{actuelle ? signe(o.annuel - actuelle.annuel) : i === 0 ? "0" : signe(o.ecartMin)}</TableCell>
+              {actuelle
+                ? <TableCell className="col-caisse align-top">{signe(o.annuel - actuelle.annuel)}</TableCell>
+                : <TableCell className="align-top">{i === 0 ? "0" : signe(o.ecartMin)}</TableCell>}
               <TableCell className="align-top">{signe(o.ecartMoyenne)}</TableCell>
             </TableRow>
           );

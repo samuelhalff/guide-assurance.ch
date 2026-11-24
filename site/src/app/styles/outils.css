@@ -134,6 +134,7 @@
   .carte-prime .unite { display: block; font: 16px var(--narrow); color: var(--encre-2); }
   .carte-prime .type-badge { margin-top: var(--s1); }
   .carte-prime .ecart-carte { grid-column: 2 / -1; margin: var(--s2) 0 0; padding: var(--s2) 0 0; border-top: 1px solid var(--filet); font: 16px var(--narrow); color: var(--encre-2); }
+  .carte-prime .ecart-carte.face-caisse { border-top: 0; padding: var(--s2) var(--s3); background: var(--info-teinte); border-radius: var(--r); color: var(--encre); }
   .carte-prime .ecart-carte b, .detail-offre b { color: var(--encre); font-weight: 700; font-variant-numeric: tabular-nums; }
   .synthese-caisse { margin-block: var(--s3); }
   .rappel-liste { margin: var(--s3) 0 var(--s2); padding: var(--s3) var(--s4); background: var(--info-teinte); border-radius: var(--r); font-size: 16px; }
@@ -183,7 +184,9 @@
   table.primes-liste td.mois { font-weight: 700; }
   table.primes-liste thead th { white-space: nowrap; vertical-align: bottom; }
   table.primes-liste thead small { display: block; font: 12px var(--narrow); white-space: normal; max-width: 9em; margin-left: auto; }
-  table.primes-liste:not(.primes-suite) tbody tr:first-child td { background: var(--info-teinte); }
+  /* Écart face à la caisse actuelle : même teinte que l'encadré de synthèse, pour relier les deux. */
+  table.primes-liste .col-caisse { background: var(--info-teinte); font-weight: 700; }
+  table.primes-liste thead .col-caisse { color: var(--encre); }
   .plus { margin: var(--s2) 0 0; }
   .integrite { margin-top: var(--s4); padding: var(--s3) var(--s4); border: 1px solid var(--filet); border-radius: var(--r); font: 14px var(--narrow); color: var(--encre-2); }
   .integrite p { margin: 0 0 6px; }
