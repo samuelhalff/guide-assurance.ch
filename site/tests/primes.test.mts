@@ -154,4 +154,14 @@ t("priminfo : Genève, adulte, 300, accident", () => {
   assert.strictEqual(r.redistribution, 4.75);
 });
 
+/* Art. 8 LAMal : seul un salarié couvert par la LAA peut suspendre la couverture accident. */
+t("accident par défaut selon l'âge", () => {
+  assert.strictEqual(P.accidentParDefaut(2015), true);
+  assert.strictEqual(P.accidentParDefaut(2009), true);
+  assert.strictEqual(P.accidentParDefaut(2008), false);
+  assert.strictEqual(P.accidentParDefaut(1963), false);
+  assert.strictEqual(P.accidentParDefaut(1962), true);
+  assert.strictEqual(P.accidentParDefaut(1940), true);
+});
+
 console.log(`primes : ${n} tests réussis`);

@@ -54,7 +54,7 @@ const TXT = {
     ajouter: "Ajouter une personne",
     retirer: "Retirer",
     accidentCase: "Assurance accidents",
-    accidentInfo: `Inutile si vous travaillez au moins 8${NB}heures par semaine chez le même employeur, car son assurance accidents (LAA) vous couvre déjà.`,
+    accidentInfo: `Cochée d'office pour les enfants et dès 65${NB}ans. Inutile si vous travaillez au moins 8${NB}heures par semaine chez le même employeur, car son assurance accidents (LAA) vous couvre déjà.`,
     voir: "Voir les primes",
     ecartCaisse: "Afficher l’écart avec ma caisse actuelle",
     resumeFoyer: (n: number, lieu: string, nb: number) => `${n} offre${n > 1 ? "s" : ""} pour ${nb} personnes à ${lieu}, total du foyer.`,
@@ -167,7 +167,7 @@ const TXT = {
     ajouter: "Add a person",
     retirer: "Remove",
     accidentCase: "Accident insurance",
-    accidentInfo: "Not needed if you work at least 8 hours a week for the same employer, because their accident insurance (LAA) already covers you.",
+    accidentInfo: "Ticked by default for children and from age 65. Not needed if you work at least 8 hours a week for the same employer, because their accident insurance (LAA) already covers you.",
     voir: "See the premiums",
     ecartCaisse: "Show the difference with my current insurer",
     resumeFoyer: (n: number, lieu: string, nb: number) => `${n} offer${n > 1 ? "s" : ""} for ${nb} people in ${lieu}, household total.`,
@@ -282,7 +282,8 @@ function charger<X>(fichier: string): Promise<X> {
 }
 
 type Lieu = { npa: string; canton: P.Canton; region: number; communes: string };
-type PersonneUI = { id: number; naissance: string; franchise: number | null; accident: boolean };
+/* accident : null tant que le visiteur n'a pas choisi, la valeur suit alors l'âge (P.accidentParDefaut). */
+type PersonneUI = { id: number; naissance: string; franchise: number | null; accident: boolean | null };
 const MAX_PERSONNES = 6;
 
 /* donneesDu : date du relevé des primes (ISO), lue au build dans les données (lib/date-primes.ts). */
@@ -294,7 +295,7 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
   const signe = (x: number) => (Math.round(x) === 0 ? "0" : `${x > 0 ? "+" : "−"}${nf(Math.abs(x))}`);
 
   const [saisieLieu, setSaisieLieu] = useState("");
-  const [personnes, setPersonnes] = useState<PersonneUI[]>([{ id: 1, naissance: "", franchise: null, accident: false }]);
+  const [personnes, setPersonnes] = useState<PersonneUI[]>([{ id: 1, naissance: "", franchise: null, accident: null }]);
   const [filtre, setFiltre] = useState<P.Filtre>("tous");
   const [parAn, setParAn] = useState(false);
   const [avecCaisse, setAvecCaisse] = useState(false);
@@ -318,7 +319,8 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
     const lues2 = ps
       .map((x, k) => {
         const [a, f, acc] = x.split(".");
-        return /^\d{4}$/.test(a ?? "") ? { id: k + 1, naissance: a, franchise: Number.isFinite(+f) ? +f : null, accident: acc === "1" } : null;
+        const p: PersonneUI = { id: k + 1, naissance: a, franchise: Number.isFinite(+f) ? +f : null, accident: acc === "1" ? true : acc === "0" ? false : null };
+        return /^\d{4}$/.test(a ?? "") ? p : null;
       })
       .filter((x): x is PersonneUI => Boolean(x));
     if (lues2.length) setPersonnes(lues2);
@@ -356,7 +358,8 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
     const cl: P.Classe | null = ok ? P.classe(annee) : null;
     const choix = P.FRANCHISES[cl ?? "adulte"];
     const fr = p.franchise !== null && choix.includes(p.franchise) ? p.franchise : choix[0];
-    return { ...p, annee, ok, cl, choix, fr };
+    const accident = p.accident ?? (ok ? P.accidentParDefaut(annee) : false);
+    return { ...p, annee, ok, cl, choix, fr, accident };
   });
   const tousValides = lues.every((p) => p.ok);
   const pers: P.Personne[] = tousValides ? lues.map((p) => ({ classe: p.cl!, franchise: p.fr, accident: p.accident })) : [];
@@ -566,7 +569,7 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
           <button
             type="button"
             className="ajouter-personne"
-            onClick={() => setPersonnes((cur) => [...cur, { id: Math.max(...cur.map((x) => x.id)) + 1, naissance: "", franchise: null, accident: false }])}
+            onClick={() => setPersonnes((cur) => [...cur, { id: Math.max(...cur.map((x) => x.id)) + 1, naissance: "", franchise: null, accident: null }])}
           >
             + {t.ajouter}
           </button>

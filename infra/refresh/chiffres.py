@@ -15,6 +15,8 @@ le … » (EN « Updated on … ») est mise en tête du texte et le manifeste s
 relevé de données (tests, build, commit sur main, déploiement, vérification en ligne). Sinon rien n'est publié et
 une alerte part. Pas de relecture (décision de Sam du 23.11.2026) : e-mail seulement en cas d'échec.
 Un contexte introuvable (article retouché à la main) : alerte, rien n'est modifié pour ce chiffre.
+Un chiffre dont la phrase décrit un sens de variation (« en hausse », « baisse », « rises »…) n'est jamais remplacé :
+changer le nombre pourrait rendre la phrase fausse. Alerte, rien n'est modifié pour ce chiffre (revue du 24.11.2026).
 
   python3 infra/refresh/chiffres.py --dry-run                   # compare et affiche, n'écrit rien
   python3 infra/refresh/chiffres.py --dry-run --simulate-change # simule un écart sur le premier chiffre
@@ -132,6 +134,20 @@ def ligne_maj(jour: dt.date, locale: str) -> str:
 
 
 # ------------------------------------------------------------------ comparaison
+SENS = re.compile(
+    r"\b(hausses?|baisses?|augment\w*|diminu\w*|recul\w*|progress\w*|grimp\w*|chut\w*|repli\w*|renchér\w*|"
+    r"plus cher|moins cher|rises?|rose|risen|fall|falls|fell|increas\w*|decreas\w*|drop\w*|climb\w*|"
+    r"higher|lower|cheaper|more expensive|up by|down by)\b", re.I)
+
+
+def phrase(texte: str, extrait: str) -> str:
+    """La phrase de l'article qui contient l'extrait (bornes : . ! ? ou fin de ligne)."""
+    i = texte.find(extrait)
+    debut = max(texte.rfind(c, 0, i) for c in ".!?\n") + 1
+    fins = [j for j in (texte.find(c, i + len(extrait)) for c in ".!?\n") if j >= 0]
+    return texte[debut:min(fins) if fins else len(texte)]
+
+
 def comparer(log: C.Log, man: dict, forcer: bool) -> tuple[list[dict], list[str]]:
     """-> (écarts, problèmes). Un écart : {fichier, locale, fait, ancien, nouveau, actuel}."""
     ecarts, problemes = [], []
@@ -159,6 +175,10 @@ def comparer(log: C.Log, man: dict, forcer: bool) -> tuple[list[dict], list[str]
                 continue
             cite = lire_nombre(fait["texte"], locale)
             if round(actuel, fait["decimales"]) != round(cite, fait["decimales"]):
+                if SENS.search(phrase(texte_article, fait["contexte"])):
+                    problemes.append(f"{nom} : cité {fait['texte']}, valeur actuelle {round(actuel, fait['decimales'])} ; "
+                                     "la phrase décrit une variation, chiffre non remplacé automatiquement")
+                    continue
                 nouveau = ecrire_nombre(round(actuel, fait["decimales"]), fait["decimales"], locale, fait["texte"])
                 ecarts.append({"fichier": art["fichier"], "locale": locale, "fait": fait, "ancien": fait["texte"],
                                "nouveau": nouveau, "actuel": actuel})

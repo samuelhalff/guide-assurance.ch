@@ -13,12 +13,15 @@ Chaque passage (cron quotidien, 07:30 Zurich) :
   4. sinon l'enregistre en status: draft, construit et déploie (pages d'aperçu non indexées seulement) et
      envoie à Sam l'aperçu, les sources et le lien d'accord.
 
-Rien n'est publié sans accord. Accord manuel (Sam le dit en session) : actualites.py --approve <slug-fr>.
+En local, rien n'est publié sans accord. Accord manuel (Sam le dit en session) : actualites.py --approve <slug-fr>.
 
 GitHub Actions (.github/workflows/actualites.yml), entièrement automatique (décision de Sam du 23.11.2026) :
 un article qui passe tous les contrôles automatiques est écrit en status: published, testé, construit, committé sur
 main et déployé (sitemap, flux et IndexNow suivent avec le déploiement). Un article qui échoue est jeté et une
 alerte part. Ni pull request ni accord à donner.
+Seuls les déclencheurs adossés à un chiffre officiel publient d'eux-mêmes (SUJETS_AUTO : primes, taux 3a, BNS). Le rendez-vous
+mensuel et les sujets SEO ne partent plus (revue du 24.11.2026) : le vérificateur contrôle les chiffres, pas le raisonnement
+juridique d'un sujet libre. Ils restent disponibles en essai avec --only.
 Clé du LLM : la même que l'assistant des demandes (secrets AZURE_OPENAI_*), ou ANTHROPIC_API_KEY.
 Absente : alerte « clé manquante », passage en échec.
 """
@@ -240,6 +243,9 @@ def rss_bns(log: C.Log) -> list[dict]:
     return items
 
 
+SUJETS_AUTO = {"primes", "taux3a", "bns"}
+
+
 def declencheurs(log: C.Log, st: dict, a) -> tuple[list[dict], dict]:
     """Retourne (déclencheurs, mise à jour de l'état). Premier passage : l'état est initialisé sans déclencher."""
     maj, out = {}, []
@@ -282,6 +288,8 @@ def declencheurs(log: C.Log, st: dict, a) -> tuple[list[dict], dict]:
                     "theme": s.get("angle") or s["requete"], "requete": s["requete"]})
     if a.only == "seo":
         return [d for d in out if d["sujet"] == "seo"], maj
+    if not a.only:
+        out = [d for d in out if d["sujet"] in SUJETS_AUTO]
     if a.only:
         out = [d for d in out if d["sujet"] == a.only] or [{"sujet": a.only, "raison": "forcé (--only)",
                                                                "theme": MENSUEL[C.now_zh().month]}]

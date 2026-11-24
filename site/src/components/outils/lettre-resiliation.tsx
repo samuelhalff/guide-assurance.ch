@@ -99,6 +99,8 @@ export function LettreResiliation({ aujourdhuiIso, locale = "fr" }: { aujourdhui
   /* Encadré du délai */
   let delai: React.ReactNode;
   let urgent = false;
+  /* Dernier jour ou veille : la poste n'arrive plus à temps, l'étape « envoyez en recommandé » change aussi. */
+  const tropTard = Boolean(r.dl) && D.jours(today, r.dl!) <= 1;
   if (!r.fin || !r.dl || !r.poster) {
     delai = MSG[r.incertain[0]] || MSG.aucune;
   } else {
@@ -121,8 +123,10 @@ export function LettreResiliation({ aujourdhuiIso, locale = "fr" }: { aujourdhui
         {isEn ? (
           <>
             Your letter must be <b>received</b> by <strong>{fmtUI(r.dl)}</strong> at the latest, for the contract to end on {fmtUI(r.fin)}.
-            {j <= 14 ? ` ${j} day${j > 1 ? "s" : ""} left.` : ""}
-            {jp < 0 ? (
+            {j === 0 ? " Today is the last day." : j <= 14 ? ` ${j} day${j > 1 ? "s" : ""} left.` : ""}
+            {j <= 1 ? (
+              <> <b>The post will no longer arrive in time.</b> Hand the letter in at one of the insurer’s branches against an acknowledgement of receipt, or use its online cancellation form if it has one.</>
+            ) : jp < 0 ? (
               <> <b>Post it today by registered mail</b>, or hand it to the insurer against an acknowledgement of receipt.</>
             ) : jp === 0 ? (
               <> <b>Post it today.</b></>
@@ -137,8 +141,10 @@ export function LettreResiliation({ aujourdhuiIso, locale = "fr" }: { aujourdhui
         ) : (
           <>
             Votre lettre doit être <b>reçue</b> au plus tard le <strong>{fmt(r.dl)}</strong>, pour une fin de contrat le {fmt(r.fin)}.
-            {j <= 14 ? ` Encore ${j} jour${j > 1 ? "s" : ""}.` : ""}
-            {jp < 0 ? (
+            {j === 0 ? " C’est le dernier jour." : j <= 14 ? ` Encore ${j} jour${j > 1 ? "s" : ""}.` : ""}
+            {j <= 1 ? (
+              <> <b>La poste n’arrivera plus à temps.</b> Remettez la lettre à une agence de l’assureur contre accusé de réception, ou utilisez son formulaire de résiliation en ligne s’il en propose un.</>
+            ) : jp < 0 ? (
               <> <b>Postez-la aujourd’hui en recommandé</b>, ou remettez-la à l’assureur contre accusé de réception.</>
             ) : jp === 0 ? (
               <> <b>Postez-la aujourd’hui.</b></>
@@ -401,14 +407,18 @@ export function LettreResiliation({ aujourdhuiIso, locale = "fr" }: { aujourdhui
             <ol>
               <li><b>{isEn ? "Sign up with the new insurer now" : "Inscrivez-vous dès maintenant auprès du nouvel assureur"}</b>{isEn ? ", without waiting for the old one to reply. The new insurer confirms your membership to the old insurer (art. 7 para. 5 LAMal)." : ", sans attendre la réponse de l’ancien. C’est lui qui confirmera votre affiliation à l’ancien assureur (art. 7, al. 5, LAMal)."}</li>
               <li>{isEn ? "Check that your premiums are paid. With arrears, the change is blocked (art. 64a para. 6 LAMal)." : "Vérifiez que vos primes sont payées. Avec des arriérés, le changement est bloqué (art. 64a, al. 6, LAMal)."}</li>
-              <li>{isEn ? "Sign the letter and send it by registered mail. Keep the receipt." : "Signez la lettre et envoyez-la en recommandé. Gardez le récépissé."}</li>
+              <li>{tropTard
+                ? isEn ? "Sign the letter and hand it in against an acknowledgement of receipt. Keep the acknowledgement." : "Signez la lettre et remettez-la contre accusé de réception. Gardez l’accusé."
+                : isEn ? "Sign the letter and send it by registered mail. Keep the receipt." : "Signez la lettre et envoyez-la en recommandé. Gardez le récépissé."}</li>
               <li>{isEn ? "Track the letter on the Swiss Post website until it is delivered." : "Suivez l’envoi sur le site de La Poste jusqu’à la distribution."}</li>
               <li>{isEn ? "Check the written confirmation from the old insurer. You stay covered without interruption until the change." : "Contrôlez la confirmation écrite de l’ancien assureur. Vous restez couvert sans interruption jusqu’au changement."}</li>
             </ol>
           ) : (
             <ol>
               <li><b>{isEn ? "Wait for written acceptance from the new insurer" : "Attendez l’acceptation écrite du nouvel assureur"}</b>{isEn ? " before you send the letter. For supplementary insurance, it can refuse you or add exclusions based on your health." : " avant d’envoyer la lettre. Pour une complémentaire, il peut refuser ou poser des réserves selon votre état de santé."}</li>
-              <li>{isEn ? "Sign the letter and send it by registered mail. Keep the receipt." : "Signez la lettre et envoyez-la en recommandé. Gardez le récépissé."}</li>
+              <li>{tropTard
+                ? isEn ? "Sign the letter and hand it in against an acknowledgement of receipt. Keep the acknowledgement." : "Signez la lettre et remettez-la contre accusé de réception. Gardez l’accusé."
+                : isEn ? "Sign the letter and send it by registered mail. Keep the receipt." : "Signez la lettre et envoyez-la en recommandé. Gardez le récépissé."}</li>
               <li>{isEn ? "Track the letter until it is delivered." : "Suivez l’envoi jusqu’à la distribution."}</li>
               <li>{isEn ? "Check the written confirmation. Your basic health insurance is not affected." : "Contrôlez la confirmation écrite. Votre assurance de base n’est pas touchée."}</li>
             </ol>

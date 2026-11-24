@@ -57,6 +57,13 @@ export function classe(naissance: number, annee = ANNEE): Classe {
   return "adulte";
 }
 
+/* Couverture accident par défaut (art. 8 LAMal) : seul un salarié assuré LAA (8 h par semaine chez le même employeur)
+   peut la suspendre. Cochée d'office pour les enfants et dès 65 ans, laissée au choix entre les deux. */
+export function accidentParDefaut(naissance: number, annee = ANNEE): boolean {
+  const age = annee - naissance;
+  return age <= 18 || age >= 65;
+}
+
 export function anneeValide(naissance: number, annee = ANNEE): boolean {
   return Number.isInteger(naissance) && naissance >= annee - 120 && naissance <= annee;
 }
