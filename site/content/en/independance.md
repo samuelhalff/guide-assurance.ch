@@ -37,7 +37,7 @@ The publisher of the site and its contact details are given in the [legal notice
 
 ## Being called back by an adviser
 
-If you ask for it, an adviser from a partner insurance broker in French-speaking Switzerland calls you back. It is the only broker that receives requests from the site. The form says who receives the request before you send it, and the [privacy policy](/en/privacy/#requests) describes what is stored.
+If you ask for it, an adviser from a partner insurance broker in French-speaking Switzerland calls you back. It is the only broker that receives requests from the site. The form says what kind of recipient receives the request before you send it, and the [privacy policy](/en/privacy/#requests) describes what is stored.
 
 ## What this page does not cover
 

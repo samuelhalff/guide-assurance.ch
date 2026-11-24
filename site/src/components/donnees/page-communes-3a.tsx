@@ -276,7 +276,7 @@ export function PageCanton3a({ canton, locale }: { canton: I.Canton; locale: Loc
     <div className="page-outil page-donnees">
       <JsonLd data={ldPage(locale, url, t.titre, t.description, t.miettes, faq, t.nomDataset)} />
       <SiteHeader current="prevoyance" locale={locale} altPath={alt} />
-      <main>
+      <main id="contenu">
         <div className="wrap">
           <Breadcrumbs items={t.miettes} locale={locale} />
           <h1>{t.h1}</h1>
@@ -404,7 +404,7 @@ export function PageCommunes3a({ locale }: { locale: Locale }) {
     <div className="page-outil page-donnees">
       <JsonLd data={ldPage(locale, url, t.titre, t.description, t.miettes, faq, t.nomDataset)} />
       <SiteHeader current="prevoyance" locale={locale} altPath={t.alt} />
-      <main>
+      <main id="contenu">
         <div className="wrap">
           <Breadcrumbs items={t.miettes} locale={locale} />
           <h1>{t.h1}</h1>

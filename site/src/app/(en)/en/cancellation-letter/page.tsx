@@ -95,7 +95,7 @@ export default function Page() {
     <div className="page-outil page-lettre">
       <JsonLd data={LD} />
       <SiteHeader current="sante" locale="en" altPath={OUTILS.lettre} />
-      <main>
+      <main id="contenu">
         <div className="wrap">
           <Breadcrumbs items={MIETTES} locale="en" />
           <h1>Your health insurance cancellation letter</h1>

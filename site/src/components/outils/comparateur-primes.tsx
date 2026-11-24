@@ -30,13 +30,17 @@ const nfFr = (x: number, d = 0) =>
 const nfEn = (x: number, d = 0) => new Intl.NumberFormat("en-GB", { minimumFractionDigits: d, maximumFractionDigits: d }).format(x);
 
 const PAR_PAGE = 20;
+/* Offres montrées avant le bloc « Recevoir des offres pour ce profil » (liste mobile). */
+const OFFRES_AVANT_BLOC = 3;
 type Tri = "prix" | "prixDesc" | "assureur";
-const RAPPEL_APRES = 5;
 
 const CANTON_FR: Record<P.Canton, string> = { GE: "Genève", VD: "Vaud", VS: "Valais", FR: "Fribourg", NE: "Neuchâtel", JU: "Jura", BE: "Jura bernois" };
 const CANTON_EN: Record<P.Canton, string> = { GE: "Geneva", VD: "Vaud", VS: "Valais", FR: "Fribourg", NE: "Neuchâtel", JU: "Jura", BE: "Bernese Jura" };
 /* Cantons à plusieurs régions de prime couvertes (OFSP, régions 2027). */
 const MULTI: P.Canton[] = ["VD", "VS", "FR"];
+/* Bornes de l'année de naissance acceptée, tirées de P.anneeValide (pour le message d'erreur du champ). */
+const ANNEE_MIN = (() => { let a = P.ANNEE; while (P.anneeValide(a - 1)) a--; return a; })();
+const ANNEE_MAX = (() => { let a = P.ANNEE; while (P.anneeValide(a + 1)) a++; return a; })();
 
 const TXT = {
   fr: {
@@ -49,7 +53,9 @@ const TXT = {
     naissance: "Année de naissance",
     classe: { enfant: "Tarif enfant (18 ans ou moins en 2027).", jeune: "Tarif jeune adulte (19 à 25 ans en 2027).", adulte: "Tarif adulte (26 ans et plus en 2027)." } as Record<P.Classe, string>,
     classeCourt: { enfant: "un enfant", jeune: "un jeune adulte", adulte: "un adulte" } as Record<P.Classe, string>,
-    verifier: "Vérifiez l’année.",
+    anneeHors: (a: number, b: number) => `Indiquez une année de naissance entre ${a} et ${b}.`,
+    lieuVide: "Indiquez votre NPA ou votre localité.",
+    lieuIntrouvable: "Indiquez un NPA à 4 chiffres ou choisissez votre localité dans la liste.",
     personne: (n: number) => `Personne ${n}`,
     ajouter: "Ajouter une personne",
     retirer: "Retirer",
@@ -80,7 +86,6 @@ const TXT = {
     types: { BASE: "Standard : libre choix du médecin", PRAXIS: "Premier contact : votre cabinet désigné (médecin de famille ou HMO)", TEL_DIG: "Premier contact : appel ou application", PHARM: "Premier contact : pharmacie partenaire", FLEX: "Premier contact : au choix (cabinet, appel ou pharmacie)" } as Record<P.TypeModele, string>,
     typesCourts: { BASE: "Standard, libre choix", PRAXIS: "Médecin de famille ou HMO", TEL_DIG: "Appel ou application d’abord", PHARM: "Pharmacie d’abord", FLEX: "Premier contact au choix" } as Record<P.TypeModele, string>,
     titre: (lieu: string) => `Assurance maladie à ${lieu}`,
-    plusBasse: `Montant le plus bas pour ce profil, après redistribution${T}:`,
     lienProfil: "Copier le lien de ce profil",
     lienCopie: "Lien copié. Votre lieu, vos années de naissance et vos franchises figurent après le signe #, une partie de l’adresse que le navigateur ne transmet pas à notre serveur.",
     trier: "Trier",
@@ -93,7 +98,6 @@ const TXT = {
     profilCourt: "Profil",
     trierCourt: "Trier",
     offresCourt: "Recevoir des offres",
-    rappelOffre: `Une question sur cette offre${T}? Être rappelé`,
     franchiseDe: (f: number) => `franchise ${nfFr(f)}${NB}CHF`,
     accOui: "avec accident",
     accNon: "sans accident",
@@ -127,6 +131,7 @@ const TXT = {
     actuelle: "Votre caisse actuelle",
     premiere: "1re offre de la liste",
     apresRedis: "après redistribution",
+    avantRedis: "avant redistribution",
     parAn: "CHF par an",
     toutes: (n: number) => `Afficher les ${n} offres`,
     moins: "Réduire la liste",
@@ -162,7 +167,9 @@ const TXT = {
     naissance: "Year of birth",
     classe: { enfant: "Child rate (18 or under in 2027).", jeune: "Young adult rate (19 to 25 in 2027).", adulte: "Adult rate (26 and over in 2027)." } as Record<P.Classe, string>,
     classeCourt: { enfant: "a child", jeune: "a young adult", adulte: "an adult" } as Record<P.Classe, string>,
-    verifier: "Check the year.",
+    anneeHors: (a: number, b: number) => `Enter a year of birth between ${a} and ${b}.`,
+    lieuVide: "Enter your postcode or town.",
+    lieuIntrouvable: "Enter a 4-digit postcode or pick your town from the list.",
     personne: (n: number) => `Person ${n}`,
     ajouter: "Add a person",
     retirer: "Remove",
@@ -193,7 +200,6 @@ const TXT = {
     types: { BASE: "Standard: free choice of doctor", PRAXIS: "First contact: your designated practice (family doctor or HMO)", TEL_DIG: "First contact: a call or an app", PHARM: "First contact: a partner pharmacy", FLEX: "First contact: your choice (practice, call or pharmacy)" } as Record<P.TypeModele, string>,
     typesCourts: { BASE: "Standard, free choice", PRAXIS: "Family doctor or HMO", TEL_DIG: "Call or app first", PHARM: "Pharmacy first", FLEX: "First contact of your choice" } as Record<P.TypeModele, string>,
     titre: (lieu: string) => `Health insurance in ${lieu}`,
-    plusBasse: "Lowest amount for this profile, after redistribution:",
     lienProfil: "Copy the link to this profile",
     lienCopie: "Link copied. Your place, years of birth and deductibles sit after the # sign, a part of the address that the browser does not send to our server.",
     trier: "Sort",
@@ -206,7 +212,6 @@ const TXT = {
     profilCourt: "Profile",
     trierCourt: "Sort",
     offresCourt: "Get offers",
-    rappelOffre: "A question about this offer? Call me back",
     franchiseDe: (f: number) => `deductible CHF${NB}${nfEn(f)}`,
     accOui: "with accident cover",
     accNon: "without accident cover",
@@ -240,6 +245,7 @@ const TXT = {
     actuelle: "Your current insurer",
     premiere: "1st offer in the list",
     apresRedis: "after redistribution",
+    avantRedis: "before redistribution",
     parAn: "CHF per year",
     toutes: (n: number) => `Show all ${n} offers`,
     moins: "Shorten the list",
@@ -307,6 +313,12 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
   const [etat, setEtat] = useState<"pret" | "erreur">("pret");
   const [nb, setNb] = useState(PAR_PAGE);
   const [copie, setCopie] = useState(false);
+  /* Erreurs de saisie : affichées une fois le champ quitté (touche) ou le formulaire envoyé (soumis), jamais pendant la frappe. */
+  const [touche, setTouche] = useState<Record<string, boolean>>({});
+  const [soumis, setSoumis] = useState(false);
+  const quitter = (cle: string) => () => setTouche((c) => (c[cle] ? c : { ...c, [cle]: true }));
+  /* Défilement vers le résultat : demandé à l'envoi du formulaire ou par un lien de profil complet, exécuté dès que la liste est prête. */
+  const [defiler, setDefiler] = useState(false);
 
   /* Profil partagé par lien : après le #, jamais envoyé au serveur. Lu une fois, puis retiré de l'adresse
      pour que la mesure d'audience ne le voie pas. Format : #npa=1201&p=1985.300.1,2015.0.1 */
@@ -324,6 +336,7 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
       })
       .filter((x): x is PersonneUI => Boolean(x));
     if (lues2.length) setPersonnes(lues2);
+    if (n && /^\d{4}$/.test(n) && lues2.length && lues2.every((x) => P.anneeValide(+x.naissance))) setDefiler(true);
     history.replaceState(null, "", window.location.pathname + window.location.search);
   }, []);
   const [tri, setTri] = useState<Tri>("prix");
@@ -332,9 +345,9 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
   const [barre, setBarre] = useState(false);
   const listeRef = useRef<HTMLDivElement>(null);
   const apresRef = useRef<HTMLDivElement>(null);
-  const rappelListe = useRef<HTMLParagraphElement>(null);
   const rappelApres = useRef<HTMLParagraphElement>(null);
   const resultatRef = useRef<HTMLElement>(null);
+  const titreRef = useRef<HTMLHeadingElement>(null);
   const offreRef = useRef<OffreComparateurHandle>(null);
   const [offreEnvoyee, setOffreEnvoyee] = useState(false);
 
@@ -350,6 +363,9 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
   const exacte = lieux.findIndex((l) => P.libelleLieu(l.npa, l.communes, l.canton) === saisieLieu.trim());
   const lieu: Lieu | undefined = exacte >= 0 ? lieux[exacte] : lieux[Math.min(choixLieu, lieux.length - 1)];
   const ambigu = lieux.length > 1 && exacte < 0;
+  const inconnu = Boolean(index) && saisieLieu.trim().length >= 4 && !sugg.length;
+  const erreurLieu: string | null =
+    lieu || inconnu || !(soumis || touche.lieu) ? null : !saisieLieu.trim() ? t.lieuVide : index ? t.lieuIntrouvable : null;
 
   /* Personnes : classe d'âge selon l'année, franchise parmi celles de la classe (enfant 0 à 600, dès 19 ans 300 à 2500). */
   const lues = personnes.map((p) => {
@@ -359,7 +375,8 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
     const choix = P.FRANCHISES[cl ?? "adulte"];
     const fr = p.franchise !== null && choix.includes(p.franchise) ? p.franchise : choix[0];
     const accident = p.accident ?? (ok ? P.accidentParDefaut(annee) : false);
-    return { ...p, annee, ok, cl, choix, fr, accident };
+    const erreur = !ok && (soumis || touche[`n-${p.id}`]) ? t.anneeHors(ANNEE_MIN, ANNEE_MAX) : null;
+    return { ...p, annee, ok, cl, choix, fr, accident, erreur };
   });
   const tousValides = lues.every((p) => p.ok);
   const pers: P.Personne[] = tousValides ? lues.map((p) => ({ classe: p.cl!, franchise: p.fr, accident: p.accident })) : [];
@@ -384,6 +401,17 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
   const pret = Boolean(d && lieu && pers.length);
   const r = pret ? P.offresFoyer(d!, lieu!.region, pers, filtre) : null;
   const seul = pers.length === 1 ? pers[0] : null;
+  const listePrete = Boolean(r);
+  useEffect(() => {
+    if (!defiler) return;
+    /* Lien de profil dont le lieu est hors des régions couvertes : rien à montrer, on abandonne. */
+    if (etat === "erreur" || inconnu) { setDefiler(false); return; }
+    if (!listePrete) return;
+    setDefiler(false);
+    const reduit = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    titreRef.current?.focus({ preventScroll: true });
+    resultatRef.current?.scrollIntoView({ behavior: reduit ? "auto" : "smooth", block: "start" });
+  }, [defiler, listePrete, etat, inconnu]);
   const lignesFr = pret && seul ? P.parFranchise(d!, { region: lieu!.region, classe: seul.classe, accident: seul.accident, filtre }) : [];
 
   /* Caisse actuelle : prime du foyer chez elle, même profil, tous modèles confondus. */
@@ -427,8 +455,7 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
     return () => obs.disconnect();
   }, [aListe]);
 
-  /* rappel_vu : appel sous la 5e offre et appel de fin de liste (un seul événement « comparateur » par page). */
-  useRappelVu(rappelListe, "comparateur", Boolean(aListe) && (r?.offres.length ?? 0) >= RAPPEL_APRES);
+  /* rappel_vu : appel de fin de parcours (un seul événement « comparateur » par page). */
   useRappelVu(rappelApres, "comparateur", Boolean(aListe));
 
   function profilVersFormulaires() {
@@ -467,6 +494,50 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
       {texte ?? t.rappel}
     </a>
   );
+  const carte = (o: P.OffreFoyer, i: number) => {
+    const ip = rangPrix.get(o) ?? i;
+    const vsAct = actuelle ? o.annuel - actuelle.annuel : null;
+    const estAct = actuelle && o.assureur === actuelle.assureur && o.produit === actuelle.produit;
+    return (
+      <li key={`${o.assureur}|${o.produit}`}>
+        <Card size="sm">
+        <CardContent className="carte-prime">
+          <span className="rang">{ip + 1}</span>
+          <div className="offre-qui">
+            {estAct ? <Badge variant="secondary">{t.votreCaisse}</Badge> : null}
+            <b>{o.assureur}</b>
+            <span className="produit">{o.produit}</span>
+            <span className="type">{t.types[o.type]}</span>
+          </div>
+          <div className="combien">
+            <span className="montant">{nf(prix(o.mensuel), parAn ? 0 : 2)}</span>
+            <span className="unite">CHF {parAn ? t.an : t.mois}</span>
+            <span className="unite">{t.avantRedis}</span>
+            <span className="autre">{parAn ? `${nf(o.mensuel, 2)} ${t.mois}` : `${nf(o.annuel)} ${t.an}`}</span>
+          </div>
+          <ul className="ecarts">
+            <li>{ip === 0 ? t.premiere : <><b>{signe(o.ecartMin)}</b> {t.parAn} {t.vsPremiere}</>}</li>
+            <li><b>{signe(o.ecartMoyenne)}</b> {t.parAn} {t.vsMoyenne}</li>
+            {vsAct !== null ? <li className="vs-actuelle"><b>{signe(vsAct)}</b> {t.parAn} {t.vsActuelle}</li> : null}
+          </ul>
+          <Depliable className="detail-offre" titre={t.details}>
+            <ul>
+              <li>{chf(o.mensuel, 2)} {t.mois}, {chf(o.annuel)} {t.an}</li>
+              <li>{chf(o.mensuel - redis, 2)} {t.mois} {t.apresRedis}</li>
+              {o.details.map((x, k) => (
+                <li key={k}>
+                  {seul ? "" : `${t.personne(k + 1)}${isEn ? ": " : `${T}: `}`}
+                  {t.classeCourt[pers[k].classe]}, {t.franchiseDe(pers[k].franchise)}, {pers[k].accident ? t.accOui : t.accNon}
+                  {seul ? "" : <>, <b>{chf(prix(x), parAn ? 0 : 2)}</b></>}
+                </li>
+              ))}
+            </ul>
+          </Depliable>
+        </CardContent>
+        </Card>
+      </li>
+    );
+  };
   const Coche = ({ ok }: { ok: boolean }) =>
     ok ? (
       <svg className="coche-ok" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" strokeWidth="2.4" /></svg>
@@ -480,7 +551,9 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
         noValidate
         onSubmit={(ev) => {
           ev.preventDefault();
-          resultatRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+          setSoumis(true);
+          if (lieu && tousValides) setDefiler(true);
+          else document.getElementById(!lieu ? "cp-lieu" : `cp-n-${lues.find((p) => !p.ok)?.id}`)?.focus();
         }}
       >
         <Card><CardContent>
@@ -495,7 +568,9 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
               enterKeyHint="next"
               placeholder={t.lieuPh}
               value={saisieLieu}
-              onChange={(e) => setSaisieLieu(e.target.value)}
+              onChange={(e) => { setSaisieLieu(e.target.value); setDefiler(false); }}
+              onBlur={quitter("lieu")}
+              aria-invalid={erreurLieu || inconnu ? true : undefined}
               aria-describedby="cp-lieu-aide"
             />
             <Coche ok={Boolean(lieu) && !ambigu} />
@@ -520,8 +595,10 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
           </div>
         ) : lieu ? (
           <p className="lieu-trouve" id="cp-lieu-aide" role="status">{lieu.npa} {lieu.communes}{lieu.communes === t.region(lieu.canton, lieu.region) ? "" : ` · ${t.region(lieu.canton, lieu.region)}`}</p>
-        ) : index && saisieLieu.trim().length >= 4 && !sugg.length ? (
+        ) : inconnu ? (
           <Alert variant="attention" className="provisoire" id="cp-lieu-aide" role="status">{t.inconnu}</Alert>
+        ) : erreurLieu ? (
+          <Alert variant="attention" className="provisoire" id="cp-lieu-aide" role="status">{erreurLieu}</Alert>
         ) : (
           <p className="note-outil" id="cp-lieu-aide">{t.lieuAide}</p>
         )}
@@ -547,7 +624,9 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
                     maxLength={4}
                     placeholder={isEn ? "e.g. 1994" : "ex. 1994"}
                     value={p.naissance}
-                    onChange={(e) => maj(p.id, { naissance: e.target.value.replace(/\D/g, "").slice(0, 4) })}
+                    onChange={(e) => { maj(p.id, { naissance: e.target.value.replace(/\D/g, "").slice(0, 4) }); setDefiler(false); }}
+                    onBlur={quitter(`n-${p.id}`)}
+                    aria-invalid={p.erreur ? true : undefined}
                     aria-describedby={`cp-cl-${p.id}`}
                   />
                   <Coche ok={p.ok} />
@@ -559,7 +638,11 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
                 {k === 0 ? <small className="aide-champ">{t.franchiseAide}</small> : null}
               </div>
             </div>
-            <p className="note-outil classe" id={`cp-cl-${p.id}`} role="status">{p.cl ? t.classe[p.cl] : p.naissance.length === 4 ? t.verifier : NB}</p>
+            {p.erreur ? (
+              <Alert variant="attention" className="provisoire" id={`cp-cl-${p.id}`} role="status">{p.erreur}</Alert>
+            ) : (
+              <p className="note-outil classe" id={`cp-cl-${p.id}`} role="status">{p.cl ? t.classe[p.cl] : NB}</p>
+            )}
             <Case checked={p.accident} onChange={(c) => maj(p.id, { accident: c })}>
               {t.accidentCase}<small>{t.accidentInfo}</small>
             </Case>
@@ -579,7 +662,7 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
       </form>
 
       <section className="apercu" ref={resultatRef}>
-        <h2 className={lieu && tousValides && r ? "titre-resultat" : "visually-hidden"}>{lieu && tousValides && r ? t.titre(`${lieu.npa} ${lieu.communes}`) : t.resultat}</h2>
+        <h2 ref={titreRef} tabIndex={-1} className={lieu && tousValides && r ? "titre-resultat" : "visually-hidden"}>{lieu && tousValides && r ? t.titre(`${lieu.npa} ${lieu.communes}`) : t.resultat}</h2>
         {/* Seule ligne annoncée aux lecteurs d'écran : attente, erreur, chargement, puis le résumé de la liste (même nœud, toujours présent). */}
         <div aria-live="polite">
           {!lieu || !tousValides ? (
@@ -599,24 +682,6 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
           <>
             {r.total ? <p className="fourchette">{t.fourchette(chf(prix(r.min - redis), parAn ? 0 : 2), chf(prix(r.max - redis), parAn ? 0 : 2), chf(prix(r.moyenne - redis), parAn ? 0 : 2), parAn ? t.an : t.mois)}</p> : null}
             {!seul ? <p className="note-outil">{t.foyerNote}</p> : null}
-            {r.total ? (
-              <Card size="sm" className="plus-basse">
-                <CardContent>
-                  {t.plusBasse} <b>{r.offres[0].assureur}, {r.offres[0].produit}</b> · {chf(prix(r.offres[0].mensuel - redis), parAn ? 0 : 2)} {parAn ? t.an : t.mois}
-                </CardContent>
-              </Card>
-            ) : null}
-
-            {r.total ? (
-              <OffreComparateur
-                ref={offreRef}
-                locale={locale}
-                profil={{ npa: lieu.npa, personnes: lues.map((p) => ({ annee: p.annee, franchise: p.fr, accident: p.accident })) }}
-                ecartAn={r.total > 1 ? chf(r.offres[r.offres.length - 1].annuel - r.offres[0].annuel) : null}
-                onEnvoyee={() => setOffreEnvoyee(true)}
-              />
-            ) : null}
-
             <div className="reglages" ref={reglagesRef}>
               <div className="champ">
                 <label htmlFor="cp-tri">{t.trier}</label>
@@ -659,54 +724,19 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
               <div ref={listeRef}>
                 <Alert variant="info" className="verdict">{t.memes}</Alert>
 
-                {/* Mobile : une carte par offre */}
-                <ol className="cartes-primes">
-                  {visibles.map((o, i) => {
-                    const ip = rangPrix.get(o) ?? i;
-                    const vsAct = actuelle ? o.annuel - actuelle.annuel : null;
-                    const estAct = actuelle && o.assureur === actuelle.assureur && o.produit === actuelle.produit;
-                    return (
-                      <li key={`${o.assureur}|${o.produit}`}>
-                        <Card size="sm">
-                        <CardContent className="carte-prime">
-                          <span className="rang">{ip + 1}</span>
-                          <div className="offre-qui">
-                            {estAct ? <Badge variant="secondary">{t.votreCaisse}</Badge> : null}
-                            <b>{o.assureur}</b>
-                            <span className="produit">{o.produit}</span>
-                            <span className="type">{t.types[o.type]}</span>
-                          </div>
-                          <div className="combien">
-                            <span className="montant">{nf(prix(o.mensuel), parAn ? 0 : 2)}</span>
-                            <span className="unite">CHF {parAn ? t.an : t.mois}</span>
-                            <span className="autre">{parAn ? `${nf(o.mensuel, 2)} ${t.mois}` : `${nf(o.annuel)} ${t.an}`}</span>
-                          </div>
-                          <ul className="ecarts">
-                            <li>{ip === 0 ? t.premiere : <><b>{signe(o.ecartMin)}</b> {t.parAn} {t.vsPremiere}</>}</li>
-                            <li><b>{signe(o.ecartMoyenne)}</b> {t.parAn} {t.vsMoyenne}</li>
-                            {vsAct !== null ? <li className="vs-actuelle"><b>{signe(vsAct)}</b> {t.parAn} {t.vsActuelle}</li> : null}
-                          </ul>
-                          <Depliable className="detail-offre" titre={t.details}>
-                            <ul>
-                              <li>{chf(o.mensuel, 2)} {t.mois}, {chf(o.annuel)} {t.an}</li>
-                              <li>{chf(o.mensuel - redis, 2)} {t.mois} {t.apresRedis}</li>
-                              {o.details.map((x, k) => (
-                                <li key={k}>
-                                  {seul ? "" : `${t.personne(k + 1)}${isEn ? ": " : `${T}: `}`}
-                                  {t.classeCourt[pers[k].classe]}, {t.franchiseDe(pers[k].franchise)}, {pers[k].accident ? t.accOui : t.accNon}
-                                  {seul ? "" : <>, <b>{chf(prix(x), parAn ? 0 : 2)}</b></>}
-                                </li>
-                              ))}
-                            </ul>
-                          </Depliable>
-                          <a className="rappel-offre" href={RAPPEL[locale]} onClick={versRappel}>{t.rappelOffre}</a>
-                        </CardContent>
-                        </Card>
-                        {i === RAPPEL_APRES - 1 ? <p className="rappel-liste" ref={rappelListe}>{t.rappelQ} {lienRappel()}</p> : null}
-                      </li>
-                    );
-                  })}
-                </ol>
+                {/* Mobile : une carte par offre. Le bloc « Recevoir des offres » vient après les trois premières
+                    (sur ordinateur, les cartes sont masquées et il précède le tableau). */}
+                <ol className="cartes-primes">{visibles.slice(0, OFFRES_AVANT_BLOC).map(carte)}</ol>
+                <OffreComparateur
+                  ref={offreRef}
+                  locale={locale}
+                  profil={{ npa: lieu.npa, personnes: lues.map((p) => ({ annee: p.annee, franchise: p.fr, accident: p.accident })) }}
+                  ecartAn={r.total > 1 ? chf(r.offres[r.offres.length - 1].annuel - r.offres[0].annuel) : null}
+                  onEnvoyee={() => setOffreEnvoyee(true)}
+                />
+                {visibles.length > OFFRES_AVANT_BLOC ? (
+                  <ol className="cartes-primes" start={OFFRES_AVANT_BLOC + 1}>{visibles.slice(OFFRES_AVANT_BLOC).map((o, i) => carte(o, i + OFFRES_AVANT_BLOC))}</ol>
+                ) : null}
 
                 {/* Ordinateur : tableau */}
                 <Table variant="chiffres" className="primes-liste">

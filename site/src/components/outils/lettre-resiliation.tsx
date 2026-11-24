@@ -170,6 +170,12 @@ export function LettreResiliation({ aujourdhuiIso, locale = "fr" }: { aujourdhui
   if (!t.numero) av.push(isEn ? "Add your insured person or policy number, which the insurer uses to find your contract." : "Ajoutez votre numéro d’assuré ou de police, qui permet à l’assureur de retrouver votre contrat.");
   if (!t.assureur) av.push(isEn ? "Add your insurer’s address (on your policy)." : "Ajoutez l’adresse de votre assureur (sur votre police).");
 
+  /* Champs vides de la lettre, rappelés juste au-dessus des boutons : on peut imprimer quand même et compléter à la main. */
+  const vides = [
+    !t.nom || !t.rue || !t.npa || !t.localite ? (isEn ? "your address" : "votre adresse") : "",
+    !t.numero ? (isEn ? "your insured person or policy number" : "votre numéro d’assuré ou de police") : "",
+    !t.assureur ? (isEn ? "the insurer’s address" : "l’adresse de l’assureur") : "",
+  ].filter(Boolean);
   const dates = r.fin ? fmt(r.fin) : <Vide>date à préciser</Vide>;
   const qui = t.personnes ? (
     <>pour moi-même et pour les personnes suivantes{NB}:</>
@@ -369,6 +375,13 @@ export function LettreResiliation({ aujourdhuiIso, locale = "fr" }: { aujourdhui
           <p>Veuillez agréer, Madame, Monsieur, mes salutations distinguées.</p>
           <p className="sign">{ou(t.nom, "Prénom Nom")}<br /><Vide>Signature</Vide></p>
         </article>
+        {vides.length ? (
+          <p className="note-outil">
+            {isEn
+              ? `The letter still has blanks: ${vides.join(", ")}. Fill them in above, or by hand once printed.`
+              : `La lettre a encore des blancs${NB}: ${vides.join(", ")}. Complétez-les plus haut, ou à la main une fois imprimée.`}
+          </p>
+        ) : null}
         <div className="actions">
           <Button onClick={() => { suivre("lettre_imprimee"); setFaite(true); window.print(); }}>{isEn ? "Print or save as PDF" : "Imprimer ou enregistrer en PDF"}</Button>
           <Button variant="outline" onClick={copier}>{isEn ? "Copy the text" : "Copier le texte"}</Button>

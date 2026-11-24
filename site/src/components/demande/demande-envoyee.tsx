@@ -41,7 +41,7 @@ export function DemandeEnvoyee({ locale }: { locale: "fr" | "en" }) {
     <div className="page-outil">
       <MesureLead />
       <SiteHeader locale={locale} altPath={t.autre} rappel={false} />
-      <main>
+      <main id="contenu">
         <div className="wrap envoyee">
           <h1>{t.h1}</h1>
           <p className="intro">{t.chapo}</p>

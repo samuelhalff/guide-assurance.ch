@@ -214,7 +214,7 @@ export function PageTaux3a({ locale }: { locale: Locale }) {
     <div className="page-outil">
       <JsonLd data={ld} />
       <SiteHeader current="prevoyance" locale={locale} altPath={t.alt} />
-      <main>
+      <main id="contenu">
         <div className="wrap">
           <Breadcrumbs items={t.miettes} locale={locale} />
           <h1>{t.h1}</h1>
@@ -466,7 +466,7 @@ export function PageImpot3a({ locale }: { locale: Locale }) {
     <div className="page-outil">
       <JsonLd data={ld} />
       <SiteHeader current="prevoyance" locale={locale} altPath={t.alt} />
-      <main>
+      <main id="contenu">
         <div className="wrap">
           <Breadcrumbs items={t.miettes} locale={locale} />
           <h1>{t.h1}</h1>

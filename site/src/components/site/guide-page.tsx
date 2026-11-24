@@ -147,7 +147,7 @@ export function GuidePage({
     <div className={landing ? "page-guide page-landing" : "page-guide"}>
       <JsonLd data={ld} />
       <SiteHeader current={rubrique} locale={locale} altPath={altPath} />
-      <main>
+      <main id="contenu">
         <div className="wrap">
           <Breadcrumbs items={miettes} locale={locale} />
           {landing ? (

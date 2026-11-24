@@ -94,7 +94,7 @@ export default function Page() {
     <div className="page-outil page-lettre">
       <JsonLd data={LD} />
       <SiteHeader current="sante" altPath="/en/cancellation-letter/" />
-      <main>
+      <main id="contenu">
         <div className="wrap">
           <Breadcrumbs items={MIETTES} />
           <h1>Votre lettre de résiliation d’assurance maladie</h1>

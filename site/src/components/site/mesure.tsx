@@ -4,11 +4,12 @@ import { usePathname } from "next/navigation";
 import { useReportWebVitals } from "next/web-vitals";
 import { CONSENTEMENT_REQUIS, GTM_ID, MESURE_ACTIVE, apresChargement, demarrerPostHog, ecrireChoix, lireChoix, memoriserAttribution, memoriserUtm, persistantNavigateur, suivre, versGA } from "@/lib/analytics";
 import { extensionTelechargement, utmDepuis } from "@/lib/mesure-regles";
+import { Button } from "@/components/ui/button";
 
 /* Une seule règle partout : sans choix, tout est actif ; seul « Refuser » l'arrête. */
 const TXT = {
   fr: {
-    texte: "Sans choix de votre part, nos cookies de mesure d’audience et publicitaires sont actifs et certaines visites sont enregistrées pour améliorer les guides. Ce que vous saisissez n’est jamais enregistré. Vous pouvez refuser.",
+    texte: "Sans choix de votre part, la mesure d’audience est active et certaines visites sont enregistrées. Ce que vous saisissez ne l’est jamais.",
     oui: "Accepter",
     non: "Refuser",
     lien: "En savoir plus",
@@ -16,7 +17,7 @@ const TXT = {
     region: "Cookies",
   },
   en: {
-    texte: "Unless you choose otherwise, our analytics and advertising cookies are on and some visits are recorded to improve the guides. What you type is never recorded. You can decline.",
+    texte: "Unless you choose otherwise, analytics cookies are on and some visits are recorded. What you type never is.",
     oui: "Accept",
     non: "Decline",
     lien: "Learn more",
@@ -54,12 +55,8 @@ export function Mesure({ locale = "fr" }: { locale?: "fr" | "en" }) {
         {t.texte} <a href={t.href}>{t.lien}</a>
       </p>
       <div className="consentement-actions">
-        <button type="button" className="commande-cadre" onClick={() => choisir("non")}>
-          {t.non}
-        </button>
-        <button type="button" className="commande-cadre" onClick={() => choisir("oui")}>
-          {t.oui}
-        </button>
+        <Button variant="outline" size="barre" onClick={() => choisir("non")}>{t.non}</Button>
+        <Button variant="outline" size="barre" onClick={() => choisir("oui")}>{t.oui}</Button>
       </div>
     </div>
   );

@@ -150,7 +150,7 @@ export function PageRappels({ l }: { l: Locale }) {
     <div className="page-outil page-rappels">
       <JsonLd data={LD} />
       <SiteHeader current="sante" locale={l} altPath={autre} />
-      <main>
+      <main id="contenu">
         <div className="wrap">
           <Breadcrumbs items={t.miettes} locale={l} />
           <h1>{t.h1}</h1>

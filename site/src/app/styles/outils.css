@@ -148,7 +148,6 @@
     background: var(--background); border-top: 1px solid var(--filet); box-shadow: 0 -4px 16px rgb(0 0 0 / .08);
   }
   .barre-collante .commande { border: 1px solid var(--filet); font-family: var(--narrow); font-size: 15px; }
-  .plus-basse { margin: 0 0 var(--s4); }
   .lien-profil { border: 0; background: none; padding: 0; font: 600 14px var(--narrow); color: var(--lac-encre); text-decoration: underline; cursor: pointer; }
   .page-outil .apercu > h2.titre-resultat, .page-outil h2.titre-resultat { font-size: 23px; margin: 0 0 var(--s2); }
   .reglages { grid-template-columns: 1fr; }
@@ -159,11 +158,11 @@
   .detail-offre { grid-column: 2 / -1; font: 14px var(--narrow); margin-top: var(--s1); }
   .detail-offre .depliable-titre { color: var(--lac-encre); min-height: 32px; }
   .detail-offre ul { margin: 0 0 var(--s1); padding-left: 1.1em; list-style: disc; color: var(--encre-2); }
-  .rappel-offre { grid-column: 2 / -1; font: 14px var(--narrow); color: var(--lac-encre); justify-self: start; }
   .outil-comparateur fieldset.personne { border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s3) var(--s3) 0; margin: 0 0 var(--s3); }
   .outil-comparateur fieldset.personne legend { font: 700 16px var(--sans); padding: 0 6px; margin: 0 0 var(--s1) -6px; display: flex; gap: var(--s3); align-items: baseline; }
   .retirer { border: 0; background: none; padding: 0; font: 14px var(--narrow); color: var(--lac-encre); text-decoration: underline; cursor: pointer; }
   .outil-comparateur .personne .note-outil.classe { margin: 0 0 var(--s1); }
+  .outil-comparateur .personne .provisoire { margin: 0 0 var(--s2); }
   .outil-comparateur .personne .case { margin-bottom: var(--s3); }
   .ajouter-personne {
     width: 100%; min-height: 48px; border: 1.5px dashed var(--filet); border-radius: var(--r); background: none; cursor: pointer;
@@ -203,7 +202,7 @@
   .reperes-grille { display: grid; gap: var(--s4); }
 
   /* Comparateur : bloc « Recevoir des offres pour ce profil » sous le résumé (styles communs : .capture-rappel, demande.css). */
-  .offre-comparateur { margin: 0 0 var(--s5); }
+  .offre-comparateur { margin: var(--s3) 0; }
   .barre-collante.avec-offre { grid-template-columns: auto auto 1fr; }
   .barre-collante .offre-collante { background: var(--sentier); color: var(--sur-sentier); border-color: var(--sentier); font-weight: 700; }
   @media (min-width: 720px) {
@@ -272,7 +271,7 @@
   .reperes-details[data-open] > .depliable-titre { margin-bottom: var(--s4); }
 }
 @layer components {
-  .outil-comparateur .aide-champ { display: block; margin-top: var(--s1); font: 14px/1.4 var(--narrow); color: var(--encre-2); }
+  .outil-comparateur .aide-champ, .outil-frontalier .aide-champ { display: block; margin-top: var(--s1); font: 14px/1.4 var(--narrow); color: var(--encre-2); }
 }
 
 /* Simulateur frontalier, foyer personne par personne (simulateur-frontalier.tsx). Mobile d'abord. */
@@ -282,7 +281,7 @@
   .outil-frontalier .foyer-aide { margin: calc(-1 * var(--s2)) 0 var(--s3); }
   .outil-frontalier fieldset.personne { border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s3) var(--s3) var(--s1); margin: 0 0 var(--s3); }
   .outil-frontalier fieldset.personne > legend { font: 700 16px var(--sans); padding: 0 6px; margin: 0 0 var(--s1) -6px; display: flex; gap: var(--s3); align-items: baseline; }
-  .outil-frontalier .personne .note-outil { margin: var(--s1) 0 var(--s2); }
+  .outil-frontalier .personne .note-outil, .outil-frontalier .personne .erreur-champ { margin: var(--s1) 0 var(--s2); }
   .outil-frontalier .personne .provisoire { margin: var(--s1) 0 var(--s2); }
   .outil-frontalier .personne .sous-q { margin-top: var(--s2); }
   .outil-frontalier .personne .case { margin-bottom: var(--s2); }

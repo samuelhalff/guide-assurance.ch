@@ -94,7 +94,7 @@ export default function Page() {
     <div className="page-outil">
       <JsonLd data={LD} />
       <SiteHeader current="sante" altPath={OUTILS_EN.comparateur} />
-      <main>
+      <main id="contenu">
         <div className="wrap">
           <Breadcrumbs items={MIETTES} />
           <h1>Comparer les primes de l’assurance maladie 2027</h1>

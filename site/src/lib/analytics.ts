@@ -1,10 +1,10 @@
 /* Mesure d'audience (Google Consent Mode v2 ; règles dans lib/mesure-regles.ts). Décision de Sam du 23.11.2026, prise en
-   connaissance du risque RGPD pour l'UE : partout, tout est accordé d'office, signaux publicitaires compris ; ignorer le
+   connaissance du risque RGPD pour l'UE : partout, la mesure est accordée d'office (signaux publicitaires refusés tant qu'il n'y a pas de publicité, 24.11.2026) ; ignorer le
    bandeau vaut acceptation, seul « Refuser » change cela. Un choix enregistré l'emporte toujours. GTM (GTM_ID) porte les
    balises Google ; il se charge d'office et respecte l'état de consentement. PostHog (EU) : persistant et avec
    enregistrement de session sauf refus ; en mémoire, sans enregistrement, après un refus.
    Jamais de valeur saisie, jamais de contenu de l'assistant, jamais d'enregistrement sur le formulaire de demande. */
-import { ACCORDE, REFUSE, attributionDepuis, attributionLue, persistantParDefaut, proprietesConversion, replayAutorise, scriptAmorce, type Choix } from "@/lib/mesure-regles";
+import { ACCORDE, CLE_INTERNE, REFUSE, attributionDepuis, attributionLue, persistantParDefaut, proprietesConversion, replayAutorise, scriptAmorce, type Choix } from "@/lib/mesure-regles";
 export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID ?? "";
 export const POSTHOG_TOKEN = process.env.NEXT_PUBLIC_POSTHOG_TOKEN ?? "";
 export const POSTHOG_HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://eu.i.posthog.com";
@@ -278,8 +278,20 @@ let persistanceAppliquee: boolean | null = null;
 let chargement: Promise<void> | null = null;
 
 /* persistant : localStorage+cookie et enregistrement de session (hors formulaire de demande) ; sinon mémoire, sans enregistrement. */
+/* Appareil marqué interne (voir AMORCE_INTERNE) : aucune mesure. Relu ici quand GTM est absent. */
+export function appareilInterne(): boolean {
+  try {
+    const q = new URLSearchParams(window.location.search).get("interne");
+    if (q === "1") localStorage.setItem(CLE_INTERNE, "1");
+    else if (q === "0") localStorage.removeItem(CLE_INTERNE);
+    return localStorage.getItem(CLE_INTERNE) === "1";
+  } catch {
+    return false;
+  }
+}
+
 export async function demarrerPostHog(persistant: boolean) {
-  if (!POSTHOG_TOKEN || typeof window === "undefined") return;
+  if (!POSTHOG_TOKEN || typeof window === "undefined" || appareilInterne()) return;
   persistanceVoulue = persistant;
   /* Un seul chargement même si le visiteur choisit pendant qu'il est en cours ; le dernier choix l'emporte. */
   if (!chargement) chargement = initPostHog(persistant);

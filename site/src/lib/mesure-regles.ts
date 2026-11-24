@@ -9,7 +9,9 @@ export const EEE_RU = ["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","G
 type Etat = "granted" | "denied";
 export type Consentement = { ad_storage: Etat; analytics_storage: Etat; ad_user_data: Etat; ad_personalization: Etat };
 export const REFUSE: Consentement = { ad_storage: "denied", analytics_storage: "denied", ad_user_data: "denied", ad_personalization: "denied" };
-export const ACCORDE: Consentement = { ad_storage: "granted", analytics_storage: "granted", ad_user_data: "granted", ad_personalization: "granted" };
+/* Sans publicité sur le site, les signaux publicitaires restent refusés même après accord (revue du 24.11.2026) :
+   ils n'apportent rien et exposent. À rouvrir seulement au lancement de Google Ads. */
+export const ACCORDE: Consentement = { ad_storage: "denied", analytics_storage: "granted", ad_user_data: "denied", ad_personalization: "denied" };
 
 export const REGIONS_OPT_IN: string[] = [];
 
@@ -165,14 +167,20 @@ export function extensionTelechargement(href: string): string | null {
    page_view compris, et propriété utilisateur). Seule l'injection de gtm.js attend la fin du chargement de la page
    puis un moment libre (requestIdleCallback, 3 s au plus) ; les commandes poussées entre-temps restent dans
    dataLayer et GTM les lit à son arrivée. */
+/* Trafic interne (Sam, tests) : ouvrir une page avec ?interne=1 marque l'appareil, ?interne=0 l'efface. Un appareil
+   marqué ne charge ni GTM ni PostHog : ses visites ne comptent pas. */
+export const CLE_INTERNE = "mesure-interne";
+export const AMORCE_INTERNE = `try{var q=new URLSearchParams(location.search).get('interne');if(q==='1')localStorage.setItem('${CLE_INTERNE}','1');else if(q==='0')localStorage.removeItem('${CLE_INTERNE}');if(localStorage.getItem('${CLE_INTERNE}')==='1')window.__mesureInterne=true;}catch(e){}`;
+
 export function scriptAmorce(gtmId: string, cle: string): string {
   if (!gtmId) return "";
   const defauts = consentementsParDefaut().map((c) => `gtag('consent','default',${JSON.stringify(c)});`).join("\n");
-  return `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+  return `${AMORCE_INTERNE}
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
 ${defauts}
 gtag('set','ads_data_redaction',true);
 try{var c=localStorage.getItem(${JSON.stringify(cle)});if(c==='oui')gtag('consent','update',${JSON.stringify(ACCORDE)});else if(c==='non')gtag('consent','update',${JSON.stringify(REFUSE)});}catch(e){}
 try{if(!sessionStorage.getItem('ga-ia-vu')){sessionStorage.setItem('ga-ia-vu','1');var a=(${sourceIA.toString()})(document.referrer,new URLSearchParams(location.search).get('utm_source'));if(a){gtag('set','user_properties',{ai_source:a});gtag('set',{ai_source:a});dataLayer.push({ai_source:a});}}}catch(e){}
 gtag('js',new Date());
-(function(w,d,l,i){var go=function(){w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var j=d.createElement('script');j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i;d.head.appendChild(j);};var later=function(){(w.requestIdleCallback||function(f){setTimeout(f,1)})(go,{timeout:3000});};if(d.readyState==='complete')later();else w.addEventListener('load',later,{once:true});})(window,document,'dataLayer',${JSON.stringify(gtmId)});`;
+if(!window.__mesureInterne)(function(w,d,l,i){var go=function(){w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var j=d.createElement('script');j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i;d.head.appendChild(j);};var later=function(){(w.requestIdleCallback||function(f){setTimeout(f,1)})(go,{timeout:3000});};if(d.readyState==='complete')later();else w.addEventListener('load',later,{once:true});})(window,document,'dataLayer',${JSON.stringify(gtmId)});`;
 }

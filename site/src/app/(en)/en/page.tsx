@@ -21,7 +21,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 /* English home: the French home (src/app/(fr)/page.tsx) in English, same figures, links to the English pages. */
-const TITRE = "Compare 2027 Swiss health insurance premiums";
+const TITRE = "Swiss health premiums 2027, cross-border workers and pillar 3a";
 const DESCRIPTION =
   "2027 health insurance premiums from the insurers active in your part of French-speaking Switzerland (FOPH data). No sign-up or ads; runs in your browser.";
 
@@ -109,7 +109,7 @@ const OUTILS_LISTE: OutilLigne[] = [
   {
     href: OUTILS_EN.comparateur,
     chiffre: "611.70 to 915.70",
-    legende: "CHF a month · 106 offers for an adult in Geneva, CHF 300 deductible, 2027 premiums",
+    legende: "CHF a month · 106 offers for an adult in Geneva, CHF 300 deductible, with accident cover, all models, 2027 premiums",
     titre: "Compare 2027 LAMal premiums",
     texte: "The law sets the basic benefits, which are identical from one insurer to the next. The list shows the offers in your region sorted by premium, for your age, deductible and model.",
     cta: "See the premiums",
@@ -163,10 +163,10 @@ export default function Home() {
     <>
       <JsonLd data={LD} />
       <SiteHeader locale="en" altPath="/" />
-      <main className="accueil">
+      <main id="contenu" className="accueil">
         <AccueilFeuille locale="en" saisonInitiale={calculerSaison(new Date())} cartes={<PaysageAccueil />} />
-        <BandeConfiance locale="en" />
         <AccueilSituations locale="en" />
+        <BandeConfiance locale="en" />
 
         <section className="passage" id="passage" aria-labelledby="passage-titre">
           <div className="wrap grille">

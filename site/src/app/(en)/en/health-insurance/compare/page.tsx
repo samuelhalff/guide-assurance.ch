@@ -94,7 +94,7 @@ export default function Page() {
     <div className="page-outil">
       <JsonLd data={LD} />
       <SiteHeader current="sante" locale="en" altPath={OUTILS.comparateur} />
-      <main>
+      <main id="contenu">
         <div className="wrap">
           <Breadcrumbs items={MIETTES} locale="en" />
           <h1>Compare 2027 health insurance premiums</h1>

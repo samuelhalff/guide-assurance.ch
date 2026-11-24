@@ -95,7 +95,7 @@ export default function Page() {
     <div className="page-outil">
       <JsonLd data={LD} />
       <SiteHeader current="frontaliers" locale="en" altPath={OUTILS.simulateur} />
-      <main>
+      <main id="contenu">
         <div className="wrap">
           <Breadcrumbs items={MIETTES} locale="en" />
           <h1>Cross-border worker: LAMal or French health insurance?</h1>

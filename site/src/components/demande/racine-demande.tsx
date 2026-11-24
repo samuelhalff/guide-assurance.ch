@@ -14,6 +14,7 @@ export function RacineDemande({ locale, children }: { locale: "fr" | "en"; child
   return (
     <html lang={locale} className={`${archivo.variable} ${archivoNarrow.variable}`} suppressHydrationWarning>
       <body className="antialiased">
+        <a href="#contenu" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[70] focus:rounded-lg focus:bg-background focus:px-4 focus:py-3 focus:font-bold focus:text-foreground focus:ring-3 focus:ring-ring">{locale === "en" ? "Skip to content" : "Aller au contenu"}</a>
         <MesureDemande />
         <ThemeProvider>
           <div className="page-demande">
@@ -23,7 +24,7 @@ export function RacineDemande({ locale, children }: { locale: "fr" | "en"; child
                 <ThemeToggle lang={locale} />
               </div>
             </header>
-            <main>{children}</main>
+            <main id="contenu">{children}</main>
           </div>
         </ThemeProvider>
       </body>

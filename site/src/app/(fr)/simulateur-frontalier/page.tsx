@@ -94,7 +94,7 @@ export default function Page() {
     <div className="page-outil">
       <JsonLd data={LD} />
       <SiteHeader current="frontaliers" altPath="/en/cross-border-calculator/" />
-      <main>
+      <main id="contenu">
         <div className="wrap">
           <Breadcrumbs items={MIETTES} />
           <h1>Frontalier : LAMal ou assurance maladie française ?</h1>

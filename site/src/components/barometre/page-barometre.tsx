@@ -96,7 +96,7 @@ export function PageBarometre({ l, code }: { l: Locale; code?: string }) {
     <div className="page-outil page-barometre">
       <JsonLd data={LD} />
       <SiteHeader current="sante" locale={l} altPath={autre} />
-      <main>
+      <main id="contenu">
         <div className="wrap">
           <Breadcrumbs items={miettes} locale={l} />
           <h1>{m.h1}</h1>

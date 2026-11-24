@@ -34,7 +34,7 @@ L’éditeur du site et ses coordonnées figurent dans les [mentions légales](/
 
 ## Être rappelé par un conseiller
 
-Si vous le demandez, un conseiller d’un courtier en assurances partenaire, en Suisse romande, vous rappelle. C’est le seul courtier qui reçoit des demandes du site. Le formulaire indique avant l’envoi à qui la demande est transmise, et la [politique de confidentialité](/confidentialite/#demandes) décrit ce qui est enregistré.
+Si vous le demandez, un conseiller d’un courtier en assurances partenaire, en Suisse romande, vous rappelle. C’est le seul courtier qui reçoit des demandes du site. Le formulaire indique avant l’envoi à quel type de destinataire la demande est transmise, et la [politique de confidentialité](/confidentialite/#demandes) décrit ce qui est enregistré.
 
 ## Ce que cette page ne couvre pas
 

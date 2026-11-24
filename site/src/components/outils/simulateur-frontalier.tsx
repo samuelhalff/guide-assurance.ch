@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as F from "@/lib/engines/frontaliers";
+import * as P from "@/lib/engines/primes";
 import primes from "@/data/primes-eu-fr-2027.json";
 import type { Locale } from "@/lib/i18n";
 import { suivre } from "@/lib/analytics";
@@ -70,7 +71,8 @@ const TXT = {
     } as Record<SituationUI, string>,
     ajouterAdulte: "Un adulte",
     ajouterEnfant: "Un enfant",
-    verifier: "Indiquez une année à quatre chiffres.",
+    verifier: `Indiquez une année de naissance entre ${ANNEE - 120} et ${ANNEE}.`,
+    enFrancs: (tx: string) => `Payé en francs${T}? Divisez le montant par ${tx}, le taux de change retenu plus bas.`,
     classe: { adulte: "tarif adulte en 2027", jeune: "tarif jeune adulte (19 à 25 ans) en 2027", enfant: "tarif enfant (18 ans ou moins) en 2027" } as Record<F.Classe, string>,
     change: "Taux de change",
     changeLabel: "1 euro vaut (en francs)",
@@ -140,7 +142,8 @@ const TXT = {
     } as Record<SituationUI, string>,
     ajouterAdulte: "An adult",
     ajouterEnfant: "A child",
-    verifier: "Enter a four-digit year.",
+    verifier: `Enter a year of birth between ${ANNEE - 120} and ${ANNEE}.`,
+    enFrancs: (tx: string) => `Paid in francs? Divide the amount by ${tx}, the exchange rate used below.`,
     classe: { adulte: "adult rate in 2027", jeune: "young adult rate (19 to 25) in 2027", enfant: "child rate (18 or under) in 2027" } as Record<F.Classe, string>,
     change: "Exchange rate",
     changeLabel: "1 euro is worth (in francs)",
@@ -217,6 +220,8 @@ export function SimulateurFrontalier({ locale = "fr" }: { locale?: Locale }) {
   const [etape, setEtape] = useState<"ouvert" | "fait">("ouvert");
   const [personnes, setPersonnes] = useState<PersonneUI[]>([{ id: 1, enfant: false, naissance: "", situation: "suisse", revenu: "", moinsDe8h: false }]);
   const [tx, setTx] = useState("0.93");
+  /* Années quittées (blur) : l'erreur d'année s'affiche après la saisie, jamais pendant les premiers chiffres. */
+  const [quittes, setQuittes] = useState<number[]>([]);
   const [barre, setBarre] = useState(false);
   const ctaRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
@@ -229,8 +234,9 @@ export function SimulateurFrontalier({ locale = "fr" }: { locale?: Locale }) {
   /* Années valides seulement : une personne en cours de saisie n'est pas comptée, le reste du foyer reste affiché. */
   const lues = personnes.map((p) => {
     const annee = parseInt(p.naissance, 10);
-    const ok = p.naissance.length === 4 && annee >= 1920 && annee <= ANNEE;
-    return { ...p, annee, ok, cl: ok ? F.classe(annee, ANNEE) : null };
+    const ok = p.naissance.length === 4 && P.anneeValide(annee, ANNEE);
+    const erreur = p.naissance.length > 0 && !ok && (p.naissance.length === 4 || quittes.includes(p.id));
+    return { ...p, annee, ok, erreur, cl: ok ? F.classe(annee, ANNEE) : null };
   });
   const valides = lues.filter((p) => p.ok);
   /* Résultat seulement quand le visiteur a donné son année et ses revenus : aucun chiffre pour un profil qui n’est pas le sien. */
@@ -267,14 +273,18 @@ export function SimulateurFrontalier({ locale = "fr" }: { locale?: Locale }) {
     return () => io.disconnect();
   }, [pret]);
 
+  /* Préremplissage du formulaire (sessionStorage) : situation → besoin, année du frontalier, taille du foyer (4 = « 4+ »).
+     Aucun revenu ni montant n'est transmis. */
   function prerempli() {
     const p1 = lues[0];
     ecrirePreremplissage({
       porte: "frontaliers",
+      besoin: [etape === "ouvert" ? "nouvel-emploi" : "changement"],
       ...(p1.ok ? { birthYear: p1.annee } : {}),
-      householdSize: Math.min(4, Math.max(1, valides.length)),
+      householdSize: Math.min(4, Math.max(1, personnes.length)),
     });
   }
+  const txAffiche = String(lireNombre(tx) || 1).replace(".", isEn ? "." : ",");
 
   const nAdulte = (k: number) => lues.slice(0, k + 1).filter((p, i) => i === 0 || !p.enfant).length;
   const nEnfant = (k: number) => lues.slice(0, k + 1).filter((p, i) => i > 0 && p.enfant).length;
@@ -339,6 +349,9 @@ export function SimulateurFrontalier({ locale = "fr" }: { locale?: Locale }) {
                         placeholder={p.enfant ? "2016" : "1988"}
                         value={p.naissance}
                         aria-describedby={`sf-cl-${p.id}`}
+                        aria-invalid={p.erreur || undefined}
+                        onFocus={() => setQuittes((q) => q.filter((x) => x !== p.id))}
+                        onBlur={() => setQuittes((q) => (q.includes(p.id) ? q : [...q, p.id]))}
                         onChange={(e) => maj(p.id, { naissance: e.target.value.replace(/\D/g, "").slice(0, 4) })}
                       />
                     </div>
@@ -350,13 +363,15 @@ export function SimulateurFrontalier({ locale = "fr" }: { locale?: Locale }) {
                           inputMode="numeric"
                           placeholder="55000"
                           value={p.revenu}
+                          aria-describedby={`sf-ra-${p.id}`}
                           onChange={(e) => maj(p.id, { revenu: e.target.value.replace(/[^\d\s']/g, "").slice(0, 9) })}
                         />
+                        <small className="aide-champ" id={`sf-ra-${p.id}`}>{t.enFrancs(txAffiche)}</small>
                       </div>
                     ) : null}
                   </div>
-                  <p className="note-outil classe" id={`sf-cl-${p.id}`} role="status">
-                    {p.cl ? t.classe[p.cl] : p.naissance.length ? t.verifier : frontalier ? t.revenuAide : NB}
+                  <p className={p.erreur ? "erreur-champ" : "note-outil classe"} id={`sf-cl-${p.id}`} role="status">
+                    {p.erreur ? t.verifier : p.cl ? t.classe[p.cl] : frontalier ? t.revenuAide : NB}
                   </p>
                   {k === 0 ? (
                     <Depliable className="aide-revenus" titre={t.quelMontant}>

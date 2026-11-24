@@ -447,7 +447,7 @@ export function PageOutils({ locale }: { locale: Locale }) {
     <div className="page-outil page-donnees page-hub">
       <JsonLd data={ld} />
       <SiteHeader current="outils" locale={locale} altPath={alt} />
-      <main>
+      <main id="contenu">
         <div className="wrap">
           <Breadcrumbs items={miettes} locale={locale} />
           <h1>{t.h1}</h1>

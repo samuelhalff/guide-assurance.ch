@@ -9,6 +9,7 @@ import * as P from "@/lib/engines/primes";
 import { IconeTelephone, LienRappel } from "@/components/demande/lien-rappel";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Card, CardAction, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const N = " "; // espace fine insécable avant ; : ? ! »
 
@@ -22,7 +23,7 @@ const TXT = {
     annee: "Année de naissance",
     anneePh: "1990",
     voir: "Voir les primes",
-    defaut: "Le calcul part de la franchise la plus basse, sans couverture accident. Vous pourrez modifier ces choix dans la liste des résultats.",
+    defaut: "Le calcul part de la franchise la plus basse, avec la couverture accident pour les enfants et dès 65 ans seulement. Vous pourrez modifier ces choix dans la liste des résultats.",
     anneeErr: "Indiquez l’année à quatre chiffres, par exemple 1990.",
     integrite: "Le site n’affiche aucune publicité et aucun assureur ne paie pour l’ordre des résultats. Les primes 2027 sont celles approuvées par l’OFSP, et le calcul se fait dans votre navigateur.",
     sources: `Sources${N}: OFSP (primes 2027), Fedlex`,
@@ -36,7 +37,7 @@ const TXT = {
     annee: "Year of birth",
     anneePh: "1990",
     voir: "See the premiums",
-    defaut: "The calculation starts from the lowest deductible, without accident cover. These choices can be changed in the list of results.",
+    defaut: "The calculation starts from the lowest deductible, with accident cover only for children and from age 65. These choices can be changed in the list of results.",
     anneeErr: "Enter a four-digit year, for example 1990.",
     integrite: "The site shows no ads, and no insurer pays for the order of the results. The premiums are the 2027 premiums approved by the FOPH, and the calculation runs in your browser.",
     sources: "Sources: FOPH (2027 premiums), Fedlex",
@@ -85,7 +86,7 @@ function Saison({ initial, locale }: { initial: Etat; locale: Locale }) {
 }
 
 /* Formulaire de la tête : lieu + année, puis le comparateur avec le profil après le # (jamais envoyé au serveur ;
-   format du comparateur : #npa=1201&p=1990.300.0 = année.franchise.accident). Sans JavaScript, les champs n'ont pas
+   format du comparateur : #npa=1201&p=1990.300 = année.franchise ; sans accident indiqué, le comparateur le règle selon l'âge). Sans JavaScript, les champs n'ont pas
    de name : le bouton mène simplement au comparateur, sans rien mettre dans l'adresse. */
 function FormComparer({ locale }: { locale: Locale }) {
   const t = TXT[locale];
@@ -115,7 +116,7 @@ function FormComparer({ locale }: { locale: Locale }) {
       const idx = index ?? (await chargerIndex().catch(() => null));
       npa = idx ? (P.suggestions(idx, lieu, 1)[0]?.npa ?? "") : "";
     }
-    const h = [npa && `npa=${npa}`, anneeOk && `p=${a}.${P.FRANCHISES[P.classe(a)][0]}.0`].filter(Boolean).join("&");
+    const h = [npa && `npa=${npa}`, anneeOk && `p=${a}.${P.FRANCHISES[P.classe(a)][0]}`].filter(Boolean).join("&");
     suivre("comparateur_accueil", undefined, true);
     window.location.assign(h ? `${cible}#${h}` : cible);
   }
@@ -209,21 +210,23 @@ export function AccueilFeuille({ cartes, saisonInitiale, locale = "fr" }: { cart
   );
 }
 
-/* Situations, juste sous la tête : l'entrée des frontaliers, des nouveaux arrivants, de la prévoyance et des entreprises. */
+/* Situations, juste sous le formulaire du comparateur : l'entrée des frontaliers, des nouveaux arrivants, de la
+   prévoyance et des entreprises, qui comptent toute l'année (la saison LAMal finit le 30 novembre). Chaque ligne
+   reprend un fait déjà publié sur la page visée. */
 export type Situation = "frontaliers" | "arrivee" | "prevoyance" | "entreprises";
 type Option = { value: Situation; label: string; detail: string; href: string };
 const SITUATIONS: Record<Locale, Option[]> = {
   fr: [
-    { value: "frontaliers", label: "Je vis en France, je travaille en Suisse", detail: "LAMal ou assurance française, le droit d’option", href: "/frontaliers/" },
-    { value: "arrivee", label: "Je viens d’arriver en Suisse", detail: "Les assurances des premiers mois", href: "/nouveaux-arrivants/" },
-    { value: "prevoyance", label: "Je prépare mon 3e pilier", detail: "Plafonds 2027, déductions, assurance décès", href: "/3e-pilier/" },
-    { value: "entreprises", label: "J’assure mon entreprise", detail: "LPP, accidents, perte de gain, RC professionnelle", href: "/entreprises/" },
+    { value: "frontaliers", label: "Je vis en France, je travaille en Suisse", detail: "Vous avez trois mois pour choisir entre la LAMal et l’assurance maladie française, et ce choix engage tout le foyer.", href: "/frontaliers/" },
+    { value: "arrivee", label: "Je viens d’arriver en Suisse", detail: "Vous avez trois mois pour vous affilier à une caisse maladie, et la couverture remonte au jour de votre arrivée.", href: "/nouveaux-arrivants/" },
+    { value: "prevoyance", label: "Je prépare mon 3e pilier", detail: "En 2027, vous pouvez verser jusqu’à 7\u202f373 francs sur votre 3a si vous avez une caisse de pension.", href: "/3e-pilier/" },
+    { value: "entreprises", label: "J’assure mon entreprise", detail: "Dès que vous employez du personnel, la LPP et l’assurance accidents (LAA) deviennent obligatoires.", href: "/entreprises/" },
   ],
   en: [
-    { value: "frontaliers", label: "I live in France, I work in Switzerland", detail: "LAMal or French insurance, the right of option", href: "/en/cross-border-workers/" },
-    { value: "arrivee", label: "I’ve just arrived in Switzerland", detail: "Insurance for your first months", href: "/en/moving-to-switzerland/" },
-    { value: "prevoyance", label: "I’m planning my pillar 3a", detail: "2027 limits, tax deductions, death cover", href: "/en/pillar-3a/" },
-    { value: "entreprises", label: "I’m insuring my business", detail: "Pensions, accident, sickness benefit, liability", href: "/en/business/" },
+    { value: "frontaliers", label: "I live in France, I work in Switzerland", detail: "You have three months to choose between LAMal and French health insurance, and the choice is in principle final.", href: "/en/cross-border-workers/" },
+    { value: "arrivee", label: "I’ve just arrived in Switzerland", detail: "You have three months to join a health insurer, and your cover goes back to the day you arrived.", href: "/en/moving-to-switzerland/" },
+    { value: "prevoyance", label: "I’m planning my pillar 3a", detail: "In 2027 you can pay up to CHF 7,373 into pillar 3a if you have a pension fund.", href: "/en/pillar-3a/" },
+    { value: "entreprises", label: "I’m insuring my business", detail: "Once you employ staff, LPP pension and LAA accident cover are compulsory.", href: "/en/business/" },
   ],
 };
 
@@ -237,11 +240,17 @@ export function AccueilSituations({ locale = "fr" }: { locale?: Locale }) {
           {SITUATIONS[locale].map((o) => (
             <li key={o.value}>
               <a href={o.href} onClick={() => suivre("situation_choisie", { situation: o.value }, true)}>
-                <span className="libelle">{o.label}</span>
-                <span className="detail">{o.detail}</span>
-                <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
-                  <path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="2" />
-                </svg>
+                <Card size="sm" className="h-full">
+                  <CardHeader>
+                    <CardTitle>{o.label}</CardTitle>
+                    <CardDescription>{o.detail}</CardDescription>
+                    <CardAction>
+                      <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
+                        <path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="2" />
+                      </svg>
+                    </CardAction>
+                  </CardHeader>
+                </Card>
               </a>
             </li>
           ))}

@@ -161,7 +161,7 @@ export function PageKitRh({ l }: { l: Locale }) {
     <div className="page-outil page-kit">
       <JsonLd data={LD} />
       <SiteHeader current="entreprises" locale={l} altPath={autre} />
-      <main>
+      <main id="contenu">
         <div className="wrap">
           <Breadcrumbs items={t.miettes} locale={l} />
           <h1>{t.h1}</h1>

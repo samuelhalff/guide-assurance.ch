@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 
 /* Formulaire court du comparateur LAMal (NPA ou localité + année de naissance) pour la tête des pages produit santé.
    Même comportement que le formulaire de l'accueil (accueil-feuille.tsx, non modifié ici) : il mène au comparateur avec
-   le profil après le # (#npa=1201&p=1990.300.0 = année.franchise.accident), relu puis retiré de l'adresse par le
+   le profil après le # (#npa=1201&p=1990.300 = année.franchise ; sans accident indiqué, le comparateur le règle selon l'âge), relu puis retiré de l'adresse par le
    comparateur. Sans JavaScript, les champs n'ont pas de name : le bouton mène au comparateur sans rien dans l'adresse. */
 const TXT = {
   fr: {
@@ -19,7 +19,7 @@ const TXT = {
     annee: "Année de naissance",
     anneePh: "1990",
     voir: "Voir les primes 2027",
-    defaut: "Le calcul part de la franchise la plus basse, sans couverture accident. Vous pourrez modifier ces choix dans la liste des résultats.",
+    defaut: "Le calcul part de la franchise la plus basse, avec la couverture accident pour les enfants et dès 65 ans seulement. Vous pourrez modifier ces choix dans la liste des résultats.",
     anneeErr: "Indiquez l’année à quatre chiffres, par exemple 1990.",
   },
   en: {
@@ -29,7 +29,7 @@ const TXT = {
     annee: "Year of birth",
     anneePh: "1990",
     voir: "See 2027 premiums",
-    defaut: "The calculation starts from the lowest deductible, without accident cover. These choices can be changed in the list of results.",
+    defaut: "The calculation starts from the lowest deductible, with accident cover only for children and from age 65. These choices can be changed in the list of results.",
     anneeErr: "Enter a four-digit year, for example 1990.",
   },
 } as const;
@@ -74,7 +74,7 @@ export function FormulaireComparer({ locale = "fr" }: { locale?: Locale }) {
       const idx = index ?? (await chargerIndex().catch(() => null));
       npa = idx ? (P.suggestions(idx, lieu, 1)[0]?.npa ?? "") : "";
     }
-    const h = [npa && `npa=${npa}`, anneeOk && `p=${a}.${P.FRANCHISES[P.classe(a)][0]}.0`].filter(Boolean).join("&");
+    const h = [npa && `npa=${npa}`, anneeOk && `p=${a}.${P.FRANCHISES[P.classe(a)][0]}`].filter(Boolean).join("&");
     suivre("comparateur_produit", undefined, true);
     window.location.assign(h ? `${cible}#${h}` : cible);
   }

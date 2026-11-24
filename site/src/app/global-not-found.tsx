@@ -42,7 +42,7 @@ export default function GlobalNotFound() {
         <ThemeProvider>
           <div className="page-outil page-404">
             <SiteHeader />
-            <main>
+            <main id="contenu">
               <div className="wrap">
                 <h1>Cette page n’existe pas ou a changé d’adresse</h1>
                 <p className="intro">

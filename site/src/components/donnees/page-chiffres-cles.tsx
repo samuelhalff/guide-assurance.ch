@@ -137,7 +137,7 @@ export function PageChiffresCles({ locale }: { locale: Locale }) {
     <div className="page-outil page-donnees">
       <JsonLd data={ld} />
       <SiteHeader current="outils" locale={locale} altPath={t.alt} />
-      <main>
+      <main id="contenu">
         <div className="wrap">
           <Breadcrumbs items={t.miettes} locale={locale} />
           <h1>{t.h1}</h1>

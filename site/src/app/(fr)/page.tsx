@@ -20,7 +20,7 @@ import { Alert } from "@/components/ui/alert";
 import { buttonVariants } from "@/components/ui/button";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
-const TITRE = "Comparer les primes maladie 2027 en Suisse romande";
+const TITRE = "Primes maladie 2027, frontaliers et 3e pilier en Suisse romande";
 const DESCRIPTION =
   "Les primes maladie 2027 des caisses actives dans votre région de Suisse romande (OFSP). Sans inscription ni publicité, calculées dans votre navigateur.";
 const N = "\u202f"; // espace fine insécable avant ; : ? ! »
@@ -112,7 +112,7 @@ const OUTILS_LISTE: OutilLigne[] = [
   {
     href: OUTILS.comparateur,
     chiffre: "611,70 à 915,70",
-    legende: "CHF par mois · 106 offres pour un adulte à Genève, franchise 300, primes 2027",
+    legende: "CHF par mois · 106 offres pour un adulte à Genève, franchise 300, avec accident, tous modèles, primes 2027",
     titre: "Comparer les primes LAMal 2027",
     texte: "La loi fixe les prestations de base, identiques d’une caisse à l’autre. La liste donne les offres de votre région triées par prime, pour votre âge, votre franchise et votre modèle.",
     cta: "Voir les primes",
@@ -166,10 +166,10 @@ export default function Accueil() {
     <>
       <JsonLd data={LD} />
       <SiteHeader />
-      <main className="accueil">
+      <main id="contenu" className="accueil">
         <AccueilFeuille saisonInitiale={calculerSaison(new Date())} cartes={<PaysageAccueil />} />
-        <BandeConfiance />
         <AccueilSituations />
+        <BandeConfiance />
 
         <section className="passage" id="passage" aria-labelledby="passage-titre">
           <div className="wrap grille">

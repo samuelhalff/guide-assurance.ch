@@ -175,9 +175,8 @@
 .consentement p{margin:0}
 .consentement a{color:var(--sentier-lien, var(--encre))}
 .consentement-actions{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3)}
-.commande-cadre{min-height:48px;border:1px solid var(--encre);border-radius:var(--r);background:transparent;color:var(--encre);font:600 16px var(--font-archivo);cursor:pointer}
-.commande-cadre:hover{background:var(--encre);color:var(--papier)}
-.commande-cadre:focus-visible{outline:2px solid var(--focus, #1C5C88);outline-offset:2px}
+/* Mobile : bandeau ramassé, pour laisser voir le formulaire de l'accueil au-dessus. */
+@media (max-width:767px){.consentement{left:var(--s3);right:var(--s3);bottom:calc(var(--s3) + env(safe-area-inset-bottom));padding:var(--s3);gap:var(--s2)}}
 .lien-pied{background:none;border:0;padding:0;font:inherit;color:var(--bande-texte);cursor:pointer;text-decoration:underline}
 .lien-pied:hover{color:var(--bande-titre)}
 
