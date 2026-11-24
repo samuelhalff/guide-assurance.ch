@@ -1,4 +1,4 @@
-import { PORTES_FORMULAIRE, PREFILL_STORAGE_KEY, type Porte } from "@shared/demande/portes";
+import { PORTES_FORMULAIRE, PREFILL_STORAGE_KEY, type Porte } from "@shared/demande/portes-cles";
 import { ESPACE_FINE as NNBSP } from "./nombres.ts";
 
 /* Formulaire de demande : adresses, porte d'une page guide, préremplissage (sessionStorage, jamais l'URL). */

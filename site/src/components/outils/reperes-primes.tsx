@@ -1,5 +1,5 @@
 import resume from "@/data/primes-2027-resume.json";
-import { Depliable } from "@/components/controles";
+import { Depliable } from "@/components/controle-depliable";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import type { Locale } from "@/lib/i18n";
 import { itemListLd } from "@/lib/jsonld";

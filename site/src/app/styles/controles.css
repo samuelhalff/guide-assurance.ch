@@ -1,4 +1,4 @@
-/* Contrôles shadcn habillés (components/controles.tsx) : états lus sur les attributs base-ui (data-checked, data-open).
+/* Contrôles shadcn habillés (components/controle-*.tsx) : états lus sur les attributs base-ui (data-checked, data-open).
    Les cartes (.option, .pastille, .puce) gardent leur dessin de site.css, outils.css et demande.css. */
 @layer components {
   .case, .puce, .option, .pastille { position: relative; }

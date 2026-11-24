@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PageImpot3a, metaImpot3a } from "@/components/outils/pages-3a";
+import { PageImpot3a, metaImpot3a } from "@/components/outils/pages-impot-3a";
 
 export const metadata: Metadata = metaImpot3a("en");
 

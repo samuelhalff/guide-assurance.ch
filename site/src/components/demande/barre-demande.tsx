@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { useRappelVu } from "@/components/demande/lien-rappel";
-import type { Porte } from "@shared/demande/portes";
+import type { Porte } from "@shared/demande/portes-cles";
 import { RAPPEL, TEXTE_CTA, TEXTE_RAPPEL, ecrirePreremplissage, lienDemande, lirePreremplissage } from "@/lib/demande";
 import { suivre } from "@/lib/analytics";
 import { Button, buttonVariants } from "@/components/ui/button";

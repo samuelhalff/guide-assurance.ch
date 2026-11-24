@@ -4,7 +4,7 @@ import { BoutonAgenda } from "@/components/outils/ajouter-agenda";
 import { NOM_CONTRAT, evenementContrat, evenementFixe, prochain, type Contrat, type TypeContrat, type TypeFixe } from "@/lib/ics";
 import type { Locale } from "@/lib/i18n";
 import { Choix } from "@/components/outils/choix";
-import { Case } from "@/components/controles";
+import { Case } from "@/components/controle-case";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";

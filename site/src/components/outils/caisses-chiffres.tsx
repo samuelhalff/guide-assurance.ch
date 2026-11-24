@@ -7,7 +7,7 @@ import { ecrirePreremplissage } from "@/lib/demande";
 import { DEMANDE_PORTE } from "@/lib/demande-porte";
 import { BarreOffres, CtaOffres } from "@/components/outils/cta-offres";
 import { Choix } from "@/components/outils/choix";
-import { Depliable } from "@/components/controles";
+import { Depliable } from "@/components/controle-depliable";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";

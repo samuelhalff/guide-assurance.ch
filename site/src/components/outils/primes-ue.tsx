@@ -9,7 +9,7 @@ import { chf, nombre } from "@/lib/nombres";
 import { BarreOffres, CtaOffres } from "@/components/outils/cta-offres";
 import { Choix } from "@/components/outils/choix";
 import { buttonVariants } from "@/components/ui/button";
-import { Case } from "@/components/controles";
+import { Case } from "@/components/controle-case";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";

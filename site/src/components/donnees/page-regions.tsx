@@ -1,5 +1,5 @@
 import { SiteHeader } from "@/components/site/site-header";
-import { Depliable } from "@/components/controles";
+import { Depliable } from "@/components/controle-depliable";
 import { SiteFooter } from "@/components/site/site-footer";
 import { Breadcrumbs } from "@/components/site/breadcrumbs";
 import { JsonLd } from "@/components/site/json-ld";

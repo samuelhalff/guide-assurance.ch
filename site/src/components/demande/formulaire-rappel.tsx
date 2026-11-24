@@ -8,7 +8,7 @@ import type { Demande } from "@shared/demande/schema";
 import { suivre, marquerLead } from "@/lib/analytics";
 import { DEMANDE, DEMANDE_ENVOYEE, TEXTE_CTA, lirePreremplissage } from "@/lib/demande";
 import { Turnstile } from "@/components/demande/turnstile";
-import { ChoixBoutons } from "@/components/controles";
+import { ChoixBoutons } from "@/components/controle-boutons";
 import { Consentements, Erreur, Puce, origine, typo } from "@/components/demande/formulaire-demande";
 import { Alert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";

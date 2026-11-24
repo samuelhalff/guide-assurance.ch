@@ -1,4 +1,4 @@
-import type { Porte } from "@shared/demande/portes";
+import type { Porte } from "@shared/demande/portes-cles";
 import { CtaDemande } from "@/components/demande/cta-demande";
 import { estPorteOffre } from "@/lib/demande";
 

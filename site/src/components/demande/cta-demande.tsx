@@ -1,4 +1,4 @@
-import type { Porte } from "@shared/demande/portes";
+import type { Porte } from "@shared/demande/portes-cles";
 import { TEXTE_CTA, TEXTE_RAPPEL, lienDemande } from "@/lib/demande";
 import { LienRappel, type EmplacementRappel } from "@/components/demande/lien-rappel";
 import { buttonVariants } from "@/components/ui/button";

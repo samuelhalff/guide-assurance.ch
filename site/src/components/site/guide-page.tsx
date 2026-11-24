@@ -1,4 +1,4 @@
-import { Depliable } from "@/components/controles";
+import { Depliable } from "@/components/controle-depliable";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
 import { Breadcrumbs } from "@/components/site/breadcrumbs";
@@ -8,7 +8,7 @@ import { DATE_PRIMES } from "@/lib/date-primes";
 import { abs } from "@/lib/site";
 import type { Rubrique } from "@/lib/nav";
 import { DICT, dateLongue, type Locale } from "@/lib/i18n";
-import type { Porte } from "@shared/demande/portes";
+import type { Porte } from "@shared/demande/portes-cles";
 import { CtaDemande } from "@/components/demande/cta-demande";
 import { BarreDemande } from "@/components/demande/barre-demande";
 import { IconeTelephone, LienRappel } from "@/components/demande/lien-rappel";

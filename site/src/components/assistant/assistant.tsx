@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { suivre } from "@/lib/analytics";
 import { DEMANDE, RAPPEL, ecrirePreremplissage, lienDemande } from "@/lib/demande";
-import { PORTE_RAPPEL, RAPPEL_SUJET_DEFAUT } from "@shared/demande/portes";
+import { PORTE_RAPPEL, RAPPEL_SUJET_DEFAUT } from "@shared/demande/portes-cles";
 import {
   TEXTE_ASSISTANT,
   ErreurAssistant,

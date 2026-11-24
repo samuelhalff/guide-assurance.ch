@@ -2,7 +2,8 @@
 import { useRef, useState } from "react";
 import { suivre } from "@/lib/analytics";
 import type { Locale } from "@/lib/i18n";
-import { ChoixBoutons, Depliable } from "@/components/controles";
+import { ChoixBoutons } from "@/components/controle-boutons";
+import { Depliable } from "@/components/controle-depliable";
 import { Alert } from "@/components/ui/alert";
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";

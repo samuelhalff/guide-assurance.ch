@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import { PORTES } from "@shared/demande/portes";
+import { PORTES } from "@shared/demande/portes-cles";
 import { mesurerLead } from "@/lib/analytics";
 
 /* Page de remerciement : conversion GA4 generate_lead { porte } si le formulaire vient d'envoyer une demande (lib/analytics.ts). */

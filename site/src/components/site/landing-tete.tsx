@@ -3,7 +3,7 @@ import { IconeTelephone, LienRappel } from "@/components/demande/lien-rappel";
 import { TEXTE_LANDING, typoFr, type Landing } from "@/lib/landing";
 import { outils } from "@/lib/nav";
 import type { Locale } from "@/lib/i18n";
-import type { Porte } from "@shared/demande/portes";
+import type { Porte } from "@shared/demande/portes-cles";
 import { lienDemande } from "@/lib/demande";
 import { buttonVariants } from "@/components/ui/button";
 

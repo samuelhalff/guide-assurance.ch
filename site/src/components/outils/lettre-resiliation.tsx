@@ -8,7 +8,7 @@ import { IconeTelephone, LienRappel } from "@/components/demande/lien-rappel";
 import { BoutonAgenda } from "@/components/outils/ajouter-agenda";
 import { evenementLettre } from "@/lib/ics";
 import { Choix } from "@/components/outils/choix";
-import { ChoixBoutons } from "@/components/controles";
+import { ChoixBoutons } from "@/components/controle-boutons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";

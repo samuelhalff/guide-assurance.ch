@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState, type ReactNode } from "react";
-import { Depliable } from "@/components/controles";
+import { Depliable } from "@/components/controle-depliable";
 import { Card, CardContent } from "@/components/ui/card";
 
 /* Liste des assureurs 3a : un bloc dépliable par assureur, plusieurs ouverts à la fois. Le contenu reste dans le HTML statique
