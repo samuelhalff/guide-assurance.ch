@@ -488,4 +488,47 @@ console.log("subsides : cas officiel vaudois du parent seul OK");
   assert.equal(Math.round(r.vd!.specifique), 50);
 }
 
+/* ------------------------------------------------------------ Vaud : immobilier, fortune commerciale, code 540
+   cas dérivés des formules affichées par l'estimateur de l'État de Vaud (étape 2), de l'art. 4 RLHPS et de la notice 2027,
+   et non montants officiels publiés. Franchises : logement propre 300 000, fortune commerciale 100 000 par ménage, puis
+   franchise générale 60 000 (une personne) ou 120 000 (couple) ; majoration de 6,7 % arrondie au franc. */
+{
+  const seul = { revenuNet: 25000, primesDeduites: 0, adultes: 1 as 1 | 2, enfants: 0 };
+  const d = (e: Partial<S.EntreeRduVD>) => S.rduVD({ ...seul, ...e });
+  // logement 500 000 seul : 200 000 - 60 000 = 140 000, x 0,067 = 9 380
+  assert.equal(d({ logementPropre: 500000 }).majorationFortune, 9380);
+  assert.equal(d({ logementPropre: 500000 }).logementRetenu, 200000);
+  assert.equal(d({ logementPropre: 500000 }).fortuneRetenue, 140000);
+  assert.equal(d({ logementPropre: 300000 }).majorationFortune, 0, "logement à 300 000 : franchise entière");
+  assert.equal(d({ logementPropre: 300001 }).logementRetenu, 1);
+  // logement 250 000 (0 retenu) + fortune mobilière 80 000 : 20 000 au-delà de 60 000 = 1 340
+  assert.equal(d({ logementPropre: 250000, fortuneMobiliere: 80000 }).majorationFortune, 1340);
+  // autre immeuble 200 000, couple : 200 000 - 120 000 = 80 000 = 5 360 (aucune franchise sur l'autre immeuble)
+  assert.equal(d({ autreImmobilier: 200000, adultes: 2 }).majorationFortune, 5360);
+  assert.equal(d({ autreImmobilier: 60000 }).majorationFortune, 0, "autre immeuble : seule la franchise générale joue");
+  // fortune commerciale 150 000 seul : 50 000 retenus, sous 60 000 : 0
+  assert.equal(d({ fortuneCommerciale: 150000 }).commercialeRetenue, 50000);
+  assert.equal(d({ fortuneCommerciale: 150000 }).majorationFortune, 0);
+  assert.equal(d({ fortuneCommerciale: 100000 }).commercialeRetenue, 0);
+  // commerciale 400 000 (300 000 retenus) + mobilière 50 000, couple : 350 000 - 120 000 = 230 000 = 15 410
+  const c = d({ fortuneCommerciale: 400000, fortuneMobiliere: 50000, adultes: 2 });
+  assert.equal(c.fortuneAvantFranchise, 350000);
+  assert.equal(c.fortuneRetenue, 230000);
+  assert.equal(c.majorationFortune, 15410);
+  // code 540 : l'excédent saisi s'ajoute en entier au revenu
+  assert.equal(d({ fraisEntretien: 4000 }).rdu, 25000 - 2200 + 4000);
+  assert.equal(d({ fraisEntretien: 0 }).rdu, 25000 - 2200);
+  // toutes les lignes : couple, 2 enfants. Revenu net 50 000 + primes 3 000 + rachats (30 000 - 20 000) + 3a 4 000 + code 540 2 500
+  // - forfait (4 400 + 2 x 1 300) = 50 000 + 3 000 + 10 000 + 4 000 + 2 500 - 7 000 = 62 500.
+  // Fortune : logement 450 000 (150 000 retenus) + autre immeuble 100 000 + mobilière 40 000 + commerciale 220 000 (120 000 retenus)
+  // = 410 000 ; moins 120 000 = 290 000 ; x 0,067 = 19 430. RDU = 62 500 + 19 430 = 81 930.
+  const t = S.rduVD({ revenuNet: 50000, primesDeduites: 3000, rachatsLpp: 30000, versements3a: 4000, fraisEntretien: 2500, logementPropre: 450000, autreImmobilier: 100000, fortuneMobiliere: 40000, fortuneCommerciale: 220000, adultes: 2, enfants: 2 });
+  assert.equal(t.fortuneAvantFranchise, 410000);
+  assert.equal(t.fortuneRetenue, 290000);
+  assert.equal(t.majorationFortune, 19430);
+  assert.equal(t.rdu, 81930);
+  // les anciennes entrées (sans les nouvelles lignes) donnent le même résultat qu'avant
+  assert.equal(d({ fortuneMobiliere: 100000 }).rdu, 25000 - 2200 + 2680);
+}
+
 console.log("subsides : cas officiel vaudois de l'adulte seul à 22 800 OK");

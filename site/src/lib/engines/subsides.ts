@@ -352,8 +352,10 @@ export function limiteMaximale(canton: Canton, menage: Menage): number | null {
    Base légale : art. 6 LHPS (BLV 850.03) et art. 4 RLHPS (BLV 850.03.1). Montants 2027 : notice explicative 2027 de l'OVAM,
    point 1, liste ① à ⑥ (revenu net code 650, rachats 2e pilier code 320 après franchise de 20 000, 3e pilier A code 310,
    primes d'assurance-maladie déduites code 300, déduction forfaitaire pour les primes : 2 200 pour un adulte, 4 400 pour deux
-   adultes, 1 300 par enfant). Hors calcul, faute de règle sans interprétation : frais d'entretien d'immeuble au-delà du forfait (code 540), fortune immobilière et commerciale.
-   Fortune mobilière (codes 410 à 465, dettes non déduites, art. 4 RLHPS) : franchise de 60 000 (une personne, avec ou sans enfant)
+   adultes, 1 300 par enfant), code 540 : excédent des frais d'entretien d'immeuble sur le forfait, ajouté en entier (notice ④).
+   Fortune : logement propre (code 500) après franchise de 300 000, autres immeubles (code 500) sans franchise, fortune
+   mobilière (410 à 465), fortune commerciale (450, 465, 510) après franchise de 100 000 par ménage (art. 4 RLHPS) ; les
+   montants retenus s'additionnent (dettes non déduites, art. 4 RLHPS), puis la franchise générale s'applique : 60 000 (une personne, avec ou sans enfant)
    ou 120 000 (couple) selon le point ⑨ de la notice 2027, puis majoration de 6,7 % (taux appliqué par l'estimateur officiel :
    2 747 pour 41 000, soit 41 000 x 0,067 et non un quinzième). La majoration est arrondie au franc le plus proche : le seul
    cas officiel relevé est un entier, l'arrondi d'un résultat fractionnaire n'est donc pas attesté. */
@@ -362,6 +364,8 @@ export const RDU_VD = {
   forfaitPrimes: { adulte: 2200, couple: 4400, enfant: 1300 },
   franchiseFortune: { seul: 60000, couple: 120000 },
   tauxFortune: 0.067,
+  franchiseLogement: 300000,
+  franchiseCommerciale: 100000,
 } as const;
 
 export type EntreeRduVD = {
@@ -370,6 +374,10 @@ export type EntreeRduVD = {
   rachatsLpp?: number; // code 320
   versements3a?: number; // code 310
   fortuneMobiliere?: number; // codes 410 à 465, dettes non déduites ; vide = 0
+  logementPropre?: number; // code 500, valeur fiscale du logement permanent, dettes hypothécaires non déduites
+  autreImmobilier?: number; // code 500, autres immeubles, sans franchise
+  fortuneCommerciale?: number; // codes 450, 465, 510, dettes commerciales non déduites
+  fraisEntretien?: number; // code 540 : part des frais d'entretien au-delà de la déduction forfaitaire
   adultes: 1 | 2;
   enfants: number; // mineurs et majeurs dépendants du ménage
 };
@@ -380,23 +388,37 @@ export type DetailRduVD = {
   primesDeduites: number;
   deductionForfaitaire: number;
   fortuneMobiliere: number;
+  logementPropre: number;
+  logementRetenu: number;
+  autreImmobilier: number;
+  fortuneCommerciale: number;
+  commercialeRetenue: number;
+  fraisEntretien: number;
+  fortuneAvantFranchise: number;
   franchiseFortune: number;
   fortuneRetenue: number;
   majorationFortune: number;
   rdu: number;
 };
 
-/* RDU (lettre A de la notice) pour un ménage sans bien immobilier ni fortune commerciale. */
+/* RDU (lettre A de la notice), avant déduction pour enfants. */
 export function rduVD(e: EntreeRduVD): DetailRduVD {
   const pos = (x: number | undefined) => Math.max(0, x ?? 0);
   const rachatsRetenus = Math.max(0, pos(e.rachatsLpp) - RDU_VD.franchiseRachats);
   const f = RDU_VD.forfaitPrimes;
   const deductionForfaitaire = (e.adultes === 2 ? f.couple : f.adulte) + f.enfant * Math.max(0, e.enfants);
   const fortuneMobiliere = pos(e.fortuneMobiliere);
+  const logementPropre = pos(e.logementPropre);
+  const autreImmobilier = pos(e.autreImmobilier);
+  const fortuneCommerciale = pos(e.fortuneCommerciale);
+  const fraisEntretien = pos(e.fraisEntretien);
+  const logementRetenu = Math.max(0, logementPropre - RDU_VD.franchiseLogement);
+  const commercialeRetenue = Math.max(0, fortuneCommerciale - RDU_VD.franchiseCommerciale);
+  const fortuneAvantFranchise = fortuneMobiliere + logementRetenu + autreImmobilier + commercialeRetenue;
   const franchiseFortune = e.adultes === 2 ? RDU_VD.franchiseFortune.couple : RDU_VD.franchiseFortune.seul;
-  const fortuneRetenue = Math.max(0, fortuneMobiliere - franchiseFortune);
+  const fortuneRetenue = Math.max(0, fortuneAvantFranchise - franchiseFortune);
   const majorationFortune = Math.round(fortuneRetenue * RDU_VD.tauxFortune);
-  const total = e.revenuNet + rachatsRetenus + pos(e.versements3a) + pos(e.primesDeduites) - deductionForfaitaire + majorationFortune;
+  const total = e.revenuNet + rachatsRetenus + pos(e.versements3a) + pos(e.primesDeduites) + fraisEntretien - deductionForfaitaire + majorationFortune;
   return {
     revenuNet: e.revenuNet,
     rachatsRetenus,
@@ -404,6 +426,13 @@ export function rduVD(e: EntreeRduVD): DetailRduVD {
     primesDeduites: pos(e.primesDeduites),
     deductionForfaitaire,
     fortuneMobiliere,
+    logementPropre,
+    logementRetenu,
+    autreImmobilier,
+    fortuneCommerciale,
+    commercialeRetenue,
+    fraisEntretien,
+    fortuneAvantFranchise,
     franchiseFortune,
     fortuneRetenue,
     majorationFortune,

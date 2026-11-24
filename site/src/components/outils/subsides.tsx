@@ -144,7 +144,6 @@ const TXT = {
 } as const;
 
 /* Vaud : saisie à partir de la décision de taxation (RDU reconstitué, voir rduVD dans le moteur). */
-const ESTIMATEUR_VD = "https://prestations.vd.ch/pub/samoa/001489";
 const TXT_VD = {
   fr: {
     mode: "Votre revenu déterminant",
@@ -153,21 +152,25 @@ const TXT_VD = {
     net: "Revenu net (code 650)",
     netAide: "Dans le tableau « Détail de la taxation cantonale » de votre décision de taxation, à la ligne du code 650. Pour un couple, indiquez le total des deux conjoints.",
     primes: "Primes d’assurance-maladie déduites (code 300)",
-    primesAide: "Même tableau, ligne du code 300 : c’est la déduction fiscale pour vos primes d’assurance-maladie. Sans ligne 300, saisissez 0.",
+    primesAide: "Dans la décision de taxation, ligne du code 300 : c’est la déduction fiscale pour vos primes d’assurance-maladie. Sans ligne 300, saisissez 0.",
     rare: "J’ai racheté des années de 2e pilier ou versé au 3e pilier",
     lpp: "Rachats d’années du 2e pilier (code 320)",
     lppAide: "Seule la part au-delà de 20 000 francs entre dans le calcul.",
     p3a: "Versements au 3e pilier A (code 310)",
     p3aAide: "Le montant est retenu en entier.",
     mob: "Fortune mobilière (codes 410 à 465 de la décision de taxation), sans déduire vos dettes",
-    mobAide: (c: boolean) => `Comptes, titres et autres avoirs. Seule la part au-delà de ${nombre(c ? 120000 : 60000, 0, "fr")} francs compte, à 6,7${N}%. Laissez vide si vous n’en avez pas.`,
-    immo: "Possédez-vous un bien immobilier ou une entreprise ?",
-    non: "Non",
-    oui: "Oui",
-    horsCalcul: "Dans ce cas, l’outil ne peut pas estimer votre RDU : les biens immobiliers et la fortune commerciale entrent dans le calcul avec des règles qu’il ne reprend pas. Saisissez le RDU de votre décision de l’OVAM (« Je connais mon RDU ») ou utilisez l’évaluation de l’État de Vaud.",
-    estimateur: "Évaluation de l’État de Vaud",
+    mobAide: (c: boolean) => `Comptes, titres et autres avoirs. Seule la part au-delà de ${nombre(c ? 120000 : 60000, 0, "fr")} francs compte, à 6,7${N}%. Les avoirs d’une entreprise se saisissent dans la fortune commerciale, pas ici. Laissez vide si vous n’avez pas de fortune.`,
+    immoTitre: "Je possède un bien immobilier ou une entreprise",
+    logement: "Logement dont vous êtes propriétaire (code 500)",
+    logementAide: (n: string) => `Valeur fiscale de votre logement permanent, sans déduire l’hypothèque. Les premiers ${n} francs ne comptent pas.`,
+    autreImmo: "Autres biens immobiliers (code 500)",
+    autreImmoAide: "Valeur fiscale, sans déduire l’hypothèque. Aucune franchise ne s’applique.",
+    commerciale: "Fortune commerciale (codes 450, 465 et 510)",
+    commercialeAide: (n: string) => `Sans déduire les dettes commerciales. Les premiers ${n} francs ne comptent pas. Saisissez ces avoirs ici et pas une seconde fois dans la fortune mobilière.`,
+    frais: "Frais d’entretien d’immeuble au-delà du forfait (code 540)",
+    fraisAide: "Indiquez la part de vos frais d’entretien effectifs qui dépasse la déduction forfaitaire. Laissez vide si vous avez déduit le forfait.",
     rduLigne: (v: string) => `Votre RDU estimé est de ${v} francs.`,
-    manque: "Saisissez le revenu net et les primes déduites, puis répondez à la question sur le bien immobilier ou l’entreprise pour voir le subside.",
+    manque: "Saisissez le revenu net et les primes déduites pour voir le subside.",
     detailRdu: "Voir le calcul du RDU",
     ligne: "Ligne de la décision",
     montant: "Francs",
@@ -177,8 +180,17 @@ const TXT_VD = {
     l300: "Primes d’assurance-maladie déduites (code 300)",
     lForfait: (a: number, e: number) => `Moins la déduction forfaitaire pour les primes (${a > 1 ? "2 adultes" : "1 adulte"}${e ? `, ${e} enfant${e > 1 ? "s" : ""}` : ""})`,
     lRdu: "RDU, avant déduction pour enfants",
-    lMaj: (fr: number) => `Majoration de 6,7${N}% sur la fortune mobilière au-delà de ${nombre(fr, 0, "fr")} francs`,
-    hyp: "Sans bien immobilier ni entreprise. L’OVAM retient la décision de taxation définitive la plus récente.",
+    lMaj: "Majoration de 6,7 % sur la fortune retenue (voir le détail de la fortune)",
+    l540: "Frais d’entretien d’immeuble au-delà du forfait (code 540)",
+    fortuneTitre: "Fortune",
+    fMob: "Fortune mobilière (codes 410 à 465)",
+    fLog: (n: string) => `Logement propre (code 500), après franchise de ${n} francs`,
+    fAutre: "Autres biens immobiliers (code 500)",
+    fCom: (n: string) => `Fortune commerciale (codes 450, 465, 510), après franchise de ${n} francs`,
+    fTotal: "Total des montants retenus",
+    fFranchise: "Moins la franchise générale",
+    fRetenue: "Fortune retenue",
+    hyp: "L’OVAM retient la décision de taxation définitive la plus récente.",
   },
   en: {
     mode: "Your determining income",
@@ -187,21 +199,25 @@ const TXT_VD = {
     net: "Net income (code 650)",
     netAide: "In the “Détail de la taxation cantonale” table of your tax assessment, on the line with code 650. For a couple, enter the total of both spouses.",
     primes: "Health insurance premiums deducted (code 300)",
-    primesAide: "Same table, line with code 300: it is the tax deduction for your health insurance premiums. If there is no line 300, enter 0.",
+    primesAide: "In the tax assessment, line with code 300: it is the tax deduction for your health insurance premiums. If there is no line 300, enter 0.",
     rare: "I bought back second-pillar years or paid into pillar 3",
     lpp: "Second-pillar buy-ins (code 320)",
     lppAide: "Only the part above CHF 20,000 counts.",
     p3a: "Pillar 3a payments (code 310)",
     p3aAide: "The full amount counts.",
     mob: "Movable wealth (codes 410 to 465 of the tax assessment), before deducting your debts",
-    mobAide: (c: boolean) => `Accounts, securities and other assets. Only the part above CHF ${nombre(c ? 120000 : 60000, 0, "en")} counts, at 6.7%. Leave empty if you have none.`,
-    immo: "Do you own property or a business?",
-    non: "No",
-    oui: "Yes",
-    horsCalcul: "In that case the tool cannot estimate your RDU: property and business wealth enter the calculation under rules it does not cover. Enter the RDU from your OVAM decision (“I know my RDU”) or use the canton of Vaud’s own assessment.",
-    estimateur: "Canton of Vaud assessment",
+    mobAide: (c: boolean) => `Accounts, securities and other assets. Only the part above CHF ${nombre(c ? 120000 : 60000, 0, "en")} counts, at 6.7%. Business assets go in business wealth, not here. Leave empty if you have no wealth.`,
+    immoTitre: "I own property or a business",
+    logement: "Home you own (code 500)",
+    logementAide: (n: string) => `Tax value of your permanent home, without deducting the mortgage. The first CHF ${n} do not count.`,
+    autreImmo: "Other property (code 500)",
+    autreImmoAide: "Tax value, without deducting the mortgage. No allowance applies.",
+    commerciale: "Business wealth (codes 450, 465 and 510)",
+    commercialeAide: (n: string) => `Without deducting business debts. The first CHF ${n} do not count. Enter these assets here and not a second time in movable wealth.`,
+    frais: "Property maintenance costs above the flat deduction (code 540)",
+    fraisAide: "Enter the part of your actual maintenance costs that exceeds the flat-rate deduction. Leave empty if you deducted the flat rate.",
     rduLigne: (v: string) => `Your estimated RDU is CHF ${v}.`,
-    manque: "Enter net income and deducted premiums, then answer the question on property or a business to see the subsidy.",
+    manque: "Enter net income and deducted premiums to see the subsidy.",
     detailRdu: "See how the RDU is worked out",
     ligne: "Line of the assessment",
     montant: "CHF",
@@ -211,8 +227,17 @@ const TXT_VD = {
     l300: "Health insurance premiums deducted (code 300)",
     lForfait: (a: number, e: number) => `Less the flat deduction for premiums (${a > 1 ? "2 adults" : "1 adult"}${e ? `, ${e} child${e > 1 ? "ren" : ""}` : ""})`,
     lRdu: "RDU, before the child deduction",
-    lMaj: (fr: number) => `6.7% surcharge on movable wealth above CHF ${nombre(fr, 0, "en")}`,
-    hyp: "Assumes no property or business. The OVAM uses the most recent final tax assessment.",
+    lMaj: "6.7% surcharge on the wealth retained (see the wealth details)",
+    l540: "Property maintenance costs above the flat deduction (code 540)",
+    fortuneTitre: "Wealth",
+    fMob: "Movable wealth (codes 410 to 465)",
+    fLog: (n: string) => `Home you own (code 500), after the CHF ${n} allowance`,
+    fAutre: "Other property (code 500)",
+    fCom: (n: string) => `Business wealth (codes 450, 465, 510), after the CHF ${n} allowance`,
+    fTotal: "Total of the amounts retained",
+    fFranchise: "Less the general allowance",
+    fRetenue: "Wealth retained",
+    hyp: "The OVAM uses the most recent final tax assessment.",
   },
 } as const;
 
@@ -292,7 +317,10 @@ export function Subsides({ locale }: { locale: Locale }) {
   const [vLpp, setVLpp] = useState("");
   const [v3a, setV3a] = useState("");
   const [vMob, setVMob] = useState("");
-  const [vFortune, setVFortune] = useState<"" | "non" | "oui">("");
+  const [vLog, setVLog] = useState("");
+  const [vAutre, setVAutre] = useState("");
+  const [vCom, setVCom] = useState("");
+  const [vFrais, setVFrais] = useState("");
   const [ctaVisible, setCtaVisible] = useState(true);
   const utilise = useRef(false);
   const f = (x: number, d = 0) => nombre(x, d, locale);
@@ -320,8 +348,8 @@ export function Subsides({ locale }: { locale: Locale }) {
   const vNetN = S.lireRevenu(vNet);
   const vPrimesN = S.lireRevenu(vPrimes);
   const detailRdu =
-    vdTaxation && vFortune === "non" && vNetN != null && vPrimesN != null
-      ? S.rduVD({ revenuNet: vNetN, primesDeduites: vPrimesN, rachatsLpp: S.lireRevenu(vLpp) ?? 0, versements3a: S.lireRevenu(v3a) ?? 0, fortuneMobiliere: S.lireRevenu(vMob) ?? 0, adultes: menage.adultes, enfants: nEnfants })
+    vdTaxation && vNetN != null && vPrimesN != null
+      ? S.rduVD({ revenuNet: vNetN, primesDeduites: vPrimesN, rachatsLpp: S.lireRevenu(vLpp) ?? 0, versements3a: S.lireRevenu(v3a) ?? 0, fortuneMobiliere: S.lireRevenu(vMob) ?? 0, logementPropre: S.lireRevenu(vLog) ?? 0, autreImmobilier: S.lireRevenu(vAutre) ?? 0, fortuneCommerciale: S.lireRevenu(vCom) ?? 0, fraisEntretien: S.lireRevenu(vFrais) ?? 0, adultes: menage.adultes, enfants: nEnfants })
       : null;
   const rdu = vdTaxation ? (detailRdu ? detailRdu.rdu : null) : S.lireRevenu(revenu);
   const avecRegion = canton === "VD" || canton === "FR";
@@ -429,26 +457,12 @@ export function Subsides({ locale }: { locale: Locale }) {
                         <Nombre id="s-v-lpp" label={tv.lpp} aide={tv.lppAide} placeholder="0" value={vLpp} locale={locale} onChange={(x) => { setVLpp(x); toucher(); }} />
                         <Nombre id="s-v-3a" label={tv.p3a} aide={tv.p3aAide} placeholder="0" value={v3a} locale={locale} onChange={(x) => { setV3a(x); toucher(); }} />
                       </Depliable>
-                      <div className="champ">
-                        <span id="s-v-fortune-l" className="font-semibold">{tv.immo}</span>
-                        <ToggleGroup
-                          variant="outline"
-                          size="champ"
-                          spacing={0}
-                          className="mt-1 w-full"
-                          aria-labelledby="s-v-fortune-l"
-                          value={vFortune ? [vFortune] : []}
-                          onValueChange={(v) => { setVFortune((v[0] ?? "") as "" | "non" | "oui"); toucher(); }}
-                        >
-                          <ToggleGroupItem value="non" className="flex-1">{tv.non}</ToggleGroupItem>
-                          <ToggleGroupItem value="oui" className="flex-1">{tv.oui}</ToggleGroupItem>
-                        </ToggleGroup>
-                      </div>
-                      {vFortune === "oui" ? (
-                        <p className="note-outil" role="status">
-                          {tv.horsCalcul} <a className="lien-tap" href={ESTIMATEUR_VD} rel="noopener">{tv.estimateur}</a>
-                        </p>
-                      ) : null}
+                      <Depliable className="affiner" titre={tv.immoTitre}>
+                        <Nombre id="s-v-log" label={tv.logement} aide={tv.logementAide(f(S.RDU_VD.franchiseLogement))} placeholder="0" value={vLog} locale={locale} onChange={(x) => { setVLog(x); toucher(); }} />
+                        <Nombre id="s-v-autre" label={tv.autreImmo} aide={tv.autreImmoAide} placeholder="0" value={vAutre} locale={locale} onChange={(x) => { setVAutre(x); toucher(); }} />
+                        <Nombre id="s-v-com" label={tv.commerciale} aide={tv.commercialeAide(f(S.RDU_VD.franchiseCommerciale))} placeholder="0" value={vCom} locale={locale} onChange={(x) => { setVCom(x); toucher(); }} />
+                        <Nombre id="s-v-frais" label={tv.frais} aide={tv.fraisAide} placeholder="0" value={vFrais} locale={locale} onChange={(x) => { setVFrais(x); toucher(); }} />
+                      </Depliable>
                       {detailRdu ? <p className="s-rdu" aria-live="polite">{tv.rduLigne(f(detailRdu.rdu))}</p> : null}
                       {ligne}
                     </fieldset>
@@ -552,11 +566,32 @@ export function Subsides({ locale }: { locale: Locale }) {
                           <TableRow><TableHead scope="row">{tv.l320}</TableHead><TableCell className="text-right">{f(detailRdu.rachatsRetenus)}</TableCell></TableRow>
                           <TableRow><TableHead scope="row">{tv.l310}</TableHead><TableCell className="text-right">{f(detailRdu.versements3a)}</TableCell></TableRow>
                           <TableRow><TableHead scope="row">{tv.l300}</TableHead><TableCell className="text-right">{f(detailRdu.primesDeduites)}</TableCell></TableRow>
-                          {detailRdu.fortuneMobiliere > 0 ? <TableRow><TableHead scope="row">{tv.lMaj(detailRdu.franchiseFortune)}</TableHead><TableCell className="text-right">{f(detailRdu.majorationFortune)}</TableCell></TableRow> : null}
+                          {detailRdu.fraisEntretien > 0 ? <TableRow><TableHead scope="row">{tv.l540}</TableHead><TableCell className="text-right">{f(detailRdu.fraisEntretien)}</TableCell></TableRow> : null}
+                          {detailRdu.majorationFortune > 0 ? <TableRow><TableHead scope="row">{tv.lMaj}</TableHead><TableCell className="text-right">{f(detailRdu.majorationFortune)}</TableCell></TableRow> : null}
                           <TableRow><TableHead scope="row">{tv.lForfait(menage.adultes, nEnfants)}</TableHead><TableCell className="text-right">{f(-detailRdu.deductionForfaitaire)}</TableCell></TableRow>
                           <TableRow><TableHead scope="row">{tv.lRdu}</TableHead><TableCell className="text-right">{f(detailRdu.rdu)}</TableCell></TableRow>
                         </TableBody>
                       </Table>
+                      {detailRdu.fortuneAvantFranchise > 0 ? (
+                        <Table variant="chiffres">
+                          <TableCaption className="visually-hidden">{tv.fortuneTitre}</TableCaption>
+                          <TableHeader>
+                            <TableRow>
+                              <TableHead scope="col">{tv.fortuneTitre}</TableHead>
+                              <TableHead scope="col" className="text-right">{tv.montant}</TableHead>
+                            </TableRow>
+                          </TableHeader>
+                          <TableBody>
+                            {detailRdu.fortuneMobiliere > 0 ? <TableRow><TableHead scope="row">{tv.fMob}</TableHead><TableCell className="text-right">{f(detailRdu.fortuneMobiliere)}</TableCell></TableRow> : null}
+                            {detailRdu.logementPropre > 0 ? <TableRow><TableHead scope="row">{tv.fLog(f(S.RDU_VD.franchiseLogement))}</TableHead><TableCell className="text-right">{f(detailRdu.logementRetenu)}</TableCell></TableRow> : null}
+                            {detailRdu.autreImmobilier > 0 ? <TableRow><TableHead scope="row">{tv.fAutre}</TableHead><TableCell className="text-right">{f(detailRdu.autreImmobilier)}</TableCell></TableRow> : null}
+                            {detailRdu.fortuneCommerciale > 0 ? <TableRow><TableHead scope="row">{tv.fCom(f(S.RDU_VD.franchiseCommerciale))}</TableHead><TableCell className="text-right">{f(detailRdu.commercialeRetenue)}</TableCell></TableRow> : null}
+                            <TableRow><TableHead scope="row">{tv.fTotal}</TableHead><TableCell className="text-right">{f(detailRdu.fortuneAvantFranchise)}</TableCell></TableRow>
+                            <TableRow><TableHead scope="row">{tv.fFranchise}</TableHead><TableCell className="text-right">{f(-Math.min(detailRdu.franchiseFortune, detailRdu.fortuneAvantFranchise))}</TableCell></TableRow>
+                            <TableRow><TableHead scope="row">{tv.fRetenue}</TableHead><TableCell className="text-right">{f(detailRdu.fortuneRetenue)}</TableCell></TableRow>
+                          </TableBody>
+                        </Table>
+                      ) : null}
                       <p className="base">{tv.hyp}</p>
                     </Depliable>
                   ) : null}
