@@ -12,6 +12,11 @@ const compat = new FlatCompat({
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
+    /* Export statique (output: "export", images non optimisées) : next/image n'apporterait rien.
+       Les images portent leurs propres variantes (srcset, width/height, loading). */
+    rules: { "@next/next/no-img-element": "off" },
+  },
+  {
     ignores: [
       "node_modules/**",
       ".next/**",

@@ -168,7 +168,6 @@ export function PageKitRh({ l }: { l: Locale }) {
           <p className="intro">{t.intro}</p>
           <div className="kit-grille">
             <a className="kit-apercu" href={PDF_KIT[l]}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={`/kit-rh/apercu-${l}.jpg`} width={794} height={1123} alt={t.apercu} loading="lazy" />
             </a>
             <div className="kit-actions">

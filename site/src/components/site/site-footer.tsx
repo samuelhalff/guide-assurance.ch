@@ -29,7 +29,6 @@ export function SiteFooter({ note, locale = "fr", altPath }: { note?: string; lo
           {t.credit}{" "}
           <a href="https://houle.ai/">
             {/* SVG statique de quelques Ko, déjà à la bonne taille : next/image n'apporte rien en export statique */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/credits/houle-ai.svg" alt="houle.ai" width={64} height={15} loading="lazy" decoding="async" />
           </a>
         </p>
