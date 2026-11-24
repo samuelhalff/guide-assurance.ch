@@ -19,11 +19,11 @@ const FLECHE = (
 );
 
 /* `pleine` : bouton sur toute la largeur, libellé centré (encadré du résultat ménage). */
-export function CtaOffres({ locale, href, libelle, note, className, pleine }: { locale: Locale; href: string; libelle?: string; note?: ReactNode; className?: string; pleine?: boolean }) {
+export function CtaOffres({ locale, href, libelle, note, className, pleine, onClick }: { locale: Locale; href: string; libelle?: string; note?: ReactNode; className?: string; pleine?: boolean; onClick?: () => void }) {
   const t = TEXTE_OFFRES[locale];
   return (
     <div className={`cta-demande cta-offres${className ? ` ${className}` : ""}`}>
-      <a data-slot="button" className={cn(buttonVariants(), pleine ? "w-full justify-center" : "max-[719px]:justify-between")} href={href}>
+      <a data-slot="button" className={cn(buttonVariants(), pleine ? "w-full justify-center" : "max-[719px]:justify-between")} href={href} onClick={onClick}>
         {libelle ?? t.bouton}
         {FLECHE}
       </a>
@@ -33,10 +33,10 @@ export function CtaOffres({ locale, href, libelle, note, className, pleine }: { 
 }
 
 /* `detail` : seconde ligne, plus petite (ex. la somme assurée), pour que le libellé tienne sur une ligne à côté du bouton de l'assistant. */
-export function BarreOffres({ locale, href, libelle, detail, visible }: { locale: Locale; href: string; libelle?: string; detail?: string; visible: boolean }) {
+export function BarreOffres({ locale, href, libelle, detail, visible, onClick }: { locale: Locale; href: string; libelle?: string; detail?: string; visible: boolean; onClick?: () => void }) {
   return (
     <div className="barre-demande barre-offres" data-visible={visible || undefined} aria-hidden={!visible} inert={!visible}>
-      <a data-slot="button" className={buttonVariants({ size: "barre" })} href={href}>
+      <a data-slot="button" className={buttonVariants({ size: "barre" })} href={href} onClick={onClick}>
         <span>{libelle ?? TEXTE_OFFRES[locale].bouton}</span>
         {detail ? <small>{detail}</small> : null}
       </a>
