@@ -1,20 +1,13 @@
 import { FaqSections } from "@/components/site/faq-sections";
 import { IconeTelephone, LienRappel } from "@/components/demande/lien-rappel";
 import type { Locale } from "@/lib/i18n";
+import { nombre as formaterNombre } from "@/lib/nombres";
 
 /* Éléments communs des pages de données (régions de primes, chiffres clés, historique 3a, économie d'impôt par
    commune) : formats de nombres, questions fréquentes, appel « Être rappelé » (emplacement `donnees`). */
 export const N = "\u202f";
-const NF = {
-  fr: [0, 1, 2, 3].map((d) => new Intl.NumberFormat("fr-CH", { minimumFractionDigits: d, maximumFractionDigits: d })),
-  en: [0, 1, 2, 3].map((d) => new Intl.NumberFormat("en-GB", { minimumFractionDigits: d, maximumFractionDigits: d })),
-};
-/* 1234.5 -> « 1 234,50 » / "1,234.50" ; d décimales. Le séparateur de milliers fr-CH est l'apostrophe : on prend
-   l'espace fine insécable, comme le reste du site. */
-export const nombre = (x: number, locale: Locale, d = 0) => {
-  const s = NF[locale][d].format(x);
-  return locale === "fr" ? s.replace(/[’'  ]/g, N).replace(/\./g, ",") : s;
-};
+/* 1234.5 -> « 1 234,50 » / "1,234.50" ; d décimales (src/lib/nombres.ts, sans Intl). */
+export const nombre = (x: number, locale: Locale, d = 0) => formaterNombre(x, d, locale);
 export const chf = (x: number, locale: Locale, d = 0) => (locale === "fr" ? `${nombre(x, locale, d)}${N}CHF` : `CHF ${nombre(x, locale, d)}`);
 export const pct = (x: number, locale: Locale, d = 0) => (locale === "fr" ? `${nombre(x, locale, d)}${N}%` : `${nombre(x, locale, d)}%`);
 

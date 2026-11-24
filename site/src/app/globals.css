@@ -245,6 +245,24 @@
   * {
     @apply border-border outline-ring/50;
   }
+  /* Tailwind v4 ne met plus de curseur « main » sur les boutons (préconisation shadcn : le rétablir ici, une fois pour
+     tous les éléments cliquables, y compris les contrôles base-ui et les cartes qui enveloppent une case). */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [role="checkbox"]:not([aria-disabled="true"]),
+  [role="radio"]:not([aria-disabled="true"]),
+  [role="switch"]:not([aria-disabled="true"]),
+  [role="option"]:not([aria-disabled="true"]),
+  [role="combobox"]:not([aria-disabled="true"]),
+  [role="tab"],
+  select:not(:disabled),
+  summary {
+    cursor: pointer;
+  }
+  /* Règle à part : un navigateur sans :has() n'ignore qu'elle. Cartes et libellés qui enveloppent une case active. */
+  label:has(:is([role="checkbox"], [role="radio"], [role="switch"]):not([data-disabled])) {
+    cursor: pointer;
+  }
   body {
     @apply bg-background text-foreground;
   }

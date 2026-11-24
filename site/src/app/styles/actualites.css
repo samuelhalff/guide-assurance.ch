@@ -19,7 +19,7 @@
 
   .actu-rappel .actu-rappel-q { margin: 0; font: 700 18px var(--sans); color: var(--encre); }
 
-  .actu-sources { padding-block: var(--s6) var(--s7); border-top: 1px solid var(--filet); }
+  .actu-sources { margin-top: var(--s7); padding-block: var(--s6) var(--s7); border-top: 1px solid var(--filet); }
   .actu-sources h2 { font-size: 22px; font-weight: 800; margin: 0 0 var(--s3); }
   .actu-sources ol { margin: 0; padding-left: 1.3em; list-style: decimal; max-width: 72ch; font: 16px/1.5 var(--narrow); }
   .actu-sources li { margin-bottom: var(--s2); overflow-wrap: anywhere; }

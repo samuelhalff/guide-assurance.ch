@@ -7,6 +7,7 @@ import { Choix } from "@/components/outils/choix";
 import { Case } from "@/components/controles";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
+import { dateTexte } from "@/lib/dates";
 
 /* Page « Rappels d'échéance » : échéances légales cochées, puis contrats saisis par le visiteur.
    Tout reste dans le navigateur : aucune valeur n'est envoyée, gardée ou mesurée. */
@@ -21,10 +22,7 @@ export function RappelsEcheances({ aujourdhuiIso, locale = "fr" }: { aujourdhuiI
   const l = en ? "en" : "fr";
   const [today, setToday] = useState(() => d0(new Date(`${aujourdhuiIso}T00:00`)));
   useEffect(() => setToday(d0(new Date())), []);
-  const fmt = (d: Date) =>
-    en
-      ? d.toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric" })
-      : d.toLocaleDateString("fr-CH", { weekday: "long", day: "numeric", month: "long", year: "numeric" }).replace(/ 1 /, " 1er ");
+  const fmt = (d: Date) => dateTexte(d, en ? "en" : "fr", { jour: true });
 
   const [fixes, setFixes] = useState<Record<TypeFixe, boolean>>({ lamal: true, "3a": true, semestre: false });
   const FIXES: { t: TypeFixe; titre: string; texte: string; date: Date }[] = [

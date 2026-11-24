@@ -12,12 +12,10 @@ import { DATE_PRIMES } from "@/lib/date-primes";
 import { abs } from "@/lib/site";
 import { OUTILS, OUTILS_EN, PAGES_DONNEES, PAGES_DONNEES_EN } from "@/lib/nav";
 import type { Locale } from "@/lib/i18n";
+import { nombre as formaterNombre } from "@/lib/nombres";
 
 const N = "\u202f";
-const nf = (x: number, l: Locale, d = 0) => {
-  const s = new Intl.NumberFormat(l === "fr" ? "fr-CH" : "en-GB", { minimumFractionDigits: d, maximumFractionDigits: d }).format(x);
-  return l === "fr" ? s.replace(/[’' ]/g, N) : s;
-};
+const nf = (x: number, l: Locale, d = 0) => formaterNombre(x, d, l);
 const chf = (x: number, l: Locale, d = 0) => (l === "fr" ? `${nf(x, l, d)}${N}CHF` : `CHF ${nf(x, l, d)}`);
 const pc = (x: number, l: Locale, d = 0) => (l === "fr" ? `${nf(x, l, d)}${N}%` : `${nf(x, l, d)}%`);
 const dc = (iso: string) => iso.split("-").reverse().join(".");

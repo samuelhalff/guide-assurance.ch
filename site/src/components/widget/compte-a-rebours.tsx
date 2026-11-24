@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { jours, lamal } from "@/lib/engines/delais";
 import type { Locale } from "@/lib/i18n";
+import { dateTexte } from "@/lib/dates";
 
 /* Compte à rebours jusqu'au dernier jour de réception de la résiliation LAMal (30 novembre, art. 7, al. 2, LAMal).
    Calculé avec la date de l'appareil ; le HTML statique porte la date du build, remplacée dès l'affichage. */
@@ -16,7 +17,7 @@ export function CompteARebours({ l, aujourdhuiIso, lien }: { l: Locale; aujourdh
   const dl = r.dl!;
   const debut = new Date(r.fin!.getFullYear() + 1, 0, 1);
   const n = jours(today, dl);
-  const date = dl.toLocaleDateString(fr ? "fr-CH" : "en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+  const date = dateTexte(dl, fr ? "fr" : "en", { jour: true });
   const annee = debut.getFullYear();
   return (
     <>

@@ -19,6 +19,7 @@ import { Alert } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { nombre as formaterNombre } from "@/lib/nombres";
 
 /* Page « 3a et 3b auprès d'un assureur » (FR /3e-pilier/assurance-3a-3b/, EN /en/pillar-3a/insurance-3a-3b/).
    Faits relevés le 23.11.2026 dans les documents publics des assureurs (src/data/assureurs-3a-3b.json) et dans le droit
@@ -36,7 +37,7 @@ const NB_PRODUITS = ASSUREURS_3A.reduce((s, a) => s + a.produits.length, 0);
 const TYPES: TypeContrat[] = ["risque", "mixte", "hybride", "fonds", "nc"];
 const P26 = I.PLAFONDS["2026"];
 const P27 = I.PLAFONDS["2027"];
-const nf = { fr: (x: number) => String(x).replace(/\B(?=(\d{3})+(?!\d))/g, T), en: (x: number) => new Intl.NumberFormat("en-GB").format(x) };
+const nf = { fr: (x: number) => formaterNombre(x, 0, "fr"), en: (x: number) => formaterNombre(x, 0, "en") };
 const dch = (iso: string) => iso.split("-").reverse().join(".");
 
 const SRC = {

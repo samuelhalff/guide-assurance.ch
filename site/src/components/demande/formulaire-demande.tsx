@@ -32,6 +32,7 @@ import { Alert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { nombre as formaterNombre } from "@/lib/nombres";
 
 type Locale = "fr" | "en";
 type Ecran = 1 | 2 | 3 | "hors-suisse";
@@ -147,7 +148,7 @@ const LIENS_HORS = {
 type Erreurs = Partial<Record<string, string>>;
 type Reponses = Record<string, string | string[]>;
 
-const milliers = (n: number, locale: Locale) => n.toLocaleString(locale === "fr" ? "fr-CH" : "en-GB");
+const milliers = (n: number, locale: Locale) => formaterNombre(n, 0, locale);
 
 /* Réponses saisies → payload `details` (nombres convertis, vides retirés). */
 function versDetails(porte: Porte, r: Reponses, date: string): Details | undefined {

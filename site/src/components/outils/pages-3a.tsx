@@ -20,12 +20,13 @@ import { OUTILS, OUTILS_EN, PAGES_DONNEES, PAGES_DONNEES_EN } from "@/lib/nav";
 import type { Locale } from "@/lib/i18n";
 import { Alert } from "@/components/ui/alert";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { nombre as formaterNombre } from "@/lib/nombres";
 
 /* Pages « Taux des comptes 3a » et « Économie d'impôt 3a », en français et en anglais. Les fichiers de route
    (src/app/(fr)/3e-pilier/..., src/app/(en)/en/pillar-3a/...) ne font qu'appeler ces fonctions. */
 const N = " ";
-const nfFr = new Intl.NumberFormat("fr-CH", { maximumFractionDigits: 0 });
-const nfEn = new Intl.NumberFormat("en-GB", { maximumFractionDigits: 0 });
+const nfFr = { format: (x: number) => formaterNombre(x, 0, "fr") };
+const nfEn = { format: (x: number) => formaterNombre(x, 0, "en") };
 const P26 = I.PLAFONDS["2026"];
 const P27 = I.PLAFONDS["2027"];
 const NB = COMPTES_3A.length;

@@ -1,4 +1,4 @@
-/* Calculateur de la somme d'assurance ménage (valeur à neuf du mobilier). Fonctions pures, sans dépendance, testées par
+/* Calculateur de la somme d'assurance ménage (valeur à neuf du mobilier). Fonctions pures, sans dépendance externe, testées par
    tests/somme-menage.test.mts. Rien n'est envoyé : tout se calcule dans le navigateur.
    Deux méthodes publiées par des assureurs, reprises telles quelles (relevé du 23.11.2026, détail dans
    courtier/research/menage-somme-sources.md) :
@@ -10,6 +10,8 @@
      standard ; une partie de l'électronique, du sport, des loisirs et des objets de valeur est déjà comprise ; réserve
      « en général 10 % ».
    Les enfants comptent pour une demi-personne (Baloise : moins de 14 ans ; Zurich : moins de 18 ans). */
+
+import { nombre } from "../nombres.ts";
 
 export type Standard = "simple" | "moyen" | "eleve";
 export const STANDARDS: Standard[] = ["simple", "moyen", "eleve"];
@@ -114,7 +116,5 @@ export const tauxCouverture = (sommeAssuree: number, valeur: number) => (sommeAs
 /* Montant entier groupé par milliers, sans Intl : l'ICU de Node (build) et celle du navigateur ne donnent pas le même
    séparateur pour fr-CH (apostrophe ou espace fine), ce qui casse l'hydratation. FR : espace fine U+202F ; EN : virgule. */
 export function formaterMontant(x: number, langue: "fr" | "en"): string {
-  const n = Math.round(Number.isFinite(x) ? x : 0);
-  const s = String(Math.abs(n)).replace(/\B(?=(\d{3})+(?!\d))/g, langue === "fr" ? " " : ",");
-  return n < 0 ? `-${s}` : s;
+  return nombre(x, 0, langue);
 }

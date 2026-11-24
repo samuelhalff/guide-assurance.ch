@@ -3,6 +3,7 @@ import { Depliable } from "@/components/controles";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import type { Locale } from "@/lib/i18n";
 import { PAGES_DONNEES, PAGES_DONNEES_EN } from "@/lib/nav";
+import { nombre as formaterNombre } from "@/lib/nombres";
 
 /* Tableau statique, lisible sans JavaScript : pour chaque canton, région de prime la plus peuplée, adulte de 26 ans et plus.
    Quatre profils (franchise 300 et 2500, avec et sans accident) : première prime de la liste et moyenne des offres ;
@@ -23,10 +24,7 @@ const MULTI = ["VD", "VS", "FR"];
 
 export function TableauReperes({ locale = "fr", replie = false }: { locale?: Locale; replie?: boolean }) {
   const en = locale === "en";
-  const nf = (c: number) =>
-    en
-      ? new Intl.NumberFormat("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(c / 100)
-      : new Intl.NumberFormat("fr-CH", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(c / 100).replace(/\s/g, T);
+  const nf = (c: number) => formaterNombre(c / 100, 2, locale);
   const cantons = R.cantons;
   const bas = cantons.map((c) => c.offres[0].mensuel);
   const min = Math.min(...bas);

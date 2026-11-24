@@ -4,6 +4,7 @@
    Pour l'année suivante : relancer le script, le build suit (voir docs/decisions.md, baromètre). */
 import B from "@/data/barometre.json";
 import { ORG_ID, WEBSITE_ID } from "@/lib/jsonld";
+import { nombre } from "@/lib/nombres";
 
 export type Stat = { n: number; min: number; q1: number; med: number; q3: number; max: number };
 export type ProfilB = {
@@ -56,14 +57,10 @@ export const donneesCanton = (code: string) => DONNEES.cantons.find((c) => c.cod
 /* ---- Formats ---- */
 const T = " ";
 const NB = " ";
-const nf2 = { fr: new Intl.NumberFormat("fr-CH", { minimumFractionDigits: 2, maximumFractionDigits: 2 }), en: new Intl.NumberFormat("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) };
-const nf0 = { fr: new Intl.NumberFormat("fr-CH", { maximumFractionDigits: 0 }), en: new Intl.NumberFormat("en-GB", { maximumFractionDigits: 0 }) };
-const esp = (s: string) => s.replace(/[\s\u2019']/g, T);
-export const chf = (x: number, l: "fr" | "en") => (l === "fr" ? `${esp(nf2.fr.format(x))}${NB}CHF` : `CHF${NB}${nf2.en.format(x)}`);
-export const chf0 = (x: number, l: "fr" | "en") => (l === "fr" ? `${esp(nf0.fr.format(Math.round(x)))}${NB}CHF` : `CHF${NB}${nf0.en.format(Math.round(x))}`);
-export const num2 = (x: number, l: "fr" | "en") => (l === "fr" ? esp(nf2.fr.format(x)) : nf2.en.format(x));
+export const chf = (x: number, l: "fr" | "en") => (l === "fr" ? `${nombre(x, 2, "fr")}${NB}CHF` : `CHF${NB}${nombre(x, 2, "en")}`);
+const chf0 = (x: number, l: "fr" | "en") => (l === "fr" ? `${nombre(Math.round(x), 0, "fr")}${NB}CHF` : `CHF${NB}${nombre(Math.round(x), 0, "en")}`);
 export const pct = (x: number, l: "fr" | "en", signe = true) => {
-  const s = l === "fr" ? x.toFixed(1).replace(".", ",") : x.toFixed(1);
+  const s = nombre(x, 1, l);
   return `${signe && x > 0 ? "+" : ""}${s}${l === "fr" ? `${NB}%` : "%"}`;
 };
 

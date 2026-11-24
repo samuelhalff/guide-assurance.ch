@@ -1,3 +1,4 @@
+import { dateTexte } from "@/lib/dates";
 /* Langues du site : français à la racine, anglais sous /en/. Chaînes de l'habillage commun (tête, menu, pied,
    fil d'Ariane, pages guide, partage) et correspondance des pages hors Markdown entre les deux langues.
    Les pages Markdown portent leur équivalent dans content/en/*.md (clé `fr`). */
@@ -51,13 +52,8 @@ export const DICT = {
 } as const;
 
 /* Format des dates affichées : « 22 novembre 2026 », « 1er décembre » ; « 22 November 2026 » en anglais. */
-const FMT = {
-  fr: new Intl.DateTimeFormat("fr-CH", { day: "numeric", month: "long", year: "numeric" }),
-  en: new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric" }),
-};
 export function dateLongue(iso: string, locale: Locale) {
-  const s = FMT[locale].format(new Date(`${iso}T00:00`));
-  return locale === "fr" ? s.replace(/^1 /, "1er ") : s;
+  return dateTexte(new Date(`${iso}T00:00`), locale);
 }
 
 /* Pages écrites en TSX : adresse française -> adresse anglaise. */

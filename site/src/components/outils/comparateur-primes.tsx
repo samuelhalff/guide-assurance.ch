@@ -12,10 +12,11 @@ import { Choix } from "@/components/outils/choix";
 import { Case, ChoixBoutons, Depliable } from "@/components/controles";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Alert } from "@/components/ui/alert";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { nombre as formaterNombre } from "@/lib/nombres";
 
 /* Comparateur de primes LAMal 2027. Les données du canton sont chargées à la demande (public/data/primes-2027) ;
    le calcul se fait dans le navigateur, rien de ce qui est saisi n'est envoyé ni mis dans l'adresse.
@@ -25,9 +26,8 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 
 const T = " "; // espace fine insécable avant ; : ? ! »
 const NB = " ";
-const nfFr = (x: number, d = 0) =>
-  new Intl.NumberFormat("fr-CH", { minimumFractionDigits: d, maximumFractionDigits: d }).format(x).replace(/[\s'’]/g, T); // ICU du build (apostrophe) et du navigateur (espace) diffèrent : même séparateur partout, sinon erreur d’hydratation 418
-const nfEn = (x: number, d = 0) => new Intl.NumberFormat("en-GB", { minimumFractionDigits: d, maximumFractionDigits: d }).format(x);
+const nfFr = (x: number, d = 0) => formaterNombre(x, d, "fr"); // sans Intl : l'ICU du build et celle du navigateur diffèrent (src/lib/nombres.ts)
+const nfEn = (x: number, d = 0) => formaterNombre(x, d, "en");
 
 const PAR_PAGE = 20;
 /* Offres montrées avant le bloc « Recevoir des offres pour ce profil » (liste mobile). */
@@ -62,6 +62,13 @@ const TXT = {
     accidentCase: "Assurance accidents",
     accidentInfo: `Cochée d'office pour les enfants et dès 65${NB}ans. Inutile si vous travaillez au moins 8${NB}heures par semaine chez le même employeur, car son assurance accidents (LAA) vous couvre déjà.`,
     voir: "Voir les primes",
+    voirN: (n: number) => (n > 1 ? `Voir les ${n} offres` : "Voir l’offre"),
+    enDirect: "Les primes se mettent à jour à chaque changement.",
+    caisseTitre: (a: string, p: string) => `Votre caisse actuelle${T}: ${a}, ${p}`,
+    caisseRang: (m: string, an: string, rang: number, n: number) => `${m} par mois, soit ${an} par an. Elle arrive au rang ${rang} sur ${n}.`,
+    caisseHors: (m: string, an: string) => `${m} par mois, soit ${an} par an. Ce modèle n’est pas dans la liste filtrée.`,
+    caisseGain: (x: string) => ` L’offre la moins chère coûte ${x} de moins par an.`,
+    caisseMeilleure: " C’est déjà l’offre la moins chère de la liste.",
     ecartCaisse: "Afficher l’écart avec ma caisse actuelle",
     resumeFoyer: (n: number, lieu: string, nb: number) => `${n} offre${n > 1 ? "s" : ""} pour ${nb} personnes à ${lieu}, total du foyer.`,
     foyerNote: "Le total du foyer suppose que chaque personne est assurée chez le même assureur, dans le même modèle.",
@@ -128,7 +135,6 @@ const TXT = {
     vsMoyenne: "par rapport à la moyenne",
     vsActuelle: "par rapport à votre caisse",
     votreCaisse: "Votre caisse actuelle",
-    actuelle: "Votre caisse actuelle",
     premiere: "1re offre de la liste",
     apresRedis: "après redistribution",
     avantRedis: "avant redistribution",
@@ -176,6 +182,13 @@ const TXT = {
     accidentCase: "Accident insurance",
     accidentInfo: "Ticked by default for children and from age 65. Not needed if you work at least 8 hours a week for the same employer, because their accident insurance (LAA) already covers you.",
     voir: "See the premiums",
+    voirN: (n: number) => (n > 1 ? `See the ${n} offers` : "See the offer"),
+    enDirect: "Premiums update as soon as you change an answer.",
+    caisseTitre: (a: string, p: string) => `Your current insurer: ${a}, ${p}`,
+    caisseRang: (m: string, an: string, rang: number, n: number) => `${m} a month, or ${an} a year. It ranks ${rang} out of ${n}.`,
+    caisseHors: (m: string, an: string) => `${m} a month, or ${an} a year. This model is not in the filtered list.`,
+    caisseGain: (x: string) => ` The cheapest offer costs ${x} less a year.`,
+    caisseMeilleure: " It is already the cheapest offer in the list.",
     ecartCaisse: "Show the difference with my current insurer",
     resumeFoyer: (n: number, lieu: string, nb: number) => `${n} offer${n > 1 ? "s" : ""} for ${nb} people in ${lieu}, household total.`,
     foyerNote: "The household total assumes that each person is insured with the same insurer, in the same model.",
@@ -242,7 +255,6 @@ const TXT = {
     vsMoyenne: "compared with the average",
     vsActuelle: "compared with your insurer",
     votreCaisse: "Your current insurer",
-    actuelle: "Your current insurer",
     premiere: "1st offer in the list",
     apresRedis: "after redistribution",
     avantRedis: "before redistribution",
@@ -529,9 +541,9 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
             <span className="autre">{parAn ? `${nf(o.mensuel, 2)} ${t.mois}` : `${nf(o.annuel)} ${t.an}`}</span>
           </div>
           <ul className="ecarts">
+            {vsAct !== null ? <li className="vs-actuelle"><b>{signe(vsAct)}</b> {t.parAn} {t.vsActuelle}</li> : null}
             <li>{ip === 0 ? t.premiere : <><b>{signe(o.ecartMin)}</b> {t.parAn} {t.vsPremiere}</>}</li>
             <li><b>{signe(o.ecartMoyenne)}</b> {t.parAn} {t.vsMoyenne}</li>
-            {vsAct !== null ? <li className="vs-actuelle"><b>{signe(vsAct)}</b> {t.parAn} {t.vsActuelle}</li> : null}
           </ul>
           <Depliable className="detail-offre" titre={t.details}>
             <ul>
@@ -718,7 +730,8 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
             + {t.ajouter}
           </button>
         ) : null}
-        <Button type="submit" className="w-full">{t.voir}</Button>
+        <Button type="submit" className="w-full">{r && r.total ? t.voirN(r.total) : t.voir}</Button>
+        {r && r.total ? <small className="aide-champ">{t.enDirect}</small> : null}
         </CardContent></Card>
       </form>
 
@@ -755,7 +768,7 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
               <ChoixBoutons
                 name="cp-periode"
                 variante="pastille"
-                className="bascule"
+                className="periode"
                 label={t.affichage}
                 value={parAn}
                 onChange={setParAn}
@@ -775,9 +788,22 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
                   <label htmlFor="cp-act-p">{t.produit}</label>
                   <Choix id="cp-act-p" value={actP} onChange={setActP} disabled={!actA} options={[{ value: "", label: t.choisir }, ...produitsActA.map((x) => ({ value: x, label: x }))]} />
                 </div>
-                {actuelle ? <p className="note-outil">{t.actuelle}{isEn ? ":" : `${T}:`} {chf(actuelle.mensuel, 2)} {t.mois}, {chf(actuelle.annuel)} {t.an}.</p> : null}
               </div>
             ) : null}
+            {actuelle && r && r.total ? (() => {
+              const rang = r.offres.findIndex((o) => o.assureur === actuelle.assureur && o.produit === actuelle.produit);
+              const moinsChere = r.offres[0];
+              const gain = actuelle.annuel - moinsChere.annuel;
+              return (
+                <Alert variant="info" className="synthese-caisse">
+                  <AlertTitle>{t.caisseTitre(actuelle.assureur, actuelle.produit)}</AlertTitle>
+                  <AlertDescription>
+                    {rang >= 0 ? t.caisseRang(chf(actuelle.mensuel, 2), chf(actuelle.annuel), rang + 1, r.offres.length) : t.caisseHors(chf(actuelle.mensuel, 2), chf(actuelle.annuel))}
+                    {Math.round(gain) > 0 ? t.caisseGain(chf(gain)) : rang === 0 ? t.caisseMeilleure : null}
+                  </AlertDescription>
+                </Alert>
+              );
+            })() : null}
 
             {!r.total ? (
               <Alert variant="attention" className="provisoire">{t.aucune}</Alert>

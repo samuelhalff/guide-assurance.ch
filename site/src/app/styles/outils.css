@@ -122,8 +122,8 @@
   .fourchette { font: 600 16px var(--narrow); margin: 0 0 var(--s4); }
   .reglages { display: grid; gap: var(--s3); align-items: end; }
   .reglages .champ { margin: 0; }
-  .bascule { display: grid; grid-template-columns: auto auto; gap: 4px; }
-  .bascule .pastille span { min-height: 48px; padding: 6px 10px; font-size: 15px; }
+  .periode { display: grid; grid-template-columns: auto auto; gap: 4px; }
+  .periode .pastille span { min-height: 48px; padding: 6px 10px; font-size: 15px; }
 
   .cartes-primes { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s2); }
   .carte-prime { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 2px var(--s2); align-items: start; }
@@ -138,6 +138,7 @@
   .carte-prime .ecarts { grid-column: 2 / -1; list-style: none; margin: var(--s2) 0 0; padding: var(--s2) 0 0; border-top: 1px solid var(--filet); font: 14px var(--narrow); color: var(--encre-2); display: grid; gap: 1px; }
   .carte-prime .ecarts b { color: var(--encre); font-weight: 700; font-variant-numeric: tabular-nums; }
   .carte-prime .ecarts .vs-actuelle { color: var(--encre); }
+  .synthese-caisse { margin-block: var(--s3); }
   .rappel-liste { margin: var(--s3) 0 var(--s2); padding: var(--s3) var(--s4); background: var(--info-teinte); border-radius: var(--r); font-size: 16px; }
   .rappel-liste a { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; }
   .rappel-liste svg { vertical-align: -2px; }
@@ -151,7 +152,7 @@
   .lien-profil { border: 0; background: none; padding: 0; font: 600 14px var(--narrow); color: var(--lac-encre); text-decoration: underline; cursor: pointer; }
   .page-outil .apercu > h2.titre-resultat, .page-outil h2.titre-resultat { font-size: 23px; margin: 0 0 var(--s2); }
   .reglages { grid-template-columns: 1fr; }
-  .reglages .bascule { justify-self: start; }
+  .reglages .periode { justify-self: start; }
   .caisse-case { margin-top: var(--s3); }
   .caisse-actuelle { margin-bottom: var(--s3); }
   .caisse-actuelle > p { grid-column: 1 / -1; margin: 0; }
@@ -232,11 +233,11 @@
     .rappel-bureau { display: block; }
     .barre-collante { display: none; }
     .reglages { grid-template-columns: 1fr 1fr auto; }
-    .reglages .bascule { grid-column: auto; }
+    .reglages .periode { grid-column: auto; }
   }
 
   /* FAQ en bas de page */
-  .faq { padding-block: var(--s7); border-top: 1px solid var(--filet); }
+  .faq { margin-top: var(--s7); padding-block: var(--s7); border-top: 1px solid var(--filet); }
   .faq section { max-width: 68ch; margin-bottom: var(--s6); }
   .faq h2 { margin-bottom: var(--s3); }
   .faq p { margin: 0 0 var(--s3); }

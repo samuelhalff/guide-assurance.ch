@@ -4,6 +4,7 @@
    Règles appliquées : lignes terminées par CRLF, repliées à 75 octets sans couper un caractère UTF-8 (§3.1),
    texte échappé (§3.3.11), UID et DTSTAMP sur chaque VEVENT (§3.6.1), alarmes VALARM avec ACTION, DESCRIPTION
    et TRIGGER (§3.6.6). */
+import { dateTexte } from "./dates.ts";
 
 export type Alarme = { joursAvant: number; heure?: number };
 
@@ -169,7 +170,7 @@ export function evenementFixe(type: TypeFixe, today: Date, l: Langue = "fr"): Ev
 export function evenementLettre(type: "lamal" | "lca", dl: Date, fin: Date, l: Langue = "fr"): EvenementIcs {
   const fr = l === "fr";
   const k = LIENS[l];
-  const f = (d: Date) => d.toLocaleDateString(fr ? "fr-CH" : "en-GB", { day: "numeric", month: "long", year: "numeric" }).replace(/^1 /, fr ? "1er " : "1 ");
+  const f = (d: Date) => dateTexte(d, fr ? "fr" : "en");
   const quoi = type === "lamal" ? (fr ? "l’assurance de base" : "basic health insurance") : fr ? "la complémentaire" : "supplementary insurance";
   const base = type === "lamal" ? (fr ? "art. 7 LAMal" : "art. 7 LAMal") : fr ? "art. 35a LCA" : "art. 35a LCA";
   return {
@@ -230,7 +231,7 @@ export function evenementContrat(c: Contrat, i: number, today: Date, l: Langue =
   /* RRULE annuelle sur un 29 février : on ramène au 28 pour que le rappel revienne chaque année. */
   if (dl.getMonth() === 1 && dl.getDate() === 29) dl = new Date(dl.getFullYear(), 1, 28);
   const nom = (c.nom ?? "").trim().slice(0, 80) || NOM_CONTRAT[c.type][l];
-  const f = (d: Date) => d.toLocaleDateString(fr ? "fr-CH" : "en-GB", { day: "numeric", month: "long" }).replace(/^1 /, fr ? "1er " : "1 ");
+  const f = (d: Date) => dateTexte(d, fr ? "fr" : "en", { annee: false });
   const mois = fr ? `${c.preavis} mois` : `${c.preavis} month${c.preavis > 1 ? "s" : ""}`;
   return {
     uid: uidIcs(`contrat-${i + 1}-${c.type}`, dl),

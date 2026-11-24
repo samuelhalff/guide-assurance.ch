@@ -10,19 +10,14 @@ import { Input } from "@/components/ui/input";
 import { Alert } from "@/components/ui/alert";
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { nombre as formaterNombre } from "@/lib/nombres";
 
 /* Calculateur « Économie d'impôt 3a » : tout se calcule ici, rien n'est envoyé. Le profil peut être partagé
    après le # (jamais transmis au serveur), lu une fois puis retiré de l'adresse. */
 const N = " ";
-/* Nombres formatés sans Intl : l'ICU du build et celle du navigateur diffèrent pour fr-CH (apostrophe ou espace fine),
-   ce qui casse l'hydratation (erreur React 418). FR : espace fine ; EN : virgule. */
-const grouper = (x: number, mille: string) => {
-  const v = Number.isFinite(x) ? Math.round(x) : 0;
-  const s = String(Math.abs(v)).replace(/\B(?=(\d{3})+(?!\d))/g, mille);
-  return v < 0 ? `-${s}` : s;
-};
-const nfFr = { format: (x: number) => grouper(x, "\u202f") };
-const nfEn = { format: (x: number) => grouper(x, ",") };
+/* Nombres formatés sans Intl (src/lib/nombres.ts) : l'ICU du build et celle du navigateur diffèrent pour fr-CH. */
+const nfFr = { format: (x: number) => formaterNombre(x, 0, "fr") };
+const nfEn = { format: (x: number) => formaterNombre(x, 0, "en") };
 
 const TXT = {
   fr: {
