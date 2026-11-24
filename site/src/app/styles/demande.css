@@ -15,17 +15,17 @@
   .demande h2.petit { font-size: 18px; font-weight: 700; letter-spacing: -.01em; }
   .demande h1:focus { outline: none; }
   .demande h1:focus-visible { outline: 3px solid var(--lac-encre); outline-offset: 4px; }
-  .demande .aide { font: 15px var(--narrow); color: var(--encre-2); margin: 0 0 var(--s3); }
+  .demande .aide { font: 16px var(--narrow); color: var(--encre-2); margin: 0 0 var(--s3); }
   .demande .champ .aide { margin: 0; }
   .demande .champ { margin: 0; }
   .legende-champ { font: 600 16px var(--narrow); }
   .facultatif { font-weight: 400; color: var(--encre-2); }
   .saisie-courte { max-width: 9em; }
-  .erreur-champ { font: 600 15px var(--narrow); color: var(--sentier-fonce); margin: var(--s2) 0 0; }
+  .erreur-champ { font: 600 16px var(--narrow); color: var(--sentier-fonce); margin: var(--s2) 0 0; }
 
   /* Progression : « 1 sur 3 » + trois segments */
   .progression { display: grid; gap: var(--s2); margin: 0 0 var(--s5); }
-  .progression p { margin: 0; font: 15px var(--narrow); color: var(--encre-2); }
+  .progression p { margin: 0; font: 16px var(--narrow); color: var(--encre-2); }
   .progression p span { font-weight: 700; color: var(--encre); }
   .progression ol { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 0; padding: 0; list-style: none; }
   .progression li { height: 4px; border-radius: 2px; background: var(--filet); transition: background-color .25s ease-out; }
@@ -62,14 +62,14 @@
   .hors-suisse ul { margin: 0; padding-left: 1.2em; list-style: disc; display: grid; gap: var(--s2); }
 
   /* Consentement */
-  .consent p { margin: 0; font: 15px/1.5 var(--narrow); color: var(--encre-2); }
+  .consent p { margin: 0; font: 16px/1.5 var(--narrow); color: var(--encre-2); }
   .consent p strong { color: var(--encre); font-weight: 700; }
-  .consent .erreur-champ { margin: 0; font: 600 15px var(--narrow); color: var(--sentier-fonce); }
+  .consent .erreur-champ { margin: 0; font: 600 16px var(--narrow); color: var(--sentier-fonce); }
   .case-demande { display: grid; grid-template-columns: 24px 1fr; gap: 12px; align-items: start; font-size: 16px; line-height: 1.4; cursor: pointer; padding: 6px 0; }
 
   /* Actions : Retour à gauche, action principale qui prend la place */
   .actions-demande { display: flex; gap: var(--s3); margin-top: var(--s2); }
-  .rassurance { margin: 0; font: 15px var(--narrow); color: var(--encre-2); text-align: center; text-wrap: balance; }
+  .rassurance { margin: 0; font: 16px var(--narrow); color: var(--encre-2); text-align: center; text-wrap: balance; }
   .turnstile:empty { display: none; }
 
   /* Pot de miel : hors écran, sans display:none (certains robots l'ignorent) */
@@ -82,7 +82,7 @@
   @media (max-width: 719px) {
     .cta-demande, .cta-haut-outil { justify-items: stretch; }
   }
-  .cta-demande p { margin: 0; font: 15px var(--narrow); color: var(--encre-2); }
+  .cta-demande p { margin: 0; font: 16px var(--narrow); color: var(--encre-2); }
 
   /* Barre collante : mobile seulement, après la moitié de la page */
   .barre-demande { display: none; }
@@ -125,7 +125,7 @@
   .cta-demande .cta-rappel { margin-top: var(--s1); color: var(--encre); }
   .cta-rappel a { font-weight: 700; }
   .chapo-rappel { margin: calc(-1 * var(--s2)) 0 0; font-size: 18px; line-height: 1.45; color: var(--encre-2); }
-  .vers-complet { margin: 0; font: 15px var(--narrow); color: var(--encre-2); text-align: center; }
+  .vers-complet { margin: 0; font: 16px var(--narrow); color: var(--encre-2); text-align: center; }
 }
 
 /* Portes d'offre directe (ménage et RC, protection juridique, auto) : choix en boutons, saisies courtes, facultatifs
@@ -169,13 +169,13 @@
   .capture-champs { display: grid; gap: var(--s3); }
   .capture-rappel .champ { margin: 0; }
   .capture-rappel .champ label { display: block; font: 600 16px var(--narrow); margin: 0 0 var(--s1); }
-  .capture-rappel .aide { font: 15px var(--narrow); color: var(--encre-2); margin: var(--s1) 0 0; }
+  .capture-rappel .aide { font: 16px var(--narrow); color: var(--encre-2); margin: var(--s1) 0 0; }
   .capture-rappel .erreur-champ { margin-top: var(--s1); }
   .capture-creneau { border: 0; margin: 0; padding: 0; min-width: 0; }
   .capture-creneau legend { padding: 0; margin: 0 0 var(--s2); }
   .capture-creneau .puce { font-size: 16px; min-height: 44px; padding: 8px 12px; }
   .capture-bouton { width: 100%; justify-content: center; }
-  .capture-rassurance, .capture-complet { margin: 0; font: 15px/1.4 var(--narrow); color: var(--encre-2); }
+  .capture-rassurance, .capture-complet { margin: 0; font: 16px/1.4 var(--narrow); color: var(--encre-2); }
   .capture-rassurance { margin-top: calc(-1 * var(--s2)); }
   .capture-complet a { font-weight: 600; color: var(--lac-encre); }
   .capture-envoyee { display: grid; grid-template-columns: 28px 1fr; gap: var(--s3); align-items: start; border-color: var(--lac-trait); background: var(--papier); }

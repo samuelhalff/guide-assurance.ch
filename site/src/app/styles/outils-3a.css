@@ -6,12 +6,12 @@
   .carte-taux { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 2px var(--s2); align-items: start; }
   .carte-taux .rang { font: 600 14px var(--narrow); color: var(--encre-2); padding-top: 3px; font-variant-numeric: tabular-nums; }
   .carte-taux .qui b { display: block; font-weight: 700; font-size: 17px; }
-  .carte-taux .produit, .table-taux .produit { display: block; font: 15px var(--narrow); color: var(--encre-2); overflow-wrap: anywhere; }
+  .carte-taux .produit, .table-taux .produit { display: block; font: 16px var(--narrow); color: var(--encre-2); overflow-wrap: anywhere; }
   .carte-taux .combien { text-align: right; }
   .carte-taux .montant { display: block; font: 800 22px/1.1 var(--sans); letter-spacing: -.01em; font-variant-numeric: tabular-nums; white-space: nowrap; }
-  .carte-taux .unite { display: block; font: 13px var(--narrow); color: var(--encre-2); }
-  .carte-taux .cond, .carte-taux .releve { grid-column: 2 / -1; margin: var(--s1) 0 0; font: 15px/1.4 var(--narrow); }
-  .carte-taux .releve { color: var(--encre-2); font-size: 14px; }
+  .carte-taux .unite { display: block; font: 16px var(--narrow); color: var(--encre-2); }
+  .carte-taux .cond, .carte-taux .releve { grid-column: 2 / -1; margin: var(--s1) 0 0; font: 16px/1.4 var(--narrow); }
+  .carte-taux .releve { color: var(--encre-2); font-size: 16px; }
   .carte-taux .releve a, .table-taux .releve a { color: var(--lac-encre); }
 
   table.table-taux { display: none; width: 100%; }
@@ -22,9 +22,9 @@
   .table-taux td:first-child b { display: block; }
   table.table-taux td.taux { font-weight: 800; font-size: 18px; white-space: nowrap; text-align: right; font-variant-numeric: tabular-nums; }
   table.table-taux thead th:nth-child(2) { text-align: right; }
-  table.table-taux td.cond { font: 15px/1.4 var(--narrow); min-width: 22em; }
-  .table-taux td.releve { font: 14px var(--narrow); white-space: nowrap; color: var(--encre-2); }
-  .table-taux td.releve small, .table-taux td.releve a { display: block; font-size: 13px; }
+  table.table-taux td.cond { font: 16px/1.4 var(--narrow); min-width: 22em; }
+  .table-taux td.releve { font: 16px var(--narrow); white-space: nowrap; color: var(--encre-2); }
+  .table-taux td.releve small, .table-taux td.releve a { display: block; font-size: 16px; }
 
   .lien-outil-3a { margin: 0 0 var(--s7); }
   .lien-outil-3a a { font-weight: 700; }
@@ -41,10 +41,10 @@
   .resultat-3a .economie .montant small { font: 600 18px var(--narrow); color: var(--encre-2); letter-spacing: 0; }
   .resultat-3a .economie .soit { margin: 2px 0 0; font: 16px var(--narrow); color: var(--encre-2); }
   .resultat-3a .economie .provisoire { margin: var(--s3) 0 0; }
-  table.detail-3a { font-size: 15px; }
-  .detail-3a th[scope="row"] { text-align: left; font: 600 15px var(--narrow); }
+  table.detail-3a { font-size: 16px; }
+  .detail-3a th[scope="row"] { text-align: left; font: 600 16px var(--narrow); }
   .detail-3a td { font-variant-numeric: tabular-nums; white-space: nowrap; }
-  .detail-3a thead th { font-size: 13px; white-space: normal; }
+  .detail-3a thead th { font-size: 16px; white-space: normal; }
   .detail-3a tr.total th, .detail-3a tr.total td { border-top: 1.5px solid var(--encre); border-bottom: 0; }
   .resultat-3a .rappel-liste { margin: 0; }
   .retrait-3a .depliable-titre { font: 700 17px var(--sans); min-height: 32px; color: var(--lac-encre); }
@@ -71,10 +71,10 @@
   .cta-bas-3a .cta-demande { margin: var(--s6) 0 var(--s5); }
   .page-outil h2.titre-section-3a { margin: var(--s7) 0 var(--s2); scroll-margin-top: 80px; }
   .intro-section-3a { max-width: 68ch; margin: 0 0 var(--s4); }
-  .carte-taux .frais { grid-column: 2 / -1; margin: var(--s1) 0 0; font: 15px/1.4 var(--narrow); }
+  .carte-taux .frais { grid-column: 2 / -1; margin: var(--s1) 0 0; font: 16px/1.4 var(--narrow); }
   .carte-taux .frais a { color: var(--lac-encre); }
-  table.table-taux td.frais { font: 15px/1.4 var(--narrow); min-width: 14em; }
-  table.table-taux td.frais a { display: block; font-size: 13px; color: var(--lac-encre); }
+  table.table-taux td.frais { font: 16px/1.4 var(--narrow); min-width: 14em; }
+  table.table-taux td.frais a { display: block; font-size: 16px; color: var(--lac-encre); }
   .titres-3a table.table-taux td.releve { white-space: normal; }
   .titres-3a table.table-taux td.actions { white-space: nowrap; font-variant-numeric: tabular-nums; }
 
@@ -86,29 +86,29 @@
   .table-assureurs-3a th, .table-assureurs-3a td { vertical-align: top; }
   .table-assureurs-3a th[scope="row"] a { color: var(--lac-encre); font-weight: 700; }
   ul.puces-types { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px; }
-  .table-assureurs-3a .aucun { font: 14px var(--narrow); color: var(--encre-2); }
+  .table-assureurs-3a .aucun { font: 16px var(--narrow); color: var(--encre-2); }
 
   .assureurs-3a { display: grid; gap: var(--s2); margin-top: var(--s3); }
   .assureur-3a { scroll-margin-top: 80px; }
   .assureur-3a > .depliable-titre { min-height: 48px; font-size: 17px; }
   .assureur-3a .depliable-libelle { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); }
-  .assureur-3a .assureur-nombre { margin-left: auto; font: 14px var(--narrow); color: var(--encre-2); white-space: nowrap; }
-  .assureur-3a .entite { margin: 0 0 var(--s2); font: 14px var(--narrow); color: var(--encre-2); }
+  .assureur-3a .assureur-nombre { margin-left: auto; font: 16px var(--narrow); color: var(--encre-2); white-space: nowrap; }
+  .assureur-3a .entite { margin: 0 0 var(--s2); font: 16px var(--narrow); color: var(--encre-2); }
   .contrat-3a { border-top: 1px solid var(--filet); padding: var(--s3) 0 0; margin-top: var(--s3); }
   .page-outil .contrat-3a h3 { margin: 0; font-size: 17px; }
   .contrat-3a .etiquettes { display: flex; flex-wrap: wrap; gap: 4px; margin: var(--s1) 0 var(--s2); }
   .contrat-3a dl { margin: 0; display: grid; gap: var(--s2); }
-  .contrat-3a dt { font: 600 14px var(--narrow); color: var(--encre-2); }
+  .contrat-3a dt { font: 600 16px var(--narrow); color: var(--encre-2); }
   .contrat-3a dd { margin: 0; font: 16px/1.45 var(--narrow); max-width: 68ch; }
-  .contrat-3a .source-outil { margin: var(--s2) 0 0; font-size: 14px; }
+  .contrat-3a .source-outil { margin: var(--s2) 0 0; font-size: 16px; }
   .contrat-3a .source-outil a { color: var(--lac-encre); }
 
   .table-compar-3a th, .table-compar-3a td { vertical-align: top; }
   .table-compar-3a th[scope="row"] { min-width: 9em; }
-  .table-compar-3a .src-ligne { display: block; font: 400 13px var(--narrow); color: var(--lac-encre); margin-top: 2px; }
+  .table-compar-3a .src-ligne { display: block; font: 400 16px var(--narrow); color: var(--lac-encre); margin-top: 2px; }
   /* Mobile : cartes du comparatif (le tableau prend le relais à 720 px). */
   .cartes-compar-3a { display: grid; gap: var(--s2); }
   .cartes-compar-3a dl { margin: 0; display: grid; gap: var(--s2); }
-  .cartes-compar-3a dt { font: 600 13px var(--narrow); color: var(--encre-2); }
+  .cartes-compar-3a dt { font: 600 16px var(--narrow); color: var(--encre-2); }
   .cartes-compar-3a dd { margin: 0; }
 }

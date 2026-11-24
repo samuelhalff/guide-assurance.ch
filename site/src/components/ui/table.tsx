@@ -69,7 +69,7 @@ function TableHead({ className, ...props }: React.ComponentProps<"th">) {
     <th
       data-slot="table-head"
       className={cn(
-        "px-2.5 py-2 text-left align-bottom font-narrow text-sm font-semibold text-muted-foreground [&[scope=row]]:align-middle [&[scope=row]]:font-sans [&[scope=row]]:text-base [&[scope=row]]:text-foreground group-data-[variant=chiffres]/table:not-first:text-right [&:has([role=checkbox])]:pr-0",
+        "px-2.5 py-2 text-left align-bottom font-narrow text-base font-semibold text-muted-foreground [&[scope=row]]:align-middle [&[scope=row]]:font-sans [&[scope=row]]:text-base [&[scope=row]]:text-foreground group-data-[variant=chiffres]/table:not-first:text-right [&:has([role=checkbox])]:pr-0",
         className
       )}
       {...props}
@@ -97,7 +97,7 @@ function TableCaption({
   return (
     <caption
       data-slot="table-caption"
-      className={cn("mb-2 text-left font-narrow text-[15px] text-muted-foreground", className)}
+      className={cn("mb-2 text-left font-narrow text-base text-muted-foreground", className)}
       {...props}
     />
   )

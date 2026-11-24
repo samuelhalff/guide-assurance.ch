@@ -74,20 +74,20 @@
   .comparer { margin: var(--s5) 0 0; }
   .comparer-champs { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: var(--s3); align-items: end; }
   .comparer .champ { margin: 0; }
-  .comparer .champ label { font-size: 15px; }
-  .comparer-err { font: 600 15px var(--narrow); color: var(--sentier-fonce); margin: var(--s2) 0 0; }
-  .comparer-defaut { font: 14px/1.4 var(--narrow); color: var(--encre-2); margin: var(--s2) 0 0; }
+  .comparer .champ label { font-size: 16px; }
+  .comparer-err { font: 600 16px var(--narrow); color: var(--sentier-fonce); margin: var(--s2) 0 0; }
+  .comparer-defaut { font: 16px/1.4 var(--narrow); color: var(--encre-2); margin: var(--s2) 0 0; }
   .garantie {
     display: flex; align-items: flex-start; gap: 10px; margin: var(--s4) 0 0; padding-top: var(--s3);
-    border-top: 1px solid var(--filet); font: 500 15px/1.45 var(--narrow); color: var(--encre);
+    border-top: 1px solid var(--filet); font: 500 16px/1.45 var(--narrow); color: var(--encre);
   }
   .garantie svg { flex: 0 0 auto; margin: 2px 1px 0; color: var(--encre-2); }
-  .saison { margin: var(--s3) 0 0; font: 15px/1.45 var(--narrow); color: var(--encre-2); }
+  .saison { margin: var(--s3) 0 0; font: 16px/1.45 var(--narrow); color: var(--encre-2); }
   .saison strong { color: var(--sentier-fonce); }
   .pied-cartouche {
     display: flex; justify-content: space-between; align-items: flex-end; gap: var(--s4);
     margin-top: var(--s5); padding-top: var(--s3); border-top: 1px solid var(--filet);
-    font-family: var(--narrow); font-size: 14px; color: var(--encre-2);
+    font-family: var(--narrow); font-size: 16px; color: var(--encre-2);
   }
   .mini-leg { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
   .mini-leg .sym { display: inline-block; width: 24px; height: 0; margin-left: 6px; }
@@ -151,7 +151,7 @@
   .echeance .date .an { font-size: 18px; }
   .echeance .quoi { font-family: var(--narrow); font-size: 16px; color: var(--encre-2); }
   .extrait { padding: var(--s6); margin: 0; }
-  .extrait .source { font-family: var(--narrow); font-size: 14px; color: var(--encre-2); margin: 0 0 var(--s3); }
+  .extrait .source { font-family: var(--narrow); font-size: 16px; color: var(--encre-2); margin: 0 0 var(--s3); }
   .extrait p.clause { margin: 0; font-size: 17px; line-height: 1.65; }
   .extrait mark { background: transparent; color: inherit; border-bottom: 3.4px dashed var(--sentier); padding-bottom: 1px; }
   .note {
@@ -184,7 +184,7 @@
     white-space: nowrap; font-variant-numeric: tabular-nums lining-nums;
   }
   .outil-chiffre small {
-    display: block; font: 600 14px var(--narrow); letter-spacing: 0; color: var(--bande-texte-3);
+    display: block; font: 600 16px var(--narrow); letter-spacing: 0; color: var(--bande-texte-3);
     margin-top: 6px; white-space: normal; max-width: 30ch;
   }
   .outil-texte { font-size: 16px; color: var(--bande-texte-2); line-height: 1.5; }
@@ -192,7 +192,7 @@
   .outil-cta { display: inline-flex; align-items: center; gap: 8px; font: 700 16px var(--sans); color: var(--bande-lien); align-self: end; }
   .outil-cta svg { transition: transform .15s; display: block; }
   a.outil-ligne:hover .outil-cta svg { transform: translateX(3px); }
-  .bientot-ligne { font-size: 15px; color: var(--bande-texte-3); padding: var(--s3) var(--s4) 0; line-height: 1.5; }
+  .bientot-ligne { font-size: 16px; color: var(--bande-texte-3); padding: var(--s3) var(--s4) 0; line-height: 1.5; }
   .bientot-ligne b { color: var(--bande-texte-2); font-weight: 600; }
   @media (min-width: 900px) {
     .outil-ligne { grid-template-columns: 340px 1fr auto; align-items: center; gap: var(--s6); padding: var(--s5) var(--s6); }
@@ -215,20 +215,20 @@
   .g-26 { width: 11px; height: 11px; background: var(--papier); border: 2px solid var(--encre); }
   .g-27 { width: 14px; height: 14px; background: var(--encre); }
   .g-val { font: 700 16px var(--sans); text-align: right; white-space: nowrap; }
-  .g-val em { font: 600 15px var(--narrow); font-style: normal; color: var(--sentier-fonce); margin-left: 4px; }
-  .g-leg { font: 15px var(--narrow); color: var(--encre-2); margin: var(--s3) 0 0; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .g-val em { font: 600 16px var(--narrow); font-style: normal; color: var(--sentier-fonce); margin-left: 4px; }
+  .g-leg { font: 16px var(--narrow); color: var(--encre-2); margin: var(--s3) 0 0; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
   .g-k { display: inline-block; width: 11px; height: 11px; border-radius: 50%; border: 2px solid var(--encre); }
   .g-k27 { background: var(--encre); margin-left: 8px; }
   .g-kch { display: inline-block; width: 0; height: 14px; border-left: 1.6px dashed var(--sentier); margin-left: 8px; }
   .primes-lien { margin: var(--s5) 0 0; }
-  .note-donnees { font: 15px/1.5 var(--narrow); color: var(--encre-2); max-width: 80ch; margin: var(--s5) 0 0; }
+  .note-donnees { font: 16px/1.5 var(--narrow); color: var(--encre-2); max-width: 80ch; margin: var(--s5) 0 0; }
 
   /* Tableau des guides : reste un <table> natif, car sa mise en liste sur mobile (plus bas) ne tient pas avec les marges du composant Table. */
   .itineraires table { border-collapse: collapse; width: 100%; font-size: 16px; }
   .itineraires th, .itineraires td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--filet); }
-  .itineraires th { font-family: var(--narrow); font-weight: 700; font-size: 15px; color: var(--encre-2); border-bottom: 1.5px solid var(--encre); }
+  .itineraires th { font-family: var(--narrow); font-weight: 700; font-size: 16px; color: var(--encre-2); border-bottom: 1.5px solid var(--encre); }
   .itineraires td.num, .itineraires th.num { text-align: right; }
-  .primes td .fourchette { display: block; font: 14px var(--narrow); color: var(--encre-2); margin-top: 2px; }
+  .primes td .fourchette { display: block; font: 16px var(--narrow); color: var(--encre-2); margin-top: 2px; }
 
   /* Guides */
   .accueil .itineraires { padding-top: 0; }
@@ -278,7 +278,7 @@
     }
     .mm-dest circle { fill: var(--papier); stroke: var(--encre); stroke-width: 2; }
     .mm-dest text {
-      font: 700 14px var(--narrow); fill: var(--encre);
+      font: 700 16px var(--narrow); fill: var(--encre);
       paint-order: stroke; stroke: var(--carte); stroke-width: 5px; stroke-linejoin: round;
     }
     .mm-depart circle:first-child { fill: var(--papier); stroke: var(--encre); stroke-width: 2; }
@@ -331,7 +331,7 @@
     .itineraires tr { padding: 14px 0; border-bottom: 1px solid var(--filet); }
     .itineraires td { display: inline; border: 0; padding: 0; }
     .itineraires td:first-child { display: block; font-size: 17px; line-height: 1.35; margin-bottom: 4px; }
-    .itineraires td.pour, .itineraires td.num { font: 500 14px var(--narrow); color: var(--encre-2); }
+    .itineraires td.pour, .itineraires td.num { font: 500 16px var(--narrow); color: var(--encre-2); }
     .itineraires td.pour::after { content: " · "; }
   }
   @media (prefers-reduced-motion: reduce) {

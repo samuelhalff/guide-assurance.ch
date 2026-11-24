@@ -41,8 +41,8 @@ const buttonVariants = cva(
         /* Commande du site : 52 px, 17 px gras ; le libellé peut passer à la ligne sur mobile. */
         default:
           "min-h-13 gap-2.5 px-5 py-3 text-[17px] leading-tight [&_svg:not([class*='size-'])]:size-[18px]",
-        xs: "h-6 gap-1 rounded-[min(var(--radius-md),10px)] px-2 text-xs in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
-        sm: "h-7 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
+        xs: "h-6 gap-1 rounded-[min(var(--radius-md),10px)] px-2 text-base in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
+        sm: "h-7 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-base in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
         lg: "h-9 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
         icon: "size-8",
         "icon-md": "size-10",
@@ -53,22 +53,22 @@ const buttonVariants = cva(
           "size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg",
         "icon-lg": "size-9",
         /* Commande de la tête : 44 px, 15 px. */
-        commande: "min-h-11 min-w-11 gap-2 px-2.5 text-[15px] leading-normal",
+        commande: "min-h-11 min-w-11 gap-2 px-2.5 text-base leading-normal",
         /* Texte en ligne : 14 px narrow, sans marge intérieure. */
-        texte: "h-auto min-h-0 gap-1 p-0 font-narrow text-sm leading-normal",
+        texte: "h-auto min-h-0 gap-1 p-0 font-narrow text-base leading-normal",
         /* Texte qui reprend la police voisine. */
         herite:
           "min-h-0 gap-1 p-0 font-[family-name:inherit] text-[length:inherit] leading-[inherit]",
         /* Ajout pleine largeur. */
         bloc: "min-h-12 w-full px-3 text-base leading-tight",
         /* Question d'exemple : 44 px, 15 px. */
-        puce: "min-h-11 px-3.5 py-2.5 text-[15px] leading-[1.35]",
+        puce: "min-h-11 px-3.5 py-2.5 text-base leading-[1.35]",
         /* Barre collante mobile : 16 px, padding serré ; un <small> passe en seconde ligne. */
         barre:
-          "min-h-13 flex-auto gap-0.5 px-3 py-2 text-base leading-tight whitespace-nowrap has-[small]:flex-col [&_small]:font-narrow [&_small]:text-[13px] [&_small]:font-semibold [&_small]:opacity-90",
+          "min-h-13 flex-auto gap-0.5 px-3 py-2 text-base leading-tight whitespace-nowrap has-[small]:flex-col [&_small]:font-narrow [&_small]:text-base [&_small]:font-semibold [&_small]:opacity-90",
         /* Bandeau cookies : 44 px sur téléphone (cible tactile minimale), 52 px dès 768 px. */
         bandeau:
-          "min-h-11 px-3 py-2 text-[15px] leading-tight whitespace-nowrap md:min-h-13 md:text-base",
+          "min-h-11 px-3 py-2 text-base leading-tight whitespace-nowrap md:min-h-13 md:text-base",
       },
     },
     defaultVariants: {

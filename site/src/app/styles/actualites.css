@@ -2,19 +2,19 @@
    seuls la liste, la rubrique, les sources visibles, l'appel au rappel et le bandeau d'aperçu sont propres ici.
    Aucune couleur en dur : jetons de globals.css. */
 @layer components {
-  .actu-rubrique { margin: var(--s4) 0 var(--s2); font: 600 15px var(--narrow); color: var(--sentier-texte); }
+  .actu-rubrique { margin: var(--s4) 0 var(--s2); font: 600 16px var(--narrow); color: var(--sentier-texte); }
   .page-actualite h1 { max-width: 30ch; }
   .actu-dates { margin-top: var(--s4); }
 
   .liste-actualites { list-style: none; margin: var(--s6) 0 var(--s5); padding: 0; border-top: 1px solid var(--filet); max-width: 72ch; }
   .liste-actualites li { padding: var(--s5) 0; border-bottom: 1px solid var(--filet); }
-  .liste-actualites time { display: block; font: 15px var(--narrow); color: var(--encre-2); }
+  .liste-actualites time { display: block; font: 16px var(--narrow); color: var(--encre-2); }
   .liste-actualites h2 { margin: var(--s1) 0 var(--s2); font-size: 22px; font-weight: 800; line-height: 1.18; letter-spacing: -.01em; text-wrap: balance; }
   .liste-actualites h2 a { color: var(--encre); text-decoration: none; }
   .liste-actualites h2 a:hover { text-decoration: underline; text-underline-offset: 3px; }
   .liste-actualites p { margin: 0; color: var(--encre-2); text-wrap: pretty; }
   .liste-vide { margin: var(--s6) 0; color: var(--encre-2); }
-  .actu-flux { margin: 0 0 var(--s7); font: 15px var(--narrow); }
+  .actu-flux { margin: 0 0 var(--s7); font: 16px var(--narrow); }
   .actu-flux a { display: inline-flex; align-items: center; gap: var(--s2); min-height: 44px; color: var(--lac-encre); }
 
   .actu-rappel .actu-rappel-q { margin: 0; font: 700 18px var(--sans); color: var(--encre); }

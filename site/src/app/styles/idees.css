@@ -5,7 +5,7 @@
   .bouton-agenda { display: inline-flex; align-items: center; gap: 8px; }
   .bouton-agenda svg { width: 18px; height: 18px; flex: none; }
   .bouton-agenda[disabled] { opacity: .55; cursor: not-allowed; }
-  .agenda-ok { font: 15px var(--narrow); color: var(--encre-2); align-self: center; }
+  .agenda-ok { font: 16px var(--narrow); color: var(--encre-2); align-self: center; }
   .actions-agenda { margin-top: var(--s3); align-items: center; }
   .lien-lettre { font: 16px var(--narrow); margin: var(--s4) 0 0; }
 
@@ -16,7 +16,7 @@
   .aide-bloc { font: 16px var(--narrow); color: var(--encre-2); margin: 0; }
   .cases-fixes .case { margin: 0 0 var(--s2); }
   .contrat-ligne { border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s4); margin: 0; display: grid; gap: var(--s3); background: var(--carte); min-width: 0; }
-  .contrat-ligne legend { font: 600 15px var(--narrow); color: var(--encre-2); padding: 0 6px; }
+  .contrat-ligne legend { font: 600 16px var(--narrow); color: var(--encre-2); padding: 0 6px; }
   .contrat-ligne .champ { margin: 0; min-width: 0; }
   .contrat-ligne .deux { grid-template-columns: 1fr; gap: var(--s3); }
   .rappel-calcule { color: var(--encre); }
@@ -39,7 +39,7 @@
   .liste-cantons { list-style: none; padding: 0; margin: var(--s3) 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2); }
   .liste-cantons a { display: block; padding: 10px 12px; border: 1px solid var(--filet); border-radius: var(--r); background: var(--papier); font-weight: 600; text-decoration: none; }
   .liste-cantons a:hover { border-color: var(--sentier); }
-  .sources-barometre { font: 15px var(--narrow); color: var(--encre-2); padding-left: 1.1em; }
+  .sources-barometre { font: 16px var(--narrow); color: var(--encre-2); padding-left: 1.1em; }
   .sources-barometre li { margin: 0 0 4px; }
 
   /* Page « Intégrer » */
@@ -49,7 +49,7 @@
   .widget-bloc { display: grid; gap: var(--s3); margin-top: var(--s4); }
   .widget-bloc .champ { margin: 0; max-width: 420px; }
   .widget-apercu { border: 0; max-width: 420px; width: 100%; display: block; border-radius: var(--r); background: transparent; }
-  .code-label { font: 600 15px var(--narrow); color: var(--encre-2); }
+  .code-label { font: 600 16px var(--narrow); color: var(--encre-2); }
   .code-widget { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; word-break: break-all; }
   .widget-bloc .actions { margin-top: 0; }
 

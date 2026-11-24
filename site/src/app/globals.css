@@ -243,6 +243,10 @@
 }
 
 @layer base {
+  /* Preflight met <small> à 80 % : le texte secondaire reste lisible (16 px minimum). */
+  small {
+    font-size: 16px;
+  }
   * {
     @apply border-border outline-ring/50;
   }

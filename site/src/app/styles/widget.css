@@ -11,17 +11,17 @@
 html, body { margin: 0; padding: 0; background: var(--w-fond); color: var(--w-encre); }
 body { font: 16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; -webkit-text-size-adjust: 100%; }
 .w { box-sizing: border-box; padding: 14px 16px 12px; border: 1px solid var(--w-filet); border-radius: 8px; min-height: 100vh; display: flex; flex-direction: column; gap: 8px; }
-.w-titre { margin: 0; font-size: 15px; font-weight: 600; color: var(--w-encre-2); text-wrap: balance; }
+.w-titre { margin: 0; font-size: 16px; font-weight: 600; color: var(--w-encre-2); text-wrap: balance; }
 .w-chiffre { margin: 0; font-size: 40px; line-height: 1.05; font-weight: 800; letter-spacing: -0.5px; font-variant-numeric: tabular-nums; }
 .w-chiffre small { font-size: 17px; font-weight: 600; letter-spacing: 0; margin-left: 4px; }
-.w-texte { margin: 0; font-size: 15px; text-wrap: pretty; }
-.w-liste { margin: 0; padding: 0; list-style: none; font-size: 15px; }
+.w-texte { margin: 0; font-size: 16px; text-wrap: pretty; }
+.w-liste { margin: 0; padding: 0; list-style: none; font-size: 16px; }
 .w-liste li { display: flex; justify-content: space-between; gap: 12px; padding: 5px 0; border-bottom: 1px solid var(--w-filet); font-variant-numeric: tabular-nums; }
 .w-liste li:last-child { border-bottom: 0; }
 .w-liste b { font-weight: 700; }
-.w-pied { margin-top: auto; padding-top: 6px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; font-size: 13px; color: var(--w-encre-2); }
+.w-pied { margin-top: auto; padding-top: 6px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; font-size: 16px; color: var(--w-encre-2); }
 .w a { color: var(--w-lien); text-underline-offset: 2px; }
-.w-action { font-weight: 700; font-size: 15px; }
+.w-action { font-weight: 700; font-size: 16px; }
 .w-source { color: var(--w-encre-2); }
 .w-source a { color: inherit; font-weight: 600; }
 .w-accent { color: var(--w-accent); }
