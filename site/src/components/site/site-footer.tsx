@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { pied } from "@/lib/nav";
 import { DICT, type Locale } from "@/lib/i18n";
 import { RouvrirMesure } from "@/components/site/mesure";
@@ -28,8 +29,8 @@ export function SiteFooter({ note, locale = "fr", altPath }: { note?: string; lo
         <p className="credit">
           {t.credit}{" "}
           <a href="https://houle.ai/">
-            {/* SVG statique de quelques Ko, déjà à la bonne taille : next/image n'apporte rien en export statique */}
-            <img src="/credits/houle-ai.svg" alt="houle.ai" width={64} height={15} loading="lazy" decoding="async" />
+            {/* SVG de quelques Ko, déjà à la bonne taille : servi tel quel (unoptimized). */}
+            <Image src="/credits/houle-ai.svg" alt="houle.ai" width={64} height={15} unoptimized />
           </a>
         </p>
       </div>

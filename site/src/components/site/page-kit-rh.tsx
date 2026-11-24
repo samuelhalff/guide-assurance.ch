@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
 import { Breadcrumbs } from "@/components/site/breadcrumbs";
@@ -168,7 +169,7 @@ export function PageKitRh({ l }: { l: Locale }) {
           <p className="intro">{t.intro}</p>
           <div className="kit-grille">
             <a className="kit-apercu" href={PDF_KIT[l]}>
-              <img src={`/kit-rh/apercu-${l}.jpg`} width={794} height={1123} alt={t.apercu} loading="lazy" />
+              <Image src={`/kit-rh/apercu-${l}.jpg`} width={794} height={1123} alt={t.apercu} unoptimized />
             </a>
             <div className="kit-actions">
               <a className={buttonVariants()} href={PDF_KIT[fr ? "fr" : "en"]} download>{fr ? t.pdfFr : t.pdfEn}</a>

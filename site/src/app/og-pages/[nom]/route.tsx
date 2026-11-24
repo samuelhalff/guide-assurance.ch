@@ -26,6 +26,8 @@ export async function GET(_: Request, { params }: { params: Promise<{ nom: strin
       <div style={{ width: 1200, height: 630, display: "flex", flexDirection: "column", background: "#1A1C19", color: "#E9ECE5", fontFamily: "Archivo" }}>
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", flex: 1, padding: "64px 80px 56px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 22 }}>
+            {/* Image de partage rendue par ImageResponse (Satori) : seul <img> est compris, next/image ne s'applique pas. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={LOGO} width={88} height={88} alt="" />
             <div style={{ display: "flex", flexDirection: "column", fontFamily: "ArchivoLarge", fontSize: 28, letterSpacing: 1.5, lineHeight: 1 }}>
               <span style={{ fontWeight: 500, color: "#E5484D" }}>GUIDE</span>

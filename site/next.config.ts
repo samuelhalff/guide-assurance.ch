@@ -15,7 +15,10 @@ const publiees = (l: string) => {
 const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,
-  images: { unoptimized: true },
+  /* next/image sans serveur d'optimisation : chargeur qui sert les variantes de public/ (src/lib/chargeur-images.ts). */
+  images: { loader: "custom", loaderFile: "./src/lib/chargeur-images.ts", deviceSizes: [720, 1080, 1448], imageSizes: [],
+    /* Dossiers d'images locales ; le ?v= (cache) est permis. */
+    localPatterns: [{ pathname: "/brand/**" }, { pathname: "/credits/**" }, { pathname: "/kit-rh/**" }] },
   env: { NEXT_PUBLIC_ACTUALITES_FR: String(publiees("fr")), NEXT_PUBLIC_ACTUALITES_EN: String(publiees("en")) },
   /* Le formulaire de demande importe ../shared/demande (libellés, consentements, NPA) : hors du dossier du site. */
   /* globalNotFound : page 404 unique (src/app/global-not-found.tsx), le site ayant deux mises en page racines. */

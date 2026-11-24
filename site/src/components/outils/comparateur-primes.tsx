@@ -127,7 +127,7 @@ const TXT = {
     fourchette: (a: string, b: string, m: string, u: string, x: string) =>
       `Les primes vont de ${a} à ${b} ${u}, pour une moyenne de ${m}. La redistribution des taxes environnementales retire encore ${x} par mois et par personne, quel que soit l’assureur.`,
     memes: "Les prestations de l’assurance de base sont fixées par la loi et identiques partout ; seuls changent la prime, les règles du modèle et le service.",
-    caption: "Primes 2027 de chaque offre, triées de la plus basse à la plus haute, avec l’écart annuel par rapport à la première offre et à la moyenne de la liste.",
+    caption: (caisse: boolean) => `Primes 2027 de chaque offre, avec l’écart annuel ${caisse ? "face à votre caisse actuelle" : "face à la 1re offre de la liste"} et face à la moyenne de la liste.`,
     captionSuite: (a: number, b: number) => `Suite de la liste, offres ${a} à ${b}`,
     thOffre: "Assureur et modèle",
     thPrime: "Prime",
@@ -252,7 +252,7 @@ const TXT = {
     fourchette: (a: string, b: string, m: string, u: string, x: string) =>
       `Premiums range from ${a} to ${b} ${u}, with an average of ${m}. The environmental levy redistribution then takes off ${x} a month per person, whichever insurer you choose.`,
     memes: "Basic insurance benefits are set by law and identical everywhere; only the premium, the model’s rules and the service differ.",
-    caption: "2027 premiums of each offer, sorted from the lowest to the highest, with the yearly difference from the first offer and from the average of the list.",
+    caption: (caisse: boolean) => `2027 premiums of each offer, with the yearly difference ${caisse ? "against your current insurer" : "against the 1st offer in the list"} and against the list average.`,
     captionSuite: (a: number, b: number) => `List continued, offers ${a} to ${b}`,
     thOffre: "Insurer and model",
     thPrime: "Premium",
@@ -588,24 +588,21 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
   /* Tableau (ordinateur) : deux parties autour du bloc « Recevoir des offres », colonnes identiques (colgroup + table-layout fixe en CSS).
      La seconde répète l'en-tête et porte une légende masquée, pour rester compréhensible seule. */
   const tableau = (lignes: P.OffreFoyer[], legende: string, suite = false) => (
-    <Table variant="chiffres" className={`primes-liste${suite ? " primes-suite" : ""}${actuelle ? " avec-actuelle" : ""}`}>
+    <Table variant="chiffres" className={`primes-liste${suite ? " primes-suite" : ""}`}>
       <TableCaption className={suite ? "visually-hidden" : undefined}>{legende}</TableCaption>
       <colgroup>
         <col className="c-offre" />
         <col className="c-prime" />
         <col className="c-total" />
         <col className="c-ecart" />
-        <col className="c-ecart" />
-        {actuelle ? <col className="c-ecart" /> : null}
       </colgroup>
       <TableHeader>
         <TableRow>
           <TableHead scope="col">{t.thOffre}</TableHead>
           <TableHead scope="col">{t.thPrime}<small>{t.avantRedis}</small></TableHead>
           <TableHead scope="col">{t.thTotal}<small>{`${t.apresRedis} (−${nf(prix(redis), 2)})`}</small></TableHead>
-          <TableHead scope="col">{t.thEcart}<small>{t.vsPremiere}</small></TableHead>
+          <TableHead scope="col">{t.thEcart}<small>{actuelle ? t.vsActuelle : t.vsPremiere}</small></TableHead>
           <TableHead scope="col">{t.thEcart}<small>{t.vsMoyenne}</small></TableHead>
-          {actuelle ? <TableHead scope="col">{t.thEcart}<small>{t.vsActuelle}</small></TableHead> : null}
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -624,9 +621,8 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
               </TableCell>
               <TableCell className="mois align-top">{nf(prix(o.mensuel), parAn ? 0 : 2)}</TableCell>
               <TableCell className="align-top">{nf(prix(o.mensuel - redis), parAn ? 0 : 2)}</TableCell>
-              <TableCell className="align-top">{i === 0 ? "0" : signe(o.ecartMin)}</TableCell>
+              <TableCell className="align-top">{actuelle ? signe(o.annuel - actuelle.annuel) : i === 0 ? "0" : signe(o.ecartMin)}</TableCell>
               <TableCell className="align-top">{signe(o.ecartMoyenne)}</TableCell>
-              {actuelle ? <TableCell className="align-top">{signe(o.annuel - actuelle.annuel)}</TableCell> : null}
             </TableRow>
           );
         })}
@@ -841,7 +837,7 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
                     Mobile : cartes (les tableaux sont masqués). Ordinateur : tableau coupé en deux autour du bloc
                     (les cartes sont masquées), mêmes colonnes et largeurs fixes pour que les deux parties s'alignent. */}
                 <ol className="cartes-primes">{visibles.slice(0, OFFRES_AVANT_BLOC).map(carte)}</ol>
-                {tableau(visibles.slice(0, OFFRES_AVANT_BLOC), t.caption)}
+                {tableau(visibles.slice(0, OFFRES_AVANT_BLOC), t.caption(Boolean(actuelle)))}
                 <div ref={offreZoneRef}>
                 <OffreComparateur
                   ref={offreRef}

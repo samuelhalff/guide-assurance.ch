@@ -170,12 +170,10 @@
   /* Deux parties de tableau autour du bloc « Recevoir des offres » : largeurs fixes par colonne pour qu'elles s'alignent. */
   /* Sans colonne « Redistribution » (même montant sur chaque ligne, rappelé dans l'en-tête « Total ») : le tableau tient dans sa colonne. */
   table.primes-liste { table-layout: fixed; min-width: 34em; }
-  table.primes-liste.avec-actuelle { min-width: 40em; }
   table.primes-liste col.c-prime, table.primes-liste col.c-total { width: 5em; }
   table.primes-liste col.c-ecart { width: 6em; }
   @media (max-width: 1199px) {
     table.primes-liste { min-width: 30em; }
-    table.primes-liste.avec-actuelle { min-width: 35em; }
     table.primes-liste col.c-prime, table.primes-liste col.c-total { width: 4.5em; }
     table.primes-liste col.c-ecart { width: 5em; }
   }
