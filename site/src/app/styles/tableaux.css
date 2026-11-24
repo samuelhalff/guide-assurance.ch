@@ -1,0 +1,30 @@
+/* Styles de base des lignes, cellules et en-têtes du composant Table (components/ui/table.tsx), posés une fois pour toute
+   table plutôt que recopiés dans chaque <tr>, <td> et <th> (645 cellules sur la page des subsides, deux fois : HTML et
+   charge utile RSC). Mêmes déclarations que les anciennes classes shadcn (@apply).
+   Priorité : :where() ramène les sélecteurs à zéro, dans la couche utilities comme les anciennes classes. Une classe passée
+   à une cellule les remplace donc toujours (comme avant, où cn() retirait la classe en conflit), et le CSS du site, dans la
+   couche components, ne les remplace pas (comme avant). Les règles « chiffres » gardent la priorité de l'ancienne variante
+   de groupe (group-data-[variant=chiffres]/table:not-first:…). */
+@layer utilities {
+  :where([data-slot="table"]) :where(tr) {
+    @apply border-b transition-colors hover:bg-muted/50 has-aria-expanded:bg-muted/50 data-[state=selected]:bg-muted;
+  }
+  :where([data-slot="table"]) :where(td) {
+    @apply px-2.5 py-2 align-middle;
+  }
+  :where([data-slot="table"]) :where(th) {
+    @apply px-2.5 py-2 text-left align-bottom font-narrow text-base font-semibold text-muted-foreground;
+  }
+  :where([data-slot="table"]) :where(th[scope="row"]) {
+    @apply align-middle font-sans text-base text-foreground;
+  }
+  [data-slot="table"][data-variant="chiffres"] :where(td, th):not(:first-child) {
+    @apply text-right;
+  }
+  [data-slot="table"][data-variant="chiffres"] :where(td):not(:first-child) {
+    @apply tabular-nums;
+  }
+  :where([data-slot="table"]) :where(td, th):has([role="checkbox"]) {
+    @apply pr-0;
+  }
+}

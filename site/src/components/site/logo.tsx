@@ -11,10 +11,12 @@ export function LogoSilhouette({ className }: { className?: string }) {
   );
 }
 
-/* Bloc logo : silhouette + « GUIDE / ASSURANCE » (Archivo large, 13 px). */
+/* prefetch={false} : le lien du logo est dans toutes les pages ; son préchargement faisait télécharger la charge utile de l'accueil,
+   son code et son image, sur des pages qui ne les affichent pas.
+   Bloc logo : silhouette + « GUIDE / ASSURANCE » (Archivo large, 13 px). */
 export function Marque({ locale = "fr" }: { locale?: Locale }) {
   return (
-    <Link className="marque" href={locale === "en" ? "/en/" : "/"} aria-label={DICT[locale].marqueAria}>
+    <Link className="marque" prefetch={false} href={locale === "en" ? "/en/" : "/"} aria-label={DICT[locale].marqueAria}>
       <LogoSilhouette />
       <span className="mot" aria-hidden="true">
         <span>GUIDE</span>

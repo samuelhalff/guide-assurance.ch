@@ -1,7 +1,10 @@
 import * as React from "react"
 import { cn } from "cn"
 
-/* variant="chiffres" : colonnes de montants alignées à droite, sauf la première (libellés). */
+/* variant="chiffres" : colonnes de montants alignées à droite, sauf la première (libellés).
+   Les styles des lignes (tr), cellules (td) et en-têtes (th) ne sont plus recopiés dans chaque balise : ils sont posés une
+   fois pour toutes les tables dans app/styles/tableaux.css (sélecteurs sur [data-slot=table], mêmes déclarations, même
+   priorité que les classes d'origine : une classe passée à TableRow, TableHead ou TableCell les remplace toujours). */
 function Table({ className, variant = "default", ...props }: React.ComponentProps<"table"> & { variant?: "default" | "chiffres" }) {
   return (
     <div
@@ -55,10 +58,7 @@ function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
   return (
     <tr
       data-slot="table-row"
-      className={cn(
-        "border-b transition-colors hover:bg-muted/50 has-aria-expanded:bg-muted/50 data-[state=selected]:bg-muted",
-        className
-      )}
+      className={cn(className) || undefined}
       {...props}
     />
   )
@@ -68,10 +68,7 @@ function TableHead({ className, ...props }: React.ComponentProps<"th">) {
   return (
     <th
       data-slot="table-head"
-      className={cn(
-        "px-2.5 py-2 text-left align-bottom font-narrow text-base font-semibold text-muted-foreground [&[scope=row]]:align-middle [&[scope=row]]:font-sans [&[scope=row]]:text-base [&[scope=row]]:text-foreground group-data-[variant=chiffres]/table:not-first:text-right [&:has([role=checkbox])]:pr-0",
-        className
-      )}
+      className={cn(className) || undefined}
       {...props}
     />
   )
@@ -81,10 +78,7 @@ function TableCell({ className, ...props }: React.ComponentProps<"td">) {
   return (
     <td
       data-slot="table-cell"
-      className={cn(
-        "px-2.5 py-2 align-middle group-data-[variant=chiffres]/table:not-first:text-right group-data-[variant=chiffres]/table:tabular-nums [&:has([role=checkbox])]:pr-0",
-        className
-      )}
+      className={cn(className) || undefined}
       {...props}
     />
   )
