@@ -25,8 +25,8 @@
   :is(.ligne, .categories) > .champ { grid-row: span 3; grid-template-rows: subgrid; row-gap: 4px; }
   :is(.ligne, .categories) > .champ > label { align-self: end; }
   .case { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; font-size: 16px; margin: var(--s2) 0 var(--s3); cursor: pointer; }
-  .case small { display: block; font: 14px var(--narrow); color: var(--encre-2); }
-  .note-outil { font: 15px var(--narrow); color: var(--encre-2); margin: 0; }
+  .case small { display: block; font: 16px var(--narrow); color: var(--encre-2); }
+  .note-outil { font: 16px var(--narrow); color: var(--encre-2); margin: 0; }
   .aide-revenus { font: 15px var(--narrow); color: var(--encre-2); margin: 0 0 var(--s2); }
   .aide-revenus .depliable-titre { color: var(--lac-encre); min-height: 32px; }
   .aide-revenus p { margin: var(--s2) 0; }
@@ -118,7 +118,8 @@
   .attente { font: 17px var(--narrow); color: var(--encre-2); margin: 0; padding: var(--s5) var(--s4); border: 1px dashed var(--filet); border-radius: var(--r); }
   .resume-liste { font-size: 17px; margin: 0 0 4px; }
   .resume-liste b { font-weight: 600; }
-  .fourchette { font: 600 16px var(--narrow); margin: 0 0 var(--s4); }
+  .fourchette { font: 600 16px var(--narrow); margin: 0 0 var(--s2); }
+  .apercu .memes { margin: 0 0 var(--s4); }
   .reglages { display: grid; gap: var(--s3); align-items: end; }
   .reglages .champ { margin: 0; }
 
@@ -127,14 +128,13 @@
   .carte-prime .rang { font: 600 14px var(--narrow); color: var(--encre-2); padding-top: 2px; font-variant-numeric: tabular-nums; }
   .carte-prime .offre-qui b { display: block; font-weight: 700; font-size: 17px; }
   .carte-prime .produit, table.primes-liste .produit { display: block; font: 15px var(--narrow); overflow-wrap: anywhere; }
-  .carte-prime .type, table.primes-liste .type { display: block; margin-top: 2px; font: 14px var(--narrow); color: var(--encre-2); }
+  table.primes-liste .type { display: block; margin-top: 2px; font: 14px var(--narrow); color: var(--encre-2); }
   .carte-prime .combien { text-align: right; }
   .carte-prime .montant { display: block; font: 800 22px/1.1 var(--sans); letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
-  .carte-prime .unite { display: block; font: 13px var(--narrow); color: var(--encre-2); }
-  .carte-prime .autre { display: block; font: 14px var(--narrow); color: var(--encre-2); margin-top: 2px; white-space: nowrap; }
-  .carte-prime .ecarts { grid-column: 2 / -1; list-style: none; margin: var(--s2) 0 0; padding: var(--s2) 0 0; border-top: 1px solid var(--filet); font: 14px var(--narrow); color: var(--encre-2); display: grid; gap: 1px; }
-  .carte-prime .ecarts b { color: var(--encre); font-weight: 700; font-variant-numeric: tabular-nums; }
-  .carte-prime .ecarts .vs-actuelle { color: var(--encre); }
+  .carte-prime .unite { display: block; font: 16px var(--narrow); color: var(--encre-2); }
+  .carte-prime .type-badge { margin-top: var(--s1); }
+  .carte-prime .ecart-carte { grid-column: 2 / -1; margin: var(--s2) 0 0; padding: var(--s2) 0 0; border-top: 1px solid var(--filet); font: 16px var(--narrow); color: var(--encre-2); }
+  .carte-prime .ecart-carte b, .detail-offre b { color: var(--encre); font-weight: 700; font-variant-numeric: tabular-nums; }
   .synthese-caisse { margin-block: var(--s3); }
   .rappel-liste { margin: var(--s3) 0 var(--s2); padding: var(--s3) var(--s4); background: var(--info-teinte); border-radius: var(--r); font-size: 16px; }
   .rappel-liste a { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; }
@@ -154,8 +154,8 @@
   .caisse-case { margin-top: var(--s3); }
   .caisse-actuelle { margin-bottom: var(--s3); }
   .caisse-actuelle > p { grid-column: 1 / -1; margin: 0; }
-  .detail-offre { grid-column: 2 / -1; font: 14px var(--narrow); margin-top: var(--s1); }
-  .detail-offre .depliable-titre { color: var(--lac-encre); min-height: 32px; }
+  .detail-offre { grid-column: 2 / -1; font: 16px var(--narrow); margin-top: var(--s1); }
+  .detail-offre .depliable-titre { color: var(--lac-encre); min-height: 44px; }
   .detail-offre ul { margin: 0 0 var(--s1); padding-left: 1.1em; list-style: disc; color: var(--encre-2); }
   .outil-comparateur fieldset.personne { border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s3) var(--s3) 0; margin: 0 0 var(--s3); }
   .outil-comparateur fieldset.personne legend { font: 700 16px var(--sans); padding: 0 6px; margin: 0 0 var(--s1) -6px; display: flex; gap: var(--s3); align-items: baseline; }
@@ -271,11 +271,11 @@
 }
 @layer components {
   .reperes-details { margin-top: var(--s4); }
-  .reperes-details > .depliable-titre { font-weight: 700; color: var(--bande-titre, var(--encre)); text-decoration: underline; text-underline-offset: 3px; padding: var(--s3) 0; }
+  .reperes-details > .depliable-titre { font-weight: 700; color: var(--encre); text-decoration: underline; text-underline-offset: 3px; padding: var(--s3) 0; }
   .reperes-details[data-open] > .depliable-titre { margin-bottom: var(--s4); }
 }
 @layer components {
-  .outil-comparateur .aide-champ, .outil-frontalier .aide-champ { display: block; margin-top: var(--s1); font: 14px/1.4 var(--narrow); color: var(--encre-2); }
+  .outil-comparateur .aide-champ, .outil-frontalier .aide-champ { display: block; margin-top: var(--s1); font: 16px/1.4 var(--narrow); color: var(--encre-2); }
 }
 
 /* Simulateur frontalier, foyer personne par personne (simulateur-frontalier.tsx). Mobile d'abord. */

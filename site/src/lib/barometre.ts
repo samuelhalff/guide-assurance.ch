@@ -104,14 +104,14 @@ export function phrasesCanton(code: string, l: "fr" | "en"): string[] {
         ? `${lieu}, l’assurance de base reste la plus chère de Suisse romande${T}: un adulte paie en moyenne ${chf(o.adulte, l)} par mois en ${A}, contre ${chf(o.adulte_prec, l)} en ${P}, selon l’OFSP.`
         : rm === DONNEES.cantons.length
           ? `${lieu}, la prime moyenne reste la plus basse des six cantons romands${T}: ${chf(o.adulte, l)} par mois pour un adulte en ${A}, contre ${chf(o.adulte_prec, l)} en ${P}, selon l’OFSP.`
-          : `Avec une prime moyenne de ${chf(o.adulte, l)} par mois pour un adulte en ${A} (${chf(o.adulte_prec, l)} en ${P}, selon l’OFSP), le canton se place au ${ORD_FR[rm]} rang des six cantons romands, du plus cher au moins cher.`,
+          : `Avec une prime moyenne de ${chf(o.adulte, l)} par mois pour un adulte en ${A} (${chf(o.adulte_prec, l)} en ${P}, selon l’OFSP), le canton se place au ${ORD_FR[rm]} rang des six cantons romands, de la prime moyenne la plus haute à la plus basse.`,
     );
     const cmp = o.variation_pct > n.variation_pct ? "plus forte que la" : o.variation_pct < n.variation_pct ? "plus faible que la" : "égale à la";
     out.push(
       `La hausse de ${pct(o.variation_pct, l, false)} est ${cmp} moyenne suisse (${pct(n.variation_pct, l, false)})${rh === 1 ? ` et c’est la plus forte de Suisse romande` : rh === DONNEES.cantons.length ? ` et c’est la plus faible de Suisse romande` : ""}.`,
     );
     out.push(
-      `Pour un adulte avec la franchise de 300 francs, la couverture accident et le libre choix du médecin${multi ? ` (région de ${r0.commune})` : ""}, l’offre la plus chère coûte ${chf(ecartMensuel(p0.standard), l)} de plus par mois que la moins chère, soit ${chf0(ecartMensuel(p0.standard) * 12, l)} par an pour les mêmes prestations.`,
+      `Pour un adulte avec la franchise de 300 francs, la couverture accident et le libre choix du médecin${multi ? ` (région de ${r0.commune})` : ""}, la prime la plus haute dépasse de ${chf(ecartMensuel(p0.standard), l)} par mois la prime la plus basse, soit ${chf0(ecartMensuel(p0.standard) * 12, l)} par an pour les mêmes prestations.`,
     );
     if (multi) {
       const meds = c.regions.map((r) => ({ r, m: profil(r, "adulte_300").standard.med })).sort((a, b) => b.m - a.m);
@@ -133,7 +133,7 @@ export function phrasesCanton(code: string, l: "fr" | "en"): string[] {
       `The ${pct(o.variation_pct, l, false)} increase is ${cmp} the Swiss average (${pct(n.variation_pct, l, false)})${rh === 1 ? ", and the highest in French-speaking Switzerland" : rh === DONNEES.cantons.length ? ", and the lowest in French-speaking Switzerland" : ""}.`,
     );
     out.push(
-      `For an adult with the CHF 300 deductible, accident cover and free choice of doctor${multi ? ` (${r0.commune} premium region)` : ""}, the most expensive offer costs ${chf(ecartMensuel(p0.standard), l)} a month more than the cheapest, or ${chf0(ecartMensuel(p0.standard) * 12, l)} a year for the same benefits.`,
+      `For an adult with the CHF 300 deductible, accident cover and free choice of doctor${multi ? ` (${r0.commune} premium region)` : ""}, the highest premium is ${chf(ecartMensuel(p0.standard), l)} a month above the lowest, or ${chf0(ecartMensuel(p0.standard) * 12, l)} a year for the same benefits.`,
     );
     if (multi) {
       const meds = c.regions.map((r) => ({ r, m: profil(r, "adulte_300").standard.med })).sort((a, b) => b.m - a.m);
