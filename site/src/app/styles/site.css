@@ -4,6 +4,11 @@
    primaire = rouge plein, secondaire = 1 px encre, choix et formulaires = papier + filet,
    alerte = bord rouge de 3 px à gauche sur fond rosé, document = papier + filet, le reste sans cadre.
    Aucune couleur en dur : tout passe par les jetons de globals.css. */
+
+/* Attribut `hidden` : règle hors couche, donc plus forte que tout `display` posé dans une couche (components, utilities), sans `!important`.
+   hidden="until-found" (blocs dépliables) reste trouvable par Ctrl+F : le navigateur le masque lui-même. */
+[hidden]:not([hidden="until-found"]) { display: none; }
+
 @layer components {
   html {
     --sans: var(--font-archivo), "Archivo", sans-serif;
@@ -12,6 +17,7 @@
     --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px; --s8: 72px; --s9: 112px;
     --wrap-max: 1280px;
   }
+  .sans-marge { margin: 0; }
   .page-outil, .page-guide { --wrap-max: 1180px; font-size: 18px; }
 
   .wrap { max-width: var(--wrap-max); margin: 0 auto; padding-inline: var(--s5); }
@@ -20,8 +26,6 @@
   .visually-hidden, .sr {
     position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
   }
-  /* hidden="until-found" (blocs dépliables) reste trouvable par Ctrl+F : le navigateur le masque lui-même. */
-  [hidden]:not([hidden="until-found"]) { display: none !important; }
 
   /* ===== Tête ===== */
   /* Barre du haut toujours visible ; les ancres et les blocs collants se placent dessous. */
@@ -52,15 +56,8 @@
   .page-outil .nav a::after, .page-guide .nav a::after { bottom: 15px; }
 
   .tete-droite { display: flex; gap: 2px; align-items: center; font-family: var(--narrow); font-size: 16px; }
-  /* EN, thème et Menu : commandes de la tête, sans cadre, 44 px */
-  .commande {
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    min-height: 44px; min-width: 44px; padding: 0 10px; border: 0; border-radius: var(--r); background: none;
-    font: 600 15px var(--sans); color: var(--encre); text-decoration: none; cursor: pointer;
-  }
-  .commande:hover { background: var(--carte); color: var(--encre); }
-  .commande:focus-visible { outline: 3px solid var(--lac-encre); outline-offset: 2px; }
-  .commande svg { display: block; }
+  /* EN, thème et Menu : commandes de la tête (Button, variante commande). Ces deux enveloppes portent seulement l'affichage. */
+  .theme-tete { display: contents; }
   .menu-btn { display: none; }
 
   @media (min-width: 821px) and (max-width: 1100px) {
@@ -178,8 +175,6 @@
 /* Mobile : bandeau ramassé, pour laisser voir le formulaire de l'accueil au-dessus. */
 @media (max-width:767px){.consentement{left:var(--s2);right:var(--s2);bottom:calc(var(--s2) + env(safe-area-inset-bottom));padding:var(--s3);gap:var(--s2);font-size:14px;line-height:1.4}
   .consentement-actions{gap:var(--s2)}}
-.lien-pied{background:none;border:0;padding:0;font:inherit;color:var(--bande-texte);cursor:pointer;text-decoration:underline}
-.lien-pied:hover{color:var(--bande-titre)}
 
 /* Pied de page en bas de l'écran sur les pages courtes */
 .page-guide,.page-outil{min-height:100dvh;display:flex;flex-direction:column}
@@ -214,7 +209,6 @@
     .rappel-court { display: inline; }
     /* « Menu » en texte lu seulement : l'icône reste. */
     .menu-mot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-    .menu-btn { gap: 0; }
   }
   @media (max-width: 399px) { .rappel-tete { padding: 0 8px; gap: 5px; } .tete .wrap { gap: var(--s2); } }
   @media (max-width: 389px) { .rappel-tete:lang(en) .rappel-court { display: none; } }

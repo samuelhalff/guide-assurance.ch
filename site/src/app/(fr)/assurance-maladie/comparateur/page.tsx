@@ -13,13 +13,13 @@ import { abs } from "@/lib/site";
 import { DATE_PAGE, DATE_PRIMES } from "@/lib/donnees";
 import { dateLongue } from "@/lib/i18n";
 import { OUTILS, OUTILS_EN } from "@/lib/nav";
+import { ESPACE_FINE as N } from "@/lib/nombres";
 
 const PATH = OUTILS.comparateur;
 const URL_ = abs(PATH);
 const TITRE = "Comparer les primes LAMal 2027 en Suisse romande";
 const DESCRIPTION =
   "Primes LAMal 2027 des offres de votre région selon votre NPA, âge, franchise et modèle, triées de la plus basse à la plus haute. Données OFSP.";
-const N = " ";
 
 const FAQ = [
   {

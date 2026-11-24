@@ -17,11 +17,11 @@ import { dateLongue, type Locale } from "@/lib/i18n";
 import { OUTILS, OUTILS_EN } from "@/lib/nav";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { FAQ_PJ, OS_167, OS_URL } from "@/components/outils/faq-garanties-pj";
+import { ESPACE_FINE as N } from "@/lib/nombres";
 
 /* « Protection juridique : ce que couvrent les contrats » (/protection-juridique/comparatif-garanties/ et version
    anglaise). Tableau statique tiré des CGA publiques, ordre alphabétique, sans prime ni classement. Les fichiers de
    route ne font qu'appeler ces fonctions. */
-const N = " ";
 
 const T = {
   fr: {

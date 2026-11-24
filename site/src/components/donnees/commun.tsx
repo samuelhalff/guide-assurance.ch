@@ -1,15 +1,14 @@
 import { FaqSections } from "@/components/site/faq-sections";
 import { IconeTelephone, LienRappel } from "@/components/demande/lien-rappel";
 import type { Locale } from "@/lib/i18n";
-import { nombre as formaterNombre } from "@/lib/nombres";
+import { chf, nombre as formaterNombre, pct } from "@/lib/nombres";
 
 /* Éléments communs des pages de données (régions de primes, chiffres clés, historique 3a, économie d'impôt par
    commune) : formats de nombres, questions fréquentes, appel « Être rappelé » (emplacement `donnees`). */
-export const N = "\u202f";
+export { ESPACE_FINE as N } from "@/lib/nombres";
 /* 1234.5 -> « 1 234,50 » / "1,234.50" ; d décimales (src/lib/nombres.ts, sans Intl). */
 export const nombre = (x: number, locale: Locale, d = 0) => formaterNombre(x, d, locale);
-export const chf = (x: number, locale: Locale, d = 0) => (locale === "fr" ? `${nombre(x, locale, d)}${N}CHF` : `CHF ${nombre(x, locale, d)}`);
-export const pct = (x: number, locale: Locale, d = 0) => (locale === "fr" ? `${nombre(x, locale, d)}${N}%` : `${nombre(x, locale, d)}%`);
+export { chf, pct };
 
 export type Faq = { q: string; a: string };
 /* FAQ visible : composant commun des pages outils (FaqSections), alimenté par le même tableau que le nœud

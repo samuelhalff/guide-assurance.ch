@@ -1,8 +1,8 @@
 import { GTM_ID, POSTHOG_TOKEN } from "@/lib/analytics";
+import { ESPACE_FINE as N } from "../nombres.ts";
 
 /* Textes de la politique de confidentialité sur la mesure d'audience, choisis au build selon les outils réellement
    configurés : la page dit toujours ce que le site fait. */
-const N = " ";
 const ph = Boolean(POSTHOG_TOKEN);
 const ga = Boolean(GTM_ID);
 

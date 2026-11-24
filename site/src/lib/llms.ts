@@ -17,8 +17,8 @@ import EU from "@/data/primes-eu-fr-2027.json";
 import { lignesLlms, textesLlms, tousLesArticles } from "@/lib/actualites";
 import { CONTRATS as CONTRATS_PJ, LU_LE as LU_LE_PJ, garantiesPjMarkdown } from "@/lib/garanties-pj";
 import * as SM from "@/lib/engines/somme-menage";
+import { ESPACE_FINE as N } from "./nombres.ts";
 
-const N = " ";
 const NB_BANQUES = COMPTES_3A.length;
 const NB_ASSUREURS_EU = EU.assureurs.length;
 

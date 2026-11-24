@@ -9,19 +9,18 @@ import { Case, ChoixBoutons, Depliable } from "@/components/controles";
 import { CtaDemande } from "@/components/demande/cta-demande";
 import { TEXTE_CTA, ecrirePreremplissage, lienDemande } from "@/lib/demande";
 import { cn } from "cn";
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Alert } from "@/components/ui/alert";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { INSECABLE as NB, ESPACE_FINE as T } from "@/lib/nombres";
 
 /* Simulateur frontalier : le foyer se décrit personne par personne, comme dans le comparateur de primes
    (comparateur-primes.tsx). Calcul : src/lib/engines/frontaliers.ts (comparerFoyer). Résultat instantané, sans bouton.
    Tout reste dans le navigateur : aucune saisie n'est envoyée ni mise dans l'adresse, la mesure ne reçoit qu'un événement
    « simulateur_utilise » sans valeur. Les primes sont triées par montant, seul critère affiché (docs/decisions.md §0 bis). */
 const D = primes as unknown as F.DonneesPrimes;
-const NB = " ";
-const T = " ";
 const ANNEE = 2027;
 const MAX_PERSONNES = 6;
 /* Nombres formatés sans Intl : l'ICU de Node (build) et celle du navigateur diffèrent pour fr-CH (apostrophe ou
@@ -334,9 +333,9 @@ export function SimulateurFrontalier({ locale = "fr" }: { locale?: Locale }) {
                   <legend>
                     {titre}
                     {k > 0 ? (
-                      <button type="button" className="retirer" onClick={() => setPersonnes((cur) => cur.filter((x) => x.id !== p.id))}>
+                      <Button type="button" variant="texte" size="texte" onClick={() => setPersonnes((cur) => cur.filter((x) => x.id !== p.id))}>
                         {t.retirer}
-                      </button>
+                      </Button>
                     ) : null}
                   </legend>
                   <div className="ligne">
@@ -405,8 +404,8 @@ export function SimulateurFrontalier({ locale = "fr" }: { locale?: Locale }) {
             })}
             {personnes.length < MAX_PERSONNES ? (
               <div className="ajouts">
-                <button type="button" className="ajouter-personne" onClick={() => ajouter(false)} aria-label={isEn ? "Add an adult" : "Ajouter un adulte"}>+ {t.ajouterAdulte}</button>
-                <button type="button" className="ajouter-personne" onClick={() => ajouter(true)} aria-label={isEn ? "Add a child" : "Ajouter un enfant"}>+ {t.ajouterEnfant}</button>
+                <Button type="button" variant="pointille" size="bloc" className="ajouter-personne" onClick={() => ajouter(false)} aria-label={isEn ? "Add an adult" : "Ajouter un adulte"}>+ {t.ajouterAdulte}</Button>
+                <Button type="button" variant="pointille" size="bloc" className="ajouter-personne" onClick={() => ajouter(true)} aria-label={isEn ? "Add a child" : "Ajouter un enfant"}>+ {t.ajouterEnfant}</Button>
               </div>
             ) : null}
           </fieldset>
@@ -495,9 +494,9 @@ export function SimulateurFrontalier({ locale = "fr" }: { locale?: Locale }) {
 
       {c ? (
         <div className="barre-demande barre-frontalier" data-visible={barre || undefined} aria-hidden={!barre} inert={!barre}>
-          <button type="button" className="barre-resume" onClick={() => resultatRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })} aria-label={t.voirResultat}>
+          <Button type="button" variant="nu" size="texte" className="barre-resume block h-6.5 truncate px-0 py-1 text-left font-semibold leading-[18px] text-encre tabular-nums" onClick={() => resultatRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })} aria-label={t.voirResultat}>
             {t.barre(chf(c.france.chf), chf(Math.round(c.lamal.min * 12)))}
-          </button>
+          </Button>
           <a data-slot="button" className={buttonVariants({ size: "barre" })} href={lienDemande(locale, "frontaliers")} onClick={prerempli}>{TEXTE_CTA[locale].bouton}</a>
         </div>
       ) : null}

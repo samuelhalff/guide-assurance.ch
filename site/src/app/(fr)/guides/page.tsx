@@ -3,13 +3,13 @@ import Link from "next/link";
 import { GuidePage, type QuestionFaq } from "@/components/site/guide-page";
 import { pageMetadata } from "@/lib/metadata";
 import { dateIndexGuides, lecture, toutesLesPages, type Rubrique } from "@/lib/content/pages";
+import { ESPACE_FINE as N } from "@/lib/nombres";
 
 const PATH = "/guides/";
 const TITRE = "Tous les guides d’assurance";
 const DESCRIPTION = "Les guides datés et sourcés de Guide Assurance sur l’assurance maladie, l’accident, le 3e pilier, le ménage, l’auto, la LPP et les assurances d’entreprise.";
 export const metadata: Metadata = pageMetadata({ title: `${TITRE} | Guide Assurance`, description: DESCRIPTION, path: PATH });
 
-const N = "\u202f"; // espace fine insécable avant ; : ? ! et dans « »
 
 /* Questions fréquentes (affichées sous la liste et reprises telles quelles dans le nœud FAQPage par GuidePage).
    Faits tirés des guides : assurance maladie, nouveaux arrivants, assurance accident, auto, bâtiment, ménage. */

@@ -29,9 +29,10 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common as C  # noqa: E402
+from annees import ANNEE_PRIMES  # noqa: E402
 
 DS = "lamal"
-YEAR = 2027
+YEAR = ANNEE_PRIMES
 SCRIPTS = C.ROOT / "data" / "scripts"
 SRC = C.ROOT / "data" / "sources"
 PI = SRC / f"priminfo-{YEAR}"
@@ -70,8 +71,7 @@ def ckan_dates(log) -> dict:
         code, body = C.http_get(CKAN, timeout=40)
         res = json.loads(body)["result"]["resources"]
     except Exception as e:  # noqa: BLE001
-        log(f"opendata.swiss illisible ({e}) : signal ignoré pour ce relevé")
-        return {}
+        raise RuntimeError(f"opendata.swiss illisible : {e}") from e
     out = {}
     for r in res:
         q = urllib.parse.parse_qs(urllib.parse.urlparse(r.get("download_url") or r.get("url") or "").query)
@@ -213,7 +213,12 @@ def run(log: C.Log, a) -> int:
         return 1
 
     # 2. fichiers OFSP sur opendata.swiss
-    dates = ckan_dates(log)
+    ckan_err = ""
+    try:
+        dates = ckan_dates(log)
+    except RuntimeError as e:  # le sondage priminfo (signal principal) se poursuit, mais le passage ne finira pas en vert
+        dates, ckan_err = {}, str(e)
+        log(ckan_err)
     ckan_msg = ""
     prev = st.get("ckan", {})
     if dates:
@@ -256,6 +261,11 @@ def run(log: C.Log, a) -> int:
         return 1
     if a.simulate_change:
         diffs.append("[simulation] GE région 0, adulte : 1 ligne différente")
+    if ckan_err and not diffs:
+        # opendata.swiss n'est qu'un signal d'appoint : priminfo (signal principal) n'a rien changé, donc pas d'alerte,
+        # mais la panne reste visible dans le journal et le récapitulatif.
+        C.record_run(DS, "ok", f"primes {YEAR} inchangées (opendata.swiss illisible : {ckan_err[:200]})", success=True)
+        return 0
     if not diffs and not ckan_msg:
         C.record_run(DS, "ok", f"primes {YEAR} inchangées", success=True)
         return 0
@@ -290,11 +300,13 @@ def run(log: C.Log, a) -> int:
         return 0
 
     backup = C.Backup([PUB, RESUME, PI])
-    shutil.rmtree(PUB)
-    shutil.copytree(new_pub, PUB)
-    shutil.copy2(new_res, RESUME)
-    shutil.rmtree(PI)
-    shutil.copytree(tree / "data" / "sources" / PI.name, PI)
+    try:
+        C.swap_dir(new_pub, PUB)
+        C.replace_file(new_res, RESUME)
+        C.swap_dir(tree / "data" / "sources" / PI.name, PI)
+    except BaseException:
+        backup.restore()  # état d'avant remis si une étape de l'écriture échoue
+        raise
     log(f"écrit {PUB}, {RESUME} et {PI}")
     checks = [{"url": "/assurance-maladie/comparateur/", "out": "assurance-maladie/comparateur/index.html"}]
     checks += [{"url": f"/data/primes-{YEAR}/{ct}.json", "out": f"data/primes-{YEAR}/{ct}.json"} for ct in changed]

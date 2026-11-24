@@ -22,10 +22,11 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common as C  # noqa: E402
+from annees import ANNEE_IMPOTS, ANNEE_IMPOTS_SUIVANTE  # noqa: E402
 
 DS = "impots"
 API = "https://swisstaxcalculator.estv.admin.ch/delegate/ost-integration/v1/lg-proxy/operation/c3b67379_ESTV/"
-CUR, NEXT = 2026, 2027
+CUR, NEXT = ANNEE_IMPOTS, ANNEE_IMPOTS_SUIVANTE
 SNAP = C.ROOT / "data" / "sources" / f"impots-{CUR}"
 
 

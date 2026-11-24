@@ -12,10 +12,10 @@ import { abs } from "@/lib/site";
 import { dateLongue, type Locale } from "@/lib/i18n";
 import { MAJ_IDEES, ROUTES_IDEES } from "@/lib/pages-idees";
 import { ANNEE_BAROMETRE } from "@/lib/barometre";
+import { ESPACE_FINE as T } from "@/lib/nombres";
 
 /* Page « Intégrer nos chiffres » (idée 7) : aperçu et code des trois widgets. Les widgets eux-mêmes sont sous /widget/,
    en noindex, sans mesure ; seule cette page est indexable. */
-const T = " ";
 export const WIDGETS = {
   fr: { delai: "/widget/delai-resiliation/", prime: "/widget/prime-moyenne/", taux: "/widget/taux-3a/" },
   en: { delai: "/widget/en/cancellation-deadline/", prime: "/widget/en/average-premium/", taux: "/widget/en/3a-rates/" },

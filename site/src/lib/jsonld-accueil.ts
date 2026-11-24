@@ -1,3 +1,5 @@
+import { DATE_PAGE } from "@/lib/donnees";
+
 /* Données structurées de l'accueil, reprises de mockups/v2/index.html (entités communes : organisation, éditeur, site). */
 export const jsonLdAccueil = {
   "@context": "https://schema.org",
@@ -80,27 +82,7 @@ export const jsonLdAccueil = {
       "publisher": {
         "@id": "https://guide-assurance.ch/#organization"
       },
-      "dateModified": "2026-11-22"
-    }
-  ]
-} as const;
-
-/* Accueil anglais (/en/) : mêmes entités communes, page web en anglais. */
-export const jsonLdAccueilEn = {
-  "@context": "https://schema.org",
-  "@graph": [
-    ...jsonLdAccueil["@graph"].slice(0, 3),
-    {
-      "@type": "WebPage",
-      "@id": "https://guide-assurance.ch/en/#webpage",
-      "url": "https://guide-assurance.ch/en/",
-      "name": "Swiss insurance guides 2027 | Guide Assurance",
-      "description": "Dated guides and free tools, built on official data, on health insurance, cross-border work, moving to Switzerland and pillar 3a.",
-      "inLanguage": "en",
-      "isPartOf": { "@id": "https://guide-assurance.ch/#website" },
-      "about": { "@id": "https://guide-assurance.ch/#organization" },
-      "publisher": { "@id": "https://guide-assurance.ch/#organization" },
-      "dateModified": "2026-11-22"
+      "dateModified": DATE_PAGE.accueil
     }
   ]
 } as const;

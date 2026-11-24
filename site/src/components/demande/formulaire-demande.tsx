@@ -32,12 +32,11 @@ import { Alert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { nombre as formaterNombre } from "@/lib/nombres";
+import { nombre as formaterNombre, ESPACE_FINE as NB } from "@/lib/nombres";
 
 type Locale = "fr" | "en";
 type Ecran = 1 | 2 | 3 | "hors-suisse";
 
-const NB = " ";
 /* Typographie française des libellés partagés : espace fine insécable avant ; : ? ! */
 export const typo = (s: string, locale: Locale) => (locale === "fr" ? s.replace(/ ([;:?!])/g, `${NB}$1`) : s);
 const ANNEE = new Date().getFullYear();

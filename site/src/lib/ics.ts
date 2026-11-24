@@ -4,7 +4,8 @@
    Règles appliquées : lignes terminées par CRLF, repliées à 75 octets sans couper un caractère UTF-8 (§3.1),
    texte échappé (§3.3.11), UID et DTSTAMP sur chaque VEVENT (§3.6.1), alarmes VALARM avec ACTION, DESCRIPTION
    et TRIGGER (§3.6.6). */
-import { dateTexte } from "./dates.ts";
+import { d0, dateTexte, dim } from "./dates.ts";
+import { ESPACE_FINE as N } from "./nombres.ts";
 
 export type Alarme = { joursAvant: number; heure?: number };
 
@@ -102,7 +103,6 @@ export function calendrierIcs(evenements: EvenementIcs[], { maintenant = new Dat
 /* ---- Échéances fixes ---- */
 
 const SITE = "https://guide-assurance.ch";
-const d0 = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
 /* Prochaine occurrence (aujourd'hui compris) du jour j du mois m (0 = janvier). */
 export function prochain(today: Date, m: number, j: number): Date {
   const t = d0(today);
@@ -120,7 +120,6 @@ const LIENS = {
 };
 export const lienRappel = (l: Langue) => RAPPEL[l];
 
-const N = "\u202f";
 export function evenementFixe(type: TypeFixe, today: Date, l: Langue = "fr"): EvenementIcs {
   const fr = l === "fr";
   const k = LIENS[l];
@@ -210,7 +209,6 @@ export const guideContrat = (t: TypeContrat, l: Langue) => `${SITE}${GUIDE[t][l]
 
 /* Recule de n mois ; une fin de mois reste une fin de mois (31.12 - 3 mois = 30.09), comme src/lib/engines/delais.ts. */
 export function moinsMoisIcs(d: Date, n: number): Date {
-  const dim = (y: number, m: number) => new Date(y, m + 1, 0).getDate();
   const fin = d.getDate() === dim(d.getFullYear(), d.getMonth());
   let m = d.getMonth() - n, y = d.getFullYear();
   while (m < 0) { m += 12; y--; }

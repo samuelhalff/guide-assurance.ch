@@ -11,9 +11,9 @@ import { abs } from "@/lib/site";
 import { ANNEE_BAROMETRE as A, DATE_BAROMETRE, DONNEES, chf, datasetBarometreLd, donneesCanton, infoCanton, pct } from "@/lib/barometre";
 import { ROUTES_IDEES, cheminBarometre } from "@/lib/pages-idees";
 import type { Locale } from "@/lib/i18n";
+import { ESPACE_FINE as T } from "@/lib/nombres";
 
 /* Pages du baromètre (FR et EN) : métadonnées, JSON-LD et gabarit. Les fichiers de route ne font qu'appeler ces fonctions. */
-const T = " ";
 
 function metaCanton(code: string, l: Locale) {
   const c = donneesCanton(code);

@@ -21,8 +21,7 @@
   .contrat-ligne .deux { grid-template-columns: 1fr; gap: var(--s3); }
   .rappel-calcule { color: var(--encre); }
   .rappel-calcule b { font-weight: 700; }
-  .commande.retirer { color: var(--encre-2); justify-self: start; }
-  .commande.plus { justify-self: start; }
+  .plus { justify-self: start; }
 
   /* Baromètre */
   .lead-barometre { font-size: 19px; line-height: 1.45; margin: var(--s4) 0 0; max-width: 62ch; }

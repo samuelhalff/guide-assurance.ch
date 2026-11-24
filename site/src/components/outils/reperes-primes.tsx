@@ -3,7 +3,7 @@ import { Depliable } from "@/components/controles";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import type { Locale } from "@/lib/i18n";
 import { PAGES_DONNEES, PAGES_DONNEES_EN } from "@/lib/nav";
-import { nombre as formaterNombre } from "@/lib/nombres";
+import { chf as chfBase, nombre as formaterNombre, ESPACE_FINE as T, INSECABLE as NB } from "@/lib/nombres";
 
 /* Tableau statique, lisible sans JavaScript : pour chaque canton, région de prime la plus peuplée, adulte de 26 ans et plus.
    Quatre profils (franchise 300 et 2500, avec et sans accident) : première prime de la liste et moyenne des offres ;
@@ -14,8 +14,6 @@ type ProfilResume = { franchise: number; accident: boolean; premiere: number; mo
 type CantonResume = { canton: string; region: number; commune: string; nombre: number; moyenne: number; offres: Offre[]; profils: ProfilResume[] };
 const R = resume as { cantons: CantonResume[] };
 
-const T = " ";
-const NB = " ";
 const NOM = {
   fr: { GE: "Genève", VD: "Vaud", VS: "Valais", FR: "Fribourg", NE: "Neuchâtel", JU: "Jura", BE: "Jura bernois" },
   en: { GE: "Geneva", VD: "Vaud", VS: "Valais", FR: "Fribourg", NE: "Neuchâtel", JU: "Jura", BE: "Bernese Jura" },
@@ -29,7 +27,7 @@ export function TableauReperes({ locale = "fr", replie = false }: { locale?: Loc
   const bas = cantons.map((c) => c.offres[0].mensuel);
   const min = Math.min(...bas);
   const max = Math.max(...bas);
-  const chf = (c: number) => (en ? `CHF${NB}${nf(c)}` : `${nf(c)}${NB}CHF`);
+  const chf = (c: number) => chfBase(c / 100, locale, 2, NB, NB);
   const grille = (
       <div className="reperes-grille">
         {cantons.map((c) => (

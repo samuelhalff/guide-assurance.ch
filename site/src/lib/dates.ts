@@ -19,3 +19,8 @@ export function dateTexte(d: Date, locale: Locale, o: { jour?: boolean; annee?: 
   const s = `${n} ${MOIS[locale][d.getMonth()]}${annee ? ` ${d.getFullYear()}` : ""}`;
   return jour ? `${JOURS[locale][d.getDay()]} ${s}` : s;
 }
+
+/* Minuit local du jour de `d`. */
+export const d0 = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+/* Nombre de jours du mois `m` (0 à 11) de l'année `y`. */
+export const dim = (y: number, m: number) => new Date(y, m + 1, 0).getDate();

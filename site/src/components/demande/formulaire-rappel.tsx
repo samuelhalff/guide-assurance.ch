@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 type Locale = "fr" | "en";
-const NB = " ";
+const NB = " ";
 
 /* Formulaire court « Être rappelé » : un seul écran, sans profil ni santé (porte « rappel »).
    Même envoi que le formulaire complet (POST /api/demande), même texte d'accord, même Turnstile. */

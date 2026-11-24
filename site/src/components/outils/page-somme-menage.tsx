@@ -13,10 +13,10 @@ import { DATE_PAGE } from "@/lib/donnees";
 import { dateLongue, type Locale } from "@/lib/i18n";
 import { OUTILS, OUTILS_EN } from "@/lib/nav";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { ESPACE_FINE as N } from "@/lib/nombres";
 
 /* « Calculateur de la somme d'assurance ménage » (/assurance-menage-rc/calculateur-somme/ et version anglaise). Les
    fichiers de route ne font qu'appeler ces fonctions. Méthodes et sources : src/lib/engines/somme-menage.ts. */
-const N = " ";
 const nfFr = { format: (x: number) => S.formaterMontant(x, "fr") };
 const nfEn = { format: (x: number) => S.formaterMontant(x, "en") };
 

@@ -1,9 +1,9 @@
 import type { Locale } from "@/lib/i18n";
 import { Card, CardContent } from "@/components/ui/card";
+import { ESPACE_FINE as T } from "@/lib/nombres";
 
 /* Sous le simulateur frontalier : le droit d'option (choix en principe irréversible) et ce que le prix ne dit pas.
    Rendu côté serveur, lisible sans JavaScript. Sources officielles citées en lien, vérifiées le 23.11.2026 (research : CLEISS, ge.ch du 10.11.2026, OFSP, OAMal consolidée au 22.10.2026). */
-const T = " ";
 
 export const SOURCES_OPTION = {
   ofsp: "https://www.bag.admin.ch/fr/assurance-maladie-travailleurs-frontaliers-en-suisse",

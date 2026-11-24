@@ -24,10 +24,10 @@ import { OUTILS, OUTILS_EN } from "@/lib/nav";
 import { ROUTES_IDEES, cheminBarometre } from "@/lib/pages-idees";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { ESPACE_FINE as T } from "@/lib/nombres";
 
 /* Baromètre des primes : page d'ensemble et page par canton, FR et EN. Rendu côté serveur, lisible sans JavaScript.
    Aucun assureur n'est nommé ; les tableaux donnent des valeurs de distribution (plus basse, quartiles, médiane, plus haute). */
-const T = " ";
 const DATE_RELEVE = DONNEES.date_donnees;
 const URL_OFSP_MOYENNES = DONNEES.source.moyennes.urls[0];
 

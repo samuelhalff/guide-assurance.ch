@@ -330,6 +330,35 @@ class Backup:
                 shutil.copy2(dst, p)
 
 
+def swap_dir(src: Path, dst: Path):
+    """Remplace dst par une copie de src sans jamais laisser dst absent ou à moitié copié : copie dans un dossier
+    voisin, ancien dossier mis de côté, nouveau renommé en place, ancien supprimé ; ancien remis si une étape échoue."""
+    new, old = dst.with_name(dst.name + ".new"), dst.with_name(dst.name + ".old")
+    for t in (new, old):
+        shutil.rmtree(t, ignore_errors=True)
+    shutil.copytree(src, new)
+    moved = False
+    try:
+        if dst.exists():
+            os.replace(dst, old)
+            moved = True
+        os.replace(new, dst)
+    except BaseException:
+        if moved and not dst.exists():
+            os.replace(old, dst)
+        raise
+    finally:
+        shutil.rmtree(new, ignore_errors=True)
+    shutil.rmtree(old, ignore_errors=True)
+
+
+def replace_file(src: Path, dst: Path):
+    """Copie src vers dst de façon atomique (fichier temporaire voisin puis os.replace)."""
+    tmp = dst.with_name(dst.name + ".new")
+    shutil.copy2(src, tmp)
+    os.replace(tmp, dst)
+
+
 def verify_live(log: Log, checks: list[dict]) -> list[str]:
     """checks : {url, out: chemin relatif à site/out, values: [regex]} -> liste des problèmes (vide = OK)."""
     problems = []

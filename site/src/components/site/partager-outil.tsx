@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import { abs } from "@/lib/site";
 import { DICT, type Locale } from "@/lib/i18n";
 import { suivre } from "@/lib/analytics";
@@ -29,12 +30,12 @@ export function PartagerOutil({ path, title, text, locale = "fr" }: { path: stri
   }
   return (
     <div className="partage">
-      <button type="button" className="commande" onClick={partager}>
-        <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <Button type="button" variant="commande" size="commande" className="font-narrow text-base text-lac-encre" onClick={partager}>
+        <svg className="size-[18px]" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <path d="M10 13V3M6 6.5L10 2.5l4 4M4 10v6.5h12V10" />
         </svg>
         {t.partager}
-      </button>
+      </Button>
       <span className="partage-ok" role="status">{etat}</span>
     </div>
   );

@@ -729,6 +729,11 @@ def run(log: C.Log, a) -> int:
     attente = len(brouillons()) >= 3 and not a.only and bool(trig)
     reportes = {d["sujet"] for d in (trig if attente else trig[1:])}
     maj = {k: v for k, v in maj.items() if CLES_ETAT.get(k) not in reportes}
+    # La clé du déclencheur traité n'est écrite qu'une fois son brouillon réussi (un brouillon rejeté se retente au
+    # passage suivant). Les autres clés (rien à rédiger, déclencheur reporté déjà retiré plus haut) s'écrivent tout de suite.
+    traite = trig[0]["sujet"] if trig and not attente else None
+    maj_apres = {k: v for k, v in maj.items() if traite and CLES_ETAT.get(k) == traite}
+    maj = {k: v for k, v in maj.items() if k not in maj_apres}
     if not a.dry_run and not a.only:
         C.save_state(DS, **maj)
     if not trig:
@@ -748,7 +753,10 @@ def run(log: C.Log, a) -> int:
         C.alert(log, DS, "clé manquante", [f"Déclencheur « {html.escape(d['raison'])} », mais aucune clé de LLM n'est configurée "
                                            "(secret GitHub Actions ANTHROPIC_API_KEY, ou AZURE_OPENAI_ENDPOINT et AZURE_OPENAI_API_KEY). Aucun brouillon rédigé."], a.dry_run)
         return 1
-    return rediger(log, a, d, env)
+    rc = rediger(log, a, d, env)
+    if rc == 0 and maj_apres and not a.dry_run and not a.only:
+        C.save_state(DS, **maj_apres)
+    return rc
 
 
 if __name__ == "__main__":

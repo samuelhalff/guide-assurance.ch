@@ -4,7 +4,7 @@ import { useRappelVu } from "@/components/demande/lien-rappel";
 import type { Porte } from "@shared/demande/portes";
 import { RAPPEL, TEXTE_CTA, TEXTE_RAPPEL, ecrirePreremplissage, lienDemande, lirePreremplissage } from "@/lib/demande";
 import { suivre } from "@/lib/analytics";
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 
 const CLE_MASQUEE = "ga-barre-demande-masquee";
 
@@ -68,11 +68,11 @@ export function BarreDemande({ locale = "fr", porte, rappelSujet }: { locale?: "
           {TEXTE_RAPPEL[locale].tete}
         </a>
       )}
-      <button type="button" className="commande" onClick={masquer} aria-label={t.fermer}>
-        <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
+      <Button type="button" variant="commande" size="commande" onClick={masquer} aria-label={t.fermer}>
+        <svg className="size-[18px]" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
           <path d="M5 5l10 10M15 5L5 15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
         </svg>
-      </button>
+      </Button>
     </div>
   );
 }

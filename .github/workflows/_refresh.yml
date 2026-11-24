@@ -88,7 +88,7 @@ jobs:
       ACTUALITES_APERCU_CLE: ${{ secrets.ACTUALITES_APERCU_CLE }}
       REFRESH_DATASET: ${{ inputs.dataset }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           ref: main
           fetch-depth: 0
@@ -100,7 +100,16 @@ jobs:
       - name: Restaurer l'état (branche refresh-state)
         run: |
           mkdir -p infra/refresh/state
-          if git fetch -q origin refresh-state; then git archive FETCH_HEAD | tar -x -C infra/refresh/state; fi
+          # Branche absente (premier passage) : départ à vide. Toute autre erreur (réseau, droits) fait échouer le passage.
+          rc=0; git ls-remote --exit-code --heads origin refresh-state >/dev/null || rc=$?
+          if [ "$rc" = 0 ]; then
+            git fetch -q origin refresh-state
+            git archive FETCH_HEAD | tar -x -C infra/refresh/state
+          elif [ "$rc" = 2 ]; then
+            echo "branche refresh-state absente : état initial vide"
+          else
+            echo "::error::lecture de la branche refresh-state impossible (git ls-remote, code $rc)"; exit 1
+          fi
           ls infra/refresh/state
 
       - name: Accès SSH
@@ -125,8 +134,17 @@ jobs:
           AZURE_OPENAI_DEPLOYMENT: ${{ secrets.AZURE_OPENAI_DEPLOYMENT }}
           AZURE_OPENAI_API_VERSION: ${{ secrets.AZURE_OPENAI_API_VERSION }}
           GH_TOKEN: ${{ github.token }}
+          DATASET: ${{ inputs.dataset }}
+          PLAN_ARGS: ${{ needs.plan.outputs.args }}
+          DRY_RUN: ${{ inputs.dry_run }}
+          EXTRA_ARGS: ${{ inputs.args }}
         run: |
-          python3 infra/refresh/${{ inputs.dataset }}.py ${{ needs.plan.outputs.args }} ${{ inputs.dry_run && '--dry-run' || '' }} ${{ inputs.args }}
+          set -euo pipefail
+          args=()
+          read -r -a plan_args <<< "$PLAN_ARGS"; args+=("${plan_args[@]}")
+          if [ "$DRY_RUN" = "true" ]; then args+=(--dry-run); fi
+          read -r -a extra_args <<< "$EXTRA_ARGS"; args+=("${extra_args[@]}")
+          python3 "infra/refresh/${DATASET}.py" "${args[@]}"
 
       - name: Enregistrer l'état (branche refresh-state)
         if: ${{ always() && !inputs.dry_run }}
@@ -149,7 +167,7 @@ jobs:
 
       - name: Journal
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: journal-${{ inputs.dataset }}-${{ github.run_id }}
           path: infra/refresh/logs/

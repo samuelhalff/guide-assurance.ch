@@ -18,6 +18,24 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         link: "text-primary underline-offset-4 hover:underline",
+        /* Commande de la tête et des barres : sans cadre, fond carte au survol. */
+        commande: "text-foreground font-semibold hover:bg-card hover:text-foreground",
+        /* Fermeture discrète d'un encadré. */
+        discret: "text-encre-2 hover:bg-papier hover:text-encre",
+        /* Texte seul, sans soulignement. */
+        nu: "rounded-none text-foreground font-normal hover:text-foreground",
+        /* Action en ligne : texte bleu souligné. */
+        texte: "rounded-none text-lac-encre font-normal underline underline-offset-2 hover:text-lac-encre",
+        /* Ajout d'une ligne : cadre pointillé. */
+        pointille:
+          "border-[1.5px] border-dashed border-filet bg-transparent font-narrow font-semibold text-lac-encre hover:border-encre-2",
+        /* Question d'exemple proposée dans l'assistant. */
+        puce: "justify-start border-filet bg-papier text-left font-normal text-encre hover:border-encre",
+        /* Tri d'une colonne : reprend la police et la couleur de l'en-tête. */
+        entete:
+          "justify-start rounded-sm font-[weight:inherit] text-inherit in-[th[aria-sort]]:text-encre",
+        /* Lien du pied de page : reprend la police du texte voisin. */
+        pied: "rounded-none font-[weight:inherit] text-bande-texte underline hover:text-bande-titre",
       },
       size: {
         /* Commande du site : 52 px, 17 px gras ; le libellé peut passer à la ligne sur mobile. */
@@ -27,11 +45,24 @@ const buttonVariants = cva(
         sm: "h-7 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
         lg: "h-9 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
         icon: "size-8",
+        "icon-md": "size-10",
+        "icon-xl": "size-12",
         "icon-xs":
           "size-6 rounded-[min(var(--radius-md),10px)] in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3",
         "icon-sm":
           "size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg",
         "icon-lg": "size-9",
+        /* Commande de la tête : 44 px, 15 px. */
+        commande: "min-h-11 min-w-11 gap-2 px-2.5 text-[15px] leading-normal",
+        /* Texte en ligne : 14 px narrow, sans marge intérieure. */
+        texte: "h-auto min-h-0 gap-1 p-0 font-narrow text-sm leading-normal",
+        /* Texte qui reprend la police voisine. */
+        herite:
+          "min-h-0 gap-1 p-0 font-[family-name:inherit] text-[length:inherit] leading-[inherit]",
+        /* Ajout pleine largeur. */
+        bloc: "min-h-12 w-full px-3 text-base leading-tight",
+        /* Question d'exemple : 44 px, 15 px. */
+        puce: "min-h-11 px-3.5 py-2.5 text-[15px] leading-[1.35]",
         /* Barre collante mobile : 16 px, padding serré ; un <small> passe en seconde ligne. */
         barre:
           "min-h-13 flex-auto gap-0.5 px-3 py-2 text-base leading-tight whitespace-nowrap has-[small]:flex-col [&_small]:font-narrow [&_small]:text-[13px] [&_small]:font-semibold [&_small]:opacity-90",

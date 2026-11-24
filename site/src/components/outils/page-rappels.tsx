@@ -13,9 +13,9 @@ import { abs } from "@/lib/site";
 import { dateLongue, type Locale } from "@/lib/i18n";
 import { MAJ_IDEES, ROUTES_IDEES } from "@/lib/pages-idees";
 import { OUTILS, OUTILS_EN } from "@/lib/nav";
+import { ESPACE_FINE as T } from "@/lib/nombres";
 
 /* Page « Rappels d'échéance » (idée 1 du rapport 08) : fichier .ics créé dans le navigateur, sans e-mail ni serveur. */
-const T = " ";
 const LAMAL = "https://www.fedlex.admin.ch/eli/cc/1995/1328_1328_1328/fr#art_7";
 const LCA = "https://www.fedlex.admin.ch/eli/cc/24/719_735_717/fr#art_35a";
 const LCA42 = "https://www.fedlex.admin.ch/eli/cc/24/719_735_717/fr#art_42";

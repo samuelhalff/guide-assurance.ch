@@ -16,7 +16,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { nombre as formaterNombre } from "@/lib/nombres";
+import { chf as chfBase, nombre as formaterNombre, ESPACE_FINE as T, INSECABLE as NB } from "@/lib/nombres";
 
 /* Comparateur de primes LAMal 2027. Les données du canton sont chargées à la demande (public/data/primes-2027) ;
    le calcul se fait dans le navigateur, rien de ce qui est saisi n'est envoyé ni mis dans l'adresse.
@@ -24,8 +24,6 @@ import { nombre as formaterNombre } from "@/lib/nombres";
    Parcours repris de priminfo (research/05-benchmark-comparateurs.md) : lieu, année, franchise, accident ; le modèle,
    l'affichage mois/an et la caisse actuelle viennent après, sur la liste. */
 
-const T = " "; // espace fine insécable avant ; : ? ! »
-const NB = " ";
 const nfFr = (x: number, d = 0) => formaterNombre(x, d, "fr"); // sans Intl : l'ICU du build et celle du navigateur diffèrent (src/lib/nombres.ts)
 const nfEn = (x: number, d = 0) => formaterNombre(x, d, "en");
 
@@ -309,7 +307,7 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
   const isEn = locale === "en";
   const t = TXT[locale];
   const nf = isEn ? nfEn : nfFr;
-  const chf = (x: number, d = 0) => (isEn ? `CHF${NB}${nf(x, d)}` : `${nf(x, d)}${NB}CHF`);
+  const chf = (x: number, d = 0) => chfBase(x, isEn ? "en" : "fr", d, NB, NB);
   const signe = (x: number) => (Math.round(x) === 0 ? "0" : `${x > 0 ? "+" : "−"}${nf(Math.abs(x))}`);
 
   const [saisieLieu, setSaisieLieu] = useState("");
@@ -681,9 +679,9 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
             <legend>
               {t.personne(k + 1)}
               {personnes.length > 1 ? (
-                <button type="button" className="retirer" onClick={() => setPersonnes((cur) => cur.filter((x) => x.id !== p.id))}>
+                <Button type="button" variant="texte" size="texte" onClick={() => setPersonnes((cur) => cur.filter((x) => x.id !== p.id))}>
                   {t.retirer}
-                </button>
+                </Button>
               ) : null}
             </legend>
             <div className="ligne">
@@ -722,13 +720,15 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
           </fieldset>
         ))}
         {personnes.length < MAX_PERSONNES ? (
-          <button
+          <Button
             type="button"
+            variant="pointille"
+            size="bloc"
             className="ajouter-personne"
             onClick={() => setPersonnes((cur) => [...cur, { id: Math.max(...cur.map((x) => x.id)) + 1, naissance: "", franchise: null, accident: null }])}
           >
             + {t.ajouter}
-          </button>
+          </Button>
         ) : null}
         <Button type="submit" className="w-full">{r && r.total ? t.voirN(r.total) : t.voir}</Button>
         {r && r.total ? <small className="aide-champ">{t.enDirect}</small> : null}
@@ -832,9 +832,9 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
 
 
                 {r.total > nb ? (
-                  <button type="button" className="commande plus" onClick={() => setNb((v) => v + PAR_PAGE)}>
+                  <Button type="button" variant="texte" size="texte" className="plus min-h-11 text-base" onClick={() => setNb((v) => v + PAR_PAGE)}>
                     {t.plus(Math.min(r.total, nb + PAR_PAGE), r.total)}
-                  </button>
+                  </Button>
                 ) : null}
                 <p className="rappel-liste rappel-bureau">{t.rappelQ} {lienRappel()}{t.rappelSuite}</p>
               </div>
@@ -846,7 +846,7 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
               <p>{t.reseau}</p>
               <p><b>{t.integrite(dateCh(donneesDu))}</b></p>
               <p>
-                <button type="button" className="lien-profil" onClick={copierLien}>{t.lienProfil}</button>
+                <Button type="button" variant="texte" size="texte" className="font-semibold" onClick={copierLien}>{t.lienProfil}</Button>
                 {copie ? <span className="copie-ok"> {t.lienCopie}</span> : null}
               </p>
             </div>
@@ -895,10 +895,10 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
 
             {aListe && barre ? (
               <div className={offreEnvoyee ? "barre-collante" : "barre-collante avec-offre"}>
-                <button type="button" className="commande" onClick={() => formRef.current?.scrollIntoView({ behavior: "smooth" })}>{offreEnvoyee ? t.modifier : t.profilCourt}</button>
-                <button type="button" className="commande" onClick={() => reglagesRef.current?.scrollIntoView({ behavior: "smooth", block: "center" })}>{offreEnvoyee ? t.trierFiltrer : t.trierCourt}</button>
+                <Button type="button" variant="commande" size="commande" className="border-filet font-narrow" onClick={() => formRef.current?.scrollIntoView({ behavior: "smooth" })}>{offreEnvoyee ? t.modifier : t.profilCourt}</Button>
+                <Button type="button" variant="commande" size="commande" className="border-filet font-narrow" onClick={() => reglagesRef.current?.scrollIntoView({ behavior: "smooth", block: "center" })}>{offreEnvoyee ? t.trierFiltrer : t.trierCourt}</Button>
                 {offreEnvoyee ? null : (
-                  <button type="button" className="commande offre-collante" onClick={() => offreRef.current?.ouvrir()}>{t.offresCourt}</button>
+                  <Button type="button" size="commande" className="border-sentier font-narrow font-bold" onClick={() => offreRef.current?.ouvrir()}>{t.offresCourt}</Button>
                 )}
               </div>
             ) : null}

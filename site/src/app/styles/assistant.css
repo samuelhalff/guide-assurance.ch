@@ -82,11 +82,6 @@
 
   .assistant-exemples { display: grid; gap: var(--s2); justify-items: start; }
   .assistant-exemples p { margin: var(--s1) 0 0; font: 600 14px var(--narrow); color: var(--encre-2); }
-  .assistant-exemples button {
-    text-align: left; min-height: 44px; padding: 10px 14px; border: 1px solid var(--filet); border-radius: var(--r);
-    background: var(--papier); color: var(--encre); font: 15px/1.35 var(--sans); cursor: pointer;
-  }
-  .assistant-exemples button:hover { border-color: var(--encre); }
 
   .assistant-rappel { align-self: stretch; flex: 0 0 auto; }
   .assistant-rappel-titre { margin: 0; font: 700 17px/1.25 var(--sans); }
@@ -103,20 +98,6 @@
     display: flex; align-items: flex-end; gap: var(--s2); padding: var(--s3) var(--s3) var(--s2);
     background: var(--papier); border-top: 1px solid var(--filet);
   }
-  .assistant-saisie textarea {
-    flex: 1 1 auto; min-height: 48px; max-height: 132px; resize: none; field-sizing: content;
-    padding: 12px 14px; border: 1px solid var(--input); border-radius: var(--r);
-    background: var(--champ); color: var(--encre); font: 16px/1.4 var(--sans);
-  }
-  .assistant-saisie textarea::placeholder { color: var(--encre-2); }
-  .assistant-saisie textarea:focus-visible { outline: 3px solid var(--lac-encre); outline-offset: 1px; }
-  .assistant-envoyer {
-    flex: 0 0 auto; display: grid; place-items: center; width: 48px; height: 48px; border: 0; border-radius: var(--r);
-    background: var(--sentier); color: var(--sur-sentier); cursor: pointer;
-  }
-  .assistant-envoyer:hover { background: var(--bouton-survol); }
-  .assistant-envoyer:disabled { background: var(--muted); color: var(--encre-2); cursor: default; }
-  .assistant-envoyer:focus-visible { outline: 3px solid var(--lac-encre); outline-offset: 2px; }
   .assistant-pied {
     margin: 0; padding: 0 var(--s4) calc(var(--s3) + env(safe-area-inset-bottom)); background: var(--papier);
     font: 13px/1.4 var(--narrow); color: var(--encre-2);
@@ -127,5 +108,5 @@
     .assistant-bouton, .assistant-panneau { transition: none; }
     .assistant-ecrit::after { animation: none; width: auto; }
   }
-  @media print { .assistant-bouton, .assistant-panneau, .assistant-fond { display: none !important; } }
+  @media print { .assistant-bouton, .assistant-panneau, .assistant-fond { display: none; } }
 }

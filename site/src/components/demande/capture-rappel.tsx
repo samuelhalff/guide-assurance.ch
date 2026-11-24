@@ -20,7 +20,7 @@ import { Input } from "@/components/ui/input";
    s'ouvrent au premier focus pour garder le bloc court. */
 
 type Locale = "fr" | "en";
-const NNBSP = " ";
+const NNBSP = " ";
 
 const T = {
   fr: {
@@ -244,11 +244,11 @@ export const CaptureRappel = forwardRef<
           {titre}
         </h3>
         {masquable ? (
-          <button type="button" className="capture-masquer" onClick={() => onFin?.(false)} aria-label={t.fermer} title={t.fermer}>
-            <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
+          <Button type="button" variant="discret" size="icon-md" className="-mt-2 -mr-2" onClick={() => onFin?.(false)} aria-label={t.fermer} title={t.fermer}>
+            <svg className="size-[18px]" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
               <path d="M5 5l10 10M15 5L5 15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
             </svg>
-          </button>
+          </Button>
         ) : null}
       </div>
       <div className="capture-intro">{intro}</div>

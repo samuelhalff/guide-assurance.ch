@@ -1,6 +1,8 @@
 /* Délais de résiliation, assurance maladie suisse. Fonctions pures, testées par tests/delais.test.mjs.
    Toutes les dates sont des Date locales à minuit. Sources vérifiées dans Fedlex le 22.11.2026 :
    art. 7 al. 1-2 LAMal ; art. 94 al. 2 et 100 al. 3 OAMal ; art. 35a LCA. */
+import { d0, dim } from "../dates.ts";
+
 const JOUR = 864e5;
 type Cand = { fin: Date; dl: Date; base?: string; dlLegal?: Date };
 export type Resultat = {
@@ -9,8 +11,6 @@ export type Resultat = {
   dlLegal?: Date | null;
   base: string; incertain: string[]; premiere?: Date | null;
 };
-const d0 = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
-const dim = (y: number, m: number) => new Date(y, m + 1, 0).getDate();
 const finDeMois = (d: Date) => d.getDate() === dim(d.getFullYear(), d.getMonth());
 
 /* Recule de n mois. Une fin de mois reste une fin de mois (31.12 - 3 mois = 30.09). */

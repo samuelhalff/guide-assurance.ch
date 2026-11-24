@@ -12,9 +12,9 @@ import { dateLongue, type Locale } from "@/lib/i18n";
 import { MAJ_IDEES, ROUTES_IDEES } from "@/lib/pages-idees";
 import { OUTILS, OUTILS_EN } from "@/lib/nav";
 import { buttonVariants } from "@/components/ui/button";
+import { ESPACE_FINE as T } from "@/lib/nombres";
 
 /* Page du kit RH (idée 8) : deux PDF d'une page, FR et EN, produits par scripts/kit-rh.mjs dans public/kit-rh/. */
-const T = " ";
 export const PDF_KIT = { fr: "/kit-rh/guide-assurance-kit-rh-fr.pdf", en: "/kit-rh/guide-assurance-kit-rh-en.pdf" };
 const FED = {
   lamal3: "https://www.fedlex.admin.ch/eli/cc/1995/1328_1328_1328/fr#art_3",

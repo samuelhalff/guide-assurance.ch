@@ -1,4 +1,5 @@
 import { PORTES_FORMULAIRE, PREFILL_STORAGE_KEY, type Porte } from "@shared/demande/portes";
+import { ESPACE_FINE as NNBSP } from "./nombres.ts";
 
 /* Formulaire de demande : adresses, porte d'une page guide, préremplissage (sessionStorage, jamais l'URL). */
 export const DEMANDE = { fr: "/demande/", en: "/en/request/" } as const;
@@ -81,7 +82,6 @@ export const TEXTE_CTA = {
   },
 } as const;
 
-const NNBSP = "\u202f";
 
 /* Appels « Être rappelé » (tête, accueil, zone d'appel des guides) et formulaire court. Aucun délai promis. */
 export const TEXTE_RAPPEL = {

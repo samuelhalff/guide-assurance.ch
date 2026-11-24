@@ -1,3 +1,4 @@
+import { buttonVariants } from "@/components/ui/button";
 import { Marque } from "@/components/site/logo";
 import { ThemeToggle } from "@/components/site/theme-toggle";
 import { SiteMenu } from "@/components/site/site-menu";
@@ -40,10 +41,10 @@ export function SiteHeader({ current, locale = "fr", altPath, rappel = true }: {
             </LienRappel>
           ) : null}
           {/* Chaque langue a sa propre mise en page racine : rechargement complet voulu */}
-          <a className="commande" href={autre} lang={t.autreLangue.lang} hrefLang={t.autreLangue.lang} aria-label={t.autreLangue.long}>
+          <a data-slot="button" className={buttonVariants({ variant: "commande", size: "commande" })} href={autre} lang={t.autreLangue.lang} hrefLang={t.autreLangue.lang} aria-label={t.autreLangue.long}>
             {t.autreLangue.court}
           </a>
-          <ThemeToggle className="theme-tete" lang={locale} />
+          <span className="theme-tete"><ThemeToggle lang={locale} /></span>
           <SiteMenu current={current} locale={locale} />
         </div>
       </div>

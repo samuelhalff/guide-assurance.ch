@@ -335,7 +335,7 @@
     .itineraires td.pour::after { content: " · "; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .trace { animation: none !important; }
+    .feuille[data-actif] .itin[data-itin] .trace { animation: none; }
     .sentier { transition: none; }
   }
 }

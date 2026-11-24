@@ -5,14 +5,14 @@ import { NOM_CONTRAT, evenementContrat, evenementFixe, prochain, type Contrat, t
 import type { Locale } from "@/lib/i18n";
 import { Choix } from "@/components/outils/choix";
 import { Case } from "@/components/controles";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { dateTexte } from "@/lib/dates";
+import { d0, dateTexte } from "@/lib/dates";
+import { ESPACE_FINE as N } from "@/lib/nombres";
 
 /* Page « Rappels d'échéance » : échéances légales cochées, puis contrats saisis par le visiteur.
    Tout reste dans le navigateur : aucune valeur n'est envoyée, gardée ou mesurée. */
-const N = " ";
-const d0 = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
 const TYPES: TypeContrat[] = ["auto", "menage", "complementaire", "juridique", "vie", "autre"];
 type Ligne = { id: number; type: TypeContrat; nom: string; echeance: string; preavis: string };
 const vide = (id: number): Ligne => ({ id, type: "auto", nom: "", echeance: "", preavis: "3" });
@@ -145,15 +145,17 @@ export function RappelsEcheances({ aujourdhuiIso, locale = "fr" }: { aujourdhuiI
               </p>
             ) : null}
             {lignes.length > 1 ? (
-              <button type="button" className="commande plus retirer" onClick={() => setLignes((ls) => ls.filter((y) => y.id !== x.id))}>
+              <Button type="button" variant="texte" size="texte" className="plus min-h-11 text-base text-encre-2" onClick={() => setLignes((ls) => ls.filter((y) => y.id !== x.id))}>
                 {en ? "Remove this contract" : "Retirer ce contrat"}
-              </button>
+              </Button>
             ) : null}
           </fieldset>
         ))}
-        <button
+        <Button
           type="button"
-          className="commande plus"
+          variant="texte"
+          size="texte"
+          className="plus min-h-11 text-base"
           disabled={lignes.length >= 12}
           onClick={() => {
             setLignes((ls) => [...ls, vide(suivant)]);
@@ -161,7 +163,7 @@ export function RappelsEcheances({ aujourdhuiIso, locale = "fr" }: { aujourdhuiI
           }}
         >
           {en ? "+ Add a contract" : "+ Ajouter un contrat"}
-        </button>
+        </Button>
         <div className="actions">
           <BoutonAgenda
             locale={locale}

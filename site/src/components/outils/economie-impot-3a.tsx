@@ -6,15 +6,15 @@ import { IconeTelephone, LienRappel } from "@/components/demande/lien-rappel";
 import type { Locale } from "@/lib/i18n";
 import { Choix } from "@/components/outils/choix";
 import { ChoixBoutons, Depliable } from "@/components/controles";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Alert } from "@/components/ui/alert";
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { nombre as formaterNombre } from "@/lib/nombres";
+import { nombre as formaterNombre, ESPACE_FINE as N } from "@/lib/nombres";
 
 /* Calculateur « Économie d'impôt 3a » : tout se calcule ici, rien n'est envoyé. Le profil peut être partagé
    après le # (jamais transmis au serveur), lu une fois puis retiré de l'adresse. */
-const N = " ";
 /* Nombres formatés sans Intl (src/lib/nombres.ts) : l'ICU du build et celle du navigateur diffèrent pour fr-CH. */
 const nfFr = { format: (x: number) => formaterNombre(x, 0, "fr") };
 const nfEn = { format: (x: number) => formaterNombre(x, 0, "en") };
@@ -387,7 +387,7 @@ export function EconomieImpot3a({ locale = "fr" }: { locale?: Locale }) {
           <p>{t.limites}</p>
           {res ? (
             <p>
-              <button type="button" className="lien-profil" onClick={copierLien}>{t.lien}</button>
+              <Button type="button" variant="texte" size="texte" className="font-semibold" onClick={copierLien}>{t.lien}</Button>
               {copie ? <span className="copie-ok"> {t.lienOk}</span> : null}
             </p>
           ) : null}

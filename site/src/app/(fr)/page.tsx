@@ -19,11 +19,11 @@ import { OUTILS } from "@/lib/nav";
 import { Alert } from "@/components/ui/alert";
 import { buttonVariants } from "@/components/ui/button";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { ESPACE_FINE as N } from "@/lib/nombres";
 
 const TITRE = "Primes maladie 2027, frontaliers et 3e pilier en Suisse romande";
 const DESCRIPTION =
   "Les primes maladie 2027 des caisses actives dans votre région de Suisse romande (OFSP). Sans inscription ni publicité, calculées dans votre navigateur.";
-const N = "\u202f"; // espace fine insécable avant ; : ? ! »
 
 export const metadata: Metadata = pageMetadata({ title: TITRE, description: DESCRIPTION, path: "/", enPath: "/en/" });
 

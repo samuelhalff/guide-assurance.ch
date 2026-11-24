@@ -159,7 +159,7 @@ export function GuidePage({
             </>
           )}
           <div className="guide-meta">
-            <p style={{ margin: 0 }}>
+            <p className="sans-marge">
               {t.majLe} <time dateTime={majIso}>{dateLongue(majIso, locale)}</time>
               {sources.length ? ` · ${t.source(sources.length)}` : ""}
             </p>

@@ -10,8 +10,8 @@ import { IconeTelephone, LienRappel } from "@/components/demande/lien-rappel";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardAction, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { ESPACE_FINE as N } from "@/lib/nombres";
 
-const N = " "; // espace fine insécable avant ; : ? ! »
 
 const TXT = {
   fr: {

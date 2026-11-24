@@ -24,12 +24,13 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common as C  # noqa: E402
+from annees import ANNEE_PRIMES  # noqa: E402
 from lamal import ckan_dates  # noqa: E402
 
 DS = "frontalier"
 URSSAF = "https://www.urssaf.fr/accueil/outils-documentation/taux-baremes/plafonds-securite-sociale.html"
 ENGINE = C.SITE / "src" / "lib" / "engines" / "frontaliers.ts"
-EU_JSON = C.SITE / "src" / "data" / "primes-eu-fr-2027.json"
+EU_JSON = C.SITE / "src" / "data" / f"primes-eu-fr-{ANNEE_PRIMES}.json"
 
 
 def text(raw: bytes) -> str:
@@ -82,7 +83,11 @@ def run(log: C.Log, a) -> int:
     eu = json.loads(EU_JSON.read_text())
     mm = re.search(r"mise à jour du (\d{2})\.(\d{2})\.(\d{4})", eu.get("source", ""))
     site_date = dt.date(int(mm.group(3)), int(mm.group(2)), int(mm.group(1))) if mm else None
-    dates = ckan_dates(log)
+    try:
+        dates = ckan_dates(log)
+    except RuntimeError as e:
+        dates = {}
+        failures.append(str(e))
     ofsp = max((v for k, v in dates.items() if k.startswith("Prämien_EU")), default=None)
     if a.simulate_change and ofsp:
         ofsp = "2027-01-15T00:00:00"

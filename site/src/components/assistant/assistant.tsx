@@ -5,7 +5,8 @@ import { LogoSilhouette } from "@/components/site/logo";
 import { Turnstile } from "@/components/demande/turnstile";
 import { CaptureRappel } from "@/components/demande/capture-rappel";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { suivre } from "@/lib/analytics";
 import { DEMANDE, RAPPEL, ecrirePreremplissage, lienDemande } from "@/lib/demande";
@@ -222,14 +223,14 @@ export function Assistant({ locale = "fr" }: { locale?: "fr" | "en" }) {
               <p className="assistant-sous-titre">{t.sousTitre}</p>
             </div>
             {messages.length > 0 && (
-              <button type="button" className="commande" onClick={nouvelle} disabled={enCours} aria-label={t.nouvelle} title={t.nouvelle}>
-                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+              <Button type="button" variant="commande" size="commande" onClick={nouvelle} disabled={enCours} aria-label={t.nouvelle} title={t.nouvelle}>
+                <svg className="size-5" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
                   <path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4.5h4.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-              </button>
+              </Button>
             )}
-            <DialogPrimitive.Close className="commande" aria-label={t.fermer}>
-              <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true">
+            <DialogPrimitive.Close className={buttonVariants({ variant: "commande", size: "commande" })} aria-label={t.fermer}>
+              <svg className="size-5" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true">
                 <path d="M5 5l10 10M15 5L5 15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
               </svg>
             </DialogPrimitive.Close>
@@ -243,9 +244,9 @@ export function Assistant({ locale = "fr" }: { locale?: "fr" | "en" }) {
               <div className="assistant-exemples">
                 <p>{t.exemplesTitre}</p>
                 {t.exemples.map((e) => (
-                  <button key={e} type="button" onClick={() => void envoyer(e)}>
+                  <Button key={e} type="button" variant="puce" size="puce" onClick={() => void envoyer(e)}>
                     {e}
-                  </button>
+                  </Button>
                 ))}
               </div>
             )}
@@ -318,8 +319,9 @@ export function Assistant({ locale = "fr" }: { locale?: "fr" | "en" }) {
             <label className="sr" htmlFor="assistant-champ">
               {t.champ}
             </label>
-            <textarea
+            <Textarea
               id="assistant-champ"
+              className="max-h-33 min-h-12 flex-1 resize-none px-3.5 py-3 text-base leading-[1.4]"
               ref={champ}
               rows={1}
               maxLength={MAX}
@@ -334,11 +336,11 @@ export function Assistant({ locale = "fr" }: { locale?: "fr" | "en" }) {
                 }
               }}
             />
-            <button type="submit" className="assistant-envoyer" aria-label={t.envoyer} disabled={enCours || !saisie.trim()}>
-              <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+            <Button type="submit" size="icon-xl" aria-label={t.envoyer} disabled={enCours || !saisie.trim()}>
+              <svg className="size-[22px]" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
                 <path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-            </button>
+            </Button>
           </form>
           <p className="assistant-pied">
             {t.pied} <a href={t.piedHref}>{t.piedLien}</a>

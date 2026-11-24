@@ -1,4 +1,5 @@
 import type { Rubrique } from "@/lib/nav";
+import { ESPACE_FINE as N } from "./nombres.ts";
 
 /* Pages produit en « landing » : bloc de tête (H1, réponse en une ligne, action principale, faits utiles avant une
    demande d'offre) au-dessus du guide. Opt-in par le bloc `landing:` du frontmatter (content/{fr,en}/*.md).
@@ -90,7 +91,6 @@ export const ZONE_DESSERVIE = [
   { "@type": "AdministrativeArea", name: "Jura bernois" },
 ];
 
-const N = " ";
 
 export const TEXTE_LANDING = {
   fr: {

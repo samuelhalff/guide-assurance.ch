@@ -13,8 +13,8 @@ import { DICT, dateLongue } from "@/lib/i18n";
 import { INDEXABLE, SITE_NAME, abs } from "@/lib/site";
 import { imagePartage } from "@/lib/og";
 import { BASE_ACTUALITES, cheminArticle, equivalentPublie, outilsLiesActualite, type Article } from "@/lib/actualites";
+import { ESPACE_FINE as N } from "@/lib/nombres";
 
-const N = " ";
 export const TEXTE_ACTU = {
   fr: {
     rubrique: "Actualités",

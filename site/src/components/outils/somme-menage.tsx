@@ -10,11 +10,11 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Alert } from "@/components/ui/alert";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { ESPACE_FINE as N } from "@/lib/nombres";
 
 /* Calculateur de la somme d'assurance ménage : trois réponses donnent tout de suite une somme, « Affiner » ajoute les
    objets coûteux. Tout se calcule ici ; seule la somme arrondie part dans le lien « Recevoir des offres », si le
    visiteur clique. Aucune valeur saisie n'est mesurée. */
-const N = " ";
 const nf = { fr: { format: (x: number) => S.formaterMontant(x, "fr") }, en: { format: (x: number) => S.formaterMontant(x, "en") } };
 const demi = (x: number, l: Locale) => (l === "fr" ? String(x).replace(".", ",") : String(x));
 
@@ -294,7 +294,7 @@ export function SommeMenage({ locale }: { locale: Locale }) {
           {sommePolice > 0 && !e ? <p className="note-outil reponse">{t.attentePolice}</p> : null}
           {sommePolice > 0 && e ? (
             <div className="reponse">
-              <p style={{ margin: 0 }} aria-live="polite">
+              <p className="sans-marge" aria-live="polite">
                 <b>{t.couvre(f(Math.round(S.tauxCouverture(sommePolice, e.somme) * 100)))}</b>
               </p>
               <span className="jauge" aria-hidden="true">

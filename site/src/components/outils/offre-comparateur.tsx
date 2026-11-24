@@ -11,7 +11,7 @@ import { ecrirePreremplissage, lienDemande } from "@/lib/demande";
    conseil ni classement. */
 
 type Locale = "fr" | "en";
-const NNBSP = " ";
+const NNBSP = " ";
 
 const T = {
   fr: {

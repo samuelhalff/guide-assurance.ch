@@ -2,6 +2,7 @@
    publiques des assureurs (src/data/garanties-pj.json). Ordre alphabétique de l'assureur, puis du produit ; aucun
    score, aucun classement. Une valeur que le document ne donne pas reste « non précisé ». */
 import DATA from "@/data/garanties-pj.json";
+import { ESPACE_FINE as N } from "@/lib/nombres";
 import type { Locale } from "@/lib/i18n";
 
 export type Txt = { fr: string; en: string };
@@ -98,7 +99,6 @@ export const NOM_COUVERTURE: Record<Locale, Record<Contrat["couverture"], string
 /* Version texte du tableau pour llms-full.txt : un bloc par contrat, mêmes valeurs que la page. */
 export function garantiesPjMarkdown(l: Locale, url: string): string {
   const fr = l === "fr";
-  const N = "\u202f";
   const out = [
     fr ? `## Protection juridique${N}: ce que couvrent les contrats` : "## Legal protection insurance: what the policies cover",
     "",

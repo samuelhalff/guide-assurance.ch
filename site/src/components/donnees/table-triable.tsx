@@ -1,5 +1,6 @@
 "use client";
 import { useMemo, useState } from "react";
+import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 /* Tableau HTML triable : rendu complet côté serveur (lisible sans JavaScript, indexable), tri au clic sur l'en-tête
@@ -55,10 +56,10 @@ export function TableTriable({
               {c.triable === false ? (
                 c.titre
               ) : (
-                <button type="button" className="tri" onClick={() => changer(c.cle, c.num)} aria-label={`${aide}${locale === "fr" ? " " : ""}: ${c.titre}`}>
+                <Button type="button" variant="entete" size="herite" className="tri min-h-8" onClick={() => changer(c.cle, c.num)} aria-label={`${aide}${locale === "fr" ? " " : ""}: ${c.titre}`}>
                   {c.titre}
                   <span className="fleche" aria-hidden="true">{tri.cle === c.cle ? (tri.sens === "asc" ? "▲" : "▼") : "↕"}</span>
-                </button>
+                </Button>
               )}
             </TableHead>
           ))}

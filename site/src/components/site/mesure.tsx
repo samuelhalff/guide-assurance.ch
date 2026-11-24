@@ -150,8 +150,8 @@ function useMesureGA() {
 export function RouvrirMesure() {
   if (!CONSENTEMENT_REQUIS) return null;
   return (
-    <button type="button" className="lien-pied" onClick={() => window.dispatchEvent(new Event("mesure:rouvrir"))}>
+    <Button type="button" variant="pied" size="herite" onClick={() => window.dispatchEvent(new Event("mesure:rouvrir"))}>
       Cookies
-    </button>
+    </Button>
   );
 }

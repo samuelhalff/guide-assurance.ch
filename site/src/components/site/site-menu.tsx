@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { buttonVariants } from "@/components/ui/button";
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { ThemeToggle } from "@/components/site/theme-toggle";
 import { nav, type Rubrique } from "@/lib/nav";
@@ -12,12 +13,14 @@ export function SiteMenu({ current, locale = "fr" }: { current?: Rubrique; local
   const t = DICT[locale];
   return (
     <Sheet open={ouvert} onOpenChange={setOuvert}>
-      <SheetTrigger className="commande menu-btn">
-        <svg width="22" height="12" viewBox="0 0 22 12" aria-hidden="true">
-          <path d="M1 2h20M8 10h13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-        </svg>
-        <span className="menu-mot">{t.menu}</span>
-      </SheetTrigger>
+      <span className="menu-btn">
+        <SheetTrigger className={buttonVariants({ variant: "commande", size: "commande", className: "max-[479px]:gap-0" })}>
+          <svg className="size-[22px] h-3" width="22" height="12" viewBox="0 0 22 12" aria-hidden="true">
+            <path d="M1 2h20M8 10h13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+          </svg>
+          <span className="menu-mot">{t.menu}</span>
+        </SheetTrigger>
+      </span>
       <SheetContent
         side="right"
         showCloseButton={false}
@@ -25,8 +28,8 @@ export function SiteMenu({ current, locale = "fr" }: { current?: Rubrique; local
       >
         <div className="flex min-h-[58px] items-center justify-between">
           <SheetTitle className="font-narrow text-[15px] font-semibold text-encre-2">{t.menu}</SheetTitle>
-          <SheetClose className="commande" aria-label={t.fermerMenu}>
-            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
+          <SheetClose className={buttonVariants({ variant: "commande", size: "commande" })} aria-label={t.fermerMenu}>
+            <svg className="size-[18px]" width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
               <path d="M3 3l12 12M15 3L3 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
             </svg>
           </SheetClose>

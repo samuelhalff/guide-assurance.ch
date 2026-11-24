@@ -4,7 +4,7 @@
    Pour l'année suivante : relancer le script, le build suit (voir docs/decisions.md, baromètre). */
 import B from "@/data/barometre.json";
 import { ORG_ID, WEBSITE_ID } from "@/lib/jsonld";
-import { nombre } from "@/lib/nombres";
+import { chf as chfBase, pct as pctBase, ESPACE_FINE as T, INSECABLE as NB } from "@/lib/nombres";
 
 export type Stat = { n: number; min: number; q1: number; med: number; q3: number; max: number };
 export type ProfilB = {
@@ -55,13 +55,10 @@ export const cantonParSlug = (slug: string, l: "fr" | "en") => INFO.find((i) => 
 export const donneesCanton = (code: string) => DONNEES.cantons.find((c) => c.code === code)!;
 
 /* ---- Formats ---- */
-const T = " ";
-const NB = " ";
-export const chf = (x: number, l: "fr" | "en") => (l === "fr" ? `${nombre(x, 2, "fr")}${NB}CHF` : `CHF${NB}${nombre(x, 2, "en")}`);
-const chf0 = (x: number, l: "fr" | "en") => (l === "fr" ? `${nombre(Math.round(x), 0, "fr")}${NB}CHF` : `CHF${NB}${nombre(Math.round(x), 0, "en")}`);
+export const chf = (x: number, l: "fr" | "en") => chfBase(x, l, 2, NB, NB);
+const chf0 = (x: number, l: "fr" | "en") => chfBase(Math.round(x), l, 0, NB, NB);
 export const pct = (x: number, l: "fr" | "en", signe = true) => {
-  const s = nombre(x, 1, l);
-  return `${signe && x > 0 ? "+" : ""}${s}${l === "fr" ? `${NB}%` : "%"}`;
+  return `${signe && x > 0 ? "+" : ""}${pctBase(x, l, 1, NB)}`;
 };
 
 export const LIBELLE_PROFIL: Record<string, { fr: string; en: string }> = {

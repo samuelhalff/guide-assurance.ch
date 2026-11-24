@@ -14,14 +14,13 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Alert } from "@/components/ui/alert";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { dateTexte } from "@/lib/dates";
+import { d0, dateTexte } from "@/lib/dates";
+import { ESPACE_FINE as NB } from "@/lib/nombres";
 
 /* Lettre de résiliation : interface de mockups/v2/lettre-resiliation.html, délais par src/lib/engines/delais.ts.
    La lettre est rédigée dans le navigateur ; rien n'est envoyé ni gardé. */
-const NB = " ";
 const fmt = (d: Date) => dateTexte(d, "fr");
 const fmtEn = (d: Date) => dateTexte(d, "en");
-const d0 = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
 const dv = (s: string) => (s ? new Date(`${s}T00:00`) : null);
 
 const MSG_FR: Record<string, string> = {

@@ -5,12 +5,6 @@
   table.table-donnees th, table.table-donnees td { white-space: nowrap; }
   table.table-donnees caption { white-space: normal; position: sticky; left: 0; max-width: calc(100vw - 32px); }
   table.table-donnees small { display: block; font: 13px var(--narrow); color: var(--encre-2); }
-  table.table-donnees th button.tri {
-    all: unset; cursor: pointer; display: inline-flex; gap: 4px; align-items: center; min-height: 32px;
-    font: inherit; color: inherit;
-  }
-  table.table-donnees th button.tri:focus-visible { outline: 2px solid var(--lac-encre); outline-offset: 2px; border-radius: 4px; }
-  table.table-donnees th[aria-sort] button.tri { color: var(--encre); }
   .tri .fleche { font-size: 11px; opacity: .7; }
   .telechargement { margin: var(--s3) 0 0; font-size: 16px; }
   .telechargement a { font-weight: 700; }

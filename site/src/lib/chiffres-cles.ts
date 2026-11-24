@@ -12,12 +12,8 @@ import { DATE_PRIMES } from "@/lib/date-primes";
 import { abs } from "@/lib/site";
 import { OUTILS, OUTILS_EN, PAGES_DONNEES, PAGES_DONNEES_EN } from "@/lib/nav";
 import type { Locale } from "@/lib/i18n";
-import { nombre as formaterNombre } from "@/lib/nombres";
+import { chf, pct, ESPACE_FINE as N } from "@/lib/nombres";
 
-const N = "\u202f";
-const nf = (x: number, l: Locale, d = 0) => formaterNombre(x, d, l);
-const chf = (x: number, l: Locale, d = 0) => (l === "fr" ? `${nf(x, l, d)}${N}CHF` : `CHF ${nf(x, l, d)}`);
-const pc = (x: number, l: Locale, d = 0) => (l === "fr" ? `${nf(x, l, d)}${N}%` : `${nf(x, l, d)}%`);
 const dc = (iso: string) => iso.split("-").reverse().join(".");
 
 export type Source = { label: string; url: string };
@@ -81,16 +77,16 @@ export function groupes(l: Locale): Groupe[] {
       id: "primes-moyennes",
       question: fr ? `Combien coûte l’assurance de base en 2027 dans chaque canton romand${N}?` : "How much does basic health insurance cost in 2027 in each French-speaking canton?",
       reponse: fr
-        ? `La prime mensuelle moyenne d’un adulte va de ${chf(OFSP.cantons[bas].adult_2027, l, 2)} ${NOM.fr[bas]} à ${chf(OFSP.cantons[haut].adult_2027, l, 2)} ${NOM.fr[haut]}, pour une moyenne suisse de ${chf(OFSP.national.adult_2027, l, 2)}, en hausse de ${pc(OFSP.national.change_pct, l, 1)} (OFSP).`
-        : `The average monthly premium for an adult ranges from ${chf(OFSP.cantons[bas].adult_2027, l, 2)} ${NOM.en[bas]} to ${chf(OFSP.cantons[haut].adult_2027, l, 2)} ${NOM.en[haut]}, against a Swiss average of ${chf(OFSP.national.adult_2027, l, 2)}, up ${pc(OFSP.national.change_pct, l, 1)} (FOPH).`,
+        ? `La prime mensuelle moyenne d’un adulte va de ${chf(OFSP.cantons[bas].adult_2027, l, 2)} ${NOM.fr[bas]} à ${chf(OFSP.cantons[haut].adult_2027, l, 2)} ${NOM.fr[haut]}, pour une moyenne suisse de ${chf(OFSP.national.adult_2027, l, 2)}, en hausse de ${pct(OFSP.national.change_pct, l, 1)} (OFSP).`
+        : `The average monthly premium for an adult ranges from ${chf(OFSP.cantons[bas].adult_2027, l, 2)} ${NOM.en[bas]} to ${chf(OFSP.cantons[haut].adult_2027, l, 2)} ${NOM.en[haut]}, against a Swiss average of ${chf(OFSP.national.adult_2027, l, 2)}, up ${pct(OFSP.national.change_pct, l, 1)} (FOPH).`,
       faits: [
         ...cantons.map((c) => {
           const o = OFSP.cantons[c];
           return {
             id: `prime-moyenne-${c.toLowerCase()}`,
             texte: fr
-              ? `En 2027, la prime mensuelle moyenne d’un adulte (26 ans et plus) ${NOM.fr[c]} est de ${chf(o.adult_2027, l, 2)}, en hausse de ${pc(o.change_pct, l, 1)} par rapport à 2026 (${chf(o.adult_2026, l, 2)}).`
-              : `In 2027 the average monthly premium for an adult (26 and over) ${NOM.en[c]} is ${chf(o.adult_2027, l, 2)}, up ${pc(o.change_pct, l, 1)} on 2026 (${chf(o.adult_2026, l, 2)}).`,
+              ? `En 2027, la prime mensuelle moyenne d’un adulte (26 ans et plus) ${NOM.fr[c]} est de ${chf(o.adult_2027, l, 2)}, en hausse de ${pct(o.change_pct, l, 1)} par rapport à 2026 (${chf(o.adult_2026, l, 2)}).`
+              : `In 2027 the average monthly premium for an adult (26 and over) ${NOM.en[c]} is ${chf(o.adult_2027, l, 2)}, up ${pct(o.change_pct, l, 1)} on 2026 (${chf(o.adult_2026, l, 2)}).`,
             validite: validite2027,
             sources: [S.ofspMoyennes(l)],
             methode: fr
@@ -101,8 +97,8 @@ export function groupes(l: Locale): Groupe[] {
         {
           id: "prime-moyenne-suisse",
           texte: fr
-            ? `La prime mensuelle moyenne d’un adulte en Suisse est de ${chf(OFSP.national.adult_2027, l, 2)} en 2027, contre ${chf(OFSP.national.adult_2026, l, 2)} en 2026, soit ${pc(OFSP.national.change_pct, l, 1)} de plus.`
-            : `The average monthly premium for an adult in Switzerland is ${chf(OFSP.national.adult_2027, l, 2)} in 2027, against ${chf(OFSP.national.adult_2026, l, 2)} in 2026, or ${pc(OFSP.national.change_pct, l, 1)} more.`,
+            ? `La prime mensuelle moyenne d’un adulte en Suisse est de ${chf(OFSP.national.adult_2027, l, 2)} en 2027, contre ${chf(OFSP.national.adult_2026, l, 2)} en 2026, soit ${pct(OFSP.national.change_pct, l, 1)} de plus.`
+            : `The average monthly premium for an adult in Switzerland is ${chf(OFSP.national.adult_2027, l, 2)} in 2027, against ${chf(OFSP.national.adult_2026, l, 2)} in 2026, or ${pct(OFSP.national.change_pct, l, 1)} more.`,
           validite: validite2027,
           sources: [S.ofspCommunique(l), S.ofspMoyennes(l)],
           methode: fr ? "Chiffre de l’OFSP repris tel quel." : "FOPH figure taken as published.",
@@ -122,15 +118,15 @@ export function groupes(l: Locale): Groupe[] {
       id: "ecart-offres",
       question: fr ? `Quel écart sépare l’offre la plus basse de la plus haute pour un même profil${N}?` : "How far apart are the lowest and highest offers for the same profile?",
       reponse: fr
-        ? `Pour un adulte avec une franchise de 300${N}CHF et la couverture accident, l’offre la plus haute coûte de ${pc(adulte(regionsParEcart[regionsParEcart.length - 1]).ecartPct, l)} à ${pc(adulte(regionsParEcart[0]).ecartPct, l)} de plus que la plus basse, selon la région de prime.`
-        : `For an adult with a CHF 300 deductible and accident cover, the highest offer costs ${pc(adulte(regionsParEcart[regionsParEcart.length - 1]).ecartPct, l)} to ${pc(adulte(regionsParEcart[0]).ecartPct, l)} more than the lowest, depending on the premium region.`,
+        ? `Pour un adulte avec une franchise de 300${N}CHF et la couverture accident, l’offre la plus haute coûte de ${pct(adulte(regionsParEcart[regionsParEcart.length - 1]).ecartPct, l)} à ${pct(adulte(regionsParEcart[0]).ecartPct, l)} de plus que la plus basse, selon la région de prime.`
+        : `For an adult with a CHF 300 deductible and accident cover, the highest offer costs ${pct(adulte(regionsParEcart[regionsParEcart.length - 1]).ecartPct, l)} to ${pct(adulte(regionsParEcart[0]).ecartPct, l)} more than the lowest, depending on the premium region.`,
       faits: R.REGIONS.map((r) => {
         const a = adulte(r);
         return {
           id: `ecart-${r.cle}`,
           texte: fr
-            ? `${dansRegion(r, "fr").replace(/^./, (x) => x.toUpperCase())}, l’offre la plus haute pour un adulte (franchise 300${N}CHF, accident compris) coûte ${pc(a.ecartPct, l)} de plus que la plus basse en 2027, soit ${chf(a.ecartAnnuel, l)} de plus par an ; la prime médiane est de ${chf(a.mediane, l, 2)} par mois.`
-            : `${dansRegion(r, "en").replace(/^./, (x) => x.toUpperCase())}, the highest offer for an adult (CHF 300 deductible, accident cover included) costs ${pc(a.ecartPct, l)} more than the lowest in 2027, or ${chf(a.ecartAnnuel, l)} more a year; the median premium is ${chf(a.mediane, l, 2)} a month.`,
+            ? `${dansRegion(r, "fr").replace(/^./, (x) => x.toUpperCase())}, l’offre la plus haute pour un adulte (franchise 300${N}CHF, accident compris) coûte ${pct(a.ecartPct, l)} de plus que la plus basse en 2027, soit ${chf(a.ecartAnnuel, l)} de plus par an ; la prime médiane est de ${chf(a.mediane, l, 2)} par mois.`
+            : `${dansRegion(r, "en").replace(/^./, (x) => x.toUpperCase())}, the highest offer for an adult (CHF 300 deductible, accident cover included) costs ${pct(a.ecartPct, l)} more than the lowest in 2027, or ${chf(a.ecartAnnuel, l)} more a year; the median premium is ${chf(a.mediane, l, 2)} a month.`,
           validite: validite2027,
           sources: [S.priminfo(l), S.regions(l)],
           methode: methodePrimes(r),
@@ -168,14 +164,14 @@ export function groupes(l: Locale): Groupe[] {
       id: "taux-3a",
       question: fr ? `Combien rapporte un compte 3a${N}?` : "What does a pillar 3a account pay?",
       reponse: fr
-        ? `Au relevé du ${dc(T3A.date)}, les comptes 3a des ${T3A.n} banques suivies rapportent de ${pc(T3A.min, l, 2)} à ${pc(T3A.max, l, 2)} par an, avec un taux médian de ${pc(T3A.mediane, l, 2)}.`
-        : `In the survey of ${dc(T3A.date)}, the pillar 3a accounts of the ${T3A.n} banks tracked pay ${pc(T3A.min, l, 2)} to ${pc(T3A.max, l, 2)} a year, with a median rate of ${pc(T3A.mediane, l, 2)}.`,
+        ? `Au relevé du ${dc(T3A.date)}, les comptes 3a des ${T3A.n} banques suivies rapportent de ${pct(T3A.min, l, 2)} à ${pct(T3A.max, l, 2)} par an, avec un taux médian de ${pct(T3A.mediane, l, 2)}.`
+        : `In the survey of ${dc(T3A.date)}, the pillar 3a accounts of the ${T3A.n} banks tracked pay ${pct(T3A.min, l, 2)} to ${pct(T3A.max, l, 2)} a year, with a median rate of ${pct(T3A.mediane, l, 2)}.`,
       faits: [
         {
           id: "taux-3a-fourchette",
           texte: fr
-            ? `Le ${dc(T3A.date)}, le taux de base des comptes 3a va de ${pc(T3A.min, l, 2)} à ${pc(T3A.max, l, 2)} par an selon la banque, sur ${T3A.n} banques suivies.`
-            : `On ${dc(T3A.date)}, the base rate of pillar 3a accounts ranges from ${pc(T3A.min, l, 2)} to ${pc(T3A.max, l, 2)} a year depending on the bank, across ${T3A.n} banks tracked.`,
+            ? `Le ${dc(T3A.date)}, le taux de base des comptes 3a va de ${pct(T3A.min, l, 2)} à ${pct(T3A.max, l, 2)} par an selon la banque, sur ${T3A.n} banques suivies.`
+            : `On ${dc(T3A.date)}, the base rate of pillar 3a accounts ranges from ${pct(T3A.min, l, 2)} to ${pct(T3A.max, l, 2)} a year depending on the bank, across ${T3A.n} banks tracked.`,
           validite: fr ? `Au relevé du ${dc(T3A.date)} ; les taux sont variables et relevés chaque lundi.` : `As of the survey of ${dc(T3A.date)}; rates are variable and read every Monday.`,
           sources: [S.banques(l)],
           methode: fr ? "Taux lus sur la page officielle ou la fiche de taux de chaque banque." : "Rates read on each bank’s official page or rate sheet.",
@@ -183,8 +179,8 @@ export function groupes(l: Locale): Groupe[] {
         {
           id: "taux-3a-median",
           texte: fr
-            ? `Le taux médian des comptes 3a est de ${pc(T3A.mediane, l, 2)} et le taux moyen de ${pc(T3A.moyenne, l, 3).replace(/0(\D*)$/, "$1")} au relevé du ${dc(T3A.date)}.`
-            : `The median pillar 3a rate is ${pc(T3A.mediane, l, 2)} and the mean ${pc(T3A.moyenne, l, 3).replace(/0(\D*)$/, "$1")} in the survey of ${dc(T3A.date)}.`,
+            ? `Le taux médian des comptes 3a est de ${pct(T3A.mediane, l, 2)} et le taux moyen de ${pct(T3A.moyenne, l, 3).replace(/0(\D*)$/, "$1")} au relevé du ${dc(T3A.date)}.`
+            : `The median pillar 3a rate is ${pct(T3A.mediane, l, 2)} and the mean ${pct(T3A.moyenne, l, 3).replace(/0(\D*)$/, "$1")} in the survey of ${dc(T3A.date)}.`,
           validite: fr ? `Au relevé du ${dc(T3A.date)}.` : `As of the survey of ${dc(T3A.date)}.`,
           sources: [S.banques(l), { label: fr ? "Historique des taux 3a (CSV)" : "Pillar 3a rate history (CSV)", url: abs("/data/taux-3a-historique.csv") }],
           methode: fr ? `Médiane et moyenne non pondérées des ${T3A.n} taux de base, calculées par Guide Assurance.` : `Unweighted median and mean of the ${T3A.n} base rates, calculated by Guide Assurance.`,

@@ -5,10 +5,10 @@ import { dateLongue, type Locale } from "@/lib/i18n";
 import { SITE_URL } from "@/lib/site";
 import { OUTILS, OUTILS_EN } from "@/lib/nav";
 import { MAJ_IDEES } from "@/lib/pages-idees";
+import { ESPACE_FINE as T } from "@/lib/nombres";
 
 /* Widgets intégrables (iframes) : aucun traceur, aucun cookie, aucun stockage, aucun appel réseau.
    Chaque lien s'ouvre dans un nouvel onglet ; les liens vers le site portent utm_source=widget (sans identifiant). */
-const T = " ";
 const utm = (path: string, w: string) => `${SITE_URL}${path}?utm_source=widget&utm_medium=iframe&utm_campaign=${w}`;
 const ext = { target: "_blank", rel: "noopener" } as const;
 

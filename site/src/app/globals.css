@@ -259,6 +259,11 @@
   summary {
     cursor: pointer;
   }
+  /* Titres et messages qui reçoivent le focus par script (lecteurs d'écran après « Voir les offres », merci) : pas d'anneau,
+     ce ne sont pas des commandes. */
+  :is(h1, h2, h3, p)[tabindex="-1"]:focus {
+    outline: none;
+  }
   /* Règle à part : un navigateur sans :has() n'ignore qu'elle. Cartes et libellés qui enveloppent une case active. */
   label:has(:is([role="checkbox"], [role="radio"], [role="switch"]):not([data-disabled])) {
     cursor: pointer;

@@ -5,7 +5,9 @@
    Arrondi comme Intl.NumberFormat : au plus proche, moitié loin de zéro, sur l'écriture décimale la plus courte du
    nombre (1.005 -> « 1,01 », là où toFixed donne « 1.00 »). -0 et les valeurs qui s'arrondissent à zéro donnent « 0 ». */
 
-export const ESPACE_FINE = " ";
+export const ESPACE_FINE = "\u202f";
+/* Espace insécable ordinaire, U+00A0. */
+export const INSECABLE = "\u00a0";
 
 /* Écriture décimale positionnelle (sans exposant) de |x|. */
 function decimal(abs: number): string {
@@ -38,4 +40,18 @@ export function nombre(x: number, decimales = 0, locale: "fr" | "en" = "fr"): st
   const mille = locale === "fr" ? ESPACE_FINE : ",";
   const s = ent.replace(/\B(?=(\d{3})+(?!\d))/g, mille) + (d ? (locale === "fr" ? "," : ".") + frac : "");
   return v < 0 && /[1-9]/.test(ent + frac) ? `-${s}` : s;
+}
+
+/* Montant en francs : FR « 1 234,50 CHF », EN « CHF 1,234.50 ». `espaceFr` sépare le nombre de « CHF » en FR,
+   `espaceEn` sépare « CHF » du nombre en EN (une espace ordinaire par défaut ; les pages qui veulent une espace
+   insécable passent INSECABLE). */
+export function chf(x: number, locale: "fr" | "en", decimales = 0, espaceFr = ESPACE_FINE, espaceEn = " "): string {
+  const n = nombre(x, decimales, locale);
+  return locale === "fr" ? `${n}${espaceFr}CHF` : `CHF${espaceEn}${n}`;
+}
+
+/* Pourcentage : FR « 12,5 % » (espace `espaceFr` avant le signe), EN « 12.5% ». */
+export function pct(x: number, locale: "fr" | "en", decimales = 0, espaceFr = ESPACE_FINE): string {
+  const n = nombre(x, decimales, locale);
+  return locale === "fr" ? `${n}${espaceFr}%` : `${n}%`;
 }

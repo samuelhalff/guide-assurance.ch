@@ -8,11 +8,11 @@ import { AVIS_VALIDES, CONFIANCE } from "@/lib/confiance";
 import { avisJsonLd } from "@/lib/confiance-core";
 import { ORG_ID } from "@/lib/jsonld";
 import type { Locale } from "@/lib/i18n";
+import { ESPACE_FINE as N } from "@/lib/nombres";
 
 export type Signal = "ofsp" | "offres" | "pj" | "gratuit" | "navigateur";
 const TOUS: Signal[] = ["ofsp", "offres", "pj", "gratuit", "navigateur"];
 
-const N = " ";
 const nombre = (x: number, l: Locale) =>
   l === "fr" ? String(x).replace(/\B(?=(\d{3})+(?!\d))/g, N) : String(x).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 const dateCh = (iso: string) => iso.split("-").reverse().join(".");

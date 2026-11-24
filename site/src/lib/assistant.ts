@@ -1,8 +1,8 @@
 /* Assistant : textes, appel de /api/assistant (flux NDJSON) et rendu sûr du markdown des réponses.
    La conversation reste dans l'onglet (sessionStorage) : rien n'est enregistré côté serveur. */
 import { PORTES_DEF, type Porte } from "@shared/demande/portes";
+import { ESPACE_FINE as N } from "./nombres.ts";
 
-const N = " ";
 
 export const TEXTE_ASSISTANT = {
   fr: {

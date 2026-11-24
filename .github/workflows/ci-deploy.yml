@@ -39,7 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           fetch-depth: 0
 
@@ -70,7 +70,7 @@ jobs:
         run: node --no-warnings scripts/donnees-ouvertes.mts ../data/csv && git diff --exit-code -- ../data/csv
 
       - name: Restaurer le cache de build Next.js
-        uses: actions/cache@v5
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
         with:
           path: site/.next/cache
           key: next-${{ runner.os }}-${{ hashFiles('site/package-lock.json', 'site/next.config.ts') }}-${{ github.sha }}

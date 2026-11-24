@@ -2,9 +2,9 @@
 import { useState } from "react";
 import { TELEPHONE_ERREURS, chiffresSaisis, formaterTelephone, normaliserTelephone } from "@shared/demande/telephone";
 import { Input } from "@/components/ui/input";
+import { ESPACE_FINE as NB } from "@/lib/nombres";
 
 type Locale = "fr" | "en";
-const NB = " ";
 
 const T = {
   fr: {

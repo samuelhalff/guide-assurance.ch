@@ -19,7 +19,7 @@ import { Alert } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { nombre as formaterNombre } from "@/lib/nombres";
+import { nombre as formaterNombre, ESPACE_FINE as T } from "@/lib/nombres";
 
 /* Page « 3a et 3b auprès d'un assureur » (FR /3e-pilier/assurance-3a-3b/, EN /en/pillar-3a/insurance-3a-3b/).
    Faits relevés le 23.11.2026 dans les documents publics des assureurs (src/data/assureurs-3a-3b.json) et dans le droit
@@ -29,7 +29,6 @@ type TypeContrat = "risque" | "mixte" | "fonds" | "hybride" | "nc";
 type Produit = { nom: string; pilier: string; type: string; primes_fr: string; rachat_fr: string; primes_en?: string; rachat_en?: string; liberation_primes: boolean | null; url: string };
 type Assureur = { id: string; nom: string; entite: string; lu_le: string; produits: Produit[] };
 
-const T = " ";
 const LU_LE: string = D.lu_le;
 export const ASSUREURS_3A: Assureur[] = [...(D.assureurs as Assureur[])].sort((a, b) => a.nom.localeCompare(b.nom, "fr"));
 const NB = ASSUREURS_3A.length;
