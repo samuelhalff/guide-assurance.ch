@@ -1,9 +1,9 @@
 /* Primes LAMal 2027 des assurés résidant dans l'UE, l'AELE ou au Royaume-Uni (OFSP, fichier Prämien_EU).
    Fonctions pures : les données sont passées en paramètre (src/data/primes-eu-2027.json). Aucun classement, aucune
-   recommandation : tri par prime croissante ou par nom, au choix du visiteur. */
+   recommandation : tri par prime croissante, décroissante ou par nom, au choix du visiteur. */
 
 export type Classe = "adulte" | "jeune" | "enfant";
-export type Tri = "prix" | "nom";
+export type Tri = "prix" | "prixDesc" | "nom";
 export type Montants = { sans: number; avec: number };
 export type AssureurUe = { nom: string; no: number; adulte: Montants; jeune: Montants; enfant: Montants; enfant3?: Montants };
 export type DonneesUe = { source: string; annee: number; franchise: string; pays: Record<string, AssureurUe[]> };
@@ -21,6 +21,7 @@ export function offres(d: DonneesUe, pays: string, classe: Classe, accident: boo
 export function trier(liste: readonly OffreUe[], tri: Tri): OffreUe[] {
   const copie = [...liste];
   if (tri === "nom") return copie.sort((a, b) => a.nom.localeCompare(b.nom, "fr") || a.no - b.no);
+  if (tri === "prixDesc") return copie.sort((a, b) => b.mensuel - a.mensuel || a.nom.localeCompare(b.nom, "fr"));
   return copie.sort((a, b) => a.mensuel - b.mensuel || a.nom.localeCompare(b.nom, "fr"));
 }
 

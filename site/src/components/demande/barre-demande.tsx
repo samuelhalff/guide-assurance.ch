@@ -11,8 +11,10 @@ const CLE_MASQUEE = "ga-barre-demande-masquee";
 /* Barre collante du bas d'écran, mobile seulement (CSS), visible après la moitié de la page.
    Masquée pour la session si le lecteur la ferme. L'animation d'entrée saute avec prefers-reduced-motion (CSS).
    Sans porte (pages produit sans formulaire propre), elle mène au formulaire court « Être rappelé », sujet présélectionné. */
-export function BarreDemande({ locale = "fr", porte, rappelSujet }: { locale?: "fr" | "en"; porte?: Porte; rappelSujet?: string }) {
-  const [visible, setVisible] = useState(false);
+export function BarreDemande({ locale = "fr", porte, rappelSujet, visible: visibleImpose }: { locale?: "fr" | "en"; porte?: Porte; rappelSujet?: string; visible?: boolean }) {
+  /* `visible` fourni : la page décide seule de l'affichage (aucun suivi du défilement ici). */
+  const [visibleAuto, setVisible] = useState(false);
+  const visible = visibleImpose ?? visibleAuto;
   const [masquee, setMasquee] = useState(true);
   const lienRappel = useRef<HTMLAnchorElement>(null);
   useRappelVu(lienRappel, "produit", visible && !masquee && !porte);
@@ -25,7 +27,7 @@ export function BarreDemande({ locale = "fr", porte, rappelSujet }: { locale?: "
       /* rien */
     }
     setMasquee(m);
-    if (m) return;
+    if (m || visibleImpose !== undefined) return;
     const verifier = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       setVisible(max > 0 && window.scrollY / max >= 0.5);
@@ -37,7 +39,7 @@ export function BarreDemande({ locale = "fr", porte, rappelSujet }: { locale?: "
       window.removeEventListener("scroll", verifier);
       window.removeEventListener("resize", verifier);
     };
-  }, []);
+  }, [visibleImpose]);
 
   if (masquee) return null;
   const t = TEXTE_CTA[locale];

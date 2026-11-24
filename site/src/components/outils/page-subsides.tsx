@@ -9,7 +9,7 @@ import { CtaOffres } from "@/components/outils/cta-offres";
 import { Alert } from "@/components/ui/alert";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { DONNEES as D, CANTONS, type Canton } from "@/lib/engines/subsides";
-import { NOMS } from "@/lib/subsides";
+import { NOMS, TRANSPARENCE_VD } from "@/lib/subsides";
 import { lienDemande } from "@/lib/demande";
 import { pageMetadata } from "@/lib/metadata";
 import { ORG_ID, WEBSITE_ID, breadcrumbLd, faqLd, graph, type Miette } from "@/lib/jsonld";
@@ -72,10 +72,12 @@ const TEXTE = {
 };
 
 /* ---------- tableaux ---------- */
-type Tab = { cap: string; tete: string[]; lignes: (string | number)[][] };
-function Tableau({ cap, tete, lignes }: Tab) {
+/* `empile` : sur téléphone, chaque ligne devient un bloc (le libellé de colonne passe devant la valeur) ; dès 720 px, tableau ordinaire. */
+/* `serre` : marges de cellule réduites sur téléphone, pour les tableaux à peine trop larges. */
+type Tab = { cap: string; tete: string[]; lignes: (string | number)[][]; empile?: boolean; serre?: boolean };
+function Tableau({ cap, tete, lignes, empile, serre }: Tab) {
   return (
-    <Table variant="chiffres">
+    <Table variant="chiffres" className={empile ? "tableau-empile tableau-empile-2" : serre ? "max-[719px]:[&_:is(th,td)]:px-1.5" : undefined}>
       <TableCaption className="text-left">{cap}</TableCaption>
       <TableHeader>
         <TableRow>{tete.map((h) => <TableHead key={h} scope="col">{h}</TableHead>)}</TableRow>
@@ -83,7 +85,7 @@ function Tableau({ cap, tete, lignes }: Tab) {
       <TableBody>
         {lignes.map((l, i) => (
           <TableRow key={i}>
-            {l.map((c, j) => (j === 0 ? <TableHead key={j} scope="row">{c}</TableHead> : <TableCell key={j}>{c}</TableCell>))}
+            {l.map((c, j) => (j === 0 ? <TableHead key={j} scope="row" data-label={empile ? tete[0] : undefined}>{c}</TableHead> : <TableCell key={j} data-label={empile ? tete[j] : undefined}>{c}</TableCell>))}
           </TableRow>
         ))}
       </TableBody>
@@ -98,11 +100,11 @@ function tablesGE(l: Locale): Tab[] {
   const fr = l === "fr";
   const grp = Array.from({ length: 9 }, (_, i) => i);
   const charges = [0, 1, 2, 3, 4];
-  const th = (s: string) => (fr ? `${s} charge(s)` : `${s} dependant(s)`);
+  const th = (s: string) => (fr ? (s === "0" || s === "1" ? `${s} charge` : `${s} charges`) : (s === "1" ? `${s} dependant` : `${s} dependants`));
   return [
     { cap: fr ? "Subside mensuel 2027 par personne, en francs, selon le groupe" : "2027 monthly subsidy per person, in francs, by group", tete: [fr ? "Groupe" : "Group", fr ? "Adulte" : "Adult", fr ? "Jeune adulte (19 à 25 ans)" : "Young adult (19 to 25)", fr ? "Enfant" : "Child"], lignes: grp.map((i) => [i + 1, n(g.montants.adulte[i]), n(g.montants.jeuneAdulte[i]), n(g.montants.enfant[i])]) },
-    { cap: fr ? "Revenu déterminant (RDU) maximal par groupe, personne seule, selon le nombre de charges légales" : "Maximum RDU per group, single person, by number of legal dependants", tete: [fr ? "Groupe" : "Group", ...charges.map((c) => th(String(c)))], lignes: grp.map((i) => [i + 1, ...charges.map((c) => n(g.limites.seul[String(c) as "0"][i]))]) },
-    { cap: fr ? "Revenu déterminant (RDU) maximal par groupe, couple, selon le nombre de charges légales" : "Maximum RDU per group, couple, by number of legal dependants", tete: [fr ? "Groupe" : "Group", ...charges.map((c) => th(String(c)))], lignes: grp.map((i) => [i + 1, ...charges.map((c) => n(g.limites.couple[String(c) as "0"][i]))]) },
+    { cap: fr ? "Revenu déterminant (RDU) maximal par groupe, personne seule, selon le nombre de charges légales" : "Maximum RDU per group, single person, by number of legal dependants", tete: [fr ? "Groupe" : "Group", ...charges.map((c) => th(String(c)))], empile: true, lignes: grp.map((i) => [i + 1, ...charges.map((c) => n(g.limites.seul[String(c) as "0"][i]))]) },
+    { cap: fr ? "Revenu déterminant (RDU) maximal par groupe, couple, selon le nombre de charges légales" : "Maximum RDU per group, couple, by number of legal dependants", tete: [fr ? "Groupe" : "Group", ...charges.map((c) => th(String(c)))], empile: true, lignes: grp.map((i) => [i + 1, ...charges.map((c) => n(g.limites.couple[String(c) as "0"][i]))]) },
   ];
 }
 
@@ -173,8 +175,8 @@ function tablesNE(l: Locale): Tab[] {
   const col = [fr ? "Classe" : "Class", fr ? "Sans enfant" : "No child", fr ? "1 enfant" : "1 child", fr ? "2 enfants" : "2 children", fr ? "3 enfants" : "3 children"];
   return [
     { cap: fr ? "Subside mensuel maximal 2027 par personne, en francs, selon la classification" : "2027 maximum monthly subsidy per person, in francs, by classification", tete: [fr ? "Classe" : "Class", fr ? "Adulte (26 ans et plus)" : "Adult (26 and over)", fr ? "Enfant mineur" : "Minor child"], lignes: cl.map((i) => [`S${i + 1}`, n(g.montants[i].adulte), n(g.montants[i].enfant)]) },
-    { cap: fr ? "Revenu déterminant maximal de chaque classe (inclus ; la classe commence un franc au-dessus de la précédente), adulte seul, selon le nombre d’enfants mineurs" : "Maximum determining income of each class (inclusive; a class starts one franc above the previous one), single adult, by number of minor children", tete: col, lignes: cl.map((i) => [`S${i + 1}`, ...[0, 1, 2, 3].map((e) => cell((g.seul as (number[] | null)[][])[i][e]))]) },
-    { cap: fr ? "Revenu déterminant maximal de chaque classe (inclus ; la classe commence un franc au-dessus de la précédente), couple d’adultes, selon le nombre d’enfants mineurs" : "Maximum determining income of each class (inclusive; a class starts one franc above the previous one), couple of adults, by number of minor children", tete: col, lignes: cl.map((i) => [`S${i + 1}`, ...[0, 1, 2, 3].map((e) => cell((g.couple as (number[] | null)[][])[i][e]))]) },
+    { cap: fr ? "Revenu déterminant maximal de chaque classe (inclus ; la classe commence un franc au-dessus de la précédente), adulte seul, selon le nombre d’enfants mineurs" : "Maximum determining income of each class (inclusive; a class starts one franc above the previous one), single adult, by number of minor children", tete: col, empile: true, lignes: cl.map((i) => [`S${i + 1}`, ...[0, 1, 2, 3].map((e) => cell((g.seul as (number[] | null)[][])[i][e]))]) },
+    { cap: fr ? "Revenu déterminant maximal de chaque classe (inclus ; la classe commence un franc au-dessus de la précédente), couple d’adultes, selon le nombre d’enfants mineurs" : "Maximum determining income of each class (inclusive; a class starts one franc above the previous one), couple of adults, by number of minor children", tete: col, empile: true, lignes: cl.map((i) => [`S${i + 1}`, ...[0, 1, 2, 3].map((e) => cell((g.couple as (number[] | null)[][])[i][e]))]) },
   ];
 }
 
@@ -186,6 +188,7 @@ function tablesJU(l: Locale): Tab[] {
     {
       cap: fr ? "Réduction mensuelle 2027, en francs, selon le revenu déterminant (adulte : 28 paliers jusqu’à 26 999)" : "2027 monthly reduction, in francs, by determining income (adult: 28 steps up to 26,999)",
       tete: [fr ? "Revenu déterminant" : "Determining income", fr ? "Adulte" : "Adult", fr ? "Jeune adulte en formation" : "Young adult in training", fr ? "Enfant (moins de 18 ans)" : "Child (under 18)"],
+      serre: true,
       lignes: [...g.adulte.map((a, i) => [palier(i), n(a), n(g.jeune_adulte_formation), n(g.enfant)]), [fr ? "27 000 et plus" : "27,000 and over", "0", fr ? "204 jusqu’à 52 999" : "204 up to 52,999", fr ? "108 jusqu’à 52 999" : "108 up to 52,999"]],
     },
     {
@@ -230,7 +233,7 @@ function para(c: Canton, l: Locale): string {
 }
 
 function SectionCanton({ c, l }: { c: Canton; l: Locale }) {
-  const t = TEXTE[l], fr = l === "fr";
+  const fr = l === "fr";
   const k = K[c];
   const h = fr
     ? c === "VS" ? "Valais : barème 2027 pas encore publié" : `Subside d’assurance maladie ${c === "VD" || c === "JU" ? "dans le canton de " : "à "}${NOMS[c].fr}${c === "VD" || c === "JU" ? "" : ""} en 2027`
@@ -239,12 +242,15 @@ function SectionCanton({ c, l }: { c: Canton; l: Locale }) {
     <section className="subsides-canton" id={c.toLowerCase()}>
       <h2>{fr && (c === "VD" || c === "JU") ? `Subside d’assurance maladie ${c === "VD" ? "à Vaud" : "dans le Jura"} en 2027` : h}</h2>
       <p>{para(c, l)}</p>
+      {c === "VD" ? <p>{TRANSPARENCE_VD[l]}</p> : null}
       {TABLES[c](l).map((tab) => <Tableau key={tab.cap} {...tab} />)}
-      <p className="source-outil">
-        {t.source}{fr ? N : ""}: {k.sources.slice(0, 2).map((s, i) => (
-          <span key={s.url}>{i ? " ; " : ""}<a href={s.url} rel="noopener">{s.titre}</a></span>
-        ))}, {t.lu(fr ? LE : LE_EN)}. <a href={k.autorite.url} rel="noopener">{k.autorite.nom}</a>.
-      </p>
+      <p className="source-outil">{fr ? `Le barème vient des textes officiels suivants, lus le ${LE}.` : `The scale comes from the following official texts, read on ${LE_EN}.`}</p>
+      <ul className="liens-source">
+        {k.sources.slice(0, 2).map((s) => (
+          <li key={s.url}><a className="lien-tap" href={s.url} rel="noopener">{s.titre}</a></li>
+        ))}
+        <li><a className="lien-tap" href={k.autorite.url} rel="noopener">{k.autorite.nom}</a></li>
+      </ul>
     </section>
   );
 }

@@ -209,6 +209,36 @@ assert.equal(calc("VD", m(1), 70000, { region: "2" }).vd?.specifique, 0, "taux d
 assert.equal(calc("VD", m(1), 200000).droit, false);
 assert.equal(S.calculer({ canton: "VD", menage: m(1, 0, 1), rdu: 20000, primes: gros }).calcule, false, "jeunes adultes : hors outil");
 
+/* Vaud, entre les seuils : points dérivés des formules de l'art. 21 RLVLAMal et des paramètres de l'arrêté du 7 octobre
+   2026, et non montants officiels publiés (le simulateur en ligne du canton affichait encore 2026 le 24.11.2026, sans
+   montant intermédiaire 2027 à lire). Valeurs issues d'une dérivation indépendante (6 548 comparaisons, accord avec le
+   moteur) ; le franc supérieur s'applique au résultat de la formule. Pas de point à RD 39 999 : la dérivation arrondit
+   plus largement que la règle littérale, d'un franc. */
+const POINTS_VD: [string, S.Menage, number, number][] = [
+  ["adulte de 26 ans et plus, seul", seul, 20000, 319],
+  ["adulte de 26 ans et plus, seul", seul, 30000, 145],
+  ["adulte de 26 ans et plus, seul", seul, 35000, 59],
+  ["couple sans enfant", couple, 30000, 287],
+  ["couple sans enfant", couple, 35000, 256],
+  ["couple sans enfant", couple, 65000, 23],
+  ["adulte avec enfant(s)", fam, 28500, 288],
+  ["adulte avec enfant(s)", fam, 35000, 228],
+  ["adulte avec enfant(s)", fam, 45000, 90],
+];
+for (const [nom, mn, rd, attendu] of POINTS_VD) assert.equal(ord(rd, mn), attendu, `${nom}, RD ${rd}`);
+// l'enfant : la formule 5 reste à 118 francs entre les seuils (E = F = G = 118)
+for (const rd of [30000, 50000, 70000]) assert.equal(S.ordinaireEnfantVD(rd), 118, `enfant, RD ${rd}`);
+// recalcul à la main de trois points (formule 1 : E + (F − E) × (1 − ((RD − C) / (A − C))²)^P, puis franc supérieur)
+// seul, RD 30 000 : x = 13 000 / 23 000 = 0,5652 ; 1 − x² = 0,6805 ; 0,6805^2,5 = 0,3820 ; 30 + 301 × 0,3820 = 144,996 -> 145
+// couple, RD 65 000 : x = 40 800 / 45 800 = 0,8908 ; 1 − x² = 0,2064 ; 0,2064^3 = 0,008796 ; 20 + 280 × 0,008796 = 22,46 -> 23
+// famille, RD 35 000 : x = 10 800 / 30 800 = 0,3506 ; 1 − x² = 0,8770 ; 0,8770^2,3 = 0,7395 ; 20 + 280 × 0,7395 = 227,07 -> 228
+const courbeMain = (E: number, F: number, C: number, A: number, P: number, rd: number) => E + (F - E) * Math.pow(1 - Math.pow((rd - C) / (A - C), 2), P);
+assert.equal(Math.ceil(courbeMain(30, 331, 17000, 40000, 2.5, 30000) - 1e-9), 145);
+assert.equal(Math.ceil(courbeMain(20, 300, 24200, 70000, 3, 65000) - 1e-9), 23);
+assert.equal(Math.ceil(courbeMain(20, 300, 24200, 55000, 2.3, 35000) - 1e-9), 228);
+// chaîne complète : le ménage de la notice (2 adultes, 2 enfants, RDU 76 000, RD 63 000) reçoit 40 + 236 = 276 francs, soit 3 312 par an
+assert.equal(calc("VD", m(2, 2), 76000).vd?.ordinaire, 276);
+
 /* ------------------------------------------------------------ Neuchâtel (page ne.ch et arrêté 2027) */
 const NE = D.cantons.NE.tables;
 assert.equal(NE.montants.length, 15);

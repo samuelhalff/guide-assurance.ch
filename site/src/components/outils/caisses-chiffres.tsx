@@ -1,16 +1,19 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { suivre } from "@/lib/analytics";
+import { cn } from "cn";
 import type { Locale } from "@/lib/i18n";
 import { ecrirePreremplissage } from "@/lib/demande";
 import { DEMANDE_PORTE } from "@/lib/demande-porte";
 import { BarreOffres, CtaOffres } from "@/components/outils/cta-offres";
 import { Choix } from "@/components/outils/choix";
 import { Depliable } from "@/components/controles";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { ASSUREURS, META, NOM_CANTON, assuresDans, dateCourte, lignes, nomAffiche, ordreCantons, partDans, type Assureur, type Tri, type Zone } from "@/lib/caisses-lamal";
+import { ASSUREURS, META, NOM_CANTON, assuresDans, dateCourte, filtrer, lignes, nomAffiche, ordreCantons, partDans, type Assureur, type Tri, type Zone } from "@/lib/caisses-lamal";
 import { chf, nombre, ESPACE_FINE as N } from "@/lib/nombres";
 
 /* « Caisses maladie en chiffres » : un tableau, une carte par caisse sur mobile. Le rendu initial (Suisse entière, ordre
@@ -31,6 +34,13 @@ const TXT = {
     sensTexte: (t: Tri, desc: boolean) =>
       t === "nom" ? (desc ? "de Z à A" : "de A à Z") : desc ? "du plus élevé au plus bas" : "du plus bas au plus élevé",
     finSolvabilite: " Les caisses sans taux de solvabilité publié passent en fin de liste.",
+    avertissement: " Ces indicateurs ne forment pas un classement des caisses, et les très petites caisses peuvent afficher des valeurs extrêmes.",
+    recherche: "Chercher une caisse",
+    recherchePlaceholder: "Nom de la caisse",
+    affiche: (n: number, total: number) => `${n} caisses sont affichées sur ${total}.`,
+    trouvees: (n: number, total: number) => (n === 0 ? `Aucune des ${total} caisses ne correspond à cette recherche.` : n === 1 ? `Une caisse sur ${total} correspond à cette recherche.` : `${n} caisses sur ${total} correspondent à cette recherche.`),
+    autres: (n: number) => `Afficher les ${n} autres caisses`,
+    partDe: (p: string, canton: boolean) => `${p} des assurés ${canton ? "du canton" : "de Suisse"}`,
     caption: (zone: string) => `Caisses maladie avec des assurés ${zone} : assurés au 31.12.2024, frais administratifs 2024, réserves, résultat et solvabilité au 1.1.2025`,
     thCaisse: "Caisse",
     thAssures: (d: string) => `Assurés au ${d}`,
@@ -42,7 +52,7 @@ const TXT = {
     thSolv: (d: string) => `Solvabilité au ${d}`,
     assures: "Assurés",
     part: "Part de marché",
-    fraisCourt: "Frais admin. par assuré",
+    fraisCourt: "Frais administratifs par assuré",
     solv: "Solvabilité",
     details: "Détails",
     fraisPct: "Frais administratifs en % des dépenses",
@@ -72,6 +82,13 @@ const TXT = {
     critere: { nom: "name", assures: "number of insured", frais: "administrative costs per insured", solvabilite: "solvency ratio" } as Record<Tri, string>,
     sensTexte: (t: Tri, desc: boolean) => (t === "nom" ? (desc ? "from Z to A" : "from A to Z") : desc ? "from highest to lowest" : "from lowest to highest"),
     finSolvabilite: " Insurers with no published solvency ratio come last.",
+    avertissement: " These indicators are not a ranking of the insurers, and very small insurers can show extreme values.",
+    recherche: "Find an insurer",
+    recherchePlaceholder: "Insurer name",
+    affiche: (n: number, total: number) => `${n} insurers are shown out of ${total}.`,
+    trouvees: (n: number, total: number) => (n === 0 ? `None of the ${total} insurers matches this search.` : n === 1 ? `One insurer out of ${total} matches this search.` : `${n} insurers out of ${total} match this search.`),
+    autres: (n: number) => `Show the ${n} other insurers`,
+    partDe: (p: string, canton: boolean) => `${p} of insured people ${canton ? "in the canton" : "in Switzerland"}`,
     caption: (zone: string) => `Health insurers with insured people ${zone}: insured at 31.12.2024, 2024 administrative costs, reserves, result and solvency at 1.1.2025`,
     thCaisse: "Insurer",
     thAssures: (d: string) => `Insured at ${d}`,
@@ -83,7 +100,7 @@ const TXT = {
     thSolv: (d: string) => `Solvency at ${d}`,
     assures: "Insured",
     part: "Market share",
-    fraisCourt: "Admin. costs per insured",
+    fraisCourt: "Administrative costs per insured",
     solv: "Solvency",
     details: "Details",
     fraisPct: "Administrative costs as % of expenses",
@@ -101,6 +118,7 @@ const TXT = {
   },
 };
 
+const NB_CARTES = 12;
 const D_ASSURES = dateCourte(META.dateAssures);
 const D_SOLV = dateCourte(META.dateSolvabilite);
 
@@ -112,6 +130,7 @@ function useFormats(locale: Locale) {
     entier: (x: number) => nombre(x, 0, locale),
     francs: (x: number) => chf(x, locale),
     pct: (x: number) => (fr ? `${nombre(x, 1, locale)}${N}%` : `${nombre(x, 1, locale)}%`),
+    partPhrase: (x: number, canton: boolean) => t.partDe(x < 0.05 ? t.moinsDe : fr ? `${nombre(x, 1, locale)}${N}%` : `${nombre(x, 1, locale)}%`, canton),
     part: (x: number) => (x < 0.05 ? t.moinsDe : fr ? `${nombre(x, 1, locale)}${N}%` : `${nombre(x, 1, locale)}%`),
     solv: (a: Assureur) => (a.solvabilitePct === undefined ? t.nonIndique : fr ? `${nombre(a.solvabilitePct, 0, locale)}${N}%` : `${nombre(a.solvabilitePct, 0, locale)}%`),
   };
@@ -150,7 +169,13 @@ export function CaissesChiffres({ locale }: { locale: Locale }) {
     suivre("caisses_chiffres_utilise");
   };
 
-  const liste = useMemo(() => lignes(zone, tri, desc, locale), [zone, tri, desc, locale]);
+  const [requete, setRequete] = useState("");
+  const [tout, setTout] = useState(false);
+  const complete = useMemo(() => lignes(zone, tri, desc, locale), [zone, tri, desc, locale]);
+  const liste = useMemo(() => filtrer(complete, requete), [complete, requete]);
+  const cherche = requete.trim() !== "";
+  const cartes = cherche || tout ? liste : liste.slice(0, NB_CARTES);
+  const restantes = liste.length - cartes.length;
   const nomZone = zone === "CH" ? t.zoneCh : t.zoneCanton(NOM_CANTON[locale][zone]);
   const optionsCanton = useMemo(
     () => [{ value: "CH" as Zone, label: t.suisse }, ...ordreCantons(locale).map((c) => ({ value: c as Zone, label: `${NOM_CANTON[locale][c]} (${c})` }))],
@@ -158,27 +183,25 @@ export function CaissesChiffres({ locale }: { locale: Locale }) {
   );
   const optionsTri = (Object.keys(t.tris) as Tri[]).map((k) => ({ value: k, label: t.tris[k] }));
 
-  /* Bouton « Recevoir des offres » collant (mobile) : visible entre l'appel du haut et celui du bas. */
-  const [haut, setHaut] = useState(true);
-  const [bas, setBas] = useState(false);
+  /* Bouton « Recevoir des offres » collant (mobile) : masqué tant qu'un appel du même nom est à l'écran (haut, bas ou corps de page). */
+  const [cta, setCta] = useState(true);
   useEffect(() => {
     if (typeof IntersectionObserver === "undefined") return;
-    const suivi = (id: string, set: (v: boolean) => void) => {
-      const el = document.getElementById(id);
-      if (!el) return () => {};
-      const io = new IntersectionObserver(([e]) => set(e.isIntersecting));
-      io.observe(el);
-      return () => io.disconnect();
-    };
-    const a = suivi("cta-caisses-haut", setHaut);
-    const b = suivi("cta-caisses-bas", setBas);
-    return () => {
-      a();
-      b();
-    };
+    const els = Array.from(document.querySelectorAll("main .cta-offres"));
+    if (!els.length) return;
+    const visibles = new Set<Element>();
+    const io = new IntersectionObserver((entrees) => {
+      for (const e of entrees) {
+        if (e.isIntersecting) visibles.add(e.target);
+        else visibles.delete(e.target);
+      }
+      setCta(visibles.size > 0);
+    });
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
   }, []);
 
-  const phrase = t.phrase(liste.length, nomZone, t.critere[tri], t.sensTexte(tri, desc)) + (tri === "solvabilite" ? t.finSolvabilite : "");
+  const phrase = t.phrase(complete.length, nomZone, t.critere[tri], t.sensTexte(tri, desc)) + (tri === "solvabilite" ? t.finSolvabilite : "") + (tri === "solvabilite" || tri === "frais" ? t.avertissement : "");
   const thAssures = zone === "CH" ? t.thAssures(D_ASSURES) : `${t.thAssures(D_ASSURES)} (${zone})`;
 
   return (
@@ -210,30 +233,50 @@ export function CaissesChiffres({ locale }: { locale: Locale }) {
         </ToggleGroup>
       </div>
       <p className="note-outil mt-4" role="status" aria-live="polite">
-        {liste.length ? phrase : t.aucun}
+        {complete.length ? phrase : t.aucun}
       </p>
 
+      <div className="champ mt-4 max-w-[28rem]">
+        <label htmlFor="cc-recherche">{t.recherche}</label>
+        <Input
+          id="cc-recherche"
+          type="search"
+          autoComplete="off"
+          placeholder={t.recherchePlaceholder}
+          value={requete}
+          onChange={(e) => {
+            setRequete(e.target.value);
+            touche();
+          }}
+        />
+      </div>
+      {cherche || restantes > 0 ? (
+        <p className={cn("note-outil mt-3", !cherche && "min-[720px]:hidden")} role="status" aria-live="polite">
+          {cherche ? t.trouvees(liste.length, complete.length) : t.affiche(cartes.length, complete.length)}
+        </p>
+      ) : null}
+
       <ul className="mt-4 grid gap-3 min-[720px]:hidden" aria-label={t.caption(nomZone)}>
-        {liste.map((a) => (
+        {cartes.map((a) => (
           <li key={a.no}>
             <Card size="sm">
               <CardContent>
                 <h3 className="text-lg leading-tight">
                   <NomCaisse a={a} />
                 </h3>
-                <dl className="mt-3 grid grid-cols-3 gap-x-3 gap-y-1 text-base">
+                <dl className="mt-3 grid grid-cols-2 gap-x-4 gap-y-3 text-base">
                   <div>
                     <dt className="text-base text-muted-foreground">{t.assures}</dt>
                     <dd className="font-semibold tabular-nums">{F.entier(assuresDans(a, zone))}</dd>
-                    <dd className="text-base tabular-nums text-muted-foreground">{F.part(partDans(a, zone))}</dd>
-                  </div>
-                  <div>
-                    <dt className="text-base text-muted-foreground">{t.fraisCourt}</dt>
-                    <dd className="font-semibold tabular-nums">{F.francs(a.fraisAdminParAssure)}</dd>
+                    <dd className="text-base text-muted-foreground">{F.partPhrase(partDans(a, zone), zone !== "CH")}</dd>
                   </div>
                   <div>
                     <dt className="text-base text-muted-foreground">{t.solv}</dt>
                     <dd className="font-semibold tabular-nums">{F.solv(a)}</dd>
+                  </div>
+                  <div className="col-span-2 flex items-baseline justify-between gap-4">
+                    <dt className="text-base text-muted-foreground">{t.fraisCourt}</dt>
+                    <dd className="font-semibold tabular-nums">{F.francs(a.fraisAdminParAssure)}</dd>
                   </div>
                 </dl>
                 <Depliable titre={t.details} className="mt-2 border-t pt-1">
@@ -262,9 +305,14 @@ export function CaissesChiffres({ locale }: { locale: Locale }) {
           </li>
         ))}
       </ul>
+      {restantes > 0 ? (
+        <Button variant="outline" className="mt-4 w-full min-[720px]:hidden" onClick={() => setTout(true)}>
+          {t.autres(restantes)}
+        </Button>
+      ) : null}
 
       <div className="mt-4 max-[719px]:hidden">
-        <Table variant="chiffres" className="text-[15px]">
+        <Table variant="chiffres" className="text-base">
           <TableCaption className="visually-hidden">{t.caption(nomZone)}</TableCaption>
           <TableHeader>
             <TableRow>
@@ -301,7 +349,7 @@ export function CaissesChiffres({ locale }: { locale: Locale }) {
       </div>
       <p className="note-outil mt-4">{t.notes(D_ASSURES, D_SOLV)}</p>
 
-      <BarreOffres locale={locale} href={DEMANDE_PORTE[locale]("sante")} visible={!haut && !bas} onClick={versDemande} />
+      <BarreOffres locale={locale} href={DEMANDE_PORTE[locale]("sante")} visible={!cta} onClick={versDemande} />
     </div>
   );
 }

@@ -85,3 +85,11 @@ export function chiffresCles() {
 
 /* 2025-01-01 -> 1.1.2025 ; 2024-12-31 -> 31.12.2024 */
 export const dateCourte = (iso: string) => iso.split("-").reverse().map(Number).join(".");
+
+/* Recherche par nom officiel ou nom court, sans tenir compte des accents ni de la casse. */
+const simple = (s: string) => s.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase().trim();
+export function filtrer(liste: Assureur[], requete: string): Assureur[] {
+  const q = simple(requete);
+  if (!q) return liste;
+  return liste.filter((a) => simple(a.nom).includes(q) || simple(a.court ?? "").includes(q));
+}

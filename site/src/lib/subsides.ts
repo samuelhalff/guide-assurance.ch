@@ -99,3 +99,9 @@ export const LIMITES_OUTIL: Record<Canton, T2> = {
   NE: { fr: "Adultes de 26 ans et plus et jusqu’à trois enfants mineurs. Les montants sont ceux de la franchise ordinaire : ils baissent dans la même mesure que les rabais des assureurs pour une franchise à option ou un modèle alternatif.", en: "Adults aged 26 and over and up to three minor children. The amounts are those for the standard deductible: they fall by the same amount as the insurers’ discounts for a higher deductible or an alternative model." },
   JU: { fr: "Adultes, enfants de moins de 18 ans et jeunes adultes en formation de moins de 25 ans. La fortune disponible doit rester sous 150 000 francs ; les enfants de 16 à 18 ans hors formation ont des montants distincts, non repris ici.", en: "Adults, children under 18 and young adults in training under 25. Available wealth must stay below CHF 150,000; children aged 16 to 18 who are not in training have separate amounts, not covered here." },
 };
+
+/* Vaud : ce que l'estimation applique et ce qui n'a pas pu être comparé (dite une fois par endroit où l'estimation paraît). */
+export const TRANSPARENCE_VD: T2 = {
+  fr: "Cette estimation applique les formules du règlement cantonal (art. 21 RLVLAMal) avec les paramètres 2027 de l’arrêté du 7 octobre 2026. Elle reproduit les exemples de la notice officielle 2027. L’estimateur en ligne du canton affichait encore l’année 2026 le 24 novembre 2026 : nous n’avons donc pas pu y comparer les montants intermédiaires.",
+  en: "This estimate applies the formulas of the cantonal regulation (art. 21 RLVLAMal) with the 2027 parameters of the order of 7 October 2026. It reproduces the examples in the official 2027 notice. The canton’s online estimator still showed 2026 on 24 November 2026, so we could not compare intermediate amounts with it.",
+};

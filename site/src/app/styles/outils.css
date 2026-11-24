@@ -8,13 +8,13 @@
   .prive { display: flex; gap: 10px; align-items: flex-start; margin: var(--s4) 0 0; font-family: var(--narrow); font-size: 16px; color: var(--encre); }
   .prive svg { flex: 0 0 20px; width: 20px; height: 20px; margin-top: 2px; }
   .partage { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2); margin: var(--s2) 0 0 -10px; }
-  .partage-ok { font: 15px var(--narrow); color: var(--encre-2); }
+  .partage-ok { font: 16px var(--narrow); color: var(--encre-2); }
 
   .outil { display: grid; gap: var(--s5); margin: var(--s5) 0 var(--s7); }
   .form fieldset { border: 0; margin: 0 0 var(--s5); padding: 0; min-width: 0; }
   .form fieldset.dernier { margin-bottom: 0; }
   .form legend { font: 700 19px var(--sans); margin: 0 0 var(--s3); padding: 0; display: flex; gap: 10px; align-items: baseline; }
-  .form legend .n { font: 700 15px var(--narrow); color: var(--sentier-texte); white-space: nowrap; }
+  .form legend .n { font: 700 16px var(--narrow); color: var(--sentier-texte); white-space: nowrap; }
   .choix-liste { display: grid; gap: 0; }
   .choix-liste .option { grid-template-columns: 22px 1fr; }
   .choix-liste .option:first-of-type { margin-top: 0; }
@@ -27,20 +27,20 @@
   .case { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; font-size: 16px; margin: var(--s2) 0 var(--s3); cursor: pointer; }
   .case small { display: block; font: 16px var(--narrow); color: var(--encre-2); }
   .note-outil { font: 16px var(--narrow); color: var(--encre-2); margin: 0; }
-  .aide-revenus { font: 15px var(--narrow); color: var(--encre-2); margin: 0 0 var(--s2); }
+  .aide-revenus { font: 16px var(--narrow); color: var(--encre-2); margin: 0 0 var(--s2); }
   .aide-revenus .depliable-titre { color: var(--lac-encre); min-height: 32px; }
   .aide-revenus p { margin: var(--s2) 0; }
 
   /* Délai : encadré d'alerte */
   .delai { margin: 0 0 var(--s5); }
-  .delai .base { display: block; font: 15px var(--narrow); color: var(--encre-2); margin-top: 4px; }
+  .delai .base { display: block; font: 16px var(--narrow); color: var(--encre-2); margin-top: 4px; }
   .delai .manque { display: block; margin-bottom: 6px; color: var(--sentier-fonce); font-weight: 600; }
 
   .page-outil .apercu > h2 { font-size: 21px; margin-bottom: var(--s3); }
   .recap { margin-bottom: var(--s5); }
   .page-outil .recap h2 { font-size: 19px; }
   .recap dl { display: grid; grid-template-columns: auto 1fr; gap: 4px var(--s4); margin: 0; font-size: 16px; }
-  .recap dt { font: 600 15px var(--narrow); color: var(--encre-2); }
+  .recap dt { font: 600 16px var(--narrow); color: var(--encre-2); }
   .recap dd { margin: 0; }
   .a-verifier { margin: var(--s3) 0 0; }
   .a-verifier ul { margin: 0; padding-left: 1.2em; list-style: disc; }
@@ -49,7 +49,7 @@
   /* La lettre : un document à imprimer, blanc dans les deux thèmes */
   .lettre {
     background: var(--doc-fond); color: var(--doc-encre); border: 1px solid var(--doc-filet); border-radius: var(--r);
-    padding: var(--s5) var(--s4); font-size: 15px; line-height: 1.5; color-scheme: light;
+    padding: var(--s5) var(--s4); font-size: 16px; line-height: 1.5; color-scheme: light;
   }
   .lettre p { margin: 0 0 var(--s3); }
   .lettre .exp { margin: 0 0 var(--s5); }
@@ -59,7 +59,7 @@
   .lettre .sign { margin-top: var(--s6); }
   .vide { color: var(--doc-vide); background: var(--doc-vide-fond); padding: 0 3px; border-radius: 2px; }
   .actions { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s4); }
-  .copie-ok { font: 15px var(--narrow); color: var(--encre-2); align-self: center; }
+  .copie-ok { font: 16px var(--narrow); color: var(--encre-2); align-self: center; }
 
   .apres { margin-top: var(--s5); border-top: 1px solid var(--filet); padding-top: var(--s4); }
   .page-outil .apres h3 { font-size: 19px; margin-bottom: var(--s3); }
@@ -73,10 +73,10 @@
 
   /* Simulateur */
   .duel { display: grid; gap: var(--s3); margin-bottom: var(--s4); }
-  .page-outil .duel-option h3 { font: 700 15px var(--narrow); color: var(--encre-2); margin: 0 0 4px; letter-spacing: 0; }
+  .page-outil .duel-option h3 { font: 700 16px var(--narrow); color: var(--encre-2); margin: 0 0 4px; letter-spacing: 0; }
   .prix { font: 800 30px/1.1 var(--sans); letter-spacing: -.02em; }
   .prix small { font: 600 16px var(--narrow); color: var(--encre-2); letter-spacing: 0; }
-  .duel-option p { margin: 6px 0 0; font: 15px var(--narrow); color: var(--encre-2); }
+  .duel-option p { margin: 6px 0 0; font: 16px var(--narrow); color: var(--encre-2); }
   .verdict { margin: 0 0 var(--s4); }
   .provisoire { margin: 0 0 var(--s4); }
   .outil-frontalier .qui { margin: 0 0 var(--s4); }
@@ -85,12 +85,12 @@
   .qui ul { margin: 0; padding-left: 1.2em; list-style: disc; }
   .qui li { margin-bottom: 3px; }
   table.table-domaines { width: 100%; border-collapse: collapse; background: var(--papier); font-size: 16px; }
-  table.table-domaines caption { text-align: left; font: 15px var(--narrow); color: var(--encre-2); padding: 0 0 var(--s2); }
+  table.table-domaines caption { text-align: left; font: 16px var(--narrow); color: var(--encre-2); padding: 0 0 var(--s2); }
   table.table-domaines th, table.table-domaines td { padding: 9px 10px; border-bottom: 1px solid var(--filet); text-align: right; }
   table.table-domaines th:first-child, table.table-domaines td:first-child { text-align: left; }
-  table.table-domaines thead th { font: 600 14px var(--narrow); color: var(--encre-2); border-bottom: 1.5px solid var(--encre); }
+  table.table-domaines thead th { font: 600 16px var(--narrow); color: var(--encre-2); border-bottom: 1.5px solid var(--encre); }
   .barre { display: block; height: 6px; background: var(--lac); margin-top: 4px; }
-  .source-outil { font: 14px var(--narrow); color: var(--encre-2); margin: var(--s2) 0 0; }
+  .source-outil { font: 16px var(--narrow); color: var(--encre-2); margin: var(--s2) 0 0; }
   .nuances { margin-top: var(--s5); }
   .page-outil .nuances > h2 { font-size: 21px; margin-bottom: var(--s3); }
   .nuances dl { margin: 0; display: grid; gap: var(--s3); }
@@ -127,8 +127,8 @@
   .carte-prime { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 2px var(--s2); align-items: start; }
   .carte-prime .rang { font: 600 14px var(--narrow); color: var(--encre-2); padding-top: 2px; font-variant-numeric: tabular-nums; }
   .carte-prime .offre-qui b { display: block; font-weight: 700; font-size: 17px; }
-  .carte-prime .produit, table.primes-liste .produit { display: block; font: 15px var(--narrow); overflow-wrap: anywhere; }
-  table.primes-liste .type { display: block; margin-top: 2px; font: 14px var(--narrow); color: var(--encre-2); }
+  .carte-prime .produit, table.primes-liste .produit { display: block; font: 16px var(--narrow); overflow-wrap: anywhere; }
+  table.primes-liste .type { display: block; margin-top: 2px; font: 16px var(--narrow); color: var(--encre-2); }
   .carte-prime .combien { text-align: right; }
   .carte-prime .montant { display: block; font: 800 22px/1.1 var(--sans); letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
   .carte-prime .unite { display: block; font: 16px var(--narrow); color: var(--encre-2); }
@@ -183,18 +183,18 @@
   table.primes-liste b { display: block; font-weight: 700; }
   table.primes-liste td.mois { font-weight: 700; }
   table.primes-liste thead th { white-space: nowrap; vertical-align: bottom; }
-  table.primes-liste thead small { display: block; font: 12px var(--narrow); white-space: normal; max-width: 9em; margin-left: auto; }
+  table.primes-liste thead small { display: block; font: 16px var(--narrow); white-space: normal; max-width: 9em; margin-left: auto; }
   /* Écart face à la caisse actuelle : même teinte que l'encadré de synthèse, pour relier les deux. */
   table.primes-liste .col-caisse { background: var(--info-teinte); font-weight: 700; }
   table.primes-liste thead .col-caisse { color: var(--encre); }
   .plus { margin: var(--s2) 0 0; }
-  .integrite { margin-top: var(--s4); padding: var(--s3) var(--s4); border: 1px solid var(--filet); border-radius: var(--r); font: 14px var(--narrow); color: var(--encre-2); }
+  .integrite { margin-top: var(--s4); padding: var(--s3) var(--s4); border: 1px solid var(--filet); border-radius: var(--r); font: 16px var(--narrow); color: var(--encre-2); }
   .integrite p { margin: 0 0 6px; }
   .integrite p:last-child { margin: 0; }
   .integrite b { color: var(--encre); font-weight: 600; }
   .franchises { margin-top: var(--s5); border-top: 1px solid var(--filet); padding-top: var(--s3); }
   .franchises .depliable-titre { font: 700 17px var(--sans); }
-  .franchises .depliable-contenu > p { font: 15px var(--narrow); color: var(--encre-2); margin: var(--s2) 0 var(--s3); }
+  .franchises .depliable-contenu > p { font: 16px var(--narrow); color: var(--encre-2); margin: var(--s2) 0 var(--s3); }
   .franchises tr[aria-current] td { font-weight: 700; }
   .apres-comparateur p { margin: 0 0 var(--s2); font-size: 16px; }
   .apres-comparateur a { font-weight: 600; }
@@ -233,8 +233,8 @@
   .faq section { max-width: 68ch; margin-bottom: var(--s6); }
   .faq h2 { margin-bottom: var(--s3); }
   .faq p { margin: 0 0 var(--s3); }
-  .faq .src { font: 15px var(--narrow); color: var(--encre-2); }
-  .maj { font: 15px var(--narrow); color: var(--encre-2); margin: 0 0 var(--s6); }
+  .faq .src { font: 16px var(--narrow); color: var(--encre-2); }
+  .maj { font: 16px var(--narrow); color: var(--encre-2); margin: 0 0 var(--s6); }
 
   @media (min-width: 720px) {
     .page-outil .wrap { padding-inline: var(--s5); }
@@ -282,7 +282,7 @@
 /* Simulateur frontalier, foyer personne par personne (simulateur-frontalier.tsx). Mobile d'abord. */
 @layer components {
   .cta-haut-outil { display: grid; gap: var(--s1); justify-items: start; margin: var(--s4) 0 0; }
-  .cta-haut-outil p { margin: 0; font: 15px var(--narrow); color: var(--encre-2); }
+  .cta-haut-outil p { margin: 0; font: 16px var(--narrow); color: var(--encre-2); }
   .outil-frontalier .foyer-aide { margin: calc(-1 * var(--s2)) 0 var(--s3); }
   .outil-frontalier fieldset.personne { border: 1px solid var(--filet); border-radius: var(--r); padding: var(--s3) var(--s3) var(--s1); margin: 0 0 var(--s3); }
   .outil-frontalier fieldset.personne > legend { font: 700 16px var(--sans); padding: 0 6px; margin: 0 0 var(--s1) -6px; display: flex; gap: var(--s3); align-items: baseline; }
@@ -292,19 +292,19 @@
   .outil-frontalier .personne .case { margin-bottom: var(--s2); }
   .outil-frontalier .pastilles-2, .outil-frontalier .pastilles-4 { grid-template-columns: 1fr 1fr; }
   .outil-frontalier .pastilles-texte span { flex-direction: column; line-height: 1.15; min-height: 56px; }
-  .outil-frontalier .pastille small { display: block; font: 400 13px var(--narrow); color: var(--encre-2); margin-top: 2px; }
+  .outil-frontalier .pastille small { display: block; font: 400 16px var(--narrow); color: var(--encre-2); margin-top: 2px; }
   .outil-frontalier .ajouts { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2); }
   .outil-frontalier .ajouts .ajouter-personne { margin: 0; }
   .taux-change .depliable-titre { font: 600 16px var(--narrow); color: var(--lac-encre); }
   .taux-change .champ { margin-top: var(--s2); max-width: 16em; }
-  .taux-change .aide { display: block; font: 14px var(--narrow); color: var(--encre-2); margin-top: 4px; }
+  .taux-change .aide { display: block; font: 16px var(--narrow); color: var(--encre-2); margin-top: 4px; }
   .page-outil .titre-resultat { font-size: 21px; margin: 0 0 var(--s3); }
   /* Rangées partagées (titre, montant, détail) : les deux montants restent à la même hauteur quand un titre passe sur deux lignes. */
   .duel-serre { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto 1fr; gap: 0 var(--s2); }
   .duel-serre .prix { font-size: 23px; font-variant-numeric: tabular-nums; letter-spacing: 0; }
-  .duel-serre .prix small { display: block; font-size: 14px; margin-top: 2px; }
+  .duel-serre .prix small { display: block; font-size: 16px; margin-top: 2px; }
   .duel-serre .prix small.des { display: inline; margin: 0; }
-  .duel-serre .duel-option p { font-size: 14px; line-height: 1.35; }
+  .duel-serre .duel-option p { font-size: 16px; line-height: 1.35; }
   .outil-frontalier .attente { font: 16px var(--narrow); color: var(--encre-2); }
   @media (max-width: 820px) {
     :root:has(.barre-frontalier) { --barre-h: 111px; }
@@ -332,6 +332,7 @@
 /* ===== Subsides d'assurance maladie (outil et tableaux) ===== */
 @layer components {
   .outil-subsides { margin-top: var(--s4); }
+  .outil-subsides > *, .outil-subsides .form fieldset { min-width: 0; }
   .outil-subsides .form fieldset { margin-bottom: var(--s4); }
   .outil-subsides .form legend { font-size: 17px; margin-bottom: var(--s2); }
   .outil-subsides .s-compteurs { display: grid; gap: var(--s4); }
@@ -346,10 +347,31 @@
   .subsides-canton h2 { margin-bottom: var(--s3); }
   .subsides-canton p { margin: 0 0 var(--s3); }
   .subsides-canton h3 { font-size: 19px; margin: var(--s4) 0 var(--s2); }
-  .subsides-canton .source-outil { font: 15px var(--narrow); color: var(--encre-2); }
+  .subsides-canton .source-outil { font: 16px var(--narrow); color: var(--encre-2); }
   .subsides-canton .source-outil a { color: var(--lac-encre); }
   .subsides-canton table { margin-bottom: var(--s3); }
+  .subsides-canton .liens-source { list-style: none; margin: 0 0 var(--s3); padding: 0; }
+  .lien-tap { display: inline-flex; align-items: center; min-height: 44px; }
+  /* Ligne de résultat sous le champ de revenu : sur téléphone, le résultat est loin sous le formulaire. Masquée quand la carte
+     du résultat est à côté du formulaire. */
+  .outil-subsides .s-ligne { margin-top: var(--s3); display: grid; gap: var(--s2); }
+  .outil-subsides .s-ligne p { margin: 0; font-weight: 600; }
+  /* Tableaux larges : sur téléphone, chaque ligne devient un bloc de lignes « libellé, valeur » (une colonne, deux dès 340 px
+     pour les tableaux marqués -2) ; dès 720 px, tableau ordinaire. Tout le texte reste dans le HTML. */
+  @media (max-width: 719px) {
+    .tableau-empile thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+    .tableau-empile tbody tr { display: grid; grid-template-columns: minmax(0, 1fr); padding-block: var(--s2); }
+    .tableau-empile tbody th { text-align: left; }
+    .tableau-empile tbody th[data-label]::before { content: attr(data-label) " "; }
+    .tableau-empile tbody td { display: flex; flex-wrap: wrap; justify-content: space-between; column-gap: var(--s2); }
+    .tableau-empile tbody td::before { content: attr(data-label); font-family: var(--narrow); color: var(--encre-2); text-align: left; }
+  }
+  @media (min-width: 340px) and (max-width: 719px) {
+    .tableau-empile-2 tbody tr { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--s3); }
+    .tableau-empile-2 tbody th { grid-column: 1 / -1; }
+  }
   @media (min-width: 1000px) {
     .outil-subsides { grid-template-columns: minmax(320px, .9fr) minmax(0, 1.1fr); align-items: start; }
+    .outil-subsides .s-ligne { display: none; }
   }
 }

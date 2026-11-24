@@ -6,7 +6,6 @@ import { PartagerOutil } from "@/components/site/partager-outil";
 import { BandeConfiance } from "@/components/site/bande-confiance";
 import { FaqSections, faqOutilLd, type FaqOutil } from "@/components/site/faq-sections";
 import { CaissesChiffres, CtaCaisses } from "@/components/outils/caisses-chiffres";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { META, MOYENNE, chiffresCles, dateCourte } from "@/lib/caisses-lamal";
 import { pageMetadata } from "@/lib/metadata";
 import { ORG_ID, WEBSITE_ID, breadcrumbLd, faqLd, graph, type Miette } from "@/lib/jsonld";
@@ -52,6 +51,9 @@ const T = {
       `Au ${D_SOL}, le taux de solvabilité publié va de ${K.solMin}${N}% à ${f(K.solMax, "fr")}${N}% pour ${K.nbSolvabilite} caisses ; ${sousCentFr}.`,
     ],
     liensTitre: "À consulter avec ces chiffres",
+    comparerAvant: "Vous pouvez aussi ",
+    comparerLien: "comparer les primes 2027",
+    comparerApres: " de ces caisses selon votre NPA.",
     lienComparateur: "Comparer les primes 2027 de ces caisses selon votre NPA",
     lienComparateurTexte: "Le comparateur affiche les primes approuvées par l’OFSP pour votre adresse, votre âge et votre franchise.",
     lienLettre: "Préparer votre lettre de résiliation",
@@ -131,6 +133,9 @@ const T = {
       `On ${D_SOL}, the published solvency ratio ranges from ${K.solMin}% to ${f(K.solMax, "en")}% for ${K.nbSolvabilite} insurers; ${sousCentEn}.`,
     ],
     liensTitre: "To read with these figures",
+    comparerAvant: "You can also ",
+    comparerLien: "compare the 2027 premiums",
+    comparerApres: " of these insurers for your postcode.",
     lienComparateur: "Compare the 2027 premiums of these insurers for your postcode",
     lienComparateurTexte: "The comparison tool shows the FOPH-approved premiums for your address, age and deductible.",
     lienLettre: "Prepare your cancellation letter",
@@ -266,20 +271,19 @@ export function PageCaissesChiffres({ locale }: { locale: Locale }) {
           <p className="intro">{t.intro}</p>
           <CtaCaisses locale={locale} id="cta-caisses-haut" />
           <BandeConfiance locale={locale} signaux={["gratuit"]} compacte />
-          <p className="mt-4 text-base">
-            <a href={o.comparateur} className="font-semibold underline underline-offset-2">{t.lienComparateur}</a>
-            <span className="text-muted-foreground"> {t.lienComparateurTexte}</span>
+          <p className="mt-5 max-w-[68ch] text-base">
+            {t.comparerAvant}
+            <a href={o.comparateur} className="font-semibold underline underline-offset-2">{t.comparerLien}</a>
+            {t.comparerApres}
           </p>
-          <Alert variant="info" className="mt-5">
-            <AlertTitle>{t.enBref}</AlertTitle>
-            <AlertDescription>
-              <ul>
-                {t.faits.map((x) => (
-                  <li key={x}>{x}</li>
-                ))}
-              </ul>
-            </AlertDescription>
-          </Alert>
+          <section className="mt-6 max-w-[68ch]" aria-labelledby="a-retenir">
+            <h2 id="a-retenir">{t.enBref}</h2>
+            <ul className="mt-3 grid list-disc gap-2 pl-5">
+              {t.faits.map((x) => (
+                <li key={x}>{x}</li>
+              ))}
+            </ul>
+          </section>
           <p className="source-outil mt-4">{t.source}</p>
           <PartagerOutil path={t.path} title={t.appli} text={t.partage} locale={locale} />
 

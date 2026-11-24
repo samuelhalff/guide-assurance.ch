@@ -72,4 +72,14 @@ ok(() => {
   assert.doesNotMatch(brut, interdits);
 });
 
+/* Recherche (même normalisation que filtrer() de src/lib/caisses-lamal.ts, qui s'importe avec l'alias @/) : sans accents ni casse. */
+ok(() => {
+  const simple = (s: string) => s.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase().trim();
+  const cherche = (q: string) => D.assureurs.filter((a) => simple(a.nom).includes(simple(q)) || simple(a.court ?? "").includes(simple(q)));
+  assert.equal(cherche("").length, D.assureurs.length);
+  assert.ok(cherche("css").some((a) => a.no === 8));
+  assert.deepEqual(cherche("CSS").map((a) => a.no), cherche("  css ").map((a) => a.no));
+  assert.equal(simple("Mutuel Assurance Maladie é"), "mutuel assurance maladie e");
+});
+
 console.log(`caisses-lamal : ${n} contrôles ok`);

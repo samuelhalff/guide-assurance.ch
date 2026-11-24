@@ -5,6 +5,7 @@ import { JsonLd } from "@/components/site/json-ld";
 import { BandeConfiance } from "@/components/site/bande-confiance";
 import { PartagerOutil } from "@/components/site/partager-outil";
 import { PrimesUe } from "@/components/outils/primes-ue";
+import { buttonVariants } from "@/components/ui/button";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { DONNEES_UE, PAYS_UE, VOISINS } from "@/lib/primes-ue";
 import { offres, stats, trier } from "@/lib/engines/primes-ue";
@@ -37,8 +38,8 @@ const T = {
     titre: "Primes LAMal 2027 pour résidents UE, AELE et UK",
     description: `Primes LAMal 2027 par pays et par assureur pour les frontaliers et retraités qui vivent dans l’UE, l’AELE ou au Royaume-Uni. Données OFSP.`,
     appli: "Primes LAMal 2027 pour les résidents de l’UE, de l’AELE et du Royaume-Uni",
-    h1: "Primes LAMal 2027 pour les assurés qui résident dans l’UE, l’AELE ou au Royaume-Uni",
-    intro: `Choisissez votre pays de résidence, votre classe d’âge et la couverture accident : la liste montre la prime mensuelle 2027 de chaque assureur qui propose l’assurance de base dans ce pays, de la prime la plus basse à la plus haute. Les primes sont fixées pour chaque pays, quel que soit le canton.`,
+    h1: "Primes LAMal 2027 des résidents de l’UE et de l’AELE",
+    intro: `Choisissez votre pays de résidence, votre classe d’âge et la couverture accident : la liste montre la prime mensuelle 2027 de chaque assureur qui propose l’assurance de base dans ce pays, de la prime la plus basse à la plus haute. Les primes sont fixées pour chaque pays, quel que soit le canton, et le Royaume-Uni figure aussi dans la liste.`,
     prive: "Le calcul se fait dans votre navigateur. Nous ne recevons aucun de vos choix.",
     partage: "Les primes LAMal 2027 des assurés qui vivent dans l’UE, l’AELE ou au Royaume-Uni, par pays et par assureur.",
     miettes: [{ name: "Accueil", href: "/" }, { name: "Assurance maladie", href: "/assurance-maladie/" }, { name: "Primes UE, AELE et Royaume-Uni" }] as Miette[],
@@ -53,6 +54,9 @@ const T = {
     captionVoisins: "Prime mensuelle 2027 d’un adulte (26 ans et plus) avec couverture accident, en francs, pour la France, l’Allemagne, l’Italie et l’Autriche",
     ordreVoisins: "Les pays sont dans l’ordre France, Allemagne, Italie, Autriche.",
     thPays: "Pays",
+    nbAssureurs: (n: number) => `${n} assureurs`,
+    thPlage: "Primes mensuelles",
+    plage: (a: string, b: string) => `de ${a} à ${b}`,
     thNb: "Assureurs",
     thMin: "Prime la plus basse",
     thMax: "Prime la plus haute",
@@ -79,8 +83,8 @@ const T = {
     hReduction: "Réduction de primes pour les assurés qui vivent à l’étranger",
     reduction: "La Suisse accorde une réduction de primes aux assurés de condition économique modeste qui résident dans l’UE, en Islande, en Norvège ou au Royaume-Uni. Pour les rentiers et leurs proches, c’est la Confédération, par l’Institution commune LAMal (kvg.org). Pour les personnes qui travaillent en Suisse et leurs proches, c’est le canton de domicile ou, pour les frontaliers, le canton du lieu de travail.",
     simu: "Vous vivez en France et travaillez en Suisse ?",
-    simuLien: "Le simulateur frontalier",
-    simuSuite: "met ces primes en regard de la cotisation de l’assurance maladie française, avec votre situation.",
+    simuLien: "Ouvrir le simulateur frontalier",
+    simuSuite: "Le simulateur frontalier met ces primes en regard de la cotisation de l’assurance maladie française, avec votre situation.",
     autres: "Pour les assurés qui vivent en Suisse, voyez le",
     autresLien: "comparateur de primes LAMal",
     autresSuite: "par NPA.",
@@ -121,8 +125,8 @@ const T = {
     titre: "2027 Swiss health premiums for EU/EFTA/UK residents",
     description: `2027 Swiss basic health insurance premiums by country and insurer for cross-border workers and pensioners living in the EU, EFTA or the UK. FOPH data.`,
     appli: "2027 Swiss health insurance premiums for residents of the EU, EFTA and the UK",
-    h1: "2027 Swiss health insurance premiums for people living in the EU, EFTA or the UK",
-    intro: `Choose your country of residence, your age group and accident cover: the list shows each insurer’s 2027 monthly premium for basic insurance in that country, from the lowest premium to the highest. Premiums are set for each country, whatever the canton.`,
+    h1: "2027 Swiss health premiums for EU and EFTA residents",
+    intro: `Choose your country of residence, your age group and accident cover: the list shows each insurer’s 2027 monthly premium for basic insurance in that country, from the lowest premium to the highest. Premiums are set for each country, whatever the canton, and the United Kingdom is on the list too.`,
     prive: "The calculation runs in your browser. We receive none of your choices.",
     partage: "2027 Swiss health insurance premiums for people living in the EU, EFTA or the UK, by country and insurer.",
     miettes: [{ name: "Home", href: "/en/" }, { name: "Health insurance", href: "/en/health-insurance/" }, { name: "EU, EFTA and UK premiums" }] as Miette[],
@@ -137,6 +141,9 @@ const T = {
     captionVoisins: "2027 monthly premium for an adult (26 and over) with accident cover, in Swiss francs, for France, Germany, Italy and Austria",
     ordreVoisins: "Countries are listed in the order France, Germany, Italy, Austria.",
     thPays: "Country",
+    nbAssureurs: (n: number) => `${n} insurers`,
+    thPlage: "Monthly premiums",
+    plage: (a: string, b: string) => `${a} to ${b}`,
     thNb: "Insurers",
     thMin: "Lowest premium",
     thMax: "Highest premium",
@@ -163,8 +170,8 @@ const T = {
     hReduction: "Premium reduction for people insured while living abroad",
     reduction: "Switzerland grants premium reductions to insured people on modest incomes who live in the EU, Iceland, Norway or the United Kingdom. For pensioners and their family members, the Confederation is responsible, through the LAMal Joint Institution (kvg.org). For people who work in Switzerland and their family members, it is the canton of residence or, for cross-border workers, the canton of work.",
     simu: "Do you live in France and work in Switzerland?",
-    simuLien: "The cross-border calculator",
-    simuSuite: "sets these premiums against the French health insurance contribution for your situation.",
+    simuLien: "Open the cross-border calculator",
+    simuSuite: "The cross-border calculator sets these premiums against the French health insurance contribution for your situation.",
     autres: "If you live in Switzerland, see the",
     autresLien: "LAMal premium comparison",
     autresSuite: "by postcode.",
@@ -218,9 +225,7 @@ function TableauVoisins({ locale }: { locale: Locale }) {
         <TableHeader>
           <TableRow>
             <TableHead scope="col">{t.thPays}</TableHead>
-            <TableHead scope="col" className="text-right">{t.thNb}</TableHead>
-            <TableHead scope="col" className="text-right">{t.thMin}</TableHead>
-            <TableHead scope="col" className="text-right">{t.thMax}</TableHead>
+            <TableHead scope="col" className="text-right">{t.thPlage}</TableHead>
             <TableHead scope="col" className="text-right">{t.thMed}</TableHead>
           </TableRow>
         </TableHeader>
@@ -229,10 +234,11 @@ function TableauVoisins({ locale }: { locale: Locale }) {
             const s = adulteAvec(c);
             return (
               <TableRow key={c}>
-                <TableCell>{PAYS_UE[c][locale]}</TableCell>
-                <TableCell className="text-right tabular-nums">{s.n}</TableCell>
-                <TableCell className="text-right tabular-nums">{nf(s.min)}</TableCell>
-                <TableCell className="text-right tabular-nums">{nf(s.max)}</TableCell>
+                <TableCell>
+                  {PAYS_UE[c][locale]}
+                  <small className="block text-base text-muted-foreground">{t.nbAssureurs(s.n)}</small>
+                </TableCell>
+                <TableCell className="text-right tabular-nums">{t.plage(nf(s.min), `${nf(s.max)}${N}CHF`)}</TableCell>
                 <TableCell className="text-right tabular-nums">{nf(s.mediane)}</TableCell>
               </TableRow>
             );
@@ -256,7 +262,6 @@ function TableauFrance({ locale }: { locale: Locale }) {
         <TableHeader>
           <TableRow>
             <TableHead scope="col">{t.thAssureur}</TableHead>
-            <TableHead scope="col" className="text-right">{t.thNo}</TableHead>
             <TableHead scope="col" className="text-right">{t.thAvec}</TableHead>
             <TableHead scope="col" className="text-right">{t.thSans}</TableHead>
           </TableRow>
@@ -264,8 +269,10 @@ function TableauFrance({ locale }: { locale: Locale }) {
         <TableBody>
           {avec.map((o) => (
             <TableRow key={o.no}>
-              <TableCell>{o.nom}</TableCell>
-              <TableCell className="text-right tabular-nums">{String(o.no).padStart(4, "0")}</TableCell>
+              <TableCell>
+                {o.nom}
+                <small className="block text-base text-muted-foreground">{t.thNo} {String(o.no).padStart(4, "0")}</small>
+              </TableCell>
               <TableCell className="text-right tabular-nums">{nf(o.mensuel)}</TableCell>
               <TableCell className="text-right tabular-nums">{nf(sans.get(o.no)!)}</TableCell>
             </TableRow>
@@ -365,7 +372,10 @@ export function PagePrimesUe({ locale }: { locale: Locale }) {
 
           <h2 className="mt-10" id="france">{t.hTableauFrance}</h2>
           <div className="mt-3"><TableauFrance locale={locale} /></div>
-          <p className="mt-4">{t.simu} <a href={o.simulateur}>{t.simuLien}</a> {t.simuSuite}</p>
+          <div className="mt-4 grid justify-items-start gap-3">
+            <p className="m-0">{t.simu} {t.simuSuite}</p>
+            <a data-slot="button" className={buttonVariants({ variant: "outline" })} href={o.simulateur}>{t.simuLien}</a>
+          </div>
 
           <h2 className="mt-10">{t.hQui}</h2>
           {t.qui.map((p) => <p className="mt-3" key={p}>{p}</p>)}

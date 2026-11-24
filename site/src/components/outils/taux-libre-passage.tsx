@@ -1,11 +1,13 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { Locale } from "@/lib/i18n";
 import { suivre } from "@/lib/analytics";
-import { chf } from "@/lib/nombres";
+import { chf, nombre } from "@/lib/nombres";
 import { COMPTES_LP, RELEVE_LE, dateCh, interetAnnuel, lireSolde, tauxEn, tauxFr, trier, type CompteLp, type TriLp } from "@/lib/tauxlp";
 import { IconeTelephone, LienRappel } from "@/components/demande/lien-rappel";
+import { BarreDemande } from "@/components/demande/barre-demande";
+import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -22,7 +24,7 @@ const TXT = {
     ordreTaux: "Trié du taux le plus élevé au plus bas, puis par nom d’institution.",
     ordreNom: "Trié par nom d’institution, de A à Z.",
     soldeLabel: "Votre avoir de libre passage, en CHF (facultatif)",
-    soldePlaceholder: "150 000",
+    soldePlaceholder: "150 000",
     soldeAide: "Pour voir l’intérêt d’une année à chaque taux. Rien n’est envoyé ni enregistré.",
     caption: (d: string) => `Taux des comptes de libre passage, en % par an, relevés le ${d} sur les pages des institutions`,
     thInstitution: "Institution",
@@ -35,8 +37,8 @@ const TXT = {
       `Illustration pour un avoir de ${s} : intérêt simple sur une année entière, au taux affiché aujourd’hui. Les taux peuvent changer à tout moment, et l’intérêt réel dépend de la date de chaque mouvement.`,
     releve: (d: string) => `Taux relevé le ${d}`,
     depuis: (d: string) => `en vigueur depuis le ${d}`,
-    sourcePage: "page de l’institution",
-    sourcePdf: "fiche de taux (PDF)",
+    sourcePage: (b: string) => `Taux de ${b} sur son site`,
+    sourcePdf: (b: string) => `Fiche de taux de ${b} (PDF)`,
     rappelQ: "Une question sur votre libre passage ?",
     rappel: "Être rappelé",
     integrite:
@@ -64,8 +66,8 @@ const TXT = {
       `Illustration for a balance of ${s}: simple interest over a full year at the rate shown today. Rates can change at any time, and actual interest depends on the date of each movement.`,
     releve: (d: string) => `Rate read on ${d}`,
     depuis: (d: string) => `in force since ${d}`,
-    sourcePage: "institution’s page",
-    sourcePdf: "rate sheet (PDF)",
+    sourcePage: (b: string) => `${b} rate on its website`,
+    sourcePdf: (b: string) => `${b} rate sheet (PDF)`,
     rappelQ: "A question about your vested benefits?",
     rappel: "Request a call-back",
     integrite:
@@ -80,7 +82,25 @@ export function TauxLibrePassage({ locale = "fr" }: { locale?: Locale }) {
   const en = locale === "en";
   const taux = en ? tauxEn : tauxFr;
   const [tri, setTri] = useState<TriLp>("taux");
-  const [soldeTexte, setSoldeTexte] = useState("");
+  const [chiffres, setChiffres] = useState("");
+  const champSolde = useRef<HTMLInputElement>(null);
+  const chiffresAvantCurseur = useRef<number | null>(null);
+  const soldeTexte = chiffres;
+  const soldeAffiche = chiffres ? nombre(Number(chiffres), 0, locale) : "";
+  /* Après chaque mise en forme, le curseur revient après le même nombre de chiffres que dans la saisie. */
+  useLayoutEffect(() => {
+    const el = champSolde.current;
+    const n = chiffresAvantCurseur.current;
+    if (!el || n === null || document.activeElement !== el) return;
+    chiffresAvantCurseur.current = null;
+    let vus = 0;
+    let pos = 0;
+    while (pos < soldeAffiche.length && vus < n) {
+      if (/\d/.test(soldeAffiche[pos])) vus++;
+      pos++;
+    }
+    el.setSelectionRange(pos, pos);
+  }, [soldeAffiche]);
   const mesure = useRef(false);
   const utilise = () => {
     if (mesure.current) return;
@@ -93,7 +113,7 @@ export function TauxLibrePassage({ locale = "fr" }: { locale?: Locale }) {
   const avecSolde = Number.isFinite(solde) && solde > 0;
   const interet = (c: CompteLp) => chf(interetAnnuel(solde, c.taux), locale, 2);
   const note = (c: CompteLp) => (en ? c.note_en : c.note_fr);
-  const source = (c: CompteLp) => (c.source_type === "pdf" ? t.sourcePdf : t.sourcePage);
+  const source = (c: CompteLp) => (c.source_type === "pdf" ? t.sourcePdf(c.banque) : t.sourcePage(c.banque));
   const idSolde = "lp-solde";
 
   return (
@@ -125,11 +145,16 @@ export function TauxLibrePassage({ locale = "fr" }: { locale?: Locale }) {
             inputMode="numeric"
             autoComplete="off"
             placeholder={t.soldePlaceholder}
-            value={soldeTexte}
+            ref={champSolde}
+            value={soldeAffiche}
             aria-describedby="lp-solde-aide"
             onChange={(e) => {
-              setSoldeTexte(e.target.value);
-              if (e.target.value.trim()) utilise();
+              const brut = e.target.value;
+              const apres = brut.slice(0, e.target.selectionStart ?? brut.length).replace(/\D/g, "").length;
+              const c = brut.replace(/\D/g, "").replace(/^0+(?=\d)/, "").slice(0, 9);
+              chiffresAvantCurseur.current = Math.min(apres, c.length);
+              setChiffres(c);
+              if (c) utilise();
             }}
           />
           <span id="lp-solde-aide" className="aide">{t.soldeAide}</span>
@@ -155,9 +180,9 @@ export function TauxLibrePassage({ locale = "fr" }: { locale?: Locale }) {
               {note(c) ? <p className="cond">{note(c)}</p> : null}
               <p className="releve">
                 {t.releve(dateCh(c.lu_le))}
-                {c.taux_valable_des ? `, ${t.depuis(dateCh(c.taux_valable_des))}` : ""}.{" "}
-                <a href={c.url} rel="nofollow noopener" target="_blank">{source(c)}</a>
+                {c.taux_valable_des ? `, ${t.depuis(dateCh(c.taux_valable_des))}` : ""}.
               </p>
+              <a className="source-lp" href={c.url} rel="nofollow noopener" target="_blank">{source(c)}</a>
             </CardContent></Card>
           </li>
         ))}
@@ -186,20 +211,20 @@ export function TauxLibrePassage({ locale = "fr" }: { locale?: Locale }) {
               <TableCell className="releve align-top">
                 {dateCh(c.lu_le)}
                 {c.taux_valable_des ? <small>{t.depuis(dateCh(c.taux_valable_des))}</small> : null}
-                <a href={c.url} rel="nofollow noopener" target="_blank">{source(c)}</a>
+                <a className="source-lp" href={c.url} rel="nofollow noopener" target="_blank">{source(c)}</a>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
 
-      <p className="rappel-liste">
-        {t.rappelQ}{" "}
-        <LienRappel locale={locale} emplacement="libre_passage" sujet="prevoyance">
-          <IconeTelephone size={16} />
+      <div className="cta-demande rappel-liste">
+        <p>{t.rappelQ}</p>
+        <LienRappel locale={locale} emplacement="libre_passage" sujet="prevoyance" className={buttonVariants()} data-cta-lp="">
+          <IconeTelephone />
           {t.rappel}
         </LienRappel>
-      </p>
+      </div>
 
       <div className="integrite">
         <p>{t.titres}</p>
@@ -207,4 +232,25 @@ export function TauxLibrePassage({ locale = "fr" }: { locale?: Locale }) {
       </div>
     </section>
   );
+}
+
+/* Barre collante « Être rappelé » (mobile) : visible dès que le bouton du haut a quitté l'écran, pendant toute la
+   liste, et masquée tant qu'un bouton du même nom (marqué data-cta-lp) est à l'écran. */
+export function BarreRappelLp({ locale = "fr" }: { locale?: Locale }) {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const cibles = document.querySelectorAll("main [data-cta-lp]");
+    if (!cibles.length || typeof IntersectionObserver === "undefined") return;
+    const vus = new Set<Element>();
+    const io = new IntersectionObserver((entrees) => {
+      for (const e of entrees) {
+        if (e.isIntersecting) vus.add(e.target);
+        else vus.delete(e.target);
+      }
+      setVisible(vus.size === 0);
+    });
+    cibles.forEach((c) => io.observe(c));
+    return () => io.disconnect();
+  }, []);
+  return <BarreDemande locale={locale} rappelSujet="prevoyance" visible={visible} />;
 }

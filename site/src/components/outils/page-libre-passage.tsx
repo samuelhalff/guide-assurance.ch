@@ -3,8 +3,7 @@ import { SiteFooter } from "@/components/site/site-footer";
 import { Breadcrumbs } from "@/components/site/breadcrumbs";
 import { JsonLd } from "@/components/site/json-ld";
 import { PartagerOutil } from "@/components/site/partager-outil";
-import { TauxLibrePassage } from "@/components/outils/taux-libre-passage";
-import { BarreDemande } from "@/components/demande/barre-demande";
+import { BarreRappelLp, TauxLibrePassage } from "@/components/outils/taux-libre-passage";
 import { IconeTelephone, LienRappel } from "@/components/demande/lien-rappel";
 import { buttonVariants } from "@/components/ui/button";
 import { COMPTES_LP, NB_INSTITUTIONS, RELEVE_LE, TAUX_MAX, TAUX_MEDIAN, TAUX_MIN, dateCh, tauxEn, tauxFr } from "@/lib/tauxlp";
@@ -309,7 +308,7 @@ export function PageLibrePassage({ locale }: { locale: Locale }) {
           <p className="intro">{t.intro}</p>
           <div className="cta-haut-lp">
             <div className="cta-demande">
-              <LienRappel locale={locale} emplacement="libre_passage" sujet="prevoyance" className={buttonVariants()}>
+              <LienRappel locale={locale} emplacement="libre_passage" sujet="prevoyance" className={buttonVariants()} data-cta-lp="">
                 <IconeTelephone />
                 {t.rappel}
               </LienRappel>
@@ -343,7 +342,7 @@ export function PageLibrePassage({ locale }: { locale: Locale }) {
           </p>
           <div className="cta-bas-lp">
             <div className="cta-demande">
-              <LienRappel locale={locale} emplacement="libre_passage" sujet="prevoyance" className={buttonVariants()}>
+              <LienRappel locale={locale} emplacement="libre_passage" sujet="prevoyance" className={buttonVariants()} data-cta-lp="">
                 <IconeTelephone />
                 {t.rappel}
               </LienRappel>
@@ -367,7 +366,7 @@ export function PageLibrePassage({ locale }: { locale: Locale }) {
           <p className="maj">{t.maj}</p>
         </div>
       </main>
-      <BarreDemande locale={locale} rappelSujet="prevoyance" />
+      <BarreRappelLp locale={locale} />
       <SiteFooter note={t.footer} locale={locale} altPath={t.alt} />
     </div>
   );

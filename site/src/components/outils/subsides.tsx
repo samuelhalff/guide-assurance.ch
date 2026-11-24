@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import * as S from "@/lib/engines/subsides";
-import { DEMARCHE, LIMITES_OUTIL, NOMS, REVENU, primesOfsp } from "@/lib/subsides";
+import { DEMARCHE, LIMITES_OUTIL, NOMS, REVENU, TRANSPARENCE_VD, primesOfsp } from "@/lib/subsides";
 import { suivre } from "@/lib/analytics";
 import { lienDemande } from "@/lib/demande";
 import { OUTILS, OUTILS_EN } from "@/lib/nav";
@@ -10,11 +10,12 @@ import { BarreOffres, CtaOffres } from "@/components/outils/cta-offres";
 import { Choix } from "@/components/outils/choix";
 import { Depliable, Interrupteur } from "@/components/controles";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Alert } from "@/components/ui/alert";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { cn } from "cn";
 import { nombre, ESPACE_FINE as N } from "@/lib/nombres";
 
 /* Estimation du subside d'assurance maladie 2027. Tout se calcule dans le navigateur ; rien de ce qui est saisi (revenu,
@@ -36,24 +37,27 @@ const TXT = {
     primeJeune: "Prime d’un jeune adulte",
     primeEnfant: "Prime d’un enfant",
     resultat: "Votre estimation",
+    lieu: { GE: "à Genève", VD: "dans le canton de Vaud", FR: "à Fribourg", VS: "en Valais", NE: "à Neuchâtel", JU: "dans le Jura" } as Record<S.Canton, string>,
+    ligneSubside: (s: string) => `Votre subside estimé est de ${s} CHF par mois.`,
+    detail: "Voir le détail",
     attente: "Saisissez le revenu déterminant pour voir le subside.",
     mois: "par mois",
     subside: "Subside estimé pour le ménage",
-    apres: "Prime du ménage après subside",
+    apres: (p: string) => `Après subside, la prime du ménage est de ${p} CHF par mois.`,
     aucun: "Avec ce revenu, le barème 2027 ne prévoit pas de subside pour ce ménage.",
     limite: (l: number) => `Le droit s’arrête à un revenu déterminant d’environ ${nombre(l, 0, "fr")} francs pour ce ménage.`,
-    cat: "Personne",
+    cat: "Personnes",
     nb: "Nombre",
     sub: "Subside",
     prime: "Prime",
     net: "Après subside",
-    adulte: "Adulte",
-    jeune: "Jeune adulte",
-    enfant: "Enfant",
-    groupe: (g: string) => `Barème 2027 : ${g.startsWith("S") ? "classification" : "groupe"} ${g}.`,
+    adulte: (n: number) => (n > 1 ? `${n} adultes` : `${n} adulte`),
+    jeune: (n: number) => (n > 1 ? `${n} jeunes adultes` : `${n} jeune adulte`),
+    enfant: (n: number) => (n > 1 ? `${n} enfants` : `${n} enfant`),
+    groupe: (g: string) => `Le barème 2027 range ce ménage dans ${g.startsWith("S") ? "la classification" : "le groupe"} ${g}.`,
     vd: (o: string, s: string) => `Dont ${o} francs de subside ordinaire et ${s} francs de subside spécifique, calculé parce que les primes dépassent 10${N}% du revenu.`,
-    base: (n: string) => `Prime : ${n}.`,
-    baseOfsp: "prime moyenne cantonale 2027 de l’OFSP",
+    base: (n: string) => `Le calcul retient ${n}.`,
+    baseOfsp: "la prime moyenne cantonale 2027 de l’OFSP",
     baseSaisie: "les primes que vous avez indiquées",
     alerte: "Estimation indicative : seule la décision de l’office cantonal fait foi. Rien de ce que vous saisissez n’est envoyé.",
     comment: "Comment l’obtenir",
@@ -76,7 +80,6 @@ const TXT = {
     } as Record<string, [string, string][]>,
     ctaCanton: "Recevoir des offres",
     pasEnvoye: "Aucune de ces valeurs n’est transmise.",
-    subsideMois: (s: string) => `Subside estimé : ${s} CHF par mois`,
   },
   en: {
     canton: "Canton of residence",
@@ -94,24 +97,27 @@ const TXT = {
     primeJeune: "Premium of one young adult",
     primeEnfant: "Premium of one child",
     resultat: "Your estimate",
+    lieu: { GE: "for Geneva", VD: "for Vaud", FR: "for Fribourg", VS: "for Valais", NE: "for Neuchâtel", JU: "for Jura" } as Record<S.Canton, string>,
+    ligneSubside: (s: string) => `Your estimated subsidy is CHF ${s} per month.`,
+    detail: "See the details",
     attente: "Enter the determining income to see the subsidy.",
     mois: "per month",
     subside: "Estimated subsidy for the household",
-    apres: "Household premium after subsidy",
+    apres: (p: string) => `After the subsidy, the household premium is CHF ${p} per month.`,
     aucun: "With this income, the 2027 scale does not provide a subsidy for this household.",
     limite: (l: number) => `Entitlement stops at a determining income of about CHF ${nombre(l, 0, "en")} for this household.`,
-    cat: "Person",
+    cat: "People",
     nb: "Number",
     sub: "Subsidy",
     prime: "Premium",
     net: "After subsidy",
-    adulte: "Adult",
-    jeune: "Young adult",
-    enfant: "Child",
-    groupe: (g: string) => `2027 scale: ${g.startsWith("S") ? "classification" : "group"} ${g}.`,
+    adulte: (n: number) => (n > 1 ? `${n} adults` : `${n} adult`),
+    jeune: (n: number) => (n > 1 ? `${n} young adults` : `${n} young adult`),
+    enfant: (n: number) => (n > 1 ? `${n} children` : `${n} child`),
+    groupe: (g: string) => `The 2027 scale places this household in ${g.startsWith("S") ? "classification" : "group"} ${g}.`,
     vd: (o: string, s: string) => `Of which CHF ${o} ordinary subsidy and CHF ${s} specific subsidy, which applies because premiums exceed 10% of income.`,
-    base: (n: string) => `Premium: ${n}.`,
-    baseOfsp: "2027 average cantonal premium from the FOPH",
+    base: (n: string) => `The calculation uses ${n}.`,
+    baseOfsp: "the 2027 average cantonal premium from the FOPH",
     baseSaisie: "the premiums you entered",
     alerte: "Indicative estimate: only the cantonal office’s decision is binding. Nothing you enter is sent anywhere.",
     comment: "How to get it",
@@ -134,7 +140,6 @@ const TXT = {
     } as Record<string, [string, string][]>,
     ctaCanton: "Get quotes",
     pasEnvoye: "None of these values is sent.",
-    subsideMois: (s: string) => `Estimated subsidy: CHF ${s} per month`,
   },
 } as const;
 
@@ -194,10 +199,11 @@ export function Subsides({ locale }: { locale: Locale }) {
   const limite = calculable ? S.limiteMaximale(canton, menage) : null;
   const href = lienDemande(locale, "sante");
   const comparateur = locale === "fr" ? OUTILS.comparateur : OUTILS_EN.comparateur;
-  const nom = NOMS[canton][locale];
   const info = S.DONNEES.cantons[canton];
   const cats = { adulte: t.adulte, jeuneAdulte: t.jeune, enfant: t.enfant };
+  const vd = canton === "VD";
 
+  const ctaPresent = calculable && r != null;
   /* Barre collante (mobile) : visible quand aucun bouton « Recevoir des offres » de la page n'est à l'écran. */
   useEffect(() => {
     const els = Array.from(document.querySelectorAll("[data-cta-subsides]"));
@@ -212,7 +218,7 @@ export function Subsides({ locale }: { locale: Locale }) {
     });
     els.forEach((e) => io.observe(e));
     return () => io.disconnect();
-  }, [r?.calcule]);
+  }, [ctaPresent]);
 
   const cantons = S.CANTONS.map((c) => ({ value: c, label: NOMS[c][locale] }));
   const regions = (t.regions[canton] ?? []).map(([value, label]) => ({ value: value as S.Region, label }));
@@ -264,6 +270,12 @@ export function Subsides({ locale }: { locale: Locale }) {
                     <legend><label htmlFor="s-revenu">{REVENU[canton].nom[locale]}</label></legend>
                     <Input id="s-revenu" inputMode="numeric" autoComplete="off" placeholder="45 000" value={revenu} onChange={(ev) => { setRevenu(ev.target.value); toucher(); }} aria-describedby="s-revenu-aide" />
                     <p className="note-outil" id="s-revenu-aide">{t.revenuNote} {REVENU[canton].aide[locale]}</p>
+                    {r ? (
+                      <div className="s-ligne">
+                        <p>{!r.calcule ? t.horsPerimetre[r.raison] : r.droit ? t.ligneSubside(f(r.subsideMensuel)) : t.aucun}</p>
+                        <a data-slot="button" className={cn(buttonVariants({ variant: "outline" }), "justify-center")} href="#s-resultat">{t.detail}</a>
+                      </div>
+                    ) : null}
                   </fieldset>
                   <Depliable className="affiner" titre={t.primes}>
                     <p className="note-outil">{t.primesTexte}</p>
@@ -295,13 +307,12 @@ export function Subsides({ locale }: { locale: Locale }) {
         </form>
 
         <div className="apercu resultat-subsides">
-          <Card className="subsides-resultat">
+          {calculable ? (
+          <Card className="subsides-resultat" id="s-resultat">
             <CardContent>
-              <h2>{t.resultat}{locale === "fr" ? N : ""}: {nom}</h2>
+              <h2>{t.resultat} {t.lieu[canton]}</h2>
               <div aria-live="polite">
-                {!calculable ? (
-                  <p className="base">{t.infoVS}</p>
-                ) : !r ? (
+                {!r ? (
                   <p className="base">{t.attente}</p>
                 ) : !r.calcule ? (
                   <p className="base">{t.horsPerimetre[r.raison]}</p>
@@ -309,7 +320,7 @@ export function Subsides({ locale }: { locale: Locale }) {
                   <>
                     <p className="base">{t.subside}</p>
                     <p className="montant">{f(r.subsideMensuel)} <small>CHF {t.mois}</small></p>
-                    <p className="base">{t.apres}{locale === "fr" ? N : ""}: {f(r.primeNetteMensuelle, 2)} CHF {t.mois}</p>
+                    <p className="base">{t.apres(f(r.primeNetteMensuelle, 2))}</p>
                   </>
                 ) : (
                   <p className="base">{t.aucun}{limite ? ` ${t.limite(limite)}` : ""}</p>
@@ -318,7 +329,7 @@ export function Subsides({ locale }: { locale: Locale }) {
               {r && r.calcule ? (
                 <>
                   {r.droit ? (
-                    <Table variant="chiffres" className="detail-3a">
+                    <Table variant="chiffres" className="tableau-empile">
                       <TableCaption className="visually-hidden">{t.resultat}</TableCaption>
                       <TableHeader>
                         <TableRow>
@@ -331,10 +342,10 @@ export function Subsides({ locale }: { locale: Locale }) {
                       <TableBody>
                         {r.lignes.map((l) => (
                           <TableRow key={l.categorie}>
-                            <TableHead scope="row">{cats[l.categorie]} × {l.nombre}</TableHead>
-                            <TableCell>{f(l.subside, l.subside % 1 ? 2 : 0)}</TableCell>
-                            <TableCell>{f(l.prime, 2)}</TableCell>
-                            <TableCell>{f(l.primeNette, 2)}</TableCell>
+                            <TableHead scope="row">{cats[l.categorie](l.nombre)}</TableHead>
+                            <TableCell data-label={t.sub}>{f(l.subside, l.subside % 1 ? 2 : 0)}</TableCell>
+                            <TableCell data-label={t.prime}>{f(l.prime, 2)}</TableCell>
+                            <TableCell data-label={t.net}>{f(l.primeNette, 2)}</TableCell>
                           </TableRow>
                         ))}
                       </TableBody>
@@ -343,15 +354,17 @@ export function Subsides({ locale }: { locale: Locale }) {
                   {r.droit && r.groupe ? <p className="base">{t.groupe(r.groupe)}</p> : null}
                   {r.droit && r.vd && r.vd.specifique > 0 ? <p className="base">{t.vd(f(r.vd.ordinaire), f(r.vd.specifique))}</p> : null}
                   <p className="base">{t.base(saisie ? t.baseSaisie : t.baseOfsp)}</p>
+                  {vd ? <p className="base">{TRANSPARENCE_VD[locale]}</p> : null}
                 </>
               ) : null}
-              {calculable && r ? (
+              {r ? (
                 <div data-cta-subsides>
                   <CtaOffres locale={locale} href={href} pleine />
                 </div>
               ) : null}
             </CardContent>
           </Card>
+          ) : null}
 
           {calculable && r && r.calcule ? <Alert>{t.alerte}</Alert> : null}
 
@@ -359,7 +372,7 @@ export function Subsides({ locale }: { locale: Locale }) {
             <CardContent>
               <h3 className="font-bold">{t.comment}</h3>
               <p className="note-outil">{DEMARCHE[canton][locale]}</p>
-              <p className="note-outil"><a href={info.autorite.url} rel="noopener">{info.autorite.nom}</a></p>
+              <p className="note-outil"><a className="lien-tap" href={info.autorite.url} rel="noopener">{info.autorite.nom}</a></p>
               {calculable ? <p className="note-outil">{LIMITES_OUTIL[canton][locale]}</p> : null}
             </CardContent>
           </Card>

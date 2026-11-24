@@ -8,6 +8,7 @@ import { ecartMin, offres, stats, trier, type Classe, type OffreUe, type Tri } f
 import { chf, nombre } from "@/lib/nombres";
 import { BarreOffres, CtaOffres } from "@/components/outils/cta-offres";
 import { Choix } from "@/components/outils/choix";
+import { buttonVariants } from "@/components/ui/button";
 import { Case } from "@/components/controles";
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -31,8 +32,8 @@ const TXT = {
     mois: "Mois",
     an: "An",
     trier: "Trier",
-    tris: { prix: "Prime, de la plus basse à la plus haute", nom: "Nom de l’assureur, de A à Z" } as Record<Tri, string>,
-    ordre: { prix: "Les assureurs sont triés de la prime la plus basse à la plus haute.", nom: "Les assureurs sont triés par ordre alphabétique." } as Record<Tri, string>,
+    tris: { prix: "Prime croissante", prixDesc: "Prime décroissante", nom: "Assureur de A à Z" } as Record<Tri, string>,
+    ordre: { prix: "Les assureurs sont triés de la prime la plus basse à la plus haute.", prixDesc: "Les assureurs sont triés de la prime la plus haute à la plus basse.", nom: "Les assureurs sont triés par ordre alphabétique." } as Record<Tri, string>,
     resumeDe: (n: number, pays: string, classe: string, acc: boolean, min: string, max: string, u: string) =>
       `${n} assureur${n > 1 ? "s" : ""} proposent l’assurance de base aux personnes qui résident ${pays} (${classe}, ${acc ? "avec" : "sans"} couverture accident). Les primes vont de ${min} à ${max} ${u}.`,
     thAssureur: "Assureur",
@@ -40,16 +41,16 @@ const TXT = {
     thEcart: "Écart avec la prime la plus basse",
     parMois: "par mois",
     parAn: "par an",
-    ecartLigne: (x: string, u: string) => `${x} ${u} de plus que la prime la plus basse de la liste`,
-    memePrime: "C’est la prime la plus basse de la liste.",
+    ecartLigne: (x: string, u: string) => `${x} de plus ${u} que la prime la plus basse de cette liste`,
+    aucunEcart: "Aucun écart",
     caption: (pays: string) => `Primes 2027 de l’assurance de base pour les assurés résidant ${pays}, en francs`,
     troisieme: (x: string) => `Dès le troisième enfant : ${x} par mois`,
     franchise: "Franchise de 300 francs pour les adultes et les jeunes adultes, sans franchise pour les enfants : c’est la seule possible pour les assurés qui résident dans l’UE, l’AELE ou au Royaume-Uni. Le modèle est l’assurance de base standard, sans médecin de famille ni modèle alternatif.",
     source: "Source : OFSP, primes 2027 des assurés résidant dans l’UE, en Islande, en Norvège ou au Royaume-Uni (fichier Prämien_EU), publiées sur priminfo.admin.ch, lues le 24 novembre 2026. Les assureurs ne proposant pas l’assurance dans ce pays n’apparaissent pas.",
     integrite: "Aucun assureur ne paie pour figurer dans cette liste ni pour sa place. Les prestations de base sont les mêmes chez tous les assureurs.",
     simulateur: "Vous vivez en France et travaillez en Suisse ?",
-    simulateurLien: "Le simulateur frontalier",
-    simulateurSuite: "compare ces primes à la cotisation de l’assurance maladie française.",
+    simulateurSuite: "Le simulateur frontalier compare ces primes à la cotisation de l’assurance maladie française.",
+    simulateurLien: "Ouvrir le simulateur frontalier",
     pasDe: "Aucun assureur de la liste",
   },
   en: {
@@ -65,8 +66,8 @@ const TXT = {
     mois: "Month",
     an: "Year",
     trier: "Sort",
-    tris: { prix: "Premium, lowest to highest", nom: "Insurer name, A to Z" } as Record<Tri, string>,
-    ordre: { prix: "Insurers are sorted from the lowest premium to the highest.", nom: "Insurers are sorted alphabetically." } as Record<Tri, string>,
+    tris: { prix: "Premium ascending", prixDesc: "Premium descending", nom: "Insurer A to Z" } as Record<Tri, string>,
+    ordre: { prix: "Insurers are sorted from the lowest premium to the highest.", prixDesc: "Insurers are sorted from the highest premium to the lowest.", nom: "Insurers are sorted alphabetically." } as Record<Tri, string>,
     resumeDe: (n: number, pays: string, classe: string, acc: boolean, min: string, max: string, u: string) =>
       `${n} insurer${n > 1 ? "s" : ""} offer basic insurance to people living in ${pays} (${classe}, ${acc ? "with" : "without"} accident cover). Premiums range from ${min} to ${max} ${u}.`,
     thAssureur: "Insurer",
@@ -74,16 +75,16 @@ const TXT = {
     thEcart: "Difference from the lowest premium",
     parMois: "per month",
     parAn: "per year",
-    ecartLigne: (x: string, u: string) => `${x} ${u} more than the lowest premium in the list`,
-    memePrime: "This is the lowest premium in the list.",
+    ecartLigne: (x: string, u: string) => `${x} more ${u} than the lowest premium in this list`,
+    aucunEcart: "No difference",
     caption: (pays: string) => `2027 basic insurance premiums for people living in ${pays}, in Swiss francs`,
     troisieme: (x: string) => `From the third child: ${x} per month`,
     franchise: "A CHF 300 deductible for adults and young adults and none for children: it is the only one available to people living in the EU, EFTA or the UK. The model is standard basic insurance, with no family-doctor or other alternative model.",
     source: "Source: FOPH, 2027 premiums for people living in the EU, Iceland, Norway or the United Kingdom (Prämien_EU file), published on priminfo.admin.ch, read on 24 November 2026. Insurers that do not offer cover in this country are not listed.",
     integrite: "No insurer pays to be listed or for its place in the list. Basic benefits are the same at every insurer.",
     simulateur: "Do you live in France and work in Switzerland?",
-    simulateurLien: "The cross-border calculator",
-    simulateurSuite: "sets these premiums against the French health insurance contribution.",
+    simulateurSuite: "The cross-border calculator sets these premiums against the French health insurance contribution.",
+    simulateurLien: "Open the cross-border calculator",
     pasDe: "No insurer in the list",
   },
 };
@@ -144,7 +145,7 @@ export function PrimesUe({ locale = "fr" }: { locale?: Locale }) {
   const classeTxt = t.classesCourt[classe];
   const ligneEcart = (o: OffreUe) => {
     const e = prix(ecartMin(liste, o));
-    return e === 0 ? t.memePrime : t.ecartLigne(`+${mc(e)}`, unite);
+    return e === 0 ? null : t.ecartLigne(mc(e), unite);
   };
 
   const carte = (o: OffreUe) => (
@@ -158,7 +159,7 @@ export function PrimesUe({ locale = "fr" }: { locale?: Locale }) {
             </span>
           </div>
           <p className="m-0 text-base text-muted-foreground">{unite}</p>
-          <p className="m-0 text-base text-muted-foreground">{ligneEcart(o)}</p>
+          {ligneEcart(o) ? <p className="m-0 text-base text-muted-foreground">{ligneEcart(o)}</p> : null}
           {o.troisiemeEnfant !== null ? <p className="m-0 text-base text-muted-foreground">{t.troisieme(mc(o.troisiemeEnfant))}</p> : null}
         </CardContent>
       </Card>
@@ -201,7 +202,7 @@ export function PrimesUe({ locale = "fr" }: { locale?: Locale }) {
             <div className="grid gap-4 min-[720px]:grid-cols-2">
               <div className="champ">
                 <label htmlFor="pu-tri">{t.trier}</label>
-                <Choix id="pu-tri" value={tri} onChange={setTri} options={(["prix", "nom"] as Tri[]).map((x) => ({ value: x, label: t.tris[x] }))} />
+                <Choix id="pu-tri" value={tri} onChange={setTri} options={(["prix", "prixDesc", "nom"] as Tri[]).map((x) => ({ value: x, label: t.tris[x] }))} />
               </div>
               <div className="champ">
                 <span id="pu-periode-l" className="font-semibold">{t.affichage}</span>
@@ -250,7 +251,7 @@ export function PrimesUe({ locale = "fr" }: { locale?: Locale }) {
                             {o.troisiemeEnfant !== null ? <small className="block text-muted-foreground">{t.troisieme(mc(o.troisiemeEnfant))}</small> : null}
                           </TableCell>
                           <TableCell className="text-right tabular-nums">{nf(prix(o.mensuel))}</TableCell>
-                          <TableCell className="text-right tabular-nums">{e === 0 ? "0" : `+${nf(e)}`}</TableCell>
+                          <TableCell className="text-right tabular-nums">{e === 0 ? <><span aria-hidden="true">–</span><span className="visually-hidden">{t.aucunEcart}</span></> : `+${nf(e)}`}</TableCell>
                         </TableRow>
                       );
                     })}
@@ -268,7 +269,10 @@ export function PrimesUe({ locale = "fr" }: { locale?: Locale }) {
           <p>{t.source}</p>
           <p><b>{t.integrite}</b></p>
         </div>
-        <p className="rappel-liste">{t.simulateur} <a href={fr ? "/simulateur-frontalier/" : "/en/cross-border-calculator/"}>{t.simulateurLien}</a> {t.simulateurSuite}</p>
+        <div className="mt-6 grid justify-items-start gap-3">
+          <p className="m-0">{t.simulateur} {t.simulateurSuite}</p>
+          <a data-slot="button" className={buttonVariants({ variant: "outline" })} href={fr ? "/simulateur-frontalier/" : "/en/cross-border-calculator/"}>{t.simulateurLien}</a>
+        </div>
       </div>
 
       <BarreOffres locale={locale} href={href} visible={!ctaVisible} />
