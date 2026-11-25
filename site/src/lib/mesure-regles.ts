@@ -156,6 +156,33 @@ export function proprietesConversion<P extends Record<string, string | number | 
   return { ...attribution, ...(props ?? {}) };
 }
 
+/* File d'attente laissée à la page suivante (sessionStorage, voir lib/analytics.ts) : événements que PostHog, pas encore
+   chargé, n'a pas pu envoyer avant le départ. Lecture : seules des paires [nom, propriétés] passent, 20 au plus. */
+export const CLE_FILE = "ga-file-attente";
+export const FILE_MAX = 20;
+type PropsFile = Record<string, string | number | boolean>;
+export function fileLue(brut: string | null): [string, PropsFile | undefined][] {
+  if (!brut) return [];
+  try {
+    const v = JSON.parse(brut) as unknown;
+    if (!Array.isArray(v)) return [];
+    return v
+      .filter((x): x is [string, unknown] => Array.isArray(x) && typeof x[0] === "string")
+      .map(([e, p]) => [e, p && typeof p === "object" && !Array.isArray(p) ? (p as PropsFile) : undefined] as [string, PropsFile | undefined])
+      .slice(-FILE_MAX);
+  } catch {
+    return [];
+  }
+}
+/* Contenu à écrire au départ de la page : null efface la file (refus enregistré ou appareil interne : rien ne doit être
+   rejoué plus tard, même après une acceptation ou la levée de la marque). Sinon, la file déjà gardée par une page
+   précédente (PostHog n'a pas démarré entre-temps) est complétée, jamais écrasée, puis tronquée aux 20 derniers. */
+export function fileAGarder(existant: string | null, nouveaux: readonly [string, PropsFile | undefined][], choix: Choix, interne: boolean): string | null {
+  if (choix === "non" || interne) return null;
+  const tout = [...fileLue(existant), ...nouveaux].slice(-FILE_MAX);
+  return tout.length ? JSON.stringify(tout) : null;
+}
+
 /* Fichiers téléchargeables suivis (file_download). */
 export function extensionTelechargement(href: string): string | null {
   const m = /\.(pdf|csv|ics|xlsx?|zip|json)(?:[?#]|$)/i.exec(href);

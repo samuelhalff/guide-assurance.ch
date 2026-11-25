@@ -6,7 +6,7 @@
    Jamais de valeur saisie, jamais de contenu de l'assistant, jamais d'enregistrement sur le formulaire de demande. */
 import { apresChargement, chargerApresAffichage } from "@/lib/charge-differee";
 export { apresChargement };
-import { ACCORDE, CLE_INTERNE, REFUSE, attributionDepuis, attributionLue, persistantParDefaut, proprietesConversion, replayAutorise, scriptAmorce, type Choix } from "@/lib/mesure-regles";
+import { ACCORDE, CLE_FILE, CLE_INTERNE, REFUSE, attributionDepuis, fileAGarder, fileLue, attributionLue, persistantParDefaut, proprietesConversion, replayAutorise, scriptAmorce, type Choix } from "@/lib/mesure-regles";
 export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID ?? "";
 export const POSTHOG_TOKEN = process.env.NEXT_PUBLIC_POSTHOG_TOKEN ?? "";
 export const POSTHOG_HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://eu.i.posthog.com";
@@ -102,19 +102,24 @@ type W = { dataLayer?: unknown[]; gtag?: (...a: unknown[]) => void };
 let ph: PH | null = null;
 const file: [Evenement, Props | undefined][] = [];
 /* Événements encore dans la file quand la page est quittée (PostHog, chargé après l'affichage, n'était pas prêt : appui
-   sur un bouton d'appel dans la première seconde, par exemple) : gardés dans sessionStorage et envoyés par PostHog
-   dès qu'il démarre sur la page suivante. Jamais après un refus ; aucune valeur saisie dans ces événements. */
-const CLE_FILE = "ga-file-attente";
+   sur un bouton d'appel dans la première seconde, par exemple) : transférés dans sessionStorage (la page ne garde pas de
+   copie : une page restaurée par le cache arrière/avant ne les renvoie pas une seconde fois), ajoutés à ceux qu'une page
+   précédente y a laissés, et envoyés par PostHog dès qu'il démarre sur la page suivante. Jamais après un refus ni sur un
+   appareil interne : la file est alors effacée. Aucune valeur saisie dans ces événements. */
 let gardeFile = false;
 function garderFile() {
   if (gardeFile || typeof window === "undefined") return;
   gardeFile = true;
   window.addEventListener("pagehide", () => {
-    if (!file.length || lireChoix() === "non") return;
+    if (!file.length) return;
     try {
-      sessionStorage.setItem(CLE_FILE, JSON.stringify(file.slice(-20)));
+      const garde = fileAGarder(sessionStorage.getItem(CLE_FILE), file, lireChoix(), appareilInterne());
+      if (garde) {
+        sessionStorage.setItem(CLE_FILE, garde);
+        file.length = 0;
+      } else sessionStorage.removeItem(CLE_FILE);
     } catch {
-      /* stockage refusé : ces événements sont perdus */
+      /* stockage refusé : ces événements restent sur cette page */
     }
   });
 }
@@ -123,10 +128,17 @@ function reprendreFile() {
     const brut = sessionStorage.getItem(CLE_FILE);
     if (!brut) return;
     sessionStorage.removeItem(CLE_FILE);
-    const v = JSON.parse(brut) as unknown;
-    if (Array.isArray(v)) for (const x of v.slice(-20)) if (Array.isArray(x) && typeof x[0] === "string") file.unshift([x[0] as Evenement, x[1] && typeof x[1] === "object" ? (x[1] as Props) : undefined]);
+    file.unshift(...(fileLue(brut) as [Evenement, Props | undefined][]));
   } catch {
     /* contenu illisible : ignoré */
+  }
+}
+function oublierFile() {
+  file.length = 0;
+  try {
+    sessionStorage.removeItem(CLE_FILE);
+  } catch {
+    /* rien à effacer */
   }
 }
 /* Faux sur le formulaire de demande (mise en page (demande), sans GTM) : rien ne part vers le dataLayer. */
@@ -141,7 +153,8 @@ export function suivre(e: Evenement, p0?: Props, avantDepart = false) {
   if (avantDepart) memoriserIdentite();
   /* avantDepart : la page va changer, l'événement part tout de suite par sendBeacon. */
   if (ph) ph.capture(e, p, avantDepart ? { transport: "sendBeacon", send_instantly: true } : undefined);
-  else if (POSTHOG_TOKEN) {
+  /* Appareil interne : PostHog ne démarre pas, rien n'est mis en attente (rien à rejouer après la levée de la marque). */
+  else if (POSTHOG_TOKEN && !appareilInterne()) {
     file.push([e, p]);
     garderFile();
   }
@@ -300,6 +313,9 @@ export function ecrireChoix(c: "oui" | "non") {
   (window as unknown as W).gtag?.("consent", "update", c === "oui" ? ACCORDE : REFUSE);
   if (c === "non") {
     oublierAttribution();
+    /* Événements en attente (page en cours ou laissés par une page précédente) : ils portent l'attribution d'avant le
+       refus ; effacés, jamais envoyés, même après une acceptation ultérieure. */
+    oublierFile();
     for (const k of ["canal", "ai_source"]) ph?.unregister_for_session(k);
   } else memoriserAttribution();
 }
@@ -316,7 +332,10 @@ export function appareilInterne(): boolean {
     const q = new URLSearchParams(window.location.search).get("interne");
     if (q === "1") localStorage.setItem(CLE_INTERNE, "1");
     else if (q === "0") localStorage.removeItem(CLE_INTERNE);
-    return localStorage.getItem(CLE_INTERNE) === "1";
+    const interne = localStorage.getItem(CLE_INTERNE) === "1";
+    /* Appareil marqué (ici ou dans un autre onglet) : événements en attente effacés, pour qu'ils ne partent pas après ?interne=0. */
+    if (interne) oublierFile();
+    return interne;
   } catch {
     return false;
   }

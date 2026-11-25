@@ -116,5 +116,21 @@ eq('attributionLue sans canal', M.attributionLue(JSON.stringify({ page_arrivee: 
   eq('sans attribution (refus) : inchangé', M.proprietesConversion('demande_envoyee', { porte: 'lamal' }, {}), { porte: 'lamal' });
 }
 
+
+/* File d'attente laissée à la page suivante (lib/analytics.ts) */
+{
+  const a: [string, Record<string, string> | undefined] = ['rappel_ouvert', { emplacement: 'tete' }];
+  const b: [string, Record<string, string> | undefined] = ['faq_ouverte', undefined];
+  const gardeA = M.fileAGarder(null, [a], null, false);
+  eq('file : gardée sans choix', M.fileLue(gardeA), [a]);
+  eq('file : deux départs rapides, la seconde page complète la file sans l’écraser', M.fileLue(M.fileAGarder(gardeA, [b], 'oui', false)), [a, b]);
+  eq('file : refus, effacée (rien rejoué après une acceptation)', M.fileAGarder(gardeA, [b], 'non', false), null);
+  eq('file : appareil interne, effacée (rien rejoué après ?interne=0)', M.fileAGarder(gardeA, [b], null, true), null);
+  eq('file : 20 derniers au plus', M.fileLue(M.fileAGarder(JSON.stringify(Array.from({ length: 15 }, () => a)), Array.from({ length: 10 }, () => b), null, false)).length, 20);
+  eq('file : contenu illisible ignoré', M.fileLue('{'), []);
+  eq('file : seules les paires [nom, propriétés] passent', M.fileLue(JSON.stringify([['x', { k: 1 }], [3, {}], 'y', ['z', [1]]])), [['x', { k: 1 }], ['z', undefined]]);
+  eq('file : rien à garder, rien d’écrit', M.fileAGarder(null, [], null, false), null);
+}
+
 console.log(ko ? `${ko}/${n} échecs` : `mesure : ${n} vérifications OK`);
 if (ko) process.exit(1);

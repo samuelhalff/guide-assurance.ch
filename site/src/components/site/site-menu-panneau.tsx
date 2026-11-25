@@ -1,4 +1,5 @@
 "use client";
+import type { RefObject } from "react";
 import { buttonVariants } from "@/components/ui/button";
 import { Sheet, SheetClose, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { ThemeToggle } from "@/components/site/theme-toggle";
@@ -6,14 +7,16 @@ import { nav, type Rubrique } from "@/lib/nav";
 import { DICT, type Locale } from "@/lib/i18n";
 
 /* Panneau latéral du menu mobile (≤ 820 px), 340 px au plus : chargé après l'affichage de la page par site-menu.tsx
-   (voir là). Base UI Dialog piège le focus, Échap ferme et rend le focus au bouton Menu. */
-export function SiteMenuPanneau({ current, locale = "fr", ouvert, onOuvert }: { current?: Rubrique; locale?: Locale; ouvert: boolean; onOuvert: (o: boolean) => void }) {
+   (voir là). Base UI Dialog piège le focus, Échap ferme ; le focus revient au bouton Menu (finalFocus, le bouton n'étant pas un
+   SheetTrigger). */
+export function SiteMenuPanneau({ current, locale = "fr", ouvert, onOuvert, retour }: { current?: Rubrique; locale?: Locale; ouvert: boolean; onOuvert: (o: boolean) => void; retour: RefObject<HTMLButtonElement | null> }) {
   const t = DICT[locale];
   return (
     <Sheet open={ouvert} onOpenChange={onOuvert}>
       <SheetContent
         side="right"
         showCloseButton={false}
+        finalFocus={retour}
         className="menu-panneau w-full gap-0 border-l border-filet bg-papier px-4 pt-2 pb-4 text-encre data-[side=right]:w-full data-[side=right]:max-w-[340px] data-[side=right]:sm:max-w-[340px]"
       >
         <div className="flex min-h-[58px] items-center justify-between">

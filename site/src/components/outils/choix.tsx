@@ -11,7 +11,8 @@ import { chargerApresAffichage } from "@/lib/charge-differee";
    écran. Le HTML initial et l'hydratation portent donc un déclencheur léger, au même balisage, aux mêmes classes et à
    la même taille que celui de Base UI, avec la valeur courante. Le vrai Select se charge une fois la page affichée, ou
    dès que le pointeur, le doigt ou le clavier approche du déclencheur, et le remplace sur place. Un appui (ou une touche
-   d'ouverture) avant la fin du chargement ouvre la liste dès l'arrivée du code. */
+   d'ouverture) avant la fin du chargement ouvre la liste dès l'arrivée du code, sauf si Échap ou la sortie du champ l'a
+   annulé entre-temps. */
 export type Option<V extends string | number> = { value: V; label: string };
 export type ChoixProps<V extends string | number> = {
   id: string;
@@ -51,12 +52,14 @@ export function Choix<V extends string | number>(props: ChoixProps<V>) {
   useLayoutEffect(() => (Reel ? undefined : chargerApresAffichage(monter)), [Reel, monter]);
   if (Reel) return <Reel {...(props as unknown as ChoixProps<string | number>)} ouvert={ouvrir.current || undefined} />;
   const libelle = options.find((o) => o.value === value)?.label ?? "";
+  /* Échap ou sortie du champ avant l'arrivée du code : l'ouverture demandée est annulée (sinon la liste s'ouvrirait plus
+     tard et reprendrait le focus au champ suivant). */
   const ouvreAuClavier = (e: KeyboardEvent) => {
     if (e.key === "ArrowDown" || e.key === "ArrowUp") {
       e.preventDefault();
       ouvrir.current = true;
       monter();
-    }
+    } else if (e.key === "Escape" || e.key === "Tab") ouvrir.current = false;
   };
   return (
     <>
@@ -79,6 +82,9 @@ export function Choix<V extends string | number>(props: ChoixProps<V>) {
         onPointerEnter={disabled ? undefined : () => void charger()}
         onTouchStart={disabled ? undefined : () => void charger()}
         onFocus={disabled ? undefined : () => void charger()}
+        onBlur={() => {
+          ouvrir.current = false;
+        }}
         onKeyDown={disabled ? undefined : ouvreAuClavier}
         onClick={() => {
           ouvrir.current = true;
