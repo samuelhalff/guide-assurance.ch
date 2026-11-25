@@ -51,6 +51,7 @@ DATA_OUTPUTS = [
     "site/src/data/taux-3a.json",
     "site/src/data/taux-libre-passage.json",
     "site/src/data/taux-3a-historique.json",
+    "site/src/data/snb-taux-prevoyance.json",
     "site/src/data/primes-2027-resume.json",
     "site/public/data/primes-2027",
 ]
@@ -58,6 +59,7 @@ DATA_OUTPUTS = [
 NAMES = {
     "taux3a": "taux 3a",
     "tauxlp": "taux de libre passage",
+    "tauxsnb": "taux 3a et de libre passage de la BNS",
     "frais3a": "frais 3a",
     "subsides": "subsides d'assurance maladie",
     "lamal": "primes LAMal",
@@ -70,6 +72,7 @@ NAMES = {
 }
 
 DRY = False  # dry-run : l'état (state/*.json) n'est pas modifié
+DATASET = ""  # jeu en cours (run_main) : sert à l'état « publication en attente »
 
 for d in (LOGS, STATE):
     d.mkdir(parents=True, exist_ok=True)
@@ -317,6 +320,7 @@ class Backup:
             shutil.rmtree(self.dir)
         self.dir.mkdir()
         self.items = []
+        self.restored = False
         for i, p in enumerate(paths):
             dst = self.dir / str(i)
             if p.is_dir():
@@ -326,6 +330,7 @@ class Backup:
             self.items.append((p, dst))
 
     def restore(self):
+        self.restored = True
         for p, dst in self.items:
             if dst.is_dir():
                 shutil.rmtree(p, ignore_errors=True)
@@ -390,7 +395,52 @@ def verify_live(log: Log, checks: list[dict]) -> list[str]:
 
 
 def publish(log: Log, written: list[Path], backup: Backup, checks: list[dict]) -> tuple[bool, str]:
-    """Teste, construit, déploie et vérifie. Retourne (publié, explication en français pour l'e-mail)."""
+    """Teste, construit, déploie et vérifie. Retourne (publié, explication en français pour l'e-mail).
+    Échec sans retour arrière des données (commit fait mais déploiement ou vérification en ligne en échec, ou
+    modifications locales non déployées) : état « publication en attente » (state/<jeu>.json), repris par
+    retenter_publication() au passage suivant, même si la source n'a plus changé. Succès : l'attente est levée."""
+    ok, why = _publish(log, written, backup, checks)
+    donnees_remises = backup.restored and any(dst.exists() for _, dst in backup.items)
+    if DATASET:
+        if ok:
+            save_state(DATASET, publication_en_attente=None)
+        elif not donnees_remises:
+            st = load_state(DATASET).get("publication_en_attente") or {}
+            save_state(DATASET, publication_en_attente={"depuis": st.get("depuis") or now_zh().isoformat(timespec="seconds"),
+                                                       "raison": why, "checks": checks})
+    return ok, why
+
+
+def retenter_publication(log: Log, dataset: str, dry_run: bool) -> tuple[bool, str] | None:
+    """Données déjà écrites mais pas encore en ligne lors d'un passage précédent : nouvelle tentative (tests, build,
+    déploiement, vérification en ligne). None s'il n'y a rien en attente. En dry-run : signalé, rien n'est lancé."""
+    attente = load_state(dataset).get("publication_en_attente")
+    if not attente:
+        return None
+    log(f"publication en attente depuis le {fr_date(attente.get('depuis'))} ({attente.get('raison', '')[:200]}) : nouvelle tentative")
+    if dry_run:
+        return False, "[dry-run] publication en attente : nouvelle tentative non lancée"
+    return publish(log, [], Backup([]), attente.get("checks") or [])
+
+
+def retenter_publication_fin(log: Log, dataset: str, dry_run: bool, libelle: str) -> int | None:
+    """Passage sans changement : reprend une publication en attente et retourne le code de sortie du passage
+    (0 publiée, statut « publie » ; 1 encore en échec, statut « ecrit_non_publie » et alerte). None : rien en attente
+    (ou dry-run), l'appelant enregistre « aucun changement »."""
+    r = retenter_publication(log, dataset, dry_run)
+    if r is None:
+        return None
+    published, why = r
+    log(why)
+    if dry_run:
+        return None
+    record_run(dataset, "publie" if published else "ecrit_non_publie", why, success=True, published=published)
+    alert(log, dataset, "données mises à jour" if published else "données à vérifier",
+          [f"{libelle} : données déjà enregistrées lors d'un passage précédent, mais pas encore en ligne. Nouvelle tentative de publication.", why], False)
+    return 0 if published else 1
+
+
+def _publish(log: Log, written: list[Path], backup: Backup, checks: list[dict]) -> tuple[bool, str]:
     pending = pending_site_changes(written)
     code, _ = sh(log, ["npm", "test"], SITE, timeout=900)
     if code:
@@ -447,10 +497,11 @@ def publish_ci(log: Log, written: list[Path], checks: list[dict]) -> tuple[bool,
 
 def run_main(dataset: str, fn, a):
     """Enveloppe : verrou, journal, capture des erreurs imprévues (alerte « échec »)."""
-    global DRY
+    global DRY, DATASET
     if not check_args(a):
         return 0
     DRY = a.dry_run
+    DATASET = dataset
     log = Log(dataset)
     log(f"=== {dataset} {'(dry-run) ' if a.dry_run else ''}début")
     try:

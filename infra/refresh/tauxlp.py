@@ -160,6 +160,8 @@ def run(log: C.Log, a) -> int:
         log(f"  non relevée cette semaine {f['id']} : {f['erreur']} (dernier taux vérifié conservé)")
     if not changes:
         log("aucun changement")
+        if (rc := C.retenter_publication_fin(log, DS, a.dry_run, "Taux de libre passage")) is not None:
+            return rc
         C.record_run(DS, "ok", "aucun changement", success=True)
         if stale:
             C.alert(log, DS, "données à vérifier", ["Relevé des taux de libre passage : aucun taux modifié chez les institutions lues.", stale_html], a.dry_run)
