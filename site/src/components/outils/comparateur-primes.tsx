@@ -548,7 +548,9 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
       : [...r.offres].sort((a, b) => a.assureur.localeCompare(b.assureur) || a.produit.localeCompare(b.produit))
     : [];
   const visibles = triees.slice(0, nb);
-  const rangPrix = new Map(r ? r.offres.map((o, i) => [o, i]) : []);
+  /* Rang par la prime, ex æquo compris (même règle que la phrase sur l'offre actuelle), quel que soit le tri choisi. */
+  const rangs = r ? P.rangsPrix(r.offres.map((o) => o.annuel)) : [];
+  const rangPrix = new Map(r ? r.offres.map((o, i) => [o, rangs[i] - 1]) : []);
   /* Badge « Prime la plus basse » : seulement sous le tri par prime croissante, pour toute offre à la prime minimale (égalités comprises). */
   const minAnnuel = r && r.offres.length ? r.offres[0].annuel : null;
   const plusBasse = (o: P.OffreFoyer) => tri === "prix" && minAnnuel !== null && o.annuel === minAnnuel;

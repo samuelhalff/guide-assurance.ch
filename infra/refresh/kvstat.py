@@ -33,13 +33,26 @@ LIGNE = re.compile(
 
 
 def editions(page: str) -> dict[int, dict]:
-    t = re.sub(r"<script.*?</script>|<style.*?</style>", " ", page, flags=re.S)
-    t = html.unescape(re.sub(r"<[^>]+>", " ", t))
-    t = re.sub(r"\s+", " ", t)
+    t = texte(page)
     out = {}
     for m in LIGNE.finditer(t):
         out[int(m.group(1))] = {"complet": m.group(2) == "vollständig", "tableaux": m.group(3).strip(), "publie": m.group(4)}
     return out
+
+
+MENTION = re.compile(r"Krankenversicherung\s+((?:19|20)\d\d)")
+
+
+def texte(page: str) -> str:
+    t = re.sub(r"<script.*?</script>|<style.*?</style>", " ", page, flags=re.S)
+    t = html.unescape(re.sub(r"<[^>]+>", " ", t))
+    return re.sub(r"\s+", " ", t)
+
+
+def non_analysees(page: str, ed: dict[int, dict], edition_site: int) -> list[int]:
+    """Éditions que la page mentionne (« … Krankenversicherung 2025 ») sans que leur ligne se lise, au moins aussi récentes
+    que celle du site : un libellé changé pour la seule nouvelle édition ne doit pas passer pour « aucune édition récente »."""
+    return sorted(y for y in {int(m) for m in MENTION.findall(texte(page))} - set(ed) if y >= edition_site)
 
 
 def run(log: C.Log, a) -> int:
@@ -54,6 +67,10 @@ def run(log: C.Log, a) -> int:
         ed = editions(page)
         if not ed:
             raise RuntimeError("liste des éditions introuvable dans la page (structure modifiée ou page rendue par JavaScript)")
+        if manque := non_analysees(page, ed, EDITION_SITE):
+            raise RuntimeError("édition(s) " + ", ".join(map(str, manque)) + " mentionnée(s) dans la page mais illisible(s) (libellé modifié)")
+        if EDITION_SITE and EDITION_SITE not in ed:
+            raise RuntimeError(f"l'édition {EDITION_SITE} utilisée par le site ne se lit plus dans la liste (structure modifiée)")
     except Exception as e:  # noqa: BLE001
         C.record_run(DS, "echec", str(e), success=False)
         C.alert(log, DS, "données à vérifier", [
@@ -85,10 +102,12 @@ def run(log: C.Log, a) -> int:
             "À reprendre quand les tableaux T 5.01, 5.03, 5.07 et 5.10 y figurent." if not v["complet"] else "Les tableaux T 5.01, 5.03, 5.07 et 5.10 peuvent être repris."),
         URL,
     ]
-    if not a.dry_run:
-        C.save_state(DS, derniere_alerte=sig)
     C.record_run(DS, "alerte", f"édition {y} {etat}", success=True)
-    C.alert(log, DS, "données à vérifier", paragraphs, a.dry_run, dedupe_days=30)
+    envoi = C.alert(log, DS, "données à vérifier", paragraphs, a.dry_run, dedupe_days=30)
+    # Signature mémorisée seulement si l'alerte est partie (ou l'avait déjà été) : après un échec d'envoi, le passage
+    # suivant la retente au lieu de la croire envoyée.
+    if not a.dry_run and envoi in ("envoye", "dedupe"):
+        C.save_state(DS, derniere_alerte=sig)
     # Une nouvelle édition est une information, pas une panne : l'alerte part une fois par état (année + complète ou
     # non, mémorisé dans state/kvstat.json sur la branche refresh-state) et le passage reste vert. Seule une page
     # illisible fait échouer le passage.

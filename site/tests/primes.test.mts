@@ -164,4 +164,13 @@ t("accident par défaut selon l'âge", () => {
   assert.strictEqual(P.accidentParDefaut(1940), true);
 });
 
+t("rang par la prime avec ex æquo (liste et phrase de l'offre actuelle)", () => {
+  assert.deepStrictEqual(P.rangsPrix([7000, 7100, 7556.4, 7556.4, 7600]), [1, 2, 3, 3, 5]);
+  assert.deepStrictEqual(P.rangsPrix([5, 5, 5]), [1, 1, 1]);
+  assert.deepStrictEqual(P.rangsPrix([]), []);
+  // même règle que la phrase : 1 + nombre d'offres strictement moins chères
+  const a = [100, 120, 120, 130];
+  a.forEach((x, i) => assert.strictEqual(P.rangsPrix(a)[i], 1 + a.filter((y) => y < x).length));
+});
+
 console.log(`primes : ${n} tests réussis`);

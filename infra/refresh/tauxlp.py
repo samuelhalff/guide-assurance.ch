@@ -47,6 +47,17 @@ def valeur_page(x: float, sep: str) -> str:
     return s.replace(".", sep)
 
 
+def separer_annonces(ok: list[dict], today: dt.date) -> tuple[list[dict], list[dict]]:
+    """Taux lus avec une date de validité future : annoncés, pas encore en vigueur. Ils ne remplacent pas le taux courant
+    (intérêts, classement) ; la page de l'institution les donne encore au premier relevé qui suit leur date d'effet, et
+    ils sont appliqués à ce moment-là, comme un changement ordinaire."""
+    actuels, annonces = [], []
+    for r in ok:
+        d = r.get("taux_valable_des")
+        (annonces if d and dt.date.fromisoformat(d) > today else actuels).append(r)
+    return actuels, annonces
+
+
 def resume_ci(lignes: list[str]) -> None:
     f = os.environ.get("GITHUB_STEP_SUMMARY")
     if f:
@@ -91,9 +102,17 @@ def run(log: C.Log, a) -> int:
         if d and not (dt.date(2015, 1, 1) <= dt.date.fromisoformat(d) <= today + dt.timedelta(days=180)):
             problems.append(f"{nom} : date de validité invraisemblable {d}")
 
+    # --- taux annoncés pour plus tard : gardés hors des changements et des données écrites
+    actuels, annonces = separer_annonces(ok, today) if not problems else (ok, [])
+    for r in annonces:
+        old = by_id.get(r["id"], {}).get("taux")
+        log(f"  annoncé {names.get(r['id'], r['id'])} : {fr(r['taux'])} dès le {r['taux_valable_des']} "
+            f"(taux en vigueur conservé : {fr(old) if old is not None else '—'})")
+    ids_annonces = {r["id"] for r in annonces}
+
     # --- changements
     changes, human = [], []
-    for r in ok:
+    for r in actuels:
         old_c = by_id.get(r["id"], {})
         new_c = {**old_c, "taux": r["taux"]}
         if "taux_valable_des" in r:
@@ -180,7 +199,7 @@ def run(log: C.Log, a) -> int:
 
     today = dt.date.today().isoformat()
     backup = C.Backup([T.DATA_FILE, T.SITE_FILE])
-    new = T.apply(stored, results, today)
+    new = T.apply(stored, [r for r in results if r.get("id") not in ids_annonces], today)
     T.DATA_FILE.write_text(json.dumps(new, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     T.SITE_FILE.write_text(T.DATA_FILE.read_text(encoding="utf-8"), encoding="utf-8")
     log(f"écrit {T.DATA_FILE} et {T.SITE_FILE}")

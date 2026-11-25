@@ -181,3 +181,9 @@ export function offresFoyer(d: DonneesCanton, region: number, personnes: Personn
   });
   return { offres, total: offres.length, min, max: offres[offres.length - 1].mensuel, moyenne: arr(moyenne), redistribution };
 }
+
+/* Rang par la prime (classement avec ex æquo) : 1 + nombre d'offres à prime strictement plus basse. Une offre à égalité
+   porte le même rang que les autres, dans la liste comme dans la phrase « Votre offre actuelle est au rang … ». */
+export function rangsPrix(annuels: readonly number[]): number[] {
+  return annuels.map((a) => 1 + annuels.filter((x) => x < a).length);
+}

@@ -94,7 +94,7 @@ const LP = {
         id: "retrait",
         h: "Quand peut-on retirer son libre passage ?",
         p: [
-          "Les prestations de vieillesse peuvent être versées au plus tôt cinq ans avant l’âge de référence. Elles sont dues à cet âge, et on peut les reporter jusqu’à cinq ans de plus si l’on prouve qu’on continue à travailler (art. 16, al. 1, OLP). Un retrait en capital exige le consentement écrit du conjoint (art. 16, al. 3, OLP). D’autres cas de paiement existent, notamment le départ définitif de Suisse, le début d’une activité à son compte sans prévoyance obligatoire ou un avoir inférieur à la cotisation annuelle (art. 5 LFLP).",
+          "Les prestations de vieillesse peuvent être versées au plus tôt cinq ans avant l’âge de référence. Elles sont dues à cet âge, et on peut les reporter jusqu’à cinq ans de plus si l’on prouve qu’on continue à travailler (art. 16, al. 1, OLP). À titre transitoire, on peut encore les reporter sans activité lucrative, jusqu’à cinq ans après l’âge de référence mais au plus tard en 2029 (disposition transitoire de l’art. 16 OLP, selon l’OFAS). Un retrait en capital exige le consentement écrit du conjoint (art. 16, al. 3, OLP). D’autres cas de paiement existent, notamment le départ définitif de Suisse, le début d’une activité à son compte sans prévoyance obligatoire ou un avoir inférieur à la cotisation annuelle (art. 5 LFLP).",
         ],
       },
     ] as Section[],
@@ -130,7 +130,7 @@ const LP = {
       },
       {
         q: `Quand peut-on retirer son libre passage${N}?`,
-        a: "Au plus tôt cinq ans avant l’âge de référence ; l’avoir est dû à cet âge, et on peut le reporter jusqu’à cinq ans si l’on continue à travailler (art. 16 OLP). Certains autres cas permettent un retrait plus tôt, par exemple le départ définitif de Suisse (art. 5 LFLP).",
+        a: "Au plus tôt cinq ans avant l’âge de référence ; l’avoir est dû à cet âge, et on peut le reporter jusqu’à cinq ans si l’on continue à travailler (art. 16 OLP). Jusqu’en 2029, la disposition transitoire permet aussi de le reporter sans activité lucrative, dans la même limite de cinq ans. Certains autres cas permettent un retrait plus tôt, par exemple le départ définitif de Suisse (art. 5 LFLP).",
       },
     ] as Faq[],
     sources: [
@@ -201,7 +201,7 @@ const LP = {
         id: "retrait",
         h: "When can you withdraw vested benefits?",
         p: [
-          "Retirement benefits can be paid out at the earliest five years before the reference age. They fall due at that age, and you can defer them by up to five years if you show that you are still working (art. 16 para. 1 OLP). A lump-sum withdrawal needs your spouse’s written consent (art. 16 para. 3 OLP). Other cases of payment exist, notably leaving Switzerland for good, starting self-employment without compulsory pension cover, or a balance below your annual contribution (art. 5 LFLP).",
+          "Retirement benefits can be paid out at the earliest five years before the reference age. They fall due at that age, and you can defer them by up to five years if you show that you are still working (art. 16 para. 1 OLP). As a transitional rule, you can still defer them without gainful activity, up to five years after the reference age but no later than 2029 (transitional provision to art. 16 OLP, according to the FSIO). A lump-sum withdrawal needs your spouse’s written consent (art. 16 para. 3 OLP). Other cases of payment exist, notably leaving Switzerland for good, starting self-employment without compulsory pension cover, or a balance below your annual contribution (art. 5 LFLP).",
         ],
       },
     ] as Section[],
@@ -237,7 +237,7 @@ const LP = {
       },
       {
         q: "When can you withdraw vested benefits?",
-        a: "At the earliest five years before the reference age; the balance falls due at that age, and you can defer it by up to five years if you keep working (art. 16 OLP). A few other cases allow earlier payment, such as leaving Switzerland for good (art. 5 LFLP).",
+        a: "At the earliest five years before the reference age; the balance falls due at that age, and you can defer it by up to five years if you keep working (art. 16 OLP). Until 2029, the transitional provision also allows deferral without gainful activity, within the same five-year limit. A few other cases allow earlier payment, such as leaving Switzerland for good (art. 5 LFLP).",
       },
     ] as Faq[],
     sources: [
