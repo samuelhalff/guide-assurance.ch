@@ -532,3 +532,87 @@ console.log("subsides : cas officiel vaudois du parent seul OK");
 }
 
 console.log("subsides : cas officiel vaudois de l'adulte seul à 22 800 OK");
+
+/* ------------------------------------------------------------ corrections après revue (25.11.2026) */
+{
+  const p = (adulte: number, enfant = 0, jeuneAdulte = 0) => ({ adulte, jeuneAdulte, enfant });
+  const vd = (extra: Partial<S.Entree>) => S.calculer({ canton: "VD", menage: m(1), rdu: 22800, region: "1", primes: p(500), ...extra });
+  // VD, seuil de fortune mobilière (arrêté 2027, art. 12 al. 3) : au-delà de 130 000 (une personne adulte) ou 260 000 (couple), aucun subside
+  {
+    const rdu = S.rduVD({ revenuNet: 25000, primesDeduites: 0, fortuneMobiliere: 130001, adultes: 1, enfants: 0 }).rdu;
+    const r = vd({ rdu, fortuneMobiliereVD: 130001 }) as Extract<S.Resultat, { calcule: true }>;
+    assert.equal(r.droit, false, "VD : 130 001 de fortune mobilière, personne seule : refus");
+    assert.equal(r.exclu, "fortune-vd");
+    assert.equal(r.subsideMensuel, 0);
+    assert.equal((vd({ rdu, fortuneMobiliereVD: 130000 }) as Extract<S.Resultat, { calcule: true }>).droit, true, "130 000 : pas au-delà du seuil");
+    assert.equal((S.calculer({ canton: "VD", menage: m(2), rdu: 30000, region: "1", primes: p(500), fortuneMobiliereVD: 200000 }) as Extract<S.Resultat, { calcule: true }>).exclu, undefined, "couple : seuil de 260 000");
+    assert.equal((S.calculer({ canton: "VD", menage: m(2), rdu: 30000, region: "1", primes: p(500), fortuneMobiliereVD: 260001 }) as Extract<S.Resultat, { calcule: true }>).exclu, "fortune-vd");
+    assert.equal((vd({ rdu })).calcule && (vd({ rdu }) as Extract<S.Resultat, { calcule: true }>).exclu, undefined, "sans fortune saisie (RDU connu) : seuil non vérifié");
+  }
+  // NE, art. 16 de l'arrêté 2027 : revenu effectif sous 15 000 (seul), 20 000 (couple), plus 3 000 par enfant mineur
+  {
+    assert.equal(S.limiteRevenuBasNE(m(1)), 15000);
+    assert.equal(S.limiteRevenuBasNE(m(2, 2)), 26000);
+    const ne = (mn: S.Menage, rdu: number, extra: Partial<S.Entree> = {}) => S.calculer({ canton: "NE", menage: mn, rdu, primes: gros, ...extra });
+    const r0 = ne(m(1), 0);
+    assert.equal(r0.calcule, false, "NE : adulte sans revenu, plus de 639 CHF");
+    assert.equal(!r0.calcule && r0.raison, "revenu-bas-ne");
+    assert.equal(ne(m(1), 14999).calcule, false);
+    assert.equal(ne(m(1), 15000).calcule, true, "15 000 : pas inférieur à la limite");
+    assert.equal(ne(m(2, 2), 25999).calcule, false);
+    assert.equal(ne(m(2, 2), 26000).calcule, true);
+    assert.equal(ne(m(1), 30000, { revenuEffectifBasNE: true }).calcule, false, "revenu effectif bas, fortune au-dessus : non bénéficiaire");
+  }
+  // VD, revenu net négatif (code 650) : le signe est gardé à la saisie, le plancher zéro s'applique au RDU reconstitué
+  {
+    assert.equal(S.saisieFrancs("-30 000", true), "-30000");
+    assert.equal(S.saisieFrancs("−30000", true), "-30000", "signe moins typographique");
+    assert.equal(S.saisieFrancs("-", true), "-");
+    assert.equal(S.saisieFrancs("-30000"), "30000", "champs sans signe : chiffres seuls");
+    assert.equal(S.saisieFrancs("0012 500"), "12500");
+    const net = S.lireRevenu(S.saisieFrancs("-30000", true))!;
+    assert.equal(net, -30000);
+    const rdu = S.rduVD({ revenuNet: net, primesDeduites: 0, adultes: 1, enfants: 0 }).rdu;
+    assert.equal(rdu, 0);
+    assert.equal((vd({ rdu }) as Extract<S.Resultat, { calcule: true }>).subsideMensuel, 500, "revenu négatif : prime de 500 entièrement couverte");
+  }
+  // Primes avec centimes
+  {
+    for (const [s, v] of [["300.50", 300.5], ["300,50", 300.5], ["300", 300], [" 1 050,20 ", 1050.2], ["1'050.20", 1050.2], ["1,050.20", 1050.2], ["1’050", 1050]] as const) assert.equal(S.lirePrime(s), v, s);
+    for (const s of ["", "abc", "0", "300.505", "-300", "3,0,0"]) assert.equal(S.lirePrime(s), null, `illisible : ${s}`);
+    const r = S.calculer({ canton: "GE", menage: m(1), rdu: 25000, primes: p(S.lirePrime("300,50")!) }) as Extract<S.Resultat, { calcule: true }>;
+    assert.equal(r.subsideMensuel, 300.5, "GE, RDU 25 000, prime 300,50 : subside plafonné à la prime");
+    assert.equal(r.primeNetteMensuelle, 0);
+  }
+  // FR, couple non marié : pas de limite de couple (ORP art. 3 al. 1 let. c)
+  {
+    const r = S.calculer({ canton: "FR", menage: m(2), rdu: 60000, region: "1", primes: gros, concubins: true });
+    assert.equal(r.calcule, false);
+    assert.equal(!r.calcule && r.raison, "concubins");
+    assert.equal(S.calculer({ canton: "FR", menage: m(1), rdu: 30000, region: "1", primes: gros, concubins: true }).calcule, true, "personne seule : sans effet");
+    assert.equal(calc("FR", m(2), 60000).droit, true, "couple marié : inchangé");
+  }
+  // Assuré principal de 19 à 25 ans : non représenté, refus explicite (GE : 242 et non 363)
+  {
+    for (const c of ["GE", "VD", "FR", "NE", "JU"] as const) {
+      const r = S.calculer({ canton: c, menage: m(1), rdu: 25000, region: "1", primes: gros, jeuneAdultePrincipal: true });
+      assert.equal(!r.calcule && r.raison, "jeune-adulte-principal", c);
+    }
+    const vs = S.calculer({ canton: "VS", menage: m(1), rdu: 25000, primes: gros, jeuneAdultePrincipal: true });
+    assert.equal(!vs.calcule && vs.raison, "aucun-bareme-2027");
+  }
+  // VD, limite du droit avec le subside spécifique (personne seule, région 1, prime 580)
+  {
+    const prim = p(580);
+    const l = S.limiteVD(m(1), prim, "1")!;
+    const droit = (rdu: number) => (S.calculer({ canton: "VD", menage: m(1), rdu, region: "1", primes: prim }) as Extract<S.Resultat, { calcule: true }>).droit;
+    assert.ok(l > 55000, `limite ${l} au-delà de 55 000 (le moteur accorde encore un subside à 55 000)`);
+    assert.equal(droit(55000), true);
+    assert.equal(droit(l), true);
+    assert.equal(droit(l + 1), false);
+    assert.equal(droit(l + 5000), false);
+    assert.ok(S.limiteVD(m(1), p(300), "1")! >= S.limiteMaximale("VD", m(1))!, "jamais sous la limite du subside ordinaire");
+    assert.equal(S.limiteVD(m(1, 0, 1), prim, "1"), null, "jeunes adultes : pas de limite");
+  }
+}
+console.log("subsides : corrections après revue OK");

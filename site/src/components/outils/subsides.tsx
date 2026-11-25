@@ -31,12 +31,18 @@ const TXT = {
     jeunes: "Jeunes adultes de 19 à 25 ans à charge, en formation",
     region: (c: S.Canton) => (c === "VD" ? "Région de primes" : "Région de votre district"),
     activite: "Au moins un parent exerce une activité professionnelle",
+    jeunePrincipal: (c: boolean) => (c ? "L’un de vous deux est né en 2002 ou après (19 à 25 ans en 2027)" : "Vous êtes né ou née en 2002 ou après (19 à 25 ans en 2027)"),
+    etatCivil: "Vous êtes",
+    maries: "Mariés ou partenaires enregistrés",
+    concubins: "Non mariés",
+    revenuBasNE: (l: string) => `Sans compter la fortune, votre revenu effectif est inférieur à ${l} francs : chiffre 5.5 de la déclaration fiscale 2026, sans la valeur locative, moins les frais professionnels (chiffres 6.4 et 6.5, plafonnés à 10 000 et 2 400 francs), les cotisations AVS des personnes sans activité lucrative (6.7) et les pensions alimentaires versées (6.10)`,
     revenuNote: "Montant annuel en francs.",
     primes: "Indiquer ma prime actuelle",
     primesTexte: "Sans votre prime, l’outil prend la prime moyenne cantonale 2027 de l’OFSP (tous modèles et franchises, accident compris). Indiquez ce que votre assureur vous facture par mois pour chaque personne.",
     primeAdulte: "Prime d’un adulte",
     primeJeune: "Prime d’un jeune adulte",
     primeEnfant: "Prime d’un enfant",
+    primeIllisible: "Montant illisible : le calcul prend la prime moyenne de l’OFSP. Exemple : 312,40.",
     resultat: "Votre estimation",
     lieu: { GE: "à Genève", VD: "dans le canton de Vaud", FR: "à Fribourg", VS: "en Valais", NE: "à Neuchâtel", JU: "dans le Jura" } as Record<S.Canton, string>,
     ligneSubside: (s: string) => `Votre subside estimé est de ${s} CHF par mois.`,
@@ -47,6 +53,8 @@ const TXT = {
     apres: (p: string) => `Après subside, la prime du ménage est de ${p} CHF par mois.`,
     aucun: "Avec ce revenu, le barème 2027 ne prévoit pas de subside pour ce ménage.",
     limite: (l: number) => `Le droit s’arrête à un revenu déterminant d’environ ${nombre(l, 0, "fr")} francs pour ce ménage.`,
+    limiteVd: (l: number) => `Avec ces primes, le droit s’arrête à un revenu déterminant d’environ ${nombre(l, 0, "fr")} francs pour ce ménage.`,
+    excluFortuneVd: (s: number) => `Avec une fortune mobilière supérieure à ${nombre(s, 0, "fr")} francs, l’OVAM refuse le subside à tout le ménage (arrêté 2027, art. 12). Le seuil porte sur les chiffres 410, 420, 430 et 445 de la décision de taxation : indiquez leur total sous la fortune mobilière si une partie de celle-ci n’en relève pas.`,
     cat: "Personnes",
     nb: "Nombre",
     sub: "Subside",
@@ -68,6 +76,9 @@ const TXT = {
       "jeunes-adultes": "Pour ce canton, les jeunes adultes suivent des règles que cet outil ne reprend pas : demandez le calcul à l’office cantonal.",
       enfants: "Pour plus de trois enfants, l’arrêté renvoie à des règles que cet outil ne reprend pas : demandez le calcul à l’office cantonal.",
       region: "Choisissez la région.",
+      "jeune-adulte-principal": "De 19 à 25 ans, les cantons appliquent des montants propres aux jeunes adultes et examinent parfois la situation des parents : cet outil ne les calcule pas. Demandez le calcul à l’office cantonal.",
+      concubins: "À Fribourg, un couple non marié n’est pas calculé comme un couple : chaque partenaire est examiné sur son propre revenu déterminant, et un enfant compte chez le parent au revenu le plus élevé. Faites le calcul pour chacun en choisissant « Seul ou seule ».",
+      "revenu-bas-ne": "Avec un revenu effectif de moins de 15 000 francs (20 000 pour un couple, plus 3 000 par enfant mineur), l’arrêté 2027 classe le ménage parmi les personnes non bénéficiaires (art. 16). Un subside reste possible si vous demandez une révision de votre classification au guichet social régional, selon votre situation personnelle ou familiale : cet outil ne peut pas l’estimer.",
     } as Record<string, string>,
     infoVS: "Le Valais n’a pas encore publié son barème 2027 (au 24 novembre 2026) : aucun montant n’est calculé. Voir la fiche du canton plus bas.",
     comparer: "Comparer les primes 2027 selon votre NPA",
@@ -91,12 +102,18 @@ const TXT = {
     jeunes: "Dependent young adults aged 19 to 25, in training",
     region: (c: S.Canton) => (c === "VD" ? "Premium region" : "Region of your district"),
     activite: "At least one parent is in paid work",
+    jeunePrincipal: (c: boolean) => (c ? "One of you was born in 2002 or later (aged 19 to 25 in 2027)" : "You were born in 2002 or later (aged 19 to 25 in 2027)"),
+    etatCivil: "You are",
+    maries: "Married or in a registered partnership",
+    concubins: "Not married",
+    revenuBasNE: (l: string) => `Leaving wealth aside, your actual income is below CHF ${l}: item 5.5 of the 2026 tax return, without the imputed rental value, less professional expenses (items 6.4 and 6.5, capped at CHF 10,000 and CHF 2,400), AHV contributions of people without gainful activity (6.7) and maintenance payments made (6.10)`,
     revenuNote: "Yearly amount in francs.",
     primes: "Enter my current premium",
     primesTexte: "Without your premium, the tool uses the 2027 average cantonal premium from the FOPH (all models and deductibles, accident cover included). Enter what your insurer bills you per month for each person.",
     primeAdulte: "Premium of one adult",
     primeJeune: "Premium of one young adult",
     primeEnfant: "Premium of one child",
+    primeIllisible: "Amount not recognised: the calculation uses the FOPH average premium. Example: 312.40.",
     resultat: "Your estimate",
     lieu: { GE: "for Geneva", VD: "for Vaud", FR: "for Fribourg", VS: "for Valais", NE: "for Neuchâtel", JU: "for Jura" } as Record<S.Canton, string>,
     ligneSubside: (s: string) => `Your estimated subsidy is CHF ${s} per month.`,
@@ -107,6 +124,8 @@ const TXT = {
     apres: (p: string) => `After the subsidy, the household premium is CHF ${p} per month.`,
     aucun: "With this income, the 2027 scale does not provide a subsidy for this household.",
     limite: (l: number) => `Entitlement stops at a determining income of about CHF ${nombre(l, 0, "en")} for this household.`,
+    limiteVd: (l: number) => `With these premiums, entitlement stops at a determining income of about CHF ${nombre(l, 0, "en")} for this household.`,
+    excluFortuneVd: (s: number) => `With movable wealth above CHF ${nombre(s, 0, "en")}, the OVAM refuses the subsidy for the whole household (2027 order, art. 12). The threshold covers items 410, 420, 430 and 445 of the tax assessment: enter their total under movable wealth if part of it falls outside them.`,
     cat: "People",
     nb: "Number",
     sub: "Subsidy",
@@ -128,6 +147,9 @@ const TXT = {
       "jeunes-adultes": "In this canton young adults follow rules this tool does not cover: ask the cantonal office to work it out.",
       enfants: "For more than three children the order refers to rules this tool does not cover: ask the cantonal office to work it out.",
       region: "Choose the region.",
+      "jeune-adulte-principal": "From 19 to 25, cantons apply amounts specific to young adults and sometimes look at the parents’ situation: this tool does not calculate them. Ask the cantonal office to work it out.",
+      concubins: "In Fribourg, an unmarried couple is not calculated as a couple: each partner is assessed on their own determining income, and a child counts with the parent who has the higher income. Do the calculation for each of you by choosing “Alone”.",
+      "revenu-bas-ne": "With actual income below CHF 15,000 (CHF 20,000 for a couple, plus CHF 3,000 per minor child), the 2027 order classifies the household as non-beneficiaries (art. 16). A subsidy is still possible if you ask the regional social office to review your classification, depending on your personal or family situation: this tool cannot estimate it.",
     } as Record<string, string>,
     infoVS: "Valais had not published its 2027 scale on 24 November 2026: no amount is calculated. See the canton’s card below.",
     comparer: "Compare 2027 premiums for your postcode",
@@ -160,6 +182,8 @@ const TXT_VD = {
     p3a: "Versements au 3e pilier A (code 310)",
     p3aAide: "Le montant est retenu en entier.",
     mob: "Fortune mobilière (codes 410 à 465 de la décision de taxation), sans déduire vos dettes",
+    mobSeuil: "Dont chiffres 410, 420, 430 et 445 (titres et placements, numéraire, véhicules et objets de valeur, autres fortunes)",
+    mobSeuilAide: (n: string) => `Seuls ces chiffres comptent pour le seuil de ${n} francs au-delà duquel l’OVAM refuse le subside. Laissez vide si toute la fortune mobilière saisie en relève.`,
     mobAide: (c: boolean) => `Comptes, titres et autres avoirs. Seule la part au-delà de ${nombre(c ? 120000 : 60000, 0, "fr")} francs compte, à 6,7${N}%. Les avoirs d’une entreprise se saisissent dans la fortune commerciale, pas ici. Laissez vide si vous n’avez pas de fortune.`,
     immoTitre: "Je possède un bien immobilier ou une entreprise",
     logement: "Logement dont vous êtes propriétaire (code 500)",
@@ -207,6 +231,8 @@ const TXT_VD = {
     p3a: "Pillar 3a payments (code 310)",
     p3aAide: "The full amount counts.",
     mob: "Movable wealth (codes 410 to 465 of the tax assessment), before deducting your debts",
+    mobSeuil: "Of which items 410, 420, 430 and 445 (securities and investments, cash, vehicles and valuables, other wealth)",
+    mobSeuilAide: (n: string) => `Only these items count towards the CHF ${n} threshold above which the OVAM refuses the subsidy. Leave empty if all the movable wealth entered falls under them.`,
     mobAide: (c: boolean) => `Accounts, securities and other assets. Only the part above CHF ${nombre(c ? 120000 : 60000, 0, "en")} counts, at 6.7%. Business assets go in business wealth, not here. Leave empty if you have no wealth.`,
     immoTitre: "I own property or a business",
     logement: "Home you own (code 500)",
@@ -242,8 +268,9 @@ const TXT_VD = {
   },
 } as const;
 
-const MAX_ENFANTS: Record<S.Canton, number> = { GE: 4, VD: 6, FR: 6, VS: 0, NE: 3, JU: 6 };
-const JEUNES: Record<S.Canton, boolean> = { GE: true, VD: false, FR: true, VS: false, NE: false, JU: true };
+/* Compteurs communs à tous les cantons : le moteur signale les ménages qu'un barème ne couvre pas (GE : quatre charges,
+   NE : trois enfants, jeunes adultes à VD et NE). */
+const MAX_CHARGES = 6;
 
 function Compteur({ id, label, valeur, max, onChange }: { id: string; label: string; valeur: number; max: number; onChange: (n: number) => void }) {
   return (
@@ -258,10 +285,10 @@ function Compteur({ id, label, valeur, max, onChange }: { id: string; label: str
   );
 }
 
-function Nombre({ id, label, aide, placeholder, value, locale, onChange }: { id: string; label: string; aide: string; placeholder: string; value: string; locale: Locale; onChange: (v: string) => void }) {
+function Nombre({ id, label, aide, placeholder, value, locale, onChange, negatif = false }: { id: string; label: string; aide: string; placeholder: string; value: string; locale: Locale; onChange: (v: string) => void; negatif?: boolean }) {
   const champ = useRef<HTMLInputElement>(null);
   const avantCurseur = useRef<number | null>(null);
-  const affiche = value ? nombre(Number(value), 0, locale) : "";
+  const affiche = value === "-" ? "-" : value ? nombre(Number(value), 0, locale) : "";
   /* Après chaque mise en forme, le curseur revient après le même nombre de chiffres que dans la saisie. */
   useLayoutEffect(() => {
     const el = champ.current;
@@ -269,7 +296,8 @@ function Nombre({ id, label, aide, placeholder, value, locale, onChange }: { id:
     if (!el || n === null || document.activeElement !== el) return;
     avantCurseur.current = null;
     let vus = 0;
-    let pos = 0;
+    /* Un signe moins en tête (code 650) reste devant le curseur. */
+    let pos = /^[-−]/.test(el.value) ? 1 : 0;
     while (pos < el.value.length && vus < n) {
       if (/\d/.test(el.value[pos])) vus++;
       pos++;
@@ -282,7 +310,7 @@ function Nombre({ id, label, aide, placeholder, value, locale, onChange }: { id:
       <Input
         id={id}
         ref={champ}
-        inputMode="numeric"
+        inputMode={negatif ? "text" : "numeric"}
         autoComplete="off"
         placeholder={placeholder}
         value={affiche}
@@ -290,8 +318,8 @@ function Nombre({ id, label, aide, placeholder, value, locale, onChange }: { id:
         onChange={(ev) => {
           const brut = ev.target.value;
           const apres = brut.slice(0, ev.target.selectionStart ?? brut.length).replace(/\D/g, "").length;
-          const c = brut.replace(/\D/g, "").replace(/^0+(?=\d)/, "").slice(0, 9);
-          avantCurseur.current = Math.min(apres, c.length);
+          const c = S.saisieFrancs(brut, negatif);
+          avantCurseur.current = Math.min(apres, c.replace(/\D/g, "").length);
           onChange(c);
         }}
       />
@@ -308,6 +336,9 @@ export function Subsides({ locale }: { locale: Locale }) {
   const [jeunes, setJeunes] = useState(0);
   const [region, setRegion] = useState<S.Region>("1");
   const [activite, setActivite] = useState(false);
+  const [jeunePrincipal, setJeunePrincipal] = useState(false);
+  const [concubins, setConcubins] = useState(false);
+  const [revenuBasNE, setRevenuBasNE] = useState(false);
   const [revenu, setRevenu] = useState("");
   const [pAdulte, setPAdulte] = useState("");
   const [pJeune, setPJeune] = useState("");
@@ -318,6 +349,7 @@ export function Subsides({ locale }: { locale: Locale }) {
   const [vLpp, setVLpp] = useState("");
   const [v3a, setV3a] = useState("");
   const [vMob, setVMob] = useState("");
+  const [vMobSeuil, setVMobSeuil] = useState("");
   const [vLog, setVLog] = useState("");
   const [vAutre, setVAutre] = useState("");
   const [vCom, setVCom] = useState("");
@@ -334,16 +366,16 @@ export function Subsides({ locale }: { locale: Locale }) {
   };
 
   const calculable = S.calcule(canton);
-  const nJeunes = JEUNES[canton] ? jeunes : 0;
-  const nEnfants = Math.min(enfants, MAX_ENFANTS[canton]);
+  /* Le ménage saisi est gardé tel quel d'un canton à l'autre : un canton qui ne le couvre pas l'annonce (hors périmètre)
+     plutôt que de calculer un autre ménage. */
+  const nJeunes = jeunes;
+  const nEnfants = enfants;
   const menage: S.Menage = { adultes: couple === "couple" ? 2 : 1, enfants: nEnfants, jeunesAdultes: nJeunes };
   const ofsp = primesOfsp(canton);
-  const lu = (s: string, d: number) => {
-    const v = S.lireRevenu(s);
-    return v != null && v > 0 ? v : d;
-  };
+  const lu = (s: string, d: number) => S.lirePrime(s) ?? d;
+  const illisible = (s: string) => s.trim() !== "" && S.lirePrime(s) == null;
   const primes: S.Primes = { adulte: lu(pAdulte, ofsp.adulte), jeuneAdulte: lu(pJeune, ofsp.jeuneAdulte), enfant: lu(pEnfant, ofsp.enfant) };
-  const saisie = [pAdulte, pJeune, pEnfant].some((x) => S.lireRevenu(x));
+  const saisie = [pAdulte, nJeunes > 0 ? pJeune : "", nEnfants > 0 ? pEnfant : ""].some((x) => S.lirePrime(x) != null);
   const vdTaxation = canton === "VD" && vdMode === "taxation";
   const tv = TXT_VD[locale];
   const vNetN = S.lireRevenu(vNet);
@@ -354,8 +386,29 @@ export function Subsides({ locale }: { locale: Locale }) {
       : null;
   const rdu = vdTaxation ? (detailRdu ? detailRdu.rdu : null) : S.lireRevenu(revenu);
   const avecRegion = canton === "VD" || canton === "FR";
-  const r = calculable && rdu != null ? S.calculer({ canton, menage, rdu, region: avecRegion ? region : undefined, activite, primes }) : null;
-  const limite = calculable ? S.limiteMaximale(canton, menage) : null;
+  /* Seuil vaudois : chiffres 410, 420, 430 et 445 seulement ; détail demandé dès que la fortune mobilière saisie dépasse le
+     seuil, sinon la fortune saisie entière. */
+  const mobN = S.lireRevenu(vMob) ?? 0;
+  const detailSeuil = vdTaxation && mobN > S.seuilFortuneVD(menage);
+  const seuilSaisi = S.lireRevenu(vMobSeuil);
+  const fortuneSeuilVD = detailSeuil && seuilSaisi != null ? Math.min(seuilSaisi, mobN) : mobN;
+  const r =
+    calculable && rdu != null
+      ? S.calculer({
+          canton,
+          menage,
+          rdu,
+          region: avecRegion ? region : undefined,
+          activite,
+          primes,
+          jeuneAdultePrincipal: jeunePrincipal,
+          concubins: canton === "FR" && couple === "couple" && concubins,
+          revenuEffectifBasNE: canton === "NE" && revenuBasNE,
+          fortuneMobiliereVD: vdTaxation ? fortuneSeuilVD : undefined,
+        })
+      : null;
+  /* Vaud : limite cherchée avec les primes et la région (subside spécifique compris), seulement quand il n'y a pas de droit. */
+  const limite = !calculable ? null : canton === "VD" ? (r && r.calcule && !r.droit && !r.exclu ? S.limiteVD(menage, primes, region) : null) : S.limiteMaximale(canton, menage);
   const href = lienDemande(locale, "sante");
   const comparateur = locale === "fr" ? OUTILS.comparateur : OUTILS_EN.comparateur;
   const info = S.DONNEES.cantons[canton];
@@ -381,7 +434,7 @@ export function Subsides({ locale }: { locale: Locale }) {
 
   const ligne = r ? (
     <div className="s-ligne">
-      <p>{!r.calcule ? t.horsPerimetre[r.raison] : r.droit ? t.ligneSubside(f(r.subsideMensuel)) : t.aucun}</p>
+      <p>{!r.calcule ? t.horsPerimetre[r.raison] : r.exclu ? t.excluFortuneVd(S.seuilFortuneVD(menage)) : r.droit ? t.ligneSubside(f(r.subsideMensuel)) : t.aucun}</p>
       <a data-slot="button" className={cn(buttonVariants({ variant: "outline" }), "justify-center")} href="#s-resultat">{t.detail}</a>
     </div>
   ) : null;
@@ -416,9 +469,30 @@ export function Subsides({ locale }: { locale: Locale }) {
                       <ToggleGroupItem value="couple" className="flex-1">{t.couple}</ToggleGroupItem>
                     </ToggleGroup>
                   </fieldset>
+                  {canton === "FR" && couple === "couple" ? (
+                    <fieldset>
+                      <legend>{t.etatCivil}</legend>
+                      <ToggleGroup
+                        variant="outline"
+                        size="champ"
+                        spacing={0}
+                        className="w-full"
+                        aria-label={t.etatCivil}
+                        value={[concubins ? "concubins" : "maries"]}
+                        onValueChange={(v) => { if (v[0]) { setConcubins(v[0] === "concubins"); toucher(); } }}
+                      >
+                        <ToggleGroupItem value="maries" className="h-auto min-h-12 flex-1 self-stretch whitespace-normal px-2 py-2 text-center">{t.maries}</ToggleGroupItem>
+                        <ToggleGroupItem value="concubins" className="h-auto min-h-12 flex-1 self-stretch whitespace-normal px-2 py-2 text-center">{t.concubins}</ToggleGroupItem>
+                      </ToggleGroup>
+                    </fieldset>
+                  ) : null}
+                  <fieldset>
+                    <legend id="s-jeune-principal-l">{t.jeunePrincipal(couple === "couple")}</legend>
+                    <Interrupteur checked={jeunePrincipal} onChange={(v) => { setJeunePrincipal(v); toucher(); }} labelledBy="s-jeune-principal-l" />
+                  </fieldset>
                   <fieldset className="s-compteurs">
-                    <Compteur id="s-enfants" label={t.enfants} valeur={nEnfants} max={MAX_ENFANTS[canton]} onChange={(n) => { setEnfants(n); toucher(); }} />
-                    {JEUNES[canton] ? <Compteur id="s-jeunes" label={t.jeunes} valeur={nJeunes} max={Math.max(0, MAX_ENFANTS[canton] - nEnfants)} onChange={(n) => { setJeunes(n); toucher(); }} /> : null}
+                    <Compteur id="s-enfants" label={t.enfants} valeur={nEnfants} max={Math.max(0, MAX_CHARGES - nJeunes)} onChange={(n) => { setEnfants(n); toucher(); }} />
+                    <Compteur id="s-jeunes" label={t.jeunes} valeur={nJeunes} max={Math.max(0, MAX_CHARGES - nEnfants)} onChange={(n) => { setJeunes(n); toucher(); }} />
                   </fieldset>
                   {avecRegion ? (
                     <fieldset>
@@ -430,6 +504,12 @@ export function Subsides({ locale }: { locale: Locale }) {
                     <fieldset>
                       <legend id="s-activite-l">{t.activite}</legend>
                       <Interrupteur checked={activite} onChange={(v) => { setActivite(v); toucher(); }} labelledBy="s-activite-l" />
+                    </fieldset>
+                  ) : null}
+                  {canton === "NE" ? (
+                    <fieldset>
+                      <legend id="s-revenu-bas-l">{t.revenuBasNE(f(S.limiteRevenuBasNE(menage)))}</legend>
+                      <Interrupteur checked={revenuBasNE} onChange={(v) => { setRevenuBasNE(v); toucher(); }} labelledBy="s-revenu-bas-l" />
                     </fieldset>
                   ) : null}
                   {vd ? (
@@ -451,9 +531,10 @@ export function Subsides({ locale }: { locale: Locale }) {
                   ) : null}
                   {vdTaxation ? (
                     <fieldset className="dernier s-taxation">
-                      <Nombre id="s-v-net" label={tv.net} aide={tv.netAide} placeholder="60 000" value={vNet} locale={locale} onChange={(x) => { setVNet(x); toucher(); }} />
+                      <Nombre id="s-v-net" label={tv.net} aide={tv.netAide} placeholder="60 000" value={vNet} locale={locale} negatif onChange={(x) => { setVNet(x); toucher(); }} />
                       <Nombre id="s-v-primes" label={tv.primes} aide={tv.primesAide} placeholder="3 000" value={vPrimes} locale={locale} onChange={(x) => { setVPrimes(x); toucher(); }} />
                       <Nombre id="s-v-mob" label={tv.mob} aide={tv.mobAide(couple === "couple")} placeholder="0" value={vMob} locale={locale} onChange={(x) => { setVMob(x); toucher(); }} />
+                      {detailSeuil ? <Nombre id="s-v-mob-seuil" label={tv.mobSeuil} aide={tv.mobSeuilAide(f(S.seuilFortuneVD(menage)))} placeholder={f(mobN)} value={vMobSeuil} locale={locale} onChange={(x) => { setVMobSeuil(x); toucher(); }} /> : null}
                       <Depliable className="affiner" titre={tv.rare}>
                         <Nombre id="s-v-lpp" label={tv.lpp} aide={tv.lppAide} placeholder="0" value={vLpp} locale={locale} onChange={(x) => { setVLpp(x); toucher(); }} />
                         <Nombre id="s-v-3a" label={tv.p3a} aide={tv.p3aAide} placeholder="0" value={v3a} locale={locale} onChange={(x) => { setV3a(x); toucher(); }} />
@@ -480,18 +561,21 @@ export function Subsides({ locale }: { locale: Locale }) {
                     <div className="categories">
                       <div className="champ">
                         <label htmlFor="s-p-adulte">{t.primeAdulte}</label>
-                        <Input id="s-p-adulte" inputMode="numeric" placeholder={f(ofsp.adulte)} value={pAdulte} onChange={(ev) => { setPAdulte(ev.target.value); toucher(); }} />
+                        <Input id="s-p-adulte" inputMode="decimal" placeholder={f(ofsp.adulte)} value={pAdulte} aria-invalid={illisible(pAdulte) || undefined} aria-describedby={illisible(pAdulte) ? "s-p-adulte-err" : undefined} onChange={(ev) => { setPAdulte(ev.target.value); toucher(); }} />
+                        {illisible(pAdulte) ? <p className="note-outil" id="s-p-adulte-err" role="alert">{t.primeIllisible}</p> : null}
                       </div>
                       {nJeunes > 0 ? (
                         <div className="champ">
                           <label htmlFor="s-p-jeune">{t.primeJeune}</label>
-                          <Input id="s-p-jeune" inputMode="numeric" placeholder={f(ofsp.jeuneAdulte)} value={pJeune} onChange={(ev) => { setPJeune(ev.target.value); toucher(); }} />
+                          <Input id="s-p-jeune" inputMode="decimal" placeholder={f(ofsp.jeuneAdulte)} value={pJeune} aria-invalid={illisible(pJeune) || undefined} aria-describedby={illisible(pJeune) ? "s-p-jeune-err" : undefined} onChange={(ev) => { setPJeune(ev.target.value); toucher(); }} />
+                        {illisible(pJeune) ? <p className="note-outil" id="s-p-jeune-err" role="alert">{t.primeIllisible}</p> : null}
                         </div>
                       ) : null}
                       {nEnfants > 0 ? (
                         <div className="champ">
                           <label htmlFor="s-p-enfant">{t.primeEnfant}</label>
-                          <Input id="s-p-enfant" inputMode="numeric" placeholder={f(ofsp.enfant)} value={pEnfant} onChange={(ev) => { setPEnfant(ev.target.value); toucher(); }} />
+                          <Input id="s-p-enfant" inputMode="decimal" placeholder={f(ofsp.enfant)} value={pEnfant} aria-invalid={illisible(pEnfant) || undefined} aria-describedby={illisible(pEnfant) ? "s-p-enfant-err" : undefined} onChange={(ev) => { setPEnfant(ev.target.value); toucher(); }} />
+                        {illisible(pEnfant) ? <p className="note-outil" id="s-p-enfant-err" role="alert">{t.primeIllisible}</p> : null}
                         </div>
                       ) : null}
                     </div>
@@ -514,6 +598,8 @@ export function Subsides({ locale }: { locale: Locale }) {
                   <p className="base">{vdTaxation ? tv.manque : t.attente}</p>
                 ) : !r.calcule ? (
                   <p className="base">{t.horsPerimetre[r.raison]}</p>
+                ) : r.exclu ? (
+                  <p className="base">{t.excluFortuneVd(S.seuilFortuneVD(menage))}</p>
                 ) : r.droit ? (
                   <>
                     <p className="base">{t.subside}</p>
@@ -521,7 +607,7 @@ export function Subsides({ locale }: { locale: Locale }) {
                     <p className="base">{t.apres(f(r.primeNetteMensuelle, 2))}</p>
                   </>
                 ) : (
-                  <p className="base">{t.aucun}{limite ? ` ${t.limite(limite)}` : ""}</p>
+                  <p className="base">{t.aucun}{limite ? ` ${canton === "VD" ? t.limiteVd(limite) : t.limite(limite)}` : ""}</p>
                 )}
               </div>
               {r && r.calcule ? (

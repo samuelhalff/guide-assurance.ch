@@ -33,11 +33,22 @@ export type Entree = {
   activite?: boolean;
   /* Prime mensuelle de chaque personne de la catégorie, en francs. */
   primes: Primes;
+  /* Un adulte du ménage a de 19 à 25 ans en 2027 (né en 2002 ou après) : montants et règles propres aux jeunes adultes,
+     que cet outil ne reprend pas pour l'assuré principal. */
+  jeuneAdultePrincipal?: boolean;
+  /* Fribourg : couple non marié et sans partenariat enregistré (chaque partenaire est examiné séparément, ORP art. 3). */
+  concubins?: boolean;
+  /* Neuchâtel : revenu effectif (art. 12 al. 1 let. a de l'arrêté 2027, sans la part de fortune) sous la limite de
+     l'art. 16. */
+  revenuEffectifBasNE?: boolean;
+  /* Vaud : fortune mobilière (chiffres 410, 420, 430 et 445 de la décision de taxation), pour le seuil de l'art. 12 de
+     l'arrêté 2027 ; absente, le seuil n'est pas vérifié. */
+  fortuneMobiliereVD?: number;
 };
 export type Ligne = { categorie: Categorie; nombre: number; subside: number; prime: number; primeNette: number };
 export type Motif = "information" | "hors-perimetre";
 export type Resultat =
-  | { calcule: false; motif: Motif; raison: "aucun-bareme-2027" | "charges" | "jeunes-adultes" | "enfants" | "region" }
+  | { calcule: false; motif: Motif; raison: "aucun-bareme-2027" | "charges" | "jeunes-adultes" | "enfants" | "region" | "jeune-adulte-principal" | "concubins" | "revenu-bas-ne" }
   | {
       calcule: true;
       droit: boolean;
@@ -49,6 +60,8 @@ export type Resultat =
       groupe?: string;
       /* Vaud : part ordinaire et part spécifique du subside mensuel du ménage. */
       vd?: { revenuOvam: number; ordinaire: number; specifique: number };
+      /* Droit refusé avant tout calcul : fortune mobilière au-delà du seuil vaudois (art. 12 de l'arrêté 2027). */
+      exclu?: "fortune-vd";
     };
 
 export const DONNEES = D;
@@ -63,6 +76,26 @@ export function lireRevenu(texte: string): number | null {
   const s = texte.replace(/[\s'’  ]/g, "");
   if (!/^-?\d{1,9}$/.test(s)) return null;
   return Number(s);
+}
+
+/* Saisie d'un montant en francs entiers (champs de la décision de taxation vaudoise) : chiffres seuls ; `negatif`
+   (revenu net, code 650) garde un signe moins tapé en tête, pour qu'un revenu net négatif reste négatif. Renvoie la
+   valeur gardée dans l'état du champ ("" si vide, "-" si seul le signe est tapé), 9 chiffres au plus. */
+export function saisieFrancs(brut: string, negatif = false): string {
+  const signe = negatif && /^\s*[-−–]/.test(brut) ? "-" : "";
+  const chiffres = brut.replace(/\D/g, "").replace(/^0+(?=\d)/, "").slice(0, 9);
+  return signe + chiffres;
+}
+
+/* Lit une prime mensuelle saisie : « 300 », « 300.50 », « 300,50 », « 1 050,20 », « 1'050.20 » ou « 1,050.20 ». Renvoie
+   null si le champ est vide, illisible ou nul : la page signale alors la saisie et prend la prime moyenne de l'OFSP. */
+export function lirePrime(texte: string): number | null {
+  const s = texte.replace(/[\s'’  ]/g, "");
+  let n: number;
+  if (/^\d{1,6}(?:[.,]\d{1,2})?$/.test(s)) n = Number(s.replace(",", "."));
+  else if (/^\d{1,3}(?:,\d{3})+(?:\.\d{1,2})?$/.test(s)) n = Number(s.replace(/,/g, ""));
+  else return null;
+  return n > 0 ? n : null;
 }
 
 function lignes(e: Entree, subsides: Record<Categorie, number>): Ligne[] {
@@ -137,6 +170,10 @@ export function tauxFR(ecart: number): number {
 
 function fr(e: Entree): Resultat {
   const T = D.cantons.FR.tables;
+  /* Limite de couple : couples mariés et partenaires enregistrés seulement (ORP art. 3 al. 1 let. c). Un couple non marié
+     est examiné personne par personne, chacun sur son revenu déterminant, l'enfant comptant chez le parent au revenu le
+     plus élevé (art. 5 al. 6 let. c) : un seul revenu saisi ne permet pas ce calcul. */
+  if (e.menage.adultes === 2 && e.concubins) return { calcule: false, motif: "hors-perimetre", raison: "concubins" };
   const lim = limiteFR(e.menage);
   if (lim == null) return { calcule: false, motif: "hors-perimetre", raison: "charges" };
   if (!e.region) return { calcule: false, motif: "hors-perimetre", raison: "region" };
@@ -156,6 +193,12 @@ function fr(e: Entree): Resultat {
 }
 
 /* ---------------------------------------------------------------- Neuchâtel */
+/* Art. 16 de l'arrêté 2027 : revenu effectif (art. 12 al. 1 let. a, sans la part de fortune) inférieur à 15 000 francs
+   (personne seule) ou 20 000 francs (couple), plus 3 000 francs par enfant mineur à charge : classification parmi les
+   personnes non bénéficiaires, sauf révision demandée au guichet social régional (art. 16 al. 2, art. 23). */
+export function limiteRevenuBasNE(menage: Menage): number {
+  return (menage.adultes === 2 ? 20000 : 15000) + 3000 * menage.enfants;
+}
 /* Classification S1 à S15 lue dans le tableau 2027 (adulte seul ou couple, selon le nombre d'enfants mineurs), puis
    montants mensuels de la classe pour l'adulte et pour l'enfant. Jeunes adultes et enfants au-delà de trois :
    l'arrêté renvoie à des règles que cet outil ne reprend pas. */
@@ -174,6 +217,8 @@ function ne(e: Entree): Resultat {
   const T = D.cantons.NE.tables;
   if (e.menage.jeunesAdultes > 0) return { calcule: false, motif: "hors-perimetre", raison: "jeunes-adultes" };
   if (e.menage.enfants > T.enfants_max) return { calcule: false, motif: "hors-perimetre", raison: "enfants" };
+  /* Le revenu déterminant ajoute au revenu effectif 30 % de la fortune : sous la limite, le revenu effectif l'est aussi. */
+  if (e.revenuEffectifBasNE || e.rdu < limiteRevenuBasNE(e.menage)) return { calcule: false, motif: "hors-perimetre", raison: "revenu-bas-ne" };
   const k = classeNE(e.menage, e.rdu);
   if (k == null) return total(e, lignes(e, zero()));
   const m = T.montants[k - 1];
@@ -213,6 +258,10 @@ function ju(e: Entree): Resultat {
    spécifique : si les primes retenues (plafonnées aux primes de référence), après subside ordinaire, dépassent 10 %
    du RDU, la différence est versée (art. 21a à 21d). Jeunes adultes : règles propres, hors de cet outil. */
 type ParamsVD = Record<string, number>;
+/* Seuils de fortune mobilière (art. 12 al. 3 de l'arrêté vaudois 2027, chiffres 410, 420, 430 et 445 de la décision de
+   taxation) : au-delà, aucun subside, pour tout le ménage. Une seule personne adulte : 130 000 ; plusieurs : 260 000. */
+export const SEUIL_FORTUNE_VD = { seul: 130000, couple: 260000 } as const;
+export const seuilFortuneVD = (menage: Menage) => (menage.adultes === 2 ? SEUIL_FORTUNE_VD.couple : SEUIL_FORTUNE_VD.seul);
 const P = D.cantons.VD.tables.params as Record<string, ParamsVD>;
 
 function courbe(p: ParamsVD, rd: number): number {
@@ -265,6 +314,7 @@ export function primeReferenceVD(menage: Menage, rdu: number, region: Region): {
 function vd(e: Entree): Resultat {
   const T = D.cantons.VD.tables;
   if (e.menage.jeunesAdultes > 0) return { calcule: false, motif: "hors-perimetre", raison: "jeunes-adultes" };
+  if (e.fortuneMobiliereVD != null && e.fortuneMobiliereVD > seuilFortuneVD(e.menage)) return total(e, lignes(e, zero()), { exclu: "fortune-vd" });
   const region = e.region ?? "1";
   const m = e.menage;
   const rdu = Math.max(0, e.rdu);
@@ -298,6 +348,7 @@ function vd(e: Entree): Resultat {
 
 /* ---------------------------------------------------------------- Point d'entrée */
 export function calculer(e: Entree): Resultat {
+  if (e.jeuneAdultePrincipal && e.canton !== "VS") return { calcule: false, motif: "hors-perimetre", raison: "jeune-adulte-principal" };
   switch (e.canton) {
     case "GE": return ge(e);
     case "VD": return vd(e);
@@ -346,6 +397,33 @@ export function limiteMaximale(canton: Canton, menage: Menage): number | null {
     case "VS":
       return null;
   }
+}
+
+/* Vaud : la limite de limiteMaximale ne vaut que pour le subside ordinaire. Le subside spécifique (primes retenues au-delà
+   de 10 % du RDU) prolonge le droit selon les primes et la région : la limite du ménage se cherche donc avec le calcul
+   lui-même, par pas de 100 francs depuis un plafond sûr (ordinaire nul et 10 % du RDU au-delà de toutes les primes),
+   puis au franc près. */
+export function limiteVD(menage: Menage, primes: Primes, region: Region): number | null {
+  const ordinaire = limiteMaximale("VD", menage);
+  if (ordinaire == null) return null;
+  const droit = (rdu: number) => {
+    const r = vd({ canton: "VD", menage, rdu, region, primes });
+    return r.calcule && r.droit;
+  };
+  const primesMois = primes.adulte * menage.adultes + primes.enfant * menage.enfants;
+  const haut = Math.ceil(Math.max(ordinaire, primesMois * 12 / D.cantons.VD.tables.taux_effort) / 100) * 100 + 100;
+  for (let x = haut; x >= 0; x -= 100) {
+    if (!droit(x)) continue;
+    let bas = x;
+    let sup = x + 100;
+    while (sup - bas > 1) {
+      const milieu = Math.floor((bas + sup) / 2);
+      if (droit(milieu)) bas = milieu;
+      else sup = milieu;
+    }
+    return bas;
+  }
+  return null;
 }
 
 /* ------------------------------------------------------------ Vaud : RDU reconstitué depuis la décision de taxation
