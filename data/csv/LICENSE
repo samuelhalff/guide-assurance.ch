@@ -18,6 +18,10 @@ Sources d'origine
 - taux-3a-historique.csv : taux d'intérêt de base des comptes 3a lus sur les pages officielles et les fiches
   de taux des banques, chaque lundi. Les taux restent la propriété d'information des banques ; seule la
   page de la banque fait foi.
+- taux-3a-archives.csv : taux de base des comptes 3a lus dans les copies archivées (Internet Archive,
+  Wayback Machine) des pages officielles et fiches de taux des banques ; chaque ligne donne l'adresse de la
+  copie archivée et de la page d'origine. La date est celle de la copie (taux en vigueur ce jour-là), sauf
+  date d'entrée en vigueur indiquée par la page. Points ambigus exclus.
 
 Les données publiques d'origine (OFSP, AFC, cantons) sont librement réutilisables selon les conditions de
 leurs éditeurs (opendata.swiss, conditions d'utilisation des sites de la Confédération). Ces fichiers sont
@@ -28,4 +32,5 @@ fournis tels quels, sans garantie ; ils ne constituent pas un conseil.
 Open data from guide-assurance.ch (folder data/csv/), licensed under CC BY 4.0
 (https://creativecommons.org/licenses/by/4.0/). Credit: "Guide Assurance (guide-assurance.ch), from" the
 original sources listed above (FOPH/BAG premiums and premium regions; Federal Tax Administration and
-cantonal tax scales; banks' published 3a rates), with the data date. Provided as is, without warranty.
+cantonal tax scales; banks' published 3a rates, including archived copies of the banks' pages from the
+Internet Archive), with the data date. Provided as is, without warranty.

@@ -4,6 +4,9 @@ import { Breadcrumbs } from "@/components/site/breadcrumbs";
 import { JsonLd } from "@/components/site/json-ld";
 import { AppelRappel, Faqs, N, Telechargement, nombre, type Faq } from "@/components/donnees/commun";
 import * as H from "@/lib/engines/historique-3a";
+import { PUBLIE_LE_SNB, SNB_3A, SOURCE_SNB, decimalesSnb, moisTexte, reperes } from "@/lib/engines/taux-snb";
+import { SectionTauxBns } from "@/components/donnees/section-taux-bns";
+import { CSV_ARCHIVES, SectionArchives3a } from "@/components/donnees/section-archives-3a";
 import { pageMetadata } from "@/lib/metadata";
 import { ORG_ID, WEBSITE_ID, breadcrumbLd, faqLd, graph, type Miette } from "@/lib/jsonld";
 import { abs } from "@/lib/site";
@@ -24,6 +27,14 @@ const NB = DERNIER.n;
 const t2 = (x: number, l: Locale) => (l === "fr" ? `${nombre(x, "fr", 2)}${N}%` : `${nombre(x, "en", 2)}%`);
 const t3 = (x: number, l: Locale) => (l === "fr" ? `${nombre(x, "fr", 3).replace(/0$/, "")}${N}%` : `${nombre(x, "en", 3).replace(/0$/, "")}%`);
 const dc = (iso: string) => iso.split("-").reverse().join(".");
+/* Série mensuelle de la BNS (taux-snb.ts) : premier et dernier mois publiés. */
+const BNS = reperes(SNB_3A.points);
+/* Copies archivées des pages des banques (historique-3a.ts) : points et banques affichés. */
+const ARCH = H.HISTORIQUE_ARCHIVES;
+const ARCH_N = ARCH.banques.reduce((s, b) => s + b.points.length, 0);
+const ARCH_DEBUT = ARCH.banques.map((b) => b.points[0].date_archive).reduce((a, b) => (b < a ? b : a));
+const ARCH_FIN = ARCH.banques.map((b) => b.points[b.points.length - 1].date_archive).reduce((a, b) => (b > a ? b : a));
+const tb = (x: number, l: Locale) => (l === "fr" ? `${decimalesSnb(x).replace(".", ",")}${N}%` : `${decimalesSnb(x)}%`);
 
 /* Comptes du dernier relevé, avec leur taux au premier relevé. */
 const PREMIERS = new Map(H.RELEVES[0].comptes.map((c) => [c.id, c.taux]));
@@ -86,12 +97,19 @@ const TXT = {
   fr: {
     path: PAGES_DONNEES.historique3a,
     alt: PAGES_DONNEES_EN.historique3a,
-    titre: "Taux 3a : historique des relevés chaque lundi",
-    description: `Taux des comptes 3a de ${NB} banques suisses relevés chaque lundi depuis le ${dc(PREMIER.date)}, avec moyenne, médiane, graphique et fichier CSV à télécharger.`,
+    titre: `Taux 3a : historique depuis ${BNS.premier.mois.slice(0, 4)} (BNS) et relevés du lundi`,
+    description: `Taux moyen des comptes 3a chaque mois depuis ${moisTexte(BNS.premier.mois, "fr")} selon la Banque nationale suisse, et taux de ${NB} banques relevés chaque lundi depuis le ${dc(PREMIER.date)} : graphiques et fichiers CSV.`,
     h1: "Historique des taux des comptes 3a",
-    intro: `Au relevé du ${dc(DERNIER.date)}, le taux moyen des ${NB} comptes 3a suivis est de ${t3(DERNIER.moyenne, "fr")} et le taux médian de ${t2(DERNIER.mediane, "fr")}. Les taux sont lus chaque lundi sur les pages des banques depuis le ${dc(PREMIER.date)}, et chaque relevé reste dans l’historique.`,
+    intro: `Selon la Banque nationale suisse, le taux moyen des comptes 3a était de ${tb(BNS.dernier.moyenne, "fr")} en ${moisTexte(BNS.dernier.mois, "fr")} ; sa série mensuelle commence en ${moisTexte(BNS.premier.mois, "fr")}. Nos propres relevés, faits chaque lundi depuis le ${dc(PREMIER.date)} sur les pages de ${NB} banques, donnent au ${dc(DERNIER.date)} un taux moyen de ${t3(DERNIER.moyenne, "fr")} et un taux médian de ${t2(DERNIER.mediane, "fr")}.`,
+    bnsSerieTitre: `Comment les taux 3a ont-ils évolué depuis ${BNS.premier.mois.slice(0, 4)}${N}?`,
+    bnsSerieNos: `La série de la BNS est la moyenne non pondérée des taux publiés par les banques qui les déclarent à la Banque nationale ; elle ne nomme aucune banque. Les relevés du lundi, plus bas, sont nos propres lectures des pages de ${NB} banques : les deux séries ne portent pas sur le même ensemble de banques et ne se comparent pas point par point.`,
     miettes: [{ name: "Accueil", href: "/" }, { name: "3e pilier", href: "/3e-pilier/" }, { name: "Taux des comptes 3a", href: OUTILS.taux3a }, { name: "Historique" }] as Miette[],
-    evolTitre: `Comment le taux moyen a-t-il évolué depuis le début du relevé${N}?`,
+    archTitre: `Quel taux chaque banque servait-elle avant nos relevés${N}?`,
+    archIntro: [
+      `Relevés reconstitués à partir des copies archivées (Internet Archive) des pages officielles des banques, jamais d’un comparateur : ${ARCH_N} copies lisibles pour ${ARCH.banques.length} banques, du ${dc(ARCH_DEBUT)} au ${dc(ARCH_FIN)}. Chaque point donne le taux mentionné dans la copie archivée, à la date de cette copie, qui n’est pas la date du changement de taux. Quand la page indique une date de validité, la liste de la banque la donne, et un taux annoncé à l’avance («${N}valable dès…${N}») est placé à cette date.`,
+      `Rien n’est interpolé ni prolongé sans preuve : un trait relie seulement deux copies successives qui montrent le même taux, à moins de ${H.ECART_MAX_MOIS} mois d’intervalle. Quand le taux change, l’ancien taux n’est prolongé que jusqu’à la date d’entrée en vigueur du nouveau, si la page la donne ; sinon, seuls les points sont dessinés. Les copies dont le taux ne s’attribue pas sans doute à une date ou au compte 3a de base sont écartées. Toutes les banques sont à la même échelle, avec la moyenne mensuelle de la BNS en pointillé ; certaines, notamment des banques en ligne, ont servi des taux nettement au-dessus de cette moyenne.`,
+    ],
+    evolTitre: `Comment le taux moyen a-t-il évolué depuis le début de nos relevés${N}?`,
     evol:
       H.SERIE.length < 2
         ? `Un seul relevé existe pour l’instant.`
@@ -129,7 +147,15 @@ const TXT = {
     faq: [
       {
         q: `Les taux 3a suivent-ils le taux directeur de la BNS${N}?`,
-        a: `Chaque banque fixe elle-même le taux de son compte 3a. Le relevé commence le ${dc(PREMIER.date)} et ne couvre encore aucune décision de la Banque nationale suisse : il ne permet donc pas de mesurer ce lien. Après chaque décision, une note datée donnera ici la moyenne et la médiane du relevé d’avant et du relevé d’après.`,
+        a: `Chaque banque fixe elle-même le taux de son compte 3a. La série mensuelle de la BNS montre l’évolution du taux moyen depuis ${moisTexte(BNS.premier.mois, "fr")}, mais cette page ne la met pas en regard du taux directeur. Nos relevés du lundi commencent le ${dc(PREMIER.date)} et ne couvrent encore aucune décision de la Banque nationale suisse. Après chaque décision, une note datée donnera ici la moyenne et la médiane du relevé d’avant et du relevé d’après.`,
+      },
+      {
+        q: `D’où vient la série depuis ${BNS.premier.mois.slice(0, 4)}${N}?`,
+        a: `De la statistique « ${SOURCE_SNB.titre_fr} » de la Banque nationale suisse (portail data.snb.ch, cube ${SOURCE_SNB.cube}), série « ${SNB_3A.libelle_fr} ». La BNS publie chaque mois la moyenne non pondérée, les quartiles et la médiane des taux annoncés par les banques. Les valeurs sont reprises telles quelles et mises à jour chaque mois après la publication de la BNS${N}; la série complète se télécharge sur le portail de la BNS.`,
+      },
+      {
+        q: `Comment l’historique de chaque banque avant le ${dc(PREMIER.date)} est-il reconstitué${N}?`,
+        a: `Les relevés sont reconstitués à partir des copies archivées (Internet Archive) des pages officielles des banques et de leurs fiches de taux, jamais d’un comparateur. Chaque taux renvoie à sa copie archivée et donne le taux mentionné à la date de cette copie, pas la date du changement de taux, sauf quand la page indique une date de validité. Les copies ambiguës sont écartées, rien n’est interpolé ni prolongé au-delà de ce que montrent les copies, et une banque n’a de graphique qu’avec au moins ${H.MIN_POINTS} copies lisibles.`,
       },
       {
         q: `Pourquoi donner une moyenne et une médiane${N}?`,
@@ -141,21 +167,28 @@ const TXT = {
       },
       {
         q: `Puis-je réutiliser ces données${N}?`,
-        a: `Oui. Le fichier CSV est publié sous licence Creative Commons CC${N}BY${N}4.0 : il est possible de le reprendre, y compris dans un article ou une étude, en citant « Guide Assurance, d’après les pages des banques » et la date du relevé.`,
+        a: `Oui. Le fichier CSV de nos relevés est publié sous licence Creative Commons CC${N}BY${N}4.0 : il est possible de le reprendre, y compris dans un article ou une étude, en citant « Guide Assurance, d’après les pages des banques » et la date du relevé. La série de la BNS se cite « Banque nationale suisse (BNS), data.snb.ch », avec le mois et la date de publication ; elle reste soumise aux conditions d’utilisation de la BNS.`,
       },
     ] as Faq[],
-    maj: `Dernier relevé le ${dateLongue(DERNIER.date, "fr")}, sur les pages des banques. Les taux sont variables et seul le site de la banque fait foi.`,
+    maj: `Dernier relevé le ${dateLongue(DERNIER.date, "fr")}, sur les pages des banques ; série de la BNS publiée le ${dateLongue(PUBLIE_LE_SNB, "fr")}. Les taux sont variables et seul le site de la banque fait foi.`,
     footer: "Ces taux sont donnés à titre d’information. Les conditions de la banque font foi.",
   },
   en: {
     path: PAGES_DONNEES_EN.historique3a,
     alt: PAGES_DONNEES.historique3a,
-    titre: "Pillar 3a interest rates: weekly history",
-    description: `Pillar 3a account rates at ${NB} Swiss banks, read every Monday since ${dc(PREMIER.date)}, with mean, median, a chart and a CSV file to download.`,
+    titre: `Pillar 3a interest rates: history since ${BNS.premier.mois.slice(0, 4)} (SNB) and weekly surveys`,
+    description: `Mean pillar 3a account rate every month since ${moisTexte(BNS.premier.mois, "en")} according to the Swiss National Bank, and the rates of ${NB} banks read every Monday since ${dc(PREMIER.date)}: charts and CSV files.`,
     h1: "Pillar 3a interest rate history",
-    intro: `In the survey of ${dc(DERNIER.date)}, the mean rate of the ${NB} pillar 3a accounts tracked is ${t3(DERNIER.moyenne, "en")} and the median ${t2(DERNIER.mediane, "en")}. Rates have been read every Monday on the banks’ own pages since ${dc(PREMIER.date)}, and every survey stays in the history.`,
+    intro: `According to the Swiss National Bank, the mean pillar 3a account rate was ${tb(BNS.dernier.moyenne, "en")} in ${moisTexte(BNS.dernier.mois, "en")}; its monthly series starts in ${moisTexte(BNS.premier.mois, "en")}. Our own surveys, made every Monday since ${dc(PREMIER.date)} on the pages of ${NB} banks, give a mean rate of ${t3(DERNIER.moyenne, "en")} and a median of ${t2(DERNIER.mediane, "en")} on ${dc(DERNIER.date)}.`,
+    bnsSerieTitre: `How have pillar 3a rates moved since ${BNS.premier.mois.slice(0, 4)}?`,
+    bnsSerieNos: `The SNB series is the unweighted average of the rates published by the banks that report them to the Swiss National Bank; it names no bank. The Monday surveys below are our own readings of ${NB} banks’ pages: the two series do not cover the same set of banks and cannot be compared point by point.`,
     miettes: [{ name: "Home", href: "/en/" }, { name: "Pillar 3a", href: "/en/pillar-3a/" }, { name: "3a interest rates", href: OUTILS_EN.taux3a }, { name: "History" }] as Miette[],
-    evolTitre: "How has the mean rate moved since the survey began?",
+    archTitre: "What rate did each bank pay before our surveys?",
+    archIntro: [
+      `Readings reconstructed from archived copies (Internet Archive) of the banks’ official pages, never from a comparison site: ${ARCH_N} readable copies for ${ARCH.banques.length} banks, from ${dc(ARCH_DEBUT)} to ${dc(ARCH_FIN)}. Each point is the rate stated in the archived copy, on the date of that copy, which is not the date the rate changed. When the page states a validity date, the bank’s list gives it, and a rate announced in advance (“valid from…”) is placed on that date.`,
+      `Nothing is interpolated or extended without evidence: a line only joins two consecutive copies showing the same rate, less than ${H.ECART_MAX_MOIS} months apart. When the rate changes, the old rate is extended only up to the date the new one took effect, if the page gives it; otherwise only the points are drawn. Copies whose rate cannot be tied with certainty to a date or to the basic 3a account are left out. All banks share the same scale, with the SNB monthly average dotted; some, online banks in particular, paid rates well above that average.`,
+    ],
+    evolTitre: "How has the mean rate moved since our surveys began?",
     evol:
       H.SERIE.length < 2
         ? "There is only one survey so far."
@@ -193,7 +226,15 @@ const TXT = {
     faq: [
       {
         q: "Do pillar 3a rates follow the SNB policy rate?",
-        a: `Each bank sets its own pillar 3a rate. The survey starts on ${dc(PREMIER.date)} and does not yet cover any Swiss National Bank decision, so it cannot measure that link yet. After each decision, a dated note here will give the mean and median of the survey before and the survey after.`,
+        a: `Each bank sets its own pillar 3a rate. The SNB’s monthly series shows how the mean rate has moved since ${moisTexte(BNS.premier.mois, "en")}, but this page does not set it against the policy rate. Our Monday surveys start on ${dc(PREMIER.date)} and do not yet cover any Swiss National Bank decision. After each decision, a dated note here will give the mean and median of the survey before and the survey after.`,
+      },
+      {
+        q: `Where does the series since ${BNS.premier.mois.slice(0, 4)} come from?`,
+        a: `From the Swiss National Bank statistic “${SOURCE_SNB.titre_en}” (data.snb.ch portal, cube ${SOURCE_SNB.cube}), series “${SNB_3A.libelle_en}”. Each month the SNB publishes the unweighted average, the quartiles and the median of the rates reported by banks. The values are used as published and updated every month after the SNB release; the full series can be downloaded from the SNB data portal.`,
+      },
+      {
+        q: `How is each bank’s history before ${dc(PREMIER.date)} reconstructed?`,
+        a: `The readings are reconstructed from archived copies (Internet Archive) of the banks’ official pages and rate sheets, never from a comparison site. Each rate links to its archived copy and is the rate stated on the date of that copy, not the date the rate changed, unless the page states a validity date. Ambiguous copies are left out, nothing is interpolated or extended beyond what the copies show, and a bank gets a chart only with at least ${H.MIN_POINTS} readable copies.`,
       },
       {
         q: "Why give both a mean and a median?",
@@ -205,10 +246,10 @@ const TXT = {
       },
       {
         q: "Can I reuse this data?",
-        a: "Yes. The CSV file is published under a Creative Commons CC BY 4.0 licence: you may reuse it, including in an article or a study, by citing “Guide Assurance, from the banks’ pages” and the survey date.",
+        a: "Yes. The CSV file of our surveys is published under a Creative Commons CC BY 4.0 licence: you may reuse it, including in an article or a study, by citing “Guide Assurance, from the banks’ pages” and the survey date. The SNB series is cited as “Swiss National Bank (SNB), data.snb.ch”, with the month and release date; it remains subject to the SNB’s terms of use.",
       },
     ] as Faq[],
-    maj: `Latest survey on ${dateLongue(DERNIER.date, "en")}, on the banks’ pages. Rates are variable, and the bank’s website is authoritative.`,
+    maj: `Latest survey on ${dateLongue(DERNIER.date, "en")}, on the banks’ pages; SNB series released on ${dateLongue(PUBLIE_LE_SNB, "en")}. Rates are variable, and the bank’s website is authoritative.`,
     footer: "These rates are for information only. The bank’s conditions are authoritative.",
   },
 };
@@ -241,7 +282,10 @@ export function PageHistorique3a({ locale }: { locale: Locale }) {
       "@type": "Dataset",
       "@id": `${url}#serie`,
       name: fr ? "Historique des taux des comptes 3a en Suisse" : "Pillar 3a account interest rate history, Switzerland",
-      description: t.description,
+      // Uniquement nos relevés hebdomadaires (licence CC BY) : la série BNS est décrite dans #serie-bns, sans licence.
+      description: fr
+        ? `Taux d’intérêt de base du compte 3a de ${NB} banques, relevés chaque lundi par Guide Assurance sur leurs pages officielles depuis le ${dc(PREMIER.date)}.`
+        : `Base interest rate of the pillar 3a account at ${NB} banks, read every Monday by Guide Assurance on their official pages since ${dc(PREMIER.date)}.`,
       inLanguage: fr ? "fr-CH" : "en",
       temporalCoverage: `${PREMIER.date}/..`,
       dateModified: DERNIER.date,
@@ -252,6 +296,42 @@ export function PageHistorique3a({ locale }: { locale: Locale }) {
       measurementTechnique: fr ? "Lecture hebdomadaire des pages officielles et fiches de taux des banques" : "Weekly reading of the banks’ official pages and rate sheets",
       variableMeasured: fr ? "Taux d’intérêt annuel de base du compte 3a (%)" : "Annual base interest rate of the pillar 3a account (%)",
       distribution: [{ "@type": "DataDownload", encodingFormat: "text/csv", contentUrl: abs(CSV) }],
+    },
+    {
+      "@type": "Dataset",
+      "@id": `${url}#serie-bns`,
+      name: fr ? "Taux d’intérêt des comptes 3a selon la Banque nationale suisse, chaque mois" : "Pillar 3a account interest rates according to the Swiss National Bank, monthly",
+      description: fr
+        ? `Moyenne non pondérée, quartiles et médiane des taux des comptes de prévoyance liée (pilier 3a) publiés par les banques, selon la statistique de la BNS « ${SOURCE_SNB.titre_fr} » (cube ${SOURCE_SNB.cube}), fin de mois, depuis ${moisTexte(BNS.premier.mois, "fr")}.`
+        : `Unweighted average, quartiles and median of tied pension provision (pillar 3a) account rates published by banks, from the SNB statistic “${SOURCE_SNB.titre_en}” (cube ${SOURCE_SNB.cube}), end of month, since ${moisTexte(BNS.premier.mois, "en")}.`,
+      inLanguage: fr ? "fr-CH" : "en",
+      temporalCoverage: `${BNS.premier.mois}/${BNS.dernier.mois}`,
+      dateModified: PUBLIE_LE_SNB,
+      isAccessibleForFree: true,
+      creator: { "@type": "Organization", name: fr ? SOURCE_SNB.organisme_fr : SOURCE_SNB.organisme_en, url: "https://www.snb.ch/" },
+      url: fr ? SOURCE_SNB.page_fr : SOURCE_SNB.page_en,
+      isBasedOn: fr ? SOURCE_SNB.page_fr : SOURCE_SNB.page_en,
+      usageInfo: fr ? SOURCE_SNB.conditions_fr : SOURCE_SNB.conditions_en,
+      creditText: fr ? "Banque nationale suisse (BNS), data.snb.ch" : "Swiss National Bank (SNB), data.snb.ch",
+      variableMeasured: fr ? "Taux d’intérêt des comptes 3a (% par an) : moyenne, quartiles, médiane" : "Pillar 3a account interest rate (% a year): mean, quartiles, median",
+    },
+    {
+      "@type": "Dataset",
+      "@id": `${url}#archives`,
+      name: fr ? "Taux des comptes 3a par banque d’après les copies archivées de leurs pages" : "Pillar 3a account rates by bank from archived copies of their pages",
+      description: fr
+        ? `Taux de base des comptes 3a de ${ARCH.banques.length} banques suisses, reconstitués à partir des copies archivées (Internet Archive) de leurs pages officielles, du ${dc(ARCH_DEBUT)} au ${dc(ARCH_FIN)}. Chaque ligne cite sa copie archivée.`
+        : `Base rates of pillar 3a accounts at ${ARCH.banques.length} Swiss banks, reconstructed from archived copies (Internet Archive) of their official pages, from ${dc(ARCH_DEBUT)} to ${dc(ARCH_FIN)}. Each row cites its archived copy.`,
+      inLanguage: fr ? "fr-CH" : "en",
+      temporalCoverage: `${ARCH_DEBUT}/${ARCH_FIN}`,
+      dateModified: H.ARCHIVES_GENERE_LE,
+      isAccessibleForFree: true,
+      license: LICENCE_DONNEES,
+      creator: { "@id": ORG_ID },
+      creditText: fr ? "Guide Assurance, d’après les copies archivées (Internet Archive) des pages des banques" : "Guide Assurance, from archived copies (Internet Archive) of the banks’ pages",
+      measurementTechnique: fr ? "Lecture des copies archivées (Wayback Machine) des pages officielles et fiches de taux des banques" : "Reading of archived copies (Wayback Machine) of the banks’ official pages and rate sheets",
+      variableMeasured: fr ? "Taux d’intérêt annuel de base du compte 3a (%)" : "Annual base interest rate of the pillar 3a account (%)",
+      distribution: [{ "@type": "DataDownload", encodingFormat: "text/csv", contentUrl: abs(CSV_ARCHIVES) }],
     },
     breadcrumbLd(t.miettes, `${url}#breadcrumb`),
     { ...faqLd(t.faq), "@id": `${url}#faq` },
@@ -265,6 +345,17 @@ export function PageHistorique3a({ locale }: { locale: Locale }) {
           <Breadcrumbs items={t.miettes} locale={locale} />
           <h1>{t.h1}</h1>
           <p className="intro">{t.intro}</p>
+
+          <SectionTauxBns
+            serie={SNB_3A}
+            locale={locale}
+            id="serie-bns"
+            titre={t.bnsSerieTitre}
+            produit={{ fr: "des comptes 3a", en: "on pillar 3a accounts" }}
+            nosReleves={t.bnsSerieNos}
+          />
+
+          <SectionArchives3a locale={locale} titre={t.archTitre} intro={t.archIntro} />
 
           <section className="reperes-statiques">
             <h2>{t.evolTitre}</h2>

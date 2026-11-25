@@ -37,6 +37,27 @@
   .graphique-3a .cle.moyenne::before { background: var(--lac-encre); }
   .graphique-3a .cle.mediane::before { background: repeating-linear-gradient(90deg, var(--ocre) 0 6px, transparent 6px 10px); }
   .graphique-3a .cle.bande::before { height: 10px; background: var(--lac); opacity: .3; }
+  /* Série longue (BNS, graphique-serie.tsx) : repères datés (décisions de la BNS) et points isolés (archives). */
+  .graphique-3a .repere { stroke: var(--encre-2); stroke-width: 1; stroke-dasharray: 3 3; }
+  .graphique-3a .point.isole { fill: var(--ocre); }
+  .graphique-3a .cle.isole::before { width: 8px; height: 8px; border-radius: 50%; background: var(--ocre); }
+  .graphique-3a .cle.repere::before { width: 0; height: 14px; border-left: 1px dashed var(--encre-2); }
+  .source-bns { font: 16px var(--narrow); color: var(--encre-2); }
+  /* Taux par banque d'après les copies archivées (section-archives-3a.tsx) : petits graphiques à la même échelle. */
+  .archives-grille { display: grid; grid-template-columns: 1fr; gap: var(--s5); margin: var(--s4) 0; }
+  @media (min-width: 760px) { .archives-grille { grid-template-columns: 1fr 1fr; } }
+  .graphique-3a.mini-banque { margin: 0; min-width: 0; }
+  .mini-banque .mini-titre { display: block; margin: 0 0 var(--s1); font: 16px var(--narrow); color: var(--encre-2); }
+  .mini-banque .mini-titre b { color: var(--encre); font-size: 17px; }
+  .graphique-3a .palier { fill: none; stroke: var(--lac-encre); stroke-width: 2.2; stroke-linejoin: round; }
+  .graphique-3a .point-archive { fill: var(--lac-encre); stroke: var(--papier); stroke-width: 1; }
+  .graphique-3a .ligne-bns { fill: none; stroke: var(--encre-2); stroke-width: 1.2; stroke-dasharray: 4 3; opacity: .7; }
+  .graphique-3a.legende-archives { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4); font: 16px var(--narrow); color: var(--encre-2); margin: 0 0 var(--s3); }
+  .graphique-3a .cle.palier::before { background: var(--lac-encre); }
+  .graphique-3a .cle.point-archive::before { width: 7px; height: 7px; border-radius: 50%; background: var(--lac-encre); }
+  .graphique-3a .cle.ligne-bns::before { height: 0; border-top: 2px dashed var(--encre-2); background: none; }
+  .archives-detail { margin-top: var(--s2); font-size: 16px; }
+  .archives-detail summary { cursor: pointer; font-weight: 600; padding: 10px 0; }
 
   /* Chiffres clés : une phrase par fait, avec ancre, validité, source et méthode. */
   .sommaire-chiffres ul { margin: 0 0 var(--s6); padding-left: 1.2em; list-style: disc; }

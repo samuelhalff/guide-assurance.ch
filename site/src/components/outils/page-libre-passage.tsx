@@ -11,6 +11,8 @@ import { pageMetadata } from "@/lib/metadata";
 import { ORG_ID, WEBSITE_ID, breadcrumbLd, faqLd, graph, itemListLd, type Miette } from "@/lib/jsonld";
 import { abs } from "@/lib/site";
 import { DATE_PAGE } from "@/lib/donnees";
+import { SectionTauxBns } from "@/components/donnees/section-taux-bns";
+import { PUBLIE_LE_SNB, SNB_LP, SOURCE_SNB, moisTexte, reperes } from "@/lib/engines/taux-snb";
 import { dateLongue } from "@/lib/i18n";
 import { OUTILS, OUTILS_3A_ASSURANCE, OUTILS_EN } from "@/lib/nav";
 import { chf, ESPACE_FINE as N } from "@/lib/nombres";
@@ -25,6 +27,7 @@ const NB = NB_INSTITUTIONS;
 const PLUS_HAUT = COMPTES_LP.filter((c) => c.taux === TAUX_MAX).map((c) => c.banque);
 const noms = (et: string) => PLUS_HAUT.join(` ${et} `);
 const ECART_100K = (100000 * (TAUX_MAX - TAUX_MIN)) / 100;
+const BNS = reperes(SNB_LP.points);
 const FEDLEX_LFLP = "https://www.fedlex.admin.ch/eli/cc/1994/2386_2386_2386/fr";
 const FEDLEX_OLP = "https://www.fedlex.admin.ch/eli/cc/1994/2399_2399_2399/fr";
 const FEDLEX_LB = "https://www.fedlex.admin.ch/eli/cc/51/117_121_129/fr";
@@ -44,6 +47,8 @@ const LP = {
     rappelTexte: "Un conseiller d’un courtier partenaire peut vous rappeler pour parler de votre libre passage, gratuitement et sans engagement.",
     rappel: "Être rappelé",
     hListe: "Taux par institution",
+    bnsTitre: `Comment les taux de libre passage ont-ils évolué depuis ${BNS.premier.mois.slice(0, 4)}${N}?`,
+    bnsNos: `La série de la BNS est la moyenne non pondérée des taux publiés par les banques qui les déclarent à la Banque nationale ; elle ne nomme aucune institution. La liste plus haut reprend nos propres lectures des pages de ${NB} institutions, au ${RELEVE} : les deux ne portent pas sur le même ensemble d’institutions.`,
     miettes: [{ name: "Accueil", href: "/" }, { name: "Prévoyance", href: "/3e-pilier/" }, { name: "Taux des comptes de libre passage" }] as Miette[],
     appli: "Taux des comptes de libre passage",
     partage: `Les taux des comptes de libre passage de ${NB} institutions suisses, relevés sur leurs pages.`,
@@ -149,6 +154,8 @@ const LP = {
     rappelTexte: "An adviser from a partner broker can call you back to talk about your vested benefits, free and without commitment.",
     rappel: "Request a call-back",
     hListe: "Rates by institution",
+    bnsTitre: `How have vested benefits rates moved since ${BNS.premier.mois.slice(0, 4)}?`,
+    bnsNos: `The SNB series is the unweighted average of the rates published by the banks that report them to the Swiss National Bank; it names no institution. The list above is our own reading of ${NB} institutions’ pages on ${RELEVE}: the two do not cover the same set of institutions.`,
     miettes: [{ name: "Home", href: "/en/" }, { name: "Pensions", href: "/en/pillar-3a/" }, { name: "Vested benefits account rates" }] as Miette[],
     appli: "Vested benefits account rates",
     partage: `Interest rates on vested benefits accounts at ${NB} Swiss institutions, read on their own pages.`,
@@ -296,6 +303,24 @@ export function PageLibrePassage({ locale }: { locale: Locale }) {
       creator: { "@id": ORG_ID },
       variableMeasured: fr ? ["Taux d’intérêt annuel du compte de libre passage (%)"] : ["Annual interest rate of the vested benefits account (%)"],
     },
+    {
+      "@type": "Dataset",
+      "@id": `${url}#serie-bns`,
+      name: fr ? "Taux d’intérêt des comptes de libre passage selon la Banque nationale suisse, chaque mois" : "Vested benefits account interest rates according to the Swiss National Bank, monthly",
+      description: fr
+        ? `Moyenne non pondérée, quartiles et médiane des taux des comptes de libre passage (2e pilier) publiés par les banques, selon la statistique de la BNS « ${SOURCE_SNB.titre_fr} » (cube ${SOURCE_SNB.cube}), fin de mois, depuis ${moisTexte(BNS.premier.mois, "fr")}.`
+        : `Unweighted average, quartiles and median of vested benefits account (pillar 2) rates published by banks, from the SNB statistic “${SOURCE_SNB.titre_en}” (cube ${SOURCE_SNB.cube}), end of month, since ${moisTexte(BNS.premier.mois, "en")}.`,
+      inLanguage: fr ? "fr-CH" : "en",
+      temporalCoverage: `${BNS.premier.mois}/${BNS.dernier.mois}`,
+      dateModified: PUBLIE_LE_SNB,
+      isAccessibleForFree: true,
+      creator: { "@type": "Organization", name: fr ? SOURCE_SNB.organisme_fr : SOURCE_SNB.organisme_en, url: "https://www.snb.ch/" },
+      url: fr ? SOURCE_SNB.page_fr : SOURCE_SNB.page_en,
+      isBasedOn: fr ? SOURCE_SNB.page_fr : SOURCE_SNB.page_en,
+      usageInfo: fr ? SOURCE_SNB.conditions_fr : SOURCE_SNB.conditions_en,
+      creditText: fr ? "Banque nationale suisse (BNS), data.snb.ch" : "Swiss National Bank (SNB), data.snb.ch",
+      variableMeasured: fr ? "Taux d’intérêt des comptes de libre passage (% par an) : moyenne, quartiles, médiane" : "Vested benefits account interest rate (% a year): mean, quartiles, median",
+    },
     itemListLd({
       id: `${url}#liste`,
       name: fr ? "Taux des comptes de libre passage, du plus élevé au plus bas" : "Vested benefits account rates, from the highest to the lowest",
@@ -344,6 +369,17 @@ export function PageLibrePassage({ locale }: { locale: Locale }) {
               ))}
             </section>
           ))}
+          <SectionTauxBns
+            serie={SNB_LP}
+            locale={locale}
+            id="serie-bns"
+            titre={t.bnsTitre}
+            produit={{ fr: "des comptes de libre passage", en: "on vested benefits accounts" }}
+            nosReleves={t.bnsNos}
+            tableau={false}
+            classe="prose-lp"
+            classeTitre="titre-section-lp"
+          />
           <p className="note-outil">
             {t.sourcesTitre} :{" "}
             {t.sources.map((s, i) => (

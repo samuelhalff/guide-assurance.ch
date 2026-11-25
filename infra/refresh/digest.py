@@ -16,6 +16,7 @@ import common as C  # noqa: E402
 DATASETS = {
     "taux3a": ("Taux 3a (hebdomadaire, publication automatique)", 8),
     "tauxlp": ("Taux de libre passage (hebdomadaire, publication automatique)", 8),
+    "tauxsnb": ("Taux 3a et de libre passage de la BNS (mensuel, publication automatique)", 32),
     "lamal": ("Primes LAMal (mensuel, quotidien du 25.9 au 31.12, publication automatique des corrections)", 32),
     "frontalier": ("Frontaliers : PASS et primes UE (mensuel, quotidien en janvier, alerte seulement)", 32),
     "impots": ("Barèmes d'impôt GE/VD (mensuel, alerte seulement)", 32),

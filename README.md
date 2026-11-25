@@ -24,6 +24,7 @@ Avant de pousser : `cd site && npx tsc --noEmit && npm run lint && npm test && n
 |---|---|---|
 | `ci-deploy.yml` | chaque push et pull request ; à la main (`dry_run`) | mentions interdites, gitleaks (tout l'historique), tsc, lint, tests, données ouvertes à jour, build, contrôles SEO du HTML, mentions interdites dans `site/out`, liens internes. Sur `main` : rsync de `site/out` vers le proxy, contrôle HTTP 200 des pages clés, IndexNow (adresses nouvelles, retirées ou au `lastmod` changé, par rapport au plan du site en ligne avant la mise à jour) |
 | `refresh-taux3a.yml` | lundi 06:30 (Zurich) | taux 3a des 17 banques (HTTP, PDF, navigateur sans tête Playwright en secours) : contrôles, publication automatique si valide, historique hebdomadaire ; une banque illisible garde son dernier taux vérifié et sa date, signalée dans le résumé et par e-mail |
+| `refresh-tauxsnb.yml` | le 5 du mois, 07:40 (Zurich) | taux 3a et de libre passage selon la statistique mensuelle de la BNS (data.snb.ch, cube `zikrepro`) : contrôles (format, libellés des séries, révisions, écarts), publication automatique si valide |
 | `refresh-lamal.yml` | 06:15 chaque jour du 25.9 au 31.12, sinon le 1er du mois | corrections des primes LAMal de l'année en cours publiées automatiquement ; nouvelle année : alerte |
 | `refresh-frontalier.yml` | 06:45 chaque jour en janvier, sinon le 1er du mois | PASS et primes UE : alerte seulement |
 | `refresh-impots.yml` | le 1er du mois, 07:00 | barèmes d'impôt GE/VD : alerte seulement |
@@ -38,14 +39,17 @@ Secrets du dépôt (valeurs jamais affichées) : `DEPLOY_SSH_KEY` (clé ed25519 
 
 ## Données ouvertes
 
-Le dossier `data/csv/` contient trois fichiers CSV sous licence [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), calculés avec les mêmes moteurs que les pages du site (`site/scripts/donnees-ouvertes.mts`) :
+Le dossier `data/csv/` contient quatre fichiers CSV sous licence [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), calculés avec les mêmes moteurs que les pages du site (`site/scripts/donnees-ouvertes.mts`) :
 
 | Fichier | Contenu | Source d'origine |
 |---|---|---|
 | `primes-2027-regions.csv` | primes LAMal 2027 par région de prime et profil type : nombre d'offres, minimum, quartiles, médiane, maximum | OFSP (priminfo.admin.ch, régions de primes 2027) |
 | `economie-impot-3a-communes-2026.csv` | économie d'impôt 2026 d'un versement 3a de 7 258 CHF, personne seule, 80 000 CHF de revenu imposable, pour chaque commune couverte | AFC et administrations fiscales cantonales |
 | `taux-3a-historique.csv` | taux de base des comptes 3a, relevés chaque lundi depuis le 22.11.2026 | pages officielles des banques |
+| `taux-3a-archives.csv` | taux de base des comptes 3a par banque avant le relevé hebdomadaire, une ligne par copie archivée (date de la copie, taux, date d'entrée en vigueur si indiquée, adresses de la copie et de la page) ; source : `data/sources/taux-3a-archives.json` | copies archivées (Internet Archive) des pages officielles des banques |
 
 Pour les citer : « Guide Assurance (guide-assurance.ch), d'après » la source d'origine, avec la date des données. Voir `data/csv/LICENSE` et `CITATION.cff`. Pages correspondantes : [chiffres clés 2027](https://guide-assurance.ch/chiffres-cles-2027/), [primes par région](https://guide-assurance.ch/assurance-maladie/primes/regions/), [économie d'impôt 3a par commune](https://guide-assurance.ch/3e-pilier/economie-impot/communes/), [historique des taux 3a](https://guide-assurance.ch/3e-pilier/taux-3a/historique/).
+
+La série mensuelle de la BNS (taux 3a et de libre passage, cube `zikrepro`) est affichée sur les pages de taux avec sa source et suit les conditions d'utilisation de la BNS ; elle n'est pas republiée ici (téléchargement sur [data.snb.ch](https://data.snb.ch/fr/topics/ziredev/cube/zikrepro)).
 
 Régénérer les fichiers : `cd site && node --no-warnings scripts/donnees-ouvertes.mts ../data/csv`

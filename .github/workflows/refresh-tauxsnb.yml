@@ -1,0 +1,36 @@
+name: "Relevé : taux 3a et de libre passage de la BNS (le 5 du mois, 07:40)"
+
+# Statistique mensuelle de la BNS (data.snb.ch, cube zikrepro, séries GVG_S3A et GVG_F2S) : contrôles, publication
+# automatique si valide (infra/refresh/tauxsnb.py). La BNS publie ces taux en début de mois.
+# Lignes en UTC : hiver puis été ; le modèle ne garde que celle qui tombe à 7 h à Zurich.
+on:
+  schedule:
+    - cron: "40 6 5 * *"
+    - cron: "40 5 5 * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "--dry-run : relève et compare, n'écrit rien, ne publie rien, n'envoie rien"
+        type: boolean
+        default: true
+      args:
+        description: "options (--simulate-change, --simulate-parser-failure)"
+        type: string
+        default: ""
+
+# Concurrence : dans _refresh.yml (job run, groupe guide-assurance-prod partagé avec le déploiement).
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+jobs:
+  releve:
+    uses: ./.github/workflows/_refresh.yml
+    with:
+      dataset: tauxsnb
+      at: 7
+      dry_run: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+      args: ${{ inputs.args || '' }}
+    secrets: inherit

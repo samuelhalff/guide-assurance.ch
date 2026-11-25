@@ -10,6 +10,10 @@ import ASSUREURS3A from "@/data/assureurs-3a-3b.json";
 export const DATE_FRAIS_3A: string = FRAIS3A.verifie_le;
 export const DATE_ASSUREURS_3A: string = ASSUREURS3A.lu_le;
 import H3A from "@/data/taux-3a-historique.json";
+import SNB from "@/data/snb-taux-prevoyance.json";
+import ARCH3A from "@/data/taux-3a-archives.json";
+/* Statistique mensuelle de la BNS (taux 3a et de libre passage), date de publication par la BNS. */
+export const DATE_SNB: string = SNB.publie_le;
 
 export const maxIso = (...d: string[]) => d.reduce((a, b) => (b > a ? b : a));
 
@@ -30,7 +34,7 @@ export const DATE_TEXTE = {
   simulateur: "2026-11-23",
   lettre: "2026-11-22",
   taux3a: "2026-11-23", // frais des comptes 3a et solutions 3a en titres
-  tauxLibrePassage: "2026-11-24", // page des taux des comptes de libre passage créée
+  tauxLibrePassage: "2026-11-25", // série mensuelle de la BNS depuis 2017 ajoutée
   assurance3a: "2026-11-23", // page 3a et 3b auprès d'un assureur créée
   impot3a: "2026-11-23", // canton du Jura ajouté
   outils: "2026-11-23", // page « Outils et chiffres » créée ; calculateur ménage et garanties PJ ajoutés
@@ -44,7 +48,7 @@ export const DATE_TEXTE = {
 export const DATE_PAGE = {
   comparateur: maxIso(DATE_TEXTE.comparateur, DATE_PRIMES),
   taux3a: maxIso(DATE_TEXTE.taux3a, DATE_TAUX_3A, DATE_FRAIS_3A),
-  tauxLibrePassage: maxIso(DATE_TEXTE.tauxLibrePassage, RELEVE_LE_LP),
+  tauxLibrePassage: maxIso(DATE_TEXTE.tauxLibrePassage, RELEVE_LE_LP, DATE_SNB),
   assurance3a: maxIso(DATE_TEXTE.assurance3a, DATE_ASSUREURS_3A),
   impot3a: maxIso(DATE_TEXTE.impot3a, DATE_IMPOTS),
   primesUe: DATE_TEXTE.primesUe,
@@ -63,9 +67,9 @@ const DERNIER_RELEVE_3A = H3A.releves.map((r) => r.date).reduce((a, b) => (b > a
 export const DATE_HISTORIQUE_3A = DERNIER_RELEVE_3A;
 export const DATE_PAGE_DONNEES = {
   regions: maxIso("2026-11-23", DATE_PRIMES),
-  historique3a: maxIso("2026-11-23", DERNIER_RELEVE_3A),
+  historique3a: maxIso("2026-11-25", DERNIER_RELEVE_3A, DATE_SNB, ARCH3A.genere_le), // série mensuelle de la BNS ajoutée le 25.11.2026
   communes3a: maxIso("2026-11-23", DATE_IMPOTS),
-  chiffres: maxIso("2026-11-23", DATE_PRIMES, DATE_TAUX_3A, DATE_IMPOTS),
+  chiffres: maxIso("2026-11-25", DATE_PRIMES, DATE_TAUX_3A, DATE_IMPOTS, DATE_SNB),
 } as const;
 /* « Outils et chiffres » : reprend les chiffres des outils et des pages de données. */
 export const DATE_PAGE_OUTILS = maxIso(DATE_TEXTE.outils, DATE_PAGE.accueil, DATE_PAGE_DONNEES.chiffres, DATE_PAGE_DONNEES.historique3a);

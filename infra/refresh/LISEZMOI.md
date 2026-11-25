@@ -8,6 +8,7 @@ Les données chiffrées du site sont relevées à la source selon un calendrier 
 |---|---|---|---|
 | Taux 3a (`taux3a.py`) | lundi 06:30 | pages et fiches PDF des 17 banques (`data/scripts/taux_3a.py`) | **publication automatique** ; le relevé de la semaine entre dans l'historique même sans changement |
 | Taux de libre passage (`tauxlp.py`) | lundi 06:40 | pages et fiches PDF de 23 institutions (`data/scripts/taux_libre_passage.py`, lecteurs de `taux_3a.py`) | **publication automatique** (pas d'historique) ; une institution illisible garde son dernier taux vérifié et est signalée |
+| Taux 3a et de libre passage de la BNS (`tauxsnb.py`) | le 5 du mois, 07:40 | API du portail de données de la BNS (data.snb.ch, cube `zikrepro`, séries `GVG_S3A` et `GVG_F2S` : moyenne, quartiles, médiane ; `data/scripts/taux_prevoyance_snb.py`) | **publication automatique** ; contrôles : format du CSV, libellés des séries dans l'API, aucun mois perdu, révision d'un mois publié ≤ 0,25 point, nouveau mois ≤ 0,5 point d'écart ; anomalie : alerte, rien publié |
 | Primes LAMal (`lamal.py`) | 06:15, chaque jour du 25.9 au 31.12, sinon le 1er du mois | priminfo.admin.ch, date des fichiers OFSP sur opendata.swiss | **publication automatique** des corrections de l'année en cours ; nouvelle année : alerte seulement |
 | Frontaliers (`frontalier.py`) | 06:45, chaque jour en janvier, sinon le 1er du mois | Urssaf (PASS), opendata.swiss (Prämien_EU) | alerte seulement |
 | Barèmes d'impôt (`impots.py`) | le 1er du mois, 07:00 | calculateur de l'AFC (GE/VD, 2026 et 2027) | alerte seulement |
@@ -41,6 +42,7 @@ python3 infra/refresh/taux3a.py --dry-run                            # relève, 
 python3 infra/refresh/taux3a.py --dry-run --simulate-change          # simule un taux modifié (copie en mémoire)
 python3 infra/refresh/taux3a.py --dry-run --simulate-parser-failure  # simule une page dont la structure a changé
 python3 infra/refresh/tauxlp.py --dry-run                            # idem pour les taux de libre passage (mêmes options --simulate-*)
+python3 infra/refresh/tauxsnb.py --dry-run                           # statistique BNS des taux 3a et de libre passage (mêmes options --simulate-*)
 python3 infra/refresh/lamal.py --dry-run [--simulate-change|--simulate-parser-failure]   # idem frontalier.py, impots.py
 python3 infra/refresh/subsides.py --dry-run                          # idem pour les subsides (mêmes options --simulate-*)
 python3 infra/refresh/digest.py --dry-run

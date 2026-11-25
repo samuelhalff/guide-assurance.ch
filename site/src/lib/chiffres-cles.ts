@@ -8,6 +8,7 @@ import * as R from "@/lib/engines/regions-primes";
 import * as I from "@/lib/engines/impot3a";
 import * as C from "@/lib/engines/communes-3a";
 import * as H from "@/lib/engines/historique-3a";
+import { PUBLIE_LE_SNB, SNB_3A, SOURCE_SNB, decimalesSnb, moisTexte, reperes as reperesSnb } from "@/lib/engines/taux-snb";
 import { DATE_PRIMES } from "@/lib/date-primes";
 import { abs } from "@/lib/site";
 import { OUTILS, OUTILS_EN, PAGES_DONNEES, PAGES_DONNEES_EN } from "@/lib/nav";
@@ -40,6 +41,10 @@ const S = {
   cleiss: (l: Locale): Source => ({ label: l === "fr" ? "CLEISS, droit d’option des frontaliers France-Suisse" : "CLEISS, right of option for France-Switzerland cross-border workers", url: "https://www.cleiss.fr/faq/droit_d_option_des_frontaliers_france-suisse.html" }),
   geDeduction: (l: Locale): Source => ({ label: l === "fr" ? "État de Genève, déduction des cotisations au 3e pilier" : "State of Geneva, pillar 3a deduction", url: "https://www.ge.ch/taux-donnees-fiscales/deduction-cotisations-au-3e-pilier" }),
   banques: (l: Locale): Source => ({ label: l === "fr" ? "Pages officielles des banques (liste et liens sur la page des taux 3a)" : "Banks’ official pages (list and links on the 3a rates page)", url: abs(l === "fr" ? OUTILS.taux3a : OUTILS_EN.taux3a) }),
+  bns: (l: Locale): Source => ({
+    label: l === "fr" ? `BNS, portail de données, ${SOURCE_SNB.titre_fr.toLowerCase()} (cube ${SOURCE_SNB.cube})` : `SNB data portal, ${SOURCE_SNB.titre_en.toLowerCase()} (cube ${SOURCE_SNB.cube})`,
+    url: l === "fr" ? SOURCE_SNB.page_fr : SOURCE_SNB.page_en,
+  }),
   afc: (l: Locale): Source => ({ label: l === "fr" ? "AFC et administrations fiscales cantonales, barèmes 2026" : "Federal Tax Administration and cantonal tax administrations, 2026 scales", url: "https://swisstaxcalculator.estv.admin.ch/" }),
 };
 
@@ -56,6 +61,8 @@ const dansRegion = (r: R.Region, l: Locale) =>
 const P26 = I.PLAFONDS["2026"];
 const P27 = I.PLAFONDS["2027"];
 const T3A = H.SERIE[H.SERIE.length - 1];
+const BNS3A = reperesSnb(SNB_3A.points);
+const tb = (x: number, l: Locale) => (l === "fr" ? `${decimalesSnb(x).replace(".", ",")}${N}%` : `${decimalesSnb(x)}%`);
 const PROFIL = C.PROFIL_TYPE;
 
 export function groupes(l: Locale): Groupe[] {
@@ -184,6 +191,15 @@ export function groupes(l: Locale): Groupe[] {
           validite: fr ? `Au relevé du ${dc(T3A.date)}.` : `As of the survey of ${dc(T3A.date)}.`,
           sources: [S.banques(l), { label: fr ? "Historique des taux 3a (CSV)" : "Pillar 3a rate history (CSV)", url: abs("/data/taux-3a-historique.csv") }],
           methode: fr ? `Médiane et moyenne non pondérées des ${T3A.n} taux de base, calculées par Guide Assurance.` : `Unweighted median and mean of the ${T3A.n} base rates, calculated by Guide Assurance.`,
+        },
+        {
+          id: "taux-3a-bns",
+          texte: fr
+            ? `Selon la Banque nationale suisse, le taux moyen des comptes 3a est de ${tb(BNS3A.dernier.moyenne, l)} en ${moisTexte(BNS3A.dernier.mois, "fr")}, contre ${tb(BNS3A.plusHaut.moyenne, l)} au plus haut de la série, en ${moisTexte(BNS3A.plusHaut.mois, "fr")}.`
+            : `According to the Swiss National Bank, the mean pillar 3a account rate is ${tb(BNS3A.dernier.moyenne, l)} in ${moisTexte(BNS3A.dernier.mois, "en")}, against ${tb(BNS3A.plusHaut.moyenne, l)} at the series high, in ${moisTexte(BNS3A.plusHaut.mois, "en")}.`,
+          validite: fr ? `Mois de ${moisTexte(BNS3A.dernier.mois, "fr")}, publié par la BNS le ${dc(PUBLIE_LE_SNB)} ; série mensuelle depuis ${moisTexte(BNS3A.premier.mois, "fr")}.` : `Month of ${moisTexte(BNS3A.dernier.mois, "en")}, released by the SNB on ${dc(PUBLIE_LE_SNB)}; monthly series since ${moisTexte(BNS3A.premier.mois, "en")}.`,
+          sources: [S.bns(l)],
+          methode: fr ? "Moyenne non pondérée des taux publiés par les banques qui les déclarent à la BNS, fin de mois, reprise telle quelle. Ce n’est pas le relevé de Guide Assurance." : "Unweighted average of the rates published by the banks that report them to the SNB, end of month, used as published. This is not Guide Assurance’s own survey.",
         },
       ],
     },

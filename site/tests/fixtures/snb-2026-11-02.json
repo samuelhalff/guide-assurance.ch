@@ -1,0 +1,66 @@
+{
+ "publie_le": "2026-11-02",
+ "note": "Valeurs lues dans la publication BNS du 2026-11-02 (cube zikrepro), mois anciens qui ne devraient plus être révisés. Ne pas mettre à jour automatiquement.",
+ "series": {
+  "GVG_S3A": [
+   {
+    "mois": "2017-06",
+    "moyenne": 0.3556,
+    "q25": 0.3,
+    "mediane": 0.3,
+    "q75": 0.5
+   },
+   {
+    "mois": "2019-12",
+    "moyenne": 0.1849,
+    "q25": 0.15,
+    "mediane": 0.2,
+    "q75": 0.2
+   },
+   {
+    "mois": "2022-12",
+    "moyenne": 0.1914,
+    "q25": 0.05,
+    "mediane": 0.15,
+    "q75": 0.25
+   },
+   {
+    "mois": "2024-02",
+    "moyenne": 1.0083,
+    "q25": 0.9,
+    "mediane": 1.0,
+    "q75": 1.1
+   }
+  ],
+  "GVG_F2S": [
+   {
+    "mois": "2017-06",
+    "moyenne": 0.1359,
+    "q25": 0.1,
+    "mediane": 0.15,
+    "q75": 0.2
+   },
+   {
+    "mois": "2019-12",
+    "moyenne": 0.0453,
+    "q25": 0.01,
+    "mediane": 0.05,
+    "q75": 0.05
+   },
+   {
+    "mois": "2022-12",
+    "moyenne": 0.0522,
+    "q25": 0.01,
+    "mediane": 0.01,
+    "q75": 0.1
+   },
+   {
+    "mois": "2024-02",
+    "moyenne": 0.5571,
+    "q25": 0.4,
+    "mediane": 0.5,
+    "q75": 0.7
+   }
+  ]
+ }
+}
