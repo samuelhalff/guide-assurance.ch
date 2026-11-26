@@ -239,7 +239,7 @@ export default function Home() {
               </li>
             </ol>
             <p className="texte reperes">
-              For this year’s figures, see the <Link href="/en/key-figures-2027/">key figures for 2027</Link>, the <Link href="/en/health-insurance/premium-barometer/">premium barometer</Link> by canton and <Link href="/en/health-insurance/premiums/regions/">premiums by region</Link>. For pillar 3a, the <Link href="/en/pillar-3a/interest-rates/history/">3a rate history</Link> follows every Monday survey and the <Link href="/en/pillar-3a/tax-savings/municipalities/">tax saving by municipality</Link> compares every municipality in French-speaking Switzerland. <Link href="/en/renewal-reminders/">Renewal reminders</Link> put the deadlines in your calendar.
+              For this year’s figures, see the <Link href="/en/key-figures-2027/">key figures for 2027</Link>, the <Link href="/en/health-insurance/premium-barometer/">premium barometer</Link> by canton and <Link href="/en/health-insurance/premiums/regions/">premiums by region</Link>. For pillar 3a, the <Link href="/en/pillar-3a/interest-rates/history/">3a rate history</Link> follows every Monday survey and the <Link href="/en/pillar-3a/tax-savings/municipalities/">tax saving by municipality</Link> compares every municipality in French-speaking Switzerland, and <Link href="/en/vested-benefits/interest-rates/">vested benefits rates</Link> are read the same way as 3a rates. The <Link href="/en/news/">news</Link> reports new official figures with their sources, and <Link href="/en/renewal-reminders/">renewal reminders</Link> put the deadlines in your calendar.
             </p>
           </div>
         </section>

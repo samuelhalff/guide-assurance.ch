@@ -31,7 +31,7 @@ sources:
   - { label: "OFSP, primes 2027 (communiqué du 29.09.2026)", url: "https://www.bag.admin.ch/fr/newnsb/BfuGvedj0OOX" }
   - { label: "OFSP, modèles avec choix limité des fournisseurs", url: "https://www.bag.admin.ch/fr/assurance-maladie-assurances-impliquant-un-choix-limite-des-fournisseurs-de-prestations" }
   - { label: "Priminfo, questions fréquentes (OFSP)", url: "https://www.priminfo.admin.ch/fr/faq" }
-outils: [comparateur-primes, subsides, caisses-chiffres, lettre-resiliation]
+outils: [comparateur-primes, barometre-primes, primes-regions, subsides, caisses-chiffres, lettre-resiliation, chiffres-cles]
 faq:
   - q: "Jusqu’à quand résilier sa caisse maladie pour 2027 ?"
     a: "L’assureur doit recevoir la résiliation au plus tard le lundi 30 novembre 2026, dernier jour ouvrable de novembre, pour un changement au 1er janvier 2027 (art. 7, al. 2, LAMal). Le cachet postal ne compte pas."

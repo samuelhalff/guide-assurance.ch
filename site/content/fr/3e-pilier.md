@@ -4,7 +4,7 @@ title: "3e pilier 2027 : plafonds 3a, rachat et 3b"
 description: "En 2027, le plafond 3a est de 7 373 CHF avec caisse de pension et de 36 864 CHF sans. Rachat des lacunes, différence avec le 3b et couverture décès."
 h1: "3e pilier : plafonds 2027, 3a, 3b et couverture décès"
 rubrique: particuliers
-outils: [taux-3a, economie-impot-3a, taux-libre-passage]
+outils: [taux-3a, historique-3a, economie-impot-3a, communes-3a, taux-libre-passage, chiffres-cles]
 updated: 2026-11-23
 sources:
   - { label: "Art. 7 OPP 3 (Fedlex)", url: "https://www.fedlex.admin.ch/eli/cc/1985/1778_1778_1778/fr#art_7" }

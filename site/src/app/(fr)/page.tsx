@@ -242,7 +242,7 @@ export default function Accueil() {
               </li>
             </ol>
             <p className="texte reperes">
-              Pour les chiffres de l’année, voyez les <Link href="/chiffres-cles-2027/">chiffres clés 2027</Link>, le <Link href="/assurance-maladie/barometre-primes/">baromètre des primes</Link> canton par canton et les <Link href="/assurance-maladie/primes/regions/">primes par région</Link>. Côté 3e pilier, l’<Link href="/3e-pilier/taux-3a/historique/">historique des taux 3a</Link> suit chaque relevé du lundi et l’<Link href="/3e-pilier/economie-impot/communes/">économie d’impôt par commune</Link> compare toutes les communes romandes. Les <Link href="/rappels-echeances/">rappels d’échéance</Link> ajoutent les dates limites à votre agenda.
+              Pour les chiffres de l’année, voyez les <Link href="/chiffres-cles-2027/">chiffres clés 2027</Link>, le <Link href="/assurance-maladie/barometre-primes/">baromètre des primes</Link> canton par canton et les <Link href="/assurance-maladie/primes/regions/">primes par région</Link>. Côté 3e pilier, l’<Link href="/3e-pilier/taux-3a/historique/">historique des taux 3a</Link> suit chaque relevé du lundi et l’<Link href="/3e-pilier/economie-impot/communes/">économie d’impôt par commune</Link> compare toutes les communes romandes, et les <Link href={OUTILS.tauxLibrePassage}>taux de libre passage</Link> sont relevés comme ceux du 3a. Les <Link href="/actualites/">actualités</Link> signalent les nouveaux chiffres officiels, sources à l’appui, et les <Link href="/rappels-echeances/">rappels d’échéance</Link> ajoutent les dates limites à votre agenda.
             </p>
           </div>
         </section>

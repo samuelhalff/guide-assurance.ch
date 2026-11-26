@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { GuidePage } from "@/components/site/guide-page";
 import { pageMetadata } from "@/lib/metadata";
-import { OUTILS } from "@/lib/nav";
+import { OUTILS, PAGES_DONNEES } from "@/lib/nav";
 import { autreLangue, pageParSlug, toutesLesPages } from "@/lib/content/pages";
 import { porteDePage } from "@/lib/demande";
 import { CorpsAvecAppel } from "@/components/demande/corps-avec-appel";
@@ -20,6 +20,11 @@ const OUTILS_LIES: Record<string, { href: string; titre: string; detail: string 
   "economie-impot-3a": { href: OUTILS.impot3a, titre: "Économie d’impôt 3a", detail: "Suisse romande, barèmes 2026" },
   "somme-menage": { href: OUTILS.sommeMenage, titre: "Calculer la somme d’assurance ménage", detail: "Trois questions, méthodes Baloise et Zurich" },
   "caisses-chiffres": { href: OUTILS.caissesChiffres, titre: "Les caisses maladie en chiffres", detail: "Assurés, frais administratifs et solvabilité, OFSP 2024" },
+  "historique-3a": { href: PAGES_DONNEES.historique3a, titre: "Historique des taux 3a", detail: "Moyenne BNS depuis 2017, relevés du lundi" },
+  "communes-3a": { href: PAGES_DONNEES.communes3a, titre: "Économie d’impôt 3a par commune", detail: "Toutes les communes romandes, barèmes 2026" },
+  "barometre-primes": { href: "/assurance-maladie/barometre-primes/", titre: "Baromètre des primes LAMal 2027", detail: "Six cantons romands, hausse et écarts, OFSP" },
+  "primes-regions": { href: PAGES_DONNEES.regions, titre: "Primes LAMal 2027 par région", detail: "Médiane et quartiles des dix régions romandes" },
+  "chiffres-cles": { href: PAGES_DONNEES.chiffres, titre: "Chiffres clés 2027", detail: "Primes, 3e pilier, délais : datés et sourcés" },
   "garanties-pj": { href: OUTILS.garantiesPj, titre: "Protection juridique : ce que couvrent les contrats", detail: "12 contrats lus dans leurs CGA, sans classement" },
 };
 

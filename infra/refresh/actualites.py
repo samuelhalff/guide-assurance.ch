@@ -21,7 +21,8 @@ main et déployé (sitemap, flux et IndexNow suivent avec le déploiement). Un a
 alerte part. Ni pull request ni accord à donner.
 Seuls les déclencheurs adossés à un chiffre officiel publient d'eux-mêmes (SUJETS_AUTO : primes, taux 3a, BNS). Le rendez-vous
 mensuel et les sujets SEO ne partent plus (revue du 24.11.2026) : le vérificateur contrôle les chiffres, pas le raisonnement
-juridique d'un sujet libre. Ils restent disponibles en essai avec --only.
+juridique d'un sujet libre. Ils restent disponibles en essai avec --only (--only mensuel --mois 12 : thème et sources d'un
+autre mois, par exemple le versement 3a de fin d'année préparé en novembre).
 Clé du LLM : la même que l'assistant des demandes (secrets AZURE_OPENAI_*), ou ANTHROPIC_API_KEY.
 Absente : alerte « clé manquante », passage en échec.
 """
@@ -74,6 +75,19 @@ SOURCES = {
     ],
     "seo": [],  # les sources des pages du site les plus proches de la requête sont ajoutées (dossier())
 }
+# Rendez-vous mensuel consacré au 3a (janvier, août, décembre) : pages officielles lisibles sans JavaScript qui portent
+# les montants maximaux (OFAS, État de Genève), la règle « versements effectués dans l'année » (État de Genève) et les
+# rachats 3a (FAQ de l'OFAS). Données : taux 3a du site, économie d'impôt par commune (faits_derives).
+MOIS_3A = {1, 8, 12}
+MOIS_3A_SEUL = {8, 12}  # janvier mêle 3a et assurance de base : il garde aussi le dossier mensuel ordinaire
+SOURCES_MENSUEL_3A = [
+    "https://www.bsv.admin.ch/fr/le-troisieme-pilier",
+    "https://www.ge.ch/taux-donnees-fiscales/deduction-cotisations-au-3e-pilier",
+    "https://faq.bsv.admin.ch/fr/prevoyance-professionnelle-et-3e-pilier/rachats-dans-le-pilier-3a/quel-est-le-montant-maximal-dun",
+    "https://faq.bsv.admin.ch/fr/3e-pilier/rachats-dans-le-pilier-3a/quelle-est-lecheance-pour-effectuer-un-rachat",
+]
+DONNEES_MENSUEL_3A = ["site/src/data/taux-3a.json", "site/src/data/taux-3a-historique.json"]
+COMMUNES_3A = C.ROOT / "data" / "csv" / "economie-impot-3a-communes-2026.csv"
 DONNEES = {
     "primes": ["site/src/data/barometre.json", "site/src/data/primes-2027-resume.json"],
     "taux3a": ["site/src/data/taux-3a.json", "site/src/data/taux-3a-historique.json"],
@@ -95,7 +109,8 @@ MENSUEL = {  # sujet du rendez-vous mensuel, selon le mois
     9: "les primes de l'année suivante : ce que l'annonce de l'OFSP change pour un ménage",
     10: "changer d'assureur : délais de résiliation de l'assurance de base",
     11: "le dernier jour ouvrable de novembre : résilier l'assurance de base à temps",
-    12: "le versement 3a avant le 31 décembre et l'économie d'impôt",
+    12: ("le versement 3a avant le 31 décembre : montants maximaux de l'année (OFAS), déduction des seuls versements "
+         "effectués dans l'année, premiers rachats 3a, économie d'impôt ; outils taux3a, historique3a et impot3a"),
 }
 
 
@@ -280,7 +295,8 @@ def declencheurs(log: C.Log, st: dict, a) -> tuple[list[dict], dict]:
 
     mois = C.now_zh().strftime("%Y-%m")
     if st.get("mensuel") != mois and not premier:
-        out.append({"sujet": "mensuel", "raison": "rendez-vous mensuel", "theme": MENSUEL[C.now_zh().month]})
+        out.append({"sujet": "mensuel", "raison": "rendez-vous mensuel", "theme": MENSUEL[C.now_zh().month],
+                    "mois": C.now_zh().month})
     if st.get("mensuel") != mois:
         maj["mensuel"] = mois
     s = sujet_seo(st, force=a.only == "seo")
@@ -292,8 +308,12 @@ def declencheurs(log: C.Log, st: dict, a) -> tuple[list[dict], dict]:
     if not a.only:
         out = [d for d in out if d["sujet"] in SUJETS_AUTO]
     if a.only:
+        mois_force = getattr(a, "mois", None) or C.now_zh().month
         out = [d for d in out if d["sujet"] == a.only] or [{"sujet": a.only, "raison": "forcé (--only)",
-                                                               "theme": MENSUEL[C.now_zh().month]}]
+                                                               "theme": MENSUEL[mois_force], "mois": mois_force}]
+        if a.only == "mensuel" and getattr(a, "mois", None):  # --mois : thème d'un autre mois (préparer une échéance)
+            for d in out:
+                d.update(theme=MENSUEL[a.mois], mois=a.mois)
     return out, maj
 
 
@@ -343,10 +363,44 @@ def texte_page(url: str) -> str:
     return re.sub(r"\n\s*\n+", "\n", t).strip()[:30000]
 
 
-def faits_derives(sujet: str) -> str:
+def est_3a(d: dict, seul: bool = False) -> bool:
+    return d["sujet"] == "mensuel" and d.get("mois") in (MOIS_3A_SEUL if seul else MOIS_3A)
+
+
+def dossier_mensuel(d: dict, cle: str) -> list[str]:
+    """Sources (cle « sources ») ou données (« donnees ») du dossier, selon le sujet et le mois du rendez-vous."""
+    base = (SOURCES if cle == "sources" else DONNEES)[d["sujet"]]
+    if not est_3a(d):
+        return list(base)
+    trois_a = SOURCES_MENSUEL_3A if cle == "sources" else DONNEES_MENSUEL_3A
+    return list(dict.fromkeys(trois_a + ([] if est_3a(d, seul=True) else list(base))))
+
+
+def faits_communes_3a() -> list[str]:
+    """Économie d'impôt 2026 par commune (data/csv, mêmes moteurs que le site) : plus faible et plus forte, par canton."""
+    if not COMMUNES_3A.exists():
+        return []
+    import csv
+    rows = list(csv.DictReader(COMMUNES_3A.open(encoding="utf-8")))
+    if not rows:
+        return []
+    r0 = rows[0]
+    lignes = [f"économie d'impôt 3a {r0['annee_fiscale']} (calcul Guide Assurance, personne seule sans enfant, revenu imposable "
+              f"{r0['revenu_imposable_chf']} CHF, versement {r0['versement_3a_chf']} CHF) : {len(rows)} communes, de "
+              f"{min(float(r['economie_chf']) for r in rows):.2f} à {max(float(r['economie_chf']) for r in rows):.2f} CHF"]
+    for c in dict.fromkeys(r["canton"] for r in rows):
+        e = sorted((float(r["economie_chf"]), r["commune"]) for r in rows if r["canton"] == c)
+        lignes.append(f"{c} : {len(e)} communes, économie de {e[0][0]:.2f} CHF ({e[0][1]}) à {e[-1][0]:.2f} CHF ({e[-1][1]})")
+    return lignes
+
+
+def faits_derives(sujet: str, d: dict | None = None) -> str:
     """Nombres dérivés calculés ici (le LLM ne calcule pas, il reprend) : écarts en francs, par an, médianes."""
     lignes = []
-    if sujet in ("primes", "mensuel"):
+    trois_a = bool(d) and est_3a(d)
+    if trois_a:
+        lignes += faits_communes_3a()
+    if sujet == "primes" or (sujet == "mensuel" and not (d and est_3a(d, seul=True))):
         b = json.loads((C.SITE / "src" / "data" / "barometre.json").read_text(encoding="utf-8"))
         rows = [("CH", b["national"])] + [(c["code"], c["officiel"]) for c in b["cantons"]]
         for code, o in rows:
@@ -370,7 +424,8 @@ def faits_derives(sujet: str) -> str:
             med = t[len(t) // 2] if len(t) % 2 else (t[len(t) // 2 - 1] + t[len(t) // 2]) / 2
             lignes.append(f"taux 3a : {len(t)} banques, min {t[0]:.2f} %, médiane {med:.2f} %, max {t[-1]:.2f} %")
             for r in (t[0], med, t[-1]):
-                lignes.append(f"intérêts d'une année sur 7373 CHF à {r:.2f} % : {7373 * r / 100:.2f} CHF")
+                for m in ((7258, 7373) if trois_a else (7373,)):
+                    lignes.append(f"intérêts d'une année sur {m} CHF à {r:.2f} % : {m * r / 100:.2f} CHF")
     return "\n".join(lignes)
 
 
@@ -383,11 +438,11 @@ def dossier(log: C.Log, d: dict) -> tuple[str, list[dict]]:
             t = f.read_text(encoding="utf-8")
             parts.append(f"### Page du site : {f.relative_to(C.ROOT)}\n{t[:30000]}")
             sources_seo += re.findall(r'url:\s*"(https://[^"]+)"', t)
-    for p in DONNEES[d["sujet"]]:
+    for p in dossier_mensuel(d, "donnees"):
         f = C.ROOT / p
         if f.exists():
             parts.append(f"### Données du site : {p}\n{f.read_text(encoding='utf-8')[:40000]}")
-    urls = list(SOURCES[d["sujet"]]) + ([d["lien"]] if d.get("lien") else []) + list(dict.fromkeys(sources_seo))[:5]
+    urls = dossier_mensuel(d, "sources") + ([d["lien"]] if d.get("lien") else []) + list(dict.fromkeys(sources_seo))[:5]
     for u in urls:
         try:
             t = texte_page(u)
@@ -395,7 +450,7 @@ def dossier(log: C.Log, d: dict) -> tuple[str, list[dict]]:
             lues.append({"url": u, "octets": len(t)})
         except Exception as e:  # noqa: BLE001
             log(f"source illisible {u} : {e}")
-    der = faits_derives(d["sujet"])
+    der = faits_derives(d["sujet"], d)
     if der:
         parts.append("### Nombres dérivés (calculés par le script à partir des données ci-dessus)\n" + der)
     return "\n\n".join(parts), lues
@@ -763,5 +818,7 @@ if __name__ == "__main__":
     ap = C.base_args(__doc__)
     ap.add_argument("--approve", metavar="SLUG_FR", help="publie ce brouillon (FR et sa version EN) : accord donné par Sam en session")
     ap.add_argument("--only", choices=["primes", "taux3a", "bns", "mensuel", "seo"], help="force ce déclencheur (essai)")
+    ap.add_argument("--mois", type=int, choices=range(1, 13), metavar="1-12",
+                    help="avec --only mensuel : thème (et sources) du rendez-vous de ce mois, pour préparer une échéance")
     ap.add_argument("--fake-llm", metavar="FICHIER_JSON", help="réponse LLM lue dans ce fichier (essai sans appel d'API)")
     sys.exit(C.run_main(DS, run, ap.parse_args()))

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { GuidePage } from "@/components/site/guide-page";
 import { pageMetadata } from "@/lib/metadata";
-import { OUTILS_EN } from "@/lib/nav";
+import { OUTILS_EN, PAGES_DONNEES_EN } from "@/lib/nav";
 import { autreLangue, equivalent, pageParSlug, toutesLesPages } from "@/lib/content/pages";
 import { porteDePage } from "@/lib/demande";
 import { CorpsAvecAppel } from "@/components/demande/corps-avec-appel";
@@ -21,6 +21,11 @@ const OUTILS_LIES: Record<string, { href: string; titre: string; detail: string 
   "economie-impot-3a": { href: OUTILS_EN.impot3a, titre: "Pillar 3a tax savings", detail: "French-speaking Switzerland, 2026 tax scales" },
   "somme-menage": { href: OUTILS_EN.sommeMenage, titre: "Work out your household sum insured", detail: "Three questions, Baloise and Zurich methods" },
   "caisses-chiffres": { href: OUTILS_EN.caissesChiffres, titre: "Swiss health insurers in figures", detail: "Insured, administrative costs and solvency, FOPH 2024" },
+  "historique-3a": { href: PAGES_DONNEES_EN.historique3a, titre: "Pillar 3a rate history", detail: "SNB mean since 2017, Monday surveys" },
+  "communes-3a": { href: PAGES_DONNEES_EN.communes3a, titre: "Pillar 3a tax savings by municipality", detail: "Every municipality in Romandy, 2026 tax scales" },
+  "barometre-primes": { href: "/en/health-insurance/premium-barometer/", titre: "2027 LAMal premium barometer", detail: "Six French-speaking cantons, increase and gaps, FOPH" },
+  "primes-regions": { href: PAGES_DONNEES_EN.regions, titre: "2027 LAMal premiums by region", detail: "Median and quartiles of the ten regions in Romandy" },
+  "chiffres-cles": { href: PAGES_DONNEES_EN.chiffres, titre: "Key figures 2027", detail: "Premiums, pillar 3a, deadlines: dated and sourced" },
   "garanties-pj": { href: OUTILS_EN.garantiesPj, titre: "Legal protection: what the policies cover", detail: "12 policies read in their terms, no ranking" },
 };
 

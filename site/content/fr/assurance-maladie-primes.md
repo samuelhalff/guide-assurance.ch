@@ -28,7 +28,7 @@ sources:
   - { label: "OFSP, Primes-conseil 2027 (PDF)", url: "https://www.bag.admin.ch/dam/fr/sd-web/ZUZ4kwDN4gnu/Primes-conseil%202027.pdf" }
   - { label: "Art. 7 LAMal (Fedlex)", url: "https://www.fedlex.admin.ch/eli/cc/1995/1328_1328_1328/fr#art_7" }
   - { label: "Art. 62 LAMal (Fedlex)", url: "https://www.fedlex.admin.ch/eli/cc/1995/1328_1328_1328/fr#art_62" }
-outils: [comparateur-primes, subsides, caisses-chiffres, lettre-resiliation, simulateur-frontalier, primes-ue]
+outils: [comparateur-primes, barometre-primes, primes-regions, subsides, caisses-chiffres, lettre-resiliation, simulateur-frontalier, primes-ue]
 faq:
   - q: "Quelle est la prime moyenne LAMal en 2027 ?"
     a: "La prime moyenne 2027 est de 412,00 CHF par mois tous assurés confondus, en hausse de 5,0 %. Elle est de 487,60 CHF pour un adulte, 338,80 CHF pour un jeune adulte et 128,10 CHF pour un enfant (OFSP, 29.09.2026)."

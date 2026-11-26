@@ -24,6 +24,11 @@ on:
         type: choice
         options: [aucun, primes, taux3a, bns, mensuel, seo]
         default: aucun
+      mois:
+        description: "avec mensuel : thème du rendez-vous de ce mois (--mois), pour préparer une échéance"
+        type: choice
+        options: [courant, "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+        default: courant
 
 permissions:
   contents: write
@@ -37,7 +42,7 @@ jobs:
       dataset: actualites
       at: 7
       dry_run: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
-      args: ${{ (inputs.only && inputs.only != 'aucun') && format('--only {0}', inputs.only) || '' }}
+      args: ${{ (inputs.only && inputs.only != 'aucun') && format('--only {0}{1}', inputs.only, (inputs.only == 'mensuel' && inputs.mois && inputs.mois != 'courant') && format(' --mois {0}', inputs.mois) || '') || '' }}
     secrets: inherit
   fin-de-matinee:
     if: always() && github.event_name == 'schedule'

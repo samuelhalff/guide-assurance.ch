@@ -5,7 +5,7 @@ title: "Pillar 3a limits 2027: CHF 7,373 or CHF 36,864"
 description: "In 2027 you can pay CHF 7,373 into a pillar 3a with a pension fund, or 20% of income up to CHF 36,864 without. Also covers buy-back, 3b and death cover."
 h1: "Pillar 3: 2027 limits, 3a, 3b and death cover"
 rubrique: particuliers
-outils: [taux-3a, economie-impot-3a, taux-libre-passage]
+outils: [taux-3a, historique-3a, economie-impot-3a, communes-3a, taux-libre-passage, chiffres-cles]
 updated: 2026-11-23
 sources:
   - { label: "Art. 7 OPP 3 (Fedlex)", url: "https://www.fedlex.admin.ch/eli/cc/1985/1778_1778_1778/fr#art_7" }
