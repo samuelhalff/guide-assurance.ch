@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 const TXT = {
   fr: {
     texte: "Sans choix de votre part, la mesure d’audience est active et certaines visites sont enregistrées. Ce que vous saisissez ne l’est jamais.",
-    oui: "Accepter",
+    oui: "Fermer",
     non: "Refuser",
     lien: "En savoir plus",
     href: "/confidentialite/#mesure",
@@ -18,7 +18,7 @@ const TXT = {
   },
   en: {
     texte: "Unless you choose otherwise, analytics cookies are on and some visits are recorded. What you type never is.",
-    oui: "Accept",
+    oui: "Close",
     non: "Decline",
     lien: "Learn more",
     href: "/en/privacy/#measurement",
