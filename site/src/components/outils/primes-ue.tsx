@@ -164,8 +164,8 @@ export function PrimesUe({ locale = "fr" }: { locale?: Locale }) {
             <div className="flex min-w-0 items-baseline gap-2">
               {numerote ? <span className="rang">{i + 1}</span> : null}
               <div className="grid min-w-0 justify-items-start gap-1">
-                {badge(o)}
                 <b className="text-base">{o.nom}</b>
+                {badge(o)}
               </div>
             </div>
             <span className="text-right text-lg font-semibold tabular-nums">
@@ -262,8 +262,8 @@ export function PrimesUe({ locale = "fr" }: { locale?: Locale }) {
                         <TableRow key={o.no}>
                           <TableCell className={numerote ? "rang-cellule relative pl-9" : undefined}>
                             {numerote ? <span className="rang">{i + 1}</span> : null}
-                            {badge(o)}
                             {o.nom}
+                            {plusBasse(o) ? <span className="badges-offre">{badge(o)}</span> : null}
                             {o.troisiemeEnfant !== null ? <small className="block text-muted-foreground">{t.troisieme(mc(o.troisiemeEnfant))}</small> : null}
                           </TableCell>
                           <TableCell className="text-right tabular-nums">{nf(prix(o.mensuel))}</TableCell>

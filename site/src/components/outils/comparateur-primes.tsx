@@ -571,11 +571,13 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
         <CardContent className="carte-prime">
           <span className="rang">{ip + 1}</span>
           <div className="offre-qui">
-            {estAct ? <Badge variant="secondary" className="h-auto text-base">{t.votreCaisse}</Badge> : null}
-            {plusBasse(o) ? <Badge variant="outline" className="badge-rang h-auto text-base">{t.plusBasse}</Badge> : null}
             <b>{o.assureur}</b>
             <span className="produit">{o.produit}</span>
-            <Badge variant="outline" className="type-badge h-auto text-base">{t.typesCourts[o.type]}</Badge>
+            <span className="badges-offre">
+              {plusBasse(o) ? <Badge variant="outline" className="badge-rang h-auto text-base">{t.plusBasse}</Badge> : null}
+              {estAct ? <Badge variant="secondary" className="h-auto text-base">{t.votreCaisse}</Badge> : null}
+              <Badge variant="outline" className="h-auto text-base">{t.typesCourts[o.type]}</Badge>
+            </span>
           </div>
           <div className="combien">
             <span className="montant">{nf(prix(o.mensuel), parAn ? 0 : 2)}</span>
@@ -640,10 +642,14 @@ export function ComparateurPrimes({ locale = "fr", donneesDu }: { locale?: Local
             <TableRow key={`${o.assureur}|${o.produit}`} data-state={estAct ? "selected" : undefined}>
               <TableCell className="pl-9 align-top">
                 <span className="rang">{i + 1}</span>
-                {estAct ? <Badge variant="secondary" className="h-auto text-base">{t.votreCaisse}</Badge> : null}
-                {plusBasse(o) ? <Badge variant="outline" className="badge-rang h-auto whitespace-normal rounded-lg text-left text-base">{t.plusBasse}</Badge> : null}
                 <b>{o.assureur}</b>
                 <span className="produit">{o.produit}</span>
+                {estAct || plusBasse(o) ? (
+                  <span className="badges-offre">
+                    {plusBasse(o) ? <Badge variant="outline" className="badge-rang h-auto whitespace-normal rounded-lg text-left text-base">{t.plusBasse}</Badge> : null}
+                    {estAct ? <Badge variant="secondary" className="h-auto text-base">{t.votreCaisse}</Badge> : null}
+                  </span>
+                ) : null}
                 <span className="type">{t.typesCourts[o.type]}</span>
                 {!seul ? <span className="type">{o.details.map((x) => nf(prix(x), parAn ? 0 : 2)).join(" + ")}</span> : null}
               </TableCell>
