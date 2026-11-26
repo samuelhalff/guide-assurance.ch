@@ -110,7 +110,9 @@ MENSUEL = {  # sujet du rendez-vous mensuel, selon le mois
     10: "changer d'assureur : délais de résiliation de l'assurance de base",
     11: "le dernier jour ouvrable de novembre : résilier l'assurance de base à temps",
     12: ("le versement 3a avant le 31 décembre : montants maximaux de l'année (OFAS), déduction des seuls versements "
-         "effectués dans l'année, premiers rachats 3a, économie d'impôt ; outils taux3a, historique3a et impot3a"),
+         "effectués dans l'année, premiers rachats 3a, économie d'impôt ; outils taux3a, historique3a et impot3a ; "
+         "les personnes sans caisse de pension sont dites « à son compte » ou « sans caisse de pension », jamais "
+         "« indépendantes » (mot refusé par le vérificateur)"),
 }
 
 
@@ -641,6 +643,8 @@ def rediger(log: C.Log, a, d: dict, env: dict) -> int:
                              "paragraphes complets de 45 à 60 mots sous les intertitres jusqu'à dépasser 780 mots en français "
                              "et 680 en anglais (garde tout ce qui est juste). Titre trop long : 55 caractères au plus. "
                              "Intertitre sans question : reformule-le en question terminée par « ? ». "
+                             "Mot interdit « indépendant » (aussi au sens d'activité lucrative) : écris « à son compte » ou "
+                             "« sans caisse de pension ». « il faut » : tournure neutre (« le versement doit parvenir… »). "
                              "Renvoie l'objet JSON complet.", log)
         art = nettoyer_en(extraire_json(brut))
         r = verifier_brouillon(log, d, art, jour, corpus)
