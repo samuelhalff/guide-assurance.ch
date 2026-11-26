@@ -136,13 +136,14 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           DATASET: ${{ inputs.dataset }}
           PLAN_ARGS: ${{ needs.plan.outputs.args }}
-          DRY_RUN: ${{ inputs.dry_run }}
+          # Pas DRY_RUN : scripts/deploy-site.sh, lancé par la publication, traite toute valeur non vide (même « false ») comme un essai.
+          REFRESH_DRY_RUN: ${{ inputs.dry_run }}
           EXTRA_ARGS: ${{ inputs.args }}
         run: |
           set -euo pipefail
           args=()
           read -r -a plan_args <<< "$PLAN_ARGS"; args+=("${plan_args[@]}")
-          if [ "$DRY_RUN" = "true" ]; then args+=(--dry-run); fi
+          if [ "$REFRESH_DRY_RUN" = "true" ]; then args+=(--dry-run); fi
           read -r -a extra_args <<< "$EXTRA_ARGS"; args+=("${extra_args[@]}")
           python3 "infra/refresh/${DATASET}.py" "${args[@]}"
 
