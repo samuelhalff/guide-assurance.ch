@@ -37,10 +37,10 @@
   "https://www.snb.ch/fr/publications/quarterly-bulletin/2026/quartbul_2026_3_komplett"
  ],
  "mensuel": "2026-11",
- "dernier_releve": "2026-11-28T07:39:24+01:00",
+ "dernier_releve": "2026-11-28T10:17:55+01:00",
  "dernier_statut": "ok",
  "dernier_message": "aucun déclencheur",
- "dernier_succes": "2026-11-28T07:39:24+01:00",
+ "dernier_succes": "2026-11-28T10:17:55+01:00",
  "publication_en_attente": {
   "depuis": "2026-11-26T16:01:27+01:00",
   "raison": "Déployé, mais la vérification en ligne a échoué : https://guide-assurance.ch/actualites/versement-3a-montant-maximal-et-deduction-avant-31-decembre/ répond HTTP 404 ; https://guide-assurance.ch/en/news/pillar-3a-maximum-amount-and-tax-deduction-before-year-end/ répond HTTP 404",
